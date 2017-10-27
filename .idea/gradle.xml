@@ -8,12 +8,18 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/PushSDK" />
             <option value="$PROJECT_DIR$/android-ngn-stack" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/camera" />
             <option value="$PROJECT_DIR$/library" />
             <option value="$PROJECT_DIR$/lint" />
             <option value="$PROJECT_DIR$/multipleimageselect" />
             <option value="$PROJECT_DIR$/network-events-library" />
+            <option value="$PROJECT_DIR$/processor" />
+            <option value="$PROJECT_DIR$/takephoto_library" />
+            <option value="$PROJECT_DIR$/viewpagerindicator" />
+            <option value="$PROJECT_DIR$/widget" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
