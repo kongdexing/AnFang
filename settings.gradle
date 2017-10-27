@@ -1,1 +1,1 @@
-include ':app', ':android-ngn-stack', ':lint', ':library', ':multipleimageselect'
+include ':app', ':android-ngn-stack', ':lint', ':library', ':multipleimageselect', ':network-events-library'

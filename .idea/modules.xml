@@ -5,6 +5,10 @@
       <module fileurl="file://$PROJECT_DIR$/AnFang.iml" filepath="$PROJECT_DIR$/AnFang.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-ngn-stack/android-ngn-stack.iml" filepath="$PROJECT_DIR$/android-ngn-stack/android-ngn-stack.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lint/lint.iml" filepath="$PROJECT_DIR$/lint/lint.iml" />
+      <module fileurl="file://$PROJECT_DIR$/multipleimageselect/multipleimageselect.iml" filepath="$PROJECT_DIR$/multipleimageselect/multipleimageselect.iml" />
+      <module fileurl="file://$PROJECT_DIR$/network-events-library/network-events-library.iml" filepath="$PROJECT_DIR$/network-events-library/network-events-library.iml" />
     </modules>
   </component>
 </project>
