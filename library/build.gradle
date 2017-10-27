@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
-//apply plugin: 'com.novoda.bintray-release'
-//apply plugin: 'optional-base'
+apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'optional-base'
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION
@@ -39,7 +39,7 @@ configurations {
 
 dependencies {
     provided "com.android.support:support-v4:$SUPPORT_LIBRARY_VERSION"
-//    provided "com.android.support:support-v13:$SUPPORT_LIBRARY_VERSION",optional
+    provided "com.android.support:support-v13:$SUPPORT_LIBRARY_VERSION",optional
     testCompile "junit:junit:$JUNIT_VERSION"
     testCompile "org.mockito:mockito-core:$MOCKITO_VERSION"
     testCompile "org.powermock:powermock-api-mockito:$POWERMOCK_VERSION"
@@ -47,15 +47,15 @@ dependencies {
     lintChecks project(path: ':lint', configuration: 'lintChecks')
 }
 
-//publish {
-//    userOrg = USER
-//    groupId = GROUP_ID
-//    artifactId = ARTIFACT_ID_LIBRARY
-//    version = VERSION
-//    description = DESCRIPTION
-//    website = WEBSITE
-//    licences = LICENCES
-//}
+publish {
+    userOrg = USER
+    groupId = GROUP_ID
+    artifactId = ARTIFACT_ID_LIBRARY
+    version = VERSION
+    description = DESCRIPTION
+    website = WEBSITE
+    licences = LICENCES
+}
 
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs

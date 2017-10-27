@@ -24,6 +24,7 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
+        flavorDimensions "1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [API_KEY_BAIDU       : rootProject.appKeyBaiduMap_parent,
                                 UMENG_APPKEY        : rootProject.UMENG_APPKEY_parent,
