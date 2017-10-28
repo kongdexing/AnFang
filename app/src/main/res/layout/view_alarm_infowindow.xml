@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/popup"
+    android:maxWidth="@dimen/dp_350"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dp_10"
+    android:paddingLeft="@dimen/dp_5"
+    android:paddingRight="@dimen/dp_5"
+    android:paddingTop="@dimen/dp_5">
+
+    <LinearLayout
+        android:id="@+id/rlStudentName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/AlarmLeftText"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="wrap_content"
+            android:text="学生姓名：" />
+
+        <TextView
+            android:id="@+id/txtStudentName"
+            style="@style/AlarmRightText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/AlarmLeftText"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:text="IMEI：" />
+
+        <TextView
+            android:id="@+id/txtIMEI"
+            style="@style/AlarmRightText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/AlarmLeftText"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:text="定位时间：" />
+
+        <TextView
+            android:id="@+id/txtTime"
+            style="@style/AlarmRightText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/trLocationType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/AlarmLeftText"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:text="定位方式：" />
+
+        <TextView
+            android:id="@+id/txtLocationType"
+            style="@style/AlarmRightText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/trPower"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:visibility="gone">
+
+        <TextView
+            style="@style/AlarmLeftText"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:text="设备电量：" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <com.android.widget.roundcornerprogressbar.RoundCornerProgressBar
+                android:id="@+id/powerBar"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/dp_18"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@+id/txtScore"
+                app:rcBackgroundPadding="1dp"
+                app:rcRadius="3dp" />
+
+            <TextView
+                android:id="@+id/txtPower"
+                style="@style/AlarmRightText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/trSignal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:visibility="gone">
+
+        <TextView
+            style="@style/AlarmLeftText"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:text="设备信号：" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <com.android.widget.roundcornerprogressbar.RoundCornerProgressBar
+                android:id="@+id/signalBar"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/dp_18"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@+id/txtScore"
+                app:rcBackgroundPadding="1dp"
+                app:rcRadius="3dp" />
+
+            <TextView
+                android:id="@+id/txtSignal"
+                style="@style/AlarmRightText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/trAlarmType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <TextView
+            style="@style/AlarmLeftText"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:text="报警类型：" />
+
+        <TextView
+            android:id="@+id/txtAlarmType"
+            style="@style/AlarmRightText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/AlarmLeftText"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:text="地理位置：" />
+
+        <TextView
+            android:id="@+id/txtLocation"
+            style="@style/AlarmRightText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxEms="9"
+            android:text="" />
+    </LinearLayout>
+
+</LinearLayout>
