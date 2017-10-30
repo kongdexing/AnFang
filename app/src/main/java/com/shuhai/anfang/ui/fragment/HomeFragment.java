@@ -2,6 +2,7 @@ package com.shuhai.anfang.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -88,8 +89,24 @@ public class HomeFragment extends BaseFragment {
         topBanner.isAutoPlay(true);
         //设置轮播时间
         topBanner.setDelayTime(3000);
-        //banner设置方法全部调用完毕时最后调用
         topBanner.start();
+        //banner设置方法全部调用完毕时最后调用
+        topBanner.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         topBanner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
@@ -105,7 +122,15 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
+        Log.i(TAG, "onResume: startAutoPlay");
+        topBanner.startAutoPlay();
+    }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.i(TAG, "onPause: stopAutoPlay");
+        topBanner.stopAutoPlay();
     }
 
     @OnClick({R.id.home_homework, R.id.home_alarm, R.id.home_checkin, R.id.home_score,
@@ -158,12 +183,6 @@ public class HomeFragment extends BaseFragment {
 //        if (viewPagerTop != null) {
 //            viewPagerTop.startAutoScroll();
 //        }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-//        viewPagerTop.stopAutoScroll();
     }
 
     @Override

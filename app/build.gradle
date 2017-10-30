@@ -25,9 +25,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        manifestPlaceholders = [API_KEY_BAIDU       : rootProject.appKeyBaiduMap_parent,
-                                UMENG_APPKEY        : rootProject.UMENG_APPKEY_parent,
-                                UMENG_MESSAGE_SECRET: rootProject.UMENG_MESSAGE_SECRET_parent,
+        manifestPlaceholders = [API_KEY_BAIDU       : rootProject.appKeyBaiduMap,
+                                UMENG_APPKEY        : rootProject.UMENG_APPKEY,
+                                UMENG_MESSAGE_SECRET: rootProject.UMENG_MESSAGE_SECRET,
                                 MZ_APP_ID           : MZAppId,
                                 MZ_APP_KEY          : MZAppKey,
                                 PACKAGE_NAME        : appPackageName]

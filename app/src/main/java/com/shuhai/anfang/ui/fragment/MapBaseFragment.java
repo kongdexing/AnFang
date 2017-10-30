@@ -466,7 +466,8 @@ public class MapBaseFragment extends BaseFragment implements BDLocationListener,
 
     @Override
     public void onResume() {
-        mMapView.onResume();
+        if (mMapView != null)
+            mMapView.onResume();
         registerSensorListener();
         super.onResume();
     }
@@ -508,8 +509,9 @@ public class MapBaseFragment extends BaseFragment implements BDLocationListener,
     }
 
     public void registerSensorListener() {
-        mSensorManager.registerListener(this, mSensor,
-                SensorManager.SENSOR_DELAY_NORMAL);
+        if (mSensorManager != null)
+            mSensorManager.registerListener(this, mSensor,
+                    SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     public void unRegisterSensorListener() {

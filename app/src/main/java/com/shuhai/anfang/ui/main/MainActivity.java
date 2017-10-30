@@ -217,7 +217,9 @@ public class MainActivity extends BaseMainActivity {
             mFgtTransaction.hide(mCurrentFgt).add(R.id.fl_Content, fragmentList.get(position)).show(fragmentList.get(position)).commit();
         }
         Log.e(TAG, "Replace");
+        mCurrentFgt.onPause();
         mCurrentFgt = fragmentList.get(position);
+        mCurrentFgt.onResume();
     }
 
     private void login(final String account, final String password) {
