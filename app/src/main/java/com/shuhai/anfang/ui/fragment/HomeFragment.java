@@ -2,7 +2,6 @@ package com.shuhai.anfang.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +10,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.android.widget.autoviewpager.AutoScrollViewPager;
 import com.shuhai.anfang.R;
 import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.model.BeanBanner;
-import com.shuhai.anfang.push.BannerHelper;
+import com.shuhai.anfang.view.autoviewpager.GalleryTransformer;
+import com.shuhai.anfang.view.autoviewpager.GlideImageLoader;
 import com.viewpagerindicator.CirclePageIndicator;
+import com.youth.banner.Banner;
+import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +31,8 @@ public class HomeFragment extends BaseFragment {
 
     @BindView(R.id.rlTipAD)
     RelativeLayout rlTipAD;
-    @BindView(R.id.viewPagerTop)
-    AutoScrollViewPager viewPagerTop;
+    @BindView(R.id.topBanner)
+    Banner topBanner;
     @BindView(R.id.indicator)
     CirclePageIndicator indicator;
     @BindView(R.id.tipTitle)
@@ -70,41 +71,41 @@ public class HomeFragment extends BaseFragment {
             Log.i(TAG, "initView setLayoutParams error: " + ex.getMessage());
         }
 
-//        viewPagerTop.setCycle(true);
-//        topAdapter = new MyTopPagerAdapter(this.getContext());
-//        viewPagerTop.setAdapter(topAdapter);
-        indicator.setViewPager(viewPagerTop);
-        indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//                Log.i(TAG, "onPageScrolled: " + position);
-            }
+        List<String> listBannerImages = new ArrayList<>();
+        listBannerImages.add("http://f10.baidu.com/it/u=1981748892,3031683197&fm=72");
+        listBannerImages.add("http://f10.baidu.com/it/u=3243370105,1125765815&fm=72");
+        listBannerImages.add("http://f11.baidu.com/it/u=4174806606,645220058&fm=72");
 
+        //设置图片加载器
+        // 1.设置幕后item的缓存数目
+        topBanner.setOffscreenPageLimit(1);
+        topBanner.setImages(listBannerImages);
+        topBanner.setImageLoader(new GlideImageLoader());
+        //设置图片集合
+        //设置banner动画效果
+        topBanner.setPageTransformer(true, new GalleryTransformer(getActivity()));
+        //设置自动轮播，默认为true
+        topBanner.isAutoPlay(true);
+        //设置轮播时间
+        topBanner.setDelayTime(3000);
+        //banner设置方法全部调用完毕时最后调用
+        topBanner.start();
+        topBanner.setOnBannerListener(new OnBannerListener() {
             @Override
-            public void onPageSelected(int position) {
-                if (topBanners.size() > position) {
-                    BeanBanner banner = topBanners.get(position);
-                    if (banner != null) {
-                        tipTitle.setText(banner.getTitle());
-                        BannerHelper.postShowBanner(banner, "1");
-                    }
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-//                Log.i(TAG, "onPageScrollStateChanged: ");
+            public void OnBannerClick(int position) {
+//                Intent web = new Intent(getContext(), WebActivity.class);
+//                web.putExtra("url", advertList.get(position).getAd_url());
+//                web.putExtra("ad_desc", advertList.get(position).getAd_desc());
+//                startActivity(web);
             }
         });
-        indicator.setCurrentItem(0);
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (viewPagerTop != null) {
-            viewPagerTop.startAutoScroll();
-        }
+
     }
 
     @OnClick({R.id.home_homework, R.id.home_alarm, R.id.home_checkin, R.id.home_score,
@@ -154,15 +155,15 @@ public class HomeFragment extends BaseFragment {
 //            }
 //            topAdapter.reloadData(banners);
 //        }
-        if (viewPagerTop != null) {
-            viewPagerTop.startAutoScroll();
-        }
+//        if (viewPagerTop != null) {
+//            viewPagerTop.startAutoScroll();
+//        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        viewPagerTop.stopAutoScroll();
+//        viewPagerTop.stopAutoScroll();
     }
 
     @Override

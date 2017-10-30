@@ -92,7 +92,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.MainActivity"
+        <activity android:name=".ui.main.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"/>

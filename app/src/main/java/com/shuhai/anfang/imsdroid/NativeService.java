@@ -153,7 +153,7 @@ public class NativeService extends NgnNativeService {
                                     return;
                                 } else {
                                     Intent i = new Intent();
-                                    i.setClass(NativeService.this, CallScreen.class);
+//                                    i.setClass(NativeService.this, CallScreen.class);
                                     i.putExtra(ExtraKey.EXTRAT_CALL_TYPE, "incoming");
                                     i.putExtra(ExtraKey.EXTRAT_SIP_SESSION_ID, avSession.getId());
 //                                i.putExtra(EXTRAT_TEACHER_ID, null);

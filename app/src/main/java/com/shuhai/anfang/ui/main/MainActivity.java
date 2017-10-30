@@ -104,7 +104,7 @@ public class MainActivity extends BaseMainActivity {
         mFgtManager = getSupportFragmentManager();
         setInitialState();
 
-        getBanners();
+//        getBanners();
     }
 
     private void setInitialState() {
