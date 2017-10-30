@@ -61,7 +61,7 @@ public class MainActivity extends BaseMainActivity {
     private List<BaseFragment> fragmentList;
     private BaseFragment mCurrentFgt, homeFragment, mapFragment, mineFragment;
     private FrameLayout fl_Content;
-    private ImageButton homeBtn, mapBtn, mineBtn;
+    private ImageButton homeBtn, mapBtn, messageBtn,mineBtn;
     private FragmentManager mFgtManager;
     private FragmentTransaction mFgtTransaction;
     private long mExitTime;
@@ -84,6 +84,7 @@ public class MainActivity extends BaseMainActivity {
         fl_Content = (FrameLayout) findViewById(R.id.fl_Content);
         homeBtn = (ImageButton) findViewById(R.id.nav_home);
         mapBtn = (ImageButton) findViewById(R.id.nav_track);
+        messageBtn = (ImageButton) findViewById(R.id.nav_message);
         mineBtn = (ImageButton) findViewById(R.id.nav_mine);
 
         IntentFilter filter = new IntentFilter(BroadcastAction.RELOAD_BANNER);
@@ -99,7 +100,8 @@ public class MainActivity extends BaseMainActivity {
 
         fragmentList.add(0, homeFragment);
         fragmentList.add(1, mapFragment);
-        fragmentList.add(2, mineFragment);
+        fragmentList.add(2, mapFragment);
+        fragmentList.add(3, mineFragment);
 
         mFgtManager = getSupportFragmentManager();
         setInitialState();
@@ -170,7 +172,7 @@ public class MainActivity extends BaseMainActivity {
         return true;
     }
 
-    @OnClick({R.id.nav_home, R.id.nav_track, R.id.nav_mine})
+    @OnClick({R.id.nav_home, R.id.nav_track, R.id.nav_message, R.id.nav_mine})
     public void viewOnclick(View view) {
         viewClick(view);
     }
@@ -185,9 +187,13 @@ public class MainActivity extends BaseMainActivity {
             case R.id.nav_track:
                 showMap();
                 break;
+            case R.id.nav_message:
+                messageBtn.setSelected(true);
+                addOrReplaceFgt(2);
+                break;
             case R.id.nav_mine:
                 mineBtn.setSelected(true);
-                addOrReplaceFgt(2);
+                addOrReplaceFgt(3);
                 break;
         }
     }
@@ -195,6 +201,7 @@ public class MainActivity extends BaseMainActivity {
     public void resetNavBar() {
         homeBtn.setSelected(false);
         mapBtn.setSelected(false);
+        messageBtn.setSelected(false);
         mineBtn.setSelected(false);
     }
 
