@@ -185,7 +185,9 @@ public class MainActivity extends BaseMainActivity {
                 addOrReplaceFgt(0);
                 break;
             case R.id.nav_track:
-                showMap();
+                MainActivityPermissionsDispatcher.showTrackFragmentWithCheck(this);
+                mapBtn.setSelected(true);
+                addOrReplaceFgt(1);
                 break;
             case R.id.nav_message:
                 messageBtn.setSelected(true);
@@ -203,12 +205,6 @@ public class MainActivity extends BaseMainActivity {
         mapBtn.setSelected(false);
         messageBtn.setSelected(false);
         mineBtn.setSelected(false);
-    }
-
-    public void showMap() {
-        MainActivityPermissionsDispatcher.showTrackFragmentWithCheck(this);
-        mapBtn.setSelected(true);
-        addOrReplaceFgt(1);
     }
 
     private void addOrReplaceFgt(int position) {

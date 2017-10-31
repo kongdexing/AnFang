@@ -36,6 +36,6 @@ task clean(type: Delete) {
 
 ext {
     appKeyBaiduMap = 'zMGIX0G6oxze26P7ljCnH1fskpqI22IU'
-    UMENG_APPKEY = '58215e1a4ad1563bfb002c6f'
-    UMENG_MESSAGE_SECRET = '27c6737e1f3441da6c438bc84cfa08d8'
+    UMENG_APPKEY = '59f6e9fc8f4a9d1989000101'
+    UMENG_MESSAGE_SECRET = '0ad6c6c612bd56516a7aa698a0be306f'
 }

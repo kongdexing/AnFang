@@ -1,67 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_setting"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_window">
+    android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+
+            <ImageView
+                android:id="@+id/imgCompany"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimaryDark"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:paddingBottom="@dimen/dp_10"
-                android:paddingTop="@dimen/dp_10">
-
-                <com.android.widget.view.CircularImageView
-                    android:id="@+id/imgHead"
-                    android:layout_width="@dimen/dp_60"
-                    android:layout_height="@dimen/dp_60"
-                    android:clickable="true"
-                    android:src="@drawable/user_defaulthead" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/txtUserName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:text=""
-                        android:visibility="gone"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="@dimen/sp_14" />
-
-                    <TextView
-                        android:id="@+id/txtChangeAccount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_5"
-                        android:background="@drawable/bg_mine_info"
-                        android:padding="@dimen/dp_2"
-                        android:text="立即登录"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="@dimen/sp_14" />
-
-                </LinearLayout>
-
-            </LinearLayout>
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dp_20"
+                android:src="@drawable/company_logo" />
 
             <RelativeLayout
-                android:id="@+id/rlMyClass"
+                android:id="@+id/rlInstruction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:background="@drawable/mine_item_selector"
+                android:clickable="true"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/mineText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="功能介绍" />
+
+                <ImageView
+                    android:id="@+id/img_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:src="@drawable/iau" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlTel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20"
@@ -72,13 +60,22 @@
                     style="@style/mineText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/mine_class" />
+                    android:text="客服电话：" />
 
-                <ImageView style="@style/arrow_right" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:text="@string/company_tel"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/sp_16" />
+
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/rlMyChild"
+                android:id="@+id/rlUpdate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_1"
@@ -89,30 +86,23 @@
                     style="@style/mineText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/mine_child" />
-
-                <ImageView style="@style/arrow_right" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rlMyCollect"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
-                android:background="@drawable/mine_item_selector"
-                android:clickable="true">
+                    android:text="版本更新" />
 
                 <TextView
-                    style="@style/mineText"
+                    android:id="@+id/txtVersion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/mine_collect" />
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:text=""
+                    android:textColor="@color/color_black_2"
+                    android:textSize="@dimen/sp_16" />
 
-                <ImageView style="@style/arrow_right" />
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/rlMyCourse"
+                android:id="@+id/rlChangePwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
@@ -123,13 +113,13 @@
                     style="@style/mineText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/mine_bill" />
+                    android:text="@string/setting_change_pwd" />
 
                 <ImageView style="@style/arrow_right" />
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/rlMyProperty"
+                android:id="@+id/rltutelage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_1"
@@ -137,17 +127,16 @@
                 android:clickable="true">
 
                 <TextView
-                    android:id="@+id/txtContact"
                     style="@style/mineText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/mine_property" />
+                    android:text="@string/setting_add_tutelage" />
 
                 <ImageView style="@style/arrow_right" />
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/rlMS_ele_account"
+                android:id="@+id/rlHelp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
@@ -158,16 +147,22 @@
                     style="@style/mineText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/mine_ms_ele_account" />
+                    android:text="@string/setting_help" />
 
-                <ImageView style="@style/arrow_right" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:src="@drawable/iau" />
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/rlMS_payment"
+                android:id="@+id/rlExit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
+                android:layout_marginTop="@dimen/dp_10"
                 android:background="@drawable/mine_item_selector"
                 android:clickable="true">
 
@@ -175,28 +170,31 @@
                     style="@style/mineText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/mine_ms_payment" />
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/mine_exit" />
 
-                <ImageView style="@style/arrow_right" />
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/rlMS_credit_card"
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
-                android:background="@drawable/mine_item_selector"
-                android:clickable="true">
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dp_30"
+                android:text="@string/company_name"
+                android:textColor="@color/text_grey" />
 
-                <TextView
-                    style="@style/mineText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/mine_ms_credit_card" />
-
-                <ImageView style="@style/arrow_right" />
-            </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/dp_5"
+                android:gravity="center"
+                android:text="@string/company_name_es"
+                android:textColor="@color/text_grey"
+                android:textSize="@dimen/sp_13" />
 
         </LinearLayout>
+
     </ScrollView>
 </LinearLayout>
+

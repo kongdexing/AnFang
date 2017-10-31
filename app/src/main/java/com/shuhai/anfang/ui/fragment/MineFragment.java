@@ -1,5 +1,6 @@
 package com.shuhai.anfang.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -11,6 +12,8 @@ import com.android.widget.view.CircularImageView;
 import com.shuhai.anfang.R;
 import com.shuhai.anfang.model.BeanParent;
 import com.shuhai.anfang.model.GreenDaoHelper;
+import com.shuhai.anfang.ui.main.MainActivity;
+import com.shuhai.anfang.ui.setting.SettingActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,9 +31,6 @@ public class MineFragment extends BaseFragment {
     @BindView(R.id.txtChangeAccount)
     TextView txtMineInfo;
 
-    @BindView(R.id.txtDot)
-    TextView txtDot;
-
     private Unbinder unbinder;
 
     public MineFragment() {
@@ -41,13 +41,28 @@ public class MineFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.fragment_mine, container, false);
         unbinder = ButterKnife.bind(this, mRootView);
-        txtDot = (TextView) mRootView.findViewById(R.id.txtDot);
         return mRootView;
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        if (mContext == null)
+            return;
+
+        ((MainActivity) mContext).setTxtRight(R.string.mine_setting);
+        ((MainActivity) mContext).setTextRightClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(mContext, SettingActivity.class));
+            }
+        });
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        ((MainActivity) mContext).setTxtRight("");
     }
 
     @Override
@@ -63,8 +78,8 @@ public class MineFragment extends BaseFragment {
         }
     }
 
-    @OnClick({R.id.imgHead, R.id.txtChangeAccount, R.id.rlMyChild, R.id.rlMyFences, R.id.rlMyWellet,
-            R.id.rlMyCourse, R.id.rlMyContacts, R.id.rlSetting})
+    @OnClick({R.id.imgHead, R.id.txtChangeAccount, R.id.rlMyChild,
+            R.id.rlMyCourse})
     void knifeClick(View view) {
         switch (view.getId()) {
 //            case R.id.imgHead:

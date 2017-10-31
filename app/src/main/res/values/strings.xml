@@ -39,10 +39,18 @@
 
     <string name="mine_info">我的信息</string>
     <string name="mine_child">我的孩子</string>
+    <string name="mine_class">我的班级</string>
     <string name="mine_fence">我的围栏</string>
     <string name="mine_wellet">我的钱包</string>
-    <string name="mine_course">课程表</string>
-    <string name="mine_contacts">通讯录</string>
+    <string name="mine_collect">我的收藏</string>
+
+    <string name="mine_bill">账单</string>
+    <string name="mine_property">资产</string>
+
+    <string name="mine_ms_ele_account">民生银行电子账户</string>
+    <string name="mine_ms_payment">代收代缴</string>
+    <string name="mine_ms_credit_card">信用卡业务</string>
+
     <string name="mine_about">关于</string>
     <string name="mine_setting">设置</string>
     <string name="mine_exit">退出当前账号</string>
