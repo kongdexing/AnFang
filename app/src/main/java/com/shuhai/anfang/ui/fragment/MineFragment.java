@@ -12,7 +12,9 @@ import com.android.widget.view.CircularImageView;
 import com.shuhai.anfang.R;
 import com.shuhai.anfang.model.BeanParent;
 import com.shuhai.anfang.model.GreenDaoHelper;
+import com.shuhai.anfang.ui.login.LoginActivity;
 import com.shuhai.anfang.ui.main.MainActivity;
+import com.shuhai.anfang.ui.mine.MyInfoActivity;
 import com.shuhai.anfang.ui.setting.SettingActivity;
 
 import butterknife.BindView;
@@ -82,14 +84,16 @@ public class MineFragment extends BaseFragment {
             R.id.rlMyCourse})
     void knifeClick(View view) {
         switch (view.getId()) {
-//            case R.id.imgHead:
-//                startActivity(new Intent(getContext(), MyInfoActivity.class));
-//                break;
+            case R.id.imgHead:
+                //登录？进入个人信息：登录页面
+                if (((MainActivity) mContext).isLogin()) {
+                    startActivity(new Intent(getContext(), MyInfoActivity.class));
+                }else{
+                    startActivity(new Intent(getContext(), LoginActivity.class));
+                }
+                break;
 //            case R.id.rlMyChild:
 //                startActivity(new Intent(getContext(), MyChildActivity.class));
-//                break;
-//            case R.id.rlMyFences:
-//                startActivity(new Intent(getContext(), FenceListActivity.class));
 //                break;
 //            case R.id.rlMyCourse:
 //                startActivity(new Intent(getContext(), CourseActivity.class));

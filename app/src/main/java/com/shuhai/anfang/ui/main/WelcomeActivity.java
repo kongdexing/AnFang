@@ -68,6 +68,7 @@ public class WelcomeActivity extends BaseActivity {
             return;
         }
 
+
         if (password.isEmpty() || userName.isEmpty()) {
 
         } else {

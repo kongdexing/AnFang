@@ -105,6 +105,8 @@
             android:name=".ui.main.SplashActivity"
             android:theme="@style/AppTheme.Translucent" />
 
+        <activity android:name=".ui.main.WebViewActivity"/>
+
         <activity
             android:name=".ui.login.LoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -116,6 +118,11 @@
         <activity android:name=".ui.setting.ChangePwdActivity" />
         <activity android:name=".ui.setting.TutelageActivity" />
         <activity android:name=".ui.setting.AboutActivity" />
+
+        <activity
+            android:name=".ui.mine.MyInfoActivity"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".ui.mine.MyChildActivity" />
 
     </application>
 

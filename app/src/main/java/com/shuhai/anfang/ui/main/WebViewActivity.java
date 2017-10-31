@@ -16,7 +16,6 @@ import com.just.library.ChromeClientCallbackManager;
 import com.shuhai.anfang.R;
 import com.shuhai.anfang.common.ExtraKey;
 import com.shuhai.anfang.model.GreenDaoHelper;
-import com.shuhai.anfang.view.CustomDialog;
 
 import butterknife.BindView;
 
@@ -97,18 +96,18 @@ public class WebViewActivity extends BaseActivity {
         }
     };
 
-    @Override
-    public void onBackPressed() {
-        CustomDialog dialog = new CustomDialog(WebViewActivity.this);
-        dialog.setTitle(R.string.label_tip);
-        dialog.setMessage("您确定要关闭该页面吗?");
-        dialog.setAlertDialogClickListener(new CustomDialog.DialogClickListener() {
-            @Override
-            public void onPositiveClick() {
-                WebViewActivity.this.finish();
-            }
-        });
-    }
+//    @Override
+//    public void onBackPressed() {
+//        CustomDialog dialog = new CustomDialog(WebViewActivity.this);
+//        dialog.setTitle(R.string.label_tip);
+//        dialog.setMessage("您确定要关闭该页面吗?");
+//        dialog.setAlertDialogClickListener(new CustomDialog.DialogClickListener() {
+//            @Override
+//            public void onPositiveClick() {
+//                WebViewActivity.this.finish();
+//            }
+//        });
+//    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
