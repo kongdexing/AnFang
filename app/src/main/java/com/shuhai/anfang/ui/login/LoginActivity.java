@@ -1,10 +1,12 @@
 package com.shuhai.anfang.ui.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -12,16 +14,19 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.widget.view.SmoothCheckBox;
 import com.huawei.hms.api.ConnectionResult;
 import com.huawei.hms.api.HuaweiApiClient;
 import com.huawei.hms.support.api.push.HuaweiPush;
 import com.meizu.cloud.pushsdk.PushManager;
 import com.shuhai.anfang.R;
 import com.shuhai.anfang.XPTApplication;
+import com.shuhai.anfang.common.CommonUtil;
 import com.shuhai.anfang.common.ExtraKey;
 import com.shuhai.anfang.common.SharedPreferencesUtil;
 import com.shuhai.anfang.push.DeviceHelper;
-import com.shuhai.anfang.ui.main.BaseActivity;
+import com.shuhai.anfang.ui.main.MainActivity;
+import com.shuhai.anfang.util.ToastUtils;
 import com.umeng.message.IUmengCallback;
 import com.umeng.message.PushAgent;
 import com.xiaomi.mipush.sdk.MiPushClient;
@@ -29,7 +34,7 @@ import com.xiaomi.mipush.sdk.MiPushClient;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class LoginActivity extends BaseActivity implements HuaweiApiClient.ConnectionCallbacks, HuaweiApiClient.OnConnectionFailedListener {
+public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.ConnectionCallbacks, HuaweiApiClient.OnConnectionFailedListener {
 
     boolean showPassword = false;
     @BindView(R.id.llParent)
@@ -46,6 +51,11 @@ public class LoginActivity extends BaseActivity implements HuaweiApiClient.Conne
     ProgressBar progress;
     @BindView(R.id.imgCompany)
     ImageView imgCompany;
+
+    @BindView(R.id.cbx_parent)
+    SmoothCheckBox cbx_parent;
+    @BindView(R.id.cbx_teacher)
+    SmoothCheckBox cbx_teacher;
 
     HuaweiApiClient client;
 
@@ -126,24 +136,26 @@ public class LoginActivity extends BaseActivity implements HuaweiApiClient.Conne
     }
 
     private void initView() {
-//        llParent.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-//            @Override
-//            public void onGlobalLayout() {
-//                int heightDiff = llParent.getRootView().getHeight();
-//                int height = llParent.getHeight();
-//                int diff = heightDiff - height;
-//                Log.i(TAG, "onGlobalLayout  rootH " + heightDiff + "  height:" + height + " diff:" + diff);
-//                if (diff > 400) {
-//                    //键盘弹起
-//                    imgCompany.setVisibility(View.GONE);
-//                } else {
-//                    imgCompany.setVisibility(View.VISIBLE);
-//                }
-//            }
-//        });
+        cbx_parent.setChecked(true);
+        llParent.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                int heightDiff = llParent.getRootView().getHeight();
+                int height = llParent.getHeight();
+                int diff = heightDiff - height;
+                Log.i(TAG, "onGlobalLayout  rootH " + heightDiff + "  height:" + height + " diff:" + diff);
+                if (diff > 400) {
+                    //键盘弹起
+                    imgCompany.setVisibility(View.GONE);
+                } else {
+                    imgCompany.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 
-    @OnClick({R.id.imgDel, R.id.imgToggle, R.id.btnLogin, R.id.txtForgetPWD})
+    @OnClick({R.id.imgDel, R.id.imgToggle, R.id.btnLogin, R.id.ll_parent, R.id.cbx_parent,
+            R.id.ll_teacher, R.id.cbx_teacher, R.id.txtForgetPWD, R.id.txtRegister})
     void buttonOnclick(View view) {
         switch (view.getId()) {
             case R.id.imgDel:
@@ -159,14 +171,27 @@ public class LoginActivity extends BaseActivity implements HuaweiApiClient.Conne
 
                 if ((!TextUtils.isEmpty(account)) && (!TextUtils.isEmpty(password))) {
                     btnLogin.setEnabled(false);
-//                    ChatUtil.hideInputWindow(LoginActivity.this, btnLogin);
-//                    login(account, password, null);
+                    CommonUtil.hideInputWindow(LoginActivity.this, btnLogin);
+                    login(account, password, cbx_parent.isChecked() ? XPTApplication.USER_TYPE_PARENT : XPTApplication.USER_TYPE_TEACHER, null);
                 } else {
                     Toast.makeText(LoginActivity.this, R.string.error_empty_login, Toast.LENGTH_SHORT).show();
                 }
                 break;
+            case R.id.ll_parent:
+            case R.id.cbx_parent:
+                cbx_parent.setChecked(true);
+                cbx_teacher.setChecked(false);
+                break;
+            case R.id.ll_teacher:
+            case R.id.cbx_teacher:
+                cbx_parent.setChecked(false);
+                cbx_teacher.setChecked(true);
+                break;
             case R.id.txtForgetPWD:
-//                startActivity(new Intent(this, CheckUserActivity.class));
+                startActivity(new Intent(this, CheckUserActivity.class));
+                break;
+            case R.id.txtRegister:
+
                 break;
         }
     }
@@ -183,6 +208,36 @@ public class LoginActivity extends BaseActivity implements HuaweiApiClient.Conne
         }
         edtPwd.setSelection(edtPwd.getText().length());
         showPassword = show;
+    }
+
+    @Override
+    protected void onStartLogin() {
+        super.onStartLogin();
+        if (progress != null)
+            progress.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void onLoginSuccess() {
+        super.onLoginSuccess();
+        if (progress != null)
+            progress.setVisibility(View.INVISIBLE);
+        btnLogin.setEnabled(true);
+
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    protected void onLoginFailed(String msg) {
+        super.onLoginFailed(msg);
+        ToastUtils.showToast(this, msg);
+        if (progress != null)
+            progress.setVisibility(View.INVISIBLE);
+        btnLogin.setEnabled(true);
     }
 
 }

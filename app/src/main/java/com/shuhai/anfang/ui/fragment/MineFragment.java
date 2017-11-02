@@ -86,7 +86,7 @@ public class MineFragment extends BaseFragment {
         switch (view.getId()) {
             case R.id.imgHead:
                 //登录？进入个人信息：登录页面
-                if (((MainActivity) mContext).isLogin()) {
+                if (((MainActivity) mContext).isLoggedIn()) {
                     startActivity(new Intent(getContext(), MyInfoActivity.class));
                 }else{
                     startActivity(new Intent(getContext(), LoginActivity.class));

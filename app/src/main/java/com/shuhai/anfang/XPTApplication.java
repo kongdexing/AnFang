@@ -34,14 +34,20 @@ import java.net.Proxy;
 
 public class XPTApplication extends NgnApplication {
 
+    //小米推送
     public static final String APP_MIPUSH_ID = "2882303761517599079";
     public static final String APP_MIPUSH_KEY = "5961759967079";
-
+    //魅族推送
     public static final String MZ_APP_ID = "111065";
     public static final String MZ_APP_KEY = "5e44c6c91687442091c945f29c888b18";
-
+    //bugly
     public static final String APP_ID = "3e1429a7a5"; // TODO bugly上注册的appid
     private static XPTApplication mInstance;
+    //老师身份
+    public static String USER_TYPE_TEACHER = "3";
+    //家长身份
+    public static String USER_TYPE_PARENT = "4";
+
     public static final String WXAPP_ID = "wx1af4f660ce9e6b37";
     private Display display;
     public static String TAG = XPTApplication.class.getSimpleName();

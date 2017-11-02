@@ -11,7 +11,9 @@ import android.text.Spanned;
 import android.util.Log;
 import android.view.Display;
 import android.view.Surface;
+import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.baidu.mapapi.model.LatLng;
@@ -348,6 +350,22 @@ public class CommonUtil {
             }
         };
         editText.setFilters(new InputFilter[]{filter});
+    }
+
+    public static void showInputWindow(Context mContext, View view) {
+        if (mContext == null) {
+            return;
+        }
+        InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(view, InputMethodManager.SHOW_FORCED);
+    }
+
+    public static void hideInputWindow(Context mContext, View view) {
+        if (mContext == null) {
+            return;
+        }
+        InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
 }

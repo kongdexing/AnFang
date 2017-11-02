@@ -183,7 +183,7 @@ public class BaseMainActivity extends BaseActivity implements HuaweiApiClient.Co
         super.onResume();
     }
 
-    public boolean isLogin() {
+    public boolean isLoggedIn() {
         String userName = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_NAME, "");
         String password = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_PWD, "");
         if (userName.isEmpty() || password.isEmpty()) {

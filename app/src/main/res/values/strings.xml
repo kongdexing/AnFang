@@ -20,9 +20,12 @@
     <string name="hint_username">请输入用户名</string>
     <string name="userpwd">密码</string>
     <string name="forgetpwd"><u>忘记密码</u></string>
+    <string name="register"><u>新用户注册</u></string>
+
     <string name="login">登录</string>
     <string name="login_failed">登录失败</string>
     <string name="error_empty_login">请输入用户名或密码</string>
+    <string name="login_role">用户角色</string>
 
     <string name="home_homework">家庭作业</string>
     <string name="home_notice">班级公告</string>
