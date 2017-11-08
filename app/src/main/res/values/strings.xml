@@ -32,7 +32,7 @@
     <string name="home_question">在线提问</string>
     <string name="home_location">位置查询</string>
     <string name="home_score">孩子成绩</string>
-    <string name="home_checkin">孩子考勤</string>
+    <string name="home_checkin">考勤记录</string>
     <string name="home_leave">在线请假</string>
     <string name="home_alarm">警报查询</string>
 

@@ -11,8 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.widget.mygridview.MyGridView;
 import com.shuhai.anfang.R;
 import com.shuhai.anfang.XPTApplication;
+import com.shuhai.anfang.bean.HomeItem;
 import com.shuhai.anfang.model.BeanBanner;
 import com.shuhai.anfang.view.autoviewpager.GalleryTransformer;
 import com.shuhai.anfang.view.autoviewpager.GlideImageLoader;
@@ -25,7 +27,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class HomeFragment extends BaseFragment {
@@ -39,8 +40,12 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.tipTitle)
     TextView tipTitle;
 
+    @BindView(R.id.grd_school)
+    MyGridView grd_school;
+    HomeItemGridAdapter itemAdapter;
+
     private Unbinder unbinder;
-//    private MyTopPagerAdapter topAdapter;
+    //    private MyTopPagerAdapter topAdapter;
     private List<BeanBanner> topBanners = new ArrayList<>();
 
     public HomeFragment() {
@@ -124,6 +129,62 @@ public class HomeFragment extends BaseFragment {
         super.onResume();
         Log.i(TAG, "onResume: startAutoPlay");
         topBanner.startAutoPlay();
+        //根据登录状态显示不同icon
+        //当状态有更改时才变化Item
+        List<HomeItem> homeItems = new ArrayList<HomeItem>();
+
+//        homeItem.setActivity();
+
+        homeItems.add(new HomeItem().setIconId(R.drawable.home_homework)
+                .setTitle(getString(R.string.home_homework)));
+        homeItems.add(new HomeItem().setIconId(R.drawable.home_notice)
+                .setTitle(getString(R.string.home_notice)));
+        homeItems.add(new HomeItem().setIconId(R.drawable.home_classes)
+                .setTitle(getString(R.string.home_score)));
+        homeItems.add(new HomeItem().setIconId(R.drawable.home_homework)
+                .setTitle(getString(R.string.home_homework)));
+        homeItems.add(new HomeItem().setIconId(R.drawable.home_homework)
+                .setTitle(getString(R.string.home_homework)));
+        homeItems.add(new HomeItem().setIconId(R.drawable.home_homework)
+                .setTitle(getString(R.string.home_homework)));
+        homeItems.add(new HomeItem().setIconId(R.drawable.home_notice)
+                .setTitle(getString(R.string.home_notice)));
+        homeItems.add(new HomeItem().setIconId(R.drawable.home_classes)
+                .setTitle(getString(R.string.home_score)));
+        homeItems.add(new HomeItem().setIconId(R.drawable.home_homework)
+                .setTitle(getString(R.string.home_homework)));
+        homeItems.add(new HomeItem().setIconId(R.drawable.home_homework)
+                .setTitle(getString(R.string.home_homework)));
+        homeItems.add(new HomeItem().setIconId(R.drawable.home_homework)
+                .setTitle(getString(R.string.home_homework)));
+        homeItems.add(new HomeItem().setIconId(R.drawable.home_notice)
+                .setTitle(getString(R.string.home_notice)));
+        homeItems.add(new HomeItem().setIconId(R.drawable.home_classes)
+                .setTitle(getString(R.string.home_score)));
+        homeItems.add(new HomeItem().setIconId(R.drawable.home_homework)
+                .setTitle(getString(R.string.home_homework)));
+        homeItems.add(new HomeItem().setIconId(R.drawable.home_homework)
+                .setTitle(getString(R.string.home_homework)));
+        homeItems.add(new HomeItem().setIconId(R.drawable.home_homework)
+                .setTitle(getString(R.string.home_homework)));
+        homeItems.add(new HomeItem().setIconId(R.drawable.home_notice)
+                .setTitle(getString(R.string.home_notice)));
+        homeItems.add(new HomeItem().setIconId(R.drawable.home_classes)
+                .setTitle(getString(R.string.home_score)));
+        homeItems.add(new HomeItem().setIconId(R.drawable.home_homework)
+                .setTitle(getString(R.string.home_homework)));
+        homeItems.add(new HomeItem().setIconId(R.drawable.home_homework)
+                .setTitle(getString(R.string.home_homework)));
+
+        itemAdapter = new HomeItemGridAdapter(mContext, new HomeItemGridAdapter.MyGridViewClickListener() {
+            @Override
+            public void onGridViewItemClick(int position, String imgPath) {
+
+            }
+        });
+
+        grd_school.setAdapter(itemAdapter);
+        itemAdapter.reloadData(homeItems);
     }
 
     @Override
@@ -131,38 +192,6 @@ public class HomeFragment extends BaseFragment {
         super.onPause();
         Log.i(TAG, "onPause: stopAutoPlay");
         topBanner.stopAutoPlay();
-    }
-
-    @OnClick({R.id.home_homework, R.id.home_alarm, R.id.home_checkin, R.id.home_score,
-            R.id.home_leave, R.id.home_location, R.id.home_notice, R.id.home_question})
-    void buttonOnClick(View view) {
-        switch (view.getId()) {
-//            case R.id.home_homework:
-//                startActivity(new Intent(getContext(), HomeWorkActivity.class));
-//                break;
-//            case R.id.home_notice:
-//                startActivity(new Intent(getContext(), NoticeActivity.class));
-//                break;
-//            case R.id.home_question:
-//                startActivity(new Intent(getContext(), QuestionActivity.class));
-//                break;
-//            case R.id.home_location:
-//                ((MainActivity) this.getActivity()).resetNavBar();
-//                ((MainActivity) this.getActivity()).showMap();
-//                break;
-//            case R.id.home_score:
-//                startActivity(new Intent(getContext(), ScoreActivity.class));
-//                break;
-//            case R.id.home_checkin:
-//                startActivity(new Intent(getContext(), CheckinActivity.class));
-//                break;
-//            case R.id.home_leave:
-//                startActivity(new Intent(getContext(), LeaveActivity.class));
-//                break;
-//            case R.id.home_alarm:
-//                startActivity(new Intent(getContext(), AlarmActivity.class));
-//                break;
-        }
     }
 
     @Override

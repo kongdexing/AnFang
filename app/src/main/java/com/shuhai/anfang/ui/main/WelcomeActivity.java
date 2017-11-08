@@ -4,8 +4,10 @@ import android.Manifest;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.shuhai.anfang.R;
@@ -13,7 +15,10 @@ import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.common.CommonUtil;
 import com.shuhai.anfang.common.ExtraKey;
 import com.shuhai.anfang.common.SharedPreferencesUtil;
+import com.xiaomi.ad.SplashAdListener;
+import com.xiaomi.ad.adView.SplashAd;
 
+import butterknife.BindView;
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.OnNeverAskAgain;
 import permissions.dispatcher.OnPermissionDenied;
@@ -24,6 +29,9 @@ import permissions.dispatcher.RuntimePermissions;
 @RuntimePermissions
 public class WelcomeActivity extends BaseActivity {
 
+    @BindView(R.id.rlAD_bottom)
+    RelativeLayout rlAD_bottom;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +40,30 @@ public class WelcomeActivity extends BaseActivity {
         setContentView(R.layout.activity_welcome);
         llContent.setBackgroundColor(Color.TRANSPARENT);
         showActionBar(false);
+
+        new SplashAd(this, rlAD_bottom, R.drawable.company_logo, new SplashAdListener() {
+            @Override
+            public void onAdPresent() {
+
+            }
+
+            @Override
+            public void onAdClick() {
+
+            }
+
+            @Override
+            public void onAdDismissed() {
+
+            }
+
+            @Override
+            public void onAdFailed(String s) {
+                Log.i(TAG, "onAdFailed: "+s);
+            }
+        })
+                .requestAd("9820dad84ce71c6015ef8d3a4bbcfcee");
+
 
         analyLogin();
     }
@@ -74,10 +106,16 @@ public class WelcomeActivity extends BaseActivity {
         } else {
             //login
         }
-        intent.setClass(this, MainActivity.class);
-        intent.putExtra(ExtraKey.LOGIN_ORIGIN, "0");
-        startActivity(intent);
-        finish();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                intent.setClass(WelcomeActivity.this, MainActivity.class);
+                intent.putExtra(ExtraKey.LOGIN_ORIGIN, "0");
+                startActivity(intent);
+                finish();
+            }
+        }, 3000);
     }
 
     @OnPermissionDenied({Manifest.permission.READ_PHONE_STATE, Manifest.permission.WRITE_EXTERNAL_STORAGE,

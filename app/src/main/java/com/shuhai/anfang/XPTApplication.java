@@ -26,6 +26,7 @@ import com.tencent.bugly.beta.Beta;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.message.UmengNotificationClickHandler;
 import com.umeng.message.entity.UMessage;
+import com.xiaomi.ad.AdSdk;
 
 import org.doubango.ngn.NgnApplication;
 
@@ -88,6 +89,8 @@ public class XPTApplication extends NgnApplication {
                     getSystemService(Context.WINDOW_SERVICE);
             display = windowManager.getDefaultDisplay();
         }
+
+        AdSdk.initialize(this, "2882303761517634324");
 
         //baidumap
         SDKInitializer.initialize(this);

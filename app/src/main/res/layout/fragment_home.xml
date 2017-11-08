@@ -53,84 +53,17 @@
 
             </RelativeLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <com.android.widget.mygridview.MyGridView
+                android:id="@+id/grd_school"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10">
-
-                <com.shuhai.anfang.view.HomeItemView
-                    android:id="@+id/home_homework"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:src="@drawable/home_homework"
-                    app:text="@string/home_homework" />
-
-                <com.shuhai.anfang.view.HomeItemView
-                    android:id="@+id/home_notice"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:src="@drawable/home_notice"
-                    app:text="@string/home_notice" />
-
-                <com.shuhai.anfang.view.HomeItemView
-                    android:id="@+id/home_question"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:src="@drawable/home_question"
-                    app:text="@string/home_question" />
-
-                <com.shuhai.anfang.view.HomeItemView
-                    android:id="@+id/home_location"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:src="@drawable/home_location"
-                    app:text="@string/home_location" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dp_10"
-                android:layout_marginTop="@dimen/dp_10">
-
-                <com.shuhai.anfang.view.HomeItemView
-                    android:id="@+id/home_score"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:src="@drawable/home_classes"
-                    app:text="@string/home_score" />
-
-                <com.shuhai.anfang.view.HomeItemView
-                    android:id="@+id/home_checkin"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:src="@drawable/home_checkin"
-                    app:text="@string/home_checkin" />
-
-                <com.shuhai.anfang.view.HomeItemView
-                    android:id="@+id/home_leave"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:src="@drawable/home_leave"
-                    app:text="@string/home_leave" />
-
-                <com.shuhai.anfang.view.HomeItemView
-                    android:id="@+id/home_alarm"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:src="@drawable/home_alarm"
-                    app:text="@string/home_alarm" />
-
-            </LinearLayout>
+                android:layout_marginTop="@dimen/dp_15"
+                android:horizontalSpacing="7.5dip"
+                android:listSelector="@null"
+                android:numColumns="3"
+                android:scrollbars="none"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="7.5dip" />
 
         </LinearLayout>
 

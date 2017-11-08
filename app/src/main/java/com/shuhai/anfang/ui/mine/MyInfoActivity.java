@@ -62,13 +62,16 @@ public class MyInfoActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.rlMinePhone, R.id.rlAddressPhone})
+    @OnClick({R.id.rlMinePhoto, R.id.rlMinePhone, R.id.rlAddressPhone})
     void viewClick(View view) {
         BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
         if (parent == null) {
             return;
         }
         switch (view.getId()) {
+            case R.id.rlMinePhoto:
+
+                break;
             case R.id.rlMinePhone:
                 if (parent.getParent_phone().isEmpty()) {
                     Toast.makeText(this, R.string.toast_phone_empty, Toast.LENGTH_SHORT).show();

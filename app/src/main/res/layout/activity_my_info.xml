@@ -15,11 +15,11 @@
             android:orientation="vertical">
 
             <RelativeLayout
-                android:id="@+id/rlMyClass"
+                android:id="@+id/rlMinePhoto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20"
-                android:background="@drawable/mine_item_normal"
+                android:background="@drawable/mine_item_selector"
                 android:clickable="true">
 
                 <TextView
@@ -39,7 +39,8 @@
                     android:layout_marginRight="@dimen/dp_30"
                     android:layout_marginTop="@dimen/dp_5"
                     android:src="@drawable/user_defaulthead" />
-
+                <ImageView
+                    style="@style/arrow_right" />
             </RelativeLayout>
 
             <RelativeLayout
