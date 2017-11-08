@@ -16,8 +16,11 @@ import com.android.widget.mygridview.MyGridView;
 import com.shuhai.anfang.R;
 import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.bean.HomeItem;
+import com.shuhai.anfang.common.ExtraKey;
 import com.shuhai.anfang.model.BeanBanner;
+import com.shuhai.anfang.push.BannerHelper;
 import com.shuhai.anfang.ui.homework.HomeWorkActivity;
+import com.shuhai.anfang.ui.main.WebViewActivity;
 import com.shuhai.anfang.view.autoviewpager.GalleryTransformer;
 import com.shuhai.anfang.view.autoviewpager.GlideImageLoader;
 import com.viewpagerindicator.CirclePageIndicator;
@@ -41,6 +44,7 @@ public class HomeFragment extends BaseFragment {
     CirclePageIndicator indicator;
     @BindView(R.id.tipTitle)
     TextView tipTitle;
+    List<BeanBanner> advertList = new ArrayList<>();
 
     @BindView(R.id.grd_school)
     MyGridView grd_school;
@@ -79,10 +83,6 @@ public class HomeFragment extends BaseFragment {
             Log.i(TAG, "initView setLayoutParams error: " + ex.getMessage());
         }
 
-//        List<String> listBannerImages = new ArrayList<>();
-//        listBannerImages.add("http://f10.baidu.com/it/u=1981748892,3031683197&fm=72");
-//        listBannerImages.add("http://f10.baidu.com/it/u=3243370105,1125765815&fm=72");
-//        listBannerImages.add("http://f11.baidu.com/it/u=4174806606,645220058&fm=72");
 
         //设置图片加载器
         // 1.设置幕后item的缓存数目
@@ -117,10 +117,14 @@ public class HomeFragment extends BaseFragment {
         topBanner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
-//                Intent web = new Intent(getContext(), WebActivity.class);
-//                web.putExtra("url", advertList.get(position).getAd_url());
-//                web.putExtra("ad_desc", advertList.get(position).getAd_desc());
-//                startActivity(web);
+                BeanBanner banner = advertList.get(position);
+
+                if (banner.getTurn_type().equals("1")) {
+                    Intent intent = new Intent(mContext, WebViewActivity.class);
+                    intent.putExtra(ExtraKey.WEB_URL, banner.getUrl());
+                    mContext.startActivity(intent);
+                    BannerHelper.postShowBanner(banner, "2");
+                }
             }
         });
 
@@ -145,12 +149,7 @@ public class HomeFragment extends BaseFragment {
         homeItems.add(new HomeItem().setIconId(R.drawable.home_classes)
                 .setTitle(getString(R.string.home_score)));
 
-        itemAdapter = new HomeItemGridAdapter(mContext, new HomeItemGridAdapter.MyGridViewClickListener() {
-            @Override
-            public void onGridViewItemClick(int position, String imgPath) {
-
-            }
-        });
+        itemAdapter = new HomeItemGridAdapter(mContext);
 
         grd_school.setAdapter(itemAdapter);
         itemAdapter.reloadData(homeItems);

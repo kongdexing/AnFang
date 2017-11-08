@@ -24,13 +24,10 @@ public class HomeItemGridAdapter extends BaseAdapter {
     private Context mContext;
     private String TAG = getClass().getSimpleName();
     public List<HomeItem> homeItems = new ArrayList<>();
-    private MyGridViewClickListener myGridViewClickListener;
-    private boolean canDelete = true;
 
-    public HomeItemGridAdapter(Context mContext, MyGridViewClickListener listener) {
+    public HomeItemGridAdapter(Context mContext) {
         super();
         this.mContext = mContext;
-        this.myGridViewClickListener = listener;
     }
 
     public void reloadData(List<HomeItem> items) {
@@ -123,10 +120,6 @@ public class HomeItemGridAdapter extends BaseAdapter {
         TextView optionText;
         ImageView optionImg;
 
-    }
-
-    public interface MyGridViewClickListener {
-        void onGridViewItemClick(int position, String imgPath);
     }
 
 }
