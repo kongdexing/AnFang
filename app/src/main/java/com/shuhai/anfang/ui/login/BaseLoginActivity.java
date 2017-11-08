@@ -11,7 +11,6 @@ import com.android.volley.common.VolleyHttpService;
 import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.common.CommonUtil;
 import com.shuhai.anfang.common.SharedPreferencesUtil;
-import com.shuhai.anfang.common.UserType;
 import com.shuhai.anfang.http.HttpAction;
 import com.shuhai.anfang.http.MyVolleyRequestListener;
 import com.shuhai.anfang.imsdroid.ImsSipHelper;
@@ -33,13 +32,13 @@ public class BaseLoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
     }
 
-    public void login(final String account, final String password, final UserType type, DefaultRetryPolicy retryPolicy) {
+    public void login(final String account, final String password, final String type, DefaultRetryPolicy retryPolicy) {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.LOGIN,
                 new VolleyHttpParamsEntity()
                         .addParam("username", account)
                         .addParam("password", password)
                         .addParam("system_model", "1")
-                        .addParam("type", type.toString()), retryPolicy,
+                        .addParam("type", type), retryPolicy,
                 new MyVolleyRequestListener() {
                     @Override
                     public void onStart() {
@@ -65,7 +64,7 @@ public class BaseLoginActivity extends BaseActivity {
                                     CommonUtil.initParentInfoByHttpResult(jsonData.getJSONObject("login").toString(), account);
                                     //删除联系人
                                     GreenDaoHelper.getInstance().deleteContact();
-                                    XPTApplication.getInstance().setCurrent_user_type(type.toString());
+                                    XPTApplication.getInstance().setCurrent_user_type(type);
                                     onLoginSuccess();
                                 } catch (Exception ex) {
                                     Log.i(TAG, "onResponse: exception " + ex.getMessage());

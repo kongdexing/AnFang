@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.common.CookieUtil;
 import com.android.volley.common.VolleyHttpParamsEntity;
@@ -37,6 +38,7 @@ import com.shuhai.anfang.ui.fragment.BaseFragment;
 import com.shuhai.anfang.ui.fragment.HomeFragment;
 import com.shuhai.anfang.ui.fragment.MapFragment;
 import com.shuhai.anfang.ui.fragment.MineFragment;
+import com.shuhai.anfang.ui.login.BaseLoginActivity;
 import com.shuhai.anfang.ui.login.LoginActivity;
 import com.shuhai.anfang.util.ParentUtil;
 
@@ -56,12 +58,12 @@ import permissions.dispatcher.PermissionRequest;
 import permissions.dispatcher.RuntimePermissions;
 
 @RuntimePermissions
-public class MainActivity extends BaseMainActivity {
+public class MainActivity extends BaseLoginActivity {
 
     private List<BaseFragment> fragmentList;
     private BaseFragment mCurrentFgt, homeFragment, mapFragment, mineFragment;
     private FrameLayout fl_Content;
-    private ImageButton homeBtn, mapBtn, messageBtn,mineBtn;
+    private ImageButton homeBtn, mapBtn, messageBtn, mineBtn;
     private FragmentManager mFgtManager;
     private FragmentTransaction mFgtTransaction;
     private long mExitTime;
@@ -77,7 +79,6 @@ public class MainActivity extends BaseMainActivity {
 
         initView();
         initData();
-
     }
 
     private void initView() {
@@ -107,6 +108,17 @@ public class MainActivity extends BaseMainActivity {
         setInitialState();
 
 //        getBanners();
+        //login
+        String userName = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_NAME, "");
+        String password = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_PWD, "");
+
+        if (!userName.isEmpty() && !password.isEmpty()) {
+            login(userName, password,
+                    SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_TYPE, "").toString(),
+                    new DefaultRetryPolicy(4 * 1000, 0, 1));
+        }
+        //location
+
     }
 
     private void setInitialState() {
@@ -126,7 +138,7 @@ public class MainActivity extends BaseMainActivity {
             Log.i(TAG, "onResume: cookie is null");
             String userName = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_NAME, "");
             String password = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_PWD, "");
-            login(userName, password);
+            login(userName, password, SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_TYPE, "").toString());
         }
     }
 
@@ -225,12 +237,12 @@ public class MainActivity extends BaseMainActivity {
         mCurrentFgt.onResume();
     }
 
-    private void login(final String account, final String password) {
+    private void login(final String account, final String password, final String type) {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.LOGIN,
                 new VolleyHttpParamsEntity()
                         .addParam("username", account)
                         .addParam("password", password)
-                        .addParam("type", "4"),
+                        .addParam("type", type),
                 new MyVolleyRequestListener() {
                     @Override
                     public void onStart() {
@@ -324,6 +336,22 @@ public class MainActivity extends BaseMainActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onStartLogin() {
+        super.onStartLogin();
+    }
+
+    @Override
+    protected void onLoginSuccess() {
+        super.onLoginSuccess();
+        getBanners();
+    }
+
+    @Override
+    protected void onLoginFailed(String msg) {
+        super.onLoginFailed(msg);
     }
 
     BroadcastReceiver MyBannerReceiver = new BroadcastReceiver() {

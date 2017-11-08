@@ -79,15 +79,15 @@ public class HomeFragment extends BaseFragment {
             Log.i(TAG, "initView setLayoutParams error: " + ex.getMessage());
         }
 
-        List<String> listBannerImages = new ArrayList<>();
-        listBannerImages.add("http://f10.baidu.com/it/u=1981748892,3031683197&fm=72");
-        listBannerImages.add("http://f10.baidu.com/it/u=3243370105,1125765815&fm=72");
-        listBannerImages.add("http://f11.baidu.com/it/u=4174806606,645220058&fm=72");
+//        List<String> listBannerImages = new ArrayList<>();
+//        listBannerImages.add("http://f10.baidu.com/it/u=1981748892,3031683197&fm=72");
+//        listBannerImages.add("http://f10.baidu.com/it/u=3243370105,1125765815&fm=72");
+//        listBannerImages.add("http://f11.baidu.com/it/u=4174806606,645220058&fm=72");
 
         //设置图片加载器
         // 1.设置幕后item的缓存数目
         topBanner.setOffscreenPageLimit(1);
-        topBanner.setImages(listBannerImages);
+//        topBanner.setImages(listBannerImages);
         topBanner.setImageLoader(new GlideImageLoader());
         //设置图片集合
         //设置banner动画效果
@@ -179,18 +179,16 @@ public class HomeFragment extends BaseFragment {
     }
 
     public void reloadTopFragment(List<BeanBanner> banners) {
-        Log.i(TAG, "reloadTopFragment: " + banners.size());
-//        if (topAdapter != null && banners.size() > 0) {
-//            topBanners = banners;
-//            BeanBanner banner = banners.get(0);
-//            if (banner != null && tipTitle != null) {
-//                tipTitle.setText(banner.getTitle());
-//            }
-//            topAdapter.reloadData(banners);
-//        }
-//        if (viewPagerTop != null) {
-//            viewPagerTop.startAutoScroll();
-//        }
+
+        List<String> listBannerImages = new ArrayList<>();
+        List<String> listTitles = new ArrayList<>();
+
+        for (int i = 0; i < banners.size(); i++) {
+            listBannerImages.add(banners.get(i).getImg());
+            listTitles.add(banners.get(i).getTitle());
+            Log.i(TAG, "reloadTopFragment: " + banners.get(i).getImg());
+        }
+        topBanner.update(listBannerImages,listTitles);
     }
 
     @Override

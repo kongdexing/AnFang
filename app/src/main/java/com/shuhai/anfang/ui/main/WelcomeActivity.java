@@ -86,8 +86,6 @@ public class WelcomeActivity extends BaseActivity {
 
     private void analyLogin() {
         final Intent intent = new Intent();
-        String userName = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_NAME, "");
-        String password = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_PWD, "");
         String splash_init = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_SPLASH_INIT, "0");
 
         if (splash_init.equals("0")) {
@@ -98,13 +96,6 @@ public class WelcomeActivity extends BaseActivity {
             startActivities(intents);
             finish();
             return;
-        }
-
-
-        if (password.isEmpty() || userName.isEmpty()) {
-
-        } else {
-            //login
         }
 
         new Handler().postDelayed(new Runnable() {

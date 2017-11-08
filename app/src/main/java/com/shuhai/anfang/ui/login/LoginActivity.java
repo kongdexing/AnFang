@@ -173,7 +173,7 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
                 if ((!TextUtils.isEmpty(account)) && (!TextUtils.isEmpty(password))) {
                     btnLogin.setEnabled(false);
                     CommonUtil.hideInputWindow(LoginActivity.this, btnLogin);
-                    login(account, password, cbx_parent.isChecked() ? UserType.PARENT : UserType.TEACHER, null);
+                    login(account, password, cbx_parent.isChecked() ? UserType.PARENT.toString() : UserType.TEACHER.toString(), null);
                 } else {
                     Toast.makeText(LoginActivity.this, R.string.error_empty_login, Toast.LENGTH_SHORT).show();
                 }

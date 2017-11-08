@@ -208,6 +208,7 @@ public class XPTApplication extends NgnApplication {
 
     public void setCurrent_user_type(String current_user_type) {
         this.current_user_type = current_user_type;
+        SharedPreferencesUtil.saveData(this, SharedPreferencesUtil.KEY_USER_TYPE, current_user_type);
     }
 
     public boolean isLoggedIn() {

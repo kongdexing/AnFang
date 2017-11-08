@@ -9,6 +9,8 @@ public class SharedPreferencesUtil {
     public static final String KEY_USER_NAME = "username";
     public static final String KEY_PWD = "password";
     public static final String KEY_UID = "userid";
+    public static final String KEY_USER_TYPE = "usertype";
+
 
     /**
      * 保存数据到文件
