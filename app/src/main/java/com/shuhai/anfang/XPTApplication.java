@@ -20,6 +20,8 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.shuhai.anfang.common.LocalImageHelper;
+import com.shuhai.anfang.common.SharedPreferencesUtil;
+import com.shuhai.anfang.common.UserType;
 import com.shuhai.anfang.ui.main.MainActivity;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
@@ -44,10 +46,7 @@ public class XPTApplication extends NgnApplication {
     //bugly
     public static final String APP_ID = "3e1429a7a5"; // TODO bugly上注册的appid
     private static XPTApplication mInstance;
-    //老师身份
-    public static String USER_TYPE_TEACHER = "3";
-    //家长身份
-    public static String USER_TYPE_PARENT = "4";
+    private String current_user_type = "";
 
     public static final String WXAPP_ID = "wx1af4f660ce9e6b37";
     private Display display;
@@ -195,6 +194,30 @@ public class XPTApplication extends NgnApplication {
         if (!cacheDir.exists())
             cacheDir.mkdirs();
         return cacheDir.getAbsolutePath();
+    }
+
+    public UserType getCurrent_user_type() {
+        if (current_user_type.equals(UserType.PARENT)) {
+            return UserType.PARENT;
+        } else if (current_user_type.equals(UserType.TEACHER)) {
+            return UserType.TEACHER;
+        } else {
+            return null;
+        }
+    }
+
+    public void setCurrent_user_type(String current_user_type) {
+        this.current_user_type = current_user_type;
+    }
+
+    public boolean isLoggedIn() {
+        String userName = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_NAME, "");
+        String password = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_PWD, "");
+        if (userName.isEmpty() || password.isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**

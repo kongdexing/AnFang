@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.android.widget.view.CircularImageView;
 import com.shuhai.anfang.R;
+import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.model.BeanParent;
 import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.ui.login.LoginActivity;
@@ -86,7 +87,7 @@ public class MineFragment extends BaseFragment {
         switch (view.getId()) {
             case R.id.imgHead:
                 //登录？进入个人信息：登录页面
-                if (((MainActivity) mContext).isLoggedIn()) {
+                if (XPTApplication.getInstance().isLoggedIn()) {
                     startActivity(new Intent(getContext(), MyInfoActivity.class));
                 }else{
                     startActivity(new Intent(getContext(), LoginActivity.class));

@@ -93,6 +93,7 @@
     <string name="label_teacher">教师：</string>
     <string name="label_teacher_option">教师：%1$s</string>
     <string name="label_tip">提示</string>
+    <string name="message_tologin">该功能需登录后可用，确定登录？</string>
     <string name="label_notice_title">标题：</string>
     <string name="label_content">内容：</string>
     <string name="label_content_option">内容：\n%1$s</string>

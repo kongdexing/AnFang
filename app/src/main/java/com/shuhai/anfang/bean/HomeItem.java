@@ -1,6 +1,6 @@
 package com.shuhai.anfang.bean;
 
-import android.app.Activity;
+import android.content.Intent;
 
 /**
  * Created by dexing on 2017-11-6 0006.
@@ -12,8 +12,8 @@ public class HomeItem {
     private int iconId;
     //标题
     private String title;
-    //跳转至某个Activity
-    private Class<Activity> activity;
+    //跳转至某个Activity之Intent
+    private Intent intent;
     //家长是否可见
     private boolean showForParent = true;
     //老师是否可见
@@ -37,12 +37,12 @@ public class HomeItem {
         return this;
     }
 
-    public Class<Activity> getActivity() {
-        return activity;
+    public Intent getIntent() {
+        return intent;
     }
 
-    public HomeItem setActivity(Class<Activity> activity) {
-        this.activity = activity;
+    public HomeItem setIntent(Intent intent) {
+        this.intent = intent;
         return this;
     }
 

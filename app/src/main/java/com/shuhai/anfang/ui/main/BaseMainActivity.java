@@ -13,7 +13,6 @@ import com.huawei.hms.support.api.push.HuaweiPush;
 import com.huawei.hms.support.api.push.TokenResult;
 import com.meizu.cloud.pushsdk.PushManager;
 import com.shuhai.anfang.XPTApplication;
-import com.shuhai.anfang.common.SharedPreferencesUtil;
 import com.shuhai.anfang.push.DeviceHelper;
 import com.shuhai.anfang.push.MyPushIntentService;
 import com.shuhai.anfang.push.UpushTokenHelper;
@@ -181,16 +180,6 @@ public class BaseMainActivity extends BaseActivity implements HuaweiApiClient.Co
     @Override
     protected void onResume() {
         super.onResume();
-    }
-
-    public boolean isLoggedIn() {
-        String userName = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_NAME, "");
-        String password = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_PWD, "");
-        if (userName.isEmpty() || password.isEmpty()) {
-            return false;
-        } else {
-            return true;
-        }
     }
 
     @Override

@@ -24,6 +24,7 @@ import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.common.CommonUtil;
 import com.shuhai.anfang.common.ExtraKey;
 import com.shuhai.anfang.common.SharedPreferencesUtil;
+import com.shuhai.anfang.common.UserType;
 import com.shuhai.anfang.push.DeviceHelper;
 import com.shuhai.anfang.ui.main.MainActivity;
 import com.shuhai.anfang.util.ToastUtils;
@@ -172,7 +173,7 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
                 if ((!TextUtils.isEmpty(account)) && (!TextUtils.isEmpty(password))) {
                     btnLogin.setEnabled(false);
                     CommonUtil.hideInputWindow(LoginActivity.this, btnLogin);
-                    login(account, password, cbx_parent.isChecked() ? XPTApplication.USER_TYPE_PARENT : XPTApplication.USER_TYPE_TEACHER, null);
+                    login(account, password, cbx_parent.isChecked() ? UserType.PARENT : UserType.TEACHER, null);
                 } else {
                     Toast.makeText(LoginActivity.this, R.string.error_empty_login, Toast.LENGTH_SHORT).show();
                 }

@@ -141,6 +141,8 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateVisible" />
 
+        <activity android:name=".ui.homework.HomeWorkActivity" />
+
     </application>
 
 </manifest>

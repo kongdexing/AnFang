@@ -1,5 +1,6 @@
 package com.shuhai.anfang.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -16,6 +17,7 @@ import com.shuhai.anfang.R;
 import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.bean.HomeItem;
 import com.shuhai.anfang.model.BeanBanner;
+import com.shuhai.anfang.ui.homework.HomeWorkActivity;
 import com.shuhai.anfang.view.autoviewpager.GalleryTransformer;
 import com.shuhai.anfang.view.autoviewpager.GlideImageLoader;
 import com.viewpagerindicator.CirclePageIndicator;
@@ -122,21 +124,12 @@ public class HomeFragment extends BaseFragment {
             }
         });
 
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.i(TAG, "onResume: startAutoPlay");
-        topBanner.startAutoPlay();
-        //根据登录状态显示不同icon
-        //当状态有更改时才变化Item
         List<HomeItem> homeItems = new ArrayList<HomeItem>();
+        homeItems.add(new HomeItem()
+                .setIconId(R.drawable.home_homework)
+                .setTitle(getString(R.string.home_homework))
+                .setIntent(new Intent(mContext, HomeWorkActivity.class)));
 
-//        homeItem.setActivity();
-
-        homeItems.add(new HomeItem().setIconId(R.drawable.home_homework)
-                .setTitle(getString(R.string.home_homework)));
         homeItems.add(new HomeItem().setIconId(R.drawable.home_notice)
                 .setTitle(getString(R.string.home_notice)));
         homeItems.add(new HomeItem().setIconId(R.drawable.home_classes)
@@ -151,30 +144,6 @@ public class HomeFragment extends BaseFragment {
                 .setTitle(getString(R.string.home_notice)));
         homeItems.add(new HomeItem().setIconId(R.drawable.home_classes)
                 .setTitle(getString(R.string.home_score)));
-        homeItems.add(new HomeItem().setIconId(R.drawable.home_homework)
-                .setTitle(getString(R.string.home_homework)));
-        homeItems.add(new HomeItem().setIconId(R.drawable.home_homework)
-                .setTitle(getString(R.string.home_homework)));
-        homeItems.add(new HomeItem().setIconId(R.drawable.home_homework)
-                .setTitle(getString(R.string.home_homework)));
-        homeItems.add(new HomeItem().setIconId(R.drawable.home_notice)
-                .setTitle(getString(R.string.home_notice)));
-        homeItems.add(new HomeItem().setIconId(R.drawable.home_classes)
-                .setTitle(getString(R.string.home_score)));
-        homeItems.add(new HomeItem().setIconId(R.drawable.home_homework)
-                .setTitle(getString(R.string.home_homework)));
-        homeItems.add(new HomeItem().setIconId(R.drawable.home_homework)
-                .setTitle(getString(R.string.home_homework)));
-        homeItems.add(new HomeItem().setIconId(R.drawable.home_homework)
-                .setTitle(getString(R.string.home_homework)));
-        homeItems.add(new HomeItem().setIconId(R.drawable.home_notice)
-                .setTitle(getString(R.string.home_notice)));
-        homeItems.add(new HomeItem().setIconId(R.drawable.home_classes)
-                .setTitle(getString(R.string.home_score)));
-        homeItems.add(new HomeItem().setIconId(R.drawable.home_homework)
-                .setTitle(getString(R.string.home_homework)));
-        homeItems.add(new HomeItem().setIconId(R.drawable.home_homework)
-                .setTitle(getString(R.string.home_homework)));
 
         itemAdapter = new HomeItemGridAdapter(mContext, new HomeItemGridAdapter.MyGridViewClickListener() {
             @Override
@@ -185,6 +154,16 @@ public class HomeFragment extends BaseFragment {
 
         grd_school.setAdapter(itemAdapter);
         itemAdapter.reloadData(homeItems);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i(TAG, "onResume: startAutoPlay");
+        topBanner.startAutoPlay();
+        //根据登录状态显示不同icon
+        //当状态有更改时才变化Item
+
     }
 
     @Override

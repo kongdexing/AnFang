@@ -1,6 +1,7 @@
 package com.shuhai.anfang.ui.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.shuhai.anfang.R;
+import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.bean.HomeItem;
+import com.shuhai.anfang.ui.login.LoginActivity;
+import com.shuhai.anfang.view.CustomDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,19 +68,53 @@ public class HomeItemGridAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+
+        final HomeItem item = getItem(position);
+        if (item.getIntent() == null) {
+            return convertView;
+        }
+
         viewHolder.llHomeItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (myGridViewClickListener != null) {
+                if (item.isShowForParent() || item.isShowForTeacher()) {
+                    //只有家长或老师可查看
+                    //1.判断是否登录
+                    //2.判断角色(暂时不用)
+                    if (XPTApplication.getInstance().isLoggedIn()) {
+//                        switch (XPTApplication.getInstance().getCurrent_user_type()) {
+//                            case PARENT:
+//                                if (item.isShowForParent()){
+//                                    //展示给家长
+//                                }
+//                                break;
+//                            case TEACHER:
+//
+//                                break;
+//                        }
+                        mContext.startActivity(item.getIntent());
+                    } else {
+                        //弹出登录对话框
+                        CustomDialog dialog = new CustomDialog(mContext);
+                        dialog.setTitle(R.string.label_tip);
+                        dialog.setMessage(R.string.message_tologin);
+                        dialog.setAlertDialogClickListener(new CustomDialog.DialogClickListener() {
+                            @Override
+                            public void onPositiveClick() {
+                                mContext.startActivity(new Intent(mContext, LoginActivity.class));
+                            }
+                        });
+                    }
+                } else {
+                    //任意角色可见
 
                 }
+
             }
         });
-        HomeItem item = getItem(position);
-        if (item != null) {
-            viewHolder.optionImg.setBackgroundResource(item.getIconId());
-            viewHolder.optionText.setText(item.getTitle());
-        }
+
+        viewHolder.optionImg.setBackgroundResource(item.getIconId());
+        viewHolder.optionText.setText(item.getTitle());
         return convertView;
     }
 
