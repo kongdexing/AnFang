@@ -19,6 +19,7 @@ import com.shuhai.anfang.bean.HomeItem;
 import com.shuhai.anfang.common.ExtraKey;
 import com.shuhai.anfang.model.BeanBanner;
 import com.shuhai.anfang.push.BannerHelper;
+import com.shuhai.anfang.ui.checkin.CheckinActivity;
 import com.shuhai.anfang.ui.homework.HomeWorkActivity;
 import com.shuhai.anfang.ui.main.WebViewActivity;
 import com.shuhai.anfang.ui.notice.NoticeActivity;
@@ -146,8 +147,12 @@ public class HomeFragment extends BaseFragment {
                 .setTitle(getString(R.string.home_score))
                 .setIntent(new Intent(mContext, ScoreActivity.class)));
 
-        homeItems.add(new HomeItem().setIconId(R.drawable.home_homework)
-                .setTitle(getString(R.string.home_homework)));
+        homeItems.add(new HomeItem()
+                .setIconId(R.drawable.home_homework)
+                .setTitle(getString(R.string.home_checkin))
+        .setIntent(new Intent(mContext, CheckinActivity.class)));
+
+
         homeItems.add(new HomeItem().setIconId(R.drawable.home_homework)
                 .setTitle(getString(R.string.home_homework)));
         homeItems.add(new HomeItem().setIconId(R.drawable.home_homework)

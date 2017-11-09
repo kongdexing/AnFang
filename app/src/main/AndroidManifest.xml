@@ -158,6 +158,10 @@
         <!--成绩-->
         <activity android:name=".ui.score.ScoreActivity" />
 
+        <!--考勤-->
+        <activity android:name=".ui.checkin.CheckinActivity" />
+        <activity android:name=".ui.checkin.ChechinDetailActivity" />
+
     </application>
 
 </manifest>
