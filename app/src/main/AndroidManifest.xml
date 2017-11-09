@@ -141,17 +141,22 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateVisible" />
 
+        <!--家庭作业-->
         <activity android:name=".ui.homework.HomeWorkActivity" />
-
         <activity
             android:name=".ui.homework.HomeWorkDetailActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
+        <!--公告-->
+        <activity android:name=".ui.notice.NoticeActivity" />
         <activity
             android:name=".ui.notice.NoticeDetailActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+
+        <!--成绩-->
+        <activity android:name=".ui.score.ScoreActivity" />
 
     </application>
 
