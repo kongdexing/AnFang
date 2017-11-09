@@ -1,6 +1,7 @@
 package com.shuhai.anfang.ui.homework;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import com.shuhai.anfang.R;
 import com.shuhai.anfang.adapter.BaseRecycleAdapter;
 import com.shuhai.anfang.adapter.RecyclerViewHolderBase;
 import com.shuhai.anfang.bean.BeanHomeWork;
+import com.shuhai.anfang.common.ExtraKey;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,9 +111,9 @@ public class HomeWorkAdapter extends BaseRecycleAdapter {
         mHolder.llhomeworkItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(mContext, HomeWorkDetailActivity.class);
-//                intent.putExtra(ExtraKey.HOMEWORK_DETAIL, work);
-//                ((HomeWorkActivity) mContext).startActivityForResult(intent, 1);
+                Intent intent = new Intent(mContext, HomeWorkDetailActivity.class);
+                intent.putExtra(ExtraKey.HOMEWORK_DETAIL, work);
+                ((HomeWorkActivity) mContext).startActivityForResult(intent, 1);
             }
         });
 

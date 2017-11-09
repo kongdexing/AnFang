@@ -142,6 +142,10 @@
             android:windowSoftInputMode="adjustResize|stateVisible" />
 
         <activity android:name=".ui.homework.HomeWorkActivity" />
+        <activity
+            android:name=".ui.homework.HomeWorkDetailActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
     </application>
 

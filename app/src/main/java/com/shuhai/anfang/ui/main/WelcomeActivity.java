@@ -131,23 +131,4 @@ public class WelcomeActivity extends BaseActivity {
         CommonUtil.goAppDetailSettingIntent(this);
     }
 
-//    @Override
-//    protected void onStartLogin() {
-//        super.onStartLogin();
-//    }
-//
-//    @Override
-//    protected void onLoginSuccess() {
-//        super.onLoginSuccess();
-//        startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
-//        finish();
-//    }
-//
-//    @Override
-//    protected void onLoginFailed(String msg) {
-//        super.onLoginFailed(msg);
-//        startActivity(new Intent(WelcomeActivity.this, LoginActivity.class));
-//        finish();
-//    }
-
 }

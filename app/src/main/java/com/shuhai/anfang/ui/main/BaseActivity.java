@@ -235,7 +235,6 @@ public class BaseActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-
     BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {

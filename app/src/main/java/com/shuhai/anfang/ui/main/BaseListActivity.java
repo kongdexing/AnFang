@@ -5,7 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.shuhai.anfang.R;
-import com.shuhai.anfang.adapter.DividerItemDecoration;
+import com.shuhai.anfang.adapter.CardDividerItemDecoration;
 import com.shuhai.anfang.adapter.WrapContentLinearLayoutManager;
 import com.shuhai.anfang.bean.ResultPage;
 
@@ -19,8 +19,8 @@ public class BaseListActivity extends BaseActivity {
             recyclerView.setHasFixedSize(true);
             mLayoutManager = new WrapContentLinearLayoutManager(this);
             recyclerView.setLayoutManager(mLayoutManager);
-            recyclerView.addItemDecoration(new DividerItemDecoration(this,
-                    LinearLayoutManager.VERTICAL, R.drawable.line_dotted));
+            recyclerView.addItemDecoration(new CardDividerItemDecoration(this,
+                    LinearLayoutManager.VERTICAL));
         }
         if (swipeRefreshLayout != null) {
             swipeRefreshLayout.setColorSchemeColors(getResources().getIntArray(R.array.google_colors));
@@ -30,7 +30,7 @@ public class BaseListActivity extends BaseActivity {
 //                        .getDisplayMetrics()));
     }
 
-    public WrapContentLinearLayoutManager getLayoutManager(){
+    public WrapContentLinearLayoutManager getLayoutManager() {
         return mLayoutManager;
     }
 

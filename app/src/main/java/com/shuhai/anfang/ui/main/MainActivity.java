@@ -27,7 +27,6 @@ import com.google.gson.reflect.TypeToken;
 import com.shuhai.anfang.R;
 import com.shuhai.anfang.common.BroadcastAction;
 import com.shuhai.anfang.common.CommonUtil;
-import com.shuhai.anfang.common.ExtraKey;
 import com.shuhai.anfang.common.SharedPreferencesUtil;
 import com.shuhai.anfang.http.HttpAction;
 import com.shuhai.anfang.http.MyVolleyRequestListener;
@@ -39,7 +38,6 @@ import com.shuhai.anfang.ui.fragment.HomeFragment;
 import com.shuhai.anfang.ui.fragment.MapFragment;
 import com.shuhai.anfang.ui.fragment.MineFragment;
 import com.shuhai.anfang.ui.login.BaseLoginActivity;
-import com.shuhai.anfang.ui.login.LoginActivity;
 import com.shuhai.anfang.util.ParentUtil;
 
 import org.json.JSONObject;
@@ -263,17 +261,17 @@ public class MainActivity extends BaseLoginActivity {
                                     startActivity(intent);
                                 } catch (Exception ex) {
                                     Log.i(TAG, "onResponse: error " + ex.getMessage());
-                                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                    intent.putExtra(ExtraKey.LOGIN_ORIGIN, "0");
-                                    startActivity(intent);
+//                                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+//                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                                    intent.putExtra(ExtraKey.LOGIN_ORIGIN, "0");
+//                                    startActivity(intent);
                                 }
                                 break;
                             default:
-                                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                intent.putExtra(ExtraKey.LOGIN_ORIGIN, "0");
-                                startActivity(intent);
+//                                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+//                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                                intent.putExtra(ExtraKey.LOGIN_ORIGIN, "0");
+//                                startActivity(intent);
                                 break;
                         }
                     }
@@ -281,10 +279,10 @@ public class MainActivity extends BaseLoginActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.i(TAG, "onErrorResponse: " + error);
-                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        intent.putExtra(ExtraKey.LOGIN_ORIGIN, "0");
-                        startActivity(intent);
+//                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+//                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                        intent.putExtra(ExtraKey.LOGIN_ORIGIN, "0");
+//                        startActivity(intent);
                     }
                 });
     }
