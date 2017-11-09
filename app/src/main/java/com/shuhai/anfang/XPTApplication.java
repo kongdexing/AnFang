@@ -22,6 +22,7 @@ import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.shuhai.anfang.common.LocalImageHelper;
 import com.shuhai.anfang.common.SharedPreferencesUtil;
 import com.shuhai.anfang.common.UserType;
+import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.ui.main.MainActivity;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
@@ -93,7 +94,7 @@ public class XPTApplication extends NgnApplication {
 
         //baidumap
         SDKInitializer.initialize(this);
-//        GreenDaoHelper.getInstance().initGreenDao(this);
+        GreenDaoHelper.getInstance().initGreenDao(this);
 
         MobclickAgent.setCheckDevice(true);
         //日志加密设置

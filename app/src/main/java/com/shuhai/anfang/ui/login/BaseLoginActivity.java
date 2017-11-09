@@ -11,6 +11,7 @@ import com.android.volley.common.VolleyHttpService;
 import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.common.CommonUtil;
 import com.shuhai.anfang.common.SharedPreferencesUtil;
+import com.shuhai.anfang.common.UserType;
 import com.shuhai.anfang.http.HttpAction;
 import com.shuhai.anfang.http.MyVolleyRequestListener;
 import com.shuhai.anfang.imsdroid.ImsSipHelper;
@@ -59,11 +60,16 @@ public class BaseLoginActivity extends BaseActivity {
                                 SharedPreferencesUtil.saveData(BaseLoginActivity.this, SharedPreferencesUtil.KEY_PWD, password);
 
                                 try {
-                                    JSONObject jsonData = new JSONObject(httpResult.getData().toString());
-                                    CommonUtil.initBeanStudentByHttpResult(jsonData.getJSONArray("stuData").toString());
-                                    CommonUtil.initParentInfoByHttpResult(jsonData.getJSONObject("login").toString(), account);
-                                    //删除联系人
-                                    GreenDaoHelper.getInstance().deleteContact();
+                                    if (type.equals(UserType.PARENT.toString())) {
+                                        JSONObject jsonData = new JSONObject(httpResult.getData().toString());
+                                        CommonUtil.initBeanStudentByHttpResult(jsonData.getJSONArray("stuData").toString());
+                                        CommonUtil.initParentInfoByHttpResult(jsonData.getJSONObject("login").toString(), account);
+                                        //删除联系人
+                                        GreenDaoHelper.getInstance().deleteContact();
+                                    } else if (type.equals(UserType.TEACHER.toString())) {
+
+                                    }
+
                                     XPTApplication.getInstance().setCurrent_user_type(type);
                                     onLoginSuccess();
                                 } catch (Exception ex) {
@@ -85,7 +91,7 @@ public class BaseLoginActivity extends BaseActivity {
     }
 
     protected void onStartLogin() {
-
+        SharedPreferencesUtil.saveData(this, SharedPreferencesUtil.KEY_PWD, "");
     }
 
     protected void onLoginSuccess() {
