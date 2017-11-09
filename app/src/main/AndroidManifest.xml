@@ -174,6 +174,13 @@
         <activity android:name=".ui.fence.FenceDrawActivity" />
         <activity android:name=".ui.fence.FenceShowActivity" />
 
+        <!--在线请假-->
+        <activity android:name=".ui.leave.LeaveActivity" />
+        <activity
+            android:name=".ui.leave.LeaveDetailActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+
     </application>
 
 </manifest>

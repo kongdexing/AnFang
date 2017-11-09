@@ -23,6 +23,7 @@ import com.shuhai.anfang.ui.alarm.AlarmActivity;
 import com.shuhai.anfang.ui.checkin.CheckinActivity;
 import com.shuhai.anfang.ui.fence.FenceListActivity;
 import com.shuhai.anfang.ui.homework.HomeWorkActivity;
+import com.shuhai.anfang.ui.leave.LeaveActivity;
 import com.shuhai.anfang.ui.main.WebViewActivity;
 import com.shuhai.anfang.ui.notice.NoticeActivity;
 import com.shuhai.anfang.ui.score.ScoreActivity;
@@ -167,8 +168,12 @@ public class HomeFragment extends BaseFragment {
                 .setIntent(new Intent(mContext, FenceListActivity.class))
         );
 
-        homeItems.add(new HomeItem().setIconId(R.drawable.home_notice)
-                .setTitle(getString(R.string.home_notice)));
+        //在线请假
+        homeItems.add(new HomeItem()
+                .setIconId(R.drawable.home_notice)
+                .setTitle(getString(R.string.home_leave))
+        .setIntent(new Intent(mContext, LeaveActivity.class)));
+
         homeItems.add(new HomeItem().setIconId(R.drawable.home_classes)
                 .setTitle(getString(R.string.home_score)));
 
