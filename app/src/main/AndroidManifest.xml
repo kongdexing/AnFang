@@ -162,6 +162,18 @@
         <activity android:name=".ui.checkin.CheckinActivity" />
         <activity android:name=".ui.checkin.ChechinDetailActivity" />
 
+        <!--报警查询-->
+        <activity android:name=".ui.alarm.AlarmActivity" />
+        <activity android:name=".ui.alarm.AlarmMapActivity" />
+
+        <!--电子围栏-->
+        <activity
+            android:name=".ui.fence.FenceListActivity"
+            android:label="@string/title_activity_fence_list"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".ui.fence.FenceDrawActivity" />
+        <activity android:name=".ui.fence.FenceShowActivity" />
+
     </application>
 
 </manifest>

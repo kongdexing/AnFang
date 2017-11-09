@@ -19,7 +19,9 @@ import com.shuhai.anfang.bean.HomeItem;
 import com.shuhai.anfang.common.ExtraKey;
 import com.shuhai.anfang.model.BeanBanner;
 import com.shuhai.anfang.push.BannerHelper;
+import com.shuhai.anfang.ui.alarm.AlarmActivity;
 import com.shuhai.anfang.ui.checkin.CheckinActivity;
+import com.shuhai.anfang.ui.fence.FenceListActivity;
 import com.shuhai.anfang.ui.homework.HomeWorkActivity;
 import com.shuhai.anfang.ui.main.WebViewActivity;
 import com.shuhai.anfang.ui.notice.NoticeActivity;
@@ -140,23 +142,31 @@ public class HomeFragment extends BaseFragment {
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_notice)
                 .setTitle(getString(R.string.home_notice))
-                .setIntent(new Intent(mContext,NoticeActivity.class)));
-
+                .setIntent(new Intent(mContext, NoticeActivity.class)));
+        //成绩
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_classes)
                 .setTitle(getString(R.string.home_score))
                 .setIntent(new Intent(mContext, ScoreActivity.class)));
+        //考勤
+        homeItems.add(new HomeItem()
+                .setIconId(R.drawable.home_checkin)
+                .setTitle(getString(R.string.home_checkin))
+                .setIntent(new Intent(mContext, CheckinActivity.class)));
 
+        //报警查询
+        homeItems.add(new HomeItem()
+                .setIconId(R.drawable.home_alarm)
+                .setTitle(getString(R.string.home_alarm))
+                .setIntent(new Intent(mContext, AlarmActivity.class)));
+
+        //电子围栏
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_homework)
-                .setTitle(getString(R.string.home_checkin))
-        .setIntent(new Intent(mContext, CheckinActivity.class)));
+                .setTitle(getString(R.string.home_fence))
+                .setIntent(new Intent(mContext, FenceListActivity.class))
+        );
 
-
-        homeItems.add(new HomeItem().setIconId(R.drawable.home_homework)
-                .setTitle(getString(R.string.home_homework)));
-        homeItems.add(new HomeItem().setIconId(R.drawable.home_homework)
-                .setTitle(getString(R.string.home_homework)));
         homeItems.add(new HomeItem().setIconId(R.drawable.home_notice)
                 .setTitle(getString(R.string.home_notice)));
         homeItems.add(new HomeItem().setIconId(R.drawable.home_classes)
@@ -200,7 +210,7 @@ public class HomeFragment extends BaseFragment {
             listTitles.add(banners.get(i).getTitle());
             Log.i(TAG, "reloadTopFragment: " + banners.get(i).getImg());
         }
-        topBanner.update(listBannerImages,listTitles);
+        topBanner.update(listBannerImages, listTitles);
     }
 
     @Override
