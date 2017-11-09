@@ -26,4 +26,5 @@
             <enum name="round" value="1" />
         </attr>
     </declare-styleable>
+
 </resources>

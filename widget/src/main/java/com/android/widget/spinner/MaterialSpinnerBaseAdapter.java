@@ -19,6 +19,7 @@ package com.android.widget.spinner;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +34,7 @@ import java.util.List;
 public abstract class MaterialSpinnerBaseAdapter<T> extends BaseAdapter {
 
     private final Context context;
-    private int selectedIndex;
+    private int selectedIndex = 0;
     private int textColor;
     private float textSize;
     private int paddingLeft = 0;
@@ -70,10 +71,17 @@ public abstract class MaterialSpinnerBaseAdapter<T> extends BaseAdapter {
         } else if (item instanceof SpinnerModel) {
             viewHolder.textView.setText(((SpinnerModel) item).getName());
         }
+
         if (position == 0) {
             viewHolder.view_line.setVisibility(View.GONE);
         } else {
             viewHolder.view_line.setVisibility(View.VISIBLE);
+        }
+
+        if (position == selectedIndex) {
+            viewHolder.textView.setTextColor(Color.parseColor("#EB6C27"));
+        } else {
+            viewHolder.textView.setTextColor(Color.parseColor("#5b5b5b"));
         }
         return convertView;
     }

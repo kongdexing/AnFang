@@ -32,16 +32,18 @@ public class MaterialSpinnerAdapter<SpinnerModel> extends MaterialSpinnerBaseAda
 
     @Override
     public int getCount() {
-        return items.size() - 1;
+//        return items.size() - 1;
+        return items.size();
     }
 
     @Override
     public Object getItem(int position) {
-        if (position >= getSelectedIndex()) {
-            return items.get(position + 1);
-        } else {
-            return items.get(position);
-        }
+//        if (position >= getSelectedIndex()) {
+//            return items.get(position + 1);
+//        } else {
+//            return items.get(position);
+//        }
+        return items.get(position);
     }
 
     @Override

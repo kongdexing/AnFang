@@ -148,9 +148,9 @@ public class MaterialSpinner extends TextView {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position >= selectedIndex && position < adapter.getCount()) {
-                    position++;
-                }
+//                if (position >= selectedIndex && position < adapter.getCount()) {
+//                    position++;
+//                }
                 selectedIndex = position;
                 nothingSelected = false;
                 Object item = adapter.get(position);
