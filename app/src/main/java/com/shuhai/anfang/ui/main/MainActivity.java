@@ -22,6 +22,10 @@ import com.android.volley.common.CookieUtil;
 import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.shuhai.anfang.R;
@@ -39,6 +43,7 @@ import com.shuhai.anfang.ui.fragment.MapFragment;
 import com.shuhai.anfang.ui.fragment.MineFragment;
 import com.shuhai.anfang.ui.login.BaseLoginActivity;
 import com.shuhai.anfang.util.ParentUtil;
+import com.shuhai.anfang.util.ToastUtils;
 
 import org.json.JSONObject;
 
@@ -56,7 +61,7 @@ import permissions.dispatcher.PermissionRequest;
 import permissions.dispatcher.RuntimePermissions;
 
 @RuntimePermissions
-public class MainActivity extends BaseLoginActivity {
+public class MainActivity extends BaseLoginActivity implements BDLocationListener {
 
     private List<BaseFragment> fragmentList;
     private BaseFragment mCurrentFgt, homeFragment, mapFragment, mineFragment;
@@ -67,6 +72,7 @@ public class MainActivity extends BaseLoginActivity {
     private long mExitTime;
     @BindView(R.id.txtUnReadNum)
     TextView txtUnReadNum;
+    public LocationClient mLocClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +83,8 @@ public class MainActivity extends BaseLoginActivity {
 
         initView();
         initData();
+
+        MainActivityPermissionsDispatcher.onLocationAllowWithCheck(this);
     }
 
     private void initView() {
@@ -88,6 +96,9 @@ public class MainActivity extends BaseLoginActivity {
 
         IntentFilter filter = new IntentFilter(BroadcastAction.RELOAD_BANNER);
         this.registerReceiver(MyBannerReceiver, filter);
+
+        // 定位初始化
+        mLocClient = new LocationClient(this);
     }
 
     private void initData() {
@@ -150,8 +161,14 @@ public class MainActivity extends BaseLoginActivity {
     }
 
     @NeedsPermission(Manifest.permission.ACCESS_FINE_LOCATION)
-    void showTrackFragment() {
-        Log.i(TAG, "showTrackFragment: ");
+    void onLocationAllow() {
+        Log.i(TAG, "onLocationAllow: ");
+        mLocClient.registerLocationListener(this);
+
+        LocationClientOption option = new LocationClientOption();
+        option.setIsNeedAddress(true);
+        mLocClient.setLocOption(option);
+        mLocClient.start();
     }
 
     @OnPermissionDenied(Manifest.permission.ACCESS_FINE_LOCATION)
@@ -176,6 +193,13 @@ public class MainActivity extends BaseLoginActivity {
         Toast.makeText(this, R.string.permission_location_never_askagain, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void onReceiveLocation(BDLocation bdLocation) {
+        ToastUtils.showToast(this,bdLocation.getCityCode()+bdLocation.getCity());
+        Log.i(TAG, "onReceiveLocation: " + bdLocation.getCountryCode()+bdLocation.getProvince());
+        Log.i(TAG, "onReceiveLocation: " + bdLocation.getCity());
+    }
+
     @OnLongClick({R.id.nav_home, R.id.nav_track, R.id.nav_mine})
     public boolean buttonOnLongClick(View view) {
         viewClick(view);
@@ -195,7 +219,6 @@ public class MainActivity extends BaseLoginActivity {
                 addOrReplaceFgt(0);
                 break;
             case R.id.nav_track:
-                MainActivityPermissionsDispatcher.showTrackFragmentWithCheck(this);
                 mapBtn.setSelected(true);
                 addOrReplaceFgt(1);
                 break;

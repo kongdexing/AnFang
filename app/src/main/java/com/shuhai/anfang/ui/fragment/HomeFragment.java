@@ -55,7 +55,6 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.grd_school)
     MyGridView grd_school;
     HomeItemGridAdapter itemAdapter;
-
     private Unbinder unbinder;
     //    private MyTopPagerAdapter topAdapter;
     private List<BeanBanner> topBanners = new ArrayList<>();
@@ -70,6 +69,7 @@ public class HomeFragment extends BaseFragment {
         mRootView = inflater.inflate(R.layout.fragment_home, container, false);
         unbinder = ButterKnife.bind(this, mRootView);
         initView();
+        Log.i(TAG, "onCreateView start location: ");
         return mRootView;
     }
 
@@ -165,14 +165,13 @@ public class HomeFragment extends BaseFragment {
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_homework)
                 .setTitle(getString(R.string.home_fence))
-                .setIntent(new Intent(mContext, FenceListActivity.class))
-        );
+                .setIntent(new Intent(mContext, FenceListActivity.class)));
 
         //在线请假
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_notice)
                 .setTitle(getString(R.string.home_leave))
-        .setIntent(new Intent(mContext, LeaveActivity.class)));
+                .setIntent(new Intent(mContext, LeaveActivity.class)));
 
         homeItems.add(new HomeItem().setIconId(R.drawable.home_classes)
                 .setTitle(getString(R.string.home_score)));
