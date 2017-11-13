@@ -8,16 +8,30 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
+import com.android.volley.common.VolleyHttpParamsEntity;
+import com.android.volley.common.VolleyHttpResult;
+import com.android.volley.common.VolleyHttpService;
+import com.android.volley.common.VolleyRequestListener;
 import com.android.widget.mygridview.MyGridView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.shuhai.anfang.R;
 import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.bean.HomeItem;
+import com.shuhai.anfang.common.CommonUtil;
 import com.shuhai.anfang.common.ExtraKey;
+import com.shuhai.anfang.http.HttpAction;
 import com.shuhai.anfang.model.BeanBanner;
+import com.shuhai.anfang.model.BeanHotGood;
+import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.push.BannerHelper;
 import com.shuhai.anfang.ui.alarm.AlarmActivity;
 import com.shuhai.anfang.ui.checkin.CheckinActivity;
@@ -51,9 +65,16 @@ public class HomeFragment extends BaseFragment {
     TextView tipTitle;
     List<BeanBanner> advertList = new ArrayList<>();
 
+    @BindView(R.id.llGroup)
+    LinearLayout llGroup;
+
     @BindView(R.id.grd_school)
     MyGridView grd_school;
     HomeItemGridAdapter itemAdapter;
+
+    @BindView(R.id.img_hot_good)
+    ImageView img_hot_good;
+
     private Unbinder unbinder;
     //    private MyTopPagerAdapter topAdapter;
     private List<BeanBanner> topBanners = new ArrayList<>();
@@ -202,6 +223,16 @@ public class HomeFragment extends BaseFragment {
     @Override
     protected void initData() {
         Log.i(TAG, "HomeFragment initData: ");
+        //获取分组数据
+        llGroup.removeAllViews();
+        for (int i = 0; i < 3; i++) {
+            HomeGroupView view = new HomeGroupView(mContext);
+            view.bindData();
+            llGroup.addView(view);
+        }
+
+        //获取热门商品数据
+        getHotGoods();
     }
 
     public void reloadTopFragment(List<BeanBanner> banners) {
@@ -215,6 +246,79 @@ public class HomeFragment extends BaseFragment {
             Log.i(TAG, "reloadTopFragment: " + banners.get(i).getImg());
         }
         topBanner.update(listBannerImages, listTitles);
+    }
+
+    /*获取推荐商品*/
+    private void getHotGoods() {
+        Log.i(TAG, "getHotGoods: ");
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.GETHotGoods,
+                new VolleyHttpParamsEntity()
+                        .addParam("token", CommonUtil.encryptToken(HttpAction.GETHotGoods)), new VolleyRequestListener() {
+                    @Override
+                    public void onStart() {
+
+                    }
+
+                    @Override
+                    public void onResponse(VolleyHttpResult volleyHttpResult) {
+                        switch (volleyHttpResult.getStatus()) {
+                            case HttpAction.SUCCESS:
+                                try {
+                                    String info = volleyHttpResult.getData().toString();
+                                    Log.i(TAG, "onResponse: data " + info);
+                                    Gson gson = new Gson();
+                                    List<BeanHotGood> hotGoods = gson.fromJson(info, new TypeToken<List<BeanHotGood>>() {
+                                    }.getType());
+                                    if (hotGoods.size() > 0) {
+                                        GreenDaoHelper.getInstance().insertHotGoods(hotGoods);
+                                    }
+                                    Log.i(TAG, "onResponse: size " + hotGoods.size());
+                                    bindHotGood(hotGoods.get(0));
+                                } catch (Exception ex) {
+                                    Log.i(TAG, "onResponse: error " + ex.getMessage());
+                                    //错误
+                                    initHotGood();
+                                }
+                                break;
+                            default:
+                                initHotGood();
+                                break;
+                        }
+
+                    }
+
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        initHotGood();
+                    }
+                });
+    }
+
+    private void initHotGood() {
+        List<BeanHotGood> hotGoods = GreenDaoHelper.getInstance().getHotGoods();
+        if (hotGoods.size() > 0) {
+            bindHotGood(hotGoods.get(0));
+        } else {
+            img_hot_good.setVisibility(View.GONE);
+        }
+    }
+
+    private void bindHotGood(final BeanHotGood good) {
+        if (good == null || img_hot_good == null) {
+            return;
+        }
+
+        ImageLoader.getInstance().displayImage(good.getImage(),
+                new ImageViewAware(img_hot_good), CommonUtil.getDefaultImageLoaderOption());
+
+        img_hot_good.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, WebViewActivity.class);
+                intent.putExtra(ExtraKey.WEB_URL, good.getUrl_pc_short());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override

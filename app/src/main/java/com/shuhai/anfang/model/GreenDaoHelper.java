@@ -184,4 +184,23 @@ public class GreenDaoHelper {
         return banners;
     }
 
+    /*热门商品*/
+    public void insertHotGoods(List<BeanHotGood> hotGoods) {
+        if (writeDaoSession != null) {
+            writeDaoSession.getBeanHotGoodDao().deleteAll();
+            writeDaoSession.getBeanHotGoodDao().insertOrReplaceInTx(hotGoods);
+        }
+    }
+
+    public List<BeanHotGood> getHotGoods() {
+        List<BeanHotGood> hotGoods = null;
+        if (readDaoSession != null) {
+            hotGoods = readDaoSession.getBeanHotGoodDao().loadAll();
+        }
+        if (hotGoods == null) {
+            hotGoods = new ArrayList<BeanHotGood>();
+        }
+        return hotGoods;
+    }
+
 }

@@ -151,7 +151,9 @@ public class MainActivity extends BaseLoginActivity implements BDLocationListene
             Log.i(TAG, "onResume: cookie is null");
             String userName = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_NAME, "");
             String password = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_PWD, "");
-            login(userName, password, SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_TYPE, "").toString());
+            if (!userName.isEmpty() || !password.isEmpty()) {
+                login(userName, password, SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_TYPE, "").toString());
+            }
         }
     }
 
@@ -338,7 +340,7 @@ public class MainActivity extends BaseLoginActivity implements BDLocationListene
         String url = HttpAction.HOME_Banner;
         VolleyHttpService.getInstance().sendPostRequest(url, new VolleyHttpParamsEntity()
                 .addParam("s_id", s_id)
-                .addParam("area_name",cityName), new MyVolleyRequestListener() {
+                .addParam("area_name", cityName), new MyVolleyRequestListener() {
             @Override
             public void onStart() {
                 super.onStart();
@@ -368,6 +370,12 @@ public class MainActivity extends BaseLoginActivity implements BDLocationListene
                             if (homeFragment != null) {
                                 ((HomeFragment) homeFragment).reloadTopFragment(GreenDaoHelper.getInstance().getBanners());
                             }
+                        }
+                        break;
+                    default:
+                        //获取失败后，读取本地数据
+                        if (homeFragment != null) {
+                            ((HomeFragment) homeFragment).reloadTopFragment(GreenDaoHelper.getInstance().getBanners());
                         }
                         break;
                 }

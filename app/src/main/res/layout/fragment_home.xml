@@ -53,6 +53,14 @@
 
             </RelativeLayout>
 
+            <!--动态添加的分组-->
+            <LinearLayout
+                android:id="@+id/llGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"/>
+
+            <!--校园生活-->
             <com.android.widget.mygridview.MyGridView
                 android:id="@+id/grd_school"
                 android:layout_width="fill_parent"
@@ -64,6 +72,22 @@
                 android:scrollbars="none"
                 android:stretchMode="columnWidth"
                 android:verticalSpacing="7.5dip" />
+
+            <!--购物推荐-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5">
+
+                <ImageView
+                    android:id="@+id/img_hot_good"
+                    android:layout_width="match_parent"
+                    android:scaleType="fitXY"
+                    android:layout_height="@dimen/dp_100"
+                    />
+
+
+            </LinearLayout>
 
         </LinearLayout>
 

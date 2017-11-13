@@ -14,20 +14,28 @@ public class HttpAction {
 
     public static String Index = BuildConfig.SERVICE_URL + "/index.php";
     public static String HEAD = BuildConfig.SERVICE_URL + "/index.php/Api/";
+    /*登录*/
     public static String LOGIN = HEAD + "Login";
+    /*更改密码*/
     public static String UPDATE_PASSWORD = LOGIN + "/edit_password";
 
     public static String GetClass = HEAD + "Comment/get_class";
     public static String GetCourse = HEAD + "Comment/get_course";
     public static String GETExams = HEAD + "Comment/get_exam_name";
+
+    /*获取推荐商品*/
+    public static String GETHotGoods = HEAD + "HotSale/query";
+
     //家庭作业
     public static String HOMEWORK_QUERY = HEAD + "Homework/query";
     public static String HOMEWORK_DEL = HEAD + "Homework/delete";
     public static String HOMEWORK_ADD = HEAD + "Homework/add";
+
     //班级公告
     public static String NOTICE_QUERY = HEAD + "Notice/query";
     public static String NOTICE_DEL = HEAD + "Notice/delete";
     public static String NOTICE_ADD = HEAD + "Notice/add";
+
     //在线提问
     public static String GET_TEACHER_BYCID = HEAD + "Comment/get_teacher_list";
     public static String QUESTION_QUERY = HEAD + "Question/query";

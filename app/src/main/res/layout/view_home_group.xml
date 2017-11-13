@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.android.widget.view.CircularImageView
+            android:id="@+id/img_group_logo"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginLeft="@dimen/dp_6"
+            android:background="@drawable/user_defaulthead" />
+
+        <TextView
+            android:id="@+id/txt_group_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_6"
+            android:text="民生银行-数海信息金融电子代收"
+            android:textSize="@dimen/sp_18" />
+
+    </LinearLayout>
+
+    <com.android.widget.mygridview.MyGridView
+        android:id="@+id/grd_home"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_15"
+        android:horizontalSpacing="7.5dip"
+        android:listSelector="@null"
+        android:numColumns="4"
+        android:scrollbars="none"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="7.5dip" />
+
+</LinearLayout>
