@@ -17,6 +17,7 @@ public class GreenDaoHelper {
     private static DaoMaster writeDaoMaster, readDaoMaster;
     private static DaoSession writeDaoSession, readDaoSession;
     private BeanParent currentParent;
+    private BeanTeacher currentTeacher;
 
     private GreenDaoHelper() {
     }
@@ -89,6 +90,18 @@ public class GreenDaoHelper {
             }
         }
         return currentParent;
+    }
+
+    public BeanTeacher getCurrentTeacher() {
+        if (currentTeacher == null) {
+            if (readDaoSession != null) {
+                List<BeanTeacher> listTeachers = readDaoSession.getBeanTeacherDao().loadAll();
+                if (listTeachers.size() > 0) {
+                    currentTeacher = listTeachers.get(0);
+                }
+            }
+        }
+        return currentTeacher;
     }
 
     public List<BeanStudent> getStudents() {

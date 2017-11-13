@@ -29,13 +29,16 @@ import com.baidu.location.LocationClientOption;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.shuhai.anfang.R;
+import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.common.BroadcastAction;
 import com.shuhai.anfang.common.CommonUtil;
 import com.shuhai.anfang.common.SharedPreferencesUtil;
+import com.shuhai.anfang.common.UserType;
 import com.shuhai.anfang.http.HttpAction;
 import com.shuhai.anfang.http.MyVolleyRequestListener;
 import com.shuhai.anfang.imsdroid.Engine;
 import com.shuhai.anfang.model.BeanBanner;
+import com.shuhai.anfang.model.BeanTeacher;
 import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.ui.fragment.BaseFragment;
 import com.shuhai.anfang.ui.fragment.HomeFragment;
@@ -116,7 +119,8 @@ public class MainActivity extends BaseLoginActivity implements BDLocationListene
         mFgtManager = getSupportFragmentManager();
         setInitialState();
 
-//        getBanners();
+        //获取默认广告位
+        getBanners("");
         //login
         String userName = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_NAME, "");
         String password = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_PWD, "");
@@ -126,8 +130,6 @@ public class MainActivity extends BaseLoginActivity implements BDLocationListene
                     SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_TYPE, "").toString(),
                     new DefaultRetryPolicy(4 * 1000, 0, 1));
         }
-        //location
-
     }
 
     private void setInitialState() {
@@ -195,9 +197,10 @@ public class MainActivity extends BaseLoginActivity implements BDLocationListene
 
     @Override
     public void onReceiveLocation(BDLocation bdLocation) {
-        ToastUtils.showToast(this,bdLocation.getCityCode()+bdLocation.getCity());
-        Log.i(TAG, "onReceiveLocation: " + bdLocation.getCountryCode()+bdLocation.getProvince());
+        ToastUtils.showToast(this, bdLocation.getCityCode() + bdLocation.getCity());
+        Log.i(TAG, "onReceiveLocation: " + bdLocation.getCountryCode() + bdLocation.getProvince());
         Log.i(TAG, "onReceiveLocation: " + bdLocation.getCity());
+        getBanners(bdLocation.getCity());
     }
 
     @OnLongClick({R.id.nav_home, R.id.nav_track, R.id.nav_mine})
@@ -310,11 +313,29 @@ public class MainActivity extends BaseLoginActivity implements BDLocationListene
                 });
     }
 
-    private void getBanners() {
+    private void getBanners(String cityName) {
         Log.i(TAG, "getBanners: ");
+        String s_id = "";
+        if (XPTApplication.getInstance().isLoggedIn()) {
+            //家长登录
+            if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+                s_id = ParentUtil.getStuSid();
+            } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+                //老师登录
+                BeanTeacher teacher = GreenDaoHelper.getInstance().getCurrentTeacher();
+                if (teacher != null) {
+                    s_id = teacher.getS_id();
+                }
+            }
+        }
+
+        if (s_id == null) {
+            s_id = "";
+        }
+
         String url = HttpAction.HOME_Banner;
         VolleyHttpService.getInstance().sendPostRequest(url, new VolleyHttpParamsEntity()
-                .addParam("s_id", ParentUtil.getStuSid()), new MyVolleyRequestListener() {
+                .addParam("s_id", s_id), new MyVolleyRequestListener() {
             @Override
             public void onStart() {
                 super.onStart();
@@ -367,7 +388,8 @@ public class MainActivity extends BaseLoginActivity implements BDLocationListene
     @Override
     protected void onLoginSuccess() {
         super.onLoginSuccess();
-        getBanners();
+        //登录成功后，根据用户角色获取广告位
+        getBanners("");
     }
 
     @Override
@@ -379,7 +401,8 @@ public class MainActivity extends BaseLoginActivity implements BDLocationListene
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(BroadcastAction.RELOAD_BANNER)) {
-                getBanners();
+                //广告过期后，重新获取广告位
+                getBanners("");
             }
         }
     };

@@ -30,7 +30,7 @@ import com.shuhai.anfang.common.ExtraKey;
 import com.shuhai.anfang.http.HttpAction;
 import com.shuhai.anfang.http.MyVolleyRequestListener;
 import com.shuhai.anfang.model.BeanStudent;
-import com.shuhai.anfang.model.BeanTeacher;
+import com.shuhai.anfang.model.SpinnerTeacher;
 import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.ui.main.BaseActivity;
 import com.shuhai.anfang.view.CustomDialog;
@@ -266,7 +266,7 @@ public class LeaveDetailActivity extends BaseActivity {
 
     private void putLeaveStatus() {
         BeanStudent student = (BeanStudent) spnStudents.getSelectedItem();
-        BeanTeacher teacher = (BeanTeacher) spnTeacher.getSelectedItem();
+        SpinnerTeacher teacher = (SpinnerTeacher) spnTeacher.getSelectedItem();
         String type = (String) spnLeaveType.getSelectedItem();
         int leave_type = 1;
         if (type.equals("事假")) {
@@ -346,7 +346,7 @@ public class LeaveDetailActivity extends BaseActivity {
                             case HttpAction.SUCCESS:
                                 try {
                                     Gson gson = new Gson();
-                                    List<BeanTeacher> teachers = gson.fromJson(volleyHttpResult.getData().toString(), new TypeToken<List<BeanTeacher>>() {
+                                    List<SpinnerTeacher> teachers = gson.fromJson(volleyHttpResult.getData().toString(), new TypeToken<List<SpinnerTeacher>>() {
                                     }.getType());
                                     spnTeacher.setItems(teachers);
                                     if (teachers.size() == 1) {

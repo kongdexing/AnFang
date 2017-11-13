@@ -27,7 +27,6 @@ import com.shuhai.anfang.ui.leave.LeaveActivity;
 import com.shuhai.anfang.ui.main.WebViewActivity;
 import com.shuhai.anfang.ui.notice.NoticeActivity;
 import com.shuhai.anfang.ui.score.ScoreActivity;
-import com.shuhai.anfang.view.autoviewpager.GalleryTransformer;
 import com.shuhai.anfang.view.autoviewpager.GlideImageLoader;
 import com.viewpagerindicator.CirclePageIndicator;
 import com.youth.banner.Banner;
@@ -93,11 +92,13 @@ public class HomeFragment extends BaseFragment {
         //设置图片加载器
         // 1.设置幕后item的缓存数目
         topBanner.setOffscreenPageLimit(1);
+        topBanner.setBackgroundResource(R.drawable.tip_ad_def);
+//        topBanner.setImages(new ArrayList<Integer>(){R.drawable.tip_ad_def});
 //        topBanner.setImages(listBannerImages);
         topBanner.setImageLoader(new GlideImageLoader());
         //设置图片集合
         //设置banner动画效果
-        topBanner.setPageTransformer(true, new GalleryTransformer(getActivity()));
+//        topBanner.setPageTransformer(true, new GalleryTransformer(getActivity()));
         //设置自动轮播，默认为true
         topBanner.isAutoPlay(true);
         //设置轮播时间
