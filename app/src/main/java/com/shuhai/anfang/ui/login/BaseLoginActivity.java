@@ -1,6 +1,7 @@
 package com.shuhai.anfang.ui.login;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -18,19 +19,28 @@ import com.shuhai.anfang.imsdroid.ImsSipHelper;
 import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.push.UpushTokenHelper;
 import com.shuhai.anfang.server.ServerManager;
-import com.shuhai.anfang.ui.main.BaseActivity;
 
 import org.json.JSONObject;
+
+import butterknife.ButterKnife;
 
 /**
  * Created by dexing on 2017/6/5.
  * No1
  */
-public class BaseLoginActivity extends BaseActivity {
+public class BaseLoginActivity extends AppCompatActivity {
+    public String TAG = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TAG = this.getClass().getSimpleName();
+    }
+
+    @Override
+    public void setContentView(int layoutResID) {
+        super.setContentView(layoutResID);
+        ButterKnife.bind(this);
     }
 
     public void login(final String account, final String password, final String type, DefaultRetryPolicy retryPolicy) {

@@ -69,7 +69,7 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
         if (bundle != null) {
             String origin = bundle.getString(ExtraKey.LOGIN_ORIGIN);
             if (origin != null && origin.equals("0")) {
-                showImgBack(false);
+//                showImgBack(false);
                 //推送不可用
                 //拒收通知
                 String model = android.os.Build.MODEL;

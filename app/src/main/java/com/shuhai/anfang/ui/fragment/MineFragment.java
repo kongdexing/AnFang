@@ -14,9 +14,7 @@ import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.model.BeanParent;
 import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.ui.login.LoginActivity;
-import com.shuhai.anfang.ui.main.MainActivity;
 import com.shuhai.anfang.ui.mine.MyInfoActivity;
-import com.shuhai.anfang.ui.setting.SettingActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,19 +51,19 @@ public class MineFragment extends BaseFragment {
         if (mContext == null)
             return;
 
-        ((MainActivity) mContext).setTxtRight(R.string.mine_setting);
-        ((MainActivity) mContext).setTextRightClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(mContext, SettingActivity.class));
-            }
-        });
+//        ((MainActivity) mContext).setTxtRight(R.string.mine_setting);
+//        ((MainActivity) mContext).setTextRightClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(mContext, SettingActivity.class));
+//            }
+//        });
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        ((MainActivity) mContext).setTxtRight("");
+//        ((MainActivity) mContext).setTxtRight("");
     }
 
     @Override

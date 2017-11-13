@@ -83,7 +83,7 @@ public class MainActivity extends BaseLoginActivity implements BDLocationListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle(R.string.app_name);
-        showImgBack(false);
+//        showImgBack(false);
 
         initView();
         initData();
