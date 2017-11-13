@@ -48,6 +48,11 @@
     <string name="mine_wellet">我的钱包</string>
     <string name="mine_collect">我的收藏</string>
 
+    <!--消息-->
+    <string name="msg_notify">通知</string>
+    <string name="msg_interact">互动</string>
+    <string name="msg_contacts">通讯录</string>
+
     <string name="mine_bill">账单</string>
     <string name="mine_property">资产</string>
 

@@ -206,7 +206,17 @@ public class CommonUtil {
     }
 
     public static String encryptToken(String action) {
-        String encrypt = action.replace(HttpAction.Index, "") + getCurrentDate().replaceAll("-", "") + GreenDaoHelper.getInstance().getCurrentParent().getSecurity_key();
+        String security_key = "";
+
+        if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())){
+            security_key = GreenDaoHelper.getInstance().getCurrentParent().getSecurity_key();
+        }else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())){
+            security_key = GreenDaoHelper.getInstance().getCurrentTeacher().getSecurity_key();
+        }
+
+        String encrypt = action.replace(HttpAction.Index, "")
+                + getCurrentDate().replaceAll("-", "")
+                + security_key;
         Log.i(TAG, "encryptToken: encrypt origin :" + encrypt);
         return md5(encrypt);
     }

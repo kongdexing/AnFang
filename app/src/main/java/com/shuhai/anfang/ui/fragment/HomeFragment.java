@@ -155,7 +155,6 @@ public class HomeFragment extends BaseFragment {
                 .setIconId(R.drawable.home_checkin)
                 .setTitle(getString(R.string.home_checkin))
                 .setIntent(new Intent(mContext, CheckinActivity.class)));
-
         //报警查询
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_alarm)

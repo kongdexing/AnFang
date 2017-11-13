@@ -43,6 +43,7 @@ import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.ui.fragment.BaseFragment;
 import com.shuhai.anfang.ui.fragment.HomeFragment;
 import com.shuhai.anfang.ui.fragment.MapFragment;
+import com.shuhai.anfang.ui.fragment.MessageFragment;
 import com.shuhai.anfang.ui.fragment.MineFragment;
 import com.shuhai.anfang.ui.login.BaseLoginActivity;
 import com.shuhai.anfang.util.ParentUtil;
@@ -67,7 +68,7 @@ import permissions.dispatcher.RuntimePermissions;
 public class MainActivity extends BaseLoginActivity implements BDLocationListener {
 
     private List<BaseFragment> fragmentList;
-    private BaseFragment mCurrentFgt, homeFragment, mapFragment, mineFragment;
+    private BaseFragment mCurrentFgt, homeFragment, mapFragment, messageFragment, mineFragment;
     private FrameLayout fl_Content;
     private ImageButton homeBtn, mapBtn, messageBtn, mineBtn;
     private FragmentManager mFgtManager;
@@ -109,11 +110,12 @@ public class MainActivity extends BaseLoginActivity implements BDLocationListene
         fragmentList = new ArrayList<>();
         homeFragment = new HomeFragment();
         mapFragment = new MapFragment();
+        messageFragment = new MessageFragment();
         mineFragment = new MineFragment();
 
         fragmentList.add(0, homeFragment);
         fragmentList.add(1, mapFragment);
-        fragmentList.add(2, mapFragment);
+        fragmentList.add(2, messageFragment);
         fragmentList.add(3, mineFragment);
 
         mFgtManager = getSupportFragmentManager();
@@ -335,7 +337,8 @@ public class MainActivity extends BaseLoginActivity implements BDLocationListene
 
         String url = HttpAction.HOME_Banner;
         VolleyHttpService.getInstance().sendPostRequest(url, new VolleyHttpParamsEntity()
-                .addParam("s_id", s_id), new MyVolleyRequestListener() {
+                .addParam("s_id", s_id)
+                .addParam("area_name",cityName), new MyVolleyRequestListener() {
             @Override
             public void onStart() {
                 super.onStart();
