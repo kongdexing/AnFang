@@ -203,7 +203,7 @@ public class HomeFragment extends BaseFragment {
 
         //电子围栏
         homeItems.add(new HomeItem()
-                .setIconId(R.drawable.home_homework)
+                .setIconId(R.drawable.home_fence)
                 .setTitle(getString(R.string.home_fence))
                 .setIntent(new Intent(mContext, FenceListActivity.class)));
 
@@ -213,8 +213,12 @@ public class HomeFragment extends BaseFragment {
                 .setTitle(getString(R.string.home_leave))
                 .setIntent(new Intent(mContext, LeaveActivity.class)));
 
-        homeItems.add(new HomeItem().setIconId(R.drawable.home_classes)
-                .setTitle(getString(R.string.home_score)));
+        Intent newsIntent = new Intent(mContext, WebViewActivity.class);
+        newsIntent.putExtra(ExtraKey.WEB_URL, "http://school.xinpingtai.com/edunews/");
+        homeItems.add(new HomeItem()
+                .setIconId(R.drawable.home_news)
+                .setTitle(getString(R.string.home_news))
+                .setIntent(newsIntent));
 
         itemAdapter = new HomeItemGridAdapter(mContext);
 
@@ -254,7 +258,6 @@ public class HomeFragment extends BaseFragment {
             }
         });
 
-        ScrollView scrollView = ptr_scrollview.getRefreshableView();
     }
 
     @Override

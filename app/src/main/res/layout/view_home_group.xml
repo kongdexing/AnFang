@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/dp_5"
     android:orientation="vertical">
 
     <LinearLayout
@@ -12,9 +13,9 @@
 
         <com.android.widget.view.CircularImageView
             android:id="@+id/img_group_logo"
-            android:layout_width="@dimen/dp_40"
-            android:layout_height="@dimen/dp_40"
-            android:layout_marginLeft="@dimen/dp_6"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginLeft="@dimen/dp_10"
             android:background="@drawable/user_defaulthead" />
 
         <TextView
@@ -22,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_6"
-            android:text="民生银行-数海信息金融电子代收"
+            android:text="民生"
             android:textSize="@dimen/sp_16" />
 
     </LinearLayout>
@@ -32,6 +33,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_3"
+        android:background="@color/white"
         android:horizontalSpacing="@dimen/dp_1"
         android:listSelector="@null"
         android:numColumns="4"

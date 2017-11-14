@@ -39,7 +39,6 @@ import com.shuhai.anfang.ui.fragment.MapFragment;
 import com.shuhai.anfang.ui.fragment.MessageFragment;
 import com.shuhai.anfang.ui.fragment.MineFragment;
 import com.shuhai.anfang.ui.login.BaseLoginActivity;
-import com.shuhai.anfang.util.ToastUtils;
 
 import org.json.JSONObject;
 
@@ -190,7 +189,7 @@ public class MainActivity extends BaseLoginActivity implements BDLocationListene
 
     @Override
     public void onReceiveLocation(BDLocation bdLocation) {
-        ToastUtils.showToast(this, bdLocation.getCityCode() + bdLocation.getCity());
+//        ToastUtils.showToast(this, bdLocation.getCityCode() + bdLocation.getCity());
         Log.i(TAG, "onReceiveLocation: " + bdLocation.getCountryCode() + bdLocation.getProvince());
         Log.i(TAG, "onReceiveLocation: " + bdLocation.getCity());
         //保存本地城市

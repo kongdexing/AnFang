@@ -63,7 +63,7 @@
                 android:background="@color/colorWhite"
                 android:onClick="buttonOnclick"
                 android:padding="@dimen/dp_10"
-                android:src="@drawable/home_mine_selector" />
+                android:src="@drawable/home_message_selector" />
 
             <TextView
                 android:id="@+id/txtUnReadNum"

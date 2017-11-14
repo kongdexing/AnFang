@@ -31,7 +31,7 @@
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/sp_18" />
 
-                
+
             </RelativeLayout>
 
             <LinearLayout

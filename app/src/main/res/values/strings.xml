@@ -28,6 +28,7 @@
     <string name="error_empty_login">请输入用户名或密码</string>
     <string name="login_role">用户角色</string>
 
+    <string name="home_school">校园生活</string>
     <string name="home_homework">家庭作业</string>
     <string name="home_notice">班级公告</string>
     <string name="home_question">在线提问</string>
@@ -37,6 +38,9 @@
     <string name="home_leave">在线请假</string>
     <string name="home_alarm">警报查询</string>
     <string name="home_fence">电子围栏</string>
+    <string name="home_news">教育新闻</string>
+    <string name="home_shop">校园购</string>
+    <string name="home_bottom">我是有底线的</string>
 
     <string name="option_date">选择日期</string>
     <string name="option_sdate">开始日期</string>

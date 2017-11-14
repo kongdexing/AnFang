@@ -2,8 +2,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clickable="true"
-    android:background="@color/bg_window">
+    android:background="@color/bg_window"
+    android:clickable="true">
 
     <com.android.widget.pulltorefresh.PullToRefreshScrollView
         android:id="@+id/scrollView"
@@ -61,31 +61,108 @@
                 android:orientation="vertical" />
 
             <!--校园生活-->
-            <com.android.widget.mygridview.MyGridView
-                android:id="@+id/grd_school"
-                android:layout_width="fill_parent"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_15"
-                android:horizontalSpacing="7.5dip"
-                android:listSelector="@null"
-                android:numColumns="4"
-                android:scrollbars="none"
-                android:stretchMode="columnWidth"
-                android:verticalSpacing="7.5dip" />
+                android:layout_marginTop="@dimen/dp_5"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
+
+                    <com.android.widget.view.CircularImageView
+                        android:layout_width="@dimen/dp_30"
+                        android:layout_height="@dimen/dp_30"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:src="@drawable/icon_home_school" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_6"
+                        android:text="@string/home_school"
+                        android:textSize="@dimen/sp_16" />
+
+                </LinearLayout>
+
+                <com.android.widget.mygridview.MyGridView
+                    android:id="@+id/grd_school"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_3"
+                    android:background="@color/white"
+                    android:horizontalSpacing="@dimen/dp_1"
+                    android:listSelector="@null"
+                    android:numColumns="4"
+                    android:scrollbars="none"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="@dimen/dp_1" />
+            </LinearLayout>
 
             <!--购物推荐-->
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_5">
 
-                <ImageView
-                    android:id="@+id/img_hot_good"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_100"
-                    android:scaleType="fitXY" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_15">
+
+                    <ImageView
+                        android:id="@+id/img_hot_good"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_100"
+                        android:scaleType="fitXY" />
 
 
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dp_30"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:background="@drawable/bg_home_shop"
+                    android:gravity="center_vertical">
+
+                    <com.android.widget.view.CircularImageView
+                        android:layout_width="@dimen/dp_20"
+                        android:layout_height="@dimen/dp_20"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:src="@drawable/icon_home_school" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_6"
+                        android:layout_marginRight="@dimen/dp_40"
+                        android:text="@string/home_shop"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_14" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:background="@drawable/line_contacts"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:background="@color/bg_window"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10"
+                    android:text="@string/home_bottom"
+                    android:textColor="@color/color_black_3"
+                    android:textSize="@dimen/sp_12" />
             </LinearLayout>
 
         </LinearLayout>
