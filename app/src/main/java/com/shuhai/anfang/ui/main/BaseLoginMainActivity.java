@@ -1,6 +1,7 @@
-package com.shuhai.anfang.ui.login;
+package com.shuhai.anfang.ui.main;
 
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -18,7 +19,6 @@ import com.shuhai.anfang.imsdroid.ImsSipHelper;
 import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.push.UpushTokenHelper;
 import com.shuhai.anfang.server.ServerManager;
-import com.shuhai.anfang.ui.main.BaseActivity;
 
 import org.json.JSONObject;
 
@@ -28,7 +28,7 @@ import butterknife.ButterKnife;
  * Created by dexing on 2017/6/5.
  * No1
  */
-public class BaseLoginActivity extends BaseActivity {
+public class BaseLoginMainActivity extends AppCompatActivity {
     public String TAG = "";
 
     @Override
@@ -61,13 +61,13 @@ public class BaseLoginActivity extends BaseActivity {
                         super.onResponse(httpResult);
                         switch (httpResult.getStatus()) {
                             case HttpAction.SUCCESS:
-                                if (!SharedPreferencesUtil.getData(BaseLoginActivity.this, SharedPreferencesUtil.KEY_USER_NAME, "").equals(account)) {
-                                    SharedPreferencesUtil.saveData(BaseLoginActivity.this, SharedPreferencesUtil.KEY_USER_NAME, account);
+                                if (!SharedPreferencesUtil.getData(BaseLoginMainActivity.this, SharedPreferencesUtil.KEY_USER_NAME, "").equals(account)) {
+                                    SharedPreferencesUtil.saveData(BaseLoginMainActivity.this, SharedPreferencesUtil.KEY_USER_NAME, account);
                                     ImsSipHelper.getInstance().stopSipServer();
                                     //切换账号
                                     UpushTokenHelper.exitAccount(GreenDaoHelper.getInstance().getCurrentParent());
                                 }
-                                SharedPreferencesUtil.saveData(BaseLoginActivity.this, SharedPreferencesUtil.KEY_PWD, password);
+                                SharedPreferencesUtil.saveData(BaseLoginMainActivity.this, SharedPreferencesUtil.KEY_PWD, password);
 
                                 try {
                                     if (type.equals(UserType.PARENT.toString())) {

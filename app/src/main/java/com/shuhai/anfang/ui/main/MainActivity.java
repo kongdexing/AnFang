@@ -38,7 +38,6 @@ import com.shuhai.anfang.ui.fragment.HomeFragment;
 import com.shuhai.anfang.ui.fragment.MapFragment;
 import com.shuhai.anfang.ui.fragment.MessageFragment;
 import com.shuhai.anfang.ui.fragment.MineFragment;
-import com.shuhai.anfang.ui.login.BaseLoginActivity;
 
 import org.json.JSONObject;
 
@@ -56,7 +55,7 @@ import permissions.dispatcher.PermissionRequest;
 import permissions.dispatcher.RuntimePermissions;
 
 @RuntimePermissions
-public class MainActivity extends BaseLoginActivity implements BDLocationListener {
+public class MainActivity extends BaseLoginMainActivity implements BDLocationListener {
 
     private List<BaseFragment> fragmentList;
     private BaseFragment mCurrentFgt, homeFragment, mapFragment, messageFragment, mineFragment;

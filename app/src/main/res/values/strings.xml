@@ -46,6 +46,8 @@
     <string name="option_sdate">开始日期</string>
     <string name="option_edate">结束日期</string>
 
+    <string name="mine_unlogin">点击登录</string>
+    <string name="mine_change_account">账号切换</string>
     <string name="mine_info">我的信息</string>
     <string name="mine_child">我的孩子</string>
     <string name="mine_class">我的班级</string>
@@ -58,8 +60,9 @@
     <string name="msg_interact">互动</string>
     <string name="msg_contacts">通讯录</string>
 
-    <string name="mine_bill">账单</string>
-    <string name="mine_property">资产</string>
+    <string name="mine_bill">电子账单</string>
+    <string name="mine_property">宝贝管理</string>
+    <string name="mine_qr_code">二维码</string>
 
     <string name="mine_ms_ele_account">民生银行电子账户</string>
     <string name="mine_ms_payment">代收代缴</string>

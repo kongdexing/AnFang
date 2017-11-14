@@ -26,7 +26,6 @@ import com.shuhai.anfang.common.ExtraKey;
 import com.shuhai.anfang.common.SharedPreferencesUtil;
 import com.shuhai.anfang.common.UserType;
 import com.shuhai.anfang.push.DeviceHelper;
-import com.shuhai.anfang.ui.main.MainActivity;
 import com.shuhai.anfang.util.ToastUtils;
 import com.umeng.message.IUmengCallback;
 import com.umeng.message.PushAgent;
@@ -225,10 +224,10 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
             progress.setVisibility(View.INVISIBLE);
         btnLogin.setEnabled(true);
 
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+//        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        startActivity(intent);
         finish();
     }
 

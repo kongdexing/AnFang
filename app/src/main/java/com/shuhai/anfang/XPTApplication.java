@@ -198,9 +198,9 @@ public class XPTApplication extends NgnApplication {
     }
 
     public UserType getCurrent_user_type() {
-        if (current_user_type.equals(UserType.PARENT)) {
+        if (current_user_type.equals(UserType.PARENT.toString())) {
             return UserType.PARENT;
-        } else if (current_user_type.equals(UserType.TEACHER)) {
+        } else if (current_user_type.equals(UserType.TEACHER.toString())) {
             return UserType.TEACHER;
         } else {
             return null;

@@ -73,7 +73,7 @@
                         android:layout_marginTop="@dimen/dp_5"
                         android:background="@drawable/bg_mine_info"
                         android:padding="@dimen/dp_2"
-                        android:text="立即登录"
+                        android:text="登录"
                         android:textColor="@color/colorWhite"
                         android:textSize="@dimen/sp_14" />
 
@@ -168,7 +168,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/rlMS_ele_account"
+                android:id="@+id/rlQRCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
@@ -179,41 +179,7 @@
                     style="@style/mineText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/mine_ms_ele_account" />
-
-                <ImageView style="@style/arrow_right" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rlMS_payment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
-                android:background="@drawable/mine_item_selector"
-                android:clickable="true">
-
-                <TextView
-                    style="@style/mineText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/mine_ms_payment" />
-
-                <ImageView style="@style/arrow_right" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rlMS_credit_card"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
-                android:background="@drawable/mine_item_selector"
-                android:clickable="true">
-
-                <TextView
-                    style="@style/mineText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/mine_ms_credit_card" />
+                    android:text="@string/mine_qr_code" />
 
                 <ImageView style="@style/arrow_right" />
             </RelativeLayout>
