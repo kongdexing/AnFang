@@ -2,6 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clickable="true"
     android:background="@color/bg_window">
 
     <com.android.widget.pulltorefresh.PullToRefreshScrollView
@@ -23,7 +24,7 @@
                 <com.youth.banner.Banner
                     android:id="@+id/topBanner"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:clipChildren="false" />
 

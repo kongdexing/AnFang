@@ -66,7 +66,7 @@ public class HomeFragment extends BaseFragment {
     TextView txtTitle;
 
     @BindView(R.id.scrollView)
-    PullToRefreshScrollView scrollView;
+    PullToRefreshScrollView ptr_scrollview;
 
     @BindView(R.id.rlTipAD)
     RelativeLayout rlTipAD;
@@ -215,12 +215,14 @@ public class HomeFragment extends BaseFragment {
         grd_school.setAdapter(itemAdapter);
         itemAdapter.reloadData(homeItems);
 
-        scrollView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
-        scrollView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
+        fragmentHome_titleLinearId.setAlpha(0);
+
+        ptr_scrollview.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        ptr_scrollview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
                 if (!NetWorkUsefulUtils.getActiveNetwork(getContext())) {
-                    scrollView.onRefreshComplete();
+                    ptr_scrollview.onRefreshComplete();
                     Toast.makeText(getContext(), "网络不可用", Toast.LENGTH_SHORT).show();
                 } else {
 //                    if (TextUtils.isEmpty(lat) || TextUtils.isEmpty(lng)) {
@@ -239,8 +241,7 @@ public class HomeFragment extends BaseFragment {
             }
         });
 
-        scrollView.setRefreshing(false);
-        scrollView.setOnScrollChangedListener(new PullToRefreshScrollView.OnScrollChangedListener() {
+        ptr_scrollview.setOnScrollChangedListener(new PullToRefreshScrollView.OnScrollChangedListener() {
             @Override
             public void onScrollChanged(PullToRefreshScrollView who, int x, int y, int oldl, int oldt) {
                 float alpha = 0;
@@ -253,6 +254,7 @@ public class HomeFragment extends BaseFragment {
             }
         });
 
+        ScrollView scrollView = ptr_scrollview.getRefreshableView();
     }
 
     @Override
