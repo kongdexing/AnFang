@@ -37,6 +37,7 @@ import com.shuhai.anfang.common.UserType;
 import com.shuhai.anfang.http.HttpAction;
 import com.shuhai.anfang.http.MyVolleyRequestListener;
 import com.shuhai.anfang.model.BeanBanner;
+import com.shuhai.anfang.model.BeanHomeCfg;
 import com.shuhai.anfang.model.BeanHotGood;
 import com.shuhai.anfang.model.BeanTeacher;
 import com.shuhai.anfang.model.GreenDaoHelper;
@@ -226,12 +227,11 @@ public class HomeFragment extends BaseFragment {
         ptr_scrollview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+                ptr_scrollview.onRefreshComplete();
                 if (!NetWorkUsefulUtils.getActiveNetwork(getContext())) {
-                    ptr_scrollview.onRefreshComplete();
                     Toast.makeText(getContext(), "网络不可用", Toast.LENGTH_SHORT).show();
                 } else {
-                    ptr_scrollview.onRefreshComplete();
-//                  loadData2();
+                    initData();
                 }
             }
 
@@ -283,13 +283,6 @@ public class HomeFragment extends BaseFragment {
 
         //获取分组数据
         getHomeGroupCfg();
-
-        llGroup.removeAllViews();
-        for (int i = 0; i < 3; i++) {
-            HomeGroupView view = new HomeGroupView(mContext);
-            view.bindData();
-            llGroup.addView(view);
-        }
 
         //获取热门商品数据
         getHotGoods();
@@ -391,14 +384,50 @@ public class HomeFragment extends BaseFragment {
 
                     @Override
                     public void onResponse(VolleyHttpResult volleyHttpResult) {
-
+                        switch (volleyHttpResult.getStatus()) {
+                            case HttpAction.SUCCESS:
+                                try {
+                                    String info = volleyHttpResult.getData().toString();
+                                    Log.i(TAG, "onResponse: data " + info);
+                                    Gson gson = new Gson();
+                                    List<BeanHomeCfg> beanHomeCfgs = gson.fromJson(info, new TypeToken<List<BeanHomeCfg>>() {
+                                    }.getType());
+                                    if (beanHomeCfgs.size() > 0) {
+                                        for (int i = 0; i < beanHomeCfgs.size(); i++) {
+                                            GreenDaoHelper.getInstance().insertHomeChildCfg(beanHomeCfgs.get(i).getChild());
+                                        }
+                                        GreenDaoHelper.getInstance().insertHomeCfg(beanHomeCfgs);
+                                    }
+                                    Log.i(TAG, "onResponse: size " + beanHomeCfgs.size());
+                                    initHomeCfg();
+//                                    bindHotGood(beanHomeCfgs.get(0));
+                                } catch (Exception ex) {
+                                    Log.i(TAG, "onResponse: error " + ex.getMessage());
+                                    //错误
+                                    initHomeCfg();
+                                }
+                                break;
+                            default:
+                                initHomeCfg();
+                                break;
+                        }
                     }
 
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-
+                        initHomeCfg();
                     }
                 });
+    }
+
+    private void initHomeCfg() {
+        List<BeanHomeCfg> beanHomeCfgs = GreenDaoHelper.getInstance().getHomeCfg();
+        llGroup.removeAllViews();
+        for (int i = 0; i < beanHomeCfgs.size(); i++) {
+            HomeGroupView view = new HomeGroupView(mContext);
+            view.bindData(beanHomeCfgs.get(i));
+            llGroup.addView(view);
+        }
     }
 
     /*获取推荐商品*/
@@ -437,7 +466,6 @@ public class HomeFragment extends BaseFragment {
                                 initHotGood();
                                 break;
                         }
-
                     }
 
                     @Override

@@ -16,7 +16,7 @@ import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.shuhai.anfang.R;
 import com.shuhai.anfang.common.CommonUtil;
 import com.shuhai.anfang.common.ExtraKey;
-import com.shuhai.anfang.model.HomeGroupItem;
+import com.shuhai.anfang.model.BeanHomeCfgChild;
 import com.shuhai.anfang.ui.main.WebViewActivity;
 
 import java.util.ArrayList;
@@ -25,25 +25,25 @@ import java.util.List;
 public class HomeGroupItemGridAdapter extends BaseAdapter {
     private Context mContext;
     private String TAG = getClass().getSimpleName();
-    public List<HomeGroupItem> homeItems = new ArrayList<>();
+    public List<BeanHomeCfgChild> homeItems = new ArrayList<>();
 
     public HomeGroupItemGridAdapter(Context mContext) {
         super();
         this.mContext = mContext;
     }
 
-    public void reloadData(List<HomeGroupItem> items) {
+    public void reloadData(List<BeanHomeCfgChild> items) {
         this.homeItems = items;
         notifyDataSetChanged();
     }
 
     @Override
     public int getCount() {
-        return homeItems.size();
+        return homeItems == null ? 0 : homeItems.size();
     }
 
     @Override
-    public HomeGroupItem getItem(int position) {
+    public BeanHomeCfgChild getItem(int position) {
         return homeItems.size() > position ? homeItems.get(position) : null;
     }
 
@@ -68,18 +68,18 @@ public class HomeGroupItemGridAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        final HomeGroupItem item = getItem(position);
+        final BeanHomeCfgChild item = getItem(position);
 
         viewHolder.llHomeItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, WebViewActivity.class);
-                intent.putExtra(ExtraKey.WEB_URL, item.getWebUrl());
+                intent.putExtra(ExtraKey.WEB_URL, item.getUrl());
                 mContext.startActivity(intent);
             }
         });
 
-        ImageLoader.getInstance().displayImage(item.getImgUrl(),
+        ImageLoader.getInstance().displayImage(item.getImg(),
                 new ImageViewAware(viewHolder.optionImg), CommonUtil.getDefaultImageLoaderOption());
 
         viewHolder.optionText.setText(item.getTitle());

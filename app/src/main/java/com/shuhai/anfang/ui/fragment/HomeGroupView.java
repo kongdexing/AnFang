@@ -9,10 +9,14 @@ import android.widget.TextView;
 
 import com.android.widget.mygridview.MyGridView;
 import com.android.widget.view.CircularImageView;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.shuhai.anfang.R;
-import com.shuhai.anfang.model.HomeGroupItem;
+import com.shuhai.anfang.common.CommonUtil;
+import com.shuhai.anfang.model.BeanHomeCfg;
+import com.shuhai.anfang.model.BeanHomeCfgChild;
+import com.shuhai.anfang.model.GreenDaoHelper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -46,17 +50,13 @@ public class HomeGroupView extends LinearLayout {
         grd_home.setAdapter(adapter);
     }
 
-    public void bindData(){
-        grd_home.setNumColumns(5);
-        List<HomeGroupItem> items = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            HomeGroupItem item = new HomeGroupItem();
-            item.setImgUrl("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1511168689&di=ea2101517140d09205241b2f268c0b1c&imgtype=jpg&er=1&src=http%3A%2F%2Fimg.csai.cn%2Fimg%2Fnews%2F201505%2F201505211403073341.png");
-            item.setTitle("如意宝");
-            item.setWebUrl("");
-            items.add(item);
-        }
-        adapter.reloadData(items);
+    public void bindData(BeanHomeCfg homeCfg){
+        grd_home.setNumColumns(Integer.parseInt(homeCfg.getCell()));
+        ImageLoader.getInstance().displayImage(homeCfg.getImg(),
+                new ImageViewAware(img_group_logo), CommonUtil.getDefaultImageLoaderOption());
+        txt_group_title.setText(homeCfg.getTitle());
+        List<BeanHomeCfgChild> children = GreenDaoHelper.getInstance().getHomeChildCfgById(homeCfg.getId());
+        adapter.reloadData(children);
     }
 
 }

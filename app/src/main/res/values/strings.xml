@@ -13,7 +13,8 @@
 
     <!---->
     <string name="nav_home">首页</string>
-    <string name="nav_track">跟踪</string>
+    <string name="nav_location">位置</string>
+    <string name="nav_message">消息</string>
     <string name="nav_mine">我的</string>
 
     <string name="username">用户名</string>

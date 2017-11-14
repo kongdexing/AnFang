@@ -105,7 +105,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:lines="1"
-            android:text="首页"
+            android:text="@string/nav_home"
             android:textColor="@android:color/white"
             android:textSize="@dimen/sp_18" />
     </RelativeLayout>
