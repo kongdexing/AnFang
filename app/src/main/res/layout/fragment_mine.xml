@@ -35,11 +35,13 @@
             </RelativeLayout>
 
             <LinearLayout
+                android:id="@+id/ll_unlogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimaryDark"
                 android:orientation="vertical"
                 android:gravity="center"
+                android:visibility="visible"
                 android:paddingBottom="@dimen/dp_10"
                 android:paddingTop="@dimen/dp_10">
 
@@ -57,21 +59,58 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/txtToLogin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:background="@drawable/bg_mine_info"
+                        android:padding="@dimen/dp_2"
+                        android:text="@string/mine_unlogin"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/sp_14" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/ll_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:paddingBottom="@dimen/dp_10"
+                android:visibility="gone"
+                android:paddingTop="@dimen/dp_10">
+
+                <com.android.widget.view.CircularImageView
+                    android:id="@+id/imgLoginHead"
+                    android:layout_width="@dimen/dp_60"
+                    android:layout_height="@dimen/dp_60"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:src="@drawable/user_defaulthead" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/imgLoginHead"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:orientation="vertical">
+
+                    <TextView
                         android:id="@+id/txtUserName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:text=""
-                        android:visibility="gone"
                         android:textColor="@color/colorWhite"
                         android:textSize="@dimen/sp_14" />
 
                     <TextView
-                        android:id="@+id/txtChangeAccount"
+                        android:id="@+id/txtPhone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_5"
-                        android:background="@drawable/bg_mine_info"
                         android:padding="@dimen/dp_2"
                         android:text="登录"
                         android:textColor="@color/colorWhite"
@@ -79,7 +118,9 @@
 
                 </LinearLayout>
 
-            </LinearLayout>
+                <ImageView style="@style/arrow_right" />
+
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/rlMyClass"

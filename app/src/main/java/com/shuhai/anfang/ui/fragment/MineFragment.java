@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -26,14 +27,17 @@ import butterknife.Unbinder;
 
 public class MineFragment extends BaseFragment {
 
-    @BindView(R.id.imgHead)
-    CircularImageView imgHead;
+    @BindView(R.id.ll_unlogin)
+    LinearLayout ll_unlogin;
+    @BindView(R.id.ll_login)
+    RelativeLayout ll_login;
 
+    @BindView(R.id.imgLoginHead)
+    CircularImageView imgLoginHead;
     @BindView(R.id.txtUserName)
     TextView txtUserName;
-
-    @BindView(R.id.txtChangeAccount)
-    TextView txtMineInfo;
+    @BindView(R.id.txtPhone)
+    TextView txtPhone;
 
     @BindView(R.id.rlMyClass)
     RelativeLayout rlMyClass;
@@ -56,13 +60,14 @@ public class MineFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (rlMyChild == null || txtMineInfo == null) {
+        if (rlMyChild == null || ll_unlogin == null) {
             return;
         }
 
         //判断登录状态
         if (XPTApplication.getInstance().isLoggedIn()) {
-            txtMineInfo.setText(getString(R.string.mine_change_account));
+            ll_unlogin.setVisibility(View.GONE);
+            ll_login.setVisibility(View.VISIBLE);
 
             if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
                 rlMyChild.setVisibility(View.GONE);
@@ -71,10 +76,11 @@ public class MineFragment extends BaseFragment {
                 BeanTeacher teacher = GreenDaoHelper.getInstance().getCurrentTeacher();
                 if (teacher != null) {
                     txtUserName.setText(teacher.getName());
+                    txtPhone.setText("手机号：" + teacher.getPhone());
                     if (teacher.getSex().equals("1")) {
-                        imgHead.setImageResource(R.drawable.teacher_man);
+                        imgLoginHead.setImageResource(R.drawable.teacher_man);
                     } else {
-                        imgHead.setImageResource(R.drawable.teacher_woman);
+                        imgLoginHead.setImageResource(R.drawable.teacher_woman);
                     }
                 }
             } else if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
@@ -84,17 +90,20 @@ public class MineFragment extends BaseFragment {
                 BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
                 if (parent != null) {
                     txtUserName.setText(parent.getParent_name());
+                    txtPhone.setText("手机号：" + parent.getParent_phone());
                     if (parent.getSex().equals("1")) {
-                        imgHead.setImageResource(R.drawable.parent_father);
+                        imgLoginHead.setImageResource(R.drawable.parent_father);
                     } else {
-                        imgHead.setImageResource(R.drawable.parent_mother);
+                        imgLoginHead.setImageResource(R.drawable.parent_mother);
                     }
                 }
             }
         } else {
             rlMyChild.setVisibility(View.VISIBLE);
             rlMyClass.setVisibility(View.VISIBLE);
-            txtMineInfo.setText(getString(R.string.mine_unlogin));
+
+            ll_unlogin.setVisibility(View.VISIBLE);
+            ll_login.setVisibility(View.GONE);
         }
     }
 
@@ -108,18 +117,16 @@ public class MineFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.imgHead, R.id.txtChangeAccount, R.id.rlMyChild,
+    @OnClick({R.id.imgHead, R.id.txtToLogin, R.id.ll_login, R.id.rlMyChild,
             R.id.rlMyCourse, R.id.rlQRCode})
     void viewClick(View view) {
         switch (view.getId()) {
             case R.id.imgHead:
-            case R.id.txtChangeAccount:
-                //登录？进入个人信息：登录页面
-                if (XPTApplication.getInstance().isLoggedIn()) {
-                    startActivity(new Intent(getContext(), MyInfoActivity.class));
-                } else {
-                    startActivity(new Intent(getContext(), LoginActivity.class));
-                }
+            case R.id.txtToLogin:
+                startActivity(new Intent(getContext(), LoginActivity.class));
+                break;
+            case R.id.ll_login:
+                startActivity(new Intent(getContext(), MyInfoActivity.class));
                 break;
 //            case R.id.rlMyChild:
 //                startActivity(new Intent(getContext(), MyChildActivity.class));
