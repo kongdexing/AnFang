@@ -1,14 +1,13 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_window"
-    android:orientation="vertical">
+    android:background="@color/bg_window">
 
-    <ScrollView
+    <com.android.widget.pulltorefresh.PullToRefreshScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -58,7 +57,7 @@
                 android:id="@+id/llGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"/>
+                android:orientation="vertical" />
 
             <!--校园生活-->
             <com.android.widget.mygridview.MyGridView
@@ -82,15 +81,31 @@
                 <ImageView
                     android:id="@+id/img_hot_good"
                     android:layout_width="match_parent"
-                    android:scaleType="fitXY"
                     android:layout_height="@dimen/dp_100"
-                    />
+                    android:scaleType="fitXY" />
 
 
             </LinearLayout>
 
         </LinearLayout>
+    </com.android.widget.pulltorefresh.PullToRefreshScrollView>
 
-    </ScrollView>
+    <RelativeLayout
+        android:id="@+id/fragmentHome_titleLinearId"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimaryDark">
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:lines="1"
+            android:text="首页"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_18" />
+    </RelativeLayout>
+</RelativeLayout>

@@ -3,5 +3,8 @@
 
     <item name="mcv_pager" type="id" />
     <item name="fgelv_tag_changed_visibility" type="id"/>
+    <item type="id" name="gridview" />
+    <item type="id" name="webview" />
+    <item type="id" name="scrollview" />
 
 </resources>

@@ -11,7 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.android.volley.common.VolleyHttpParamsEntity;
@@ -19,6 +21,8 @@ import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.volley.common.VolleyRequestListener;
 import com.android.widget.mygridview.MyGridView;
+import com.android.widget.pulltorefresh.PullToRefreshBase;
+import com.android.widget.pulltorefresh.PullToRefreshScrollView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -41,6 +45,7 @@ import com.shuhai.anfang.ui.leave.LeaveActivity;
 import com.shuhai.anfang.ui.main.WebViewActivity;
 import com.shuhai.anfang.ui.notice.NoticeActivity;
 import com.shuhai.anfang.ui.score.ScoreActivity;
+import com.shuhai.anfang.util.NetWorkUsefulUtils;
 import com.shuhai.anfang.view.autoviewpager.GlideImageLoader;
 import com.viewpagerindicator.CirclePageIndicator;
 import com.youth.banner.Banner;
@@ -54,6 +59,14 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 public class HomeFragment extends BaseFragment {
+
+    @BindView(R.id.fragmentHome_titleLinearId)
+    RelativeLayout fragmentHome_titleLinearId;
+    @BindView(R.id.txtTitle)
+    TextView txtTitle;
+
+    @BindView(R.id.scrollView)
+    PullToRefreshScrollView scrollView;
 
     @BindView(R.id.rlTipAD)
     RelativeLayout rlTipAD;
@@ -201,6 +214,45 @@ public class HomeFragment extends BaseFragment {
 
         grd_school.setAdapter(itemAdapter);
         itemAdapter.reloadData(homeItems);
+
+        scrollView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        scrollView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+                if (!NetWorkUsefulUtils.getActiveNetwork(getContext())) {
+                    scrollView.onRefreshComplete();
+                    Toast.makeText(getContext(), "网络不可用", Toast.LENGTH_SHORT).show();
+                } else {
+//                    if (TextUtils.isEmpty(lat) || TextUtils.isEmpty(lng)) {
+//                        if (mLocationClient == null) {
+//                            initLocationClient();
+//                        }
+//                        mLocationClient.start();
+//                    } else
+//                        loadData2();
+                }
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+
+            }
+        });
+
+        scrollView.setRefreshing(false);
+        scrollView.setOnScrollChangedListener(new PullToRefreshScrollView.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged(PullToRefreshScrollView who, int x, int y, int oldl, int oldt) {
+                float alpha = 0;
+                if (oldt <= 180) {
+                    alpha = ((float) oldt) / 180;
+                    fragmentHome_titleLinearId.setAlpha(alpha);
+                } else {
+                    fragmentHome_titleLinearId.setAlpha(1);
+                }
+            }
+        });
+
     }
 
     @Override
