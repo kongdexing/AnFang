@@ -26,27 +26,19 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.shuhai.anfang.R;
-import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.common.BroadcastAction;
 import com.shuhai.anfang.common.CommonUtil;
 import com.shuhai.anfang.common.SharedPreferencesUtil;
-import com.shuhai.anfang.common.UserType;
 import com.shuhai.anfang.http.HttpAction;
 import com.shuhai.anfang.http.MyVolleyRequestListener;
 import com.shuhai.anfang.imsdroid.Engine;
-import com.shuhai.anfang.model.BeanBanner;
-import com.shuhai.anfang.model.BeanTeacher;
-import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.ui.fragment.BaseFragment;
 import com.shuhai.anfang.ui.fragment.HomeFragment;
 import com.shuhai.anfang.ui.fragment.MapFragment;
 import com.shuhai.anfang.ui.fragment.MessageFragment;
 import com.shuhai.anfang.ui.fragment.MineFragment;
 import com.shuhai.anfang.ui.login.BaseLoginActivity;
-import com.shuhai.anfang.util.ParentUtil;
 import com.shuhai.anfang.util.ToastUtils;
 
 import org.json.JSONObject;
@@ -121,8 +113,6 @@ public class MainActivity extends BaseLoginActivity implements BDLocationListene
         mFgtManager = getSupportFragmentManager();
         setInitialState();
 
-        //获取默认广告位
-        getBanners("");
         //login
         String userName = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_NAME, "");
         String password = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_PWD, "");
@@ -170,7 +160,6 @@ public class MainActivity extends BaseLoginActivity implements BDLocationListene
     void onLocationAllow() {
         Log.i(TAG, "onLocationAllow: ");
         mLocClient.registerLocationListener(this);
-
         LocationClientOption option = new LocationClientOption();
         option.setIsNeedAddress(true);
         mLocClient.setLocOption(option);
@@ -204,7 +193,11 @@ public class MainActivity extends BaseLoginActivity implements BDLocationListene
         ToastUtils.showToast(this, bdLocation.getCityCode() + bdLocation.getCity());
         Log.i(TAG, "onReceiveLocation: " + bdLocation.getCountryCode() + bdLocation.getProvince());
         Log.i(TAG, "onReceiveLocation: " + bdLocation.getCity());
-        getBanners(bdLocation.getCity());
+        //保存本地城市
+        SharedPreferencesUtil.saveData(this, SharedPreferencesUtil.KEY_CITY, bdLocation.getCity());
+        if (homeFragment != null) {
+            ((HomeFragment) homeFragment).getBanners();
+        }
     }
 
     @OnLongClick({R.id.nav_home, R.id.nav_track, R.id.nav_mine})
@@ -317,80 +310,6 @@ public class MainActivity extends BaseLoginActivity implements BDLocationListene
                 });
     }
 
-    private void getBanners(String cityName) {
-        Log.i(TAG, "getBanners: ");
-        String s_id = "";
-        if (XPTApplication.getInstance().isLoggedIn()) {
-            //家长登录
-            if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-                s_id = ParentUtil.getStuSid();
-            } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-                //老师登录
-                BeanTeacher teacher = GreenDaoHelper.getInstance().getCurrentTeacher();
-                if (teacher != null) {
-                    s_id = teacher.getS_id();
-                }
-            }
-        }
-
-        if (s_id == null) {
-            s_id = "";
-        }
-
-        String url = HttpAction.HOME_Banner;
-        VolleyHttpService.getInstance().sendPostRequest(url, new VolleyHttpParamsEntity()
-                .addParam("s_id", s_id)
-                .addParam("area_name", cityName), new MyVolleyRequestListener() {
-            @Override
-            public void onStart() {
-                super.onStart();
-            }
-
-            @Override
-            public void onResponse(VolleyHttpResult volleyHttpResult) {
-                super.onResponse(volleyHttpResult);
-                switch (volleyHttpResult.getStatus()) {
-                    case HttpAction.SUCCESS:
-                        try {
-                            String info = volleyHttpResult.getData().toString();
-                            Log.i(TAG, "onResponse: data " + info);
-                            Gson gson = new Gson();
-                            List<BeanBanner> banners = gson.fromJson(info, new TypeToken<List<BeanBanner>>() {
-                            }.getType());
-                            if (banners.size() > 0) {
-                                GreenDaoHelper.getInstance().insertBanner(banners);
-                            }
-                            Log.i(TAG, "onResponse: size " + banners.size());
-                            if (homeFragment != null) {
-                                ((HomeFragment) homeFragment).reloadTopFragment(banners);
-                            }
-                        } catch (Exception ex) {
-                            Log.i(TAG, "onResponse: error " + ex.getMessage());
-                            //错误
-                            if (homeFragment != null) {
-                                ((HomeFragment) homeFragment).reloadTopFragment(GreenDaoHelper.getInstance().getBanners());
-                            }
-                        }
-                        break;
-                    default:
-                        //获取失败后，读取本地数据
-                        if (homeFragment != null) {
-                            ((HomeFragment) homeFragment).reloadTopFragment(GreenDaoHelper.getInstance().getBanners());
-                        }
-                        break;
-                }
-
-            }
-
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                if (homeFragment != null) {
-                    ((HomeFragment) homeFragment).reloadTopFragment(GreenDaoHelper.getInstance().getBanners());
-                }
-            }
-        });
-    }
-
     @Override
     protected void onStartLogin() {
         super.onStartLogin();
@@ -400,7 +319,9 @@ public class MainActivity extends BaseLoginActivity implements BDLocationListene
     protected void onLoginSuccess() {
         super.onLoginSuccess();
         //登录成功后，根据用户角色获取广告位
-        getBanners("");
+        if (homeFragment != null) {
+            ((HomeFragment) homeFragment).getBanners();
+        }
     }
 
     @Override
@@ -413,7 +334,9 @@ public class MainActivity extends BaseLoginActivity implements BDLocationListene
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(BroadcastAction.RELOAD_BANNER)) {
                 //广告过期后，重新获取广告位
-                getBanners("");
+                if (homeFragment != null) {
+                    ((HomeFragment) homeFragment).getBanners();
+                }
             }
         }
     };

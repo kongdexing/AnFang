@@ -10,6 +10,7 @@ public class SharedPreferencesUtil {
     public static final String KEY_PWD = "password";
     public static final String KEY_UID = "userid";
     public static final String KEY_USER_TYPE = "usertype";
+    public static final String KEY_CITY = "local_city";
 
 
     /**

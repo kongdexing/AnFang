@@ -32,9 +32,13 @@ import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.bean.HomeItem;
 import com.shuhai.anfang.common.CommonUtil;
 import com.shuhai.anfang.common.ExtraKey;
+import com.shuhai.anfang.common.SharedPreferencesUtil;
+import com.shuhai.anfang.common.UserType;
 import com.shuhai.anfang.http.HttpAction;
+import com.shuhai.anfang.http.MyVolleyRequestListener;
 import com.shuhai.anfang.model.BeanBanner;
 import com.shuhai.anfang.model.BeanHotGood;
+import com.shuhai.anfang.model.BeanTeacher;
 import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.push.BannerHelper;
 import com.shuhai.anfang.ui.alarm.AlarmActivity;
@@ -46,6 +50,7 @@ import com.shuhai.anfang.ui.main.WebViewActivity;
 import com.shuhai.anfang.ui.notice.NoticeActivity;
 import com.shuhai.anfang.ui.score.ScoreActivity;
 import com.shuhai.anfang.util.NetWorkUsefulUtils;
+import com.shuhai.anfang.util.ParentUtil;
 import com.shuhai.anfang.view.autoviewpager.GlideImageLoader;
 import com.viewpagerindicator.CirclePageIndicator;
 import com.youth.banner.Banner;
@@ -225,13 +230,8 @@ public class HomeFragment extends BaseFragment {
                     ptr_scrollview.onRefreshComplete();
                     Toast.makeText(getContext(), "网络不可用", Toast.LENGTH_SHORT).show();
                 } else {
-//                    if (TextUtils.isEmpty(lat) || TextUtils.isEmpty(lng)) {
-//                        if (mLocationClient == null) {
-//                            initLocationClient();
-//                        }
-//                        mLocationClient.start();
-//                    } else
-//                        loadData2();
+                    ptr_scrollview.onRefreshComplete();
+//                  loadData2();
                 }
             }
 
@@ -277,7 +277,13 @@ public class HomeFragment extends BaseFragment {
     @Override
     protected void initData() {
         Log.i(TAG, "HomeFragment initData: ");
+        //1获取广告位，2获取分组数据，3获取商品推荐
+
+        getBanners();
+
         //获取分组数据
+        getHomeGroupCfg();
+
         llGroup.removeAllViews();
         for (int i = 0; i < 3; i++) {
             HomeGroupView view = new HomeGroupView(mContext);
@@ -287,6 +293,77 @@ public class HomeFragment extends BaseFragment {
 
         //获取热门商品数据
         getHotGoods();
+    }
+
+    /*
+    * 获取广告位
+    * */
+    public void getBanners() {
+        Log.i(TAG, "getBanners: ");
+        String s_id = "";
+        if (XPTApplication.getInstance().isLoggedIn()) {
+            //家长登录
+            if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+                s_id = ParentUtil.getStuSid();
+            } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+                //老师登录
+                BeanTeacher teacher = GreenDaoHelper.getInstance().getCurrentTeacher();
+                if (teacher != null) {
+                    s_id = teacher.getS_id();
+                }
+            }
+        }
+
+        if (s_id == null) {
+            s_id = "";
+        }
+
+        String cityName = SharedPreferencesUtil.getData(mContext, SharedPreferencesUtil.KEY_CITY, "").toString();
+
+        String url = HttpAction.HOME_Banner;
+        VolleyHttpService.getInstance().sendPostRequest(url, new VolleyHttpParamsEntity()
+                .addParam("s_id", s_id)
+                .addParam("area_name", cityName), new MyVolleyRequestListener() {
+            @Override
+            public void onStart() {
+                super.onStart();
+            }
+
+            @Override
+            public void onResponse(VolleyHttpResult volleyHttpResult) {
+                super.onResponse(volleyHttpResult);
+                switch (volleyHttpResult.getStatus()) {
+                    case HttpAction.SUCCESS:
+                        try {
+                            String info = volleyHttpResult.getData().toString();
+                            Log.i(TAG, "onResponse: data " + info);
+                            Gson gson = new Gson();
+                            List<BeanBanner> banners = gson.fromJson(info, new TypeToken<List<BeanBanner>>() {
+                            }.getType());
+                            if (banners.size() > 0) {
+                                GreenDaoHelper.getInstance().insertBanner(banners);
+                            }
+                            Log.i(TAG, "onResponse: size " + banners.size());
+                            reloadTopFragment(banners);
+                        } catch (Exception ex) {
+                            Log.i(TAG, "onResponse: error " + ex.getMessage());
+                            //错误
+                            reloadTopFragment(GreenDaoHelper.getInstance().getBanners());
+                        }
+                        break;
+                    default:
+                        //获取失败后，读取本地数据
+                        reloadTopFragment(GreenDaoHelper.getInstance().getBanners());
+                        break;
+                }
+
+            }
+
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                reloadTopFragment(GreenDaoHelper.getInstance().getBanners());
+            }
+        });
     }
 
     public void reloadTopFragment(List<BeanBanner> banners) {
@@ -300,6 +377,28 @@ public class HomeFragment extends BaseFragment {
             Log.i(TAG, "reloadTopFragment: " + banners.get(i).getImg());
         }
         topBanner.update(listBannerImages, listTitles);
+    }
+
+    private void getHomeGroupCfg() {
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Home_GroupCfg,
+                new VolleyHttpParamsEntity()
+                        .addParam("token", CommonUtil.encryptToken(HttpAction.Home_GroupCfg)),
+                new VolleyRequestListener() {
+                    @Override
+                    public void onStart() {
+
+                    }
+
+                    @Override
+                    public void onResponse(VolleyHttpResult volleyHttpResult) {
+
+                    }
+
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+
+                    }
+                });
     }
 
     /*获取推荐商品*/

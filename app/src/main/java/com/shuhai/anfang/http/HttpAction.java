@@ -23,6 +23,11 @@ public class HttpAction {
     public static String GetCourse = HEAD + "Comment/get_course";
     public static String GETExams = HEAD + "Comment/get_exam_name";
 
+    //广告位
+    public static String HOME_Banner = HEAD + "Banner/query";
+    public static String SHOW_Banner = BuildConfig.SERVICE_URL + "/getadstatics.php";
+    //获取分组数据
+    public static String Home_GroupCfg = HEAD + "AppHomecfg/query";
     /*获取推荐商品*/
     public static String GETHotGoods = HEAD + "HotSale/query";
 
@@ -83,10 +88,6 @@ public class HttpAction {
 
     //上传token
     public static String HOOK_PUSH_TOKEN = HEAD + "/Hook/addPushToken";
-
-    //广告位
-    public static String HOME_Banner = HEAD + "Banner/query";
-    public static String SHOW_Banner = BuildConfig.SERVICE_URL + "/getadstatics.php";
 
     //添加监护人
     public static String ADD_TUTELAGE = HEAD + "AddGuardian/add";
