@@ -19,6 +19,7 @@ import com.shuhai.anfang.model.BeanTeacher;
 import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.ui.login.LoginActivity;
 import com.shuhai.anfang.ui.mine.MyInfoActivity;
+import com.shuhai.anfang.ui.setting.QRCodeActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -152,7 +153,7 @@ public class MineFragment extends BaseFragment {
 //                startActivity(new Intent(getContext(), SettingActivity.class));
 //                break;
             case R.id.rlQRCode:
-
+                startActivity(new Intent(getContext(), QRCodeActivity.class));
                 break;
         }
     }

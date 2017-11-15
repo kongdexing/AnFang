@@ -22,6 +22,9 @@ public class DaoMaster extends AbstractDaoMaster {
     /** Creates underlying database table using DAOs. */
     public static void createAllTables(Database db, boolean ifNotExists) {
         BeanBannerDao.createTable(db, ifNotExists);
+        BeanHomeCfgDao.createTable(db, ifNotExists);
+        BeanHomeCfgChildDao.createTable(db, ifNotExists);
+        BeanHotGoodDao.createTable(db, ifNotExists);
         BeanLearningModuleDao.createTable(db, ifNotExists);
         BeanParentDao.createTable(db, ifNotExists);
         BeanStudentDao.createTable(db, ifNotExists);
@@ -29,14 +32,14 @@ public class DaoMaster extends AbstractDaoMaster {
         ContactParentDao.createTable(db, ifNotExists);
         ContactSchoolDao.createTable(db, ifNotExists);
         ContactTeacherDao.createTable(db, ifNotExists);
-        BeanHotGoodDao.createTable(db, ifNotExists);
-        BeanHomeCfgDao.createTable(db, ifNotExists);
-        BeanHomeCfgChildDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(Database db, boolean ifExists) {
         BeanBannerDao.dropTable(db, ifExists);
+        BeanHomeCfgDao.dropTable(db, ifExists);
+        BeanHomeCfgChildDao.dropTable(db, ifExists);
+        BeanHotGoodDao.dropTable(db, ifExists);
         BeanLearningModuleDao.dropTable(db, ifExists);
         BeanParentDao.dropTable(db, ifExists);
         BeanStudentDao.dropTable(db, ifExists);
@@ -44,9 +47,6 @@ public class DaoMaster extends AbstractDaoMaster {
         ContactParentDao.dropTable(db, ifExists);
         ContactSchoolDao.dropTable(db, ifExists);
         ContactTeacherDao.dropTable(db, ifExists);
-        BeanHotGoodDao.dropTable(db, ifExists);
-        BeanHomeCfgDao.dropTable(db, ifExists);
-        BeanHomeCfgChildDao.dropTable(db, ifExists);
     }
 
     /**
@@ -66,6 +66,9 @@ public class DaoMaster extends AbstractDaoMaster {
     public DaoMaster(Database db) {
         super(db, SCHEMA_VERSION);
         registerDaoClass(BeanBannerDao.class);
+        registerDaoClass(BeanHomeCfgDao.class);
+        registerDaoClass(BeanHomeCfgChildDao.class);
+        registerDaoClass(BeanHotGoodDao.class);
         registerDaoClass(BeanLearningModuleDao.class);
         registerDaoClass(BeanParentDao.class);
         registerDaoClass(BeanStudentDao.class);
@@ -73,9 +76,6 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(ContactParentDao.class);
         registerDaoClass(ContactSchoolDao.class);
         registerDaoClass(ContactTeacherDao.class);
-        registerDaoClass(BeanHotGoodDao.class);
-        registerDaoClass(BeanHomeCfgDao.class);
-        registerDaoClass(BeanHomeCfgChildDao.class);
     }
 
     public DaoSession newSession() {

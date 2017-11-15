@@ -125,6 +125,7 @@
         <activity android:name=".ui.setting.ChangePwdActivity" />
         <activity android:name=".ui.setting.TutelageActivity" />
         <activity android:name=".ui.setting.AboutActivity" />
+        <activity android:name=".ui.setting.QRCodeActivity" />
 
         <activity
             android:name=".ui.mine.MyInfoActivity"
@@ -180,6 +181,7 @@
             android:name=".ui.leave.LeaveDetailActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+
 
     </application>
 

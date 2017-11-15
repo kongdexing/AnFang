@@ -39,11 +39,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimaryDark"
-                android:orientation="vertical"
                 android:gravity="center"
-                android:visibility="visible"
+                android:orientation="vertical"
                 android:paddingBottom="@dimen/dp_10"
-                android:paddingTop="@dimen/dp_10">
+                android:paddingTop="@dimen/dp_10"
+                android:visibility="visible">
 
                 <com.android.widget.view.CircularImageView
                     android:id="@+id/imgHead"
@@ -79,8 +79,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimaryDark"
                 android:paddingBottom="@dimen/dp_10"
-                android:visibility="gone"
-                android:paddingTop="@dimen/dp_10">
+                android:paddingTop="@dimen/dp_10"
+                android:visibility="visible">
 
                 <com.android.widget.view.CircularImageView
                     android:id="@+id/imgLoginHead"
@@ -93,8 +93,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/imgLoginHead"
                     android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_toRightOf="@+id/imgLoginHead"
                     android:orientation="vertical">
 
                     <TextView
@@ -111,8 +111,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_5"
-                        android:padding="@dimen/dp_2"
-                        android:text="登录"
+                        android:text=""
                         android:textColor="@color/colorWhite"
                         android:textSize="@dimen/sp_14" />
 
@@ -171,6 +170,7 @@
                     android:text="@string/mine_collect" />
 
                 <ImageView style="@style/arrow_right" />
+
             </RelativeLayout>
 
             <RelativeLayout

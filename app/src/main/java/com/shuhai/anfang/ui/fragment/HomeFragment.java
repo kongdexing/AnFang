@@ -57,6 +57,9 @@ import com.viewpagerindicator.CirclePageIndicator;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,6 +96,12 @@ public class HomeFragment extends BaseFragment {
 
     @BindView(R.id.img_hot_good)
     ImageView img_hot_good;
+
+    @BindView(R.id.img_hot_good2)
+    ImageView img_hot_good2;
+
+    @BindView(R.id.img_hot_good3)
+    ImageView img_hot_good3;
 
     private Unbinder unbinder;
     //    private MyTopPagerAdapter topAdapter;
@@ -399,8 +408,8 @@ public class HomeFragment extends BaseFragment {
                                         for (int i = 0; i < beanHomeCfgs.size(); i++) {
                                             GreenDaoHelper.getInstance().insertHomeChildCfg(beanHomeCfgs.get(i).getChild());
                                         }
-                                        GreenDaoHelper.getInstance().insertHomeCfg(beanHomeCfgs);
                                     }
+                                    GreenDaoHelper.getInstance().insertHomeCfg(beanHomeCfgs);
                                     Log.i(TAG, "onResponse: size " + beanHomeCfgs.size());
                                     initHomeCfg();
 //                                    bindHotGood(beanHomeCfgs.get(0));
@@ -451,14 +460,23 @@ public class HomeFragment extends BaseFragment {
                                 try {
                                     String info = volleyHttpResult.getData().toString();
                                     Log.i(TAG, "onResponse: data " + info);
-                                    Gson gson = new Gson();
-                                    List<BeanHotGood> hotGoods = gson.fromJson(info, new TypeToken<List<BeanHotGood>>() {
-                                    }.getType());
+
+                                    JSONArray array = new JSONArray(info);
+                                    List<BeanHotGood> hotGoods = new ArrayList<>();
+                                    for (int i = 0; i < array.length(); i++) {
+                                        JSONObject object = array.getJSONObject(i);
+                                        BeanHotGood hotGood = new BeanHotGood();
+                                        hotGood.setId(object.getString("id"));
+                                        hotGood.setImage(object.getString("image"));
+                                        hotGood.setUrl_pc_short(object.getString("url_pc_short"));
+                                        hotGoods.add(hotGood);
+                                    }
+
                                     if (hotGoods.size() > 0) {
                                         GreenDaoHelper.getInstance().insertHotGoods(hotGoods);
                                     }
                                     Log.i(TAG, "onResponse: size " + hotGoods.size());
-                                    bindHotGood(hotGoods.get(0));
+                                    bindHotGood(hotGoods);
                                 } catch (Exception ex) {
                                     Log.i(TAG, "onResponse: error " + ex.getMessage());
                                     //错误
@@ -481,28 +499,53 @@ public class HomeFragment extends BaseFragment {
     private void initHotGood() {
         List<BeanHotGood> hotGoods = GreenDaoHelper.getInstance().getHotGoods();
         if (hotGoods.size() > 0) {
-            bindHotGood(hotGoods.get(0));
+            bindHotGood(hotGoods);
         } else {
             img_hot_good.setVisibility(View.GONE);
         }
     }
 
-    private void bindHotGood(final BeanHotGood good) {
-        if (good == null || img_hot_good == null) {
+    private void bindHotGood(final List<BeanHotGood> hotGoods) {
+        if (hotGoods == null || img_hot_good == null) {
             return;
         }
 
-        ImageLoader.getInstance().displayImage(good.getImage(),
-                new ImageViewAware(img_hot_good), CommonUtil.getDefaultImageLoaderOption());
+        try {
+            ImageLoader.getInstance().displayImage(hotGoods.get(0).getImage(),
+                    new ImageViewAware(img_hot_good), CommonUtil.getDefaultImageLoaderOption());
+            img_hot_good.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, WebViewActivity.class);
+                    intent.putExtra(ExtraKey.WEB_URL, hotGoods.get(0).getUrl_pc_short());
+                    mContext.startActivity(intent);
+                }
+            });
 
-        img_hot_good.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, WebViewActivity.class);
-                intent.putExtra(ExtraKey.WEB_URL, good.getUrl_pc_short());
-                mContext.startActivity(intent);
-            }
-        });
+            ImageLoader.getInstance().displayImage(hotGoods.get(1).getImage(),
+                    new ImageViewAware(img_hot_good2), CommonUtil.getDefaultImageLoaderOption());
+            img_hot_good2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, WebViewActivity.class);
+                    intent.putExtra(ExtraKey.WEB_URL, hotGoods.get(1).getUrl_pc_short());
+                    mContext.startActivity(intent);
+                }
+            });
+
+            ImageLoader.getInstance().displayImage(hotGoods.get(2).getImage(),
+                    new ImageViewAware(img_hot_good3), CommonUtil.getDefaultImageLoaderOption());
+            img_hot_good3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, WebViewActivity.class);
+                    intent.putExtra(ExtraKey.WEB_URL, hotGoods.get(2).getUrl_pc_short());
+                    mContext.startActivity(intent);
+                }
+            });
+        } catch (Exception ex) {
+
+        }
     }
 
     @Override
