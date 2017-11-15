@@ -1,5 +1,7 @@
 package com.shuhai.anfang.model;
 
+import com.shuhai.anfang.BuildConfig;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
@@ -48,8 +50,8 @@ public class BeanHomeCfgChild {
     }
 
     public String getImg() {
-        if (!img.startsWith("http:")) {
-            img = "http:" + img;
+        if (!img.startsWith(BuildConfig.SERVICE_URL)) {
+            img = BuildConfig.SERVICE_URL + img;
         }
         return img;
     }

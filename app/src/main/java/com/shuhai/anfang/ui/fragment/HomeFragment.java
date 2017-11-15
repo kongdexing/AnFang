@@ -94,6 +94,10 @@ public class HomeFragment extends BaseFragment {
     MyGridView grd_school;
     HomeItemGridAdapter itemAdapter;
 
+    @BindView(R.id.grd_school_shop)
+    MyGridView grd_school_shop;
+    HomeItemGridAdapter itemShopAdapter;
+
     @BindView(R.id.img_hot_good)
     ImageView img_hot_good;
 
@@ -234,8 +238,28 @@ public class HomeFragment extends BaseFragment {
         grd_school.setAdapter(itemAdapter);
         itemAdapter.reloadData(homeItems);
 
-        fragmentHome_titleLinearId.setAlpha(0);
+        List<HomeItem> homeShopItems = new ArrayList<HomeItem>();
+        /*课程表*/
+        homeShopItems.add(new HomeItem()
+                .setIconId(R.drawable.home_course)
+                .setTitle(getString(R.string.home_course))
+                .setIntent(new Intent(mContext, LeaveActivity.class)));
+        /*老师评语*/
+        homeShopItems.add(new HomeItem()
+                .setIconId(R.drawable.home_remark)
+                .setTitle(getString(R.string.home_remark))
+                .setIntent(new Intent(mContext, LeaveActivity.class)));
+        /*荣誉墙*/
+        homeShopItems.add(new HomeItem()
+                .setIconId(R.drawable.home_honour)
+                .setTitle(getString(R.string.home_honour))
+                .setIntent(new Intent(mContext, LeaveActivity.class)));
 
+        itemShopAdapter = new HomeItemGridAdapter(mContext);
+        grd_school_shop.setAdapter(itemShopAdapter);
+        itemShopAdapter.reloadData(homeShopItems);
+
+        fragmentHome_titleLinearId.setAlpha(0);
         ptr_scrollview.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         ptr_scrollview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
             @Override
@@ -404,6 +428,8 @@ public class HomeFragment extends BaseFragment {
                                     Gson gson = new Gson();
                                     List<BeanHomeCfg> beanHomeCfgs = gson.fromJson(info, new TypeToken<List<BeanHomeCfg>>() {
                                     }.getType());
+                                    //删除所有子项
+                                    GreenDaoHelper.getInstance().deleteHomeChildCfg();
                                     if (beanHomeCfgs.size() > 0) {
                                         for (int i = 0; i < beanHomeCfgs.size(); i++) {
                                             GreenDaoHelper.getInstance().insertHomeChildCfg(beanHomeCfgs.get(i).getChild());

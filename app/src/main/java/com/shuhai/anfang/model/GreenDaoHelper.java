@@ -192,6 +192,13 @@ public class GreenDaoHelper {
         }
     }
 
+    //删除所有子项
+    public void deleteHomeChildCfg(){
+        if (writeDaoSession != null) {
+            writeDaoSession.getBeanHomeCfgChildDao().deleteAll();
+        }
+    }
+
     //保存首页配置子项
     public void insertHomeChildCfg(List<BeanHomeCfgChild> homeCfgs){
         if (writeDaoSession != null) {

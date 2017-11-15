@@ -1,5 +1,7 @@
 package com.shuhai.anfang.model;
 
+import com.shuhai.anfang.BuildConfig;
+
 import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
@@ -24,16 +26,20 @@ public class BeanHomeCfg {
     private String pid;
     @ToMany(referencedJoinProperty = "pid")
     private List<BeanHomeCfgChild> child;
-    /** Used for active entity operations. */
+    /**
+     * Used for active entity operations.
+     */
     @Generated(hash = 1846598264)
     private transient BeanHomeCfgDao myDao;
-    /** Used to resolve relations */
+    /**
+     * Used to resolve relations
+     */
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;
 
     @Generated(hash = 927340585)
     public BeanHomeCfg(String id, String title, String img, String url,
-            String cell, String pid) {
+                       String cell, String pid) {
         this.id = id;
         this.title = title;
         this.img = img;
@@ -63,8 +69,8 @@ public class BeanHomeCfg {
     }
 
     public String getImg() {
-        if (!img.startsWith("http:")) {
-            img = "http:" + img;
+        if (!img.startsWith(BuildConfig.SERVICE_URL)) {
+            img = BuildConfig.SERVICE_URL + img;
         }
         return img;
     }
@@ -142,13 +148,17 @@ public class BeanHomeCfg {
         myDao.delete(this);
     }
 
-    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
+    /**
+     * Resets a to-many relationship, making the next get call to query for a fresh result.
+     */
     @Generated(hash = 1024800465)
     public synchronized void resetChild() {
         child = null;
     }
 
-    /** called by internal mechanisms, do not call yourself. */
+    /**
+     * called by internal mechanisms, do not call yourself.
+     */
     @Generated(hash = 1016321648)
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
