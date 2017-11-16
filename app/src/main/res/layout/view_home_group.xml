@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_6"
             android:text="民生"
+            android:textColor="@color/color_black_2"
             android:textSize="@dimen/sp_16" />
 
     </LinearLayout>

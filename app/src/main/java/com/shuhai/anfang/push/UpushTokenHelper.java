@@ -8,7 +8,6 @@ import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.volley.common.VolleyRequestListener;
 import com.shuhai.anfang.http.HttpAction;
-import com.shuhai.anfang.model.BeanParent;
 
 /**
  * Created by dexing on 2017/2/4.
@@ -66,18 +65,13 @@ public class UpushTokenHelper {
     /**
      * 退出账号
      */
-    public static void exitAccount(final BeanParent parent) {
-        if (parent == null) {
-            Log.i(TAG, "exitAccount: parent is null");
-            return;
-        }
-
+    public static void exitAccount(String user_name,String user_id) {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.HOOK_PUSH_TOKEN,
                 new VolleyHttpParamsEntity()
                         .addParam("status", "2")    //1登录 2其他(切换\退出)
-                        .addParam("user_name", parent.getLoginName())
+                        .addParam("user_name", user_name)
                         .addParam("system_model", "1") //1Android 0ios
-                        .addParam("user_id", parent.getU_id())
+                        .addParam("user_id", user_id)
                         .addParam("user_type", "4")
                 , new VolleyRequestListener() {
                     @Override

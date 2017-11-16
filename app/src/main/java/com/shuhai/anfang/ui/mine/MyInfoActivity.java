@@ -10,9 +10,13 @@ import android.widget.Toast;
 
 import com.android.widget.view.CircularImageView;
 import com.shuhai.anfang.R;
+import com.shuhai.anfang.common.SharedPreferencesUtil;
+import com.shuhai.anfang.common.UserHelper;
 import com.shuhai.anfang.model.BeanParent;
 import com.shuhai.anfang.model.GreenDaoHelper;
+import com.shuhai.anfang.server.ServerManager;
 import com.shuhai.anfang.ui.main.BaseActivity;
+import com.shuhai.anfang.view.CustomDialog;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -62,7 +66,7 @@ public class MyInfoActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.rlMinePhoto, R.id.rlMinePhone, R.id.rlAddressPhone})
+    @OnClick({R.id.rlMinePhoto, R.id.rlMinePhone, R.id.rlAddressPhone, R.id.rlExit})
     void viewClick(View view) {
         BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
         if (parent == null) {
@@ -103,6 +107,27 @@ public class MyInfoActivity extends BaseActivity {
                     Log.i(TAG, "toCallPhone: " + ex.getMessage());
                     Toast.makeText(this, R.string.toast_startcall_error, Toast.LENGTH_SHORT).show();
                 }
+                break;
+            case R.id.rlExit:
+                CustomDialog dialog = new CustomDialog(MyInfoActivity.this);
+                dialog.setTitle(R.string.label_tip);
+                dialog.setMessage(R.string.msg_exit);
+                dialog.setAlertDialogClickListener(new CustomDialog.DialogClickListener() {
+                    @Override
+                    public void onPositiveClick() {
+                        //清除upush信息
+                        UserHelper.getInstance().changeAccount();
+
+                        //清除数据
+                        SharedPreferencesUtil.clearUserInfo(MyInfoActivity.this);
+
+                        GreenDaoHelper.getInstance().clearData();
+
+                        ServerManager.getInstance().stopService(MyInfoActivity.this);
+
+                        finish();
+                    }
+                });
                 break;
         }
     }

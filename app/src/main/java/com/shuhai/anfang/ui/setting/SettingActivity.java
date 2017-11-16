@@ -12,15 +12,10 @@ import android.widget.Toast;
 import com.shuhai.anfang.BuildConfig;
 import com.shuhai.anfang.R;
 import com.shuhai.anfang.common.ExtraKey;
-import com.shuhai.anfang.common.SharedPreferencesUtil;
 import com.shuhai.anfang.model.BeanStudent;
 import com.shuhai.anfang.model.GreenDaoHelper;
-import com.shuhai.anfang.push.UpushTokenHelper;
-import com.shuhai.anfang.server.ServerManager;
-import com.shuhai.anfang.ui.login.LoginActivity;
 import com.shuhai.anfang.ui.main.BaseActivity;
 import com.shuhai.anfang.ui.main.WebViewActivity;
-import com.shuhai.anfang.view.CustomDialog;
 import com.tencent.bugly.beta.Beta;
 
 import java.util.List;
@@ -48,7 +43,7 @@ public class SettingActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.rlChangePwd, R.id.rlExit, R.id.rlTel, R.id.rlUpdate, R.id.rltutelage, R.id.rlHelp})
+    @OnClick({R.id.rlChangePwd, R.id.rlTel, R.id.rlUpdate, R.id.rltutelage, R.id.rlHelp})
     void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.rlTel:
@@ -75,28 +70,6 @@ public class SettingActivity extends BaseActivity {
                 } else {
                     Toast.makeText(this, "暂无绑定的学生", Toast.LENGTH_SHORT).show();
                 }
-                break;
-            case R.id.rlExit:
-                CustomDialog dialog = new CustomDialog(SettingActivity.this);
-                dialog.setTitle(R.string.label_tip);
-                dialog.setMessage(R.string.msg_exit);
-                dialog.setAlertDialogClickListener(new CustomDialog.DialogClickListener() {
-                    @Override
-                    public void onPositiveClick() {
-                        //清除数据
-                        SharedPreferencesUtil.clearUserInfo(SettingActivity.this);
-                        //清除upush信息
-                        UpushTokenHelper.exitAccount(GreenDaoHelper.getInstance().getCurrentParent());
-                        GreenDaoHelper.getInstance().clearData();
-
-                        ServerManager.getInstance().stopService(SettingActivity.this);
-
-                        Intent intent = new Intent(SettingActivity.this, LoginActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        intent.putExtra(ExtraKey.LOGIN_ORIGIN, "0");
-                        startActivity(intent);
-                    }
-                });
                 break;
             case R.id.rlHelp:
                 Intent intent = new Intent(this, WebViewActivity.class);

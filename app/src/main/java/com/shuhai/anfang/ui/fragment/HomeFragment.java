@@ -177,13 +177,19 @@ public class HomeFragment extends BaseFragment {
         topBanner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
-                BeanBanner banner = advertList.get(position);
+                if (advertList.size() == 0) {
+                    return;
+                }
+                try {
+                    BeanBanner banner = advertList.get(position);
+                    if (banner.getTurn_type().equals("1")) {
+                        Intent intent = new Intent(mContext, WebViewActivity.class);
+                        intent.putExtra(ExtraKey.WEB_URL, banner.getUrl());
+                        mContext.startActivity(intent);
+                        BannerHelper.postShowBanner(banner, "2");
+                    }
+                } catch (Exception ex) {
 
-                if (banner.getTurn_type().equals("1")) {
-                    Intent intent = new Intent(mContext, WebViewActivity.class);
-                    intent.putExtra(ExtraKey.WEB_URL, banner.getUrl());
-                    mContext.startActivity(intent);
-                    BannerHelper.postShowBanner(banner, "2");
                 }
             }
         });
@@ -367,13 +373,13 @@ public class HomeFragment extends BaseFragment {
                             String info = volleyHttpResult.getData().toString();
                             Log.i(TAG, "onResponse: data " + info);
                             Gson gson = new Gson();
-                            List<BeanBanner> banners = gson.fromJson(info, new TypeToken<List<BeanBanner>>() {
+                            advertList = gson.fromJson(info, new TypeToken<List<BeanBanner>>() {
                             }.getType());
-                            if (banners.size() > 0) {
-                                GreenDaoHelper.getInstance().insertBanner(banners);
+                            if (advertList.size() > 0) {
+                                GreenDaoHelper.getInstance().insertBanner(advertList);
                             }
-                            Log.i(TAG, "onResponse: size " + banners.size());
-                            reloadTopFragment(banners);
+                            Log.i(TAG, "onResponse: size " + advertList.size());
+                            reloadTopFragment(advertList);
                         } catch (Exception ex) {
                             Log.i(TAG, "onResponse: error " + ex.getMessage());
                             //错误

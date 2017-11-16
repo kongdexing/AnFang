@@ -11,12 +11,12 @@ import com.android.volley.common.VolleyHttpService;
 import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.common.CommonUtil;
 import com.shuhai.anfang.common.SharedPreferencesUtil;
+import com.shuhai.anfang.common.UserHelper;
 import com.shuhai.anfang.common.UserType;
 import com.shuhai.anfang.http.HttpAction;
 import com.shuhai.anfang.http.MyVolleyRequestListener;
 import com.shuhai.anfang.imsdroid.ImsSipHelper;
 import com.shuhai.anfang.model.GreenDaoHelper;
-import com.shuhai.anfang.push.UpushTokenHelper;
 import com.shuhai.anfang.server.ServerManager;
 import com.shuhai.anfang.ui.main.BaseActivity;
 
@@ -65,7 +65,7 @@ public class BaseLoginActivity extends BaseActivity {
                                     SharedPreferencesUtil.saveData(BaseLoginActivity.this, SharedPreferencesUtil.KEY_USER_NAME, account);
                                     ImsSipHelper.getInstance().stopSipServer();
                                     //切换账号
-                                    UpushTokenHelper.exitAccount(GreenDaoHelper.getInstance().getCurrentParent());
+                                    UserHelper.getInstance().changeAccount();
                                 }
                                 SharedPreferencesUtil.saveData(BaseLoginActivity.this, SharedPreferencesUtil.KEY_PWD, password);
 
