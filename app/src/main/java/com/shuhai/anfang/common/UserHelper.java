@@ -27,6 +27,9 @@ public class UserHelper {
         return mInstance;
     }
 
+    /**
+     * 切换账号
+     */
     public void changeAccount() {
         if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
             BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();

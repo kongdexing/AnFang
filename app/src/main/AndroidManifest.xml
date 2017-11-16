@@ -182,6 +182,8 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
+        <!--课程表-->
+        <activity android:name=".ui.course.CourseActivity" />
 
     </application>
 
