@@ -1,0 +1,7 @@
+#Fri Nov 17 12:56:19 CST 2017
+base.0=D\:\\Other\\shuhai\\AnFang\\simpledemo\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_266ab406f67a42f0a25c1c23a8ff76f76c3251fc
+renamed.1=classes2.dex
+renamed.0=classes.dex
+file.1=D\:\\Other\\shuhai\\AnFang\\simpledemo\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_210d558a7daa2136550491064bcfc351d48f7cb8\\classes.dex
+base.1=D\:\\Other\\shuhai\\AnFang\\simpledemo\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_210d558a7daa2136550491064bcfc351d48f7cb8
+file.0=D\:\\Other\\shuhai\\AnFang\\simpledemo\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_266ab406f67a42f0a25c1c23a8ff76f76c3251fc\\classes.dex
