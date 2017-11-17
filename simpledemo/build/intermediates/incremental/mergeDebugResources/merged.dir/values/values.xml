@@ -424,8 +424,10 @@
         <item name="android:windowAnimationStyle">@style/AnimFade</item>
     </style>
     <style name="AppTheme" parent="android:style/Theme.Holo.Light.NoActionBar">
-        
-      
+        <!-- Customize your theme here. -->
+      <!--  <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>-->
     </style>
     <style name="HeadScale" parent="android:Theme.Dialog">
         <item name="android:windowAnimationStyle">@style/AnimHead</item>

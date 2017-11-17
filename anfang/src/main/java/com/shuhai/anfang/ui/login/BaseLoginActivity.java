@@ -8,8 +8,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
-import com.hyphenate.EMCallBack;
-import com.hyphenate.chat.EMClient;
 import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.common.CommonUtil;
 import com.shuhai.anfang.common.SharedPreferencesUtil;
@@ -21,7 +19,6 @@ import com.shuhai.anfang.imsdroid.ImsSipHelper;
 import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.server.ServerManager;
 import com.shuhai.anfang.ui.main.BaseActivity;
-import com.shuhai.anfang.util.ToastUtils;
 
 import org.json.JSONObject;
 
@@ -48,27 +45,27 @@ public class BaseLoginActivity extends BaseActivity {
 
     public void login(final String account, final String password, final String type, DefaultRetryPolicy retryPolicy) {
         //login
-        EMClient.getInstance().login(account, password, new EMCallBack() {
-
-            @Override
-            public void onSuccess() {
-                ToastUtils.showToast(BaseLoginActivity.this, "登录成功");
-            }
-
-            @Override
-            public void onProgress(int progress, String status) {
-
-            }
-
-            @Override
-            public void onError(int code, String error) {
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        ToastUtils.showToast(getApplicationContext(), "login failed");
-                    }
-                });
-            }
-        });
+//        EMClient.getInstance().login(account, password, new EMCallBack() {
+//
+//            @Override
+//            public void onSuccess() {
+//                ToastUtils.showToast(BaseLoginActivity.this, "登录成功");
+//            }
+//
+//            @Override
+//            public void onProgress(int progress, String status) {
+//
+//            }
+//
+//            @Override
+//            public void onError(int code, String error) {
+//                runOnUiThread(new Runnable() {
+//                    public void run() {
+//                        ToastUtils.showToast(getApplicationContext(), "login failed");
+//                    }
+//                });
+//            }
+//        });
 
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.LOGIN,
                 new VolleyHttpParamsEntity()

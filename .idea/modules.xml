@@ -5,7 +5,8 @@
       <module fileurl="file://$PROJECT_DIR$/AnFang.iml" filepath="$PROJECT_DIR$/AnFang.iml" />
       <module fileurl="file://$PROJECT_DIR$/PushSDK/PushSDK.iml" filepath="$PROJECT_DIR$/PushSDK/PushSDK.iml" />
       <module fileurl="file://$PROJECT_DIR$/android-ngn-stack/android-ngn-stack.iml" filepath="$PROJECT_DIR$/android-ngn-stack/android-ngn-stack.iml" />
-      <module fileurl="file://$PROJECT_DIR$/anfang/app.iml" filepath="$PROJECT_DIR$/anfang/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/anfang/anfang.iml" filepath="$PROJECT_DIR$/anfang/anfang.iml" />
+      <module fileurl="file://D:\Other\shuhai\AnFang\anfang\app.iml" filepath="D:\Other\shuhai\AnFang\anfang\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/camera/camera.iml" filepath="$PROJECT_DIR$/camera/camera.iml" />
       <module fileurl="file://$PROJECT_DIR$/easeui/easeui.iml" filepath="$PROJECT_DIR$/easeui/easeui.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />

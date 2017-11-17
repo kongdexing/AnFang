@@ -10,7 +10,6 @@ import android.view.WindowManager;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.audiorecorder.AudioManager;
 import com.baidu.mapapi.SDKInitializer;
-import com.hyphenate.easeui.EaseUI;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.liulishuo.filedownloader.connection.FileDownloadUrlConnection;
 import com.liulishuo.filedownloader.services.DownloadMgrInitialParams;
@@ -135,7 +134,7 @@ public class XPTApplication extends NgnApplication {
                         .proxy(Proxy.NO_PROXY) // set proxy
                 )));
 
-        EaseUI.getInstance().init(this, null);
+//        EaseUI.getInstance().init(this, null);
     }
 
     private void initBugly() {

@@ -1026,6 +1026,11 @@ containing a value of this type.
         public static final int AnimTop2=0x7f070008;
         public static final int Anim_style=0x7f070009;
         public static final int Anim_style2=0x7f070000;
+        /**  Customize your theme here. 
+  <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+         */
         public static final int AppTheme=0x7f07000a;
         /**  模糊 
          */

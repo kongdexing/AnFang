@@ -196,6 +196,6 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
 
     /*环信*/
-    compile project(':easeui')
+//    compile project(':easeui')
 
 }
