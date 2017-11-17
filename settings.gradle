@@ -1,1 +1,1 @@
-include ':anfang', ':android-ngn-stack', ':lint', ':library', ':multipleimageselect', ':network-events-library', ':processor', ':viewpagerindicator', ':PushSDK', ':takephoto_library', ':widget', ':camera'
+include ':anfang', ':android-ngn-stack', ':lint', ':library', ':multipleimageselect', ':network-events-library', ':processor', ':viewpagerindicator', ':PushSDK', ':takephoto_library', ':widget', ':camera', ':easeui'
