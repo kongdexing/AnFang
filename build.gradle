@@ -26,6 +26,7 @@ allprojects {
             // All of React Native (JS, Android binaries) is installed from npm
             url "../../node_modules/react-native/android"
         }
+        maven {  url "https://raw.githubusercontent.com/HyphenateInc/Hyphenate-SDK-Android/master/repository" }
         jcenter()
     }
 }

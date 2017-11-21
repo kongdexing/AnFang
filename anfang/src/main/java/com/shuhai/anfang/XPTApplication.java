@@ -10,6 +10,8 @@ import android.view.WindowManager;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.audiorecorder.AudioManager;
 import com.baidu.mapapi.SDKInitializer;
+import com.hyphenate.chat.EMOptions;
+import com.hyphenate.easeui.EaseUI;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.liulishuo.filedownloader.connection.FileDownloadUrlConnection;
 import com.liulishuo.filedownloader.services.DownloadMgrInitialParams;
@@ -133,6 +135,15 @@ public class XPTApplication extends NgnApplication {
                         .readTimeout(15_000) // set read timeout.
                         .proxy(Proxy.NO_PROXY) // set proxy
                 )));
+
+        EMOptions options = new EMOptions();
+        // 默认添加好友时，是不需要验证的，改成需要验证
+        options.setAcceptInvitationAlways(false);
+        // 是否自动将消息附件上传到环信服务器，默认为True是使用环信服务器上传下载，如果设为 false，需要开发者自己处理附件消息的上传和下载
+//        options.setAutoTransferMessageAttachments(true);
+        // 是否自动下载附件类消息的缩略图等，默认为 true 这里和上边这个参数相关联
+//        options.setAutoDownloadThumbnail(true);
+        EaseUI.getInstance().init(this, null);
     }
 
     private void initBugly() {
