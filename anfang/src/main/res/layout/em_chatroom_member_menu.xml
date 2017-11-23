@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/menu_item_add_admin"
+        style="@style/chat_room_menu_item_wrapper">
+
+        <TextView
+            style="@style/chat_room_menu_item_text_style"
+            android:text="add to administrator" />
+
+        <TextView style="@style/chat_room_menu_item_splitter" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menu_item_rm_admin"
+        style="@style/chat_room_menu_item_wrapper">
+
+        <TextView
+            style="@style/chat_room_menu_item_text_style"
+            android:text="remove admin privilege" />
+
+        <TextView style="@style/chat_room_menu_item_splitter" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menu_item_transfer_owner"
+        style="@style/chat_room_menu_item_wrapper">
+
+        <TextView
+            style="@style/chat_room_menu_item_text_style"
+            android:text="transfer owner ship" />
+
+        <TextView style="@style/chat_room_menu_item_splitter" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menu_item_remove_member"
+        style="@style/chat_room_menu_item_wrapper">
+
+        <TextView
+            style="@style/chat_room_menu_item_text_style"
+            android:text="remove member" />
+
+        <TextView style="@style/chat_room_menu_item_splitter" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menu_item_add_to_blacklist"
+        style="@style/chat_room_menu_item_wrapper">
+
+        <TextView
+            style="@style/chat_room_menu_item_text_style"
+            android:text="add to black list" />
+
+        <TextView style="@style/chat_room_menu_item_splitter" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menu_item_remove_from_blacklist"
+        style="@style/chat_room_menu_item_wrapper">
+
+        <TextView
+            style="@style/chat_room_menu_item_text_style"
+            android:text="remove from black list" />
+
+        <TextView style="@style/chat_room_menu_item_splitter" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/menu_item_mute"
+        style="@style/chat_room_menu_item_wrapper">
+
+        <TextView
+            style="@style/chat_room_menu_item_text_style"
+            android:text="mute" />
+
+        <TextView style="@style/chat_room_menu_item_splitter" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/menu_item_unmute"
+        style="@style/chat_room_menu_item_wrapper">
+
+        <TextView
+            style="@style/chat_room_menu_item_text_style"
+            android:text="unmute" />
+
+        <TextView style="@style/chat_room_menu_item_splitter" />
+    </LinearLayout>
+
+</LinearLayout>
