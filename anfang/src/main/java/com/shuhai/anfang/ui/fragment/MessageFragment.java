@@ -36,6 +36,9 @@ public class MessageFragment extends BaseFragment {
     private Fragment[] fragments;
     private ConversationListFragment conversationListFragment;
     private ContactFragment contactListFragment;
+    private int[] icons = new int[]{R.drawable.icon_msg_notice, R.drawable.icon_msg_contracts};
+    private int[] strings = new int[]{R.string.msg_notify, R.string.msg_contacts};
+
     public MessageFragment() {
     }
 
@@ -51,9 +54,9 @@ public class MessageFragment extends BaseFragment {
     protected void initData() {
         conversationListFragment = new ConversationListFragment();
         contactListFragment = new ContactFragment();
-        fragments = new Fragment[] { conversationListFragment, contactListFragment};
+        fragments = new Fragment[]{conversationListFragment, contactListFragment};
 
-        FragmentPagerAdapter adapter = new MessageTabAdapter(((MainActivity)mContext).getSupportFragmentManager());
+        FragmentPagerAdapter adapter = new MessageTabAdapter(((MainActivity) mContext).getSupportFragmentManager());
         viewPager.setAdapter(adapter);
 
         indicator.setViewPager(viewPager);
@@ -72,17 +75,17 @@ public class MessageFragment extends BaseFragment {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return "";
+            return getString(strings[position]);
         }
 
         @Override
         public int getIconResId(int index) {
-            return R.drawable.icon_msg_notice;
+            return icons[index];
         }
 
         @Override
         public int getCount() {
-            return 2;
+            return strings.length;
         }
     }
 
