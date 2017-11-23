@@ -28,7 +28,10 @@
     </declare-styleable>
 
     <declare-styleable name="ContactItemView">
-        <attr name="contactItemImage" format="reference"/>
-        <attr name="contactItemName" format="string"/>
+        <attr name="contactItemImage" format="reference" />
+        <attr name="contactItemName" format="string" />
     </declare-styleable>
+
+
+    <attr name="divider_light_grey" format="reference|color" />
 </resources>
