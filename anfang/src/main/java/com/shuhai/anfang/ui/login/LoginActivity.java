@@ -18,6 +18,8 @@ import com.android.widget.view.SmoothCheckBox;
 import com.huawei.hms.api.ConnectionResult;
 import com.huawei.hms.api.HuaweiApiClient;
 import com.huawei.hms.support.api.push.HuaweiPush;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 import com.meizu.cloud.pushsdk.PushManager;
 import com.shuhai.anfang.R;
 import com.shuhai.anfang.XPTApplication;
@@ -220,15 +222,45 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
     @Override
     protected void onLoginSuccess() {
         super.onLoginSuccess();
-        if (progress != null)
-            progress.setVisibility(View.INVISIBLE);
-        btnLogin.setEnabled(true);
 
+        String account = SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_NAME, "").toString();
+        EMClient.getInstance().login(account, "111111", new EMCallBack() {
+
+            @Override
+            public void onSuccess() {
+                EMClient.getInstance().groupManager().loadAllGroups();
+                EMClient.getInstance().chatManager().loadAllConversations();
+
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        if (progress != null)
+                            progress.setVisibility(View.INVISIBLE);
+                        btnLogin.setEnabled(true);
+                        Log.d("main", "登录聊天服务器成功！");
+                        ToastUtils.showToast(LoginActivity.this, "登录聊天服务器成功");
+                        finish();
+                    }
+                });
+            }
+
+            @Override
+            public void onProgress(int progress, String status) {
+
+            }
+
+            @Override
+            public void onError(int code, String error) {
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        ToastUtils.showToast(getApplicationContext(), "login failed");
+                    }
+                });
+            }
+        });
 //        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 //        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 //        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //        startActivity(intent);
-        finish();
     }
 
     @Override

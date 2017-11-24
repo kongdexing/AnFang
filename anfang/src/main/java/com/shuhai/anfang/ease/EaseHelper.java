@@ -99,7 +99,7 @@ public class EaseHelper {
 
 	private static EaseHelper instance = null;
 
-	private EaseModel demoModel = null;
+	private EaseModel easeModel = null;
 
 	/**
      * sync groups status listener
@@ -165,7 +165,7 @@ public class EaseHelper {
 	 *            application context
 	 */
 	public void init(Context context) {
-	    demoModel = new EaseModel(context);
+	    easeModel = new EaseModel(context);
 	    EMOptions options = initChatOptions();
 //        options.setRestServer("118.193.28.212:31080");
 //        options.setIMServer("118.193.28.212");
@@ -269,17 +269,17 @@ public class EaseHelper {
         options.setMipushConfig("2882303761517426801", "5381742660801");
 
         //set custom servers, commonly used in private deployment
-        if(demoModel.isCustomServerEnable() && demoModel.getRestServer() != null && demoModel.getIMServer() != null) {
-            options.setRestServer(demoModel.getRestServer());
-            options.setIMServer(demoModel.getIMServer());
-            if(demoModel.getIMServer().contains(":")) {
-                options.setIMServer(demoModel.getIMServer().split(":")[0]);
-                options.setImPort(Integer.valueOf(demoModel.getIMServer().split(":")[1]));
+        if(easeModel.isCustomServerEnable() && easeModel.getRestServer() != null && easeModel.getIMServer() != null) {
+            options.setRestServer(easeModel.getRestServer());
+            options.setIMServer(easeModel.getIMServer());
+            if(easeModel.getIMServer().contains(":")) {
+                options.setIMServer(easeModel.getIMServer().split(":")[0]);
+                options.setImPort(Integer.valueOf(easeModel.getIMServer().split(":")[1]));
             }
         }
 
-        if (demoModel.isCustomAppkeyEnabled() && demoModel.getCutomAppkey() != null && !demoModel.getCutomAppkey().isEmpty()) {
-            options.setAppKey(demoModel.getCutomAppkey());
+        if (easeModel.isCustomAppkeyEnabled() && easeModel.getCutomAppkey() != null && !easeModel.getCutomAppkey().isEmpty()) {
+            options.setAppKey(easeModel.getCutomAppkey());
         }
 
         options.allowChatroomOwnerLeave(getModel().isChatroomOwnerLeaveAllowed());
@@ -365,25 +365,25 @@ public class EaseHelper {
 
             @Override
             public boolean isSpeakerOpened() {
-                return demoModel.getSettingMsgSpeaker();
+                return easeModel.getSettingMsgSpeaker();
             }
 
             @Override
             public boolean isMsgVibrateAllowed(EMMessage message) {
-                return demoModel.getSettingMsgVibrate();
+                return easeModel.getSettingMsgVibrate();
             }
 
             @Override
             public boolean isMsgSoundAllowed(EMMessage message) {
-                return demoModel.getSettingMsgSound();
+                return easeModel.getSettingMsgSound();
             }
 
             @Override
             public boolean isMsgNotifyAllowed(EMMessage message) {
                 if(message == null){
-                    return demoModel.getSettingMsgNotification();
+                    return easeModel.getSettingMsgNotification();
                 }
-                if(!demoModel.getSettingMsgNotification()){
+                if(!easeModel.getSettingMsgNotification()){
                     return false;
                 }else{
                     String chatUsename = null;
@@ -391,10 +391,10 @@ public class EaseHelper {
                     // get user or group id which was blocked to show message notifications
                     if (message.getChatType() == ChatType.Chat) {
                         chatUsename = message.getFrom();
-                        notNotifyIds = demoModel.getDisabledIds();
+                        notNotifyIds = easeModel.getDisabledIds();
                     } else {
                         chatUsename = message.getTo();
-                        notNotifyIds = demoModel.getDisabledGroups();
+                        notNotifyIds = easeModel.getDisabledGroups();
                     }
 
                     if (notNotifyIds == null || !notNotifyIds.contains(chatUsename)) {
@@ -507,9 +507,9 @@ public class EaseHelper {
         syncContactsListeners = new ArrayList<>();
         syncBlackListListeners = new ArrayList<>();
 
-        isGroupsSyncedWithServer = demoModel.isGroupsSynced();
-        isContactsSyncedWithServer = demoModel.isContactSynced();
-        isBlackListSyncedWithServer = demoModel.isBacklistSynced();
+        isGroupsSyncedWithServer = easeModel.isGroupsSynced();
+        isContactsSyncedWithServer = easeModel.isContactSynced();
+        isBlackListSyncedWithServer = easeModel.isBacklistSynced();
 
         // create the global connection listener
         connectionListener = new EMConnectionListener() {
@@ -1358,7 +1358,7 @@ public class EaseHelper {
 	}
 	
 	public EaseModel getModel(){
-        return (EaseModel) demoModel;
+        return (EaseModel) easeModel;
     }
 	
 	/**
@@ -1382,7 +1382,7 @@ public class EaseHelper {
      */
     public void saveContact(EaseUser user){
     	contactList.put(user.getUsername(), user);
-    	demoModel.saveContact(user);
+    	easeModel.saveContact(user);
     }
     
     /**
@@ -1392,7 +1392,7 @@ public class EaseHelper {
      */
     public Map<String, EaseUser> getContactList() {
         if (isLoggedIn() && contactList == null) {
-            contactList = demoModel.getContactList();
+            contactList = easeModel.getContactList();
         }
         
         // return a empty non-null object to avoid app crash
@@ -1409,7 +1409,7 @@ public class EaseHelper {
      */
     public void setCurrentUserName(String username){
     	this.username = username;
-    	demoModel.setCurrentUserName(username);
+    	easeModel.setCurrentUserName(username);
     }
     
     /**
@@ -1417,7 +1417,7 @@ public class EaseHelper {
      */
     public String getCurrentUsernName(){
     	if(username == null){
-    		username = demoModel.getCurrentUsernName();
+    		username = easeModel.getCurrentUsernName();
     	}
     	return username;
     }
@@ -1428,7 +1428,7 @@ public class EaseHelper {
 
 	public Map<String, RobotUser> getRobotList() {
 		if (isLoggedIn() && robotList == null) {
-			robotList = demoModel.getRobotList();
+			robotList = easeModel.getRobotList();
 		}
 		return robotList;
 	}
@@ -1444,7 +1444,7 @@ public class EaseHelper {
          }
          ArrayList<EaseUser> mList = new ArrayList<EaseUser>();
          mList.addAll(contactList.values());
-         demoModel.saveContactList(mList);
+         easeModel.saveContactList(mList);
     }
 
 	public UserProfileManager getUserProfileManager() {
@@ -1542,7 +1542,7 @@ public class EaseHelper {
                        return;
                    }
                    
-                   demoModel.setGroupsSynced(true);
+                   easeModel.setGroupsSynced(true);
                    
                    isGroupsSyncedWithServer = true;
                    isSyncingGroupsWithServer = false;
@@ -1554,7 +1554,7 @@ public class EaseHelper {
                        callback.onSuccess();
                    }
                } catch (HyphenateException e) {
-                   demoModel.setGroupsSynced(false);
+                   easeModel.setGroupsSynced(false);
                    isGroupsSyncedWithServer = false;
                    isSyncingGroupsWithServer = false;
                    noitifyGroupSyncListeners(false);
@@ -1612,7 +1612,7 @@ public class EaseHelper {
                    List<EaseUser> users = new ArrayList<EaseUser>(userlist.values());
                    dao.saveContactList(users);
 
-                   demoModel.setContactSynced(true);
+                   easeModel.setContactSynced(true);
                    EMLog.d(TAG, "set contact syn status to true");
                    
                    isContactsSyncedWithServer = true;
@@ -1637,7 +1637,7 @@ public class EaseHelper {
                        callback.onSuccess(usernames);
                    }
                } catch (HyphenateException e) {
-                   demoModel.setContactSynced(false);
+                   easeModel.setContactSynced(false);
                    isContactsSyncedWithServer = false;
                    isSyncingContactsWithServer = false;
                    notifyContactsSyncListener(false);
@@ -1679,7 +1679,7 @@ public class EaseHelper {
                        return;
                    }
                    
-                   demoModel.setBlacklistSynced(true);
+                   easeModel.setBlacklistSynced(true);
                    
                    isBlackListSyncedWithServer = true;
                    isSyncingBlackListWithServer = false;
@@ -1689,7 +1689,7 @@ public class EaseHelper {
                        callback.onSuccess(usernames);
                    }
                } catch (HyphenateException e) {
-                   demoModel.setBlacklistSynced(false);
+                   easeModel.setBlacklistSynced(false);
                    
                    isBlackListSyncedWithServer = false;
                    isSyncingBlackListWithServer = true;
@@ -1739,9 +1739,9 @@ public class EaseHelper {
         isSyncingContactsWithServer = false;
         isSyncingBlackListWithServer = false;
         
-        demoModel.setGroupsSynced(false);
-        demoModel.setContactSynced(false);
-        demoModel.setBlacklistSynced(false);
+        easeModel.setGroupsSynced(false);
+        easeModel.setContactSynced(false);
+        easeModel.setBlacklistSynced(false);
         
         isGroupsSyncedWithServer = false;
         isContactsSyncedWithServer = false;

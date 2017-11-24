@@ -100,6 +100,10 @@ public class ContactFragment extends BaseFragment {
             }
         });
 
+    }
+
+    @Override
+    protected void initData() {
         ArrayList<Object> listTeacher = (ArrayList) GreenDaoHelper.getInstance().getContactTeacher();
         ArrayList<Object> listSchool = (ArrayList) GreenDaoHelper.getInstance().getSchoolInfo();
 
@@ -107,11 +111,6 @@ public class ContactFragment extends BaseFragment {
             setContact(listTeacher, listSchool);
         }
         getContacts();
-    }
-
-    @Override
-    protected void initData() {
-
     }
 
     private void getContacts() {

@@ -18,7 +18,6 @@ import com.shuhai.anfang.R;
 import com.shuhai.anfang.common.ExtraKey;
 import com.shuhai.anfang.model.ContactSchool;
 import com.shuhai.anfang.model.ContactTeacher;
-import com.shuhai.anfang.model.GreenDaoHelper;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -176,10 +175,10 @@ public class ContactsAdapter extends BaseExpandableListAdapter {
             viewHolder.llContacts.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    Intent intent = new Intent(mContext, ContactsDetailActivity.class);
-//                    intent.putExtra(ExtraKey.CONTACT_TYPE, ExtraKey.CONTACT_SCHOOL);
-//                    intent.putExtra(ExtraKey.CONTACT, school);
-//                    mContext.startActivity(intent);
+                    Intent intent = new Intent(mContext, ContactsDetailActivity.class);
+                    intent.putExtra(ExtraKey.CONTACT_TYPE, ExtraKey.CONTACT_SCHOOL);
+                    intent.putExtra(ExtraKey.CONTACT, school);
+                    mContext.startActivity(intent);
                 }
             });
             viewHolder.txtUnReadNum.setVisibility(View.GONE);
@@ -194,14 +193,10 @@ public class ContactsAdapter extends BaseExpandableListAdapter {
             viewHolder.llContacts.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(mContext, ChatActivity.class);
-                    intent.putExtra(ExtraKey.CHAT_TEACHER, teacher);
+                    Intent intent = new Intent(mContext, ContactsDetailActivity.class);
+                    intent.putExtra(ExtraKey.CONTACT_TYPE, ExtraKey.CONTACT_TEACHER);
+                    intent.putExtra(ExtraKey.CONTACT, teacher);
                     mContext.startActivity(intent);
-
-//                    Intent intent = new Intent(mContext, ContactsDetailActivity.class);
-//                    intent.putExtra(ExtraKey.CONTACT_TYPE, ExtraKey.CONTACT_TEACHER);
-//                    intent.putExtra(ExtraKey.CONTACT, teacher);
-//                    mContext.startActivity(intent);
                 }
             });
         }

@@ -11,7 +11,6 @@ import com.android.volley.common.VolleyHttpService;
 import com.android.widget.audiorecorder.AudioManager;
 import com.baidu.mapapi.SDKInitializer;
 import com.hyphenate.chat.EMOptions;
-import com.hyphenate.easeui.EaseUI;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.liulishuo.filedownloader.connection.FileDownloadUrlConnection;
 import com.liulishuo.filedownloader.services.DownloadMgrInitialParams;
@@ -24,6 +23,7 @@ import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.shuhai.anfang.common.LocalImageHelper;
 import com.shuhai.anfang.common.SharedPreferencesUtil;
 import com.shuhai.anfang.common.UserType;
+import com.shuhai.anfang.ease.EaseHelper;
 import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.ui.main.MainActivity;
 import com.tencent.bugly.Bugly;
@@ -143,7 +143,9 @@ public class XPTApplication extends NgnApplication {
 //        options.setAutoTransferMessageAttachments(true);
         // 是否自动下载附件类消息的缩略图等，默认为 true 这里和上边这个参数相关联
 //        options.setAutoDownloadThumbnail(true);
-        EaseUI.getInstance().init(this, null);
+
+        //init demo helper
+        EaseHelper.getInstance().init(mInstance);
     }
 
     private void initBugly() {
