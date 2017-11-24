@@ -195,7 +195,7 @@
 
         <!--联系人详情-->
         <activity
-            android:name=".ui.chat.ContactsDetailActivity"
+            android:name=".ui.contact.ContactsDetailActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
 

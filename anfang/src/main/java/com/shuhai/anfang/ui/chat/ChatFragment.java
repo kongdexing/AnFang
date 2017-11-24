@@ -127,7 +127,7 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
                 @Override
                 public void afterTextChanged(Editable s) {
                     
-                } 
+                }
             });
         }
     }

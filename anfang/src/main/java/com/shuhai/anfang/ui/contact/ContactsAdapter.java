@@ -1,4 +1,4 @@
-package com.shuhai.anfang.ui.chat;
+package com.shuhai.anfang.ui.contact;
 
 import android.content.Context;
 import android.content.Intent;

@@ -1,4 +1,4 @@
-package com.shuhai.anfang.ui.chat;
+package com.shuhai.anfang.ui.contact;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -17,6 +17,7 @@ import com.shuhai.anfang.R;
 import com.shuhai.anfang.common.ExtraKey;
 import com.shuhai.anfang.model.ContactSchool;
 import com.shuhai.anfang.model.ContactTeacher;
+import com.shuhai.anfang.ui.chat.ChatActivity;
 import com.shuhai.anfang.ui.main.BaseActivity;
 
 import butterknife.BindView;
@@ -142,6 +143,7 @@ public class ContactsDetailActivity extends BaseActivity {
                 Intent intent = new Intent(ContactsDetailActivity.this, ChatActivity.class);
                 intent.putExtra("userId", contactTeacher.getPhone());
                 startActivity(intent);
+                finish();
             }
         });
     }

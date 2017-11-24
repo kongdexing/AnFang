@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.shuhai.anfang.R;
-import com.shuhai.anfang.ui.chat.ContactFragment;
+import com.shuhai.anfang.ui.contact.ContactFragment;
 import com.shuhai.anfang.ui.chat.ConversationListFragment;
 import com.shuhai.anfang.ui.main.MainActivity;
 import com.viewpagerindicator.IconPagerAdapter;

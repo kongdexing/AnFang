@@ -12,7 +12,6 @@ import com.shuhai.anfang.ease.runtimepermissions.PermissionsManager;
 import com.shuhai.anfang.ui.main.MainActivity;
 
 /**
- * chat activity，EaseChatFragment was used {@link #EaseChatFragment}
  *
  */
 public class ChatActivity extends EaseBaseActivity {
@@ -51,7 +50,6 @@ public class ChatActivity extends EaseBaseActivity {
             finish();
             startActivity(intent);
         }
-
     }
     
     @Override

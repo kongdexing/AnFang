@@ -1,4 +1,4 @@
-package com.shuhai.anfang.ui.chat;
+package com.shuhai.anfang.ui.contact;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

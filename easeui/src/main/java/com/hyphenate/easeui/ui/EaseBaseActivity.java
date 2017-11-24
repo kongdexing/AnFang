@@ -45,7 +45,6 @@ public class EaseBaseActivity extends FragmentActivity {
         }
         inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
     }
-    
 
     @Override
     protected void onResume() {
