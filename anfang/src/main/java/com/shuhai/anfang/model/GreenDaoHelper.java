@@ -2,6 +2,7 @@ package com.shuhai.anfang.model;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.common.SharedPreferencesUtil;
@@ -84,6 +85,7 @@ public class GreenDaoHelper {
     public void insertTeacher(BeanTeacher teacher) {
         currentTeacher = teacher;
         SharedPreferencesUtil.saveData(XPTApplication.getContext(), SharedPreferencesUtil.KEY_UID, currentTeacher.getU_id());
+        Log.i(TAG, "insertTeacher: "+teacher.getLoginName());
 
         if (writeDaoSession != null) {
             writeDaoSession.getBeanTeacherDao().deleteAll();

@@ -39,8 +39,6 @@ import com.shuhai.anfang.ui.fragment.MapFragment;
 import com.shuhai.anfang.ui.fragment.MessageFragment;
 import com.shuhai.anfang.ui.fragment.MineFragment;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -273,9 +271,8 @@ public class MainActivity extends BaseLoginMainActivity implements BDLocationLis
                         switch (httpResult.getStatus()) {
                             case HttpAction.SUCCESS:
                                 try {
-                                    JSONObject jsonData = new JSONObject(httpResult.getData().toString());
-                                    CommonUtil.initBeanStudentByHttpResult(jsonData.getJSONArray("stuData").toString());
-                                    CommonUtil.initParentInfoByHttpResult(jsonData.getJSONObject("login").toString(), account);
+                                    CommonUtil.analyseLoginData(httpResult, type, account);
+
                                     Intent intent = new Intent(MainActivity.this, MainActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

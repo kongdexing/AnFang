@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.android.volley.common.VolleyHttpResult;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.CoordinateConverter;
 import com.google.gson.Gson;
@@ -30,6 +31,7 @@ import com.shuhai.anfang.model.BeanClass;
 import com.shuhai.anfang.model.BeanCourse;
 import com.shuhai.anfang.model.BeanParent;
 import com.shuhai.anfang.model.BeanStudent;
+import com.shuhai.anfang.model.BeanTeacher;
 import com.shuhai.anfang.model.GreenDaoHelper;
 
 import org.json.JSONArray;
@@ -247,13 +249,34 @@ public class CommonUtil {
         return hex.toString();
     }
 
+    public static void analyseLoginData(VolleyHttpResult httpResult, String type, String account) throws JSONException {
+        if (type.equals(UserType.PARENT.toString())) {
+            JSONObject jsonData = new JSONObject(httpResult.getData().toString());
+            CommonUtil.initBeanStudentByHttpResult(jsonData.getJSONArray("stuData").toString());
+            CommonUtil.initParentInfoByHttpResult(jsonData.getJSONObject("login").toString(), account);
+            //删除联系人
+            GreenDaoHelper.getInstance().deleteContact();
+        } else if (type.equals(UserType.TEACHER.toString())) {
+            JSONObject jsonData = new JSONObject(httpResult.getData().toString());
+            CommonUtil.getBeanClassesByHttpResult(jsonData.getJSONArray("class").toString());
+            CommonUtil.getBeanCoursesByHttpResult(jsonData.getJSONArray("course").toString());
+            JSONObject jsonLogin = jsonData.getJSONObject("login");
+            Gson gson = new Gson();
+            BeanTeacher teacher = gson.fromJson(jsonLogin.toString(), BeanTeacher.class);
+            teacher.setLogin_name(account);
+            GreenDaoHelper.getInstance().insertTeacher(teacher);
+        }
+
+        XPTApplication.getInstance().setCurrent_user_type(type);
+    }
+
     /**
      * 登录成功后解析学生信息
      *
      * @param httpResult
      * @throws JSONException
      */
-    public static void initBeanStudentByHttpResult(String httpResult) throws JSONException {
+    private static void initBeanStudentByHttpResult(String httpResult) throws JSONException {
         Gson gson = new Gson();
         List<BeanStudent> students = gson.fromJson(httpResult, new TypeToken<List<BeanStudent>>() {
         }.getType());
@@ -267,7 +290,7 @@ public class CommonUtil {
      * @param login_name
      * @throws JSONException
      */
-    public static void initParentInfoByHttpResult(String httpResult, String login_name) throws JSONException {
+    private static void initParentInfoByHttpResult(String httpResult, String login_name) throws JSONException {
         JSONObject jsonLogin = new JSONObject(httpResult);
         Gson gson = new Gson();
         BeanParent parent = gson.fromJson(jsonLogin.toString(), BeanParent.class);
@@ -284,7 +307,7 @@ public class CommonUtil {
      * @throws JSONException
      */
     @NonNull
-    public static List<BeanClass> getBeanClassesByHttpResult(String httpResult) throws JSONException {
+    private static List<BeanClass> getBeanClassesByHttpResult(String httpResult) throws JSONException {
         List<BeanClass> listClass = new ArrayList<BeanClass>();
         Gson gson = new Gson();
         listClass = gson.fromJson(httpResult.toString(), new TypeToken<List<BeanClass>>() {
@@ -301,7 +324,7 @@ public class CommonUtil {
      * @throws JSONException
      */
     @NonNull
-    public static List<BeanCourse> getBeanCoursesByHttpResult(String httpResult) throws JSONException {
+    private static List<BeanCourse> getBeanCoursesByHttpResult(String httpResult) throws JSONException {
         List<BeanCourse> listCourse = new ArrayList<BeanCourse>();
         JSONArray jsonArray = new JSONArray(httpResult);
         for (int i = 0; i < jsonArray.length(); i++) {

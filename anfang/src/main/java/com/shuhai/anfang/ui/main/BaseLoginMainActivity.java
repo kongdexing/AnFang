@@ -9,18 +9,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
-import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.common.CommonUtil;
 import com.shuhai.anfang.common.SharedPreferencesUtil;
 import com.shuhai.anfang.common.UserHelper;
-import com.shuhai.anfang.common.UserType;
 import com.shuhai.anfang.http.HttpAction;
 import com.shuhai.anfang.http.MyVolleyRequestListener;
 import com.shuhai.anfang.imsdroid.ImsSipHelper;
-import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.server.ServerManager;
-
-import org.json.JSONObject;
 
 import butterknife.ButterKnife;
 
@@ -70,17 +65,7 @@ public class BaseLoginMainActivity extends AppCompatActivity {
                                 SharedPreferencesUtil.saveData(BaseLoginMainActivity.this, SharedPreferencesUtil.KEY_PWD, password);
 
                                 try {
-                                    if (type.equals(UserType.PARENT.toString())) {
-                                        JSONObject jsonData = new JSONObject(httpResult.getData().toString());
-                                        CommonUtil.initBeanStudentByHttpResult(jsonData.getJSONArray("stuData").toString());
-                                        CommonUtil.initParentInfoByHttpResult(jsonData.getJSONObject("login").toString(), account);
-                                        //删除联系人
-                                        GreenDaoHelper.getInstance().deleteContact();
-                                    } else if (type.equals(UserType.TEACHER.toString())) {
-
-                                    }
-
-                                    XPTApplication.getInstance().setCurrent_user_type(type);
+                                    CommonUtil.analyseLoginData(httpResult, type, account);
                                     onLoginSuccess();
                                 } catch (Exception ex) {
                                     Log.i(TAG, "onResponse: exception " + ex.getMessage());
