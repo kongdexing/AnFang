@@ -1,6 +1,5 @@
 package com.shuhai.anfang.http;
 
-import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -8,7 +7,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyRequestListener;
 import com.shuhai.anfang.XPTApplication;
-import com.shuhai.anfang.common.BroadcastAction;
 
 /**
  * Created by dexing on 2017/1/5.
@@ -32,8 +30,8 @@ public class MyVolleyRequestListener implements VolleyRequestListener {
                 if (volleyHttpResult.getInfo().contains(HttpAction.ACTION_LOGIN)
                         || volleyHttpResult.getInfo().contains(HttpAction.TOKEN_LOSE)) {
                     Toast.makeText(XPTApplication.getInstance(), volleyHttpResult.getInfo(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(BroadcastAction.RELOGIN);
-                    XPTApplication.getInstance().sendBroadcast(intent);
+//                    Intent intent = new Intent(BroadcastAction.RELOGIN);
+//                    XPTApplication.getInstance().sendBroadcast(intent);
                     return;
                 }
                 break;

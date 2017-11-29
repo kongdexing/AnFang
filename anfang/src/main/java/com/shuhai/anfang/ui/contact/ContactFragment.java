@@ -21,6 +21,7 @@ import com.android.widget.groupexpandable.WrapperExpandableListAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.shuhai.anfang.R;
+import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.common.CommonUtil;
 import com.shuhai.anfang.http.HttpAction;
 import com.shuhai.anfang.http.MyVolleyRequestListener;
@@ -104,6 +105,10 @@ public class ContactFragment extends BaseFragment {
 
     @Override
     protected void initData() {
+        if (!XPTApplication.getInstance().isLoggedIn()) {
+            return;
+        }
+
         ArrayList<Object> listTeacher = (ArrayList) GreenDaoHelper.getInstance().getContactTeacher();
         ArrayList<Object> listSchool = (ArrayList) GreenDaoHelper.getInstance().getSchoolInfo();
 

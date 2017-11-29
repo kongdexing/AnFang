@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.telephony.TelephonyManager;
 import android.text.InputFilter;
 import android.text.Spanned;
@@ -25,10 +26,13 @@ import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 import com.shuhai.anfang.R;
 import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.http.HttpAction;
+import com.shuhai.anfang.model.BeanClass;
+import com.shuhai.anfang.model.BeanCourse;
 import com.shuhai.anfang.model.BeanParent;
 import com.shuhai.anfang.model.BeanStudent;
 import com.shuhai.anfang.model.GreenDaoHelper;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -208,10 +212,14 @@ public class CommonUtil {
     public static String encryptToken(String action) {
         String security_key = "";
 
-        if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())){
-            security_key = GreenDaoHelper.getInstance().getCurrentParent().getSecurity_key();
-        }else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())){
-            security_key = GreenDaoHelper.getInstance().getCurrentTeacher().getSecurity_key();
+        try {
+            if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+                security_key = GreenDaoHelper.getInstance().getCurrentParent().getSecurity_key();
+            } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+                security_key = GreenDaoHelper.getInstance().getCurrentTeacher().getSecurity_key();
+            }
+        } catch (Exception ex) {
+            Log.i(TAG, "encryptToken: currentUser is null");
         }
 
         String encrypt = action.replace(HttpAction.Index, "")
@@ -239,6 +247,12 @@ public class CommonUtil {
         return hex.toString();
     }
 
+    /**
+     * 登录成功后解析学生信息
+     *
+     * @param httpResult
+     * @throws JSONException
+     */
     public static void initBeanStudentByHttpResult(String httpResult) throws JSONException {
         Gson gson = new Gson();
         List<BeanStudent> students = gson.fromJson(httpResult, new TypeToken<List<BeanStudent>>() {
@@ -246,15 +260,63 @@ public class CommonUtil {
         GreenDaoHelper.getInstance().insertStudent(students);
     }
 
+    /**
+     * 登录成功后解析家长信息
+     *
+     * @param httpResult
+     * @param login_name
+     * @throws JSONException
+     */
     public static void initParentInfoByHttpResult(String httpResult, String login_name) throws JSONException {
         JSONObject jsonLogin = new JSONObject(httpResult);
         Gson gson = new Gson();
         BeanParent parent = gson.fromJson(jsonLogin.toString(), BeanParent.class);
         parent.setLoginName(login_name);
-        SharedPreferencesUtil.saveData(XPTApplication.getContext(), SharedPreferencesUtil.KEY_UID, parent.getU_id());
 
         GreenDaoHelper.getInstance().insertParent(parent);
     }
+
+    /**
+     * 教师登录后解析班级
+     *
+     * @param httpResult
+     * @return
+     * @throws JSONException
+     */
+    @NonNull
+    public static List<BeanClass> getBeanClassesByHttpResult(String httpResult) throws JSONException {
+        List<BeanClass> listClass = new ArrayList<BeanClass>();
+        Gson gson = new Gson();
+        listClass = gson.fromJson(httpResult.toString(), new TypeToken<List<BeanClass>>() {
+        }.getType());
+        GreenDaoHelper.getInstance().insertClass(listClass);
+        return listClass;
+    }
+
+    /**
+     * 教师登录后解析执教班级
+     *
+     * @param httpResult
+     * @return
+     * @throws JSONException
+     */
+    @NonNull
+    public static List<BeanCourse> getBeanCoursesByHttpResult(String httpResult) throws JSONException {
+        List<BeanCourse> listCourse = new ArrayList<BeanCourse>();
+        JSONArray jsonArray = new JSONArray(httpResult);
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject json = jsonArray.getJSONObject(i);
+            BeanCourse course = new BeanCourse();
+            course.setId(json.getString("id"));
+            course.setName(json.getString("name"));
+            course.setG_id(json.getString("g_id"));
+            course.setG_name(json.getString("g_name"));
+            listCourse.add(course);
+        }
+        GreenDaoHelper.getInstance().insertCourse(listCourse);
+        return listCourse;
+    }
+
 
     /**
      * 获取当前屏幕旋转角度

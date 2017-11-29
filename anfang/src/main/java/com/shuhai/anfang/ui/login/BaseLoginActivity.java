@@ -8,6 +8,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
+import com.google.gson.Gson;
 import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.common.CommonUtil;
 import com.shuhai.anfang.common.SharedPreferencesUtil;
@@ -16,6 +17,7 @@ import com.shuhai.anfang.common.UserType;
 import com.shuhai.anfang.http.HttpAction;
 import com.shuhai.anfang.http.MyVolleyRequestListener;
 import com.shuhai.anfang.imsdroid.ImsSipHelper;
+import com.shuhai.anfang.model.BeanTeacher;
 import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.server.ServerManager;
 import com.shuhai.anfang.ui.main.BaseActivity;
@@ -75,11 +77,18 @@ public class BaseLoginActivity extends BaseActivity {
                                         JSONObject jsonData = new JSONObject(httpResult.getData().toString());
                                         CommonUtil.initBeanStudentByHttpResult(jsonData.getJSONArray("stuData").toString());
                                         CommonUtil.initParentInfoByHttpResult(jsonData.getJSONObject("login").toString(), account);
-                                        //删除联系人
-                                        GreenDaoHelper.getInstance().deleteContact();
                                     } else if (type.equals(UserType.TEACHER.toString())) {
-
+                                        JSONObject jsonData = new JSONObject(httpResult.getData().toString());
+                                        CommonUtil.getBeanClassesByHttpResult(jsonData.getJSONArray("class").toString());
+                                        CommonUtil.getBeanCoursesByHttpResult(jsonData.getJSONArray("course").toString());
+                                        JSONObject jsonLogin = jsonData.getJSONObject("login");
+                                        Gson gson = new Gson();
+                                        BeanTeacher teacher = gson.fromJson(jsonLogin.toString(), BeanTeacher.class);
+                                        teacher.setLogin_name(account);
+                                        GreenDaoHelper.getInstance().insertTeacher(teacher);
                                     }
+                                    //删除联系人
+                                    GreenDaoHelper.getInstance().deleteContact();
 
                                     XPTApplication.getInstance().setCurrent_user_type(type);
                                     onLoginSuccess();

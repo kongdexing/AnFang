@@ -3,6 +3,9 @@ package com.shuhai.anfang.model;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.shuhai.anfang.XPTApplication;
+import com.shuhai.anfang.common.SharedPreferencesUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,16 +70,55 @@ public class GreenDaoHelper {
      */
     public void insertParent(BeanParent parent) {
         currentParent = parent;
+        SharedPreferencesUtil.saveData(XPTApplication.getContext(), SharedPreferencesUtil.KEY_UID, parent.getU_id());
+
         if (writeDaoSession != null) {
             writeDaoSession.getBeanParentDao().deleteAll();
             writeDaoSession.getBeanParentDao().insert(parent);
         }
     }
 
+    /**
+     * 删除后再插入
+     */
+    public void insertTeacher(BeanTeacher teacher) {
+        currentTeacher = teacher;
+        SharedPreferencesUtil.saveData(XPTApplication.getContext(), SharedPreferencesUtil.KEY_UID, currentTeacher.getU_id());
+
+        if (writeDaoSession != null) {
+            writeDaoSession.getBeanTeacherDao().deleteAll();
+            writeDaoSession.getBeanTeacherDao().insert(teacher);
+        }
+    }
+
+    /**
+     * 添加班级
+     * @param students
+     */
     public void insertStudent(List<BeanStudent> students) {
         if (writeDaoSession != null) {
             writeDaoSession.getBeanStudentDao().deleteAll();
             writeDaoSession.getBeanStudentDao().insertInTx(students);
+        }
+    }
+
+    /**
+     * 执教班级写入数据库
+     */
+    public void insertClass(List<BeanClass> listClass) {
+        if (writeDaoSession != null) {
+            writeDaoSession.getBeanClassDao().deleteAll();
+            writeDaoSession.getBeanClassDao().insertInTx(listClass);
+        }
+    }
+
+    /**
+     * 执教课程写入数据库
+     */
+    public void insertCourse(List<BeanCourse> listCourse) {
+        if (writeDaoSession != null) {
+            writeDaoSession.getBeanCourseDao().deleteAll();
+            writeDaoSession.getBeanCourseDao().insertInTx(listCourse);
         }
     }
 

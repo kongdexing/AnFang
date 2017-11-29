@@ -1,16 +1,35 @@
-package com.shuhai.anfang.bean;
+package com.shuhai.anfang.model;
 
 import com.android.widget.spinner.SpinnerModel;
+
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * Created by dexing on 2016/11/24.
  */
+@Entity
 public class BeanClass extends SpinnerModel {
 
     private String c_id;  //班级id
     private String c_name;    //班级名称
     private String g_id;
     private String g_name;
+    private int is_head;
+
+    @Generated(hash = 1983578996)
+    public BeanClass(String c_id, String c_name, String g_id, String g_name,
+            int is_head) {
+        this.c_id = c_id;
+        this.c_name = c_name;
+        this.g_id = g_id;
+        this.g_name = g_name;
+        this.is_head = is_head;
+    }
+
+    @Generated(hash = 264988998)
+    public BeanClass() {
+    }
 
     public String getC_id() {
         return c_id;
@@ -47,5 +66,13 @@ public class BeanClass extends SpinnerModel {
     @Override
     public String getName() {
         return name == null ? (g_name + c_name) : name;
+    }
+
+    public int getIs_head() {
+        return is_head;
+    }
+
+    public void setIs_head(int is_head) {
+        this.is_head = is_head;
     }
 }
