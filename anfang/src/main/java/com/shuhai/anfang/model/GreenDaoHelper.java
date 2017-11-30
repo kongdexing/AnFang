@@ -73,7 +73,7 @@ public class GreenDaoHelper {
      */
     public void insertParent(BeanParent parent) {
         currentParent = parent;
-        SharedPreferencesUtil.saveData(XPTApplication.getContext(), SharedPreferencesUtil.KEY_UID, parent.getU_id());
+        SharedPreferencesUtil.saveData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_UID, parent.getU_id());
 
         if (writeDaoSession != null) {
             writeDaoSession.getBeanParentDao().deleteAll();
@@ -86,7 +86,7 @@ public class GreenDaoHelper {
      */
     public void insertTeacher(BeanTeacher teacher) {
         currentTeacher = teacher;
-        SharedPreferencesUtil.saveData(XPTApplication.getContext(), SharedPreferencesUtil.KEY_UID, currentTeacher.getU_id());
+        SharedPreferencesUtil.saveData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_UID, currentTeacher.getU_id());
         Log.i(TAG, "insertTeacher: "+teacher.getLoginName());
 
         if (writeDaoSession != null) {

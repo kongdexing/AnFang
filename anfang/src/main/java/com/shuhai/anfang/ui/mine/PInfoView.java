@@ -17,7 +17,6 @@ import com.shuhai.anfang.common.SharedPreferencesUtil;
 import com.shuhai.anfang.common.UserHelper;
 import com.shuhai.anfang.model.BeanParent;
 import com.shuhai.anfang.model.GreenDaoHelper;
-import com.shuhai.anfang.server.ServerManager;
 import com.shuhai.anfang.view.CustomDialog;
 
 import butterknife.BindView;
@@ -134,8 +133,6 @@ public class PInfoView extends LinearLayout {
                         SharedPreferencesUtil.clearUserInfo(mContext);
 
                         GreenDaoHelper.getInstance().clearData();
-
-                        ServerManager.getInstance().stopService(mContext);
 
                         ((MyInfoActivity)mContext).finish();
                     }

@@ -17,7 +17,6 @@ import com.shuhai.anfang.common.SharedPreferencesUtil;
 import com.shuhai.anfang.common.UserHelper;
 import com.shuhai.anfang.model.BeanTeacher;
 import com.shuhai.anfang.model.GreenDaoHelper;
-import com.shuhai.anfang.server.ServerManager;
 import com.shuhai.anfang.util.ToastUtils;
 import com.shuhai.anfang.view.CustomDialog;
 
@@ -129,8 +128,6 @@ public class TInfoView extends LinearLayout {
                         SharedPreferencesUtil.clearUserInfo(mContext);
 
                         GreenDaoHelper.getInstance().clearData();
-
-                        ServerManager.getInstance().stopService(mContext);
 
                         ((MyInfoActivity)mContext).finish();
                     }

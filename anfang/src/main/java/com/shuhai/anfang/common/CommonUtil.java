@@ -268,8 +268,8 @@ public class CommonUtil {
         //删除联系人
         GreenDaoHelper.getInstance().deleteContact();
         XPTApplication.getInstance().setCurrent_user_type(type);
-        if (!SharedPreferencesUtil.getData(XPTApplication.getContext(), SharedPreferencesUtil.KEY_USER_NAME, "").equals(account)) {
-            SharedPreferencesUtil.saveData(XPTApplication.getContext(), SharedPreferencesUtil.KEY_USER_NAME, account);
+        if (!SharedPreferencesUtil.getData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_USER_NAME, "").equals(account)) {
+            SharedPreferencesUtil.saveData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_USER_NAME, account);
             //切换账号
             UserHelper.getInstance().changeAccount();
         }

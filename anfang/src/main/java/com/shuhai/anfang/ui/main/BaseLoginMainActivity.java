@@ -13,7 +13,6 @@ import com.shuhai.anfang.common.CommonUtil;
 import com.shuhai.anfang.common.SharedPreferencesUtil;
 import com.shuhai.anfang.http.HttpAction;
 import com.shuhai.anfang.http.MyVolleyRequestListener;
-import com.shuhai.anfang.server.ServerManager;
 
 import butterknife.ButterKnife;
 
@@ -82,7 +81,7 @@ public class BaseLoginMainActivity extends AppCompatActivity {
     }
 
     protected void onLoginSuccess() {
-        ServerManager.getInstance().startService();
+
     }
 
     protected void onLoginFailed(String msg) {

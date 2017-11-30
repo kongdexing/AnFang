@@ -32,7 +32,6 @@ import com.shuhai.anfang.common.CommonUtil;
 import com.shuhai.anfang.common.SharedPreferencesUtil;
 import com.shuhai.anfang.http.HttpAction;
 import com.shuhai.anfang.http.MyVolleyRequestListener;
-import com.shuhai.anfang.imsdroid.Engine;
 import com.shuhai.anfang.ui.fragment.BaseFragment;
 import com.shuhai.anfang.ui.fragment.HomeFragment;
 import com.shuhai.anfang.ui.fragment.MapFragment;
@@ -352,9 +351,6 @@ public class MainActivity extends BaseLoginMainActivity implements BDLocationLis
             Toast.makeText(this, R.string.toast_exit, Toast.LENGTH_SHORT).show();
             mExitTime = System.currentTimeMillis();
         } else {
-            if (!Engine.getInstance().stop()) {
-                Log.e(TAG, "Failed to stop engine");
-            }
             super.onBackPressed();
         }
     }

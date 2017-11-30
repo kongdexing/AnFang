@@ -1,4 +1,4 @@
-include ':anfang', ':android-ngn-stack', ':lint', ':library', ':multipleimageselect',
+include ':anfang', ':lint', ':library', ':multipleimageselect',
         ':network-events-library', ':processor', ':viewpagerindicator', ':PushSDK',
         ':takephoto_library', ':widget', ':camera', ':easeui', ':redpacketlibrary'
 //include ':hyphenatechatsdk'

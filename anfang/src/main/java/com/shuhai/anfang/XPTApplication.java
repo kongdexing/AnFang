@@ -1,5 +1,6 @@
 package com.shuhai.anfang;
 
+import android.app.Application;
 import android.content.Context;
 import android.os.Environment;
 import android.support.multidex.MultiDex;
@@ -33,12 +34,10 @@ import com.umeng.message.UmengNotificationClickHandler;
 import com.umeng.message.entity.UMessage;
 import com.xiaomi.ad.AdSdk;
 
-import org.doubango.ngn.NgnApplication;
-
 import java.io.File;
 import java.net.Proxy;
 
-public class XPTApplication extends NgnApplication {
+public class XPTApplication extends Application {
 
     //小米推送
     public static final String APP_MIPUSH_ID = "2882303761517599079";
