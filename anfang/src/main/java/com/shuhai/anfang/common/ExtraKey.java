@@ -14,6 +14,7 @@ public class ExtraKey {
     public static final String CONTACT_TYPE = "contact_type";
     public static final String CONTACT_TEACHER = "contact_teacher";
     public static final String CONTACT_SCHOOL = "contact_school";
+    public static final String CONTACT_STUDENT = "contact_student";
     public static final String CONTACT = "contact";
     public static final String FENCE_ID = "fence";
     public static final String WEB_URL = "web_url";

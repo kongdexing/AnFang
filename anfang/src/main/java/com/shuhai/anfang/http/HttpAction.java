@@ -67,7 +67,9 @@ public class HttpAction {
     //学生详情
     public static String MyStudent_Detail = HEAD + "MyStudent/view";
     //通讯录
-    public static String MyContacts_QUERY = HEAD + "Contacts/getContactsForParent";
+    public static String MyContacts_ForParent = HEAD + "Contacts/getContactsForParent";
+    public static String MyContacts_ForTeacher = HEAD + "Contacts/query";
+
     //位置
     public static String Track_RealTime = HEAD + "Track/realtimeLocation";
     public static String Track_HistoryTrack = HEAD + "Track/historyTrack";

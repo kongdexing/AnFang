@@ -6,7 +6,9 @@ package com.shuhai.anfang.bean;
  */
 
 public enum ContactType {
-    SCHOOL("学校");
+    SCHOOL("学校"),
+    TEACHER("老师"),
+    STUDENT("学生家长");
 
     private final String text;
 

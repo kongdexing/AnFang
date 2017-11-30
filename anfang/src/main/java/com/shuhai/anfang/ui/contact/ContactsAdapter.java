@@ -16,8 +16,11 @@ import android.widget.TextView;
 import com.android.widget.view.CircularImageView;
 import com.shuhai.anfang.R;
 import com.shuhai.anfang.common.ExtraKey;
+import com.shuhai.anfang.model.ContactParent;
 import com.shuhai.anfang.model.ContactSchool;
-import com.shuhai.anfang.model.ContactTeacher;
+import com.shuhai.anfang.model.ContactStudent;
+import com.shuhai.anfang.model.ContactTeacherForParent;
+import com.shuhai.anfang.model.ContactTeacherForTeacher;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -58,8 +61,8 @@ public class ContactsAdapter extends BaseExpandableListAdapter {
 
                 for (int i = 0; i < val.size(); i++) {
                     Object object = val.get(i);
-                    if (object instanceof ContactTeacher) {
-                        ContactTeacher teacher = (ContactTeacher) object;
+                    if (object instanceof ContactTeacherForParent) {
+                        ContactTeacherForParent teacher = (ContactTeacherForParent) object;
                         if (teacher.getName().contains(name)) {
                             teachers.add(teacher);
                         }
@@ -182,8 +185,8 @@ public class ContactsAdapter extends BaseExpandableListAdapter {
                 }
             });
             viewHolder.txtUnReadNum.setVisibility(View.GONE);
-        } else {
-            final ContactTeacher teacher = (ContactTeacher) object;
+        } else if (object instanceof ContactTeacherForParent) {
+            final ContactTeacherForParent teacher = (ContactTeacherForParent) object;
             if (teacher.getSex().equals("1")) {
                 viewHolder.imgHead.setImageResource(R.drawable.teacher_man);
             } else {
@@ -199,6 +202,57 @@ public class ContactsAdapter extends BaseExpandableListAdapter {
                     mContext.startActivity(intent);
                 }
             });
+        } else if (object instanceof ContactTeacherForTeacher) {
+            final ContactTeacherForTeacher teacher = (ContactTeacherForTeacher) getChild(groupPosition, childPosition);
+
+            viewHolder.text.setText(teacher.getName());
+            if (teacher.getSex().equals("1")) {
+                viewHolder.imgHead.setImageResource(R.drawable.teacher_man);
+            } else {
+                viewHolder.imgHead.setImageResource(R.drawable.teacher_woman);
+            }
+            viewHolder.llContacts.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mContext, ContactsDetailActivity.class);
+                    intent.putExtra(ExtraKey.CONTACT_TYPE, ExtraKey.CONTACT_TEACHER);
+                    intent.putExtra(ExtraKey.CONTACT, teacher);
+                    mContext.startActivity(intent);
+                }
+            });
+            viewHolder.txtUnReadNum.setVisibility(View.GONE);
+        } else if(object instanceof ContactStudent){
+            final ContactStudent student = (ContactStudent) getChild(groupPosition, childPosition);
+            viewHolder.text.setText(student.getStu_name());
+            if (student.getSex().equals("1")) {
+                viewHolder.imgHead.setImageResource(R.drawable.student_boy);
+            } else {
+                viewHolder.imgHead.setImageResource(R.drawable.student_girl);
+            }
+            viewHolder.llContacts.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mContext, ContactsDetailActivity.class);
+                    intent.putExtra(ExtraKey.CONTACT_TYPE, ExtraKey.CONTACT_STUDENT);
+                    intent.putExtra(ExtraKey.CONTACT, student);
+                    mContext.startActivity(intent);
+                }
+            });
+            List<ContactParent> parents = student.getParent();
+            if (parents == null || parents.size() == 0) {
+                return convertView;
+            }
+
+//            int unReadNum = 0;
+//            for (int i = 0; i < parents.size(); i++) {
+//                unReadNum += GreenDaoHelper.getInstance().getUnReadNumByParentId(parents.get(i).getUser_id());
+//            }
+//            if (unReadNum > 0) {
+//                viewHolder.txtUnReadNum.setText(unReadNum + "");
+//                viewHolder.txtUnReadNum.setVisibility(View.VISIBLE);
+//            } else {
+//                viewHolder.txtUnReadNum.setVisibility(View.GONE);
+//            }
         }
 
         return convertView;

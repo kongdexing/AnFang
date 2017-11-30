@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.android.volley.common.VolleyHttpParamsEntity;
@@ -22,12 +23,17 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.shuhai.anfang.R;
 import com.shuhai.anfang.XPTApplication;
+import com.shuhai.anfang.bean.ContactType;
 import com.shuhai.anfang.common.CommonUtil;
+import com.shuhai.anfang.common.UserType;
 import com.shuhai.anfang.http.HttpAction;
 import com.shuhai.anfang.http.MyVolleyRequestListener;
 import com.shuhai.anfang.model.BeanStudent;
+import com.shuhai.anfang.model.ContactParent;
 import com.shuhai.anfang.model.ContactSchool;
-import com.shuhai.anfang.model.ContactTeacher;
+import com.shuhai.anfang.model.ContactStudent;
+import com.shuhai.anfang.model.ContactTeacherForParent;
+import com.shuhai.anfang.model.ContactTeacherForTeacher;
 import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.ui.fragment.BaseFragment;
 
@@ -109,19 +115,48 @@ public class ContactFragment extends BaseFragment {
             return;
         }
 
-        ArrayList<Object> listTeacher = (ArrayList) GreenDaoHelper.getInstance().getContactTeacher();
-        ArrayList<Object> listSchool = (ArrayList) GreenDaoHelper.getInstance().getSchoolInfo();
+        //判断老师家长
+        if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+            ArrayList<Object> listTeacher = (ArrayList) GreenDaoHelper.getInstance().getContactTeacherForParent();
+            ArrayList<Object> listSchool = (ArrayList) GreenDaoHelper.getInstance().getSchoolInfo();
 
-        if (listTeacher.size() > 0 || listSchool.size() > 0) {
-            setContact(listTeacher, listSchool);
+            if (listTeacher.size() > 0 || listSchool.size() > 0) {
+                setContactForParent(listTeacher, listSchool);
+            }
+        } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+            ArrayList<Object> listTeacher = (ArrayList) GreenDaoHelper.getInstance().getContactTeacherForTeacher();
+            ArrayList<Object> listStudent = (ArrayList) GreenDaoHelper.getInstance().getContactStudent();
+            for (int i = 0; i < listStudent.size(); i++) {
+                ContactStudent student = (ContactStudent) listStudent.get(i);
+                List<ContactParent> parents = GreenDaoHelper.getInstance().getStudentParentBySId(student.getStu_id());
+                student.setParent(parents);
+            }
+
+            if (listTeacher.size() > 0 || listStudent.size() > 0) {
+                setContactForTeacher(listTeacher, listStudent);
+            }
         }
+
         getContacts();
     }
 
     private void getContacts() {
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.MyContacts_QUERY,
+        if (!XPTApplication.getInstance().isLoggedIn()) {
+            return;
+        }
+
+        //判断老师家长
+        if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+            getContactForParent();
+        } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+            getContactForTeacher();
+        }
+    }
+
+    private void getContactForParent() {
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.MyContacts_ForParent,
                 new VolleyHttpParamsEntity()
-                        .addParam("token", CommonUtil.encryptToken(HttpAction.MyContacts_QUERY)),
+                        .addParam("token", CommonUtil.encryptToken(HttpAction.MyContacts_ForParent)),
                 new MyVolleyRequestListener() {
                     @Override
                     public void onStart() {
@@ -140,7 +175,7 @@ public class ContactFragment extends BaseFragment {
                             JSONObject jsonObject = new JSONObject(volleyHttpResult.getData().toString());
                             Gson gson = new Gson();
                             ArrayList<Object> listTeacher = gson.fromJson(jsonObject.getJSONArray("teacher").toString(),
-                                    new TypeToken<List<ContactTeacher>>() {
+                                    new TypeToken<List<ContactTeacherForParent>>() {
                                     }.getType());
 
                             ArrayList<Object> listSchool = gson.fromJson(jsonObject.getJSONArray("school").toString(),
@@ -149,9 +184,9 @@ public class ContactFragment extends BaseFragment {
 
                             Log.i(TAG, "onResponse: listTeacher size " + listTeacher.size());
                             Log.i(TAG, "onResponse: listSchool size " + listSchool.size());
-                            GreenDaoHelper.getInstance().insertContactTeacher((List) listTeacher);
+                            GreenDaoHelper.getInstance().insertContactTeacherForParent((List) listTeacher);
                             GreenDaoHelper.getInstance().insertSchoolInfo((List) listSchool);
-                            setContact(listTeacher, listSchool);
+                            setContactForParent(listTeacher, listSchool);
                         } catch (Exception ex) {
                             Log.e(TAG, "onResponse: json " + ex.getMessage());
                         }
@@ -167,7 +202,79 @@ public class ContactFragment extends BaseFragment {
                 });
     }
 
-    private void setContact(ArrayList<Object> listTeacher, ArrayList<Object> listSchool) {
+    private void getContactForTeacher() {
+        try {
+            VolleyHttpService.getInstance().sendPostRequest(HttpAction.MyContacts_ForTeacher, new VolleyHttpParamsEntity()
+                            .addParam("s_id", GreenDaoHelper.getInstance().getCurrentTeacher().getS_id())
+                            .addParam("a_id", GreenDaoHelper.getInstance().getCurrentTeacher().getA_id())
+                            .addParam("token", CommonUtil.encryptToken(HttpAction.MyContacts_ForTeacher)),
+                    new MyVolleyRequestListener() {
+                        @Override
+                        public void onStart() {
+                            if (swipe_refresh_widget != null) {
+                                swipe_refresh_widget.setRefreshing(true);
+                            }
+                        }
+
+                        @Override
+                        public void onResponse(VolleyHttpResult volleyHttpResult) {
+                            super.onResponse(volleyHttpResult);
+                            if (swipe_refresh_widget != null) {
+                                swipe_refresh_widget.setRefreshing(false);
+                            }
+                            switch (volleyHttpResult.getStatus()) {
+                                case HttpAction.SUCCESS:
+                                    try {
+                                        JSONObject jsonObject = new JSONObject(volleyHttpResult.getData().toString());
+                                        Gson gson = new Gson();
+                                        ArrayList<Object> listTeacher = gson.fromJson(jsonObject.getJSONArray("teacher").toString(),
+                                                new TypeToken<List<ContactTeacherForTeacher>>() {
+                                                }.getType());
+
+                                        ArrayList<Object> listStudent = gson.fromJson(jsonObject.getJSONArray("student").toString(),
+                                                new TypeToken<List<ContactStudent>>() {
+                                                }.getType());
+
+                                        Log.i(TAG, "onResponse: listTeacher size " + listTeacher.size());
+                                        Log.i(TAG, "onResponse: listStudent size " + listStudent.size());
+                                        GreenDaoHelper.getInstance().insertContactTeacherForTeacher((List) listTeacher);
+
+                                        GreenDaoHelper.getInstance().deleteParentData();
+                                        for (int i = 0; i < listStudent.size(); i++) {
+                                            GreenDaoHelper.getInstance().insertContactParent(((ContactStudent) listStudent.get(i)).getParent());
+                                        }
+                                        GreenDaoHelper.getInstance().insertContactStudent((List) listStudent);
+
+                                        setContactForTeacher(listTeacher, listStudent);
+                                    } catch (Exception ex) {
+                                        Log.e(TAG, "onResponse: json " + ex.getMessage());
+                                    }
+                                    break;
+                                default:
+                                    Toast.makeText(mContext, volleyHttpResult.getInfo(), Toast.LENGTH_SHORT).show();
+                                    GreenDaoHelper.getInstance().deleteContact();
+                                    break;
+                            }
+
+                        }
+
+                        @Override
+                        public void onErrorResponse(VolleyError volleyError) {
+                            super.onErrorResponse(volleyError);
+                            if (swipe_refresh_widget != null) {
+                                swipe_refresh_widget.setRefreshing(false);
+                            }
+                        }
+                    });
+        } catch (Exception ex) {
+            if (swipe_refresh_widget != null) {
+                swipe_refresh_widget.setRefreshing(false);
+            }
+
+        }
+    }
+
+    private void setContactForParent(ArrayList<Object> listTeacher, ArrayList<Object> listSchool) {
         LinkedHashMap<String, ArrayList<Object>> listContacts = new LinkedHashMap<>();
 
         List<BeanStudent> students = GreenDaoHelper.getInstance().getStudents();
@@ -189,7 +296,7 @@ public class ContactFragment extends BaseFragment {
 
             for (int i = 0; i < listTeacher.size(); i++) {
                 try {
-                    ContactTeacher teacher = (ContactTeacher) listTeacher.get(i);
+                    ContactTeacherForParent teacher = (ContactTeacherForParent) listTeacher.get(i);
                     if (teacher.getS_id().equals(student.getS_id()) &&
                             teacher.getC_id().equals(student.getC_id())) {
                         teachers.add(teacher);
@@ -202,6 +309,14 @@ public class ContactFragment extends BaseFragment {
             listContacts.put(title, teachers);
         }
 
+        adapter.loadContacts(listContacts);
+        expandContactList();
+    }
+
+    private void setContactForTeacher(ArrayList<Object> listTeacher, ArrayList<Object> listStudent) {
+        LinkedHashMap<String, ArrayList<Object>> listContacts = new LinkedHashMap<>();
+        listContacts.put(ContactType.TEACHER.toString(), listTeacher);
+        listContacts.put(ContactType.STUDENT.toString(), listStudent);
         adapter.loadContacts(listContacts);
         expandContactList();
     }

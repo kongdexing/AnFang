@@ -29,7 +29,6 @@ import com.shuhai.anfang.common.SharedPreferencesUtil;
 import com.shuhai.anfang.common.UserType;
 import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.push.DeviceHelper;
-import com.shuhai.anfang.ui.mine.MyInfoActivity;
 import com.shuhai.anfang.util.ToastUtils;
 import com.umeng.message.IUmengCallback;
 import com.umeng.message.PushAgent;
@@ -226,23 +225,12 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
         super.onLoginSuccess();
 
         String account = SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_NAME, "").toString();
+        Log.i(TAG, "onLoginSuccess: login huanxin " + account);
         EMClient.getInstance().login(account, "111111", new EMCallBack() {
 
             @Override
             public void onSuccess() {
-                EMClient.getInstance().groupManager().loadAllGroups();
-                EMClient.getInstance().chatManager().loadAllConversations();
-
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        if (progress != null)
-                            progress.setVisibility(View.INVISIBLE);
-                        btnLogin.setEnabled(true);
-                        Log.d("main", "登录聊天服务器成功！");
-                        ToastUtils.showToast(LoginActivity.this, "登录聊天服务器成功");
-                        finish();
-                    }
-                });
+                EMLoginSuccess();
             }
 
             @Override
@@ -251,25 +239,43 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
             }
 
             @Override
-            public void onError(int code, String error) {
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        if (progress != null)
-                            progress.setVisibility(View.INVISIBLE);
-                        btnLogin.setEnabled(true);
-                        //清除数据
-                        SharedPreferencesUtil.clearUserInfo(LoginActivity.this);
+            public void onError(final int code, final String error) {
+                if (code == 200) {
+                    //USER_ALREADY_LOGIN
+                    EMLoginSuccess();
+                } else {
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            Log.i(TAG, "EMUI onError: " + code + " error:" + error);
+                            if (progress != null)
+                                progress.setVisibility(View.INVISIBLE);
+                            btnLogin.setEnabled(true);
+                            //清除数据
+                            SharedPreferencesUtil.clearUserInfo(LoginActivity.this);
 
-                        GreenDaoHelper.getInstance().clearData();
-                        ToastUtils.showToast(getApplicationContext(), "login failed");
-                    }
-                });
+                            GreenDaoHelper.getInstance().clearData();
+                            ToastUtils.showToast(getApplicationContext(), "login failed");
+                        }
+                    });
+                }
             }
         });
-//        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        startActivity(intent);
+    }
+
+    private void EMLoginSuccess() {
+        EMClient.getInstance().groupManager().loadAllGroups();
+        EMClient.getInstance().chatManager().loadAllConversations();
+
+        runOnUiThread(new Runnable() {
+            public void run() {
+                if (progress != null)
+                    progress.setVisibility(View.INVISIBLE);
+                btnLogin.setEnabled(true);
+                Log.d("main", "登录聊天服务器成功！");
+                ToastUtils.showToast(LoginActivity.this, "登录聊天服务器成功");
+                finish();
+            }
+        });
     }
 
     @Override

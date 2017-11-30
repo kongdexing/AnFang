@@ -16,7 +16,7 @@ import com.android.widget.view.KenBurnsView;
 import com.shuhai.anfang.R;
 import com.shuhai.anfang.common.ExtraKey;
 import com.shuhai.anfang.model.ContactSchool;
-import com.shuhai.anfang.model.ContactTeacher;
+import com.shuhai.anfang.model.ContactTeacherForParent;
 import com.shuhai.anfang.ui.chat.ChatActivity;
 import com.shuhai.anfang.ui.main.BaseActivity;
 
@@ -79,7 +79,7 @@ public class ContactsDetailActivity extends BaseActivity {
 
     String currentPhone;
 
-    private ContactTeacher contactTeacher;
+    private ContactTeacherForParent contactTeacher;
     private ContactSchool contactSchool;
 
     @Override
@@ -94,7 +94,7 @@ public class ContactsDetailActivity extends BaseActivity {
             if (type.equals(ExtraKey.CONTACT_TEACHER)) {
                 llTeacher.setVisibility(View.VISIBLE);
                 llSchool.setVisibility(View.GONE);
-                setTeacherInfo((ContactTeacher) bundle.get(ExtraKey.CONTACT));
+                setTeacherInfo((ContactTeacherForParent) bundle.get(ExtraKey.CONTACT));
             } else {
                 llTeacher.setVisibility(View.GONE);
                 llSchool.setVisibility(View.VISIBLE);
@@ -108,7 +108,7 @@ public class ContactsDetailActivity extends BaseActivity {
 
     }
 
-    private void setTeacherInfo(final ContactTeacher teacher) {
+    private void setTeacherInfo(final ContactTeacherForParent teacher) {
         if (teacher == null) {
             return;
         }

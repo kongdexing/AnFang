@@ -12,7 +12,7 @@ import java.io.Serializable;
  * No1
  */
 @Entity
-public class ContactTeacher implements Serializable {
+public class ContactTeacherForParent implements Serializable {
 
     private String t_id;
     private String u_id;
@@ -150,10 +150,10 @@ public class ContactTeacher implements Serializable {
         this.c_id = c_id;
     }
 
-    public ContactTeacher() {
+    public ContactTeacherForParent() {
     }
 
-    protected ContactTeacher(Parcel in) {
+    protected ContactTeacherForParent(Parcel in) {
         this.t_id = in.readString();
         this.name = in.readString();
         this.phone = in.readString();
@@ -170,10 +170,11 @@ public class ContactTeacher implements Serializable {
         this.c_id = in.readString();
     }
 
-    @Generated(hash = 2076097601)
-    public ContactTeacher(String t_id, String u_id, String name, String phone, String s_id, String s_name,
-            String a_id, String a_name, String d_name, String education, String sex, String email, String charge,
-            String g_id, String c_id) {
+    @Generated(hash = 167347218)
+    public ContactTeacherForParent(String t_id, String u_id, String name,
+            String phone, String s_id, String s_name, String a_id, String a_name,
+            String d_name, String education, String sex, String email,
+            String charge, String g_id, String c_id) {
         this.t_id = t_id;
         this.u_id = u_id;
         this.name = name;
@@ -193,7 +194,7 @@ public class ContactTeacher implements Serializable {
 
     @Override
     public String toString() {
-        return "ContactTeacher{" +
+        return "ContactTeacherForParent{" +
                 "t_id='" + t_id + '\'' +
                 ", u_id='" + u_id + '\'' +
                 ", name='" + name + '\'' +

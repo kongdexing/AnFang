@@ -61,7 +61,8 @@ public class GreenDaoHelper {
             writeDaoSession.getBeanParentDao().deleteAll();
             writeDaoSession.getBeanTeacherDao().deleteAll();
             writeDaoSession.getContactSchoolDao().deleteAll();
-            writeDaoSession.getContactTeacherDao().deleteAll();
+            writeDaoSession.getContactTeacherForParentDao().deleteAll();
+            writeDaoSession.getContactTeacherForTeacherDao().deleteAll();
             writeDaoSession.getBeanStudentDao().deleteAll();
             writeDaoSession.getContactParentDao().deleteAll();
         }
@@ -167,32 +168,86 @@ public class GreenDaoHelper {
         }
     }
 
-    //联系人
-    public void insertContactTeacher(List<ContactTeacher> teachers) {
+    public void deleteParentData() {
         if (writeDaoSession != null) {
-            writeDaoSession.getContactTeacherDao().deleteAll();
-            writeDaoSession.getContactTeacherDao().insertOrReplaceInTx(teachers);
+            writeDaoSession.getContactParentDao().deleteAll();
+        }
+    }
+
+    public void insertContactParent(List<ContactParent> parents) {
+        if (writeDaoSession != null) {
+            writeDaoSession.getContactParentDao().insertOrReplaceInTx(parents);
+        }
+    }
+
+    public void insertContactStudent(List<ContactStudent> students) {
+        try {
+            if (writeDaoSession != null) {
+                writeDaoSession.getContactStudentDao().deleteAll();
+                writeDaoSession.getContactStudentDao().insertOrReplaceInTx(students);
+            }
+        } catch (Exception ex) {
+            Log.i(TAG, "insertContactStudent error: " + ex.getMessage());
+        }
+    }
+
+    //家长获取联系人
+    public void insertContactTeacherForParent(List<ContactTeacherForParent> teachers) {
+        if (writeDaoSession != null) {
+            writeDaoSession.getContactTeacherForParentDao().deleteAll();
+            writeDaoSession.getContactTeacherForParentDao().insertOrReplaceInTx(teachers);
+        }
+    }
+
+    //教师获取联系人
+    public void insertContactTeacherForTeacher(List<ContactTeacherForTeacher> teachers) {
+        if (writeDaoSession != null) {
+            writeDaoSession.getContactTeacherForTeacherDao().deleteAll();
+            writeDaoSession.getContactTeacherForTeacherDao().insertOrReplaceInTx(teachers);
         }
     }
 
     public void deleteContact() {
         if (writeDaoSession != null) {
-            writeDaoSession.getContactTeacherDao().deleteAll();
+            writeDaoSession.getContactTeacherForParentDao().deleteAll();
+            writeDaoSession.getContactTeacherForTeacherDao().deleteAll();
             writeDaoSession.getContactSchoolDao().deleteAll();
         }
     }
 
-    public List<ContactTeacher> getContactTeacher() {
+    public List<ContactTeacherForParent> getContactTeacherForParent() {
         if (readDaoSession != null) {
-            return readDaoSession.getContactTeacherDao().loadAll();
+            return readDaoSession.getContactTeacherForParentDao().loadAll();
         }
-        return new ArrayList<ContactTeacher>();
+        return new ArrayList<ContactTeacherForParent>();
     }
 
-    public ContactTeacher getContactByTeacher(String t_u_id) {
+    public List<ContactTeacherForTeacher> getContactTeacherForTeacher() {
         if (readDaoSession != null) {
-            return readDaoSession.getContactTeacherDao().queryBuilder()
-                    .where(ContactTeacherDao.Properties.U_id.eq(t_u_id)).limit(1).unique();
+            return readDaoSession.getContactTeacherForTeacherDao().loadAll();
+        }
+        return new ArrayList<ContactTeacherForTeacher>();
+    }
+
+    public List<ContactStudent> getContactStudent() {
+        if (readDaoSession != null) {
+            return readDaoSession.getContactStudentDao().loadAll();
+        }
+        return new ArrayList<ContactStudent>();
+    }
+
+    public List<ContactParent> getStudentParentBySId(String stu_id) {
+        if (readDaoSession != null) {
+            return readDaoSession.getContactParentDao().queryBuilder()
+                    .where(ContactParentDao.Properties.Stu_id.eq(stu_id)).list();
+        }
+        return new ArrayList<ContactParent>();
+    }
+
+    public ContactTeacherForParent getContactByTeacher(String t_u_id) {
+        if (readDaoSession != null) {
+            return readDaoSession.getContactTeacherForParentDao().queryBuilder()
+                    .where(ContactTeacherForParentDao.Properties.U_id.eq(t_u_id)).limit(1).unique();
         }
         return null;
     }
