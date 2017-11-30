@@ -59,6 +59,7 @@ public class GreenDaoHelper {
     public void clearData() {
         if (writeDaoSession != null) {
             writeDaoSession.getBeanParentDao().deleteAll();
+            writeDaoSession.getBeanTeacherDao().deleteAll();
             writeDaoSession.getContactSchoolDao().deleteAll();
             writeDaoSession.getContactTeacherDao().deleteAll();
             writeDaoSession.getBeanStudentDao().deleteAll();

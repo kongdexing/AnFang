@@ -27,7 +27,9 @@ import com.shuhai.anfang.common.CommonUtil;
 import com.shuhai.anfang.common.ExtraKey;
 import com.shuhai.anfang.common.SharedPreferencesUtil;
 import com.shuhai.anfang.common.UserType;
+import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.push.DeviceHelper;
+import com.shuhai.anfang.ui.mine.MyInfoActivity;
 import com.shuhai.anfang.util.ToastUtils;
 import com.umeng.message.IUmengCallback;
 import com.umeng.message.PushAgent;
@@ -252,6 +254,13 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
             public void onError(int code, String error) {
                 runOnUiThread(new Runnable() {
                     public void run() {
+                        if (progress != null)
+                            progress.setVisibility(View.INVISIBLE);
+                        btnLogin.setEnabled(true);
+                        //清除数据
+                        SharedPreferencesUtil.clearUserInfo(LoginActivity.this);
+
+                        GreenDaoHelper.getInstance().clearData();
                         ToastUtils.showToast(getApplicationContext(), "login failed");
                     }
                 });

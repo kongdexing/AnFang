@@ -254,8 +254,6 @@ public class CommonUtil {
             JSONObject jsonData = new JSONObject(httpResult.getData().toString());
             CommonUtil.initBeanStudentByHttpResult(jsonData.getJSONArray("stuData").toString());
             CommonUtil.initParentInfoByHttpResult(jsonData.getJSONObject("login").toString(), account);
-            //删除联系人
-            GreenDaoHelper.getInstance().deleteContact();
         } else if (type.equals(UserType.TEACHER.toString())) {
             JSONObject jsonData = new JSONObject(httpResult.getData().toString());
             CommonUtil.getBeanClassesByHttpResult(jsonData.getJSONArray("class").toString());
@@ -266,7 +264,8 @@ public class CommonUtil {
             teacher.setLogin_name(account);
             GreenDaoHelper.getInstance().insertTeacher(teacher);
         }
-
+        //删除联系人
+        GreenDaoHelper.getInstance().deleteContact();
         XPTApplication.getInstance().setCurrent_user_type(type);
     }
 

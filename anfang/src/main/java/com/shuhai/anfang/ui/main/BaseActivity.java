@@ -63,7 +63,10 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
         super.setContentView(layoutResID);
-        View contentView = LayoutInflater.from(this).inflate(layoutResID, null, false);
+        setContentView(LayoutInflater.from(this).inflate(layoutResID, null, false));
+    }
+
+    public void setContentView(View view) {
         View parentView = LayoutInflater.from(this).inflate(R.layout.activity_base, null, true);
 
         llActionBar = (RelativeLayout) parentView.findViewById(R.id.includeActionBar);
@@ -81,15 +84,10 @@ public class BaseActivity extends AppCompatActivity {
         llContent = (LinearLayout) parentView.findViewById(R.id.llContent);
 
         btnRight.setVisibility(View.GONE);
-
         txtTitle.setText(this.getTitle());
-        llContent.addView(contentView);
-        setContentView(parentView);
+        llContent.addView(view);
+        super.setContentView(parentView);
         unbinder = ButterKnife.bind(this);
-    }
-
-    public void setContentView(View view) {
-        super.setContentView(view);
     }
 
     /**
