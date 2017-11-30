@@ -33,6 +33,7 @@ import com.shuhai.anfang.model.BeanParent;
 import com.shuhai.anfang.model.BeanStudent;
 import com.shuhai.anfang.model.BeanTeacher;
 import com.shuhai.anfang.model.GreenDaoHelper;
+import com.shuhai.anfang.ui.login.BaseLoginActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -267,6 +268,11 @@ public class CommonUtil {
         //删除联系人
         GreenDaoHelper.getInstance().deleteContact();
         XPTApplication.getInstance().setCurrent_user_type(type);
+        if (!SharedPreferencesUtil.getData(XPTApplication.getContext(), SharedPreferencesUtil.KEY_USER_NAME, "").equals(account)) {
+            SharedPreferencesUtil.saveData(XPTApplication.getContext(), SharedPreferencesUtil.KEY_USER_NAME, account);
+            //切换账号
+            UserHelper.getInstance().changeAccount();
+        }
     }
 
     /**

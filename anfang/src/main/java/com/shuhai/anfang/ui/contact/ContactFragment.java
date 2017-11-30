@@ -25,6 +25,7 @@ import com.shuhai.anfang.R;
 import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.bean.ContactType;
 import com.shuhai.anfang.common.CommonUtil;
+import com.shuhai.anfang.common.UserHelper;
 import com.shuhai.anfang.common.UserType;
 import com.shuhai.anfang.http.HttpAction;
 import com.shuhai.anfang.http.MyVolleyRequestListener;
@@ -107,6 +108,14 @@ public class ContactFragment extends BaseFragment {
             }
         });
 
+        UserHelper.getInstance().addUserChangeListener(new UserHelper.UserChangeListener() {
+            @Override
+            public void onUserLoginSuccess() {
+                //用户切换后，重新获取广告位信息
+                Log.i(TAG, "onUserLoginSuccess: ContactFragment");
+                initData();
+            }
+        });
     }
 
     @Override

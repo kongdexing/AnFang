@@ -33,6 +33,7 @@ import com.shuhai.anfang.bean.HomeItem;
 import com.shuhai.anfang.common.CommonUtil;
 import com.shuhai.anfang.common.ExtraKey;
 import com.shuhai.anfang.common.SharedPreferencesUtil;
+import com.shuhai.anfang.common.UserHelper;
 import com.shuhai.anfang.common.UserType;
 import com.shuhai.anfang.http.HttpAction;
 import com.shuhai.anfang.http.MyVolleyRequestListener;
@@ -328,6 +329,14 @@ public class HomeFragment extends BaseFragment {
 
         //获取热门商品数据
         getHotGoods();
+
+        UserHelper.getInstance().addUserChangeListener(new UserHelper.UserChangeListener() {
+            @Override
+            public void onUserLoginSuccess() {
+                //用户切换后，重新获取广告位信息
+                getBanners();
+            }
+        });
     }
 
     /*
