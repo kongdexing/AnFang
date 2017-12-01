@@ -27,15 +27,16 @@ import butterknife.Unbinder;
 /**
  * Created by Administrator on 2016/10/26.
  */
-public class HomeWorkAdapter extends BaseRecycleAdapter {
+public class HomeWorkTeacherAdapter extends BaseRecycleAdapter {
 
     private List<BeanHomeWork> beanHomeWorks = new ArrayList<>();
+
     private String TAG = getClass().getSimpleName();
     private Context mContext;
 
-    public HomeWorkAdapter(Context context) {
+    public HomeWorkTeacherAdapter(Context context) {
         super(context);
-        Log.i(TAG, "HomeWorkAdapter: ");
+        Log.i(TAG, "HomeWorkParentAdapter: ");
         mContext = context;
     }
 
@@ -60,6 +61,17 @@ public class HomeWorkAdapter extends BaseRecycleAdapter {
         return -1;
     }
 
+    public int updateData(BeanHomeWork homeWork) {
+        for (int i = 0; i < beanHomeWorks.size(); i++) {
+            if (beanHomeWorks.get(i).getH_id().equals(homeWork.getH_id())) {
+                Log.i(TAG, " update " + i + " " + homeWork.getWork_content());
+                beanHomeWorks.set(i, homeWork);
+                return i;
+            }
+        }
+        return -1;
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Log.i(TAG, "onCreateViewHolder: ");
@@ -70,10 +82,11 @@ public class HomeWorkAdapter extends BaseRecycleAdapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        Log.i(TAG, "showData: ");
-        final ViewHolder mHolder = (ViewHolder) holder;
+        Log.i(TAG, "showData: " + position);
+        final HomeWorkParentAdapter.ViewHolder mHolder = (HomeWorkParentAdapter.ViewHolder) holder;
         final BeanHomeWork work = beanHomeWorks.get(position);
         String course = work.getCrs_name().substring(0, 1);
+        mHolder.txtSubject.setText(course);
         if (course.equals("语")) {
             work.setSubjectBgColor(R.drawable.bg_circle_yuwen);
         } else if (course.equals("数")) {
@@ -97,8 +110,6 @@ public class HomeWorkAdapter extends BaseRecycleAdapter {
         }
         mHolder.txtSubject.setBackgroundResource(work.getSubjectBgColor());
         mHolder.txtClassName.setText(work.getG_name() + work.getC_name());
-        mHolder.txtSubject.setText(course);
-
         mHolder.txtTeacher.setText(mContext.getString(R.string.label_teacher_option, work.getUser_name()));
         mHolder.txtTitle.setText(mContext.getString(R.string.label_homework_title_option, work.getName()));
         mHolder.txtTime.setText(mContext.getString(R.string.homework_start_end_time, work.getCreate_time(), work.getFinish_time()));
@@ -111,19 +122,16 @@ public class HomeWorkAdapter extends BaseRecycleAdapter {
         mHolder.llhomeworkItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, HomeWorkDetailActivity.class);
+                Intent intent = new Intent(mContext, HomeWorkDetailTeacherActivity.class);
                 intent.putExtra(ExtraKey.HOMEWORK_DETAIL, work);
-                ((HomeWorkActivity) mContext).startActivityForResult(intent, 1);
+                ((HomeWorkParentActivity) mContext).startActivityForResult(intent, 1);
             }
         });
-
         Log.i(TAG, "onBindViewHolder: file_path " + work.getFile_path());
-
     }
 
     @Override
     public int getItemCount() {
-        Log.i(TAG, "getItemCount: " + beanHomeWorks.size());
         return beanHomeWorks.size();
     }
 
@@ -159,7 +167,6 @@ public class HomeWorkAdapter extends BaseRecycleAdapter {
             super(itemView);
             unbinder = ButterKnife.bind(this, itemView);
         }
-
     }
 
 }

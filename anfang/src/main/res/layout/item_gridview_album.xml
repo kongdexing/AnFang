@@ -6,7 +6,7 @@
     android:background="@color/colorWhite"
     android:orientation="vertical">
 
-    <com.xptschool.parent.view.FilterImageView
+    <com.shuhai.anfang.view.FilterImageView
         android:id="@+id/post_add_pic"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/dp_100"
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/dp_5"
-        android:padding="@dimen/dp_5"
-        android:background="@drawable/ic_delete"/>
+        android:background="@drawable/ic_delete"
+        android:padding="@dimen/dp_5" />
 
 </RelativeLayout>

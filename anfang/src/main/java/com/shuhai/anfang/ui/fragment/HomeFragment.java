@@ -46,7 +46,8 @@ import com.shuhai.anfang.push.BannerHelper;
 import com.shuhai.anfang.ui.alarm.AlarmActivity;
 import com.shuhai.anfang.ui.checkin.CheckinActivity;
 import com.shuhai.anfang.ui.fence.FenceListActivity;
-import com.shuhai.anfang.ui.homework.HomeWorkActivity;
+import com.shuhai.anfang.ui.homework.HomeWorkParentActivity;
+import com.shuhai.anfang.ui.homework.HomeWorkTeacherActivity;
 import com.shuhai.anfang.ui.leave.LeaveActivity;
 import com.shuhai.anfang.ui.main.WebViewActivity;
 import com.shuhai.anfang.ui.notice.NoticeActivity;
@@ -195,12 +196,84 @@ public class HomeFragment extends BaseFragment {
             }
         });
 
+        initSchoolItem();
+
+        initShopItem();
+
+        fragmentHome_titleLinearId.setAlpha(0);
+        ptr_scrollview.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+        ptr_scrollview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+                ptr_scrollview.onRefreshComplete();
+                if (!NetWorkUsefulUtils.getActiveNetwork(getContext())) {
+                    Toast.makeText(getContext(), "网络不可用", Toast.LENGTH_SHORT).show();
+                } else {
+                    initData();
+                }
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+
+            }
+        });
+
+        ptr_scrollview.setOnScrollChangedListener(new PullToRefreshScrollView.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged(PullToRefreshScrollView who, int x, int y, int oldl, int oldt) {
+                float alpha = 0;
+                if (oldt <= 180) {
+                    alpha = ((float) oldt) / 180;
+                    fragmentHome_titleLinearId.setAlpha(alpha);
+                } else {
+                    fragmentHome_titleLinearId.setAlpha(1);
+                }
+            }
+        });
+
+    }
+
+    private void initShopItem() {
+        List<HomeItem> homeShopItems = new ArrayList<HomeItem>();
+        /*课程表*/
+        homeShopItems.add(new HomeItem()
+                .setIconId(R.drawable.home_course)
+                .setTitle(getString(R.string.home_course))
+                .setIntent(new Intent(mContext, LeaveActivity.class)));
+        /*老师评语*/
+        homeShopItems.add(new HomeItem()
+                .setIconId(R.drawable.home_remark)
+                .setTitle(getString(R.string.home_remark))
+                .setIntent(new Intent(mContext, LeaveActivity.class)));
+        /*荣誉墙*/
+        homeShopItems.add(new HomeItem()
+                .setIconId(R.drawable.home_honour)
+                .setTitle(getString(R.string.home_honour))
+                .setIntent(new Intent(mContext, LeaveActivity.class)));
+
+        itemShopAdapter = new HomeItemGridAdapter(mContext);
+        grd_school_shop.setAdapter(itemShopAdapter);
+        itemShopAdapter.reloadData(homeShopItems);
+    }
+
+    private void initSchoolItem() {
+        boolean isParent = false;
+        if (XPTApplication.getInstance().isLoggedIn()) {
+            if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+                isParent = false;
+            } else if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+                isParent = true;
+            }
+        }
+
         List<HomeItem> homeItems = new ArrayList<HomeItem>();
+        //家庭作业
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_homework)
                 .setTitle(getString(R.string.home_homework))
-                .setIntent(new Intent(mContext, HomeWorkActivity.class)));
-
+                .setIntent(new Intent(mContext, isParent ? HomeWorkParentActivity.class : HomeWorkTeacherActivity.class)));
+        //班级公告
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_notice)
                 .setTitle(getString(R.string.home_notice))
@@ -244,60 +317,6 @@ public class HomeFragment extends BaseFragment {
 
         grd_school.setAdapter(itemAdapter);
         itemAdapter.reloadData(homeItems);
-
-        List<HomeItem> homeShopItems = new ArrayList<HomeItem>();
-        /*课程表*/
-        homeShopItems.add(new HomeItem()
-                .setIconId(R.drawable.home_course)
-                .setTitle(getString(R.string.home_course))
-                .setIntent(new Intent(mContext, LeaveActivity.class)));
-        /*老师评语*/
-        homeShopItems.add(new HomeItem()
-                .setIconId(R.drawable.home_remark)
-                .setTitle(getString(R.string.home_remark))
-                .setIntent(new Intent(mContext, LeaveActivity.class)));
-        /*荣誉墙*/
-        homeShopItems.add(new HomeItem()
-                .setIconId(R.drawable.home_honour)
-                .setTitle(getString(R.string.home_honour))
-                .setIntent(new Intent(mContext, LeaveActivity.class)));
-
-        itemShopAdapter = new HomeItemGridAdapter(mContext);
-        grd_school_shop.setAdapter(itemShopAdapter);
-        itemShopAdapter.reloadData(homeShopItems);
-
-        fragmentHome_titleLinearId.setAlpha(0);
-        ptr_scrollview.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
-        ptr_scrollview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
-            @Override
-            public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-                ptr_scrollview.onRefreshComplete();
-                if (!NetWorkUsefulUtils.getActiveNetwork(getContext())) {
-                    Toast.makeText(getContext(), "网络不可用", Toast.LENGTH_SHORT).show();
-                } else {
-                    initData();
-                }
-            }
-
-            @Override
-            public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-
-            }
-        });
-
-        ptr_scrollview.setOnScrollChangedListener(new PullToRefreshScrollView.OnScrollChangedListener() {
-            @Override
-            public void onScrollChanged(PullToRefreshScrollView who, int x, int y, int oldl, int oldt) {
-                float alpha = 0;
-                if (oldt <= 180) {
-                    alpha = ((float) oldt) / 180;
-                    fragmentHome_titleLinearId.setAlpha(alpha);
-                } else {
-                    fragmentHome_titleLinearId.setAlpha(1);
-                }
-            }
-        });
-
     }
 
     @Override
@@ -335,6 +354,9 @@ public class HomeFragment extends BaseFragment {
             public void onUserLoginSuccess() {
                 //用户切换后，重新获取广告位信息
                 getBanners();
+                //重新分配Intent
+                initSchoolItem();
+                initShopItem();
             }
         });
     }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_publish_home_work"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -27,48 +26,42 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    style="@style/mineText"
+                    style="@style/itemText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top"
                     android:text="@string/label_class" />
 
-                <com.android.widget.spinner.MaterialSpinner
-                    android:id="@+id/spnClasses"
+                <TextView
+                    android:id="@+id/txtClassName"
+                    style="@style/itemText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:ms_dropdown_height="wrap_content"
-                    app:ms_dropdown_max_height="@dimen/dp_350"
-                    app:ms_dropdown_width="wrap_content"
-                    app:ms_padding_left="@dimen/dp_5"
-                    app:ms_text_color="@color/text_black"
-                    app:ms_text_size="@dimen/sp_int_16" />
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/text_black_2" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_6"
+                android:layout_marginTop="@dimen/dp_10"
                 android:background="@color/colorWhite"
                 android:gravity="center">
 
                 <TextView
-                    style="@style/mineText"
+                    style="@style/itemText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/label_subject" />
 
-                <com.android.widget.spinner.MaterialSpinner
-                    android:id="@+id/spnSubject"
+                <TextView
+                    android:id="@+id/txtSubject"
+                    style="@style/itemText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:ms_dropdown_height="wrap_content"
-                    app:ms_dropdown_max_height="@dimen/dp_350"
-                    app:ms_dropdown_width="wrap_content"
-                    app:ms_padding_left="@dimen/dp_5"
-                    app:ms_text_color="@color/text_black"
-                    app:ms_text_size="@dimen/sp_int_16" />
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/text_black_2" />
             </LinearLayout>
 
             <LinearLayout
@@ -76,18 +69,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
-                android:background="@color/colorWhite"
-                android:visibility="gone">
+                android:background="@color/colorWhite">
 
                 <TextView
-                    style="@style/mineText"
+                    style="@style/itemText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/label_teacher" />
 
                 <TextView
                     android:id="@+id/txtTeacher"
-                    style="@style/mineText"
+                    style="@style/itemText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text=""
@@ -98,18 +90,18 @@
                 android:id="@+id/llCreateTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_6"
+                android:layout_marginTop="@dimen/dp_10"
                 android:background="@color/colorWhite">
 
                 <TextView
-                    style="@style/mineText"
+                    style="@style/itemText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/label_starttime" />
 
                 <TextView
                     android:id="@+id/txtPushTime"
-                    style="@style/mineText"
+                    style="@style/itemText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
@@ -119,170 +111,131 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_6"
+                android:layout_marginTop="@dimen/dp_10"
                 android:background="@color/colorWhite">
 
                 <TextView
-                    style="@style/mineText"
+                    style="@style/itemText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/label_endtime" />
 
                 <TextView
                     android:id="@+id/txtCompleteTime"
-                    style="@style/mineText"
+                    style="@style/itemText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:hint="@string/label_hint_endtime"
-                    android:textColorHint="@color/text_grey"
                     android:textColor="@color/text_black_2" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_6"
+                android:layout_marginTop="@dimen/dp_10"
                 android:background="@color/colorWhite">
 
                 <TextView
-                    style="@style/mineText"
+                    style="@style/itemText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/label_homework_title" />
 
-                <EditText
+                <TextView
                     android:id="@+id/edtName"
+                    style="@style/itemText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="@null"
-                    android:lines="1"
                     android:text=""
-                    android:maxLength="100"
-                    android:textColor="@color/text_black_2"
-                    android:textSize="@dimen/sp_16" />
+                    android:textColor="@color/text_black_2" />
             </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_6"
+                android:layout_marginTop="@dimen/dp_10"
                 android:background="@color/colorWhite">
 
                 <TextView
                     android:id="@+id/txtContent"
-                    style="@style/mineText"
+                    style="@style/itemText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/label_content" />
 
-                <EditText
+                <TextView
                     android:id="@+id/edtContent"
+                    style="@style/itemText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/dp_10"
                     android:layout_toRightOf="@+id/txtContent"
-                    android:background="@null"
                     android:gravity="top|left"
-                    android:hint="@string/hint_homework_content"
-                    android:maxLength="500"
                     android:minLines="3"
-                    android:paddingTop="@dimen/dp_10"
-                    android:text=""
                     android:textColor="@color/text_black_2"
-                    android:textColorHint="@color/text_grey"
-                    android:textSize="@dimen/sp_16" />
+                    android:textColorHint="@color/text_grey" />
             </RelativeLayout>
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/llVoice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_6"
-                android:text="语音文件"
-                android:textColor="@color/color_black_3" />
-            <!--声音文件-->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.android.widget.roundcornerprogressbar.RoundCornerProgressBar
-                    android:id="@+id/voiceBar"
-                    android:layout_width="fill_parent"
-                    android:layout_height="@dimen/dp_18"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/dp_6"
-                    android:layout_toLeftOf="@+id/txtProgress"
-                    app:rcBackgroundPadding="1dp"
-                    app:rcRadius="3dp" />
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/txtProgress"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/dp_6"
-                    android:layout_toLeftOf="@+id/imgDelete"
-                    android:text=""
-                    android:visibility="visible" />
+                    android:layout_marginTop="@dimen/dp_6"
+                    android:text="语音文件"
+                    android:textColor="@color/color_black_3" />
+                <!--声音文件-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/imgDelete"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/dp_6"
-                    android:layout_toLeftOf="@+id/imgMic"
-                    android:background="@drawable/ic_delete"
-                    android:visibility="gone" />
+                    <com.android.widget.roundcornerprogressbar.RoundCornerProgressBar
+                        android:id="@+id/voiceBar"
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/dp_18"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dp_6"
+                        android:layout_toLeftOf="@+id/txtProgress"
+                        app:rcBackgroundPadding="1dp"
+                        app:rcRadius="3dp" />
 
-                <ImageView
-                    android:id="@+id/imgMic"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:background="@drawable/selector_micphone" />
+                    <TextView
+                        android:id="@+id/txtProgress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dp_6"
+                        android:layout_toLeftOf="@+id/imgVoice"
+                        android:text=""
+                        android:visibility="visible" />
 
-            </RelativeLayout>
+                    <ImageView
+                        android:id="@+id/imgVoice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/selector_voice_play" />
+
+                </RelativeLayout>
+            </LinearLayout>
 
             <com.android.widget.mygridview.MyGridView
                 android:id="@+id/gridview"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_6"
+                android:layout_marginTop="@dimen/dp_15"
                 android:horizontalSpacing="7.5dip"
                 android:listSelector="@null"
                 android:numColumns="3"
                 android:scrollbars="none"
                 android:stretchMode="columnWidth"
                 android:verticalSpacing="7.5dip" />
-
-            <Button
-                android:id="@+id/btnSubmit"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_40"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginTop="@dimen/dp_10"
-                android:background="@drawable/btn_bg_normal"
-                android:padding="@dimen/dp_5"
-                android:text="@string/push"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/sp_18" />
-
-            <Button
-                android:id="@+id/btnDelete"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_40"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginBottom="@dimen/dp_10"
-                android:layout_marginTop="@dimen/dp_10"
-                android:background="@drawable/btn_delete_bg"
-                android:padding="@dimen/dp_5"
-                android:text="@string/btn_delete"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/sp_18" />
 
         </LinearLayout>
     </ScrollView>

@@ -1,5 +1,9 @@
 package com.shuhai.anfang.ui.homework;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -21,11 +25,14 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.shuhai.anfang.R;
 import com.shuhai.anfang.bean.BeanHomeWork;
+import com.shuhai.anfang.common.ActivityResultCode;
+import com.shuhai.anfang.common.BroadcastAction;
 import com.shuhai.anfang.common.CommonUtil;
+import com.shuhai.anfang.common.ExtraKey;
 import com.shuhai.anfang.http.HttpAction;
-import com.shuhai.anfang.http.HttpErrorMsg;
 import com.shuhai.anfang.http.MyVolleyRequestListener;
-import com.shuhai.anfang.model.BeanStudent;
+import com.shuhai.anfang.model.BeanClass;
+import com.shuhai.anfang.model.BeanCourse;
 import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.ui.main.BaseListActivity;
 import com.shuhai.anfang.view.CalendarOptionView;
@@ -38,7 +45,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class HomeWorkActivity extends BaseListActivity {
+public class HomeWorkTeacherActivity extends BaseListActivity {
 
     @BindView(R.id.recyclerview)
     LoadMoreRecyclerView recyclerView;
@@ -46,8 +53,11 @@ public class HomeWorkActivity extends BaseListActivity {
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout swipeRefreshLayout;
 
-    @BindView(R.id.spnStudents)
-    MaterialSpinner spnStudents;
+    @BindView(R.id.spnClass)
+    MaterialSpinner spnClass;
+
+    @BindView(R.id.spnCourse)
+    MaterialSpinner spnCourse;
 
     @BindView(R.id.txtDate)
     ArrowTextView txtDate;
@@ -58,22 +68,27 @@ public class HomeWorkActivity extends BaseListActivity {
     private PopupWindow datePopup;
     private List<BeanHomeWork> homeWorks_filter = new ArrayList<>();
     private String startTime, endTime;
-    private HomeWorkAdapter adapter;
+    private HomeWorkTeacherAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_work);
+        setContentView(R.layout.activity_home_work_teacher);
         setTitle(R.string.home_homework);
+        setTxtRight(R.string.push);
         initView();
         initDate();
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(BroadcastAction.HOMEWORK_AMEND);
+        this.registerReceiver(HomeworkAmendReceiver, intentFilter);
     }
 
     private void initView() {
 
         initRecyclerView(recyclerView, swipeRefreshLayout);
 
-        adapter = new HomeWorkAdapter(this);
+        adapter = new HomeWorkTeacherAdapter(this);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -90,33 +105,52 @@ public class HomeWorkActivity extends BaseListActivity {
             }
         });
         recyclerView.setAdapter(adapter);
+
+        setTextRightClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeWorkTeacherActivity.this, HomeWorkDetailTeacherActivity.class));
+            }
+        });
     }
 
     private void initDate() {
-        startTime = CommonUtil.getDate2StrBefore(7);
-        endTime = CommonUtil.getCurrentDate();
-        setTxtDate();
-
-        if (GreenDaoHelper.getInstance().getStudents().size() == 0) {
-            spnStudents.setText(R.string.title_no_student);
-            txtDate.setEnabled(false);
-            spnStudents.setEnabled(false);
-            swipeRefreshLayout.setEnabled(false);
-            return;
-        }
-        spnStudents.setItems(GreenDaoHelper.getInstance().getStudents());
-        spnStudents.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
+        spnClass.setItems(GreenDaoHelper.getInstance().getAllClassNameAppend());
+        spnClass.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<BeanClass>() {
             @Override
-            public void onItemSelected(MaterialSpinner materialSpinner, int i, long l, Object o) {
+            public void onItemSelected(MaterialSpinner view, int position, long id, BeanClass item) {
+                flTransparent.setVisibility(View.GONE);
+                List<BeanCourse> courses = new ArrayList<BeanCourse>();
+                if (item != null && item.getG_id() != null) {
+                    courses = GreenDaoHelper.getInstance().getCourseByGId(item.getG_id());
+                }
+                if (courses.size() == 0) {
+                    spnCourse.setItems("无课程");
+                } else {
+                    spnCourse.setItems(courses);
+                }
                 getFirstPageData();
             }
         });
-        spnStudents.setOnNothingSelectedListener(spinnerNothingSelectedListener);
+        spnClass.setOnNothingSelectedListener(spinnerNothingSelectedListener);
 
+        spnCourse.setItems(GreenDaoHelper.getInstance().getAllCourseNameAppend());
+        spnCourse.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<BeanCourse>() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, BeanCourse item) {
+                getFirstPageData();
+            }
+        });
+        spnCourse.setOnNothingSelectedListener(spinnerNothingSelectedListener);
+
+        startTime = CommonUtil.getDate2StrBefore(6);
+        endTime = CommonUtil.getCurrentDate();
+
+        setTxtDate();
         getFirstPageData();
     }
 
-    private void getFirstPageData() {
+    private void getFirstPageData(){
         flTransparent.setVisibility(View.GONE);
         resultPage.setPage(1);
         adapter.refreshData(new ArrayList<BeanHomeWork>());
@@ -127,32 +161,67 @@ public class HomeWorkActivity extends BaseListActivity {
         txtDate.setText(startTime + "\n" + endTime);
     }
 
-    @OnClick({R.id.txtDate, R.id.spnStudents})
+    @OnClick({R.id.txtDate, R.id.spnClass, R.id.spnCourse})
     void homeWorkClick(View view) {
         switch (view.getId()) {
             case R.id.txtDate:
                 showDatePop();
                 break;
-            case R.id.spnStudents:
-                if (spnStudents.getItems().size() != 1) {
+            case R.id.spnClass:
+                if (spnClass.getItems().size() != 1) {
+                    flTransparent.setVisibility(View.VISIBLE);
+                }
+                break;
+            case R.id.spnCourse:
+                if (spnCourse.getItems().size() != 1) {
                     flTransparent.setVisibility(View.VISIBLE);
                 }
                 break;
         }
     }
 
+    //新增，删除，修改
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.i(TAG, "onActivityResult: " + resultCode);
+        if (data == null || data.getExtras() == null) {
+            Log.i(TAG, "onActivityResult: data.getExtras() is null");
+            return;
+        }
+        BeanHomeWork homeWork = data.getExtras().getParcelable(ExtraKey.HOMEWORK_DETAIL);
+        if (homeWork == null) {
+            Log.i(TAG, "onActivityResult: homeWork is null");
+            return;
+        }
+
+        switch (resultCode) {
+            case ActivityResultCode.HomeWork_delete:
+                Log.i(TAG, "onActivityResult: deleteData");
+                int position = adapter.deleteData(homeWork);
+                if (position != -1) {
+                    recyclerView.deleteByPosition(position);
+                }
+                break;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     private void getHomeWorkList() {
-        BeanStudent student = (BeanStudent) spnStudents.getSelectedItem();
+        BeanClass currentClass = (BeanClass) spnClass.getSelectedItem();
+        BeanCourse currentCourse = new BeanCourse();
+        try {
+            currentCourse = (BeanCourse) spnCourse.getSelectedItem();
+        } catch (Exception ex) {
+            currentCourse = new BeanCourse();
+        }
 
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.HOMEWORK_QUERY,
                 new VolleyHttpParamsEntity()
-                        .addParam("s_id", student.getS_id())
-                        .addParam("a_id", student.getA_id())
-                        .addParam("g_id", student.getG_id())
-                        .addParam("c_id", student.getC_id())
+                        .addParam("c_id", currentClass.getC_id())
                         .addParam("sdate", startTime)
                         .addParam("edate", endTime)
                         .addParam("page", resultPage.getPage() + "")
+                        .addParam("crs_id", currentCourse.getId())
                         .addParam("token", CommonUtil.encryptToken(HttpAction.HOMEWORK_QUERY)),
                 new MyVolleyRequestListener() {
                     @Override
@@ -182,17 +251,18 @@ public class HomeWorkActivity extends BaseListActivity {
                                         recyclerView.setAutoLoadMoreEnable(false);
                                     }
 
+                                    List<BeanHomeWork> homeWorks = new ArrayList<>();
+//                                    JSONArray jsonArray = jsonObject.getJSONArray("content");
                                     Gson gson = new Gson();
-                                    List<BeanHomeWork> homeWorks = gson.fromJson(jsonObject.getJSONArray("content").toString(),
-                                            new TypeToken<List<BeanHomeWork>>() {
-                                            }.getType());
+                                    homeWorks = gson.fromJson(jsonObject.getJSONArray("content").toString(), new TypeToken<List<BeanHomeWork>>() {
+                                    }.getType());
 
                                     if (resultPage.getPage() > 1) {
                                         adapter.appendData(homeWorks);
                                     } else {
                                         //第一页数据
                                         if (homeWorks.size() == 0) {
-                                            Toast.makeText(HomeWorkActivity.this, R.string.toast_data_empty, Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(HomeWorkTeacherActivity.this, R.string.toast_data_empty, Toast.LENGTH_SHORT).show();
                                         }
                                         recyclerView.removeAllViews();
                                         adapter.refreshData(homeWorks);
@@ -200,11 +270,11 @@ public class HomeWorkActivity extends BaseListActivity {
                                     recyclerView.notifyMoreFinish(resultPage.getTotal_page() > resultPage.getPage());
                                 } catch (Exception ex) {
                                     Log.i(TAG, "onResponse: " + ex.getMessage());
-                                    Toast.makeText(HomeWorkActivity.this, HttpErrorMsg.ERROR_JSON, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(HomeWorkTeacherActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                                 break;
                             default:
-                                Toast.makeText(HomeWorkActivity.this, httpResult.getInfo(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(HomeWorkTeacherActivity.this, httpResult.getInfo(), Toast.LENGTH_SHORT).show();
                                 break;
                         }
                     }
@@ -233,9 +303,8 @@ public class HomeWorkActivity extends BaseListActivity {
                     getFirstPageData();
                 }
             });
-
             datePopup = new PopupWindow(calendarView,
-                    LinearLayout.LayoutParams.MATCH_PARENT, CommonUtil.getPopDateHeight(), true);
+                    LinearLayout.LayoutParams.WRAP_CONTENT, CommonUtil.getPopDateHeight(), true);
             datePopup.setTouchable(true);
             datePopup.setBackgroundDrawable(new BitmapDrawable());
             datePopup.setOnDismissListener(new PopupWindow.OnDismissListener() {
@@ -250,6 +319,16 @@ public class HomeWorkActivity extends BaseListActivity {
         datePopup.showAsDropDown(txtDate, 0, 2);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try {
+            this.unregisterReceiver(HomeworkAmendReceiver);
+        } catch (Exception ex) {
+
+        }
+    }
+
     MaterialSpinner.OnNothingSelectedListener spinnerNothingSelectedListener = new MaterialSpinner.OnNothingSelectedListener() {
         @Override
         public void onNothingSelected(MaterialSpinner spinner) {
@@ -257,4 +336,26 @@ public class HomeWorkActivity extends BaseListActivity {
         }
     };
 
+    BroadcastReceiver HomeworkAmendReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.i(TAG, "onReceive: " + intent.getAction());
+
+            if (intent.getAction() == BroadcastAction.HOMEWORK_AMEND) {
+                Log.i(TAG, "onReceive: equal");
+                if (intent == null || intent.getExtras() == null) {
+                    Log.i(TAG, "onActivityResult: data.getExtras() is null");
+                    return;
+                }
+                BeanHomeWork homeWork = intent.getExtras().getParcelable(ExtraKey.HOMEWORK_DETAIL);
+                if (homeWork == null) {
+                    Log.i(TAG, " is null");
+                    return;
+                }
+
+                Log.i(TAG, "onReceive: " + homeWork.toString());
+                recyclerView.updateItem(adapter.updateData(homeWork));
+            }
+        }
+    };
 }

@@ -244,6 +244,86 @@ public class GreenDaoHelper {
         return new ArrayList<ContactParent>();
     }
 
+    /**
+     * 获取全部班级(包含【全部】选项)
+     *
+     * @return
+     */
+    public List<BeanClass> getAllClassNameAppend() {
+        List<BeanClass> classes = new ArrayList<>();
+        BeanClass all = new BeanClass();
+        all.setName("全部");
+        all.setC_id("");
+        all.setG_id("");
+        classes.add(all);
+        classes.addAll(getAllClass());
+        return classes;
+    }
+
+    /**
+     * 获取全部班级
+     *
+     * @return
+     */
+    public List<BeanClass> getAllClass() {
+        List<BeanClass> classes = new ArrayList<>();
+        if (readDaoSession != null) {
+            classes = readDaoSession.getBeanClassDao().queryBuilder().orderAsc(BeanClassDao.Properties.G_id).list();
+        }
+        return classes;
+    }
+
+    public List<BeanCourse> getCourseByGId(String g_id) {
+        List<BeanCourse> courses = new ArrayList<>();
+        if (readDaoSession != null) {
+            if (g_id.isEmpty() || g_id == null) {
+                courses = readDaoSession.getBeanCourseDao().queryBuilder().list();
+            } else {
+                courses = readDaoSession.getBeanCourseDao().queryBuilder().where(BeanCourseDao.Properties.G_id.eq(g_id)).list();
+            }
+
+        }
+        return courses;
+    }
+
+    /**
+     * 获取全部课程(包含【全部】选项)
+     *
+     * @return
+     */
+    public List<BeanCourse> getAllCourseNameAppend() {
+        List<BeanCourse> courses = new ArrayList<>();
+        BeanCourse all = new BeanCourse();
+        all.setId("");
+        all.setName("全部");
+        courses.add(all);
+        courses.addAll(getAllCourse());
+        return courses;
+    }
+
+    /**
+     * 获取全部课程
+     *
+     * @return
+     */
+    public List<BeanCourse> getAllCourse() {
+        List<BeanCourse> courses = new ArrayList<>();
+        if (readDaoSession != null) {
+            courses = readDaoSession.getBeanCourseDao().loadAll();
+        }
+        return courses;
+    }
+
+    public String getCourseNameById(String id) {
+        if (readDaoSession != null) {
+            BeanCourse course = readDaoSession.getBeanCourseDao().queryBuilder().where(BeanCourseDao.Properties.Id.eq(id)).unique();
+            if (course != null) {
+                return course.getName();
+            }
+        }
+        return "";
+    }
+
     public ContactTeacherForParent getContactByTeacher(String t_u_id) {
         if (readDaoSession != null) {
             return readDaoSession.getContactTeacherForParentDao().queryBuilder()

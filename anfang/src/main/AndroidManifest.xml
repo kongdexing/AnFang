@@ -13,6 +13,7 @@
     <uses-permission android:name="android.permission.READ_LOGS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
@@ -87,6 +88,7 @@
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="${API_KEY_BAIDU}" />
+
         <activity
             android:name="com.xiaomi.ad.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
@@ -103,16 +105,17 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.main.MainActivity"
+        <activity
+            android:name=".ui.main.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".ui.main.SplashActivity"
             android:theme="@style/AppTheme.Translucent" />
 
-        <activity android:name=".ui.main.WebViewActivity"/>
+        <activity android:name=".ui.main.WebViewActivity" />
 
         <activity
             android:name=".ui.login.LoginActivity"
@@ -143,9 +146,14 @@
             android:windowSoftInputMode="adjustResize|stateVisible" />
 
         <!--家庭作业-->
-        <activity android:name=".ui.homework.HomeWorkActivity" />
+        <activity android:name=".ui.homework.HomeWorkParentActivity" />
+        <activity android:name=".ui.homework.HomeWorkTeacherActivity" />
         <activity
-            android:name=".ui.homework.HomeWorkDetailActivity"
+            android:name=".ui.homework.HomeWorkDetailParentActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.homework.HomeWorkDetailTeacherActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
@@ -214,7 +222,7 @@
             android:name="com.hyphenate.chat.EMChatService"
             android:exported="true" />
         <!-- 声明sdk所需的receiver -->
-        <receiver android:name="com.hyphenate.chat.EMMonitorReceiver" >
+        <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
 
@@ -229,12 +237,12 @@
 
         <!-- 百度地图所需的service -->
         <!--<service-->
-            <!--android:name="com.baidu.location.f"-->
-            <!--android:enabled="true"-->
-            <!--android:process=":remote" />-->
+        <!--android:name="com.baidu.location.f"-->
+        <!--android:enabled="true"-->
+        <!--android:process=":remote" />-->
         <!--<meta-data-->
-            <!--android:name="com.baidu.lbsapi.API_KEY"-->
-            <!--android:value="3ecea51f560650b1ed8a4b99808f52e8" />-->
+        <!--android:name="com.baidu.lbsapi.API_KEY"-->
+        <!--android:value="3ecea51f560650b1ed8a4b99808f52e8" />-->
 
     </application>
 

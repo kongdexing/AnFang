@@ -6,8 +6,6 @@
     android:background="@color/common_bg"
     android:orientation="vertical">
 
-    <include layout="@layout/ease_search_bar" />
-
     <FrameLayout
         android:id="@+id/fl_error_item"
         android:layout_width="match_parent"

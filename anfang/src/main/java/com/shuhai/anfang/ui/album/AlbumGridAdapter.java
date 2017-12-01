@@ -47,6 +47,10 @@ public class AlbumGridAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    public List<String> getImgPaths() {
+        return imgPaths;
+    }
+
     public void initDate(List<String> imgs, boolean canDel) {
         this.imgPaths = imgs;
         this.canDelete = canDel;
@@ -94,7 +98,7 @@ public class AlbumGridAdapter extends BaseAdapter {
         viewHolder.imgDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LocalImageHelper.getInstance().removeItemByOriginalUri(imgPaths.get(position - 1));
+                LocalImageHelper.getInstance().getLocalCheckedImgs().remove(imgPaths.get(position - 1));
                 imgPaths.remove(position - 1);
                 notifyDataSetChanged();
             }

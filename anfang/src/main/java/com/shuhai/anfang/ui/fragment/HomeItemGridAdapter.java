@@ -79,16 +79,6 @@ public class HomeItemGridAdapter extends BaseAdapter {
                     //1.判断是否登录
                     //2.判断角色(暂时不用)
                     if (XPTApplication.getInstance().isLoggedIn()) {
-//                        switch (XPTApplication.getInstance().getCurrent_user_type()) {
-//                            case PARENT:
-//                                if (item.isShowForParent()){
-//                                    //展示给家长
-//                                }
-//                                break;
-//                            case TEACHER:
-//
-//                                break;
-//                        }
                         mContext.startActivity(item.getIntent());
                     } else {
                         //弹出登录对话框
@@ -106,7 +96,6 @@ public class HomeItemGridAdapter extends BaseAdapter {
                     //任意角色可见
 
                 }
-
             }
         });
 

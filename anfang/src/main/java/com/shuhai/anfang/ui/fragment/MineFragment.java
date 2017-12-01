@@ -18,6 +18,7 @@ import com.shuhai.anfang.model.BeanParent;
 import com.shuhai.anfang.model.BeanTeacher;
 import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.ui.login.LoginActivity;
+import com.shuhai.anfang.ui.mine.MyChildActivity;
 import com.shuhai.anfang.ui.mine.MyInfoActivity;
 import com.shuhai.anfang.ui.setting.QRCodeActivity;
 
@@ -129,9 +130,9 @@ public class MineFragment extends BaseFragment {
             case R.id.ll_login:
                 startActivity(new Intent(getContext(), MyInfoActivity.class));
                 break;
-//            case R.id.rlMyChild:
-//                startActivity(new Intent(getContext(), MyChildActivity.class));
-//                break;
+            case R.id.rlMyChild:
+                startActivity(new Intent(getContext(), MyChildActivity.class));
+                break;
 //            case R.id.rlMyCourse:
 //                startActivity(new Intent(getContext(), CourseActivity.class));
 //                break;

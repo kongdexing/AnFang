@@ -15,7 +15,7 @@ import com.shuhai.anfang.view.imgloader.AlbumViewPager;
 
 import butterknife.BindView;
 
-public class HomeWorkDetailActivity extends VoicePlayActivity {
+public class HomeWorkDetailParentActivity extends VoicePlayActivity {
 
     @BindView(R.id.scrollView)
     ScrollView scrollView;
@@ -58,7 +58,7 @@ public class HomeWorkDetailActivity extends VoicePlayActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_publish_home_work);
+        setContentView(R.layout.activity_home_work_detail);
 
         mScrollView = scrollView;
 
@@ -79,7 +79,7 @@ public class HomeWorkDetailActivity extends VoicePlayActivity {
                 } else {
                     if (position == 0) {
 //                        if (LocalImageHelper.getInstance().getCheckedItems().size() >= LocalImageHelper.getInstance().getMaxChoiceSize()) {
-//                            Toast.makeText(HomeWorkDetailActivity.this, getString(R.string.image_upline, LocalImageHelper.getInstance().getMaxChoiceSize()), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(HomeWorkDetailParentActivity.this, getString(R.string.image_upline, LocalImageHelper.getInstance().getMaxChoiceSize()), Toast.LENGTH_SHORT).show();
 //                            return;
 //                        }
 //                        showAlbumSource(albumviewpager);

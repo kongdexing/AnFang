@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,6 @@ import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingProgressListener;
 import com.shuhai.anfang.R;
-import com.shuhai.anfang.common.LocalFile;
 
 import java.util.List;
 
@@ -88,6 +88,9 @@ public class AlbumViewPager extends ViewPager implements MatrixImageView.OnMovin
         localOptions = new DisplayImageOptions.Builder()
                 .cacheInMemory(true)
                 .cacheOnDisk(false)
+                .showImageForEmptyUri(R.drawable.pictures_no)
+                .showImageOnFail(R.drawable.pictures_no)
+                .showImageOnLoading(R.drawable.pictures_no)
                 .bitmapConfig(Bitmap.Config.RGB_565)
                 .imageScaleType(ImageScaleType.EXACTLY)
                 .displayer(new SimpleBitmapDisplayer()).build();
@@ -121,13 +124,16 @@ public class AlbumViewPager extends ViewPager implements MatrixImageView.OnMovin
     }
 
     public class LocalViewPagerAdapter extends PagerAdapter {
-        private List<LocalFile> paths;//大图地址 如果为网络图片 则为大图url
+        private List<String> paths;//大图地址 如果为网络图片 则为大图url
 
-        public LocalViewPagerAdapter(List<LocalFile> paths) {
+        public LocalViewPagerAdapter(List<String> paths) {
             this.paths = paths;
+            for (int i = 0; i < paths.size(); i++) {
+                Log.i(TAG, "LocalViewPagerAdapter: " + paths.get(i));
+            }
         }
 
-        public void reloadPath(List<LocalFile> paths) {
+        public void reloadPath(List<String> paths) {
             this.paths = paths;
             notifyDataSetChanged();
         }
@@ -147,9 +153,10 @@ public class AlbumViewPager extends ViewPager implements MatrixImageView.OnMovin
             MatrixImageView imageView = (MatrixImageView) imageLayout.findViewById(R.id.image);
             imageView.setOnMovingListener(AlbumViewPager.this);
             imageView.setOnSingleTapListener(onSingleTapListener);
-            LocalFile path = paths.get(position);
-            ImageLoader.getInstance().displayImage(path.getOriginalUri(), new ImageViewAware(imageView), localOptions, loadingListener,
-                    new ProcessListener(imageLayout), path.getOrientation());
+            String path = paths.get(position);
+            Log.i(TAG, "instantiateItem: " + path);
+            ImageLoader.getInstance().displayImage(path, new ImageViewAware(imageView), localOptions, loadingListener,
+                    new ProcessListener(imageLayout));
             return imageLayout;
         }
 
