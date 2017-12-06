@@ -21,11 +21,12 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
-import com.shuhai.anfang.common.LocalImageHelper;
 import com.shuhai.anfang.common.SharedPreferencesUtil;
 import com.shuhai.anfang.common.UserType;
 import com.shuhai.anfang.ease.EaseHelper;
 import com.shuhai.anfang.model.GreenDaoHelper;
+import com.shuhai.anfang.ui.album.LocalImagePHelper;
+import com.shuhai.anfang.ui.album.LocalImageTHelper;
 import com.shuhai.anfang.ui.main.MainActivity;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
@@ -82,7 +83,9 @@ public class XPTApplication extends Application {
 
     private void init() {
         initImageLoader(getInstance());
-        LocalImageHelper.init(this);
+        LocalImagePHelper.init(this);
+        LocalImageTHelper.init(this);
+
         VolleyHttpService.init(this);
 
         if (display == null) {

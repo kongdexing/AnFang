@@ -1,4 +1,4 @@
-package com.shuhai.anfang.view.imgloader;
+package com.shuhai.anfang.ui.album;
 
 
 import android.content.Context;
@@ -21,10 +21,11 @@ import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingProgressListener;
 import com.shuhai.anfang.R;
+import com.shuhai.anfang.view.imgloader.MatrixImageView;
 
 import java.util.List;
 
-public class AlbumViewPager extends ViewPager implements MatrixImageView.OnMovingListener {
+public class AlbumTeacherViewPager extends ViewPager implements MatrixImageView.OnMovingListener {
 
     public final static String TAG = "AlbumViewPager";
 
@@ -83,7 +84,7 @@ public class AlbumViewPager extends ViewPager implements MatrixImageView.OnMovin
     /**
      * 播放按钮点击事件
      */
-    public AlbumViewPager(Context context, AttributeSet attrs) {
+    public AlbumTeacherViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
         localOptions = new DisplayImageOptions.Builder()
                 .cacheInMemory(true)
@@ -151,7 +152,7 @@ public class AlbumViewPager extends ViewPager implements MatrixImageView.OnMovin
             viewGroup.addView(imageLayout);
             assert imageLayout != null;
             MatrixImageView imageView = (MatrixImageView) imageLayout.findViewById(R.id.image);
-            imageView.setOnMovingListener(AlbumViewPager.this);
+            imageView.setOnMovingListener(AlbumTeacherViewPager.this);
             imageView.setOnSingleTapListener(onSingleTapListener);
             String path = paths.get(position);
             Log.i(TAG, "instantiateItem: " + path);
@@ -202,7 +203,7 @@ public class AlbumViewPager extends ViewPager implements MatrixImageView.OnMovin
             viewGroup.addView(imageLayout);
             assert imageLayout != null;
             MatrixImageView imageView = (MatrixImageView) imageLayout.findViewById(R.id.image);
-            imageView.setOnMovingListener(AlbumViewPager.this);
+            imageView.setOnMovingListener(AlbumTeacherViewPager.this);
             imageView.setOnSingleTapListener(onSingleTapListener);
             ImageLoader.getInstance().displayImage(paths.get(position), new ImageViewAware(imageView), localOptions, loadingListener,
                     new ProcessListener(imageLayout));

@@ -101,7 +101,7 @@ public class TUriParse {
         if (uri == null) return null;
         String path;
         if (TextUtils.equals(uri.getAuthority(), TConstant.getFileProviderName(context))) {
-            path = new File(uri.getPath().replace("camera_photos/", "")).getAbsolutePath();
+            path = new File(uri.getPath().replace("camera_take_photos/", "")).getAbsolutePath();
         } else {
             path = uri.getPath();
         }

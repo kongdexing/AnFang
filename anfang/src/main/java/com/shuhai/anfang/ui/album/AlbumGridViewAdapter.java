@@ -95,7 +95,7 @@ public class AlbumGridViewAdapter extends BaseAdapter {
         ImageLoader.getInstance().displayImage(localFile.getThumbnailUri(), new ImageViewAware(viewHolder.imageView), options,
                 loadingListener, null);
         viewHolder.checkBox.setTag(localFile);
-//        viewHolder.checkBox.setChecked(LocalImageHelper.getInstance().getCheckedItems().contains(localFile));
+//        viewHolder.checkBox.setChecked(LocalImagePHelper.getInstance().getCheckedItems().contains(localFile));
         viewHolder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

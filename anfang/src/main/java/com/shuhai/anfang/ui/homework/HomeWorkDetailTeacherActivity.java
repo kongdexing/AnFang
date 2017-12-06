@@ -28,17 +28,18 @@ import com.shuhai.anfang.common.ActivityResultCode;
 import com.shuhai.anfang.common.BroadcastAction;
 import com.shuhai.anfang.common.CommonUtil;
 import com.shuhai.anfang.common.ExtraKey;
-import com.shuhai.anfang.common.LocalImageHelper;
+import com.shuhai.anfang.ui.album.LocalImagePHelper;
 import com.shuhai.anfang.http.HttpAction;
 import com.shuhai.anfang.http.MyVolleyRequestListener;
 import com.shuhai.anfang.model.BeanClass;
 import com.shuhai.anfang.model.BeanCourse;
 import com.shuhai.anfang.model.GreenDaoHelper;
-import com.shuhai.anfang.ui.album.AlbumGridAdapter;
+import com.shuhai.anfang.ui.album.AlbumGridTeacherAdapter;
+import com.shuhai.anfang.ui.album.AlbumTeacherViewPager;
+import com.shuhai.anfang.ui.album.LocalImageTHelper;
 import com.shuhai.anfang.util.ToastUtils;
 import com.shuhai.anfang.view.CustomDialog;
 import com.shuhai.anfang.view.TimePickerPopupWindow;
-import com.shuhai.anfang.view.imgloader.AlbumViewPager;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -92,7 +93,7 @@ public class HomeWorkDetailTeacherActivity extends VoiceRecordActivity {
     TextView txtCompleteTime;
 
     @BindView(R.id.albumviewpager)
-    AlbumViewPager albumviewpager;
+    AlbumTeacherViewPager albumviewpager;
 
     private TimePickerPopupWindow pushDate, completeDate;
     private BeanHomeWork currentHomeWork;
@@ -102,8 +103,6 @@ public class HomeWorkDetailTeacherActivity extends VoiceRecordActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publish_home_work);
-
-        mScrollView = scrollView;
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -116,6 +115,7 @@ public class HomeWorkDetailTeacherActivity extends VoiceRecordActivity {
             setTitle(R.string.homework_detail);
         }
 
+        mScrollView = scrollView;
         initData();
     }
 
@@ -151,7 +151,7 @@ public class HomeWorkDetailTeacherActivity extends VoiceRecordActivity {
             }
         });
 
-        myPicGridAdapter = new AlbumGridAdapter(this, new AlbumGridAdapter.MyGridViewClickListener() {
+        myPicGridAdapter = new AlbumGridTeacherAdapter(this, new AlbumGridTeacherAdapter.MyGridViewClickListener() {
             @Override
             public void onGridViewItemClick(int position, String imgPath) {
                 Log.i(TAG, "onGridViewItemClick: " + imgPath);
@@ -160,8 +160,8 @@ public class HomeWorkDetailTeacherActivity extends VoiceRecordActivity {
                     showNetImgViewPager(albumviewpager, currentHomeWork.getFile_path(), position);
                 } else {
                     if (position == 0) {
-                        if (myPicGridAdapter.getImgPaths().size() >= LocalImageHelper.getInstance().getMaxChoiceSize()) {
-                            Toast.makeText(HomeWorkDetailTeacherActivity.this, getString(R.string.image_upline, LocalImageHelper.getInstance().getMaxChoiceSize()), Toast.LENGTH_SHORT).show();
+                        if (myPicGridAdapter.getImgPaths().size() >= LocalImagePHelper.getInstance().getMaxChoiceSize()) {
+                            Toast.makeText(HomeWorkDetailTeacherActivity.this, getString(R.string.image_upline, LocalImagePHelper.getInstance().getMaxChoiceSize()), Toast.LENGTH_SHORT).show();
                             return;
                         }
                         showAlbumSource(albumviewpager);
@@ -179,8 +179,8 @@ public class HomeWorkDetailTeacherActivity extends VoiceRecordActivity {
                 btnDelete.setVisibility(View.VISIBLE);
                 btnSubmit.setVisibility(View.GONE);
                 llTeacher.setVisibility(View.GONE);
-                LocalImageHelper.getInstance().setCurrentEnableMaxChoiceSize(
-                        LocalImageHelper.getInstance().getMaxChoiceSize() - currentHomeWork.getFile_path().size());
+                LocalImageTHelper.getInstance().setCurrentEnableMaxChoiceSize(
+                        LocalImageTHelper.getInstance().getMaxChoiceSize() - currentHomeWork.getFile_path().size());
                 final List<BeanClass> beanClasses = GreenDaoHelper.getInstance().getAllClass();
                 if (beanClasses.size() > 0 && allCourse.size() > 0) {
                     setTxtRight("编辑");
@@ -205,6 +205,7 @@ public class HomeWorkDetailTeacherActivity extends VoiceRecordActivity {
             llTeacher.setVisibility(View.GONE);
             btnDelete.setVisibility(View.GONE);
             btnSubmit.setVisibility(View.VISIBLE);
+            txtCompleteTime.setText(CommonUtil.getDate2StrAfter(1));
         }
 
         //
@@ -398,13 +399,6 @@ public class HomeWorkDetailTeacherActivity extends VoiceRecordActivity {
                 uploadFile.add(imgPath.get(i).replace("file://", ""));
             }
         }
-
-//        List<String> checkedItems = LocalImageHelper.getInstance().getLocalCheckedImgs();
-//        for (String checkFile : checkedItems) {
-//            if (checkFile != null) {
-//                uploadFile.add(checkFile);
-//            }
-//        }
 
         String amrPath = localAmrFile;
         if (amrPath == null) {

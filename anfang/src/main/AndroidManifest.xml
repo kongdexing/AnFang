@@ -213,6 +213,17 @@
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide" />
 
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.shuhai.anfang.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+        <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
+
         <!-- 设置环信应用的appkey -->
         <meta-data
             android:name="EASEMOB_APPKEY"

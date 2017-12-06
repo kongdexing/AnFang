@@ -1,7 +1,6 @@
 package com.shuhai.anfang.ui.album;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,46 +8,37 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.shuhai.anfang.R;
-import com.shuhai.anfang.common.LocalImageHelper;
+import com.shuhai.anfang.common.CommonUtil;
 import com.shuhai.anfang.view.FilterImageView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AlbumGridAdapter extends BaseAdapter {
+public class AlbumGridTeacherAdapter extends BaseAdapter {
     private Context mContext;
     private String TAG = getClass().getSimpleName();
     public List<String> imgPaths = new ArrayList<>();
     private MyGridViewClickListener myGridViewClickListener;
     private boolean canDelete = true;
-    private DisplayImageOptions options;
 
-    public AlbumGridAdapter(Context mContext, MyGridViewClickListener listener) {
+    public AlbumGridTeacherAdapter(Context mContext, MyGridViewClickListener listener) {
         super();
         this.mContext = mContext;
         this.myGridViewClickListener = listener;
-        options = new DisplayImageOptions.Builder()
-                .cacheInMemory(true)
-                .cacheOnDisk(true)
-                .showImageForEmptyUri(R.drawable.pictures_no)
-                .showImageOnFail(R.drawable.pictures_no)
-                .showImageOnLoading(R.drawable.pictures_no)
-                .bitmapConfig(Bitmap.Config.RGB_565)
-                .displayer(new SimpleBitmapDisplayer()).build();
     }
 
     public void reloadPicture(List<String> imgs) {
-        this.imgPaths = imgs;
+        List<String> tempImgs = new ArrayList<>();
+        for (int j = 0; j < imgs.size(); j++) {
+            if (!imgPaths.contains(imgs.get(j))) {
+                tempImgs.add(imgs.get(j));
+            }
+        }
+        this.imgPaths.addAll(tempImgs);
         notifyDataSetChanged();
-    }
-
-    public List<String> getImgPaths() {
-        return imgPaths;
     }
 
     public void initDate(List<String> imgs, boolean canDel) {
@@ -57,9 +47,16 @@ public class AlbumGridAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    public List<String> getImgPaths() {
+        return imgPaths;
+    }
+
     @Override
     public int getCount() {
-        return canDelete ? imgPaths.size() + 1 : imgPaths.size();
+        int count = canDelete ? imgPaths.size() + 1 : imgPaths.size();
+        LocalImageTHelper.getInstance().setCurrentEnableMaxChoiceSize(
+                LocalImageTHelper.getInstance().getMaxChoiceSize() - imgPaths.size());
+        return count;
     }
 
     @Override
@@ -74,7 +71,7 @@ public class AlbumGridAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        Log.i(TAG, "getView: "+position);
+        Log.i(TAG, "getView: " + position);
         ViewHolder viewHolder = null;
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(
@@ -91,26 +88,31 @@ public class AlbumGridAdapter extends BaseAdapter {
             public void onClick(View view) {
                 if (myGridViewClickListener != null) {
                     myGridViewClickListener.onGridViewItemClick(position, position == 0 ?
-                            (canDelete ? "" : imgPaths.get(position )) : (canDelete ? imgPaths.get(position - 1) : imgPaths.get(position)));
+                            (canDelete ? "" : imgPaths.get(position)) : (canDelete ? imgPaths.get(position - 1) : imgPaths.get(position)));
                 }
             }
         });
         viewHolder.imgDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LocalImageHelper.getInstance().getLocalCheckedImgs().remove(imgPaths.get(position - 1));
+                LocalImageTHelper.getInstance().getLocalCheckedImgs().remove(imgPaths.get(position - 1));
                 imgPaths.remove(position - 1);
                 notifyDataSetChanged();
             }
         });
         if (position == 0) {
             viewHolder.imgDelete.setVisibility(View.GONE);
-            if (!canDelete){
-                ImageLoader.getInstance().displayImage(imgPaths.get(position), new ImageViewAware(viewHolder.imageView),options);
+            if (!canDelete) {
+                ImageLoader.getInstance().displayImage(imgPaths.get(position), new ImageViewAware(viewHolder.imageView), CommonUtil.getDefaultImageLoaderOption());
+            } else {
+                ImageLoader.getInstance().displayImage("drawable://" + R.drawable.post_add_pic, new ImageViewAware(viewHolder.imageView), CommonUtil.getDefaultImageLoaderOption());
             }
         } else {
             viewHolder.imgDelete.setVisibility(canDelete ? View.VISIBLE : View.GONE);
-            ImageLoader.getInstance().displayImage(imgPaths.get(position), new ImageViewAware(viewHolder.imageView),options);
+            String patch = imgPaths.get(canDelete ? position - 1 : position);
+            Log.i(TAG, "getView: patch " + patch);
+
+            ImageLoader.getInstance().displayImage(patch, new ImageViewAware(viewHolder.imageView), CommonUtil.getDefaultImageLoaderOption());
         }
         return convertView;
     }

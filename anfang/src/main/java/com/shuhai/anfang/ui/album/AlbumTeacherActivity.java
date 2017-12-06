@@ -1,11 +1,10 @@
 package com.shuhai.anfang.ui.album;
 
-import android.Manifest;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -26,86 +25,48 @@ import com.jph.takephoto.model.TResult;
 import com.jph.takephoto.model.TakePhotoOptions;
 import com.jph.takephoto.uitl.TFileUtils;
 import com.shuhai.anfang.R;
-import com.shuhai.anfang.common.LocalImageHelper;
 import com.shuhai.anfang.view.AlbumSourceView;
-import com.shuhai.anfang.view.imgloader.AlbumViewPager;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import permissions.dispatcher.NeedsPermission;
-import permissions.dispatcher.OnNeverAskAgain;
-import permissions.dispatcher.OnPermissionDenied;
-import permissions.dispatcher.OnShowRationale;
-import permissions.dispatcher.PermissionRequest;
-import permissions.dispatcher.RuntimePermissions;
-
 /**
  * Created by Administrator on 2016/10/29.
  */
-@RuntimePermissions
-public class AlbumActivity extends TakePhotoActivity {
+public class AlbumTeacherActivity extends TakePhotoActivity {
 
     public ScrollView mScrollView;
     private PopupWindow picPopup;
-    public AlbumGridAdapter myPicGridAdapter;
+    public AlbumGridTeacherAdapter myPicGridAdapter;
+
+    @Override
+    public boolean navigateUpTo(Intent upIntent) {
+        return super.navigateUpTo(upIntent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LocalImageHelper.getInstance().getLocalCheckedImgs().clear();
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        // NOTE: delegate the permission handling to generated method
-        Log.i(TAG, "onRequestPermissionsResult: " + permissions[0]);
-        AlbumActivityPermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
-    }
-
-    @NeedsPermission({Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    void toLocalAlbum() {
-        Log.i(TAG, "toLocalAlbum: ");
-    }
-
-    @OnPermissionDenied({Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    void onStorageDenied() {
-        // NOTE: Deal with a denied permission, e.g. by showing specific UI
-        // or disabling certain functionality
-        Toast.makeText(this, R.string.permission_storage_denied, Toast.LENGTH_SHORT).show();
-    }
-
-    @OnShowRationale({Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    void showRationaleForStorage(PermissionRequest request) {
-        // NOTE: Show a rationale to explain why the permission is needed, e.g. with a dialog.
-        // Call proceed() or cancel() on the provided PermissionRequest to continue or abort
-        request.proceed();
-    }
-
-    @OnNeverAskAgain({Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    void onStorageNeverAskAgain() {
-        Log.i(TAG, "onStorageNeverAskAgain: ");
-        Toast.makeText(this, R.string.permission_storage_never_askagain, Toast.LENGTH_SHORT).show();
+        LocalImageTHelper.getInstance().getLocalCheckedImgs().clear();
     }
 
     public void showAlbumSource(View view) {
         //选择相片来源
         if (picPopup == null) {
             TFileUtils.setCacheFile(null);
-            AlbumSourceView albumSourceView = new AlbumSourceView(AlbumActivity.this);
+            AlbumSourceView albumSourceView = new AlbumSourceView(AlbumTeacherActivity.this);
             albumSourceView.setOnAlbumSourceClickListener(new AlbumSourceView.OnAlbumSourceClickListener() {
                 @Override
                 public void onAlbumClick() {
-                    if (LocalImageHelper.getInstance().getLocalCheckedImgs().size() >= LocalImageHelper.getInstance().getMaxChoiceSize()) {
-                        Toast.makeText(AlbumActivity.this, getString(R.string.image_upline, LocalImageHelper.getInstance().getMaxChoiceSize()), Toast.LENGTH_SHORT).show();
+                    if (LocalImageTHelper.getInstance().getLocalCheckedImgs().size() >= LocalImageTHelper.getInstance().getMaxChoiceSize()) {
+                        Toast.makeText(AlbumTeacherActivity.this, getString(R.string.image_upline, LocalImageTHelper.getInstance().getMaxChoiceSize()), Toast.LENGTH_SHORT).show();
                         return;
                     }
                     TakePhoto takePhoto = getTakePhoto();
                     configCompress(takePhoto);
                     configTakePhotoOption(takePhoto);
-                    int limit = LocalImageHelper.getInstance().getCurrentEnableMaxChoiceSize();
+                    int limit = LocalImageTHelper.getInstance().getCurrentEnableMaxChoiceSize();
 //                    takePhoto.onPickMultiple(limit);
                     takePhoto.onPickMultipleWithCrop(limit, getCropOptions());
                     picPopup.dismiss();
@@ -113,13 +74,13 @@ public class AlbumActivity extends TakePhotoActivity {
 
                 @Override
                 public void onCameraClick() {
-                    if (LocalImageHelper.getInstance().getLocalCheckedImgs().size() >= LocalImageHelper.getInstance().getMaxChoiceSize()) {
-                        Toast.makeText(AlbumActivity.this, getString(R.string.image_upline, LocalImageHelper.getInstance().getMaxChoiceSize()), Toast.LENGTH_SHORT).show();
+                    if (LocalImageTHelper.getInstance().getLocalCheckedImgs().size() >= LocalImageTHelper.getInstance().getMaxChoiceSize()) {
+                        Toast.makeText(AlbumTeacherActivity.this, getString(R.string.image_upline, LocalImageTHelper.getInstance().getMaxChoiceSize()), Toast.LENGTH_SHORT).show();
                         return;
                     }
                     try {
                         //  拍照后保存图片的绝对路径
-                        String cameraPath = LocalImageHelper.getInstance().setCameraImgPath();
+                        String cameraPath = LocalImageTHelper.getInstance().setCameraImgPath();
                         File file = new File(cameraPath);
                         if (!file.getParentFile().exists()) file.getParentFile().mkdirs();
                         Uri imageUri = Uri.fromFile(file);
@@ -133,9 +94,9 @@ public class AlbumActivity extends TakePhotoActivity {
                         //getTakePhoto().onPickFromCaptureWithCrop(imageUri, getCropOptions());
 //                        takePhoto.onPickFromCapture(imageUri);
 //                    takePhoto.onPickFromCapture(Uri.fromFile(file));
-//                    AlbumActivityPermissionsDispatcher.openCameraWithCheck(AlbumActivity.this);
+//                    AlbumActivityPermissionsDispatcher.openCameraWithCheck(AlbumTeacherActivity.this);
                     } catch (Exception ex) {
-                        Toast.makeText(AlbumActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AlbumTeacherActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
                         Log.i(TAG, "onCameraClick: " + ex.getMessage());
                     }
                     picPopup.dismiss();
@@ -220,11 +181,11 @@ public class AlbumActivity extends TakePhotoActivity {
 //            }
             patch = "file://" + patch;
             Log.i(TAG, "showImg: " + patch + "  file size " + new File(patch).length());
-            if (!LocalImageHelper.getInstance().getLocalCheckedImgs().contains(patch)) {
-                LocalImageHelper.getInstance().getLocalCheckedImgs().add(patch);
+            if (!LocalImageTHelper.getInstance().getLocalCheckedImgs().contains(patch)) {
+                LocalImageTHelper.getInstance().getLocalCheckedImgs().add(patch);
             }
         }
-        myPicGridAdapter.reloadPicture(LocalImageHelper.getInstance().getLocalCheckedImgs());
+        myPicGridAdapter.reloadPicture(LocalImageTHelper.getInstance().getLocalCheckedImgs());
         new Handler().post(new Runnable() {
             @Override
             public void run() {
@@ -234,10 +195,12 @@ public class AlbumActivity extends TakePhotoActivity {
     }
 
     //显示大图pager
-    public void showViewPager(AlbumViewPager albumviewpager, int index) {
+    public void showViewPager(AlbumTeacherViewPager albumviewpager, int index) {
         if (albumviewpager == null)
             return;
+        Log.i(TAG, "showViewPager: ");
         albumviewpager.setVisibility(View.VISIBLE);
+//        albumviewpager.setAdapter(albumviewpager.new LocalViewPagerAdapter(LocalImageTHelper.getInstance().getLocalCheckedImgs()));
         albumviewpager.setAdapter(albumviewpager.new LocalViewPagerAdapter(myPicGridAdapter.getImgPaths()));
         albumviewpager.setCurrentItem(index);
         AnimationSet set = new AnimationSet(true);
@@ -251,9 +214,10 @@ public class AlbumActivity extends TakePhotoActivity {
     }
 
     //显示大图pager
-    public void showNetImgViewPager(AlbumViewPager albumviewpager, List<String> imgUris, int index) {
+    public void showNetImgViewPager(AlbumTeacherViewPager albumviewpager, List<String> imgUris, int index) {
         if (albumviewpager == null)
             return;
+        Log.i(TAG, "showNetImgViewPager: ");
         albumviewpager.setVisibility(View.VISIBLE);
         albumviewpager.setAdapter(albumviewpager.new NetViewPagerAdapter(imgUris));
         albumviewpager.setCurrentItem(index);
@@ -268,23 +232,26 @@ public class AlbumActivity extends TakePhotoActivity {
     }
 
     //关闭大图显示
-    public void hideViewPager(AlbumViewPager albumviewpager) {
+    public void hideViewPager(AlbumTeacherViewPager albumviewpager) {
         if (albumviewpager == null)
             return;
-        albumviewpager.setVisibility(View.GONE);
-        AnimationSet set = new AnimationSet(true);
-        ScaleAnimation scaleAnimation = new ScaleAnimation(1, (float) 0.9, 1, (float) 0.9, albumviewpager.getWidth() / 2, albumviewpager.getHeight() / 2);
-        scaleAnimation.setDuration(200);
-        set.addAnimation(scaleAnimation);
-        AlphaAnimation alphaAnimation = new AlphaAnimation(1, 0);
-        alphaAnimation.setDuration(200);
-        set.addAnimation(alphaAnimation);
-        albumviewpager.startAnimation(set);
+        if (albumviewpager.getVisibility() == View.VISIBLE) {
+            albumviewpager.setVisibility(View.GONE);
+            AnimationSet set = new AnimationSet(true);
+            ScaleAnimation scaleAnimation = new ScaleAnimation(1, (float) 0.9, 1, (float) 0.9, albumviewpager.getWidth() / 2, albumviewpager.getHeight() / 2);
+            scaleAnimation.setDuration(200);
+            set.addAnimation(scaleAnimation);
+            AlphaAnimation alphaAnimation = new AlphaAnimation(1, 0);
+            alphaAnimation.setDuration(200);
+            set.addAnimation(alphaAnimation);
+            albumviewpager.startAnimation(set);
+        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+//        LocalImageTHelper.getInstance().clear();
     }
 
 }

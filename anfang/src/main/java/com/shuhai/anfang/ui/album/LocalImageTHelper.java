@@ -1,4 +1,4 @@
-package com.shuhai.anfang.common;
+package com.shuhai.anfang.ui.album;
 
 import android.content.Context;
 import android.os.Environment;
@@ -10,11 +10,11 @@ import java.util.List;
 /**
  * Created by linjizong on 15/6/11.
  */
-public class LocalImageHelper {
+public class LocalImageTHelper {
 
-    private static LocalImageHelper instance;
+    private static LocalImageTHelper instance;
     private static Context mContext;
-    private String TAG = LocalImageHelper.class.getSimpleName();
+    private String TAG = LocalImageTHelper.class.getSimpleName();
     //最大图片选择个数
     private int maxChoiceSize = 9;
     private int currentEnableMaxChoiceSize = maxChoiceSize;
@@ -35,17 +35,17 @@ public class LocalImageHelper {
         return CameraImgPath;
     }
 
-    private LocalImageHelper() {
+    private LocalImageTHelper() {
 
     }
 
-    public static LocalImageHelper getInstance() {
-        synchronized (LocalImageHelper.class) {
+    public static LocalImageTHelper getInstance() {
+        synchronized (LocalImageTHelper.class) {
             if (mContext == null) {
                 return null;
             }
             if (instance == null) {
-                instance = new LocalImageHelper();
+                instance = new LocalImageTHelper();
             }
         }
         return instance;

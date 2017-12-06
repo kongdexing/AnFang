@@ -53,7 +53,6 @@ public class TimePickerPopupWindow extends PopupWindow implements View.OnClickLi
 
         calendarView.setShowOtherDates(MaterialCalendarView.SHOW_ALL);
 
-//        Calendar instance = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         ParsePosition pos = new ParsePosition(0);
         calendarView.setSelectedDate(formatter.parse(checkedTime, pos));

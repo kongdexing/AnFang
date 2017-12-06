@@ -2,6 +2,9 @@ package com.shuhai.anfang.ui.homework;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.AnimationSet;
+import android.view.animation.ScaleAnimation;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -10,8 +13,11 @@ import com.android.widget.mygridview.MyGridView;
 import com.shuhai.anfang.R;
 import com.shuhai.anfang.bean.BeanHomeWork;
 import com.shuhai.anfang.common.ExtraKey;
-import com.shuhai.anfang.ui.album.AlbumGridAdapter;
-import com.shuhai.anfang.view.imgloader.AlbumViewPager;
+import com.shuhai.anfang.ui.album.LocalImagePHelper;
+import com.shuhai.anfang.ui.album.AlbumGridParentAdapter;
+import com.shuhai.anfang.ui.album.AlbumParentViewPager;
+
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -51,16 +57,15 @@ public class HomeWorkDetailParentActivity extends VoicePlayActivity {
     TextView txtCompleteTime;
 
     @BindView(R.id.albumviewpager)
-    AlbumViewPager albumviewpager;
+    AlbumParentViewPager albumviewpager;
 
     private BeanHomeWork currentHomeWork;
+    public AlbumGridParentAdapter myPicGridAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_work_detail);
-
-        mScrollView = scrollView;
 
         setTitle(R.string.homework_detail);
         Bundle bundle = getIntent().getExtras();
@@ -71,15 +76,15 @@ public class HomeWorkDetailParentActivity extends VoicePlayActivity {
     }
 
     private void initData() {
-        myPicGridAdapter = new AlbumGridAdapter(this, new AlbumGridAdapter.MyGridViewClickListener() {
+        myPicGridAdapter = new AlbumGridParentAdapter(this, new AlbumGridParentAdapter.MyGridViewClickListener() {
             @Override
             public void onGridViewItemClick(int position, String imgPath) {
                 if (currentHomeWork != null) {
                     showNetImgViewPager(albumviewpager, currentHomeWork.getFile_path(), position);
                 } else {
                     if (position == 0) {
-//                        if (LocalImageHelper.getInstance().getCheckedItems().size() >= LocalImageHelper.getInstance().getMaxChoiceSize()) {
-//                            Toast.makeText(HomeWorkDetailParentActivity.this, getString(R.string.image_upline, LocalImageHelper.getInstance().getMaxChoiceSize()), Toast.LENGTH_SHORT).show();
+//                        if (LocalImagePHelper.getInstance().getCheckedItems().size() >= LocalImagePHelper.getInstance().getMaxChoiceSize()) {
+//                            Toast.makeText(HomeWorkDetailParentActivity.this, getString(R.string.image_upline, LocalImagePHelper.getInstance().getMaxChoiceSize()), Toast.LENGTH_SHORT).show();
 //                            return;
 //                        }
 //                        showAlbumSource(albumviewpager);
@@ -106,6 +111,55 @@ public class HomeWorkDetailParentActivity extends VoicePlayActivity {
         }
 
         initVoice(currentHomeWork);
+    }
+
+    //显示大图pager
+    public void showNetImgViewPager(AlbumParentViewPager albumviewpager, List<String> imgUris, int index) {
+        if (albumviewpager == null)
+            return;
+        albumviewpager.setVisibility(View.VISIBLE);
+        albumviewpager.setAdapter(albumviewpager.new NetViewPagerAdapter(imgUris));
+        albumviewpager.setCurrentItem(index);
+        AnimationSet set = new AnimationSet(true);
+        ScaleAnimation scaleAnimation = new ScaleAnimation((float) 0.9, 1, (float) 0.9, 1, albumviewpager.getWidth() / 2, albumviewpager.getHeight() / 2);
+        scaleAnimation.setDuration(200);
+        set.addAnimation(scaleAnimation);
+        AlphaAnimation alphaAnimation = new AlphaAnimation((float) 0.1, 1);
+        alphaAnimation.setDuration(200);
+        set.addAnimation(alphaAnimation);
+        albumviewpager.startAnimation(set);
+    }
+
+    //关闭大图显示
+    public void hideViewPager(AlbumParentViewPager albumviewpager) {
+        if (albumviewpager == null)
+            return;
+        albumviewpager.setVisibility(View.GONE);
+        AnimationSet set = new AnimationSet(true);
+        ScaleAnimation scaleAnimation = new ScaleAnimation(1, (float) 0.9, 1, (float) 0.9, albumviewpager.getWidth() / 2, albumviewpager.getHeight() / 2);
+        scaleAnimation.setDuration(200);
+        set.addAnimation(scaleAnimation);
+        AlphaAnimation alphaAnimation = new AlphaAnimation(1, 0);
+        alphaAnimation.setDuration(200);
+        set.addAnimation(alphaAnimation);
+        albumviewpager.startAnimation(set);
+    }
+
+    //显示大图pager
+    public void showViewPager(AlbumParentViewPager albumviewpager, int index) {
+        if (albumviewpager == null)
+            return;
+        albumviewpager.setVisibility(View.VISIBLE);
+        albumviewpager.setAdapter(albumviewpager.new LocalViewPagerAdapter(LocalImagePHelper.getInstance().getCheckedItems()));
+        albumviewpager.setCurrentItem(index);
+        AnimationSet set = new AnimationSet(true);
+        ScaleAnimation scaleAnimation = new ScaleAnimation((float) 0.9, 1, (float) 0.9, 1, albumviewpager.getWidth() / 2, albumviewpager.getHeight() / 2);
+        scaleAnimation.setDuration(200);
+        set.addAnimation(scaleAnimation);
+        AlphaAnimation alphaAnimation = new AlphaAnimation((float) 0.1, 1);
+        alphaAnimation.setDuration(200);
+        set.addAnimation(alphaAnimation);
+        albumviewpager.startAnimation(set);
     }
 
     @Override

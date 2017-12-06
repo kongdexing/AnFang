@@ -23,7 +23,7 @@ import com.shuhai.anfang.R;
 import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.bean.BeanHomeWork;
 import com.shuhai.anfang.common.CommonUtil;
-import com.shuhai.anfang.ui.album.AlbumActivity;
+import com.shuhai.anfang.ui.album.AlbumTeacherActivity;
 import com.shuhai.anfang.util.ToastUtils;
 
 import java.io.File;
@@ -41,7 +41,7 @@ import permissions.dispatcher.RuntimePermissions;
  * No1
  */
 @RuntimePermissions
-public class VoiceRecordActivity extends AlbumActivity implements VoiceListener {
+public class VoiceRecordActivity extends AlbumTeacherActivity implements VoiceListener {
 
     public int Voice_UnRecord = 0;
     public final int Voice_Recording = Voice_UnRecord + 1;

@@ -83,7 +83,7 @@ public class HomeWorkTeacherAdapter extends BaseRecycleAdapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         Log.i(TAG, "showData: " + position);
-        final HomeWorkParentAdapter.ViewHolder mHolder = (HomeWorkParentAdapter.ViewHolder) holder;
+        final HomeWorkTeacherAdapter.ViewHolder mHolder = (HomeWorkTeacherAdapter.ViewHolder) holder;
         final BeanHomeWork work = beanHomeWorks.get(position);
         String course = work.getCrs_name().substring(0, 1);
         mHolder.txtSubject.setText(course);
@@ -124,7 +124,7 @@ public class HomeWorkTeacherAdapter extends BaseRecycleAdapter {
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, HomeWorkDetailTeacherActivity.class);
                 intent.putExtra(ExtraKey.HOMEWORK_DETAIL, work);
-                ((HomeWorkParentActivity) mContext).startActivityForResult(intent, 1);
+                ((HomeWorkTeacherActivity) mContext).startActivityForResult(intent, 1);
             }
         });
         Log.i(TAG, "onBindViewHolder: file_path " + work.getFile_path());

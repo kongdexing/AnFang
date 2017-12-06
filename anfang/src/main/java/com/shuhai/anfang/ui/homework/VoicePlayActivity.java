@@ -16,7 +16,7 @@ import com.liulishuo.filedownloader.FileDownloadListener;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.shuhai.anfang.R;
 import com.shuhai.anfang.bean.BeanHomeWork;
-import com.shuhai.anfang.ui.album.AlbumActivity;
+import com.shuhai.anfang.ui.main.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -25,7 +25,7 @@ import butterknife.OnClick;
  * Created by dexing on 2017/5/19.
  * No1
  */
-public class VoicePlayActivity extends AlbumActivity implements VoicePlayListener {
+public class VoicePlayActivity extends BaseActivity implements VoicePlayListener {
 
     public int Voice_Play = 0;
     public final int Voice_Stop = Voice_Play + 1;

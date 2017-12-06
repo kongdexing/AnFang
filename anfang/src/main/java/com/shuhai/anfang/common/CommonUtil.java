@@ -95,6 +95,14 @@ public class CommonUtil {
         return sDateFormat.format(calendar.getTime());
     }
 
+    public static String getDate2StrAfter(int day) {
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.DAY_OF_MONTH, day);
+        return sDateFormat.format(calendar.getTime());
+    }
+
     public static Date getDateBefore(int day) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
