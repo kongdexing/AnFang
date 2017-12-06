@@ -180,6 +180,7 @@
 
         <!--报警查询-->
         <activity android:name=".ui.alarm.AlarmActivity" />
+        <activity android:name=".ui.alarm.AlarmTActivity" />
         <activity android:name=".ui.alarm.AlarmMapActivity" />
 
         <!--电子围栏-->

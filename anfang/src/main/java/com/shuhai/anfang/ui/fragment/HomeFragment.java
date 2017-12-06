@@ -44,6 +44,7 @@ import com.shuhai.anfang.model.BeanTeacher;
 import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.push.BannerHelper;
 import com.shuhai.anfang.ui.alarm.AlarmActivity;
+import com.shuhai.anfang.ui.alarm.AlarmTActivity;
 import com.shuhai.anfang.ui.checkin.CheckinActivity;
 import com.shuhai.anfang.ui.checkin.CheckinTActivity;
 import com.shuhai.anfang.ui.fence.FenceListActivity;
@@ -291,11 +292,12 @@ public class HomeFragment extends BaseFragment {
                 .setIconId(R.drawable.home_checkin)
                 .setTitle(getString(R.string.home_checkin))
                 .setIntent(new Intent(mContext, isParent ? CheckinActivity.class : CheckinTActivity.class)));
+
         //报警查询
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_alarm)
                 .setTitle(getString(R.string.home_alarm))
-                .setIntent(new Intent(mContext, AlarmActivity.class)));
+                .setIntent(new Intent(mContext, isParent ? AlarmActivity.class : AlarmTActivity.class)));
 
         //电子围栏
         homeItems.add(new HomeItem()
