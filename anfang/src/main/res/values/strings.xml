@@ -100,7 +100,12 @@
     <string name="hint_homework_content">请输入作业内容</string>
     <string name="label_homework_title">作业名称：</string>
     <string name="label_homework_title_option">作业名称：%1$s</string>
-    <!--<string name="label_leave"-->
+
+    <!--班级公告-->
+    <string name="hint_notice_title">请输入公告标题</string>
+    <string name="hint_notice_content">请输入公告内容</string>
+
+    <!--在线请假-->
     <string name="label_leave_starttime">请假时间：</string>
     <string name="label_leave_endtime">销假时间：</string>
     <string name="label_leave_content">请假事由：</string>
@@ -158,13 +163,14 @@
 
     <!--提醒消息-->
     <string name="msg_delete_homework">确定要删除此家庭作业吗？</string>
+    <string name="msg_delete_notice">确定要删除此活动公告吗？</string>
     <string name="msg_delete_leave">确定要删除此请假吗？</string>
     <string name="msg_miss_time">请选择一完整时间段</string>
     <string name="msg_large_endtime">结束时间小于开始时间，请重新选择</string>
     <string name="msg_month_cannot_overstep">只能查询当月日期的数据</string>
     <string name="msg_exit">确定要退出当前账号吗？</string>
     <string name="msg_fence_delete">确定要删除当前围栏信息吗？</string>
-
+    <string name="msg_teacher_null">当前教师信息获取失败</string>
     <string name="msg_fence_deleteing">正在删除围栏信息</string>
 
     <string name="permission_location_denied">未授予获取位置信息权限</string>

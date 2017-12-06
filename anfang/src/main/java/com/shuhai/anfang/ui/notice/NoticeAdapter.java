@@ -1,5 +1,6 @@
 package com.shuhai.anfang.ui.notice;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -7,16 +8,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.shuhai.anfang.R;
+import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.adapter.BaseRecycleAdapter;
 import com.shuhai.anfang.adapter.RecyclerViewHolderBase;
 import com.shuhai.anfang.bean.BeanClassInfo;
 import com.shuhai.anfang.bean.BeanNotice;
 import com.shuhai.anfang.common.CommonUtil;
 import com.shuhai.anfang.common.ExtraKey;
+import com.shuhai.anfang.common.UserType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,12 +84,30 @@ public class NoticeAdapter extends BaseRecycleAdapter {
         mHolder.txtTime.setText(CommonUtil.parseDate(notice.getCreate_time()));
         mHolder.txtContent.setText(notice.getContent());
 
+        if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+            mHolder.imgArrow.setVisibility(View.INVISIBLE);
+        } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+            mHolder.imgArrow.setVisibility(View.VISIBLE);
+            if (notice.getFs_type().equals("1")) {
+                //自己发布的公告
+                mHolder.imgArrow.setBackgroundResource(R.drawable.arrow_right_up);
+            } else {
+                //接收到的公告
+                mHolder.imgArrow.setBackgroundResource(R.drawable.arrow_left_down);
+            }
+        }
+
         mHolder.llNoticeItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, NoticeDetailActivity.class);
+                Intent intent = new Intent();
+                if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+                    intent.setClass(mContext, NoticeDetailActivity.class);
+                } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+                    intent.setClass(mContext, NoticeDetailTActivity.class);
+                }
                 intent.putExtra(ExtraKey.NOTICE_DETAIL, notice);
-                ((NoticeActivity) mContext).startActivityForResult(intent, 1);
+                ((Activity) mContext).startActivityForResult(intent, 1);
             }
         });
     }
@@ -107,6 +129,8 @@ public class NoticeAdapter extends BaseRecycleAdapter {
         TextView txtTime;
         @BindView(R.id.txtContent)
         TextView txtContent;
+        @BindView(R.id.imgArrow)
+        ImageView imgArrow;
 
         public ViewHolder(View itemView) {
             super(itemView);

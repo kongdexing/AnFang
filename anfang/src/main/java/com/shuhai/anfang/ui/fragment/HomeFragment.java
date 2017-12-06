@@ -51,6 +51,7 @@ import com.shuhai.anfang.ui.homework.HomeWorkTeacherActivity;
 import com.shuhai.anfang.ui.leave.LeaveActivity;
 import com.shuhai.anfang.ui.main.WebViewActivity;
 import com.shuhai.anfang.ui.notice.NoticeActivity;
+import com.shuhai.anfang.ui.notice.NoticeTeacherActivity;
 import com.shuhai.anfang.ui.score.ScoreActivity;
 import com.shuhai.anfang.util.NetWorkUsefulUtils;
 import com.shuhai.anfang.util.ParentUtil;
@@ -277,7 +278,7 @@ public class HomeFragment extends BaseFragment {
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_notice)
                 .setTitle(getString(R.string.home_notice))
-                .setIntent(new Intent(mContext, NoticeActivity.class)));
+                .setIntent(new Intent(mContext, isParent ? NoticeActivity.class : NoticeTeacherActivity.class)));
         //成绩
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_classes)

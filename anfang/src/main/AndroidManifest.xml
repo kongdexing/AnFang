@@ -159,8 +159,13 @@
 
         <!--公告-->
         <activity android:name=".ui.notice.NoticeActivity" />
+        <activity android:name=".ui.notice.NoticeTeacherActivity" />
         <activity
             android:name=".ui.notice.NoticeDetailActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.notice.NoticeDetailTActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
