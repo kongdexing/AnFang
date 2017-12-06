@@ -171,6 +171,7 @@
 
         <!--成绩-->
         <activity android:name=".ui.score.ScoreActivity" />
+        <activity android:name=".ui.score.ScoreTeacherActivity" />
 
         <!--考勤-->
         <activity android:name=".ui.checkin.CheckinActivity" />

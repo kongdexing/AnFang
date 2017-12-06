@@ -53,6 +53,7 @@ import com.shuhai.anfang.ui.main.WebViewActivity;
 import com.shuhai.anfang.ui.notice.NoticeActivity;
 import com.shuhai.anfang.ui.notice.NoticeTeacherActivity;
 import com.shuhai.anfang.ui.score.ScoreActivity;
+import com.shuhai.anfang.ui.score.ScoreTeacherActivity;
 import com.shuhai.anfang.util.NetWorkUsefulUtils;
 import com.shuhai.anfang.util.ParentUtil;
 import com.shuhai.anfang.view.autoviewpager.GlideImageLoader;
@@ -283,7 +284,7 @@ public class HomeFragment extends BaseFragment {
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_classes)
                 .setTitle(getString(R.string.home_score))
-                .setIntent(new Intent(mContext, ScoreActivity.class)));
+                .setIntent(new Intent(mContext, isParent ? ScoreActivity.class : ScoreTeacherActivity.class)));
         //考勤
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_checkin)

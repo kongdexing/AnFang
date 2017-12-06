@@ -59,18 +59,8 @@
                 <TextView
                     android:id="@+id/txtMineName"
                     style="@style/mineVal"
-                    android:layout_toLeftOf="@+id/img_name"
                     android:text="无" />
 
-                <ImageView
-                    android:id="@+id/img_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/dp_10"
-                    android:src="@drawable/iau"
-                    android:visibility="invisible" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -116,12 +106,8 @@
                 <TextView
                     android:id="@+id/txtEmail"
                     style="@style/mineVal"
-                    android:layout_toLeftOf="@+id/img_email"
                     android:text="无" />
 
-                <ImageView
-                    android:id="@+id/img_email"
-                    style="@style/arrow_right" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -141,12 +127,7 @@
                 <TextView
                     android:id="@+id/txtHomeAdd"
                     style="@style/mineVal"
-                    android:layout_toLeftOf="@+id/img_address"
                     android:text="无" />
-
-                <ImageView
-                    android:id="@+id/img_address"
-                    style="@style/arrow_right" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -169,8 +150,6 @@
                     android:id="@+id/txtHomeTel"
                     style="@style/mineVal"
                     android:layout_toLeftOf="@+id/img_addtel"
-                    android:layout_toRightOf="@+id/txtSchoolTitle"
-                    android:gravity="right"
                     android:text="无" />
 
                 <ImageView
