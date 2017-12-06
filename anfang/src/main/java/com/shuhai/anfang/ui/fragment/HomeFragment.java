@@ -51,6 +51,7 @@ import com.shuhai.anfang.ui.fence.FenceListActivity;
 import com.shuhai.anfang.ui.homework.HomeWorkParentActivity;
 import com.shuhai.anfang.ui.homework.HomeWorkTeacherActivity;
 import com.shuhai.anfang.ui.leave.LeaveActivity;
+import com.shuhai.anfang.ui.leave.LeaveTActivity;
 import com.shuhai.anfang.ui.main.WebViewActivity;
 import com.shuhai.anfang.ui.notice.NoticeActivity;
 import com.shuhai.anfang.ui.notice.NoticeTeacherActivity;
@@ -309,7 +310,7 @@ public class HomeFragment extends BaseFragment {
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_notice)
                 .setTitle(getString(R.string.home_leave))
-                .setIntent(new Intent(mContext, LeaveActivity.class)));
+                .setIntent(new Intent(mContext, isParent ? LeaveActivity.class : LeaveTActivity.class)));
 
         Intent newsIntent = new Intent(mContext, WebViewActivity.class);
         newsIntent.putExtra(ExtraKey.WEB_URL, "http://school.xinpingtai.com/edunews/");

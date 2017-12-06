@@ -115,6 +115,8 @@
     <string name="label_leave">请假</string>
     <string name="label_leave_modify">重新发送</string>
     <string name="label_modify">编辑</string>
+    <string name="label_leave_ok">批准</string>
+    <string name="label_leave_rebut">驳回</string>
 
     <string name="label_leave_del">删除</string>
 

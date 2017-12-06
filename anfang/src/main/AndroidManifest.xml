@@ -193,8 +193,13 @@
 
         <!--在线请假-->
         <activity android:name=".ui.leave.LeaveActivity" />
+        <activity android:name=".ui.leave.LeaveTActivity" />
         <activity
             android:name=".ui.leave.LeaveDetailActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity
+            android:name=".ui.leave.LeaveTDetailActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 

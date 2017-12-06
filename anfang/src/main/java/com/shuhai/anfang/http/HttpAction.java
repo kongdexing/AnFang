@@ -54,6 +54,7 @@ public class HttpAction {
     public static String Attendance_QUERY = HEAD + "Attendance/query_v1_0_1";
     //请假管理
     public static String Leave_QUERY = HEAD + "Leave/query";
+    public static String Leave_Edit = HEAD + "Leave/edit";
     public static String Leave_Add = HEAD + "Leave/add_leave";
     public static String Leave_Del = HEAD + "Leave/del";
     //课程表

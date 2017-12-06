@@ -324,6 +324,16 @@ public class GreenDaoHelper {
         return "";
     }
 
+    public String getClassNameById(String id) {
+        if (readDaoSession != null) {
+            BeanClass _class = readDaoSession.getBeanClassDao().queryBuilder().where(BeanClassDao.Properties.C_id.eq(id)).unique();
+            if (_class != null) {
+                return _class.getName();
+            }
+        }
+        return "";
+    }
+
     public ContactTeacherForParent getContactByTeacher(String t_u_id) {
         if (readDaoSession != null) {
             return readDaoSession.getContactTeacherForParentDao().queryBuilder()
