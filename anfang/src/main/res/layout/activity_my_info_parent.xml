@@ -35,7 +35,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginBottom="@dimen/dp_5"
-                    android:layout_marginRight="@dimen/dp_30"
+                    android:layout_marginRight="@dimen/dp_20"
                     android:layout_marginTop="@dimen/dp_5"
                     android:src="@drawable/user_defaulthead" />
                 <ImageView
@@ -81,6 +81,7 @@
                 <TextView
                     android:id="@+id/txtPhone"
                     style="@style/mineVal"
+                    android:layout_alignParentRight="false"
                     android:layout_toLeftOf="@+id/img_phone"
                     android:text="无" />
 
@@ -149,7 +150,9 @@
                 <TextView
                     android:id="@+id/txtHomeTel"
                     style="@style/mineVal"
+                    android:layout_alignParentRight="false"
                     android:layout_toLeftOf="@+id/img_addtel"
+                    android:layout_marginRight="@dimen/dp_20"
                     android:text="无" />
 
                 <ImageView

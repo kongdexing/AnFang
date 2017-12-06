@@ -172,6 +172,7 @@
     <string name="msg_fence_delete">确定要删除当前围栏信息吗？</string>
     <string name="msg_teacher_null">当前教师信息获取失败</string>
     <string name="msg_fence_deleteing">正在删除围栏信息</string>
+    <string name="toast_class_empty">无执教班级</string>
 
     <string name="permission_location_denied">未授予获取位置信息权限</string>
     <string name="permission_location_rationale">请求授予定位权限</string>

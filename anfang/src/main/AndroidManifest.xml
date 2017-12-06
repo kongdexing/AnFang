@@ -175,6 +175,7 @@
 
         <!--考勤-->
         <activity android:name=".ui.checkin.CheckinActivity" />
+        <activity android:name=".ui.checkin.CheckinTActivity" />
         <activity android:name=".ui.checkin.ChechinDetailActivity" />
 
         <!--报警查询-->

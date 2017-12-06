@@ -58,6 +58,7 @@
                 <TextView
                     android:id="@+id/txtTeacherName"
                     style="@style/mineVal"
+                    android:layout_alignParentRight="true"
                     android:text="无" />
             </RelativeLayout>
 
@@ -79,7 +80,12 @@
                 <TextView
                     android:id="@+id/txtPhone"
                     style="@style/mineVal"
+                    android:layout_toLeftOf="@+id/img_phone"
                     android:text="无" />
+
+                <ImageView
+                    android:id="@+id/img_phone"
+                    style="@style/arrow_right" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -140,7 +146,6 @@
                 <TextView
                     android:id="@+id/txtSchoolName"
                     style="@style/mineVal"
-                    android:layout_toRightOf="@+id/txtSchoolTitle"
                     android:gravity="right"
                     android:text="无" />
             </RelativeLayout>
