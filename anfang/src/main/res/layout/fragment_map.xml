@@ -70,10 +70,23 @@
                 android:layout_marginTop="@dimen/dp_5"
                 android:background="@color/text_grey" />
 
-            <LinearLayout
+            <com.android.widget.view.ArrowTextView
+                android:id="@+id/txtStudentName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@drawable/mine_item_selector"
+                android:gravity="center"
+                android:text="选择学生"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/sp_14" />
+
+            <LinearLayout
+                android:id="@+id/llStudentName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="gone"
                 android:background="@drawable/mine_item_selector"
                 android:gravity="center">
 

@@ -3,6 +3,7 @@ package com.shuhai.anfang.ui.fragment;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
@@ -33,16 +34,21 @@ import com.baidu.mapapi.map.MapView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.shuhai.anfang.R;
+import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.bean.BeanHTLocation;
 import com.shuhai.anfang.bean.BeanRTLocation;
 import com.shuhai.anfang.bean.BeanRail;
 import com.shuhai.anfang.common.CommonUtil;
+import com.shuhai.anfang.common.UserHelper;
+import com.shuhai.anfang.common.UserType;
 import com.shuhai.anfang.http.HttpAction;
 import com.shuhai.anfang.http.HttpErrorMsg;
 import com.shuhai.anfang.http.MyVolleyRequestListener;
 import com.shuhai.anfang.model.BeanStudent;
 import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.ui.alarm.AlarmActivity;
+import com.shuhai.anfang.ui.mine.StudentAdapter;
+import com.shuhai.anfang.ui.mine.StudentPopupWindowView;
 import com.shuhai.anfang.view.TimePickerPopupWindow;
 
 import java.text.SimpleDateFormat;
@@ -65,6 +71,11 @@ public class MapFragment extends MapBaseFragment {
 
     @BindView(R.id.spnStudents)
     MaterialSpinner spnStudents;
+    @BindView(R.id.llStudentName)
+    LinearLayout llStudentName;
+    @BindView(R.id.txtStudentName)
+    ArrowTextView txtStudentName;
+
     @BindView(R.id.txtSDate)
     ArrowTextView txtSDate;
     @BindView(R.id.txtEDate)
@@ -88,6 +99,8 @@ public class MapFragment extends MapBaseFragment {
 
     private Timer timer = null;
     private TimerTask task;
+    PopupWindow studentPopup;
+    StudentPopupWindowView studentPopupWindowView;
     TimePickerPopupWindow sDatePopup, eDatePopup;
     private String startTime, endTime;
     private int locationTime = 0;
@@ -132,38 +145,66 @@ public class MapFragment extends MapBaseFragment {
         txtSDate.setText(startTime);
         txtEDate.setText(endTime);
 
-        if (GreenDaoHelper.getInstance().getStudents().size() == 0) {
+        UserHelper.getInstance().addUserChangeListener(new UserHelper.UserChangeListener() {
+            @Override
+            public void onUserLoginSuccess() {
+                initSpinnerData();
+            }
+        });
+
+        initSpinnerData();
+    }
+
+    private void initSpinnerData() {
+        if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+            llStudentName.setVisibility(View.VISIBLE);
+            txtStudentName.setVisibility(View.GONE);
+
+            if (GreenDaoHelper.getInstance().getStudents().size() == 0) {
+                spnStudents.setText(R.string.title_no_student);
+                spnStudents.setEnabled(false);
+                return;
+            }
+
+            spnStudents.setEnabled(true);
+            spnStudents.setItems(GreenDaoHelper.getInstance().getStudents());
+            currentStudent = (BeanStudent) spnStudents.getSelectedItem();
+
+            spnStudents.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<BeanStudent>() {
+                @Override
+                public void onItemSelected(MaterialSpinner view, int position, long id, BeanStudent item) {
+                    flTransparent.setVisibility(View.GONE);
+                    currentStudent = item;
+                    locationTime = 0;
+                    //获取不同数据
+                    reloadDataByStatus();
+                }
+            });
+
+            spnStudents.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+                @Override
+                public void onNothingSelected(MaterialSpinner spinner) {
+                    flTransparent.setVisibility(View.GONE);
+                }
+            });
+        } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+            llStudentName.setVisibility(View.GONE);
+            txtStudentName.setVisibility(View.VISIBLE);
+            getStudents();
+        } else {
+            llStudentName.setVisibility(View.VISIBLE);
+            txtStudentName.setVisibility(View.GONE);
+
             spnStudents.setText(R.string.title_no_student);
             spnStudents.setEnabled(false);
             return;
         }
 
-        spnStudents.setItems(GreenDaoHelper.getInstance().getStudents());
-        currentStudent = (BeanStudent) spnStudents.getSelectedItem();
-
-        spnStudents.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<BeanStudent>() {
-            @Override
-            public void onItemSelected(MaterialSpinner view, int position, long id, BeanStudent item) {
-                flTransparent.setVisibility(View.GONE);
-                currentStudent = item;
-                locationTime = 0;
-                //获取不同数据
-                reloadDataByStatus();
-            }
-        });
-
-        spnStudents.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
-            @Override
-            public void onNothingSelected(MaterialSpinner spinner) {
-                flTransparent.setVisibility(View.GONE);
-            }
-        });
-
         llTrack.setTag(false);
         llLocation.setTag(false);
         llRailings.setTag(false);
 
-        viewClick(llLocation);
+//        viewClick(llLocation);
     }
 
     @Override
@@ -176,7 +217,7 @@ public class MapFragment extends MapBaseFragment {
     }
 
     @OnClick({R.id.txtSDate, R.id.txtEDate, R.id.llLocation, R.id.llTrack, R.id.llRailings,
-            R.id.switchBindRoad, R.id.spnStudents, R.id.llAlarm, R.id.llMyLocation})
+            R.id.switchBindRoad, R.id.spnStudents, R.id.txtStudentName, R.id.llAlarm, R.id.llMyLocation})
     void viewClick(View view) {
         switch (view.getId()) {
             case R.id.txtSDate:
@@ -184,6 +225,9 @@ public class MapFragment extends MapBaseFragment {
                 break;
             case R.id.txtEDate:
                 showEDatePop();
+                break;
+            case R.id.txtStudentName:
+                showStudent();
                 break;
             case R.id.spnStudents:
                 if (spnStudents.getItems().size() != 1) {
@@ -212,7 +256,7 @@ public class MapFragment extends MapBaseFragment {
                         return;
                     }
                     cancelRTLocationTimer();
-                    getHistoryTrackByStu(startTime, endTime);
+                    getHistoryTrackByStu();
                     llBindRoad.setVisibility(View.VISIBLE);
                 } else {
                     mHandler.removeCallbacksAndMessages(null);
@@ -226,7 +270,7 @@ public class MapFragment extends MapBaseFragment {
             case R.id.switchBindRoad:
                 isBindRoadForHistoryTrack = !isBindRoadForHistoryTrack;
                 switchBindRoad.setBackgroundResource(isBindRoadForHistoryTrack ? R.drawable.layer_switch_on : R.drawable.layer_switch_off);
-                getHistoryTrackByStu(startTime, endTime);
+                getHistoryTrackByStu();
                 break;
             case R.id.llRailings:
                 if (view.getTag() == null || !(Boolean) view.getTag()) {
@@ -296,13 +340,71 @@ public class MapFragment extends MapBaseFragment {
         //设置其他按钮tag 为 false
     }
 
+    public void getStudents() {
+        Log.i(TAG, "getStudentByClass: ");
+        if (studentPopupWindowView == null) {
+            studentPopupWindowView = new StudentPopupWindowView(getContext());
+            studentPopupWindowView.setMyGridViewClickListener(new StudentAdapter.MyGridViewClickListener() {
+                @Override
+                public void onGridViewItemClick(BeanStudent student) {
+                    studentPopup.dismiss();
+                    if (student == null) {
+                        return;
+                    }
+                    txtStudentName.setText(student.getStu_name());
+                    //根据学生id获取学生位置
+                    if (student != currentStudent) {
+                        currentStudent = student;
+                        locationTime = 0;
+                    } else {
+                        return;
+                    }
+
+                    Log.i(TAG, "onGridViewItemClick: " + student.getStu_name());
+                    //获取实时位置or历史轨迹or电子围栏
+                    if (llLocation.getTag() != null && (Boolean) llLocation.getTag()) {
+                        getRealTimeLocationByStu();
+                    }
+                    if (llTrack.getTag() != null && (Boolean) llTrack.getTag()) {
+                        getHistoryTrackByStu();
+                    }
+                    if (llRailings.getTag() != null && (Boolean) llRailings.getTag()) {
+                        getStudentRail();
+                    }
+                }
+            });
+        }
+    }
+
+    private void showStudent() {
+        if (studentPopup == null) {
+            studentPopup = new PopupWindow(LinearLayout.LayoutParams.MATCH_PARENT,
+                    XPTApplication.getInstance().getWindowHeight() / 2);
+            studentPopup.setFocusable(true);
+            studentPopup.setTouchable(true);
+            studentPopup.setBackgroundDrawable(new BitmapDrawable());
+            studentPopup.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                @Override
+                public void onDismiss() {
+                    flTransparent.setVisibility(View.GONE);
+                    txtStudentName.collapse();
+                }
+            });
+        }
+
+        studentPopup.setContentView(studentPopupWindowView);
+
+        flTransparent.setVisibility(View.VISIBLE);
+        studentPopup.showAsDropDown(txtStudentName, 0, 5);
+    }
+
     private void reloadDataByStatus() {
         if ((Boolean) llLocation.getTag()) {
             getRealTimeLocationByStu();
         }
 
         if ((Boolean) llTrack.getTag()) {
-            getHistoryTrackByStu(startTime, endTime);
+            getHistoryTrackByStu();
         }
 
         if ((Boolean) llRailings.getTag()) {
@@ -445,19 +547,16 @@ public class MapFragment extends MapBaseFragment {
     /**
      * 历史轨迹
      * state绑路状态  0 不绑路  1 绑路
-     *
-     * @param sDate
-     * @param eDate
      */
-    private void getHistoryTrackByStu(String sDate, String eDate) {
+    private void getHistoryTrackByStu() {
         String state_bind_road = "0";
         if (isBindRoadForHistoryTrack) {
             state_bind_road = "1";
         }
 
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.Track_HistoryTrack, new VolleyHttpParamsEntity()
-                        .addParam("sdate", sDate + ":00")
-                        .addParam("edate", eDate + ":00")
+                        .addParam("sdate", startTime + ":00")
+                        .addParam("edate", endTime + ":00")
                         .addParam("state", state_bind_road)
                         .addParam("stu_id", currentStudent.getStu_id())
                         .addParam("token", CommonUtil.encryptToken(HttpAction.Track_HistoryTrack)),
