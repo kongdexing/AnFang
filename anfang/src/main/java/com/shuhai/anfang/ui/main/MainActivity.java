@@ -70,7 +70,6 @@ public class MainActivity extends BaseLoginMainActivity implements BDLocationLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle(R.string.app_name);
-//        showImgBack(false);
 
         initView();
         initData();

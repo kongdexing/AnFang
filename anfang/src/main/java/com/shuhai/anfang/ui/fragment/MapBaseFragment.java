@@ -55,7 +55,7 @@ public class MapBaseFragment extends BaseFragment implements BDLocationListener,
 
     public BaiduMap mBaiduMap;
     public LocationClient mLocClient;
-    boolean isFirstLoc = false; // 是否首次定位
+    boolean isFirstLoc = true; // 是否首次定位
     public Marker mGPSMarker;
     public SensorManager mSensorManager;
     public Sensor mSensor;
@@ -91,7 +91,6 @@ public class MapBaseFragment extends BaseFragment implements BDLocationListener,
         switch (event.sensor.getType()) {
             case Sensor.TYPE_ORIENTATION: {
                 float x = event.values[0];
-                System.out.println(x);
                 x += CommonUtil.getScreenRotationOnPhone(getContext());
                 x %= 360.0F;
                 if (x > 180.0F)
@@ -145,7 +144,7 @@ public class MapBaseFragment extends BaseFragment implements BDLocationListener,
         mGPSMarker = (Marker) mBaiduMap.addOverlay(markerOptions);
         mGPSMarker.setPosition(ll);
 
-        if (isFirstLoc) {
+        if (isFirstLoc || currentStudent == null) {
             isFirstLoc = false;
             MapStatus.Builder builder = new MapStatus.Builder();
             builder.target(ll).zoom(18.0f);
@@ -183,6 +182,12 @@ public class MapBaseFragment extends BaseFragment implements BDLocationListener,
 
     }
 
+    /**
+     * 学生卡定位
+     *
+     * @param newPt
+     * @param timer
+     */
     public void drawLocation(final BeanRTLocation newPt, int timer) {
         mBaiduMap.clear();
         mBaiduMap.hideInfoWindow();
@@ -234,6 +239,11 @@ public class MapBaseFragment extends BaseFragment implements BDLocationListener,
         }
     }
 
+    /**
+     * 画轨迹
+     *
+     * @param locations
+     */
     public void drawTrack(List<BeanHTLocation> locations) {
         if (locations.size() > 0) {
             mBaiduMap.clear();

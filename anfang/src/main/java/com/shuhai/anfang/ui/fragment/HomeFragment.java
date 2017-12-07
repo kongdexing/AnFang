@@ -132,6 +132,48 @@ public class HomeFragment extends BaseFragment {
         return mRootView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i(TAG, "onResume: startAutoPlay");
+        topBanner.startAutoPlay();
+        //根据登录状态显示不同icon
+        //当状态有更改时才变化Item
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.i(TAG, "onPause: stopAutoPlay");
+        topBanner.stopAutoPlay();
+    }
+
+    @Override
+    protected void initData() {
+        Log.i(TAG, "HomeFragment initData: ");
+        //1获取广告位，2获取分组数据，3获取商品推荐
+
+        getBanners();
+
+        //获取分组数据
+        getHomeGroupCfg();
+
+        //获取热门商品数据
+        getHotGoods();
+
+        UserHelper.getInstance().addUserChangeListener(new UserHelper.UserChangeListener() {
+            @Override
+            public void onUserLoginSuccess() {
+                //用户切换后，重新获取广告位信息
+                getBanners();
+                //重新分配Intent
+                initSchoolItem();
+                initShopItem();
+            }
+        });
+    }
+
     private void initView() {
         Log.i(TAG, "HomeFragment initView: ");
         int width = XPTApplication.getInstance().getWindowWidth();
@@ -323,48 +365,6 @@ public class HomeFragment extends BaseFragment {
 
         grd_school.setAdapter(itemAdapter);
         itemAdapter.reloadData(homeItems);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.i(TAG, "onResume: startAutoPlay");
-        topBanner.startAutoPlay();
-        //根据登录状态显示不同icon
-        //当状态有更改时才变化Item
-
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.i(TAG, "onPause: stopAutoPlay");
-        topBanner.stopAutoPlay();
-    }
-
-    @Override
-    protected void initData() {
-        Log.i(TAG, "HomeFragment initData: ");
-        //1获取广告位，2获取分组数据，3获取商品推荐
-
-        getBanners();
-
-        //获取分组数据
-        getHomeGroupCfg();
-
-        //获取热门商品数据
-        getHotGoods();
-
-        UserHelper.getInstance().addUserChangeListener(new UserHelper.UserChangeListener() {
-            @Override
-            public void onUserLoginSuccess() {
-                //用户切换后，重新获取广告位信息
-                getBanners();
-                //重新分配Intent
-                initSchoolItem();
-                initShopItem();
-            }
-        });
     }
 
     /*

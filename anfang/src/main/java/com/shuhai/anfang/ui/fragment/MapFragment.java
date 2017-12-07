@@ -111,7 +111,7 @@ public class MapFragment extends MapBaseFragment {
     @Override
     protected void initData() {
         super.initData();
-
+        Log.i(TAG, "initData: ");
         // 开启定位图层
         mBaiduMap.getUiSettings().setRotateGesturesEnabled(true);
         mBaiduMap.setMyLocationEnabled(true);
@@ -125,6 +125,7 @@ public class MapFragment extends MapBaseFragment {
         option.setScanSpan(3000);
         mLocClient.setLocOption(option);
         mLocClient.start();
+        Log.i(TAG, "initData: start loc");
 
         startTime = (new SimpleDateFormat("yyyy-MM-dd HH:mm")).format(CommonUtil.getDateBefore(1));
         endTime = CommonUtil.getCurrentDateTime();
