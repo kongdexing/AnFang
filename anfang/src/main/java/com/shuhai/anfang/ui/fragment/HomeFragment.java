@@ -152,16 +152,17 @@ public class HomeFragment extends BaseFragment {
     @Override
     protected void initData() {
         Log.i(TAG, "HomeFragment initData: ");
+        //先获取本地数据进行展示
+        reloadTopFragment(GreenDaoHelper.getInstance().getBanners());
+        initHomeCfg();
+        initHotGood();
+
         //1获取广告位，2获取分组数据，3获取商品推荐
-
         getBanners();
-
         //获取分组数据
         getHomeGroupCfg();
-
         //获取热门商品数据
         getHotGoods();
-
         UserHelper.getInstance().addUserChangeListener(new UserHelper.UserChangeListener() {
             @Override
             public void onUserLoginSuccess() {
