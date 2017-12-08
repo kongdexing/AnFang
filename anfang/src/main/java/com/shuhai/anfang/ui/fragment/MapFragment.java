@@ -49,6 +49,7 @@ import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.ui.alarm.AlarmActivity;
 import com.shuhai.anfang.ui.mine.StudentAdapter;
 import com.shuhai.anfang.ui.mine.StudentPopupWindowView;
+import com.shuhai.anfang.util.ToastUtils;
 import com.shuhai.anfang.view.TimePickerPopupWindow;
 
 import java.text.SimpleDateFormat;
@@ -148,15 +149,22 @@ public class MapFragment extends MapBaseFragment {
         UserHelper.getInstance().addUserChangeListener(new UserHelper.UserChangeListener() {
             @Override
             public void onUserLoginSuccess() {
+                Log.i(TAG, "onUserLoginSuccess: ");
+                initSpinnerData();
+            }
+
+            @Override
+            public void onUserExit() {
                 initSpinnerData();
             }
         });
-
         initSpinnerData();
     }
 
     private void initSpinnerData() {
+        Log.i(TAG, "initSpinnerData: " + XPTApplication.getInstance().getCurrent_user_type());
         if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+            ToastUtils.showToast(mContext,"map 家长");
             llStudentName.setVisibility(View.VISIBLE);
             txtStudentName.setVisibility(View.GONE);
 
@@ -188,10 +196,12 @@ public class MapFragment extends MapBaseFragment {
                 }
             });
         } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+            ToastUtils.showToast(mContext,"map 教师");
             llStudentName.setVisibility(View.GONE);
             txtStudentName.setVisibility(View.VISIBLE);
             getStudents();
         } else {
+            ToastUtils.showToast(mContext,"map 游客");
             llStudentName.setVisibility(View.VISIBLE);
             txtStudentName.setVisibility(View.GONE);
 
@@ -301,6 +311,7 @@ public class MapFragment extends MapBaseFragment {
     void onLocationPermit() {
         Log.i(TAG, "onLocationPermit: ");
         isFirstLoc = true;
+        mapStatusChange = false;
     }
 
     @OnPermissionDenied(Manifest.permission.ACCESS_FINE_LOCATION)
@@ -355,6 +366,7 @@ public class MapFragment extends MapBaseFragment {
                     //根据学生id获取学生位置
                     if (student != currentStudent) {
                         currentStudent = student;
+                        mapStatusChange = false;
                         locationTime = 0;
                     } else {
                         return;

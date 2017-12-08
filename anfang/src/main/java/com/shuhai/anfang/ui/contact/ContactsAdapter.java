@@ -88,6 +88,12 @@ public class ContactsAdapter extends BaseExpandableListAdapter {
         notifyDataSetChanged();
     }
 
+    public void clear(){
+        listContacts.clear();
+        keys.clear();
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getGroupCount() {
         Log.i(TAG, "getGroupCount: " + keys.size());

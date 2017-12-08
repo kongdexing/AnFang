@@ -115,6 +115,12 @@ public class ContactFragment extends BaseFragment {
                 Log.i(TAG, "onUserLoginSuccess: ContactFragment");
                 initData();
             }
+
+            @Override
+            public void onUserExit() {
+                if (adapter != null)
+                    adapter.clear();
+            }
         });
     }
 

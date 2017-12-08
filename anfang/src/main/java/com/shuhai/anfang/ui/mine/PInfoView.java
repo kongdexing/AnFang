@@ -86,9 +86,6 @@ public class PInfoView extends LinearLayout {
             return;
         }
         switch (view.getId()) {
-            case R.id.rlMinePhoto:
-
-                break;
             case R.id.rlMinePhone:
                 if (parent.getParent_phone().isEmpty()) {
                     Toast.makeText(mContext, R.string.toast_phone_empty, Toast.LENGTH_SHORT).show();
@@ -126,14 +123,10 @@ public class PInfoView extends LinearLayout {
                 dialog.setAlertDialogClickListener(new CustomDialog.DialogClickListener() {
                     @Override
                     public void onPositiveClick() {
-                        //清除upush信息
-                        UserHelper.getInstance().changeAccount();
-
                         //清除数据
                         SharedPreferencesUtil.clearUserInfo(mContext);
-
                         GreenDaoHelper.getInstance().clearData();
-
+                        UserHelper.getInstance().userExit();
                         ((MyInfoActivity)mContext).finish();
                     }
                 });

@@ -172,6 +172,11 @@ public class HomeFragment extends BaseFragment {
                 initSchoolItem();
                 initShopItem();
             }
+
+            @Override
+            public void onUserExit() {
+
+            }
         });
     }
 

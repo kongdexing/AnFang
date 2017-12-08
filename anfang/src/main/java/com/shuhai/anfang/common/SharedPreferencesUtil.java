@@ -70,7 +70,6 @@ public class SharedPreferencesUtil {
     public static void clearUserInfo(Context context) {
         saveData(context, KEY_PWD, "");
         saveData(context, KEY_USER_TYPE, "");
-        saveData(context, KEY_CITY, "");
         saveData(context, KEY_UID, "");
     }
 

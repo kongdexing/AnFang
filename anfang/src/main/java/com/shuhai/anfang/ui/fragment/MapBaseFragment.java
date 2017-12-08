@@ -81,6 +81,7 @@ public class MapBaseFragment extends BaseFragment implements BDLocationListener,
     private BitmapDescriptor mBlueTexture = null;
     private boolean isShowLocation = false;
     public boolean isBindRoadForHistoryTrack = false;
+    public boolean mapStatusChange = false;
     private InfoWindow locationInfoWindow;
 
     @Override
@@ -144,7 +145,7 @@ public class MapBaseFragment extends BaseFragment implements BDLocationListener,
         mGPSMarker = (Marker) mBaiduMap.addOverlay(markerOptions);
         mGPSMarker.setPosition(ll);
 
-        if (isFirstLoc || currentStudent == null) {
+        if ((isFirstLoc || currentStudent == null) && !mapStatusChange) {
             isFirstLoc = false;
             MapStatus.Builder builder = new MapStatus.Builder();
             builder.target(ll).zoom(18.0f);
@@ -163,6 +164,7 @@ public class MapBaseFragment extends BaseFragment implements BDLocationListener,
         mBaiduMap.setOnMapStatusChangeListener(new BaiduMap.OnMapStatusChangeListener() {
             @Override
             public void onMapStatusChangeStart(MapStatus mapStatus) {
+                mapStatusChange = true;
                 if (isShowLocation) {
                     mBaiduMap.hideInfoWindow();
                 }

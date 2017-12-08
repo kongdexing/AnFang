@@ -1,7 +1,5 @@
 package com.shuhai.anfang.common;
 
-import android.util.Log;
-
 import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.model.BeanParent;
 import com.shuhai.anfang.model.BeanTeacher;
@@ -44,7 +42,7 @@ public class UserHelper {
     }
 
     /**
-     * 切换账号
+     * 登录成功，切换账号信息
      */
     public void changeAccount() {
         if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
@@ -58,14 +56,22 @@ public class UserHelper {
                 UpushTokenHelper.exitAccount(teacher.getLogin_name(), teacher.getU_id());
             }
         }
-        Log.i(TAG, "changeAccount: " + listeners.size());
         for (int i = 0; i < listeners.size(); i++) {
             listeners.get(i).onUserLoginSuccess();
         }
     }
 
+    public void userExit() {
+        XPTApplication.getInstance().setCurrent_user_type("");
+        for (int i = 0; i < listeners.size(); i++) {
+            listeners.get(i).onUserExit();
+        }
+    }
+
     public interface UserChangeListener {
         void onUserLoginSuccess();
+
+        void onUserExit();
     }
 
 }
