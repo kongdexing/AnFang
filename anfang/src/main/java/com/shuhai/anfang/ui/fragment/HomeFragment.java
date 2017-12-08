@@ -47,6 +47,8 @@ import com.shuhai.anfang.ui.alarm.AlarmActivity;
 import com.shuhai.anfang.ui.alarm.AlarmTActivity;
 import com.shuhai.anfang.ui.checkin.CheckinActivity;
 import com.shuhai.anfang.ui.checkin.CheckinTActivity;
+import com.shuhai.anfang.ui.course.CourseActivity;
+import com.shuhai.anfang.ui.course.CourseTActivity;
 import com.shuhai.anfang.ui.fence.FenceListActivity;
 import com.shuhai.anfang.ui.homework.HomeWorkParentActivity;
 import com.shuhai.anfang.ui.homework.HomeWorkTeacherActivity;
@@ -287,92 +289,6 @@ public class HomeFragment extends BaseFragment {
 
     }
 
-    private void initShopItem() {
-        List<HomeItem> homeShopItems = new ArrayList<HomeItem>();
-        /*课程表*/
-        homeShopItems.add(new HomeItem()
-                .setIconId(R.drawable.home_course)
-                .setTitle(getString(R.string.home_course))
-                .setIntent(new Intent(mContext, LeaveActivity.class)));
-        /*老师评语*/
-        homeShopItems.add(new HomeItem()
-                .setIconId(R.drawable.home_remark)
-                .setTitle(getString(R.string.home_remark))
-                .setIntent(new Intent(mContext, LeaveActivity.class)));
-        /*荣誉墙*/
-        homeShopItems.add(new HomeItem()
-                .setIconId(R.drawable.home_honour)
-                .setTitle(getString(R.string.home_honour))
-                .setIntent(new Intent(mContext, LeaveActivity.class)));
-
-        itemShopAdapter = new HomeItemGridAdapter(mContext);
-        grd_school_shop.setAdapter(itemShopAdapter);
-        itemShopAdapter.reloadData(homeShopItems);
-    }
-
-    private void initSchoolItem() {
-        boolean isParent = false;
-        if (XPTApplication.getInstance().isLoggedIn()) {
-            if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-                isParent = false;
-            } else if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-                isParent = true;
-            }
-        }
-
-        List<HomeItem> homeItems = new ArrayList<HomeItem>();
-        //家庭作业
-        homeItems.add(new HomeItem()
-                .setIconId(R.drawable.home_homework)
-                .setTitle(getString(R.string.home_homework))
-                .setIntent(new Intent(mContext, isParent ? HomeWorkParentActivity.class : HomeWorkTeacherActivity.class)));
-        //班级公告
-        homeItems.add(new HomeItem()
-                .setIconId(R.drawable.home_notice)
-                .setTitle(getString(R.string.home_notice))
-                .setIntent(new Intent(mContext, isParent ? NoticeActivity.class : NoticeTeacherActivity.class)));
-        //成绩
-        homeItems.add(new HomeItem()
-                .setIconId(R.drawable.home_classes)
-                .setTitle(getString(R.string.home_score))
-                .setIntent(new Intent(mContext, isParent ? ScoreActivity.class : ScoreTeacherActivity.class)));
-        //考勤
-        homeItems.add(new HomeItem()
-                .setIconId(R.drawable.home_checkin)
-                .setTitle(getString(R.string.home_checkin))
-                .setIntent(new Intent(mContext, isParent ? CheckinActivity.class : CheckinTActivity.class)));
-
-        //报警查询
-        homeItems.add(new HomeItem()
-                .setIconId(R.drawable.home_alarm)
-                .setTitle(getString(R.string.home_alarm))
-                .setIntent(new Intent(mContext, isParent ? AlarmActivity.class : AlarmTActivity.class)));
-
-        //电子围栏
-        homeItems.add(new HomeItem()
-                .setIconId(R.drawable.home_fence)
-                .setTitle(getString(R.string.home_fence))
-                .setIntent(new Intent(mContext, FenceListActivity.class)));
-
-        //在线请假
-        homeItems.add(new HomeItem()
-                .setIconId(R.drawable.home_notice)
-                .setTitle(getString(R.string.home_leave))
-                .setIntent(new Intent(mContext, isParent ? LeaveActivity.class : LeaveTActivity.class)));
-
-        Intent newsIntent = new Intent(mContext, WebViewActivity.class);
-        newsIntent.putExtra(ExtraKey.WEB_URL, "http://school.xinpingtai.com/edunews/");
-        homeItems.add(new HomeItem()
-                .setIconId(R.drawable.home_news)
-                .setTitle(getString(R.string.home_news))
-                .setIntent(newsIntent));
-
-        itemAdapter = new HomeItemGridAdapter(mContext);
-
-        grd_school.setAdapter(itemAdapter);
-        itemAdapter.reloadData(homeItems);
-    }
-
     /*
     * 获取广告位
     * */
@@ -515,6 +431,101 @@ public class HomeFragment extends BaseFragment {
             view.bindData(beanHomeCfgs.get(i));
             llGroup.addView(view);
         }
+    }
+
+    private void initSchoolItem() {
+        boolean isParent = false;
+        if (XPTApplication.getInstance().isLoggedIn()) {
+            if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+                isParent = false;
+            } else if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+                isParent = true;
+            }
+        }
+
+        List<HomeItem> homeItems = new ArrayList<HomeItem>();
+        //家庭作业
+        homeItems.add(new HomeItem()
+                .setIconId(R.drawable.home_homework)
+                .setTitle(getString(R.string.home_homework))
+                .setIntent(new Intent(mContext, isParent ? HomeWorkParentActivity.class : HomeWorkTeacherActivity.class)));
+        //班级公告
+        homeItems.add(new HomeItem()
+                .setIconId(R.drawable.home_notice)
+                .setTitle(getString(R.string.home_notice))
+                .setIntent(new Intent(mContext, isParent ? NoticeActivity.class : NoticeTeacherActivity.class)));
+        //成绩
+        homeItems.add(new HomeItem()
+                .setIconId(R.drawable.home_classes)
+                .setTitle(getString(R.string.home_score))
+                .setIntent(new Intent(mContext, isParent ? ScoreActivity.class : ScoreTeacherActivity.class)));
+        //考勤
+        homeItems.add(new HomeItem()
+                .setIconId(R.drawable.home_checkin)
+                .setTitle(getString(R.string.home_checkin))
+                .setIntent(new Intent(mContext, isParent ? CheckinActivity.class : CheckinTActivity.class)));
+
+        //报警查询
+        homeItems.add(new HomeItem()
+                .setIconId(R.drawable.home_alarm)
+                .setTitle(getString(R.string.home_alarm))
+                .setIntent(new Intent(mContext, isParent ? AlarmActivity.class : AlarmTActivity.class)));
+
+        //电子围栏
+        homeItems.add(new HomeItem()
+                .setIconId(R.drawable.home_fence)
+                .setTitle(getString(R.string.home_fence))
+                .setIntent(new Intent(mContext, FenceListActivity.class)));
+
+        //在线请假
+        homeItems.add(new HomeItem()
+                .setIconId(R.drawable.home_notice)
+                .setTitle(getString(R.string.home_leave))
+                .setIntent(new Intent(mContext, isParent ? LeaveActivity.class : LeaveTActivity.class)));
+
+        Intent newsIntent = new Intent(mContext, WebViewActivity.class);
+        newsIntent.putExtra(ExtraKey.WEB_URL, "http://school.xinpingtai.com/edunews/");
+        homeItems.add(new HomeItem()
+                .setIconId(R.drawable.home_news)
+                .setTitle(getString(R.string.home_news))
+                .setIntent(newsIntent));
+
+        itemAdapter = new HomeItemGridAdapter(mContext);
+
+        grd_school.setAdapter(itemAdapter);
+        itemAdapter.reloadData(homeItems);
+    }
+
+    private void initShopItem() {
+        boolean isParent = false;
+        if (XPTApplication.getInstance().isLoggedIn()) {
+            if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+                isParent = false;
+            } else if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+                isParent = true;
+            }
+        }
+
+        List<HomeItem> homeShopItems = new ArrayList<HomeItem>();
+        /*课程表*/
+        homeShopItems.add(new HomeItem()
+                .setIconId(R.drawable.home_course)
+                .setTitle(getString(R.string.home_course))
+                .setIntent(new Intent(mContext, isParent ? CourseActivity.class : CourseTActivity.class)));
+        /*老师评语*/
+        homeShopItems.add(new HomeItem()
+                .setIconId(R.drawable.home_remark)
+                .setTitle(getString(R.string.home_remark))
+                .setIntent(new Intent(mContext, LeaveActivity.class)));
+        /*荣誉墙*/
+        homeShopItems.add(new HomeItem()
+                .setIconId(R.drawable.home_honour)
+                .setTitle(getString(R.string.home_honour))
+                .setIntent(new Intent(mContext, LeaveActivity.class)));
+
+        itemShopAdapter = new HomeItemGridAdapter(mContext);
+        grd_school_shop.setAdapter(itemShopAdapter);
+        itemShopAdapter.reloadData(homeShopItems);
     }
 
     /*获取推荐商品*/

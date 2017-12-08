@@ -247,6 +247,7 @@
 
         <!--课程表-->
         <activity android:name=".ui.course.CourseActivity" />
+        <activity android:name=".ui.course.CourseTActivity" />
 
         <!-- 聊天页面 -->
         <activity
