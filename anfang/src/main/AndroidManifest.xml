@@ -257,6 +257,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".ui.chat.ImageGridActivity" />
+        <activity android:name=".ui.chat.RecorderVideoActivity" />
+        <activity android:name=".ui.chat.VideoCallActivity" />
+        <activity android:name=".ui.chat.VoiceCallActivity" />
 
         <!--联系人详情-->
         <activity

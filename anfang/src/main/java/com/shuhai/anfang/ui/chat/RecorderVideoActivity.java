@@ -12,6 +12,7 @@
 package com.shuhai.anfang.ui.chat;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -49,7 +50,6 @@ import com.hyphenate.util.EMLog;
 import com.hyphenate.util.PathUtil;
 import com.shuhai.anfang.R;
 import com.shuhai.anfang.ease.util.Utils;
-import com.shuhai.anfang.ui.main.BaseActivity;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -58,7 +58,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-public class RecorderVideoActivity extends BaseActivity implements
+public class RecorderVideoActivity extends Activity implements
 		OnClickListener, SurfaceHolder.Callback, OnErrorListener,
 		OnInfoListener {
 	private static final String TAG = "RecorderVideoActivity";
