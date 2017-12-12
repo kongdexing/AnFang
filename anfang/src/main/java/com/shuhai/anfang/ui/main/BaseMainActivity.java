@@ -14,55 +14,32 @@ import com.huawei.hms.support.api.push.TokenResult;
 import com.meizu.cloud.pushsdk.PushManager;
 import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.push.DeviceHelper;
-import com.shuhai.anfang.push.MyPushIntentService;
 import com.shuhai.anfang.push.UpushTokenHelper;
+import com.umeng.analytics.MobclickAgent;
 import com.umeng.message.IUmengCallback;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
-import com.xiaomi.channel.commonutils.logger.LoggerInterface;
-import com.xiaomi.mipush.sdk.Logger;
-import com.xiaomi.mipush.sdk.MiPushClient;
 
 /**
  * Created by dexing on 2017/6/5.
  * No1
  */
 
-public class BaseMainActivity extends BaseActivity implements HuaweiApiClient.ConnectionCallbacks, HuaweiApiClient.OnConnectionFailedListener {
+public class BaseMainActivity extends BaseLoginMainActivity implements HuaweiApiClient.ConnectionCallbacks, HuaweiApiClient.OnConnectionFailedListener {
 
     private HuaweiApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        PushAgent.getInstance(this).onAppStart();
+
         //依据手机类型，注册不同推送平台
         String model = android.os.Build.MODEL;
         String carrier = android.os.Build.MANUFACTURER;
         Log.i(TAG, "onCreate: " + model + "  " + carrier);
 
-        if (carrier.toUpperCase().equals(DeviceHelper.M_XIAOMI)) {
-            MiPushClient.registerPush(this, XPTApplication.APP_MIPUSH_ID, XPTApplication.APP_MIPUSH_KEY);
-            LoggerInterface newLogger = new LoggerInterface() {
-
-                @Override
-                public void setTag(String tag) {
-                    // ignore
-                }
-
-                @Override
-                public void log(String content, Throwable t) {
-                    Log.d(TAG, content, t);
-                }
-
-                @Override
-                public void log(String content) {
-                    Log.d(TAG, content);
-                }
-            };
-            Logger.setLogger(this, newLogger);
-            //推送可用
-            MiPushClient.enablePush(this);
-        } else if (carrier.toUpperCase().equals(DeviceHelper.M_HUAWEI)) {
+        if (carrier.toUpperCase().equals(DeviceHelper.M_HUAWEI)) {
             //创建华为移动服务client实例用以使用华为push服务
             //需要指定api为HuaweiId.PUSH_API
             //连接回调以及连接失败监听
@@ -79,8 +56,8 @@ public class BaseMainActivity extends BaseActivity implements HuaweiApiClient.Co
         } else {
             //友盟
             final PushAgent mPushAgent = PushAgent.getInstance(this);
-            mPushAgent.setDebugMode(false);
-            mPushAgent.setPushIntentServiceClass(MyPushIntentService.class);
+            mPushAgent.setDebugMode(true);
+//            mPushAgent.setPushIntentServiceClass(MyPushIntentService.class);
 
             Log.i(TAG, "startServer: register ");
             new Thread(new Runnable() {
@@ -180,6 +157,15 @@ public class BaseMainActivity extends BaseActivity implements HuaweiApiClient.Co
     @Override
     protected void onResume() {
         super.onResume();
+        MobclickAgent.onResume(this);
+        Log.i(TAG, "onResume: ");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+        Log.i(TAG, "onPause: ");
     }
 
     @Override

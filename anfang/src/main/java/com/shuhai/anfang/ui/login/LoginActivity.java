@@ -32,7 +32,6 @@ import com.shuhai.anfang.push.DeviceHelper;
 import com.shuhai.anfang.util.ToastUtils;
 import com.umeng.message.IUmengCallback;
 import com.umeng.message.PushAgent;
-import com.xiaomi.mipush.sdk.MiPushClient;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -78,10 +77,7 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
                 String carrier = android.os.Build.MANUFACTURER;
                 Log.i(TAG, "onCreate: " + model + "  " + carrier);
 
-                if (carrier.toUpperCase().equals(DeviceHelper.M_XIAOMI)) {
-                    //推送不可用
-                    MiPushClient.disablePush(this);
-                } else if (carrier.toUpperCase().equals(DeviceHelper.M_HUAWEI)) {
+                if (carrier.toUpperCase().equals(DeviceHelper.M_HUAWEI)) {
                     client = new HuaweiApiClient.Builder(this)
                             .addApi(HuaweiPush.PUSH_API)
                             .addConnectionCallbacks(this)

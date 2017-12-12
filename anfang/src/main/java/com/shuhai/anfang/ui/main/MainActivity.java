@@ -52,7 +52,7 @@ import permissions.dispatcher.PermissionRequest;
 import permissions.dispatcher.RuntimePermissions;
 
 @RuntimePermissions
-public class MainActivity extends BaseLoginMainActivity implements BDLocationListener {
+public class MainActivity extends BaseMainActivity implements BDLocationListener {
 
     private List<BaseFragment> fragmentList;
     private BaseFragment mCurrentFgt, homeFragment, mapFragment, messageFragment, mineFragment;

@@ -177,7 +177,11 @@ public class HomeFragment extends BaseFragment {
 
             @Override
             public void onUserExit() {
-
+                //用户切换后，重新获取广告位信息
+                getBanners();
+                //重新分配Intent
+                initSchoolItem();
+                initShopItem();
             }
         });
     }

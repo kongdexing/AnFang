@@ -31,8 +31,6 @@ import com.shuhai.anfang.ui.main.MainActivity;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.umeng.analytics.MobclickAgent;
-import com.umeng.message.UmengNotificationClickHandler;
-import com.umeng.message.entity.UMessage;
 import com.xiaomi.ad.AdSdk;
 
 import java.io.File;
@@ -41,8 +39,8 @@ import java.net.Proxy;
 public class XPTApplication extends Application {
 
     //小米推送
-    public static final String APP_MIPUSH_ID = "2882303761517599079";
-    public static final String APP_MIPUSH_KEY = "5961759967079";
+//    public static final String APP_MIPUSH_ID = "2882303761517599079";
+//    public static final String APP_MIPUSH_KEY = "5961759967079";
     //魅族推送
     public static final String MZ_APP_ID = "111065";
     public static final String MZ_APP_KEY = "5e44c6c91687442091c945f29c888b18";
@@ -104,31 +102,6 @@ public class XPTApplication extends Application {
         //日志加密设置
         MobclickAgent.enableEncrypt(true);
 
-//        mPushAgent.setNotificationPlaySound(MsgConstant.NOTIFICATION_PLAY_SDK_ENABLE);//声音
-//        mPushAgent.setNotificationPlayLights(MsgConstant.NOTIFICATION_PLAY_SERVER);//呼吸灯
-//        mPushAgent.setNotificationPlayVibrate(MsgConstant.NOTIFICATION_PLAY_SERVER);//振动
-
-        //通知栏数量显示
-//        mPushAgent.setDisplayNotificationNumber(0);
-//        mPushAgent.setMessageHandler(new MyUmengMessageHandler());
-//        mPushAgent.setDebugMode(false);
-        /**
-         * 自定义行为的回调处理
-         * UmengNotificationClickHandler是在BroadcastReceiver中被调用，故
-         * 如果需启动Activity，需添加Intent.FLAG_ACTIVITY_NEW_TASK
-         * */
-        UmengNotificationClickHandler notificationClickHandler = new UmengNotificationClickHandler() {
-            @Override
-            public void dealWithCustomAction(Context context, UMessage msg) {
-                Log.i(TAG, "dealWithCustomAction: " + msg.text);
-                //根据msg类型判断
-            }
-        };
-        //使用自定义的NotificationHandler，来结合友盟统计处理消息通知
-        //参考http://bbs.umeng.com/thread-11112-1-1.html
-        //CustomNotificationHandler notificationClickHandler = new CustomNotificationHandler();
-//        mPushAgent.setNotificationClickHandler(notificationClickHandler);
-
         AudioManager.getInstance(getCachePath());
         FileDownloader.init(getApplicationContext(), new DownloadMgrInitialParams.InitCustomMaker()
                 .connectionCreator(new FileDownloadUrlConnection
@@ -138,6 +111,7 @@ public class XPTApplication extends Application {
                         .proxy(Proxy.NO_PROXY) // set proxy
                 )));
 
+        //环信sdk集成
         EMOptions options = new EMOptions();
         // 默认添加好友时，是不需要验证的，改成需要验证
         options.setAcceptInvitationAlways(false);
