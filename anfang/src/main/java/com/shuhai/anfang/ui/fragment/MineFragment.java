@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.android.widget.view.CircularImageView;
 import com.shuhai.anfang.R;
 import com.shuhai.anfang.XPTApplication;
+import com.shuhai.anfang.common.UserHelper;
 import com.shuhai.anfang.common.UserType;
 import com.shuhai.anfang.model.BeanParent;
 import com.shuhai.anfang.model.BeanTeacher;
@@ -22,6 +23,8 @@ import com.shuhai.anfang.ui.mine.MyChildActivity;
 import com.shuhai.anfang.ui.mine.MyClassesActivity;
 import com.shuhai.anfang.ui.mine.MyInfoActivity;
 import com.shuhai.anfang.ui.setting.QRCodeActivity;
+import com.shuhai.anfang.ui.setting.SettingActivity;
+import com.shuhai.anfang.view.CustomDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -66,7 +69,10 @@ public class MineFragment extends BaseFragment {
         if (rlMyChild == null || ll_unlogin == null) {
             return;
         }
+        reloadMineUI();
+    }
 
+    private void reloadMineUI() {
         //判断登录状态
         if (XPTApplication.getInstance().isLoggedIn()) {
             ll_unlogin.setVisibility(View.GONE);
@@ -117,12 +123,42 @@ public class MineFragment extends BaseFragment {
 
     @Override
     protected void initData() {
+        UserHelper.getInstance().addUserChangeListener(new UserHelper.UserChangeListener() {
+            @Override
+            public void onUserLoginSuccess() {
+                reloadMineUI();
+            }
 
+            @Override
+            public void onUserExit() {
+                reloadMineUI();
+            }
+        });
     }
 
     @OnClick({R.id.imgHead, R.id.txtToLogin, R.id.ll_login, R.id.rlMyChild,
-            R.id.rlMyCourse,R.id.rlMyClass, R.id.rlQRCode})
+            R.id.rlMyBill, R.id.rlMyClass, R.id.rlMyProperty, R.id.rlSetting, R.id.rlQRCode})
     void viewClick(View view) {
+        switch (view.getId()) {
+            case R.id.rlMyClass:
+            case R.id.rlMyChild:
+            case R.id.rlMyBill:
+            case R.id.rlMyProperty:
+                if (!XPTApplication.getInstance().isLoggedIn()) {
+                    //弹出登录对话框
+                    CustomDialog dialog = new CustomDialog(mContext);
+                    dialog.setTitle(R.string.label_tip);
+                    dialog.setMessage(R.string.message_tologin);
+                    dialog.setAlertDialogClickListener(new CustomDialog.DialogClickListener() {
+                        @Override
+                        public void onPositiveClick() {
+                            mContext.startActivity(new Intent(mContext, LoginActivity.class));
+                        }
+                    });
+                    return;
+                }
+        }
+
         switch (view.getId()) {
             case R.id.imgHead:
             case R.id.txtToLogin:
@@ -154,9 +190,9 @@ public class MineFragment extends BaseFragment {
 //            case R.id.rlMyContacts:
 //                startActivity(new Intent(getContext(), ContactsActivity.class));
 //                break;
-//            case R.id.rlSetting:
-//                startActivity(new Intent(getContext(), SettingActivity.class));
-//                break;
+            case R.id.rlSetting:
+                startActivity(new Intent(getContext(), SettingActivity.class));
+                break;
             case R.id.rlQRCode:
                 startActivity(new Intent(getContext(), QRCodeActivity.class));
                 break;
