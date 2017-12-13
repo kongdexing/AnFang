@@ -56,6 +56,10 @@ public class UserHelper {
                 UpushTokenHelper.exitAccount(teacher.getLogin_name(), teacher.getU_id());
             }
         }
+        userLoginSuccess();
+    }
+
+    public void userLoginSuccess(){
         for (int i = 0; i < listeners.size(); i++) {
             listeners.get(i).onUserLoginSuccess();
         }

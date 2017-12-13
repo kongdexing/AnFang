@@ -126,10 +126,6 @@ public class ContactFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-        if (!XPTApplication.getInstance().isLoggedIn()) {
-            return;
-        }
-
         //判断老师家长
         if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
             ArrayList<Object> listTeacher = (ArrayList) GreenDaoHelper.getInstance().getContactTeacherForParent();
@@ -156,10 +152,6 @@ public class ContactFragment extends BaseFragment {
     }
 
     private void getContacts() {
-        if (!XPTApplication.getInstance().isLoggedIn()) {
-            return;
-        }
-
         //判断老师家长
         if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
             getContactForParent();

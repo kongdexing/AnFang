@@ -50,6 +50,9 @@ public class VoicePlayActivity extends BaseActivity implements VoicePlayListener
     private static final int MSG_VOICE_PLAY = 0x113;
 
     public void initVoice(BeanHomeWork homeWork) {
+        if (homeWork == null) {
+            return;
+        }
         //取amr文件
         String amr_file = homeWork.getAmr_file();
         Log.i(TAG, "amr file : " + amr_file);

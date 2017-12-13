@@ -169,21 +169,22 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onUserLoginSuccess() {
                 //用户切换后，重新获取广告位信息
-                getBanners();
-                //重新分配Intent
-                initSchoolItem();
-                initShopItem();
+                reloadPageData();
             }
 
             @Override
             public void onUserExit() {
-                //用户切换后，重新获取广告位信息
-                getBanners();
-                //重新分配Intent
-                initSchoolItem();
-                initShopItem();
+                reloadPageData();
             }
         });
+    }
+
+    public void reloadPageData() {
+        //用户切换后，重新获取广告位信息
+        getBanners();
+        //重新分配Intent
+        initSchoolItem();
+        initShopItem();
     }
 
     private void initView() {
@@ -374,6 +375,9 @@ public class HomeFragment extends BaseFragment {
             listTitles.add(banners.get(i).getTitle());
             Log.i(TAG, "reloadTopFragment: " + banners.get(i).getImg());
         }
+        if (topBanner == null) {
+            return;
+        }
         topBanner.update(listBannerImages, listTitles);
     }
 
@@ -439,12 +443,10 @@ public class HomeFragment extends BaseFragment {
 
     private void initSchoolItem() {
         boolean isParent = false;
-        if (XPTApplication.getInstance().isLoggedIn()) {
-            if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-                isParent = false;
-            } else if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-                isParent = true;
-            }
+        if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+            isParent = false;
+        } else if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+            isParent = true;
         }
 
         List<HomeItem> homeItems = new ArrayList<HomeItem>();
@@ -502,12 +504,10 @@ public class HomeFragment extends BaseFragment {
 
     private void initShopItem() {
         boolean isParent = false;
-        if (XPTApplication.getInstance().isLoggedIn()) {
-            if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-                isParent = false;
-            } else if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-                isParent = true;
-            }
+        if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+            isParent = false;
+        } else if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+            isParent = true;
         }
 
         List<HomeItem> homeShopItems = new ArrayList<HomeItem>();

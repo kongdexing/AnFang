@@ -313,13 +313,16 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
         super.onLoginSuccess();
         //登录成功后，根据用户角色获取广告位
         if (homeFragment != null) {
-            ((HomeFragment) homeFragment).getBanners();
+            ((HomeFragment) homeFragment).reloadPageData();
         }
     }
 
     @Override
     protected void onLoginFailed(String msg) {
         super.onLoginFailed(msg);
+        if (homeFragment != null) {
+            ((HomeFragment) homeFragment).reloadPageData();
+        }
     }
 
     BroadcastReceiver MyBannerReceiver = new BroadcastReceiver() {

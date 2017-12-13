@@ -47,7 +47,6 @@ public class XPTApplication extends Application {
     //bugly
     public static final String APP_ID = "3e1429a7a5"; // TODO bugly上注册的appid
     private static XPTApplication mInstance;
-    private String current_user_type = "";
 
     public static final String WXAPP_ID = "wx1af4f660ce9e6b37";
     private Display display;
@@ -187,6 +186,7 @@ public class XPTApplication extends Application {
     }
 
     public UserType getCurrent_user_type() {
+        String current_user_type = SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_TYPE, "").toString();
         if (current_user_type.equals(UserType.PARENT.toString())) {
             return UserType.PARENT;
         } else if (current_user_type.equals(UserType.TEACHER.toString())) {
@@ -197,7 +197,6 @@ public class XPTApplication extends Application {
     }
 
     public void setCurrent_user_type(String current_user_type) {
-        this.current_user_type = current_user_type;
         SharedPreferencesUtil.saveData(this, SharedPreferencesUtil.KEY_USER_TYPE, current_user_type);
     }
 

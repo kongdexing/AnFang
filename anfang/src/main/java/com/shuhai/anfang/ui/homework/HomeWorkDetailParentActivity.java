@@ -1,5 +1,6 @@
 package com.shuhai.anfang.ui.homework;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -13,11 +14,13 @@ import com.android.widget.mygridview.MyGridView;
 import com.shuhai.anfang.R;
 import com.shuhai.anfang.bean.BeanHomeWork;
 import com.shuhai.anfang.common.ExtraKey;
-import com.shuhai.anfang.ui.album.LocalImagePHelper;
 import com.shuhai.anfang.ui.album.AlbumGridParentAdapter;
 import com.shuhai.anfang.ui.album.AlbumParentViewPager;
+import com.shuhai.anfang.ui.album.LocalImagePHelper;
+import com.shuhai.anfang.util.ToastUtils;
 
 import java.util.List;
+import java.util.Set;
 
 import butterknife.BindView;
 
@@ -75,7 +78,33 @@ public class HomeWorkDetailParentActivity extends VoicePlayActivity {
         initData();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Bundle bun = getIntent().getExtras();
+        if (bun != null) {
+            try {
+                Set<String> keySet = bun.keySet();
+                for (String key : keySet) {
+                    String value = bun.getString(key);
+                    ToastUtils.showToast(this, "作业id为：" + value);
+                }
+            } catch (Exception ex) {
+                ToastUtils.showToast(this, "");
+            }
+        } else {
+            ToastUtils.showToast(this, "bundle is null：");
+        }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+    }
+
     private void initData() {
+
         myPicGridAdapter = new AlbumGridParentAdapter(this, new AlbumGridParentAdapter.MyGridViewClickListener() {
             @Override
             public void onGridViewItemClick(int position, String imgPath) {

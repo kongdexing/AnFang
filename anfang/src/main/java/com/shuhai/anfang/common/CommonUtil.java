@@ -280,6 +280,8 @@ public class CommonUtil {
             SharedPreferencesUtil.saveData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_USER_NAME, account);
             //切换账号
             UserHelper.getInstance().changeAccount();
+        } else {
+            UserHelper.getInstance().userLoginSuccess();
         }
     }
 
