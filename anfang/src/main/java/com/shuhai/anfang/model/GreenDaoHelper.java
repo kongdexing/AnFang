@@ -273,6 +273,13 @@ public class GreenDaoHelper {
         return classes;
     }
 
+    public BeanClass getClassById(String Id) {
+        if (readDaoSession != null) {
+            return readDaoSession.getBeanClassDao().queryBuilder().where(BeanClassDao.Properties.C_id.eq(Id)).build().unique();
+        }
+        return null;
+    }
+
     public List<BeanCourse> getCourseByGId(String g_id) {
         List<BeanCourse> courses = new ArrayList<>();
         if (readDaoSession != null) {

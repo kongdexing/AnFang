@@ -19,6 +19,7 @@ import com.shuhai.anfang.model.BeanTeacher;
 import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.ui.login.LoginActivity;
 import com.shuhai.anfang.ui.mine.MyChildActivity;
+import com.shuhai.anfang.ui.mine.MyClassesActivity;
 import com.shuhai.anfang.ui.mine.MyInfoActivity;
 import com.shuhai.anfang.ui.setting.QRCodeActivity;
 
@@ -120,7 +121,7 @@ public class MineFragment extends BaseFragment {
     }
 
     @OnClick({R.id.imgHead, R.id.txtToLogin, R.id.ll_login, R.id.rlMyChild,
-            R.id.rlMyCourse, R.id.rlQRCode})
+            R.id.rlMyCourse,R.id.rlMyClass, R.id.rlQRCode})
     void viewClick(View view) {
         switch (view.getId()) {
             case R.id.imgHead:
@@ -132,6 +133,9 @@ public class MineFragment extends BaseFragment {
                 break;
             case R.id.rlMyChild:
                 startActivity(new Intent(getContext(), MyChildActivity.class));
+                break;
+            case R.id.rlMyClass:
+                startActivity(new Intent(getContext(), MyClassesActivity.class));
                 break;
 //            case R.id.rlMyCourse:
 //                startActivity(new Intent(getContext(), CourseActivity.class));

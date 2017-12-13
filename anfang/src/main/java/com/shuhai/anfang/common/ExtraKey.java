@@ -9,6 +9,7 @@ public class ExtraKey {
     public static final String QUESTION = "question";
     public static final String CLASS_ID = "class_id";
     public static final String STUDENT_ID = "student";
+    public static final String STUDENT_DETAIL = "student_detail";
     public static final String LEAVE_DETAIL = "leave";
     public static final String ALARM_DETAIL = "alarm";
     public static final String CONTACT_TYPE = "contact_type";
