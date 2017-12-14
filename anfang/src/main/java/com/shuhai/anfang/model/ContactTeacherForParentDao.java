@@ -22,21 +22,15 @@ public class ContactTeacherForParentDao extends AbstractDao<ContactTeacherForPar
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property T_id = new Property(0, String.class, "t_id", false, "T_ID");
-        public final static Property U_id = new Property(1, String.class, "u_id", false, "U_ID");
-        public final static Property Name = new Property(2, String.class, "name", false, "NAME");
-        public final static Property Phone = new Property(3, String.class, "phone", false, "PHONE");
-        public final static Property S_id = new Property(4, String.class, "s_id", false, "S_ID");
-        public final static Property S_name = new Property(5, String.class, "s_name", false, "S_NAME");
-        public final static Property A_id = new Property(6, String.class, "a_id", false, "A_ID");
-        public final static Property A_name = new Property(7, String.class, "a_name", false, "A_NAME");
-        public final static Property D_name = new Property(8, String.class, "d_name", false, "D_NAME");
-        public final static Property Education = new Property(9, String.class, "education", false, "EDUCATION");
-        public final static Property Sex = new Property(10, String.class, "sex", false, "SEX");
-        public final static Property Email = new Property(11, String.class, "email", false, "EMAIL");
-        public final static Property Charge = new Property(12, String.class, "charge", false, "CHARGE");
-        public final static Property G_id = new Property(13, String.class, "g_id", false, "G_ID");
-        public final static Property C_id = new Property(14, String.class, "c_id", false, "C_ID");
+        public final static Property U_id = new Property(0, String.class, "u_id", false, "U_ID");
+        public final static Property S_name = new Property(1, String.class, "s_name", false, "S_NAME");
+        public final static Property A_name = new Property(2, String.class, "a_name", false, "A_NAME");
+        public final static Property D_name = new Property(3, String.class, "d_name", false, "D_NAME");
+        public final static Property Education = new Property(4, String.class, "education", false, "EDUCATION");
+        public final static Property Email = new Property(5, String.class, "email", false, "EMAIL");
+        public final static Property Charge = new Property(6, String.class, "charge", false, "CHARGE");
+        public final static Property G_id = new Property(7, String.class, "g_id", false, "G_ID");
+        public final static Property C_id = new Property(8, String.class, "c_id", false, "C_ID");
     };
 
 
@@ -52,21 +46,15 @@ public class ContactTeacherForParentDao extends AbstractDao<ContactTeacherForPar
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"CONTACT_TEACHER_FOR_PARENT\" (" + //
-                "\"T_ID\" TEXT," + // 0: t_id
-                "\"U_ID\" TEXT," + // 1: u_id
-                "\"NAME\" TEXT," + // 2: name
-                "\"PHONE\" TEXT," + // 3: phone
-                "\"S_ID\" TEXT," + // 4: s_id
-                "\"S_NAME\" TEXT," + // 5: s_name
-                "\"A_ID\" TEXT," + // 6: a_id
-                "\"A_NAME\" TEXT," + // 7: a_name
-                "\"D_NAME\" TEXT," + // 8: d_name
-                "\"EDUCATION\" TEXT," + // 9: education
-                "\"SEX\" TEXT," + // 10: sex
-                "\"EMAIL\" TEXT," + // 11: email
-                "\"CHARGE\" TEXT," + // 12: charge
-                "\"G_ID\" TEXT," + // 13: g_id
-                "\"C_ID\" TEXT);"); // 14: c_id
+                "\"U_ID\" TEXT," + // 0: u_id
+                "\"S_NAME\" TEXT," + // 1: s_name
+                "\"A_NAME\" TEXT," + // 2: a_name
+                "\"D_NAME\" TEXT," + // 3: d_name
+                "\"EDUCATION\" TEXT," + // 4: education
+                "\"EMAIL\" TEXT," + // 5: email
+                "\"CHARGE\" TEXT," + // 6: charge
+                "\"G_ID\" TEXT," + // 7: g_id
+                "\"C_ID\" TEXT);"); // 8: c_id
     }
 
     /** Drops the underlying database table. */
@@ -79,79 +67,49 @@ public class ContactTeacherForParentDao extends AbstractDao<ContactTeacherForPar
     protected final void bindValues(DatabaseStatement stmt, ContactTeacherForParent entity) {
         stmt.clearBindings();
  
-        String t_id = entity.getT_id();
-        if (t_id != null) {
-            stmt.bindString(1, t_id);
-        }
- 
         String u_id = entity.getU_id();
         if (u_id != null) {
-            stmt.bindString(2, u_id);
-        }
- 
-        String name = entity.getName();
-        if (name != null) {
-            stmt.bindString(3, name);
-        }
- 
-        String phone = entity.getPhone();
-        if (phone != null) {
-            stmt.bindString(4, phone);
-        }
- 
-        String s_id = entity.getS_id();
-        if (s_id != null) {
-            stmt.bindString(5, s_id);
+            stmt.bindString(1, u_id);
         }
  
         String s_name = entity.getS_name();
         if (s_name != null) {
-            stmt.bindString(6, s_name);
-        }
- 
-        String a_id = entity.getA_id();
-        if (a_id != null) {
-            stmt.bindString(7, a_id);
+            stmt.bindString(2, s_name);
         }
  
         String a_name = entity.getA_name();
         if (a_name != null) {
-            stmt.bindString(8, a_name);
+            stmt.bindString(3, a_name);
         }
  
         String d_name = entity.getD_name();
         if (d_name != null) {
-            stmt.bindString(9, d_name);
+            stmt.bindString(4, d_name);
         }
  
         String education = entity.getEducation();
         if (education != null) {
-            stmt.bindString(10, education);
-        }
- 
-        String sex = entity.getSex();
-        if (sex != null) {
-            stmt.bindString(11, sex);
+            stmt.bindString(5, education);
         }
  
         String email = entity.getEmail();
         if (email != null) {
-            stmt.bindString(12, email);
+            stmt.bindString(6, email);
         }
  
         String charge = entity.getCharge();
         if (charge != null) {
-            stmt.bindString(13, charge);
+            stmt.bindString(7, charge);
         }
  
         String g_id = entity.getG_id();
         if (g_id != null) {
-            stmt.bindString(14, g_id);
+            stmt.bindString(8, g_id);
         }
  
         String c_id = entity.getC_id();
         if (c_id != null) {
-            stmt.bindString(15, c_id);
+            stmt.bindString(9, c_id);
         }
     }
 
@@ -159,79 +117,49 @@ public class ContactTeacherForParentDao extends AbstractDao<ContactTeacherForPar
     protected final void bindValues(SQLiteStatement stmt, ContactTeacherForParent entity) {
         stmt.clearBindings();
  
-        String t_id = entity.getT_id();
-        if (t_id != null) {
-            stmt.bindString(1, t_id);
-        }
- 
         String u_id = entity.getU_id();
         if (u_id != null) {
-            stmt.bindString(2, u_id);
-        }
- 
-        String name = entity.getName();
-        if (name != null) {
-            stmt.bindString(3, name);
-        }
- 
-        String phone = entity.getPhone();
-        if (phone != null) {
-            stmt.bindString(4, phone);
-        }
- 
-        String s_id = entity.getS_id();
-        if (s_id != null) {
-            stmt.bindString(5, s_id);
+            stmt.bindString(1, u_id);
         }
  
         String s_name = entity.getS_name();
         if (s_name != null) {
-            stmt.bindString(6, s_name);
-        }
- 
-        String a_id = entity.getA_id();
-        if (a_id != null) {
-            stmt.bindString(7, a_id);
+            stmt.bindString(2, s_name);
         }
  
         String a_name = entity.getA_name();
         if (a_name != null) {
-            stmt.bindString(8, a_name);
+            stmt.bindString(3, a_name);
         }
  
         String d_name = entity.getD_name();
         if (d_name != null) {
-            stmt.bindString(9, d_name);
+            stmt.bindString(4, d_name);
         }
  
         String education = entity.getEducation();
         if (education != null) {
-            stmt.bindString(10, education);
-        }
- 
-        String sex = entity.getSex();
-        if (sex != null) {
-            stmt.bindString(11, sex);
+            stmt.bindString(5, education);
         }
  
         String email = entity.getEmail();
         if (email != null) {
-            stmt.bindString(12, email);
+            stmt.bindString(6, email);
         }
  
         String charge = entity.getCharge();
         if (charge != null) {
-            stmt.bindString(13, charge);
+            stmt.bindString(7, charge);
         }
  
         String g_id = entity.getG_id();
         if (g_id != null) {
-            stmt.bindString(14, g_id);
+            stmt.bindString(8, g_id);
         }
  
         String c_id = entity.getC_id();
         if (c_id != null) {
-            stmt.bindString(15, c_id);
+            stmt.bindString(9, c_id);
         }
     }
 
@@ -243,42 +171,30 @@ public class ContactTeacherForParentDao extends AbstractDao<ContactTeacherForPar
     @Override
     public ContactTeacherForParent readEntity(Cursor cursor, int offset) {
         ContactTeacherForParent entity = new ContactTeacherForParent( //
-            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // t_id
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // u_id
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // name
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // phone
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // s_id
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // s_name
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // a_id
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // a_name
-            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // d_name
-            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // education
-            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // sex
-            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // email
-            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // charge
-            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // g_id
-            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14) // c_id
+            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // u_id
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // s_name
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // a_name
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // d_name
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // education
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // email
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // charge
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // g_id
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8) // c_id
         );
         return entity;
     }
      
     @Override
     public void readEntity(Cursor cursor, ContactTeacherForParent entity, int offset) {
-        entity.setT_id(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
-        entity.setU_id(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setPhone(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setS_id(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setS_name(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setA_id(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setA_name(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
-        entity.setD_name(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
-        entity.setEducation(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
-        entity.setSex(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
-        entity.setEmail(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
-        entity.setCharge(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
-        entity.setG_id(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
-        entity.setC_id(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
+        entity.setU_id(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
+        entity.setS_name(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setA_name(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setD_name(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setEducation(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setEmail(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setCharge(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setG_id(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setC_id(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
      }
     
     @Override

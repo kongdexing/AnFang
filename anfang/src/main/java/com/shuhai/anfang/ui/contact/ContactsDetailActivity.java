@@ -1,23 +1,22 @@
 package com.shuhai.anfang.ui.contact;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.android.widget.view.CircularImageView;
 import com.android.widget.view.KenBurnsView;
 import com.shuhai.anfang.R;
 import com.shuhai.anfang.common.ExtraKey;
-import com.shuhai.anfang.model.ContactSchool;
-import com.shuhai.anfang.model.ContactTeacherForParent;
-import com.shuhai.anfang.ui.chat.ChatActivity;
+import com.shuhai.anfang.model.ContactParent;
 import com.shuhai.anfang.ui.main.BaseActivity;
 
 import butterknife.BindView;
@@ -27,60 +26,10 @@ public class ContactsDetailActivity extends BaseActivity {
     @BindView(R.id.imgHead)
     CircularImageView imgHead;
 
-    @BindView(R.id.txtAreaName)
-    TextView txtAreaName;
+    @BindView(R.id.llContent)
+    LinearLayout llContent;
 
-    @BindView(R.id.txtSchoolName)
-    TextView txtSchoolName;
-
-    @BindView(R.id.txtPhone)
-    TextView txtPhone;
-
-    @BindView(R.id.rlTeacherPhone)
-    RelativeLayout rlTeacherPhone;
-
-    @BindView(R.id.txtName)
-    TextView txtName;
-
-    @BindView(R.id.txtDept)
-    TextView txtDept;
-
-    @BindView(R.id.txtEmail)
-    TextView txtEmail;
-
-    @BindView(R.id.txtCharge)
-    TextView txtCharge;
-
-    @BindView(R.id.llTeacher)
-    LinearLayout llTeacher;
-
-    @BindView(R.id.txtAddress)
-    TextView txtAddress;
-    @BindView(R.id.txtTel)
-    TextView txtTel;
-    @BindView(R.id.llSchool)
-    LinearLayout llSchool;
-    @BindView(R.id.txtMainName)
-    TextView txtMainName;
-    @BindView(R.id.txtMainPhone)
-    TextView txtMainPhone;
-
-    @BindView(R.id.txtViceName)
-    TextView txtViceName;
-    @BindView(R.id.txtVicePhone)
-    TextView txtVicePhone;
-
-    @BindView(R.id.RlSchoolTel)
-    RelativeLayout RlSchoolTel;
-    @BindView(R.id.RlMainLeader)
-    RelativeLayout RlMainLeader;
-    @BindView(R.id.RlViceLeader)
-    RelativeLayout RlViceLeader;
-
-    String currentPhone;
-
-    private ContactTeacherForParent contactTeacher;
-    private ContactSchool contactSchool;
+    private PopupWindow picPopup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,14 +41,17 @@ public class ContactsDetailActivity extends BaseActivity {
         if (bundle != null) {
             type = bundle.getString(ExtraKey.CONTACT_TYPE);
             if (type.equals(ExtraKey.CONTACT_TEACHER)) {
-                llTeacher.setVisibility(View.VISIBLE);
-                llSchool.setVisibility(View.GONE);
-                setTeacherInfo((ContactTeacherForParent) bundle.get(ExtraKey.CONTACT));
-            } else {
-                llTeacher.setVisibility(View.GONE);
-                llSchool.setVisibility(View.VISIBLE);
-                rlTeacherPhone.setVisibility(View.GONE);
-                setSchoolInfo((ContactSchool) bundle.get(ExtraKey.CONTACT));
+                ContactTeacherView teacherView = new ContactTeacherView(this);
+                llContent.addView(teacherView);
+//                setTeacherInfo(bundle.get(ExtraKey.CONTACT));
+            } else if (type.equals(ExtraKey.CONTACT_SCHOOL)) {
+                ContactSchoolView schoolView = new ContactSchoolView(this);
+                llContent.addView(schoolView);
+//                setSchoolInfo((ContactSchool) bundle.get(ExtraKey.CONTACT));
+            } else if (type.equals(ExtraKey.CONTACT_STUDENT)) {
+                ContactStudentView studentView = new ContactStudentView(this);
+                llContent.addView(studentView);
+//                setStudentInfo((ContactStudent) bundle.get(ExtraKey.CONTACT));
             }
         }
 
@@ -108,92 +60,177 @@ public class ContactsDetailActivity extends BaseActivity {
 
     }
 
-    private void setTeacherInfo(final ContactTeacherForParent teacher) {
-        if (teacher == null) {
-            return;
-        }
-        contactTeacher = teacher;
+//    private void setTeacherInfo(final Object teacher) {
+//        if (teacher == null) {
+//            return;
+//        }
+//        setTitle("老师");
+//
+//        ContactTeacher contactTeacher = (ContactTeacher) teacher;
+//
+//        if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+//            contactTeacher = (ContactTeacherForTeacher) teacher;
+//        } else if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+//            contactTeacher = (ContactTeacherForParent) teacher;
+//        }
+//
+//
+//        if (contactTeacher.getSex().equals("1")) {
+//            imgHead.setImageResource(R.drawable.teacher_man);
+//        } else {
+//            imgHead.setImageResource(R.drawable.teacher_woman);
+//        }
+//
+//        txtName.setText(contactTeacher.getName());
+////        txtAreaName.setText(contactTeacher.getA_name());
+////        txtSchoolName.setText(contactTeacher.getS_name());
+////        txtDept.setText(contactTeacher.getD_name());
+////        txtEmail.setText(contactTeacher.getEmail());
+////        txtCharge.setText(contactTeacher.getCharge().equals("1") ? "是" : "否");
+//        txtPhone.setText(contactTeacher.getPhone());
+//        rlTeacherPhone.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                call(contactTeacher.getPhone());
+//            }
+//        });
+//
+//        Button btnSendMsg = (Button) findViewById(R.id.btnSendMsg);
+//        btnSendMsg.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                Intent intent = new Intent(ContactsDetailActivity.this, ChatActivity.class);
+////                intent.putExtra("userId", contactTeacher.getPhone());
+////                startActivity(intent);
+////                finish();
+//            }
+//        });
+//    }
+//
+//    private void setSchoolInfo(final ContactSchool school) {
+//        if (school == null) {
+//            return;
+//        }
+//        setTitle("学校信息");
+//        imgHead.setVisibility(View.GONE);
+//        txtName.setVisibility(View.GONE);
+//        txtAreaName.setText(school.getA_name());
+//        txtSchoolName.setText(school.getS_name());
+//        txtAddress.setText(school.getAddress());
+//        txtTel.setText(school.getTel());
+//        RlSchoolTel.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                call(school.getTel());
+//            }
+//        });
+//
+//        txtMainName.setText(school.getMain_zrr());
+//        txtMainPhone.setText(school.getMain_phone());
+//        RlMainLeader.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                call(school.getMain_phone());
+//            }
+//        });
+//
+//        txtViceName.setText(school.getSub_zzr());
+//        txtVicePhone.setText(school.getSub_phone());
+//        RlViceLeader.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                call(school.getSub_phone());
+//            }
+//        });
+//    }
+//
+//    private void setStudentInfo(ContactStudent student) {
+//        if (student == null) {
+//            return;
+//        }
+//        setTitle(student.getStu_name());
+//
+//        if (student.getSex().equals("1")) {
+//            imgHead.setImageResource(R.drawable.student_boy);
+//            llInfoBg.setBackgroundResource(R.drawable.bg_student_info_boy);
+//            imgSex.setBackgroundResource(R.drawable.male_w);
+//        } else {
+//            imgHead.setImageResource(R.drawable.student_girl);
+//            llInfoBg.setBackgroundResource(R.drawable.bg_student_info_girl);
+//            imgSex.setBackgroundResource(R.drawable.female_w);
+//        }
+//
+//        txtAge.setText(student.getAge() + "岁");
+//
+//        txtName.setText(student.getStu_name());
+//        txtBirth_date.setText(student.getBirth_date());
+//        txtClassName.setText(student.getG_name() + student.getC_name());
+//        List<ContactParent> parents = student.getParent();
+//        if (parents == null || parents.size() == 0) {
+//            txtParentCount.setText("无家长通讯信息");
+//            return;
+//        }
+//
+//        ContactParentAdapter adapter = new ContactParentAdapter(this);
+//        adapter.refreshDate(parents);
+//        adapter.setPhoneClickListener(new ContactParentAdapter.OnParentPhoneClickListener() {
+//            @Override
+//            public void onPhoneClickListener(ContactParent parent) {
+//                showBottomView(recycleView, parent);
+//            }
+//        });
+//
+//        recycleView.setHasFixedSize(true);
+//        final WrapContentLinearLayoutManager mLayoutManager = new WrapContentLinearLayoutManager(this);
+//        recycleView.setLayoutManager(mLayoutManager);
+//        recycleView.addItemDecoration(new DividerItemDecoration(this,
+//                LinearLayoutManager.VERTICAL, R.drawable.line_dotted));
+//        recycleView.setAdapter(adapter);
+//    }
 
-        setTitle("老师");
-        if (teacher.getSex().equals("1")) {
-            imgHead.setImageResource(R.drawable.teacher_man);
-        } else {
-            imgHead.setImageResource(R.drawable.teacher_woman);
-        }
-
-        txtName.setText(teacher.getName());
-        txtAreaName.setText(teacher.getA_name());
-        txtSchoolName.setText(teacher.getS_name());
-        txtDept.setText(teacher.getD_name());
-        txtEmail.setText(teacher.getEmail());
-        txtCharge.setText(teacher.getCharge().equals("1") ? "是" : "否");
-        txtPhone.setText(teacher.getPhone());
-        rlTeacherPhone.setOnClickListener(new View.OnClickListener() {
+    public void showBottomView(View view, final ContactParent parent) {
+        BottomChatView albumSourceView = new BottomChatView(ContactsDetailActivity.this);
+        albumSourceView.setOnBottomChatClickListener(new BottomChatView.OnBottomChatClickListener() {
             @Override
-            public void onClick(View view) {
-                currentPhone = teacher.getPhone();
-                call();
+            public void onCallClick() {
+                call(parent.getPhone());
+                picPopup.dismiss();
+            }
+
+            @Override
+            public void onChatClick() {
+//                Intent intent = new Intent(ContactsDetailActivity.this, ChatActivity.class);
+//                intent.putExtra(ExtraKey.CHAT_PARENT, parent);
+//                startActivity(intent);
+                picPopup.dismiss();
+            }
+
+            @Override
+            public void onBack() {
+                picPopup.dismiss();
             }
         });
-
-        Button btnSendMsg = (Button)findViewById(R.id.btnSendMsg);
-        btnSendMsg.setOnClickListener(new View.OnClickListener() {
+        picPopup = new PopupWindow(albumSourceView,
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);
+        picPopup.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        picPopup.setTouchable(true);
+        picPopup.setBackgroundDrawable(new ColorDrawable());
+        picPopup.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ContactsDetailActivity.this, ChatActivity.class);
-                intent.putExtra("userId", contactTeacher.getPhone());
-                startActivity(intent);
-                finish();
+            public void onDismiss() {
+                backgroundAlpha(1.0f);
             }
         });
+        backgroundAlpha(0.5f);
+        picPopup.showAtLocation(view, Gravity.BOTTOM, 0, 0);
     }
 
-    private void setSchoolInfo(final ContactSchool school) {
-        if (school == null) {
-            return;
-        }
-        setTitle("学校信息");
-        imgHead.setVisibility(View.GONE);
-        txtName.setVisibility(View.GONE);
-        txtAreaName.setText(school.getA_name());
-        txtSchoolName.setText(school.getS_name());
-        txtAddress.setText(school.getAddress());
-        txtTel.setText(school.getTel());
-        RlSchoolTel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                currentPhone = school.getTel();
-                call();
-            }
-        });
-
-        txtMainName.setText(school.getMain_zrr());
-        txtMainPhone.setText(school.getMain_phone());
-        RlMainLeader.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                currentPhone = school.getMain_phone();
-                call();
-            }
-        });
-
-        txtViceName.setText(school.getSub_zzr());
-        txtVicePhone.setText(school.getSub_phone());
-        RlViceLeader.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                currentPhone = school.getSub_phone();
-                call();
-            }
-        });
-    }
-
-    private void call() {
+    private void call(String phone) {
         Log.i(TAG, "call: ");
         try {
             Intent intent = new Intent();
             intent.setAction(Intent.ACTION_DIAL);
-            intent.setData(Uri.parse("tel:" + currentPhone));
+            intent.setData(Uri.parse("tel:" + phone));
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         } catch (Exception ex) {

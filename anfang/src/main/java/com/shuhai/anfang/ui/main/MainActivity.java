@@ -26,17 +26,25 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 import com.shuhai.anfang.R;
+import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.common.BroadcastAction;
 import com.shuhai.anfang.common.CommonUtil;
+import com.shuhai.anfang.common.ExtraKey;
 import com.shuhai.anfang.common.SharedPreferencesUtil;
+import com.shuhai.anfang.common.UserType;
 import com.shuhai.anfang.http.HttpAction;
 import com.shuhai.anfang.http.MyVolleyRequestListener;
+import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.ui.fragment.BaseFragment;
 import com.shuhai.anfang.ui.fragment.HomeFragment;
 import com.shuhai.anfang.ui.fragment.MapFragment;
 import com.shuhai.anfang.ui.fragment.MessageFragment;
 import com.shuhai.anfang.ui.fragment.MineFragment;
+import com.shuhai.anfang.ui.login.LoginActivity;
+import com.shuhai.anfang.util.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -277,17 +285,11 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
                                     startActivity(intent);
                                 } catch (Exception ex) {
                                     Log.i(TAG, "onResponse: error " + ex.getMessage());
-//                                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-//                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                                    intent.putExtra(ExtraKey.LOGIN_ORIGIN, "0");
-//                                    startActivity(intent);
+                                    toLogin();
                                 }
                                 break;
                             default:
-//                                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-//                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                                intent.putExtra(ExtraKey.LOGIN_ORIGIN, "0");
-//                                startActivity(intent);
+                                toLogin();
                                 break;
                         }
                     }
@@ -295,12 +297,16 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.i(TAG, "onErrorResponse: " + error);
-//                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-//                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                        intent.putExtra(ExtraKey.LOGIN_ORIGIN, "0");
-//                        startActivity(intent);
+                        toLogin();
                     }
                 });
+    }
+
+    private void toLogin() {
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra(ExtraKey.LOGIN_ORIGIN, "0");
+        startActivity(intent);
     }
 
     @Override
@@ -315,6 +321,52 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
         if (homeFragment != null) {
             ((HomeFragment) homeFragment).reloadPageData();
         }
+
+        String userId = "";
+        try {
+            if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+                userId = GreenDaoHelper.getInstance().getCurrentParent().getU_id();
+            } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+                userId = GreenDaoHelper.getInstance().getCurrentTeacher().getU_id();
+            }
+        } catch (Exception ex) {
+
+        }
+
+        EMClient.getInstance().login(userId, CommonUtil.md5("SHUHAIXINXI" + userId), new EMCallBack() {
+
+            @Override
+            public void onSuccess() {
+                EMLoginSuccess();
+                Log.d("main", "登录聊天服务器成功！");
+            }
+
+            @Override
+            public void onProgress(int progress, String status) {
+
+            }
+
+            @Override
+            public void onError(final int code, final String error) {
+                if (code == 200) {
+                    //USER_ALREADY_LOGIN
+                    EMLoginSuccess();
+                    Log.d(TAG, "USER_ALREADY_LOGIN！");
+                } else {
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            Log.i(TAG, "EMUI onError: " + code + " error:" + error);
+                            ToastUtils.showToast(getApplicationContext(), "环信 login failed");
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    private void EMLoginSuccess() {
+        EMClient.getInstance().groupManager().loadAllGroups();
+        EMClient.getInstance().chatManager().loadAllConversations();
     }
 
     @Override

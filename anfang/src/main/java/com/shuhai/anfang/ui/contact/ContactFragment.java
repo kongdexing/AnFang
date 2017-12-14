@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -53,6 +54,8 @@ import butterknife.ButterKnife;
 
 public class ContactFragment extends BaseFragment {
 
+    @BindView(R.id.ll_contacts)
+    LinearLayout ll_contacts;
     @BindView(R.id.edtContent)
     EditText edtContent;
     @BindView(R.id.progress)
@@ -152,11 +155,14 @@ public class ContactFragment extends BaseFragment {
     }
 
     private void getContacts() {
+        ll_contacts.setVisibility(View.VISIBLE);
         //判断老师家长
         if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
             getContactForParent();
         } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
             getContactForTeacher();
+        } else {
+            ll_contacts.setVisibility(View.GONE);
         }
     }
 

@@ -434,7 +434,6 @@ public class HomeWorkDetailTeacherActivity extends VoiceRecordActivity {
                         super.onResponse(httpResult);
                         hideProgress();
                         if (httpResult.getStatus() == 1) {
-                            Toast.makeText(HomeWorkDetailTeacherActivity.this, "发布成功！", Toast.LENGTH_SHORT).show();
                             try {
                                 JSONObject json = new JSONObject(httpResult.getData().toString());
                                 String hid = json.getString("h_id");
@@ -465,6 +464,9 @@ public class HomeWorkDetailTeacherActivity extends VoiceRecordActivity {
 
                             } catch (Exception ex) {
                                 Log.i(TAG, "onResponse: " + ex.getMessage());
+                            } finally {
+                                ToastUtils.showToast(HomeWorkDetailTeacherActivity.this, "发布成功！");
+                                finish();
                             }
                         } else {
                             Toast.makeText(HomeWorkDetailTeacherActivity.this, httpResult.getInfo(), Toast.LENGTH_SHORT).show();
@@ -474,6 +476,7 @@ public class HomeWorkDetailTeacherActivity extends VoiceRecordActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         super.onErrorResponse(error);
+                        ToastUtils.showToast(HomeWorkDetailTeacherActivity.this, "发布失败！");
                         hideProgress();
                     }
                 });

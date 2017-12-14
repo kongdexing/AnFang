@@ -5,38 +5,22 @@ import android.os.Parcel;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 
-import java.io.Serializable;
-
 /**
  * Created by dexing on 2016/12/8.
  * No1
  */
 @Entity
-public class ContactTeacherForParent implements Serializable {
+public class ContactTeacherForParent extends ContactTeacher {
 
-    private String t_id;
     private String u_id;
-    private String name;
-    private String phone;
-    private String s_id;
     private String s_name;
-    private String a_id;
     private String a_name;
     private String d_name;
     private String education;
-    private String sex;
     private String email;
     private String charge;
     private String g_id;
     private String c_id;
-
-    public String getT_id() {
-        return t_id;
-    }
-
-    public void setT_id(String t_id) {
-        this.t_id = t_id;
-    }
 
     public String getU_id() {
         return u_id;
@@ -46,44 +30,12 @@ public class ContactTeacherForParent implements Serializable {
         this.u_id = u_id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getS_id() {
-        return s_id;
-    }
-
-    public void setS_id(String s_id) {
-        this.s_id = s_id;
-    }
-
     public String getS_name() {
         return s_name;
     }
 
     public void setS_name(String s_name) {
         this.s_name = s_name;
-    }
-
-    public String getA_id() {
-        return a_id;
-    }
-
-    public void setA_id(String a_id) {
-        this.a_id = a_id;
     }
 
     public String getA_name() {
@@ -108,14 +60,6 @@ public class ContactTeacherForParent implements Serializable {
 
     public void setEducation(String education) {
         this.education = education;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
     }
 
     public String getEmail() {
@@ -170,22 +114,14 @@ public class ContactTeacherForParent implements Serializable {
         this.c_id = in.readString();
     }
 
-    @Generated(hash = 167347218)
-    public ContactTeacherForParent(String t_id, String u_id, String name,
-            String phone, String s_id, String s_name, String a_id, String a_name,
-            String d_name, String education, String sex, String email,
-            String charge, String g_id, String c_id) {
-        this.t_id = t_id;
+    @Generated(hash = 392585045)
+    public ContactTeacherForParent(String u_id, String s_name, String a_name, String d_name,
+                                   String education, String email, String charge, String g_id, String c_id) {
         this.u_id = u_id;
-        this.name = name;
-        this.phone = phone;
-        this.s_id = s_id;
         this.s_name = s_name;
-        this.a_id = a_id;
         this.a_name = a_name;
         this.d_name = d_name;
         this.education = education;
-        this.sex = sex;
         this.email = email;
         this.charge = charge;
         this.g_id = g_id;

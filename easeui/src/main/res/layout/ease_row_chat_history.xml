@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="59dp"
+    android:layout_height="50dp"
      android:id="@+id/list_itease_layout"
      android:background="#fff"
     android:gravity="center_vertical" >
 
     <RelativeLayout
         android:id="@+id/avatar_container"
-        android:layout_width="59dp"
+        android:layout_width="50dp"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true" >
 
       <com.hyphenate.easeui.widget.EaseImageView
             android:id="@+id/avatar"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:scaleType="fitXY"
@@ -42,7 +42,7 @@
         android:layout_marginTop="6dp"
         android:layout_toRightOf="@id/avatar_container"
         android:textColor="@color/list_itease_primary_color"
-        android:textSize="16sp" />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/time"
@@ -52,7 +52,7 @@
         android:layout_marginRight="7dp"
         android:layout_marginTop="6dp"
         android:textColor="@color/list_itease_secondary_color"
-        android:textSize="13sp" />
+        android:textSize="12sp" />
 
     <ImageView
         android:id="@+id/msg_state"
@@ -74,8 +74,8 @@
         android:id="@+id/mentioned"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@id/msg_state"
-        android:paddingTop="7dp"
-        android:paddingBottom="7dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:paddingLeft="7dp"
         android:visibility="gone"
         />
@@ -89,7 +89,7 @@
         android:layout_toRightOf="@id/mentioned"
         android:singleLine="true"
         android:ellipsize="end"
-        android:padding="7dp"
+        android:padding="5dp"
         android:textColor="@color/list_itease_secondary_color"
         android:textSize="14sp" />
 

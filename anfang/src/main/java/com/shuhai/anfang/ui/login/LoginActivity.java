@@ -29,6 +29,7 @@ import com.shuhai.anfang.common.SharedPreferencesUtil;
 import com.shuhai.anfang.common.UserType;
 import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.push.DeviceHelper;
+import com.shuhai.anfang.ui.main.MainActivity;
 import com.shuhai.anfang.util.ToastUtils;
 import com.umeng.message.IUmengCallback;
 import com.umeng.message.PushAgent;
@@ -220,13 +221,24 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
     protected void onLoginSuccess() {
         super.onLoginSuccess();
 
-        String account = SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_NAME, "").toString();
-        Log.i(TAG, "onLoginSuccess: login huanxin " + account);
-        EMClient.getInstance().login(account, "111111", new EMCallBack() {
+        String userId = "";
+        try {
+            if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+                userId = GreenDaoHelper.getInstance().getCurrentParent().getU_id();
+            } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+                userId = GreenDaoHelper.getInstance().getCurrentTeacher().getU_id();
+            }
+        } catch (Exception ex) {
+
+        }
+
+        EMClient.getInstance().login(userId, CommonUtil.md5("SHUHAIXINXI" + userId), new EMCallBack() {
 
             @Override
             public void onSuccess() {
                 EMLoginSuccess();
+                Log.d("main", "登录聊天服务器成功！");
+                ToastUtils.showToast(LoginActivity.this, "登录聊天服务器成功");
             }
 
             @Override
@@ -239,6 +251,8 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
                 if (code == 200) {
                     //USER_ALREADY_LOGIN
                     EMLoginSuccess();
+                    Log.d("main", "USER_ALREADY_LOGIN！");
+                    ToastUtils.showToast(LoginActivity.this, "USER_ALREADY_LOGIN");
                 } else {
                     runOnUiThread(new Runnable() {
                         public void run() {
@@ -267,8 +281,6 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
                 if (progress != null)
                     progress.setVisibility(View.INVISIBLE);
                 btnLogin.setEnabled(true);
-                Log.d("main", "登录聊天服务器成功！");
-                ToastUtils.showToast(LoginActivity.this, "登录聊天服务器成功");
                 finish();
             }
         });
