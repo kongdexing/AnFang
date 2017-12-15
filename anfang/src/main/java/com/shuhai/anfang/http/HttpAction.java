@@ -69,7 +69,7 @@ public class HttpAction {
     public static String MyStudent_Detail = HEAD + "MyStudent/view";
     //通讯录
     public static String MyContacts_ForParent = HEAD + "Contacts/getContactsForParent";
-    public static String MyContacts_ForTeacher = HEAD + "Contacts/query";
+    public static String MyContacts_ForTeacher = HEAD + "Contacts/getContactsForTeacher";
 
     //位置
     public static String Track_RealTime = HEAD + "Track/realtimeLocation";
@@ -128,17 +128,11 @@ public class HttpAction {
     public static String GET_TEL_RECHARGE_ORDER = HEAD + "TelCharge/getTelCharge";
     public static String TEL_RECHARGE = HEAD + "TelCharge/telTopUp";
 
-    //视频通话，给ios拨号
-    public static String VIDEO_CALL_IOS_PUSH = HEAD + "Telephone/msgPush";
-
     //密码找回
     public static String FORGOT_PWD_STEP1 = HEAD + "ForgetPwd/checkUser";
     public static String FORGOT_PWD_STEP2 = HEAD + "ForgetPwd/ForgotPassword";
     public static String FORGOT_PWD_STEP3 = HEAD + "ForgetPwd/checkCode";
     public static String FORGOT_PWD_STEP4 = HEAD + "ForgetPwd/PasswordReset";
 
-    //消息撤回
-    public static String MESSAGE_RECALL = HEAD + "Telephone/recallMsg";
-    public static String MESSAGE_RECALL_SHOW = HEAD + "Telephone/recallMsgShow";
 
 }

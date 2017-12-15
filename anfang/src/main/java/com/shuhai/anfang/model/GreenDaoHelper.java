@@ -61,8 +61,7 @@ public class GreenDaoHelper {
             writeDaoSession.getBeanParentDao().deleteAll();
             writeDaoSession.getBeanTeacherDao().deleteAll();
             writeDaoSession.getContactSchoolDao().deleteAll();
-            writeDaoSession.getContactTeacherForParentDao().deleteAll();
-            writeDaoSession.getContactTeacherForTeacherDao().deleteAll();
+            writeDaoSession.getContactTeacherDao().deleteAll();
             writeDaoSession.getBeanStudentDao().deleteAll();
             writeDaoSession.getContactParentDao().deleteAll();
         }
@@ -191,43 +190,43 @@ public class GreenDaoHelper {
         }
     }
 
-    //家长获取联系人
-    public void insertContactTeacherForParent(List<ContactTeacherForParent> teachers) {
+    //保存联系人(教师)
+    public void insertContactTeacher(List<ContactTeacher> teachers) {
         if (writeDaoSession != null) {
-            writeDaoSession.getContactTeacherForParentDao().deleteAll();
-            writeDaoSession.getContactTeacherForParentDao().insertOrReplaceInTx(teachers);
+            writeDaoSession.getContactTeacherDao().deleteAll();
+            writeDaoSession.getContactTeacherDao().insertOrReplaceInTx(teachers);
         }
     }
 
-    //教师获取联系人
-    public void insertContactTeacherForTeacher(List<ContactTeacherForTeacher> teachers) {
-        if (writeDaoSession != null) {
-            writeDaoSession.getContactTeacherForTeacherDao().deleteAll();
-            writeDaoSession.getContactTeacherForTeacherDao().insertOrReplaceInTx(teachers);
-        }
-    }
+//    //教师获取联系人
+//    public void insertContactTeacherForTeacher(List<ContactTeacherForTeacher> teachers) {
+//        if (writeDaoSession != null) {
+//            writeDaoSession.getContactTeacherForTeacherDao().deleteAll();
+//            writeDaoSession.getContactTeacherForTeacherDao().insertOrReplaceInTx(teachers);
+//        }
+//    }
+//
+//    public void deleteContact() {
+//        if (writeDaoSession != null) {
+//            writeDaoSession.getContactTeacherDao().deleteAll();
+//            writeDaoSession.getContactTeacherForTeacherDao().deleteAll();
+//            writeDaoSession.getContactSchoolDao().deleteAll();
+//        }
+//    }
 
-    public void deleteContact() {
-        if (writeDaoSession != null) {
-            writeDaoSession.getContactTeacherForParentDao().deleteAll();
-            writeDaoSession.getContactTeacherForTeacherDao().deleteAll();
-            writeDaoSession.getContactSchoolDao().deleteAll();
-        }
-    }
-
-    public List<ContactTeacherForParent> getContactTeacherForParent() {
+    public List<ContactTeacher> getContactTeacher() {
         if (readDaoSession != null) {
-            return readDaoSession.getContactTeacherForParentDao().loadAll();
+            return readDaoSession.getContactTeacherDao().loadAll();
         }
-        return new ArrayList<ContactTeacherForParent>();
+        return new ArrayList<ContactTeacher>();
     }
 
-    public List<ContactTeacherForTeacher> getContactTeacherForTeacher() {
-        if (readDaoSession != null) {
-            return readDaoSession.getContactTeacherForTeacherDao().loadAll();
-        }
-        return new ArrayList<ContactTeacherForTeacher>();
-    }
+//    public List<ContactTeacherForTeacher> getContactTeacherForTeacher() {
+//        if (readDaoSession != null) {
+//            return readDaoSession.getContactTeacherForTeacherDao().loadAll();
+//        }
+//        return new ArrayList<ContactTeacherForTeacher>();
+//    }
 
     public List<ContactStudent> getContactStudent() {
         if (readDaoSession != null) {
@@ -341,10 +340,10 @@ public class GreenDaoHelper {
         return "";
     }
 
-    public ContactTeacherForParent getContactByTeacher(String t_u_id) {
+    public ContactTeacher getContactByTeacher(String t_u_id) {
         if (readDaoSession != null) {
-            return readDaoSession.getContactTeacherForParentDao().queryBuilder()
-                    .where(ContactTeacherForParentDao.Properties.U_id.eq(t_u_id)).limit(1).unique();
+            return readDaoSession.getContactTeacherDao().queryBuilder()
+                    .where(ContactTeacherDao.Properties.U_id.eq(t_u_id)).limit(1).unique();
         }
         return null;
     }

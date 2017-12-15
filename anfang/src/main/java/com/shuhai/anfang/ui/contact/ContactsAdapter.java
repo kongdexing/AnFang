@@ -19,8 +19,7 @@ import com.shuhai.anfang.common.ExtraKey;
 import com.shuhai.anfang.model.ContactParent;
 import com.shuhai.anfang.model.ContactSchool;
 import com.shuhai.anfang.model.ContactStudent;
-import com.shuhai.anfang.model.ContactTeacherForParent;
-import com.shuhai.anfang.model.ContactTeacherForTeacher;
+import com.shuhai.anfang.model.ContactTeacher;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -61,8 +60,8 @@ public class ContactsAdapter extends BaseExpandableListAdapter {
 
                 for (int i = 0; i < val.size(); i++) {
                     Object object = val.get(i);
-                    if (object instanceof ContactTeacherForParent) {
-                        ContactTeacherForParent teacher = (ContactTeacherForParent) object;
+                    if (object instanceof ContactTeacher) {
+                        ContactTeacher teacher = (ContactTeacher) object;
                         if (teacher.getName().contains(name)) {
                             teachers.add(teacher);
                         }
@@ -190,9 +189,8 @@ public class ContactsAdapter extends BaseExpandableListAdapter {
                     mContext.startActivity(intent);
                 }
             });
-            viewHolder.txtUnReadNum.setVisibility(View.GONE);
-        } else if (object instanceof ContactTeacherForParent) {
-            final ContactTeacherForParent teacher = (ContactTeacherForParent) object;
+        } else if (object instanceof ContactTeacher) {
+            final ContactTeacher teacher = (ContactTeacher) object;
             if (teacher.getSex().equals("1")) {
                 viewHolder.imgHead.setImageResource(R.drawable.teacher_man);
             } else {
@@ -208,25 +206,6 @@ public class ContactsAdapter extends BaseExpandableListAdapter {
                     mContext.startActivity(intent);
                 }
             });
-        } else if (object instanceof ContactTeacherForTeacher) {
-            final ContactTeacherForTeacher teacher = (ContactTeacherForTeacher) getChild(groupPosition, childPosition);
-
-            viewHolder.text.setText(teacher.getName());
-            if (teacher.getSex().equals("1")) {
-                viewHolder.imgHead.setImageResource(R.drawable.teacher_man);
-            } else {
-                viewHolder.imgHead.setImageResource(R.drawable.teacher_woman);
-            }
-            viewHolder.llContacts.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(mContext, ContactsDetailActivity.class);
-                    intent.putExtra(ExtraKey.CONTACT_TYPE, ExtraKey.CONTACT_TEACHER);
-                    intent.putExtra(ExtraKey.CONTACT, teacher);
-                    mContext.startActivity(intent);
-                }
-            });
-            viewHolder.txtUnReadNum.setVisibility(View.GONE);
         } else if(object instanceof ContactStudent){
             final ContactStudent student = (ContactStudent) getChild(groupPosition, childPosition);
             viewHolder.text.setText(student.getStu_name());
@@ -284,8 +263,6 @@ public class ContactsAdapter extends BaseExpandableListAdapter {
         RelativeLayout llContacts;
         @BindView(R.id.imgHead)
         CircularImageView imgHead;
-        @BindView(R.id.txtUnReadNum)
-        TextView txtUnReadNum;
         @BindView(R.id.text)
         TextView text;
 

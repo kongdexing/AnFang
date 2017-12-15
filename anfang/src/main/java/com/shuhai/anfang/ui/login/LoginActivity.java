@@ -238,7 +238,7 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
             public void onSuccess() {
                 EMLoginSuccess();
                 Log.d("main", "登录聊天服务器成功！");
-                ToastUtils.showToast(LoginActivity.this, "登录聊天服务器成功");
+//                ToastUtils.showToast(LoginActivity.this, "登录聊天服务器成功");
             }
 
             @Override
@@ -252,7 +252,7 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
                     //USER_ALREADY_LOGIN
                     EMLoginSuccess();
                     Log.d("main", "USER_ALREADY_LOGIN！");
-                    ToastUtils.showToast(LoginActivity.this, "USER_ALREADY_LOGIN");
+//                    ToastUtils.showToast(LoginActivity.this, "USER_ALREADY_LOGIN");
                 } else {
                     runOnUiThread(new Runnable() {
                         public void run() {

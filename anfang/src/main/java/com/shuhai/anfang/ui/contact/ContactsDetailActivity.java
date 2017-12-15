@@ -71,7 +71,7 @@ public class ContactsDetailActivity extends BaseActivity {
 //        if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
 //            contactTeacher = (ContactTeacherForTeacher) teacher;
 //        } else if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-//            contactTeacher = (ContactTeacherForParent) teacher;
+//            contactTeacher = (ContactTeacher) teacher;
 //        }
 //
 //

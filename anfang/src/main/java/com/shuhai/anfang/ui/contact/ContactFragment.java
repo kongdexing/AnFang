@@ -34,8 +34,7 @@ import com.shuhai.anfang.model.BeanStudent;
 import com.shuhai.anfang.model.ContactParent;
 import com.shuhai.anfang.model.ContactSchool;
 import com.shuhai.anfang.model.ContactStudent;
-import com.shuhai.anfang.model.ContactTeacherForParent;
-import com.shuhai.anfang.model.ContactTeacherForTeacher;
+import com.shuhai.anfang.model.ContactTeacher;
 import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.ui.fragment.BaseFragment;
 
@@ -131,14 +130,14 @@ public class ContactFragment extends BaseFragment {
     protected void initData() {
         //判断老师家长
         if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-            ArrayList<Object> listTeacher = (ArrayList) GreenDaoHelper.getInstance().getContactTeacherForParent();
+            ArrayList<Object> listTeacher = (ArrayList) GreenDaoHelper.getInstance().getContactTeacher();
             ArrayList<Object> listSchool = (ArrayList) GreenDaoHelper.getInstance().getSchoolInfo();
 
             if (listTeacher.size() > 0 || listSchool.size() > 0) {
                 setContactForParent(listTeacher, listSchool);
             }
         } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-            ArrayList<Object> listTeacher = (ArrayList) GreenDaoHelper.getInstance().getContactTeacherForTeacher();
+            ArrayList<Object> listTeacher = (ArrayList) GreenDaoHelper.getInstance().getContactTeacher();
             ArrayList<Object> listStudent = (ArrayList) GreenDaoHelper.getInstance().getContactStudent();
             for (int i = 0; i < listStudent.size(); i++) {
                 ContactStudent student = (ContactStudent) listStudent.get(i);
@@ -188,7 +187,7 @@ public class ContactFragment extends BaseFragment {
                             JSONObject jsonObject = new JSONObject(volleyHttpResult.getData().toString());
                             Gson gson = new Gson();
                             ArrayList<Object> listTeacher = gson.fromJson(jsonObject.getJSONArray("teacher").toString(),
-                                    new TypeToken<List<ContactTeacherForParent>>() {
+                                    new TypeToken<List<ContactTeacher>>() {
                                     }.getType());
 
                             ArrayList<Object> listSchool = gson.fromJson(jsonObject.getJSONArray("school").toString(),
@@ -197,7 +196,7 @@ public class ContactFragment extends BaseFragment {
 
                             Log.i(TAG, "onResponse: listTeacher size " + listTeacher.size());
                             Log.i(TAG, "onResponse: listSchool size " + listSchool.size());
-                            GreenDaoHelper.getInstance().insertContactTeacherForParent((List) listTeacher);
+                            GreenDaoHelper.getInstance().insertContactTeacher((List) listTeacher);
                             GreenDaoHelper.getInstance().insertSchoolInfo((List) listSchool);
                             setContactForParent(listTeacher, listSchool);
                         } catch (Exception ex) {
@@ -241,7 +240,7 @@ public class ContactFragment extends BaseFragment {
                                         JSONObject jsonObject = new JSONObject(volleyHttpResult.getData().toString());
                                         Gson gson = new Gson();
                                         ArrayList<Object> listTeacher = gson.fromJson(jsonObject.getJSONArray("teacher").toString(),
-                                                new TypeToken<List<ContactTeacherForTeacher>>() {
+                                                new TypeToken<List<ContactTeacher>>() {
                                                 }.getType());
 
                                         ArrayList<Object> listStudent = gson.fromJson(jsonObject.getJSONArray("student").toString(),
@@ -250,7 +249,7 @@ public class ContactFragment extends BaseFragment {
 
                                         Log.i(TAG, "onResponse: listTeacher size " + listTeacher.size());
                                         Log.i(TAG, "onResponse: listStudent size " + listStudent.size());
-                                        GreenDaoHelper.getInstance().insertContactTeacherForTeacher((List) listTeacher);
+                                        GreenDaoHelper.getInstance().insertContactTeacher((List) listTeacher);
 
                                         GreenDaoHelper.getInstance().deleteParentData();
                                         for (int i = 0; i < listStudent.size(); i++) {
@@ -265,7 +264,7 @@ public class ContactFragment extends BaseFragment {
                                     break;
                                 default:
                                     Toast.makeText(mContext, volleyHttpResult.getInfo(), Toast.LENGTH_SHORT).show();
-                                    GreenDaoHelper.getInstance().deleteContact();
+//                                    GreenDaoHelper.getInstance().deleteContact();
                                     break;
                             }
 
@@ -309,11 +308,8 @@ public class ContactFragment extends BaseFragment {
 
             for (int i = 0; i < listTeacher.size(); i++) {
                 try {
-                    ContactTeacherForParent teacher = (ContactTeacherForParent) listTeacher.get(i);
-                    if (teacher.getS_id().equals(student.getS_id()) &&
-                            teacher.getC_id().equals(student.getC_id())) {
-                        teachers.add(teacher);
-                    }
+                    ContactTeacher teacher = (ContactTeacher) listTeacher.get(i);
+                    teachers.add(teacher);
                 } catch (Exception ex) {
 
                 }

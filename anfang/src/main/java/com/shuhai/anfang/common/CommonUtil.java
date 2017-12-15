@@ -274,7 +274,7 @@ public class CommonUtil {
             GreenDaoHelper.getInstance().insertTeacher(teacher);
         }
         //删除联系人
-        GreenDaoHelper.getInstance().deleteContact();
+//        GreenDaoHelper.getInstance().deleteContact();
         XPTApplication.getInstance().setCurrent_user_type(type);
         if (!SharedPreferencesUtil.getData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_USER_NAME, "").equals(account)) {
             SharedPreferencesUtil.saveData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_USER_NAME, account);
