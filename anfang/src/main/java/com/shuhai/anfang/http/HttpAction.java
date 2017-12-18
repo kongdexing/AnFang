@@ -59,6 +59,16 @@ public class HttpAction {
     public static String Leave_Del = HEAD + "Leave/del";
     //课程表
     public static String Timetable_QUERY = HEAD + "Timetable/query";
+    //荣誉墙
+    //rw_type(荣誉类型),stu_id(家长查看孩子荣誉使用),c_id(教室查看班级学生荣誉使用)
+    public static String Honor_query = HEAD + "Honor/query";
+    //添加|编辑
+    public static String Honor_edit = HEAD + "Honor/edit";
+    //删除
+    public static String Honor_del = HEAD + "Honor/edit";
+
+    
+
     //报警记录
     public static String Track_alarm = HEAD + "Track/alarmRecord_v1_0_1";
     //我的班级

@@ -1,6 +1,7 @@
 package com.shuhai.anfang.model;
 
 import android.os.Parcel;
+import android.os.Parcelable;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
@@ -25,9 +26,38 @@ public class ContactTeacher implements Serializable {
     private String charge;
     private String d_id;
     private String education;
-    private String school_name;
-    private String area_name;
+    private String s_name;
+    private String a_name;
     private String d_name;
+    private String g_id;
+    private String c_id;
+
+    @Generated(hash = 1589204404)
+    public ContactTeacher(String t_id, String u_id, String s_id, String a_id,
+            String name, String phone, String sex, String email, String charge,
+            String d_id, String education, String s_name, String a_name,
+            String d_name, String g_id, String c_id) {
+        this.t_id = t_id;
+        this.u_id = u_id;
+        this.s_id = s_id;
+        this.a_id = a_id;
+        this.name = name;
+        this.phone = phone;
+        this.sex = sex;
+        this.email = email;
+        this.charge = charge;
+        this.d_id = d_id;
+        this.education = education;
+        this.s_name = s_name;
+        this.a_name = a_name;
+        this.d_name = d_name;
+        this.g_id = g_id;
+        this.c_id = c_id;
+    }
+
+    @Generated(hash = 1177439914)
+    public ContactTeacher() {
+    }
 
     public String getT_id() {
         return t_id;
@@ -117,22 +147,6 @@ public class ContactTeacher implements Serializable {
         this.education = education;
     }
 
-    public String getSchool_name() {
-        return school_name;
-    }
-
-    public void setSchool_name(String school_name) {
-        this.school_name = school_name;
-    }
-
-    public String getArea_name() {
-        return area_name;
-    }
-
-    public void setArea_name(String area_name) {
-        this.area_name = area_name;
-    }
-
     public String getD_name() {
         return d_name;
     }
@@ -141,43 +155,35 @@ public class ContactTeacher implements Serializable {
         this.d_name = d_name;
     }
 
-    public ContactTeacher() {
+    public String getS_name() {
+        return s_name;
     }
 
-    protected ContactTeacher(Parcel in) {
-        this.t_id = in.readString();
-        this.name = in.readString();
-        this.phone = in.readString();
-        this.s_id = in.readString();
-        this.school_name = in.readString();
-        this.a_id = in.readString();
-        this.area_name = in.readString();
-        this.d_name = in.readString();
-        this.education = in.readString();
-        this.sex = in.readString();
-        this.email = in.readString();
-        this.charge = in.readString();
+    public void setS_name(String s_name) {
+        this.s_name = s_name;
     }
 
-    @Generated(hash = 1882569368)
-    public ContactTeacher(String t_id, String u_id, String s_id, String a_id,
-            String name, String phone, String sex, String email, String charge,
-            String d_id, String education, String school_name, String area_name,
-            String d_name) {
-        this.t_id = t_id;
-        this.u_id = u_id;
-        this.s_id = s_id;
-        this.a_id = a_id;
-        this.name = name;
-        this.phone = phone;
-        this.sex = sex;
-        this.email = email;
-        this.charge = charge;
-        this.d_id = d_id;
-        this.education = education;
-        this.school_name = school_name;
-        this.area_name = area_name;
-        this.d_name = d_name;
+    public String getA_name() {
+        return a_name;
     }
 
+    public void setA_name(String a_name) {
+        this.a_name = a_name;
+    }
+
+    public String getG_id() {
+        return g_id;
+    }
+
+    public void setG_id(String g_id) {
+        this.g_id = g_id;
+    }
+
+    public String getC_id() {
+        return c_id;
+    }
+
+    public void setC_id(String c_id) {
+        this.c_id = c_id;
+    }
 }

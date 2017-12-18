@@ -4,20 +4,69 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <com.android.widget.view.KenBurnsView
+        android:id="@+id/top_picture"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_170"
+        android:src="@drawable/bg_student" />
+
+    <com.android.widget.view.CircularImageView
+        android:id="@+id/imgHead"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="@dimen/dp_80"
+        android:layout_gravity="center"
+        android:layout_marginTop="-40dp"
+        android:clickable="true"
+        android:src="@drawable/teacher_man" />
+
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_5"
+        android:text="姓名"
+        android:textSize="@dimen/sp_16" />
+
     <RelativeLayout
+        android:id="@+id/rlTeacherPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_1"
-        android:background="@drawable/mine_item_normal">
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@drawable/mine_item_selector"
+        android:clickable="true">
 
         <TextView
             style="@style/mineText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="部门：" />
+            android:text="手机号：" />
 
         <TextView
-            android:id="@+id/txtDept"
+            android:id="@+id/txtPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_10"
+            android:text="" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@drawable/mine_item_normal">
+
+        <TextView
+            android:id="@+id/txtSTitle"
+            style="@style/mineText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="学校名称：" />
+
+        <TextView
+            android:id="@+id/txtSchoolName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -36,10 +85,10 @@
             style="@style/mineText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="是否为班主任：" />
+            android:text="校区：" />
 
         <TextView
-            android:id="@+id/txtCharge"
+            android:id="@+id/txtAreaName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

@@ -52,6 +52,8 @@ import com.shuhai.anfang.ui.course.CourseTActivity;
 import com.shuhai.anfang.ui.fence.FenceListActivity;
 import com.shuhai.anfang.ui.homework.HomeWorkParentActivity;
 import com.shuhai.anfang.ui.homework.HomeWorkTeacherActivity;
+import com.shuhai.anfang.ui.honor.HonorPActivity;
+import com.shuhai.anfang.ui.honor.HonorTActivity;
 import com.shuhai.anfang.ui.leave.LeaveActivity;
 import com.shuhai.anfang.ui.leave.LeaveTActivity;
 import com.shuhai.anfang.ui.main.WebViewActivity;
@@ -525,7 +527,7 @@ public class HomeFragment extends BaseFragment {
         homeShopItems.add(new HomeItem()
                 .setIconId(R.drawable.home_honour)
                 .setTitle(getString(R.string.home_honour))
-                .setIntent(new Intent(mContext, LeaveActivity.class)));
+                .setIntent(new Intent(mContext, isParent ? HonorPActivity.class: HonorTActivity.class)));
 
         itemShopAdapter = new HomeItemGridAdapter(mContext);
         grd_school_shop.setAdapter(itemShopAdapter);

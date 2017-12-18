@@ -33,9 +33,11 @@ public class ContactTeacherDao extends AbstractDao<ContactTeacher, Void> {
         public final static Property Charge = new Property(8, String.class, "charge", false, "CHARGE");
         public final static Property D_id = new Property(9, String.class, "d_id", false, "D_ID");
         public final static Property Education = new Property(10, String.class, "education", false, "EDUCATION");
-        public final static Property School_name = new Property(11, String.class, "school_name", false, "SCHOOL_NAME");
-        public final static Property Area_name = new Property(12, String.class, "area_name", false, "AREA_NAME");
+        public final static Property S_name = new Property(11, String.class, "s_name", false, "S_NAME");
+        public final static Property A_name = new Property(12, String.class, "a_name", false, "A_NAME");
         public final static Property D_name = new Property(13, String.class, "d_name", false, "D_NAME");
+        public final static Property G_id = new Property(14, String.class, "g_id", false, "G_ID");
+        public final static Property C_id = new Property(15, String.class, "c_id", false, "C_ID");
     };
 
 
@@ -62,9 +64,11 @@ public class ContactTeacherDao extends AbstractDao<ContactTeacher, Void> {
                 "\"CHARGE\" TEXT," + // 8: charge
                 "\"D_ID\" TEXT," + // 9: d_id
                 "\"EDUCATION\" TEXT," + // 10: education
-                "\"SCHOOL_NAME\" TEXT," + // 11: school_name
-                "\"AREA_NAME\" TEXT," + // 12: area_name
-                "\"D_NAME\" TEXT);"); // 13: d_name
+                "\"S_NAME\" TEXT," + // 11: s_name
+                "\"A_NAME\" TEXT," + // 12: a_name
+                "\"D_NAME\" TEXT," + // 13: d_name
+                "\"G_ID\" TEXT," + // 14: g_id
+                "\"C_ID\" TEXT);"); // 15: c_id
     }
 
     /** Drops the underlying database table. */
@@ -132,19 +136,29 @@ public class ContactTeacherDao extends AbstractDao<ContactTeacher, Void> {
             stmt.bindString(11, education);
         }
  
-        String school_name = entity.getSchool_name();
-        if (school_name != null) {
-            stmt.bindString(12, school_name);
+        String s_name = entity.getS_name();
+        if (s_name != null) {
+            stmt.bindString(12, s_name);
         }
  
-        String area_name = entity.getArea_name();
-        if (area_name != null) {
-            stmt.bindString(13, area_name);
+        String a_name = entity.getA_name();
+        if (a_name != null) {
+            stmt.bindString(13, a_name);
         }
  
         String d_name = entity.getD_name();
         if (d_name != null) {
             stmt.bindString(14, d_name);
+        }
+ 
+        String g_id = entity.getG_id();
+        if (g_id != null) {
+            stmt.bindString(15, g_id);
+        }
+ 
+        String c_id = entity.getC_id();
+        if (c_id != null) {
+            stmt.bindString(16, c_id);
         }
     }
 
@@ -207,19 +221,29 @@ public class ContactTeacherDao extends AbstractDao<ContactTeacher, Void> {
             stmt.bindString(11, education);
         }
  
-        String school_name = entity.getSchool_name();
-        if (school_name != null) {
-            stmt.bindString(12, school_name);
+        String s_name = entity.getS_name();
+        if (s_name != null) {
+            stmt.bindString(12, s_name);
         }
  
-        String area_name = entity.getArea_name();
-        if (area_name != null) {
-            stmt.bindString(13, area_name);
+        String a_name = entity.getA_name();
+        if (a_name != null) {
+            stmt.bindString(13, a_name);
         }
  
         String d_name = entity.getD_name();
         if (d_name != null) {
             stmt.bindString(14, d_name);
+        }
+ 
+        String g_id = entity.getG_id();
+        if (g_id != null) {
+            stmt.bindString(15, g_id);
+        }
+ 
+        String c_id = entity.getC_id();
+        if (c_id != null) {
+            stmt.bindString(16, c_id);
         }
     }
 
@@ -242,9 +266,11 @@ public class ContactTeacherDao extends AbstractDao<ContactTeacher, Void> {
             cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // charge
             cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // d_id
             cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // education
-            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // school_name
-            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // area_name
-            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13) // d_name
+            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // s_name
+            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // a_name
+            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // d_name
+            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // g_id
+            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15) // c_id
         );
         return entity;
     }
@@ -262,9 +288,11 @@ public class ContactTeacherDao extends AbstractDao<ContactTeacher, Void> {
         entity.setCharge(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
         entity.setD_id(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
         entity.setEducation(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
-        entity.setSchool_name(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
-        entity.setArea_name(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
+        entity.setS_name(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
+        entity.setA_name(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
         entity.setD_name(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
+        entity.setG_id(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
+        entity.setC_id(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
      }
     
     @Override

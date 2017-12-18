@@ -309,7 +309,10 @@ public class ContactFragment extends BaseFragment {
             for (int i = 0; i < listTeacher.size(); i++) {
                 try {
                     ContactTeacher teacher = (ContactTeacher) listTeacher.get(i);
-                    teachers.add(teacher);
+                    //老师指教班级与学生所在班级一致
+                    if (teacher.getC_id().contains(student.getC_id())) {
+                        teachers.add(teacher);
+                    }
                 } catch (Exception ex) {
 
                 }

@@ -30,7 +30,6 @@ import com.shuhai.anfang.http.HttpAction;
 import com.shuhai.anfang.http.MyVolleyRequestListener;
 import com.shuhai.anfang.model.BeanStudent;
 import com.shuhai.anfang.model.ContactParent;
-import com.shuhai.anfang.ui.contact.ContactParentAdapter;
 import com.shuhai.anfang.ui.main.BaseActivity;
 
 import org.json.JSONArray;
@@ -150,21 +149,21 @@ public class StudentDetailActivity extends BaseActivity {
 
                                     if (studentDetail.getParent_phone().size() > 0) {
                                         txtParentCount.setText("家长");
-                                        ContactParentAdapter adapter = new ContactParentAdapter(StudentDetailActivity.this);
-                                        adapter.setPhoneClickListener(new ContactParentAdapter.OnParentPhoneClickListener() {
-                                            @Override
-                                            public void onPhoneClickListener(ContactParent parent) {
-                                                call(parent.getPhone());
-                                            }
-                                        });
-                                        adapter.refreshDate(studentDetail.getParent_phone());
+//                                        ContactParentAdapter adapter = new ContactParentAdapter(StudentDetailActivity.this);
+//                                        adapter.setPhoneClickListener(new ContactParentAdapter.OnParentPhoneClickListener() {
+//                                            @Override
+//                                            public void onPhoneClickListener(ContactParent parent) {
+//                                                call(parent.getPhone());
+//                                            }
+//                                        });
+//                                        adapter.refreshDate(studentDetail.getParent_phone());
 
                                         recycleView.setHasFixedSize(true);
                                         final WrapContentLinearLayoutManager mLayoutManager = new WrapContentLinearLayoutManager(StudentDetailActivity.this);
                                         recycleView.setLayoutManager(mLayoutManager);
                                         recycleView.addItemDecoration(new DividerItemDecoration(StudentDetailActivity.this,
                                                 LinearLayoutManager.VERTICAL, R.drawable.line_dotted));
-                                        recycleView.setAdapter(adapter);
+//                                        recycleView.setAdapter(adapter);
                                     } else {
                                         txtParentCount.setText("无家长通讯信息");
                                     }

@@ -4,94 +4,126 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/llInfoBg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/dp_3"
-        android:gravity="center"
-        android:padding="@dimen/dp_3">
-
-        <ImageView
-            android:id="@+id/imgSex"
-            android:layout_width="@dimen/dp_10"
-            android:layout_height="@dimen/dp_10"
-            android:background="@drawable/female_w" />
-
-        <TextView
-            android:id="@+id/txtAge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_5"
-            android:text="神秘"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/sp_12" />
-
-    </LinearLayout>
-
-    <RelativeLayout
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_20"
-        android:background="@drawable/mine_item_normal">
+        android:layout_height="match_parent">
 
-        <TextView
-            style="@style/mineText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="班级：" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/txtClassName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dp_10"
-            android:text="" />
-    </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_1"
-        android:background="@drawable/mine_item_normal">
+            <com.android.widget.view.KenBurnsView
+                android:id="@+id/top_picture"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_170"
+                android:src="@drawable/bg_student" />
 
-        <TextView
-            style="@style/mineText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="出生日期：" />
+            <com.android.widget.view.CircularImageView
+                android:id="@+id/imgHead"
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="@dimen/dp_80"
+                android:layout_gravity="center"
+                android:layout_marginTop="-40dp"
+                android:clickable="true"
+                android:src="@drawable/teacher_man" />
 
-        <TextView
-            android:id="@+id/txtBirth_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dp_10"
-            android:text="" />
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dp_5"
+                android:text="" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_10">
+            <LinearLayout
+                android:id="@+id/llInfoBg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dp_3"
+                android:gravity="center"
+                android:padding="@dimen/dp_3">
 
-        <TextView
-            android:id="@+id/txtParentCount"
-            style="@style/mineText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="家长" />
+                <ImageView
+                    android:id="@+id/imgSex"
+                    android:layout_width="@dimen/dp_10"
+                    android:layout_height="@dimen/dp_10"
+                    android:background="@drawable/female_w" />
 
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/txtAge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:text="神秘"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/sp_12" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycleView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_1" />
+            </LinearLayout>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:background="@drawable/mine_item_normal">
+
+                <TextView
+                    style="@style/mineText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="班级：" />
+
+                <TextView
+                    android:id="@+id/txtClassName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:text="" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_1"
+                android:background="@drawable/mine_item_normal">
+
+                <TextView
+                    style="@style/mineText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="出生日期：" />
+
+                <TextView
+                    android:id="@+id/txtBirth_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:text="" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/llParentContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/dp_10">
+
+                <TextView
+                    android:id="@+id/txtParentCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:textSize="@dimen/sp_16"
+                    android:text="家长" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </LinearLayout>
