@@ -224,7 +224,7 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
         super.onLoginSuccess();
 
         String easeLoginName = "";
-        String nickName = "";
+
         try {
             if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
                 BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
@@ -232,21 +232,18 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
                     return;
                 }
                 easeLoginName = parent.getU_id();
-                nickName = parent.getParent_name();
             } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
                 BeanTeacher teacher = GreenDaoHelper.getInstance().getCurrentTeacher();
                 if (teacher == null) {
                     return;
                 }
                 easeLoginName = teacher.getU_id();
-                nickName = teacher.getName();
             }
         } catch (Exception ex) {
             Log.i(TAG, "onLoginSuccess: login ease error " + ex.getMessage());
             return;
         }
 
-        EMClient.getInstance().updateCurrentUserNick(nickName);
         Log.i(TAG, "login ease easeLoginName : ");
 
         EMClient.getInstance().login(easeLoginName, CommonUtil.md5("SHUHAIXINXI" + easeLoginName), new EMCallBack() {
@@ -254,7 +251,6 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
             @Override
             public void onSuccess() {
                 EMLoginSuccess();
-
                 Log.d("main", "登录聊天服务器成功！");
 //                ToastUtils.showToast(LoginActivity.this, "登录聊天服务器成功");
             }
@@ -293,6 +289,27 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
     private void EMLoginSuccess() {
         EMClient.getInstance().groupManager().loadAllGroups();
         EMClient.getInstance().chatManager().loadAllConversations();
+
+        String nickName = "";
+        try {
+            if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+                BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
+                if (parent != null) {
+                    nickName = parent.getParent_name();
+                }
+            } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+                BeanTeacher teacher = GreenDaoHelper.getInstance().getCurrentTeacher();
+                if (teacher != null) {
+                    nickName = teacher.getName();
+                }
+            }
+        } catch (Exception ex) {
+            Log.i(TAG, "onLoginSuccess: login ease error " + ex.getMessage());
+        }
+
+        EMClient.getInstance().updateCurrentUserNick(nickName);
+
+//        EMClient.getInstance().chatManager().getAllConversations();
 
         runOnUiThread(new Runnable() {
             public void run() {

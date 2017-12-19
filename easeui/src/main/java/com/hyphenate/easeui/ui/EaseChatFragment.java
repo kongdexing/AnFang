@@ -41,7 +41,9 @@ import com.hyphenate.easeui.R;
 import com.hyphenate.easeui.domain.EaseEmojicon;
 import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.model.EaseAtMessageHelper;
+import com.hyphenate.easeui.model.EaseLocalUser;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
+import com.hyphenate.easeui.utils.EaseLocalUserHelper;
 import com.hyphenate.easeui.utils.EaseUserUtils;
 import com.hyphenate.easeui.widget.EaseAlertDialog;
 import com.hyphenate.easeui.widget.EaseAlertDialog.AlertDialogUser;
@@ -134,6 +136,12 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         // userId you are chat with or group id
         toChatUsername = fragmentArgs.getString(EaseConstant.EXTRA_USER_ID);
         titleChatName = fragmentArgs.getString(EaseConstant.ExtRA_USER_NAME);
+
+        EaseLocalUser localUser = new EaseLocalUser();
+        localUser.setUserId(toChatUsername);
+        localUser.setNickName(titleChatName);
+        EaseLocalUserHelper.getInstance().insertOrReplaceLocalUser(localUser);
+
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -269,6 +277,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     protected void onConversationInit() {
         conversation = EMClient.getInstance().chatManager().getConversation(toChatUsername, EaseCommonUtils.getConversationType(chatType), true);
         conversation.markAllMessagesAsRead();
+
         // the number of messages loaded into conversation is getChatOptions().getNumberOfMessagesLoaded
         // you can change this number
 

@@ -25,6 +25,7 @@ import com.hyphenate.easeui.domain.EaseAvatarOptions;
 import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.model.EaseAtMessageHelper;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
+import com.hyphenate.easeui.utils.EaseLocalUserHelper;
 import com.hyphenate.easeui.utils.EaseSmileUtils;
 import com.hyphenate.easeui.utils.EaseUserUtils;
 import com.hyphenate.easeui.widget.EaseConversationList.EaseConversationListHelper;
@@ -103,6 +104,7 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
         EMConversation conversation = getItem(position);
         // get username or group id
         String user_id = conversation.conversationId();
+        String nickName = EaseLocalUserHelper.getInstance().getLocalUserNickName(user_id);
 
         if (conversation.getType() == EMConversationType.GroupChat) {
             String groupId = conversation.conversationId();
@@ -114,15 +116,15 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
             // group message, show group avatar
             holder.avatar.setImageResource(R.drawable.ease_group_icon);
             EMGroup group = EMClient.getInstance().groupManager().getGroup(user_id);
-            holder.name.setText(group != null ? group.getGroupName() : user_id);
+            holder.name.setText(group != null ? group.getGroupName() : nickName);
         } else if(conversation.getType() == EMConversationType.ChatRoom){
             holder.avatar.setImageResource(R.drawable.ease_group_icon);
             EMChatRoom room = EMClient.getInstance().chatroomManager().getChatRoom(user_id);
-            holder.name.setText(room != null && !TextUtils.isEmpty(room.getName()) ? room.getName() : user_id);
+            holder.name.setText(room != null && !TextUtils.isEmpty(room.getName()) ? room.getName() : nickName);
             holder.motioned.setVisibility(View.GONE);
         }else {
             EaseUserUtils.setUserAvatar(getContext(), user_id, holder.avatar);
-            EaseUserUtils.setUserNick(user_id, holder.name);
+            EaseUserUtils.setUserNick(nickName, holder.name);
             holder.motioned.setVisibility(View.GONE);
         }
 

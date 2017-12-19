@@ -12,6 +12,7 @@ import com.android.volley.common.VolleyHttpService;
 import com.android.widget.audiorecorder.AudioManager;
 import com.baidu.mapapi.SDKInitializer;
 import com.hyphenate.chat.EMOptions;
+import com.hyphenate.easeui.utils.EaseLocalUserHelper;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.liulishuo.filedownloader.connection.FileDownloadUrlConnection;
 import com.liulishuo.filedownloader.services.DownloadMgrInitialParams;
@@ -95,7 +96,9 @@ public class XPTApplication extends Application {
 
         //baidumap
         SDKInitializer.initialize(this);
+        //本地数据库
         GreenDaoHelper.getInstance().initGreenDao(this);
+        EaseLocalUserHelper.getInstance().initGreenDao(this);
 
         MobclickAgent.setCheckDevice(true);
         //日志加密设置

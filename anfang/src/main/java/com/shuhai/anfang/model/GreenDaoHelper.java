@@ -47,7 +47,7 @@ public class GreenDaoHelper {
     }
 
     public void initGreenDao(Context context) {
-        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(context, "xpt_parent", null);
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(context, "xpt_anfang", null);
 
         writeDB = helper.getWritableDatabase();
         readDB = helper.getReadableDatabase();
