@@ -19,6 +19,7 @@ public class BroadcastAction {
     public static String FENCE_CANCEL = "com.shuhai.anfang.fence.cancel";
 
     public static String RELOAD_BANNER = "com.shuhai.anfang.banner.reload";
+    public static String CARD_FREEZE = "com.xptschool.parent.card.freeze";
 
     public static String MESSAGE_RECEIVED = "com.shuhai.anfang.message.receive";
 

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.widget.view.CircularImageView;
 import com.shuhai.anfang.R;
@@ -16,6 +17,7 @@ import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.common.UserHelper;
 import com.shuhai.anfang.common.UserType;
 import com.shuhai.anfang.model.BeanParent;
+import com.shuhai.anfang.model.BeanStudent;
 import com.shuhai.anfang.model.BeanTeacher;
 import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.ui.login.LoginActivity;
@@ -24,7 +26,10 @@ import com.shuhai.anfang.ui.mine.MyClassesActivity;
 import com.shuhai.anfang.ui.mine.MyInfoActivity;
 import com.shuhai.anfang.ui.setting.QRCodeActivity;
 import com.shuhai.anfang.ui.setting.SettingActivity;
+import com.shuhai.anfang.ui.wallet.WalletActivity;
 import com.shuhai.anfang.view.CustomDialog;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,6 +54,11 @@ public class MineFragment extends BaseFragment {
     RelativeLayout rlMyClass;
     @BindView(R.id.rlMyChild)
     RelativeLayout rlMyChild;
+
+    @BindView(R.id.rlMyBill)
+    RelativeLayout rlMyBill;
+    @BindView(R.id.rlMyProperty)
+    RelativeLayout rlMyProperty;
 
     private Unbinder unbinder;
 
@@ -81,6 +91,8 @@ public class MineFragment extends BaseFragment {
             if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
                 rlMyChild.setVisibility(View.GONE);
                 rlMyClass.setVisibility(View.VISIBLE);
+                rlMyBill.setVisibility(View.GONE);
+                rlMyProperty.setVisibility(View.GONE);
 
                 BeanTeacher teacher = GreenDaoHelper.getInstance().getCurrentTeacher();
                 if (teacher != null) {
@@ -95,6 +107,8 @@ public class MineFragment extends BaseFragment {
             } else if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
                 rlMyChild.setVisibility(View.VISIBLE);
                 rlMyClass.setVisibility(View.GONE);
+                rlMyBill.setVisibility(View.VISIBLE);
+                rlMyProperty.setVisibility(View.VISIBLE);
 
                 BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
                 if (parent != null) {
@@ -110,7 +124,8 @@ public class MineFragment extends BaseFragment {
         } else {
             rlMyChild.setVisibility(View.VISIBLE);
             rlMyClass.setVisibility(View.VISIBLE);
-
+            rlMyBill.setVisibility(View.VISIBLE);
+            rlMyProperty.setVisibility(View.VISIBLE);
             ll_unlogin.setVisibility(View.VISIBLE);
             ll_login.setVisibility(View.GONE);
         }
@@ -173,17 +188,14 @@ public class MineFragment extends BaseFragment {
             case R.id.rlMyClass:
                 startActivity(new Intent(getContext(), MyClassesActivity.class));
                 break;
-//            case R.id.rlMyCourse:
-//                startActivity(new Intent(getContext(), CourseActivity.class));
-//                break;
-//            case R.id.rlMyWellet:
-//                List<BeanStudent> students = GreenDaoHelper.getInstance().getStudents();
-//                if (students.size() > 0) {
-//                    startActivity(new Intent(getContext(), WalletActivity.class));
-//                } else {
-//                    Toast.makeText(mContext, "暂无绑定的学生", Toast.LENGTH_SHORT).show();
-//                }
-//                break;
+            case R.id.rlMyProperty:
+                List<BeanStudent> students = GreenDaoHelper.getInstance().getStudents();
+                if (students.size() > 0) {
+                    startActivity(new Intent(getContext(), WalletActivity.class));
+                } else {
+                    Toast.makeText(mContext, "暂无绑定的学生", Toast.LENGTH_SHORT).show();
+                }
+                break;
 //            case R.id.txtChangeAccount:
 //                startActivity(new Intent(getContext(), LoginActivity.class));
 //                break;

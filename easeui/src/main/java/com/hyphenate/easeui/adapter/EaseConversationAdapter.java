@@ -102,8 +102,8 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
         // get conversation
         EMConversation conversation = getItem(position);
         // get username or group id
-        String username = conversation.conversationId();
-        
+        String user_id = conversation.conversationId();
+
         if (conversation.getType() == EMConversationType.GroupChat) {
             String groupId = conversation.conversationId();
             if(EaseAtMessageHelper.get().hasAtMeMsg(groupId)){
@@ -113,16 +113,16 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
             }
             // group message, show group avatar
             holder.avatar.setImageResource(R.drawable.ease_group_icon);
-            EMGroup group = EMClient.getInstance().groupManager().getGroup(username);
-            holder.name.setText(group != null ? group.getGroupName() : username);
+            EMGroup group = EMClient.getInstance().groupManager().getGroup(user_id);
+            holder.name.setText(group != null ? group.getGroupName() : user_id);
         } else if(conversation.getType() == EMConversationType.ChatRoom){
             holder.avatar.setImageResource(R.drawable.ease_group_icon);
-            EMChatRoom room = EMClient.getInstance().chatroomManager().getChatRoom(username);
-            holder.name.setText(room != null && !TextUtils.isEmpty(room.getName()) ? room.getName() : username);
+            EMChatRoom room = EMClient.getInstance().chatroomManager().getChatRoom(user_id);
+            holder.name.setText(room != null && !TextUtils.isEmpty(room.getName()) ? room.getName() : user_id);
             holder.motioned.setVisibility(View.GONE);
         }else {
-            EaseUserUtils.setUserAvatar(getContext(), username, holder.avatar);
-            EaseUserUtils.setUserNick(username, holder.name);
+            EaseUserUtils.setUserAvatar(getContext(), user_id, holder.avatar);
+            EaseUserUtils.setUserNick(user_id, holder.name);
             holder.motioned.setVisibility(View.GONE);
         }
 

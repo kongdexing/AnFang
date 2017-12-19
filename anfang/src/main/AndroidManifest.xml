@@ -279,6 +279,78 @@
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide" />
 
+        <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
+
+        <!--钱包-->
+        <activity android:name=".ui.wallet.WalletActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="wx1af4f660ce9e6b37" /> <!-- 需修改 -->
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop" />
+
+        <receiver
+            android:name=".wxapi.AppRegister"
+            android:permission="com.tencent.mm.plugin.permission.SEND">
+            <intent-filter>
+                <action android:name="com.tencent.mm.plugin.openapi.Intent.ACTION_REFRESH_WXAPP" />
+            </intent-filter>
+        </receiver>
+        <!--start 支付宝-->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" />
+        <activity
+            android:name="com.alipay.sdk.auth.AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" />
+        <!--支付宝 end-->
+        <activity
+            android:name=".ui.wallet.pocket.PocketActivity"
+            android:configChanges="orientation|keyboardHidden|fontScale"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.wallet.pocket.RechargeActivity"
+            android:configChanges="orientation|keyboardHidden|fontScale"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.wallet.card.StuCardActivity"
+            android:configChanges="orientation|keyboardHidden|fontScale"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.wallet.bill.BillActivity"
+            android:configChanges="orientation|keyboardHidden|fontScale"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.wallet.card.CardRechargeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.unionpay.uppay.PayActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.unionpay.UPPayWapActivity"
+            android:configChanges="orientation|keyboardHidden|fontScale"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".ui.wallet.pocket.bill.PocketDetailActivity" />
+        <activity android:name=".ui.wallet.bankcard.AddBankCardActivity" />
+        <activity android:name=".ui.wallet.bankcard.BankListActivity" />
+        <activity android:name=".ui.wallet.pocket.BankCardChooseActivity" />
+        <activity android:name=".ui.wallet.pocket.TakeOutMoneyActivity" />
+        <activity android:name=".ui.wallet.pocket.bill.BillDetailActivity" />
+        <activity android:name=".ui.wallet.TelephoneFareActivity" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.shuhai.anfang.fileProvider"
@@ -289,7 +361,6 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
 
         <!-- 设置环信应用的appkey -->
         <meta-data

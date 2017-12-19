@@ -27,6 +27,8 @@ import com.shuhai.anfang.common.CommonUtil;
 import com.shuhai.anfang.common.ExtraKey;
 import com.shuhai.anfang.common.SharedPreferencesUtil;
 import com.shuhai.anfang.common.UserType;
+import com.shuhai.anfang.model.BeanParent;
+import com.shuhai.anfang.model.BeanTeacher;
 import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.push.DeviceHelper;
 import com.shuhai.anfang.ui.main.MainActivity;
@@ -221,22 +223,38 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
     protected void onLoginSuccess() {
         super.onLoginSuccess();
 
-        String userId = "";
+        String easeLoginName = "";
+        String nickName = "";
         try {
             if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-                userId = GreenDaoHelper.getInstance().getCurrentParent().getU_id();
+                BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
+                if (parent == null) {
+                    return;
+                }
+                easeLoginName = parent.getU_id();
+                nickName = parent.getParent_name();
             } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-                userId = GreenDaoHelper.getInstance().getCurrentTeacher().getU_id();
+                BeanTeacher teacher = GreenDaoHelper.getInstance().getCurrentTeacher();
+                if (teacher == null) {
+                    return;
+                }
+                easeLoginName = teacher.getU_id();
+                nickName = teacher.getName();
             }
         } catch (Exception ex) {
-
+            Log.i(TAG, "onLoginSuccess: login ease error " + ex.getMessage());
+            return;
         }
 
-        EMClient.getInstance().login(userId, CommonUtil.md5("SHUHAIXINXI" + userId), new EMCallBack() {
+        EMClient.getInstance().updateCurrentUserNick(nickName);
+        Log.i(TAG, "login ease easeLoginName : ");
+
+        EMClient.getInstance().login(easeLoginName, CommonUtil.md5("SHUHAIXINXI" + easeLoginName), new EMCallBack() {
 
             @Override
             public void onSuccess() {
                 EMLoginSuccess();
+
                 Log.d("main", "登录聊天服务器成功！");
 //                ToastUtils.showToast(LoginActivity.this, "登录聊天服务器成功");
             }
