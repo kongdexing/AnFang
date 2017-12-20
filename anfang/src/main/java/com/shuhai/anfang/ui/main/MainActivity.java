@@ -338,12 +338,12 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
             @Override
             public void onSuccess() {
                 EMLoginSuccess();
-                Log.d("main", "登录聊天服务器成功！");
+                Log.d(TAG, "登录聊天服务器成功！");
             }
 
             @Override
             public void onProgress(int progress, String status) {
-
+                Log.i(TAG, "onProgress: " + progress + "  status:" + status);
             }
 
             @Override

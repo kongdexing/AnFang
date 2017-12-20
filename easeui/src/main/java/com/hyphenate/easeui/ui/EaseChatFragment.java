@@ -82,7 +82,6 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     protected Bundle fragmentArgs;
     protected int chatType;
     protected String toChatUsername;
-    protected String titleChatName;
     protected EaseChatMessageList messageList;
     protected EaseChatInputMenu inputMenu;
 
@@ -135,12 +134,6 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         chatType = fragmentArgs.getInt(EaseConstant.EXTRA_CHAT_TYPE, EaseConstant.CHATTYPE_SINGLE);
         // userId you are chat with or group id
         toChatUsername = fragmentArgs.getString(EaseConstant.EXTRA_USER_ID);
-        titleChatName = fragmentArgs.getString(EaseConstant.ExtRA_USER_NAME);
-
-        EaseLocalUser localUser = new EaseLocalUser();
-        localUser.setUserId(toChatUsername);
-        localUser.setNickName(titleChatName);
-        EaseLocalUserHelper.getInstance().insertOrReplaceLocalUser(localUser);
 
         super.onActivityCreated(savedInstanceState);
     }
@@ -203,6 +196,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     }
 
     protected void setUpView() {
+        String titleChatName = EaseLocalUserHelper.getInstance().getLocalUserNickName(toChatUsername);
         titleBar.setTitle(titleChatName);
         if (chatType == EaseConstant.CHATTYPE_SINGLE) {
             // set title
@@ -565,7 +559,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
                             titleBar.setTitle(room.getName());
                             EMLog.d(TAG, "join room success : " + room.getName());
                         } else {
-                            titleBar.setTitle(titleChatName);
+                            titleBar.setTitle(EaseLocalUserHelper.getInstance().getLocalUserNickName(toChatUsername));
                         }
                         onConversationInit();
                         onMessageListInit();

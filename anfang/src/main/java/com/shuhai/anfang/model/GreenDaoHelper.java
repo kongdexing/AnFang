@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.hyphenate.easeui.model.EaseLocalUser;
+import com.hyphenate.easeui.utils.EaseLocalUserHelper;
 import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.common.SharedPreferencesUtil;
 
@@ -173,10 +175,22 @@ public class GreenDaoHelper {
         }
     }
 
+    //保存家长信息
     public void insertContactParent(List<ContactParent> parents) {
         if (writeDaoSession != null) {
             writeDaoSession.getContactParentDao().insertOrReplaceInTx(parents);
         }
+
+        for (int i = 0; i < parents.size(); i++) {
+            ContactParent parent = parents.get(i);
+
+            EaseLocalUser localUser = new EaseLocalUser();
+            localUser.setUserId(parent.getUser_id());
+            localUser.setNickName(parent.getName());
+            EaseLocalUserHelper.getInstance().insertOrReplaceLocalUser(localUser);
+
+        }
+
     }
 
     public void insertContactStudent(List<ContactStudent> students) {
@@ -196,23 +210,18 @@ public class GreenDaoHelper {
             writeDaoSession.getContactTeacherDao().deleteAll();
             writeDaoSession.getContactTeacherDao().insertOrReplaceInTx(teachers);
         }
-    }
 
-//    //教师获取联系人
-//    public void insertContactTeacherForTeacher(List<ContactTeacherForTeacher> teachers) {
-//        if (writeDaoSession != null) {
-//            writeDaoSession.getContactTeacherForTeacherDao().deleteAll();
-//            writeDaoSession.getContactTeacherForTeacherDao().insertOrReplaceInTx(teachers);
-//        }
-//    }
-//
-//    public void deleteContact() {
-//        if (writeDaoSession != null) {
-//            writeDaoSession.getContactTeacherDao().deleteAll();
-//            writeDaoSession.getContactTeacherForTeacherDao().deleteAll();
-//            writeDaoSession.getContactSchoolDao().deleteAll();
-//        }
-//    }
+        for (int i = 0; i < teachers.size(); i++) {
+            ContactTeacher teacher = teachers.get(i);
+
+            EaseLocalUser localUser = new EaseLocalUser();
+            localUser.setUserId(teacher.getU_id());
+            localUser.setNickName(teacher.getName());
+            EaseLocalUserHelper.getInstance().insertOrReplaceLocalUser(localUser);
+
+        }
+
+    }
 
     public List<ContactTeacher> getContactTeacher() {
         if (readDaoSession != null) {
@@ -220,13 +229,6 @@ public class GreenDaoHelper {
         }
         return new ArrayList<ContactTeacher>();
     }
-
-//    public List<ContactTeacherForTeacher> getContactTeacherForTeacher() {
-//        if (readDaoSession != null) {
-//            return readDaoSession.getContactTeacherForTeacherDao().loadAll();
-//        }
-//        return new ArrayList<ContactTeacherForTeacher>();
-//    }
 
     public List<ContactStudent> getContactStudent() {
         if (readDaoSession != null) {

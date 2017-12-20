@@ -10,10 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.hyphenate.chat.EMClient;
 import com.shuhai.anfang.R;
 import com.shuhai.anfang.ui.contact.ContactFragment;
 import com.shuhai.anfang.ui.chat.ConversationListFragment;
 import com.shuhai.anfang.ui.main.MainActivity;
+import com.shuhai.anfang.util.ToastUtils;
 import com.viewpagerindicator.IconPagerAdapter;
 import com.viewpagerindicator.TabPageIndicator;
 
@@ -61,6 +63,12 @@ public class MessageFragment extends BaseFragment {
 
         indicator.setViewPager(viewPager);
 
+        if (!EMClient.getInstance().isLoggedInBefore()) {
+            //login
+            ToastUtils.showToast(mContext, " not isLoggedInBefore");
+        } else {
+            ToastUtils.showToast(mContext, "Ease isLoggedInBefore");
+        }
     }
 
     class MessageTabAdapter extends FragmentPagerAdapter implements IconPagerAdapter {

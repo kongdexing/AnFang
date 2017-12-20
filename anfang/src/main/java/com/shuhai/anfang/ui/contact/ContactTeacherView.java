@@ -93,7 +93,6 @@ public class ContactTeacherView extends ContactBaseView{
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, ChatActivity.class);
                 intent.putExtra(EaseConstant.EXTRA_USER_ID, contactTeacher.getU_id());
-                intent.putExtra(EaseConstant.ExtRA_USER_NAME, contactTeacher.getName());
                 mContext.startActivity(intent);
                 ((Activity)mContext).finish();
             }

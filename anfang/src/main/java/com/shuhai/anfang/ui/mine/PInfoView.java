@@ -27,7 +27,7 @@ import butterknife.OnClick;
  * Created by dexing on 2017-11-29 0029.
  */
 
-public class PInfoView extends LinearLayout {
+public class PInfoView extends BaseInfoView {
 
     @BindView(R.id.imgHead)
     CircularImageView imgHead;
@@ -46,8 +46,6 @@ public class PInfoView extends LinearLayout {
 
     @BindView(R.id.txtHomeTel)
     TextView txtHomeTel;
-
-    Context mContext;
 
     public PInfoView(Context context) {
         this(context, null);
@@ -117,19 +115,7 @@ public class PInfoView extends LinearLayout {
                 }
                 break;
             case R.id.rlExit:
-                CustomDialog dialog = new CustomDialog(mContext);
-                dialog.setTitle(R.string.label_tip);
-                dialog.setMessage(R.string.msg_exit);
-                dialog.setAlertDialogClickListener(new CustomDialog.DialogClickListener() {
-                    @Override
-                    public void onPositiveClick() {
-                        //清除数据
-                        SharedPreferencesUtil.clearUserInfo(mContext);
-                        GreenDaoHelper.getInstance().clearData();
-                        UserHelper.getInstance().userExit();
-                        ((MyInfoActivity)mContext).finish();
-                    }
-                });
+                exitUser();
                 break;
         }
     }

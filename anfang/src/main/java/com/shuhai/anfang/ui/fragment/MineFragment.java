@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.widget.view.CircularImageView;
+import com.hyphenate.chat.EMClient;
 import com.shuhai.anfang.R;
 import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.common.UserHelper;
@@ -27,6 +28,7 @@ import com.shuhai.anfang.ui.mine.MyInfoActivity;
 import com.shuhai.anfang.ui.setting.QRCodeActivity;
 import com.shuhai.anfang.ui.setting.SettingActivity;
 import com.shuhai.anfang.ui.wallet.WalletActivity;
+import com.shuhai.anfang.util.ToastUtils;
 import com.shuhai.anfang.view.CustomDialog;
 
 import java.util.List;
@@ -106,6 +108,11 @@ public class MineFragment extends BaseFragment {
                 }
             } else if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
                 rlMyChild.setVisibility(View.VISIBLE);
+
+                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)rlMyChild.getLayoutParams();
+                params.setMargins(0,(int)mContext.getResources().getDimension(R.dimen.dp_20),0,0);
+                rlMyChild.setLayoutParams(params);
+
                 rlMyClass.setVisibility(View.GONE);
                 rlMyBill.setVisibility(View.VISIBLE);
                 rlMyProperty.setVisibility(View.VISIBLE);
@@ -122,6 +129,10 @@ public class MineFragment extends BaseFragment {
                 }
             }
         } else {
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)rlMyChild.getLayoutParams();
+            params.setMargins(0,(int)mContext.getResources().getDimension(R.dimen.dp_1),0,0);
+            rlMyChild.setLayoutParams(params);
+
             rlMyChild.setVisibility(View.VISIBLE);
             rlMyClass.setVisibility(View.VISIBLE);
             rlMyBill.setVisibility(View.VISIBLE);

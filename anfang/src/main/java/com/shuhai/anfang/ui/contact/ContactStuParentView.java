@@ -80,7 +80,6 @@ public class ContactStuParentView extends ContactBaseView {
             public void onChatClick() {
                 Intent intent = new Intent(mContext, ChatActivity.class);
                 intent.putExtra(EaseConstant.EXTRA_USER_ID, parent.getUser_id());
-                intent.putExtra(EaseConstant.ExtRA_USER_NAME, parent.getName());
                 mContext.startActivity(intent);
                 ((Activity) mContext).finish();
             }
