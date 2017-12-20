@@ -245,10 +245,13 @@
         <activity android:name=".ui.course.CourseActivity" />
         <activity android:name=".ui.course.CourseTActivity" />
 
-        <!--荣誉墙-->
-        <activity android:name=".ui.honor.HonorPActivity"></activity>
-        <activity android:name=".ui.honor.HonorTActivity"></activity>
+        <!--评语-->
+        <activity android:name=".ui.comment.CommentPActivity"></activity>
+        <activity android:name=".ui.comment.CommentTActivity"></activity>
 
+        <!-- 荣誉墙 -->
+        <activity android:name=".ui.honor.HonorPActivity" />
+        <activity android:name=".ui.honor.HonorTActivity" />
 
         <!-- 我的班级 -->
         <activity android:name=".ui.mine.MyClassesActivity" />
@@ -278,10 +281,9 @@
             android:name="com.hyphenate.easeui.ui.EaseBaiduMapActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide" />
-
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
 
-        <!--钱包-->
+        <!-- 钱包 -->
         <activity android:name=".ui.wallet.WalletActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -303,7 +305,7 @@
                 <action android:name="com.tencent.mm.plugin.openapi.Intent.ACTION_REFRESH_WXAPP" />
             </intent-filter>
         </receiver>
-        <!--start 支付宝-->
+        <!-- start 支付宝 -->
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
@@ -314,7 +316,7 @@
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="behind" />
-        <!--支付宝 end-->
+        <!-- 支付宝 end -->
         <activity
             android:name=".ui.wallet.pocket.PocketActivity"
             android:configChanges="orientation|keyboardHidden|fontScale"
@@ -360,7 +362,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-
 
         <!-- 设置环信应用的appkey -->
         <meta-data

@@ -35,7 +35,7 @@
     <string name="home_location">位置查询</string>
     <string name="home_score">孩子成绩</string>
     <string name="home_course">课程表</string>
-    <string name="home_remark">老师评语</string>
+    <string name="home_comment">老师评语</string>
     <string name="home_honour">荣誉墙</string>
 
     <string name="home_checkin">考勤记录</string>

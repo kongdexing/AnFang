@@ -1,9 +1,8 @@
-package com.shuhai.anfang.ui.honor;
+package com.shuhai.anfang.ui.comment;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -18,17 +17,13 @@ import com.android.widget.view.LoadMoreRecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.shuhai.anfang.R;
-import com.shuhai.anfang.bean.BeanHomeWork;
 import com.shuhai.anfang.bean.BeanHonor;
 import com.shuhai.anfang.common.CommonUtil;
 import com.shuhai.anfang.http.HttpAction;
 import com.shuhai.anfang.http.MyVolleyRequestListener;
 import com.shuhai.anfang.model.BeanClass;
-import com.shuhai.anfang.model.BeanCourse;
+import com.shuhai.anfang.model.BeanStudent;
 import com.shuhai.anfang.model.GreenDaoHelper;
-import com.shuhai.anfang.ui.homework.HomeWorkDetailTeacherActivity;
-import com.shuhai.anfang.ui.homework.HomeWorkTeacherActivity;
-import com.shuhai.anfang.ui.homework.HomeWorkTeacherAdapter;
 import com.shuhai.anfang.ui.main.BaseListActivity;
 
 import org.json.JSONObject;
@@ -39,10 +34,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-/**
- * 老师 荣誉
- */
-public class HonorTActivity extends BaseListActivity {
+public class CommentPActivity extends BaseListActivity {
 
     @BindView(R.id.recyclerview)
     LoadMoreRecyclerView recyclerView;
@@ -50,23 +42,23 @@ public class HonorTActivity extends BaseListActivity {
     @BindView(R.id.refresh_layout)
     SwipeRefreshLayout swipeRefreshLayout;
 
-    @BindView(R.id.spnClasses)
-    MaterialSpinner spnClass;
-    @BindView(R.id.spnHonorType)
-    MaterialSpinner spnHonorType;
+    @BindView(R.id.spnStudents)
+    MaterialSpinner spnStudents;
+    @BindView(R.id.spnType)
+    MaterialSpinner spnType;
 
     @BindView(R.id.flTransparent)
     FrameLayout flTransparent;
 
-    HonorTAdapter adapter;
+    CommentAdapter adapter;
     //循序固定，勿乱动
-    private static final String[] honorType = {"全部", "班级奖励", "年级奖励", "校级奖励", "市级奖励", "省级奖励", "国家奖励"};
+    private static final String[] commentType = {"全部", "平时评语", "每周评语", "每月评语", "期中评语", "期末评语"};
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_honor_t);
+        setContentView(R.layout.activity_comment_p);
         setTitle(R.string.home_honour);
         initView();
         initDate();
@@ -75,7 +67,7 @@ public class HonorTActivity extends BaseListActivity {
     public void initView() {
         initRecyclerView(recyclerView, swipeRefreshLayout);
 
-        adapter = new HonorTAdapter(this);
+        adapter = new CommentAdapter(this);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -87,7 +79,7 @@ public class HonorTActivity extends BaseListActivity {
             public void onLoadMore() {
                 if (resultPage.getPage() < resultPage.getTotal_page()) {
                     resultPage.setPage(resultPage.getPage() + 1);
-                    getHonorList();
+                    getCommentList();
                 }
             }
         });
@@ -95,38 +87,43 @@ public class HonorTActivity extends BaseListActivity {
     }
 
     public void initDate() {
-        spnClass.setItems(GreenDaoHelper.getInstance().getAllClassNameAppend());
-        spnClass.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<BeanClass>() {
+        if (GreenDaoHelper.getInstance().getStudents().size() == 0) {
+            spnStudents.setText(R.string.title_no_student);
+            spnStudents.setEnabled(false);
+            swipeRefreshLayout.setEnabled(false);
+            return;
+        }
+        spnStudents.setItems(GreenDaoHelper.getInstance().getStudents());
+        spnStudents.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(MaterialSpinner view, int position, long id, BeanClass item) {
-                flTransparent.setVisibility(View.GONE);
+            public void onItemSelected(MaterialSpinner materialSpinner, int i, long l, Object o) {
                 getFirstPageData();
             }
         });
-        spnClass.setOnNothingSelectedListener(spinnerNothingSelectedListener);
+        spnStudents.setOnNothingSelectedListener(spinnerNothingSelectedListener);
 
-        spnHonorType.setItems(honorType);
-        spnHonorType.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+        spnType.setItems(commentType);
+        spnType.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
                 flTransparent.setVisibility(View.GONE);
                 getFirstPageData();
             }
         });
-        spnHonorType.setOnNothingSelectedListener(spinnerNothingSelectedListener);
+        spnType.setOnNothingSelectedListener(spinnerNothingSelectedListener);
         getFirstPageData();
     }
 
-    @OnClick({R.id.spnClasses, R.id.spnHonorType})
+    @OnClick({R.id.spnStudents, R.id.spnType})
     void honorClick(View view) {
         switch (view.getId()) {
-            case R.id.spnClasses:
-                if (spnClass.getItems().size() != 1) {
+            case R.id.spnStudents:
+                if (spnStudents.getItems().size() != 1) {
                     flTransparent.setVisibility(View.VISIBLE);
                 }
                 break;
-            case R.id.spnHonorType:
-                if (spnHonorType.getItems().size() != 1) {
+            case R.id.spnType:
+                if (spnType.getItems().size() != 1) {
                     flTransparent.setVisibility(View.VISIBLE);
                 }
                 break;
@@ -136,18 +133,18 @@ public class HonorTActivity extends BaseListActivity {
     private void getFirstPageData() {
         flTransparent.setVisibility(View.GONE);
         resultPage.setPage(1);
-        adapter.refreshData(new ArrayList<BeanHonor>());
-        getHonorList();
+//        adapter.refreshData(new ArrayList<BeanHonor>());
+        getCommentList();
     }
 
-    private void getHonorList() {
-        BeanClass currentClass = (BeanClass) spnClass.getSelectedItem();
-        String type = spnHonorType.getSelectedIndex() + "";
+    private void getCommentList() {
+        BeanStudent currentStudent = (BeanStudent) spnStudents.getSelectedItem();
+        String type = spnType.getSelectedIndex() + "";
 
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Honor_query,
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Remark_query,
                 new VolleyHttpParamsEntity()
-                        .addParam("c_id", currentClass.getC_id())
-                        .addParam("reward_type", type)
+                        .addParam("stu_id", currentStudent.getStu_id())
+                        .addParam("r_type", type)
                         .addParam("page", resultPage.getPage() + "")
                         .addParam("token", CommonUtil.encryptToken(HttpAction.HOMEWORK_QUERY)),
                 new MyVolleyRequestListener() {
@@ -183,24 +180,24 @@ public class HonorTActivity extends BaseListActivity {
                                     honors = gson.fromJson(jsonObject.getJSONArray("content").toString(), new TypeToken<List<BeanHonor>>() {
                                     }.getType());
 
-                                    if (resultPage.getPage() > 1) {
-                                        adapter.appendData(honors);
-                                    } else {
-                                        //第一页数据
-                                        if (honors.size() == 0) {
-                                            Toast.makeText(HonorTActivity.this, R.string.toast_data_empty, Toast.LENGTH_SHORT).show();
-                                        }
-                                        recyclerView.removeAllViews();
-                                        adapter.refreshData(honors);
-                                    }
+//                                    if (resultPage.getPage() > 1) {
+//                                        adapter.appendData(honors);
+//                                    } else {
+//                                        //第一页数据
+//                                        if (honors.size() == 0) {
+//                                            Toast.makeText(HonorTActivity.this, R.string.toast_data_empty, Toast.LENGTH_SHORT).show();
+//                                        }
+//                                        recyclerView.removeAllViews();
+//                                        adapter.refreshData(honors);
+//                                    }
                                     recyclerView.notifyMoreFinish(resultPage.getTotal_page() > resultPage.getPage());
                                 } catch (Exception ex) {
                                     Log.i(TAG, "onResponse: " + ex.getMessage());
-                                    Toast.makeText(HonorTActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(CommentPActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                                 break;
                             default:
-                                Toast.makeText(HonorTActivity.this, httpResult.getInfo(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CommentPActivity.this, httpResult.getInfo(), Toast.LENGTH_SHORT).show();
                                 break;
                         }
                     }

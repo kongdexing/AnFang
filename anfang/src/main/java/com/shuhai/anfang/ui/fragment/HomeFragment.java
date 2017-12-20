@@ -47,6 +47,8 @@ import com.shuhai.anfang.ui.alarm.AlarmActivity;
 import com.shuhai.anfang.ui.alarm.AlarmTActivity;
 import com.shuhai.anfang.ui.checkin.CheckinActivity;
 import com.shuhai.anfang.ui.checkin.CheckinTActivity;
+import com.shuhai.anfang.ui.comment.CommentPActivity;
+import com.shuhai.anfang.ui.comment.CommentTActivity;
 import com.shuhai.anfang.ui.course.CourseActivity;
 import com.shuhai.anfang.ui.course.CourseTActivity;
 import com.shuhai.anfang.ui.fence.FenceListActivity;
@@ -521,13 +523,13 @@ public class HomeFragment extends BaseFragment {
         /*老师评语*/
         homeShopItems.add(new HomeItem()
                 .setIconId(R.drawable.home_remark)
-                .setTitle(getString(R.string.home_remark))
-                .setIntent(new Intent(mContext, LeaveActivity.class)));
+                .setTitle(getString(R.string.home_comment))
+                .setIntent(new Intent(mContext, isParent ? CommentPActivity.class : CommentTActivity.class)));
         /*荣誉墙*/
         homeShopItems.add(new HomeItem()
                 .setIconId(R.drawable.home_honour)
                 .setTitle(getString(R.string.home_honour))
-                .setIntent(new Intent(mContext, isParent ? HonorPActivity.class: HonorTActivity.class)));
+                .setIntent(new Intent(mContext, isParent ? HonorPActivity.class : HonorTActivity.class)));
 
         itemShopAdapter = new HomeItemGridAdapter(mContext);
         grd_school_shop.setAdapter(itemShopAdapter);

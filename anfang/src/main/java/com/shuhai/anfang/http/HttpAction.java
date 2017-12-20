@@ -67,6 +67,8 @@ public class HttpAction {
     //删除
     public static String Honor_del = HEAD + "Honor/edit";
 
+    //评语查询
+    public static String Remark_query = HEAD + "Remark/query";
     
 
     //报警记录
