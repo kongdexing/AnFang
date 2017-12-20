@@ -31,13 +31,9 @@ public class HomeWorkTeacherAdapter extends BaseRecycleAdapter {
 
     private List<BeanHomeWork> beanHomeWorks = new ArrayList<>();
 
-    private String TAG = getClass().getSimpleName();
-    private Context mContext;
-
     public HomeWorkTeacherAdapter(Context context) {
         super(context);
         Log.i(TAG, "HomeWorkParentAdapter: ");
-        mContext = context;
     }
 
     public void refreshData(List<BeanHomeWork> listHomeWorks) {

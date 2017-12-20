@@ -30,13 +30,10 @@ import butterknife.Unbinder;
 public class HomeWorkParentAdapter extends BaseRecycleAdapter {
 
     private List<BeanHomeWork> beanHomeWorks = new ArrayList<>();
-    private String TAG = getClass().getSimpleName();
-    private Context mContext;
 
     public HomeWorkParentAdapter(Context context) {
         super(context);
         Log.i(TAG, "HomeWorkParentAdapter: ");
-        mContext = context;
     }
 
     public void refreshData(List<BeanHomeWork> listHomeWorks) {
