@@ -59,7 +59,7 @@ public class CommentPActivity extends BaseListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment_p);
-        setTitle(R.string.home_honour);
+        setTitle(R.string.home_comment);
         initView();
         initDate();
     }

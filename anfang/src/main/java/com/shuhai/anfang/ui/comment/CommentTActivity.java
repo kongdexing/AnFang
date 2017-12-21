@@ -62,7 +62,7 @@ public class CommentTActivity extends BaseListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment_t);
-        setTitle(R.string.home_honour);
+        setTitle(R.string.home_comment);
         initView();
         initDate();
     }
