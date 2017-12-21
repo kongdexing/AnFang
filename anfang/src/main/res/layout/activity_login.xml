@@ -51,10 +51,9 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:background="@null"
-                        android:hint="@string/username"
+                        android:hint="@string/hint_username"
                         android:inputType="textVisiblePassword|textPersonName"
-                        android:textColor="@color/colorBlack"
-                        android:textColorHint="@color/transparent_gray"
+                        android:textColor="@color/color2"
                         android:textSize="@dimen/sp_16" />
 
                     <ImageView
@@ -94,8 +93,7 @@
                         android:background="@null"
                         android:hint="@string/userpwd"
                         android:inputType="textPassword"
-                        android:textColor="@color/colorBlack"
-                        android:textColorHint="@color/transparent_gray"
+                        android:textColor="@color/color2"
                         android:textSize="@dimen/sp_16" />
 
                     <ImageView
@@ -194,6 +192,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
+                    android:background="@drawable/btn_bg"
                     android:gravity="center"
                     android:text="登 录"
                     android:textColor="@color/colorWhite"
@@ -220,7 +219,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/forgetpwd"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/color2"
                     android:visibility="visible" />
 
                 <TextView
@@ -229,7 +228,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:text="@string/register"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/color2"
                     android:visibility="visible" />
 
             </RelativeLayout>

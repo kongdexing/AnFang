@@ -32,6 +32,7 @@ import com.shuhai.anfang.model.BeanTeacher;
 import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.push.DeviceHelper;
 import com.shuhai.anfang.ui.main.MainActivity;
+import com.shuhai.anfang.ui.register.RegisterActivity;
 import com.shuhai.anfang.util.ToastUtils;
 import com.umeng.message.IUmengCallback;
 import com.umeng.message.PushAgent;
@@ -193,7 +194,7 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
                 startActivity(new Intent(this, CheckUserActivity.class));
                 break;
             case R.id.txtRegister:
-
+                startActivity(new Intent(this, RegisterActivity.class));
                 break;
         }
     }

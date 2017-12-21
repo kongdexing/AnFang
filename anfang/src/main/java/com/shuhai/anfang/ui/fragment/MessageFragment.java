@@ -9,18 +9,23 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.hyphenate.chat.EMClient;
 import com.shuhai.anfang.R;
-import com.shuhai.anfang.ui.contact.ContactFragment;
+import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.ui.chat.ConversationListFragment;
+import com.shuhai.anfang.ui.contact.ContactFragment;
 import com.shuhai.anfang.ui.main.MainActivity;
 import com.shuhai.anfang.util.ToastUtils;
-import com.viewpagerindicator.IconPagerAdapter;
-import com.viewpagerindicator.TabPageIndicator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -32,14 +37,21 @@ public class MessageFragment extends BaseFragment {
     private Unbinder unbinder;
     @BindView(R.id.viewpager)
     ViewPager viewPager;
-    @BindView(R.id.indicator)
-    TabPageIndicator indicator;
+//    @BindView(R.id.indicator)
+//    TabPageIndicator indicator;
+
+    @BindView(R.id.llNotify)
+    LinearLayout llNotify;
+    @BindView(R.id.llContact)
+    LinearLayout llContact;
+    @BindView(R.id.rlTip)
+    RelativeLayout rlTip;
 
     private Fragment[] fragments;
     private ConversationListFragment conversationListFragment;
     private ContactFragment contactListFragment;
-    private int[] icons = new int[]{R.drawable.icon_msg_notice, R.drawable.icon_msg_contracts};
-    private int[] strings = new int[]{R.string.msg_notify, R.string.msg_contacts};
+    private int currIndex = 0;
+    private int indicatorWidth = 0;
 
     public MessageFragment() {
     }
@@ -58,10 +70,44 @@ public class MessageFragment extends BaseFragment {
         contactListFragment = new ContactFragment();
         fragments = new Fragment[]{conversationListFragment, contactListFragment};
 
-        FragmentPagerAdapter adapter = new MessageTabAdapter(((MainActivity) mContext).getSupportFragmentManager());
-        viewPager.setAdapter(adapter);
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) rlTip.getLayoutParams();
+        indicatorWidth = XPTApplication.getInstance().getWindowWidth() / 2;
+        params.width = indicatorWidth;
+        rlTip.setLayoutParams(params);
 
-        indicator.setViewPager(viewPager);
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                Animation animation = null;
+                switch (position) {
+                    case 0:
+                        animation = new TranslateAnimation(indicatorWidth, 0, 0, 0);
+                        break;
+                    case 1:
+                        animation = new TranslateAnimation(0, indicatorWidth, 0, 0);
+                        break;
+                }
+                currIndex = position;
+                animation.setFillAfter(true);// True:图片停在动画结束位置
+                animation.setDuration(300);
+                rlTip.startAnimation(animation);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        FragmentPagerAdapter adapter = new MyPagerAdapter(((MainActivity) mContext).getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
+        viewPager.setCurrentItem(0);
 
         if (!EMClient.getInstance().isLoggedInBefore()) {
             //login
@@ -71,8 +117,24 @@ public class MessageFragment extends BaseFragment {
         }
     }
 
-    class MessageTabAdapter extends FragmentPagerAdapter implements IconPagerAdapter {
-        public MessageTabAdapter(FragmentManager fm) {
+    @OnClick({R.id.llNotify, R.id.llContact})
+    void tipViewClick(View view) {
+        switch (view.getId()) {
+            case R.id.llNotify:
+                currIndex = 0;
+                viewPager.setCurrentItem(0);
+                break;
+            case R.id.llContact:
+                currIndex = 1;
+                viewPager.setCurrentItem(1);
+                break;
+
+        }
+    }
+
+    class MyPagerAdapter extends FragmentPagerAdapter {
+
+        public MyPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
@@ -82,18 +144,8 @@ public class MessageFragment extends BaseFragment {
         }
 
         @Override
-        public CharSequence getPageTitle(int position) {
-            return getString(strings[position]);
-        }
-
-        @Override
-        public int getIconResId(int index) {
-            return icons[index];
-        }
-
-        @Override
         public int getCount() {
-            return strings.length;
+            return fragments.length;
         }
     }
 

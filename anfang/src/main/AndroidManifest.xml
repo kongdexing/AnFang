@@ -245,9 +245,9 @@
         <activity android:name=".ui.course.CourseActivity" />
         <activity android:name=".ui.course.CourseTActivity" />
 
-        <!--评语-->
-        <activity android:name=".ui.comment.CommentPActivity"></activity>
-        <activity android:name=".ui.comment.CommentTActivity"></activity>
+        <!-- 评语 -->
+        <activity android:name=".ui.comment.CommentPActivity" />
+        <activity android:name=".ui.comment.CommentTActivity" />
 
         <!-- 荣誉墙 -->
         <activity android:name=".ui.honor.HonorPActivity" />
@@ -498,6 +498,7 @@
         <!-- android:name="com.baidu.lbsapi.API_KEY" -->
         <!-- android:value="3ecea51f560650b1ed8a4b99808f52e8" /> -->
 
+        <activity android:name=".ui.register.RegisterActivity"></activity>
     </application>
 
 </manifest>

@@ -46,7 +46,7 @@ public class XPTApplication extends Application {
     public static final String MZ_APP_ID = "111065";
     public static final String MZ_APP_KEY = "5e44c6c91687442091c945f29c888b18";
     //bugly
-    public static final String APP_ID = "3e1429a7a5"; // TODO bugly上注册的appid
+    public static final String APP_ID = "b874e11623"; // TODO bugly上注册的appid
     private static XPTApplication mInstance;
 
     public static final String WXAPP_ID = "wx1af4f660ce9e6b37";
@@ -140,7 +140,7 @@ public class XPTApplication extends Application {
         Beta.showInterruptedStrategy = true;
         Beta.canShowUpgradeActs.add(MainActivity.class);
         Beta.autoDownloadOnWifi = false;
-        Bugly.init(this, APP_ID, false);
+        Bugly.init(this, APP_ID, true);
     }
 
     // Initialize the image loader stratetry

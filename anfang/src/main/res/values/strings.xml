@@ -18,10 +18,15 @@
     <string name="nav_mine">我的</string>
 
     <string name="username">用户名</string>
-    <string name="hint_username">请输入用户名</string>
+    <string name="hint_username">请输入登录名/手机号</string>
     <string name="userpwd">密码</string>
+    <string name="hint_userpwd">请输入密码</string>
+    <string name="hint_nickname">请输入用户名</string>
+
     <string name="forgetpwd"><u>忘记密码</u></string>
     <string name="register"><u>新用户注册</u></string>
+    <string name="title_register">注册</string>
+
 
     <string name="login">登录</string>
     <string name="login_failed">登录失败</string>
@@ -160,6 +165,8 @@
     <string name="hint_question_content">请输入提问内容</string>
     <string name="hint_contract_name">联系人</string>
     <string name="hint_phone">请输入手机号</string>
+
+
     <string name="input_error_phone">手机号格式不正确</string>
     <string name="label_fence_name">围栏名称</string>
     <string name="input_fence_name">请输入围栏名称</string>

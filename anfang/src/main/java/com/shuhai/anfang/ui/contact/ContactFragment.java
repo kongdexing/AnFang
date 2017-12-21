@@ -128,7 +128,7 @@ public class ContactFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-        Log.i(TAG, "initData: "+XPTApplication.getInstance().getCurrent_user_type().toString());
+        Log.i(TAG, "initData: "+XPTApplication.getInstance().getCurrent_user_type());
         //判断老师家长
         if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
             ArrayList<Object> listTeacher = (ArrayList) GreenDaoHelper.getInstance().getContactTeacher();

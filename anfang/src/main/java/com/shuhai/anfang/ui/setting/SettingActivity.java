@@ -6,12 +6,15 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shuhai.anfang.BuildConfig;
 import com.shuhai.anfang.R;
+import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.common.ExtraKey;
+import com.shuhai.anfang.common.UserType;
 import com.shuhai.anfang.model.BeanStudent;
 import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.ui.main.BaseActivity;
@@ -19,6 +22,7 @@ import com.shuhai.anfang.ui.main.WebViewActivity;
 import com.tencent.bugly.beta.Beta;
 
 import java.util.List;
+import java.util.logging.XMLFormatter;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -27,6 +31,8 @@ public class SettingActivity extends BaseActivity {
 
     @BindView(R.id.txtVersion)
     TextView txtVersion;
+    @BindView(R.id.rltutelage)
+    RelativeLayout rltutelage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +47,13 @@ public class SettingActivity extends BaseActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+            rltutelage.setVisibility(View.VISIBLE);
+        } else {
+            rltutelage.setVisibility(View.GONE);
+        }
+
     }
 
     @OnClick({R.id.rlChangePwd, R.id.rlTel, R.id.rlUpdate, R.id.rltutelage, R.id.rlHelp})

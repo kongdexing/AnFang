@@ -21,7 +21,7 @@
             android:layout_centerVertical="true"
             android:lines="1"
             android:text="@string/nav_message"
-            android:textColor="@android:color/white"
+            android:textColor="@color/color2"
             android:textSize="@dimen/sp_18" />
     </RelativeLayout>
 
@@ -30,92 +30,101 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!--通知，互动，通讯录-->
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:visibility="gone">
+            android:layout_height="wrap_content">
 
+            <!--通知，互动，通讯录-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/mine_item_selector"
-                android:clickable="true"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="@dimen/dp_10">
+                android:layout_height="@dimen/dp_60"
+                android:orientation="horizontal"
+                android:visibility="visible">
 
-                <ImageView
-                    android:layout_width="@dimen/dp_40"
-                    android:layout_height="@dimen/dp_40"
-                    android:background="@drawable/icon_msg_notice" />
-
-                <TextView
+                <LinearLayout
+                    android:id="@+id/llNotify"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/dp_5"
+                    android:layout_weight="1"
+                    android:background="@drawable/mine_item_selector"
+                    android:clickable="true"
                     android:gravity="center"
-                    android:text="@string/msg_notify" />
+                    android:orientation="vertical"
+                    android:padding="@dimen/dp_5">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_25"
+                        android:layout_height="@dimen/dp_25"
+                        android:background="@drawable/icon_msg_notice" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/dp_3"
+                        android:gravity="center"
+                        android:textSize="@dimen/sp_14"
+                        android:text="@string/msg_notify" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/mine_item_selector"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/dp_10"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_35"
+                        android:layout_height="@dimen/dp_35"
+                        android:background="@drawable/icon_msg_interact" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:gravity="center"
+                        android:text="@string/msg_interact" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llContact"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/mine_item_selector"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="@dimen/dp_5">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_25"
+                        android:layout_height="@dimen/dp_25"
+                        android:background="@drawable/icon_msg_contracts" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/dp_3"
+                        android:gravity="center"
+                        android:textSize="@dimen/sp_14"
+                        android:text="@string/msg_contacts" />
+                </LinearLayout>
+
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
+                android:id="@+id/rlTip"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/mine_item_selector"
-                android:clickable="true"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="@dimen/dp_10">
+                android:layout_height="@dimen/dp_60"
+                android:background="@color/transparent_gray_map"/>
 
-                <ImageView
-                    android:layout_width="@dimen/dp_40"
-                    android:layout_height="@dimen/dp_40"
-                    android:background="@drawable/icon_msg_interact" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/dp_5"
-                    android:gravity="center"
-                    android:text="@string/msg_interact" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/mine_item_selector"
-                android:clickable="true"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="@dimen/dp_10">
-
-                <ImageView
-                    android:layout_width="@dimen/dp_40"
-                    android:layout_height="@dimen/dp_40"
-                    android:background="@drawable/icon_msg_contracts" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/dp_5"
-                    android:gravity="center"
-                    android:text="@string/msg_contacts" />
-            </LinearLayout>
-
-        </LinearLayout>
-
+        </FrameLayout>
         <!--最近聊天记录-->
-        <com.viewpagerindicator.TabPageIndicator
-            android:id="@+id/indicator"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/color_black_3"
-            android:textSize="@dimen/sp_16" />
-
         <android.support.v4.view.ViewPager
             android:id="@+id/viewpager"
             android:layout_width="match_parent"

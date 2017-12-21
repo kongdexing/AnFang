@@ -23,7 +23,7 @@
                 android:layout_centerVertical="true"
                 android:lines="1"
                 android:text="@string/nav_location"
-                android:textColor="@android:color/white"
+                android:textColor="@color/color2"
                 android:textSize="@dimen/sp_18" />
         </RelativeLayout>
 
@@ -41,7 +41,7 @@
                 android:gravity="center"
                 android:maxLines="2"
                 android:text="开始日期"
-                android:textColor="@color/text_black"
+                android:textColor="@color/color2"
                 android:textSize="@dimen/sp_14" />
 
             <View
@@ -60,7 +60,7 @@
                 android:gravity="center"
                 android:maxLines="2"
                 android:text="结束日期"
-                android:textColor="@color/text_black"
+                android:textColor="@color/color2"
                 android:textSize="@dimen/sp_14" />
 
             <View
@@ -97,7 +97,7 @@
                     app:ms_dropdown_height="wrap_content"
                     app:ms_dropdown_max_height="@dimen/dp_350"
                     app:ms_dropdown_width="match_parent"
-                    app:ms_text_color="@color/text_black"
+                    app:ms_text_color="@color/color2"
                     app:ms_text_size="@dimen/sp_int_14" />
 
             </LinearLayout>

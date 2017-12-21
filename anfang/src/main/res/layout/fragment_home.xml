@@ -90,7 +90,6 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_3"
-                    android:background="@color/white"
                     android:horizontalSpacing="@dimen/dp_1"
                     android:listSelector="@null"
                     android:numColumns="4"
@@ -174,7 +173,6 @@
                         android:id="@+id/grd_school_shop"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/white"
                         android:horizontalSpacing="@dimen/dp_1"
                         android:listSelector="@null"
                         android:numColumns="3"
@@ -223,7 +221,7 @@
             android:layout_centerVertical="true"
             android:lines="1"
             android:text="@string/nav_home"
-            android:textColor="@android:color/white"
+            android:textColor="@color/color2"
             android:textSize="@dimen/sp_18" />
     </RelativeLayout>
 </RelativeLayout>
