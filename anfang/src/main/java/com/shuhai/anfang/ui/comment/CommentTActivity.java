@@ -17,6 +17,7 @@ import com.android.widget.view.LoadMoreRecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.shuhai.anfang.R;
+import com.shuhai.anfang.bean.BeanComment;
 import com.shuhai.anfang.bean.BeanHonor;
 import com.shuhai.anfang.common.CommonUtil;
 import com.shuhai.anfang.http.HttpAction;
@@ -131,7 +132,7 @@ public class CommentTActivity extends BaseListActivity {
     private void getFirstPageData() {
         flTransparent.setVisibility(View.GONE);
         resultPage.setPage(1);
-//        adapter.refreshData(new ArrayList<BeanHonor>());
+        adapter.refreshData(new ArrayList<BeanComment>());
         getCommentList();
     }
 
@@ -173,21 +174,21 @@ public class CommentTActivity extends BaseListActivity {
                                         recyclerView.setAutoLoadMoreEnable(false);
                                     }
 
-                                    List<BeanHonor> honors = new ArrayList<>();
+                                    List<BeanComment> honors = new ArrayList<>();
                                     Gson gson = new Gson();
-                                    honors = gson.fromJson(jsonObject.getJSONArray("content").toString(), new TypeToken<List<BeanHonor>>() {
+                                    honors = gson.fromJson(jsonObject.getJSONArray("content").toString(), new TypeToken<List<BeanComment>>() {
                                     }.getType());
 
-//                                    if (resultPage.getPage() > 1) {
-//                                        adapter.appendData(honors);
-//                                    } else {
-//                                        //第一页数据
-//                                        if (honors.size() == 0) {
-//                                            Toast.makeText(HonorTActivity.this, R.string.toast_data_empty, Toast.LENGTH_SHORT).show();
-//                                        }
-//                                        recyclerView.removeAllViews();
-//                                        adapter.refreshData(honors);
-//                                    }
+                                    if (resultPage.getPage() > 1) {
+                                        adapter.appendData(honors);
+                                    } else {
+                                        //第一页数据
+                                        if (honors.size() == 0) {
+                                            Toast.makeText(CommentTActivity.this, R.string.toast_data_empty, Toast.LENGTH_SHORT).show();
+                                        }
+                                        recyclerView.removeAllViews();
+                                        adapter.refreshData(honors);
+                                    }
                                     recyclerView.notifyMoreFinish(resultPage.getTotal_page() > resultPage.getPage());
                                 } catch (Exception ex) {
                                     Log.i(TAG, "onResponse: " + ex.getMessage());

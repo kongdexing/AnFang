@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_40"
-        android:background="@color/colorWhite">
+        android:background="@color/color3">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,7 +24,7 @@
             app:ms_dropdown_height="wrap_content"
             app:ms_dropdown_max_height="@dimen/dp_350"
             app:ms_dropdown_width="match_parent"
-            app:ms_text_color="@color/text_black"
+            app:ms_text_color="@color/color1"
             app:ms_text_size="@dimen/sp_int_14" />
         </LinearLayout>
         <View
@@ -32,7 +32,7 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/dp_5"
             android:layout_marginTop="@dimen/dp_5"
-            android:background="@color/text_grey" />
+            android:background="@color/color2" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -48,7 +48,7 @@
                 app:ms_dropdown_height="wrap_content"
                 app:ms_dropdown_max_height="@dimen/dp_350"
                 app:ms_dropdown_width="match_parent"
-                app:ms_text_color="@color/text_black"
+                app:ms_text_color="@color/color1"
                 app:ms_text_size="@dimen/sp_int_14" />
 
         </LinearLayout>
@@ -57,7 +57,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/text_grey" />
+        android:background="@color/color1" />
 
     <FrameLayout
         android:layout_width="match_parent"
