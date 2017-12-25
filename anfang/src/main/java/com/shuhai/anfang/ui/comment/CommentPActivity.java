@@ -26,6 +26,7 @@ import com.shuhai.anfang.model.BeanClass;
 import com.shuhai.anfang.model.BeanStudent;
 import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.ui.main.BaseListActivity;
+import com.shuhai.anfang.util.TeacherUtil;
 
 import org.json.JSONObject;
 
@@ -52,9 +53,6 @@ public class CommentPActivity extends BaseListActivity {
     FrameLayout flTransparent;
 
     CommentAdapter adapter;
-    //循序固定，勿乱动
-    private static final String[] commentType = {"全部", "平时评语", "每周评语", "每月评语", "期中评语", "期末评语"};
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +101,7 @@ public class CommentPActivity extends BaseListActivity {
         });
         spnStudents.setOnNothingSelectedListener(spinnerNothingSelectedListener);
 
-        spnType.setItems(commentType);
+        spnType.setItems(TeacherUtil.commentType);
         spnType.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {

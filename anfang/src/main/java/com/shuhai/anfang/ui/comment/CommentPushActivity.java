@@ -1,7 +1,6 @@
-package com.shuhai.anfang.ui.honor;
+package com.shuhai.anfang.ui.comment;
 
 import android.graphics.drawable.BitmapDrawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -16,7 +15,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
-import com.android.volley.common.VolleyRequestListener;
 import com.android.widget.spinner.MaterialSpinner;
 import com.shuhai.anfang.R;
 import com.shuhai.anfang.XPTApplication;
@@ -35,13 +33,13 @@ import com.shuhai.anfang.util.ToastUtils;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class HonorPushActivity extends BaseActivity {
+public class CommentPushActivity extends BaseActivity {
 
     @BindView(R.id.spnClasses)
     MaterialSpinner spnClasses;
 
-    @BindView(R.id.spnHonorType)
-    MaterialSpinner spnHonorType;
+    @BindView(R.id.spnCommentType)
+    MaterialSpinner spnCommentType;
 
     @BindView(R.id.txtStudent)
     TextView txtStudent;
@@ -62,9 +60,9 @@ public class HonorPushActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_honor_push);
+        setContentView(R.layout.activity_comment_push);
 
-        setTitle(R.string.title_honor_push);
+        setTitle(R.string.title_comment_push);
 
         initView();
         initData();
@@ -84,7 +82,7 @@ public class HonorPushActivity extends BaseActivity {
                 currentClass = item;
             }
         });
-        spnHonorType.setItems(TeacherUtil.honorType);
+        spnCommentType.setItems(TeacherUtil.commentType);
     }
 
     @OnClick({R.id.txtStudent, R.id.btnSubmit})
@@ -106,18 +104,17 @@ public class HonorPushActivity extends BaseActivity {
                     ToastUtils.showToast(this, R.string.hint_choose_student);
                     return;
                 }
-                //荣誉类型
-                if (spnHonorType.getSelectedIndex() == 0) {
-                    ToastUtils.showToast(this, R.string.toast_honor_type_empty);
+                //评语类型
+                if (spnCommentType.getSelectedIndex() == 0) {
+                    ToastUtils.showToast(this, R.string.toast_comment_type_empty);
                     return;
                 }
                 String content = edtContent.getText().toString().trim();
                 if (content.isEmpty()) {
-                    ToastUtils.showToast(this, R.string.hint_honor_content);
+                    ToastUtils.showToast(this, R.string.hint_comment_content);
                     return;
                 }
-
-                addHonor(content);
+                addComment(content);
                 break;
         }
     }
@@ -164,23 +161,23 @@ public class HonorPushActivity extends BaseActivity {
         studentPopup.showAtLocation(txtStudent, Gravity.BOTTOM, 0, 0);
     }
 
-    private void addHonor(String content) {
+    private void addComment(String content) {
 
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Honor_edit,
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Remark_edit,
                 new VolleyHttpParamsEntity()
                         .addParam("stu_id", currentStudent.getStu_id())
                         .addParam("s_id", GreenDaoHelper.getInstance().getCurrentTeacher().getS_id())
                         .addParam("a_id", GreenDaoHelper.getInstance().getCurrentTeacher().getA_id())
                         .addParam("g_id", currentClass.getG_id())
                         .addParam("c_id", currentClass.getC_id())
-                        .addParam("reward_type", spnHonorType.getSelectedIndex() + "")
-                        .addParam("reward_details", content)
-                        .addParam("token", CommonUtil.encryptToken(HttpAction.Honor_edit))
+                        .addParam("r_type", spnCommentType.getSelectedIndex() + "")
+                        .addParam("content", content)
+                        .addParam("token", CommonUtil.encryptToken(HttpAction.Remark_edit))
                 , new MyVolleyRequestListener() {
                     @Override
                     public void onStart() {
                         super.onStart();
-                        showProgress("正在发布荣誉...");
+                        showProgress("正在发布评语...");
                     }
 
                     @Override
@@ -189,11 +186,11 @@ public class HonorPushActivity extends BaseActivity {
                         hideProgress();
                         switch (volleyHttpResult.getStatus()) {
                             case HttpAction.SUCCESS:
-                                ToastUtils.showToast(HonorPushActivity.this, "发布成功");
+                                ToastUtils.showToast(CommentPushActivity.this, "发布成功");
                                 finish();
                                 break;
                             default:
-                                ToastUtils.showToast(HonorPushActivity.this, "发布失败");
+                                ToastUtils.showToast(CommentPushActivity.this, "发布失败");
                                 break;
                         }
                     }
@@ -202,7 +199,7 @@ public class HonorPushActivity extends BaseActivity {
                     public void onErrorResponse(VolleyError volleyError) {
                         super.onErrorResponse(volleyError);
                         hideProgress();
-                        ToastUtils.showToast(HonorPushActivity.this, "发布失败");
+                        ToastUtils.showToast(CommentPushActivity.this, "发布失败");
                     }
                 });
     }

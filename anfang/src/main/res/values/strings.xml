@@ -129,12 +129,16 @@
     <string name="label_leave_del">删除</string>
 
     <!--评语|荣誉-->
+    <string name="title_comment_push">发布评语</string>
     <string name="title_honor_push">发布荣誉</string>
+
     <string name="label_honor_type">荣誉类型:</string>
     <string name="toast_honor_type_empty">请选择荣誉类型</string>
 
     <string name="label_comment_type">评语类型:</string>
+    <string name="toast_comment_type_empty">请选择评语类型</string>
     <string name="hint_honor_content">请输入荣誉内容</string>
+    <string name="hint_comment_content">请输入评语内容</string>
     <string name="hint_choose_student">请选择学生</string>
 
     <string name="label_teacher">教师：</string>

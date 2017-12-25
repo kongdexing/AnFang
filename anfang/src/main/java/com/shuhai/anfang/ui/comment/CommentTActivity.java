@@ -1,5 +1,6 @@
 package com.shuhai.anfang.ui.comment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -24,9 +25,11 @@ import com.shuhai.anfang.http.HttpAction;
 import com.shuhai.anfang.http.MyVolleyRequestListener;
 import com.shuhai.anfang.model.BeanClass;
 import com.shuhai.anfang.model.GreenDaoHelper;
+import com.shuhai.anfang.ui.honor.HonorPushActivity;
 import com.shuhai.anfang.ui.honor.HonorTActivity;
 import com.shuhai.anfang.ui.honor.HonorTAdapter;
 import com.shuhai.anfang.ui.main.BaseListActivity;
+import com.shuhai.anfang.util.TeacherUtil;
 
 import org.json.JSONObject;
 
@@ -56,8 +59,6 @@ public class CommentTActivity extends BaseListActivity {
     FrameLayout flTransparent;
 
     CommentAdapter adapter;
-    //循序固定，勿乱动
-    private static final String[] commentType = {"全部", "平时评语", "每周评语", "每月评语", "期中评语", "期末评语"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +89,14 @@ public class CommentTActivity extends BaseListActivity {
             }
         });
         recyclerView.setAdapter(adapter);
+
+        setTxtRight(R.string.push);
+        setTextRightClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CommentTActivity.this, CommentPushActivity.class));
+            }
+        });
     }
 
     public void initDate() {
@@ -101,7 +110,7 @@ public class CommentTActivity extends BaseListActivity {
         });
         spnClass.setOnNothingSelectedListener(spinnerNothingSelectedListener);
 
-        spnType.setItems(commentType);
+        spnType.setItems(TeacherUtil.commentType);
         spnType.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {

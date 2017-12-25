@@ -250,6 +250,11 @@
         <!-- 评语 -->
         <activity android:name=".ui.comment.CommentPActivity" />
         <activity android:name=".ui.comment.CommentTActivity" />
+        <activity
+            android:name=".ui.comment.CommentPushActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
 
         <!-- 荣誉墙 -->
         <activity android:name=".ui.honor.HonorPActivity" />

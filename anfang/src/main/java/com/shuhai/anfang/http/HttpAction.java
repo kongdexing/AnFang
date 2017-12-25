@@ -69,7 +69,8 @@ public class HttpAction {
 
     //评语查询
     public static String Remark_query = HEAD + "Remark/query";
-    
+    public static String Remark_edit = HEAD + "Remark/edit";
+
 
     //报警记录
     public static String Track_alarm = HEAD + "Track/alarmRecord_v1_0_1";
