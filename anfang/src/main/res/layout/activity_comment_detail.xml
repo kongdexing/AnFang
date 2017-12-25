@@ -28,19 +28,14 @@
                     style="@style/mineText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="top"
                     android:text="@string/label_class" />
 
-                <com.android.widget.spinner.MaterialSpinner
-                    android:id="@+id/spnClasses"
+                <TextView
+                    android:id="@+id/txtClassName"
+                    style="@style/mineText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:ms_dropdown_height="wrap_content"
-                    app:ms_dropdown_max_height="@dimen/dp_350"
-                    app:ms_dropdown_width="wrap_content"
-                    app:ms_padding_left="@dimen/dp_5"
-                    app:ms_text_color="@color/text_black"
-                    app:ms_text_size="@dimen/sp_int_16" />
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_5" />
 
             </LinearLayout>
 
@@ -62,8 +57,7 @@
                     style="@style/mineText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/dp_5"
-                    android:text="@string/hint_choose_student" />
+                    android:padding="@dimen/dp_5" />
             </LinearLayout>
 
             <LinearLayout
@@ -100,18 +94,14 @@
                     style="@style/mineText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/label_honor_type" />
+                    android:text="@string/label_comment_type" />
 
-                <com.android.widget.spinner.MaterialSpinner
-                    android:id="@+id/spnHonorType"
+                <TextView
+                    android:id="@+id/txtType"
+                    style="@style/mineText"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:ms_dropdown_height="wrap_content"
-                    app:ms_dropdown_max_height="@dimen/dp_350"
-                    app:ms_dropdown_width="wrap_content"
-                    app:ms_padding_left="@dimen/dp_5"
-                    app:ms_text_color="@color/text_black"
-                    app:ms_text_size="@dimen/sp_int_16" />
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_5" />
             </LinearLayout>
 
             <RelativeLayout
@@ -121,22 +111,21 @@
                 android:background="@color/colorWhite">
 
                 <TextView
-                    android:id="@+id/txtContent"
+                    android:id="@+id/titleContent"
                     style="@style/mineText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/label_content" />
 
-                <EditText
-                    android:id="@+id/edtContent"
+                <TextView
+                    android:id="@+id/txtContent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/dp_10"
-                    android:layout_toRightOf="@+id/txtContent"
+                    android:layout_toRightOf="@+id/titleContent"
                     android:background="@null"
                     android:gravity="top|left"
-                    android:hint="@string/hint_honor_content"
                     android:maxLength="500"
                     android:minLines="5"
                     android:paddingTop="@dimen/dp_10"
@@ -145,19 +134,6 @@
                     android:textColorHint="@color/text_grey"
                     android:textSize="@dimen/sp_16" />
             </RelativeLayout>
-
-            <Button
-                android:id="@+id/btnSubmit"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_40"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginTop="@dimen/dp_10"
-                android:background="@drawable/btn_bg_normal"
-                android:padding="@dimen/dp_5"
-                android:text="@string/push"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/sp_18" />
 
             <Button
                 android:id="@+id/btnDelete"
@@ -172,7 +148,7 @@
                 android:text="@string/btn_delete"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/sp_18"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
         </LinearLayout>
     </ScrollView>

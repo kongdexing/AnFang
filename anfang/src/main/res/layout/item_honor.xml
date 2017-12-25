@@ -92,6 +92,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
+                    android:maxLines="3"
                     android:text="1.akdjad\n2.全文阿斯顿发生是的法师打发手动阀手动阀阿斯蒂芬阿斯蒂芬阿斯蒂芬阿斯蒂芬阿斯蒂芬阿斯顿发生分背诵\nsdf"
                     android:textColor="@color/color_black_3"
                     android:textSize="@dimen/sp_16" />

@@ -6,6 +6,8 @@ public class ExtraKey {
     public static final String LOGIN_ORIGIN = "origin";
     public static final String HOMEWORK_DETAIL = "homework";
     public static final String NOTICE_DETAIL = "notice";
+    public static final String COMMENT_DETAIL = "comment";
+
     public static final String QUESTION = "question";
     public static final String CLASS_ID = "class_id";
     public static final String STUDENT_ID = "student";
@@ -22,9 +24,6 @@ public class ExtraKey {
     public static final String WEB_TITLE = "web_title";
     public static final String LEARNING_MODEL = "learning_model";
 
-    public static final String CHAT_TEACHER = "chat_teacher";
 
-    public final static String EXTRAT_SIP_SESSION_ID = "SipSession";
-    public final static String EXTRAT_TEACHER_ID = "Teacher";
-    public final static String EXTRAT_CALL_TYPE = "Call_Type";
+
 }

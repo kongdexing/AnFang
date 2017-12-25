@@ -130,7 +130,10 @@
 
     <!--评语|荣誉-->
     <string name="title_comment_push">发布评语</string>
+    <string name="title_comment_detail">评语详情</string>
+
     <string name="title_honor_push">发布荣誉</string>
+    <string name="title_honor_detail">荣誉详情</string>
 
     <string name="label_honor_type">荣誉类型:</string>
     <string name="toast_honor_type_empty">请选择荣誉类型</string>

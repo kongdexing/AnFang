@@ -1,10 +1,13 @@
 package com.shuhai.anfang.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by shuhaixinxi on 2017/12/22.
  */
 //老师评语
-public class BeanComment {
+public class BeanComment implements Parcelable{
 
     private String g_id;
     private String c_id;
@@ -123,4 +126,58 @@ public class BeanComment {
     public void setStu_name(String stu_name) {
         this.stu_name = stu_name;
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.g_id);
+        dest.writeString(this.c_id);
+        dest.writeString(this.r_id);
+        dest.writeString(this.stu_id);
+        dest.writeString(this.user_id);
+        dest.writeString(this.r_type);
+        dest.writeString(this.content);
+        dest.writeString(this.create_time);
+        dest.writeString(this.modify_time);
+        dest.writeString(this.c_name);
+        dest.writeString(this.g_name);
+        dest.writeString(this.user_name);
+        dest.writeString(this.stu_name);
+    }
+
+    public BeanComment() {
+    }
+
+    protected BeanComment(Parcel in) {
+        this.g_id = in.readString();
+        this.c_id = in.readString();
+        this.r_id = in.readString();
+        this.stu_id = in.readString();
+        this.user_id = in.readString();
+        this.r_type = in.readString();
+        this.content = in.readString();
+        this.create_time = in.readString();
+        this.modify_time = in.readString();
+        this.c_name = in.readString();
+        this.g_name = in.readString();
+        this.user_name = in.readString();
+        this.stu_name = in.readString();
+    }
+
+    public static final Creator<BeanComment> CREATOR = new Creator<BeanComment>() {
+        @Override
+        public BeanComment createFromParcel(Parcel source) {
+            return new BeanComment(source);
+        }
+
+        @Override
+        public BeanComment[] newArray(int size) {
+            return new BeanComment[size];
+        }
+    };
 }

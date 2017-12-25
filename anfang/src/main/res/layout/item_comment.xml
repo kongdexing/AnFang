@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/llNoticeItem"
+    android:id="@+id/llItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/touch_bg"
@@ -33,8 +33,8 @@
                     android:id="@+id/txtTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@+id/imgArrow"
                     android:layout_marginRight="@dimen/dp_5"
+                    android:layout_toLeftOf="@+id/imgArrow"
                     android:text="20160612"
                     android:textColor="@color/color_black_3"
                     android:textSize="@dimen/sp_16" />
@@ -47,7 +47,7 @@
                     android:layout_marginRight="@dimen/dp_10"
                     android:background="@drawable/arrow_left_down"
                     android:padding="@dimen/dp_10"
-                    android:visibility="invisible"/>
+                    android:visibility="invisible" />
             </RelativeLayout>
 
             <LinearLayout
@@ -92,6 +92,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
+                    android:maxLines="3"
                     android:text="1.akdjad\n2.全文阿斯顿发生是的法师打发手动阀手动阀阿斯蒂芬阿斯蒂芬阿斯蒂芬阿斯蒂芬阿斯蒂芬阿斯顿发生分背诵\nsdf"
                     android:textColor="@color/color_black_3"
                     android:textSize="@dimen/sp_16" />

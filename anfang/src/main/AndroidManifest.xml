@@ -163,7 +163,6 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateVisible" />
         <activity android:name=".ui.register.RegisterActivity" />
-
         <activity android:name=".ui.setting.SettingActivity" />
         <activity android:name=".ui.setting.ChangePwdActivity" />
         <activity android:name=".ui.setting.TutelageActivity" />
@@ -254,7 +253,8 @@
             android:name=".ui.comment.CommentPushActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name=".ui.comment.CommentDetailActivity"></activity>
 
         <!-- 荣誉墙 -->
         <activity android:name=".ui.honor.HonorPActivity" />
@@ -263,7 +263,7 @@
             android:name=".ui.honor.HonorPushActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
         <!-- 我的班级 -->
         <activity android:name=".ui.mine.MyClassesActivity" />
