@@ -48,7 +48,6 @@ public class StudentPopupWindowView extends LinearLayout {
         llStudent = (LinearLayout) view.findViewById(R.id.llStudent);
         indicator = (CirclePageIndicator) view.findViewById(R.id.indicator);
         viewPager = (ViewPager) view.findViewById(R.id.studentPager);
-        initData();
     }
 
     public void initData() {
@@ -64,9 +63,19 @@ public class StudentPopupWindowView extends LinearLayout {
         indicator.setCurrentItem(0);
     }
 
-    public void setMyGridViewClickListener(StudentAdapter.MyGridViewClickListener listener){
+    public void getStudentByClass(BeanClass beanClass) {
+        mViews = new ArrayList<>();
+        AllStudentsView view = new AllStudentsView(mContext);
+        view.getStudentByClassId(beanClass);
+        mViews.add(view);
+        viewPager.setAdapter(new StudentFragmentAdapter());
+        indicator.setViewPager(viewPager);
+        indicator.setCurrentItem(0);
+    }
+
+    public void setMyGridViewClickListener(StudentAdapter.MyGridViewClickListener listener) {
         for (int i = 0; i < mViews.size(); i++) {
-            ((AllStudentsView)mViews.get(i)).setGrdvStudentOnClickListener(listener);
+            ((AllStudentsView) mViews.get(i)).setGrdvStudentOnClickListener(listener);
         }
     }
 

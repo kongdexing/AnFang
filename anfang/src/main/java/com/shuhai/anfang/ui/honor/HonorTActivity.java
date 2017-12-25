@@ -30,6 +30,7 @@ import com.shuhai.anfang.ui.homework.HomeWorkDetailTeacherActivity;
 import com.shuhai.anfang.ui.homework.HomeWorkTeacherActivity;
 import com.shuhai.anfang.ui.homework.HomeWorkTeacherAdapter;
 import com.shuhai.anfang.ui.main.BaseListActivity;
+import com.shuhai.anfang.util.TeacherUtil;
 
 import org.json.JSONObject;
 
@@ -59,8 +60,6 @@ public class HonorTActivity extends BaseListActivity {
     FrameLayout flTransparent;
 
     HonorTAdapter adapter;
-    //循序固定，勿乱动
-    private static final String[] honorType = {"全部", "班级奖励", "年级奖励", "校级奖励", "市级奖励", "省级奖励", "国家奖励"};
 
 
     @Override
@@ -92,6 +91,15 @@ public class HonorTActivity extends BaseListActivity {
             }
         });
         recyclerView.setAdapter(adapter);
+
+        setTxtRight(R.string.push);
+        setTextRightClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HonorTActivity.this,HonorPushActivity.class));
+            }
+        });
+
     }
 
     public void initDate() {
@@ -105,7 +113,7 @@ public class HonorTActivity extends BaseListActivity {
         });
         spnClass.setOnNothingSelectedListener(spinnerNothingSelectedListener);
 
-        spnHonorType.setItems(honorType);
+        spnHonorType.setItems(TeacherUtil.honorType);
         spnHonorType.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {

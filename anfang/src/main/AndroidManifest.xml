@@ -162,6 +162,8 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity android:name=".ui.register.RegisterActivity" />
+
         <activity android:name=".ui.setting.SettingActivity" />
         <activity android:name=".ui.setting.ChangePwdActivity" />
         <activity android:name=".ui.setting.TutelageActivity" />
@@ -252,6 +254,11 @@
         <!-- 荣誉墙 -->
         <activity android:name=".ui.honor.HonorPActivity" />
         <activity android:name=".ui.honor.HonorTActivity" />
+        <activity
+            android:name=".ui.honor.HonorPushActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
 
         <!-- 我的班级 -->
         <activity android:name=".ui.mine.MyClassesActivity" />
@@ -498,7 +505,6 @@
         <!-- android:name="com.baidu.lbsapi.API_KEY" -->
         <!-- android:value="3ecea51f560650b1ed8a4b99808f52e8" /> -->
 
-        <activity android:name=".ui.register.RegisterActivity"></activity>
     </application>
 
 </manifest>

@@ -27,6 +27,7 @@ import com.shuhai.anfang.model.BeanStudent;
 import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.ui.homework.HomeWorkParentAdapter;
 import com.shuhai.anfang.ui.main.BaseListActivity;
+import com.shuhai.anfang.util.TeacherUtil;
 
 import org.json.JSONObject;
 
@@ -54,9 +55,6 @@ public class HonorPActivity extends BaseListActivity {
     FrameLayout flTransparent;
 
     HonorTAdapter adapter;
-    //循序固定，勿乱动
-    private static final String[] honorType = {"全部", "班级奖励", "年级奖励", "校级奖励", "市级奖励", "省级奖励", "国家奖励"};
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +103,7 @@ public class HonorPActivity extends BaseListActivity {
         });
         spnStudents.setOnNothingSelectedListener(spinnerNothingSelectedListener);
 
-        spnHonorType.setItems(honorType);
+        spnHonorType.setItems(TeacherUtil.honorType);
         spnHonorType.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {

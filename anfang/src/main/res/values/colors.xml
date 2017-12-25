@@ -21,9 +21,9 @@
     <color name="colorRed_def">#d71345</color>
     <color name="colorRed_pre">#d93a49</color>
     <color name="translucent">#00000000</color>
-    <color name="window_bg">#333b3f</color>
+    <color name="window_bg">@color/white</color>
     <color name="colorUserName">#9298AC</color>
-    <color name="bg_window">@color/color3</color>
+    <color name="bg_window">@color/white</color>
     <color name="transparent_gray">#60000000</color>
     <color name="transparent_gray_map">#10000000</color>
     <color name="color_refresh_reload">#6fbce6</color>

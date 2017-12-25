@@ -355,6 +355,7 @@ public class MapFragment extends MapBaseFragment {
         Log.i(TAG, "getStudentByClass: ");
         if (studentPopupWindowView == null) {
             studentPopupWindowView = new StudentPopupWindowView(getContext());
+            studentPopupWindowView.initData();
             studentPopupWindowView.setMyGridViewClickListener(new StudentAdapter.MyGridViewClickListener() {
                 @Override
                 public void onGridViewItemClick(BeanStudent student) {
