@@ -1,12 +1,10 @@
 package com.shuhai.anfang.ui.honor;
 
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
@@ -22,10 +20,8 @@ import com.shuhai.anfang.bean.BeanHonor;
 import com.shuhai.anfang.common.CommonUtil;
 import com.shuhai.anfang.http.HttpAction;
 import com.shuhai.anfang.http.MyVolleyRequestListener;
-import com.shuhai.anfang.model.BeanClass;
 import com.shuhai.anfang.model.BeanStudent;
 import com.shuhai.anfang.model.GreenDaoHelper;
-import com.shuhai.anfang.ui.homework.HomeWorkParentAdapter;
 import com.shuhai.anfang.ui.main.BaseListActivity;
 import com.shuhai.anfang.util.TeacherUtil;
 
@@ -54,7 +50,7 @@ public class HonorPActivity extends BaseListActivity {
     @BindView(R.id.flTransparent)
     FrameLayout flTransparent;
 
-    HonorTAdapter adapter;
+    HonorAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +64,7 @@ public class HonorPActivity extends BaseListActivity {
     private void initView() {
         initRecyclerView(recyclerView, swipeRefreshLayout);
 
-        adapter = new HonorTAdapter(this);
+        adapter = new HonorAdapter(this);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

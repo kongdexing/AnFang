@@ -14,9 +14,7 @@ import com.shuhai.anfang.R;
 import com.shuhai.anfang.adapter.BaseRecycleAdapter;
 import com.shuhai.anfang.adapter.RecyclerViewHolderBase;
 import com.shuhai.anfang.bean.BeanComment;
-import com.shuhai.anfang.bean.BeanHonor;
 import com.shuhai.anfang.common.ExtraKey;
-import com.shuhai.anfang.ui.honor.HonorTAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,10 +1,13 @@
 package com.shuhai.anfang.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by shuhaixinxi on 2017/12/20.
  */
 
-public class BeanHonor {
+public class BeanHonor implements Parcelable {
 
     private String rw_id;
     private String g_id;
@@ -123,4 +126,57 @@ public class BeanHonor {
     public void setStu_name(String stu_name) {
         this.stu_name = stu_name;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.rw_id);
+        dest.writeString(this.g_id);
+        dest.writeString(this.g_name);
+        dest.writeString(this.c_id);
+        dest.writeString(this.c_name);
+        dest.writeString(this.stu_id);
+        dest.writeString(this.stu_name);
+        dest.writeString(this.reward_type);
+        dest.writeString(this.reward_details);
+        dest.writeString(this.create_time);
+        dest.writeString(this.modify_time);
+        dest.writeString(this.user_id);
+        dest.writeString(this.user_name);
+    }
+
+    public BeanHonor() {
+    }
+
+    protected BeanHonor(Parcel in) {
+        this.rw_id = in.readString();
+        this.g_id = in.readString();
+        this.g_name = in.readString();
+        this.c_id = in.readString();
+        this.c_name = in.readString();
+        this.stu_id = in.readString();
+        this.stu_name = in.readString();
+        this.reward_type = in.readString();
+        this.reward_details = in.readString();
+        this.create_time = in.readString();
+        this.modify_time = in.readString();
+        this.user_id = in.readString();
+        this.user_name = in.readString();
+    }
+
+    public static final Creator<BeanHonor> CREATOR = new Creator<BeanHonor>() {
+        @Override
+        public BeanHonor createFromParcel(Parcel source) {
+            return new BeanHonor(source);
+        }
+
+        @Override
+        public BeanHonor[] newArray(int size) {
+            return new BeanHonor[size];
+        }
+    };
 }

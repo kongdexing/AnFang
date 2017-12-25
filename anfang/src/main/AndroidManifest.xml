@@ -264,6 +264,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name=".ui.honor.HonorDetailActivity"></activity>
 
         <!-- 我的班级 -->
         <activity android:name=".ui.mine.MyClassesActivity" />

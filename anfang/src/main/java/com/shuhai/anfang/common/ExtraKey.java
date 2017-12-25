@@ -7,6 +7,7 @@ public class ExtraKey {
     public static final String HOMEWORK_DETAIL = "homework";
     public static final String NOTICE_DETAIL = "notice";
     public static final String COMMENT_DETAIL = "comment";
+    public static final String HONOR_DETAIL = "honor";
 
     public static final String QUESTION = "question";
     public static final String CLASS_ID = "class_id";
