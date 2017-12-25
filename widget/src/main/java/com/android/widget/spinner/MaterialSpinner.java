@@ -437,7 +437,7 @@ public class MaterialSpinner extends TextView {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             popupWindow.setOverlapAnchor(false);
-            popupWindow.showAsDropDown(this, location[0] - 40, 1);
+            popupWindow.showAsDropDown(this, 0, 1);
         } else {
             int x = location[0];
             int y = getHeight() + location[1] + 3;
