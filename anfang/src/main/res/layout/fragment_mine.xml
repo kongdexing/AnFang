@@ -161,7 +161,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_1"
                 android:background="@drawable/mine_item_selector"
-                android:clickable="true">
+                android:clickable="true"
+                android:visibility="gone">
 
                 <TextView
                     style="@style/mineText"
@@ -179,6 +180,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
                 android:background="@drawable/mine_item_selector"
+                android:visibility="gone"
                 android:clickable="true">
 
                 <TextView
@@ -225,6 +227,7 @@
                 <ImageView style="@style/arrow_right" />
 
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/rlQRCode"
                 android:layout_width="match_parent"
