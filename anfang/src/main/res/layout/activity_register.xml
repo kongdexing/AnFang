@@ -26,8 +26,8 @@
                 android:background="@null"
                 android:hint="@string/hint_phone"
                 android:inputType="textVisiblePassword|textPersonName"
-                android:textColor="@color/color2"
-                android:textColorHint="@color/color2"
+                android:textColor="@color/text_black"
+                android:textColorHint="@color/text_black"
                 android:textSize="@dimen/sp_16" />
 
             <ImageView
@@ -61,8 +61,8 @@
                 android:background="@null"
                 android:hint="@string/hint_nickname"
                 android:inputType="textPassword"
-                android:textColor="@color/color2"
-                android:textColorHint="@color/color2"
+                android:textColor="@color/text_black"
+                android:textColorHint="@color/text_black"
                 android:textSize="@dimen/sp_16" />
 
         </FrameLayout>
@@ -88,8 +88,8 @@
             android:hint="@string/hint_code"
             android:lines="1"
             android:text=""
-            android:textColor="@color/color2"
-            android:textColorHint="@color/color2"
+            android:textColor="@color/color_black_2"
+            android:textColorHint="@color/color_black_3"
             android:textSize="@dimen/sp_16" />
 
         <Button
@@ -127,8 +127,8 @@
                 android:background="@null"
                 android:hint="@string/hint_userpwd"
                 android:inputType="textPassword"
-                android:textColor="@color/color2"
-                android:textColorHint="@color/color2"
+                android:textColor="@color/color_black_2"
+                android:textColorHint="@color/color_black_3"
                 android:textSize="@dimen/sp_16" />
 
         </FrameLayout>
@@ -155,8 +155,8 @@
                 android:background="@null"
                 android:hint="@string/hint_userpwd"
                 android:inputType="textPassword"
-                android:textColor="@color/color2"
-                android:textColorHint="@color/color2"
+                android:textColor="@color/color_black_2"
+                android:textColorHint="@color/color_black_3"
                 android:textSize="@dimen/sp_16" />
 
         </FrameLayout>

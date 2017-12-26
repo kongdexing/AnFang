@@ -22,6 +22,6 @@
         android:clickable="false"
         android:textSize="@dimen/sp_13"
         android:text=""
-        android:textColor="@color/color2" />
+        android:textColor="@color/text_black_2" />
 
 </LinearLayout>

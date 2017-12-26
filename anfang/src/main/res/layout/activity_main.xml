@@ -30,7 +30,7 @@
                 android:id="@+id/nav_home"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/color3"
+                android:background="@color/colorWhite"
                 android:onClick="buttonOnclick"
                 android:padding="@dimen/dp_10"
                 android:src="@drawable/home_page_selector" />
@@ -45,7 +45,7 @@
                 android:id="@+id/nav_track"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/color3"
+                android:background="@color/colorWhite"
                 android:onClick="buttonOnclick"
                 android:padding="@dimen/dp_10"
                 android:src="@drawable/home_track_selector" />
@@ -60,7 +60,7 @@
                 android:id="@+id/nav_message"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/color3"
+                android:background="@color/colorWhite"
                 android:onClick="buttonOnclick"
                 android:padding="@dimen/dp_10"
                 android:src="@drawable/home_message_selector" />
@@ -90,8 +90,8 @@
                 android:id="@+id/nav_mine"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/color3"
-                android:onClick="color3"
+                android:background="@color/colorWhite"
+                android:onClick="buttonOnclick"
                 android:padding="@dimen/dp_10"
                 android:src="@drawable/home_mine_selector" />
 

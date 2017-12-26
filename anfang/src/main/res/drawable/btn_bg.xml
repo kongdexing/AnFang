@@ -3,19 +3,19 @@
     <item android:state_focused="true">
         <shape>
             <corners android:radius="@dimen/dp_16" />
-            <solid android:color="@color/color2" />
+            <solid android:color="#008fd0" />
         </shape>
     </item>
     <item android:state_pressed="true">
         <shape>
             <corners android:radius="@dimen/dp_16" />
-            <solid android:color="@color/color2" />
+            <solid android:color="#008fd0" />
         </shape>
     </item>
     <item>
         <shape>
             <corners android:radius="@dimen/dp_16" />
-            <solid android:color="@color/color1" />
+            <solid android:color="#00a0e9" />
         </shape>
     </item>
 </selector>

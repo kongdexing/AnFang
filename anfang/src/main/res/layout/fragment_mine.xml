@@ -28,7 +28,7 @@
                     android:layout_centerVertical="true"
                     android:lines="1"
                     android:text="@string/nav_mine"
-                    android:textColor="@color/color2"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/sp_18" />
 
 

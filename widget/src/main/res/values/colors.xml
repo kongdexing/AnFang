@@ -5,9 +5,4 @@
     <color name="round_corner_progress_bar_progress_default">#7f7f7f</color>
     <color name="round_corner_progress_bar_secondary_progress_default">@android:color/transparent</color>
 
-    <color name="color1">#dec074</color>
-    <color name="color2">#d0b391</color>
-    <color name="color3">#333b3f</color>
-    <color name="color4">#333b3f</color>
-
 </resources>

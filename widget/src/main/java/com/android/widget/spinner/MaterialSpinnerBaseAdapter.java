@@ -81,7 +81,7 @@ public abstract class MaterialSpinnerBaseAdapter<T> extends BaseAdapter {
         if (position == selectedIndex) {
             viewHolder.textView.setTextColor(Color.parseColor("#EB6C27"));
         } else {
-            viewHolder.textView.setTextColor(context.getResources().getColor(R.color.color1));
+            viewHolder.textView.setTextColor(Color.parseColor("#5b5b5b"));
         }
         return convertView;
     }

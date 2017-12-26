@@ -3,17 +3,11 @@
 
     <color name="colorTransparent">#00000000</color>
     <color name="colorPrimaryTransparent">#ffffff</color>
-    <color name="colorPrimary">#333b3f</color>
-    <color name="colorPrimaryDark">#333b3f</color>
+    <color name="colorPrimary">#0080ba</color>
+    <color name="colorPrimaryDark">#00a0e8</color>
     <color name="colorAccent">#0080ba</color>
     <color name="colorAccent2">#27DEB7</color>
     <color name="colorAccent3">#A0A8CC</color>
-    
-    <color name="color1">#dec074</color>
-    <color name="color2">#d0b391</color>
-    <color name="color3">#333b3f</color>
-    <color name="color4">#333b3f</color>
-
     <color name="colorOrange">#EE8026</color>
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
@@ -22,8 +16,9 @@
     <color name="colorRed_pre">#d93a49</color>
     <color name="translucent">#00000000</color>
     <color name="window_bg">@color/white</color>
+
     <color name="colorUserName">#9298AC</color>
-    <color name="bg_window">@color/white</color>
+    <color name="bg_window">#f0f0f0</color>
     <color name="transparent_gray">#60000000</color>
     <color name="transparent_gray_map">#10000000</color>
     <color name="color_refresh_reload">#6fbce6</color>
@@ -35,7 +30,7 @@
     <color name="text_white">#E6E6E6</color>
     <color name="text_grey">#999999</color>
     <color name="text_black">#384554</color>
-    <color name="text_black_2">#d0b391</color>
+    <color name="text_black_2">#5b5b5b</color>
     <color name="text_red">#f34e4e</color>
 
     <color name="line">#ffd3dde6</color>
@@ -48,8 +43,8 @@
     <color name="comment_popup_bg">#292929</color>
     <color name="comment_popup_tx_bg">#c7c7c7</color>
 
-    <color name="color_black_1">@color/color1</color>
-    <color name="color_black_2">@color/color2</color>
+    <color name="color_black_1">#333333</color>
+    <color name="color_black_2">#666666</color>
     <color name="color_black_3">#999999</color>
 
     <color name="color_dili">#fe9f21</color>

@@ -105,7 +105,7 @@ public class MaterialSpinner extends TextView {
         }
 
         try {
-            backgroundColor = ta.getColor(R.styleable.MaterialSpinner_ms_background_color, getResources().getColor(R.color.color3));
+            backgroundColor = ta.getColor(R.styleable.MaterialSpinner_ms_background_color, Color.WHITE);
             textColor = ta.getColor(R.styleable.MaterialSpinner_ms_text_color, defaultColor);
             textSize = ta.getFloat(R.styleable.MaterialSpinner_ms_text_size, defaultSize);
             arrowColor = ta.getColor(R.styleable.MaterialSpinner_ms_arrow_tint, textColor);
