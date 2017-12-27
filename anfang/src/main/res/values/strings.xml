@@ -37,7 +37,10 @@
     <string name="role_parent">家长</string>
     <string name="title_skip">跳过</string>
     <string name="title_select_school">选择学校</string>
-
+    <string name="label_county">省市区:</string>
+    <string name="hint_county">选择省市区</string>
+    <string name="label_school">学校:</string>
+    <string name="label_campus">校区:</string>
 
     <string name="home_school">校园生活</string>
     <string name="home_homework">家庭作业</string>

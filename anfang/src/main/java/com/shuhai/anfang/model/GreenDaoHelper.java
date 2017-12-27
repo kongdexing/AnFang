@@ -88,7 +88,7 @@ public class GreenDaoHelper {
     public void insertTeacher(BeanTeacher teacher) {
         currentTeacher = teacher;
         SharedPreferencesUtil.saveData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_UID, currentTeacher.getU_id());
-        Log.i(TAG, "insertTeacher: "+teacher.getLoginName());
+        Log.i(TAG, "insertTeacher: " + teacher.getLoginName());
 
         if (writeDaoSession != null) {
             writeDaoSession.getBeanTeacherDao().deleteAll();
@@ -98,6 +98,7 @@ public class GreenDaoHelper {
 
     /**
      * 添加班级
+     *
      * @param students
      */
     public void insertStudent(List<BeanStudent> students) {
@@ -383,7 +384,7 @@ public class GreenDaoHelper {
     }
 
     //保存首页配置项
-    public void insertHomeCfg(List<BeanHomeCfg> homeCfgs){
+    public void insertHomeCfg(List<BeanHomeCfg> homeCfgs) {
         if (writeDaoSession != null) {
             writeDaoSession.getBeanHomeCfgDao().deleteAll();
             writeDaoSession.getBeanHomeCfgDao().insertOrReplaceInTx(homeCfgs);
@@ -391,20 +392,20 @@ public class GreenDaoHelper {
     }
 
     //删除所有子项
-    public void deleteHomeChildCfg(){
+    public void deleteHomeChildCfg() {
         if (writeDaoSession != null) {
             writeDaoSession.getBeanHomeCfgChildDao().deleteAll();
         }
     }
 
     //保存首页配置子项
-    public void insertHomeChildCfg(List<BeanHomeCfgChild> homeCfgs){
+    public void insertHomeChildCfg(List<BeanHomeCfgChild> homeCfgs) {
         if (writeDaoSession != null) {
             writeDaoSession.getBeanHomeCfgChildDao().insertOrReplaceInTx(homeCfgs);
         }
     }
 
-    public List<BeanHomeCfg> getHomeCfg(){
+    public List<BeanHomeCfg> getHomeCfg() {
         List<BeanHomeCfg> homeCfgs = null;
         if (readDaoSession != null) {
             homeCfgs = readDaoSession.getBeanHomeCfgDao().loadAll();
@@ -415,7 +416,7 @@ public class GreenDaoHelper {
         return homeCfgs;
     }
 
-    public List<BeanHomeCfgChild> getHomeChildCfgById(String pid){
+    public List<BeanHomeCfgChild> getHomeChildCfgById(String pid) {
         List<BeanHomeCfgChild> homeCfgs = null;
         if (readDaoSession != null) {
             homeCfgs = readDaoSession.getBeanHomeCfgChildDao().queryBuilder()
@@ -444,6 +445,27 @@ public class GreenDaoHelper {
             hotGoods = new ArrayList<BeanHotGood>();
         }
         return hotGoods;
+    }
+
+    //插入省市区数据
+    public void insertCounties(List<BeanCounty> counties) {
+        if (writeDaoSession != null) {
+            writeDaoSession.getBeanCountyDao().deleteAll();
+            writeDaoSession.getBeanCountyDao().insertOrReplaceInTx(counties);
+        }
+    }
+
+    //根据父级 id 获取地区
+    public List<BeanCounty> getCountiesByParentId(String parentId) {
+        List<BeanCounty> counties = null;
+        if (readDaoSession != null) {
+            counties = readDaoSession.getBeanCountyDao().queryBuilder()
+                    .where(BeanCountyDao.Properties.Parent_id.eq(parentId)).list();
+        }
+        if (counties == null) {
+            counties = new ArrayList<BeanCounty>();
+        }
+        return counties;
     }
 
 }
