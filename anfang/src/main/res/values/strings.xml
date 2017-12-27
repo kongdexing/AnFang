@@ -27,11 +27,17 @@
     <string name="register"><u>新用户注册</u></string>
     <string name="title_register">注册</string>
 
-
+    <!--登录注册-->
     <string name="login">登录</string>
+    <string name="btn_register">注 册</string>
     <string name="login_failed">登录失败</string>
     <string name="error_empty_login">请输入用户名或密码</string>
     <string name="login_role">用户角色</string>
+    <string name="role_teacher">老师</string>
+    <string name="role_parent">家长</string>
+    <string name="title_skip">跳过</string>
+    <string name="title_select_school">选择学校</string>
+
 
     <string name="home_school">校园生活</string>
     <string name="home_homework">家庭作业</string>
@@ -256,7 +262,7 @@
     <string name="toast_contract_other_empty">请将对应的名称及手机号填写完整</string>
     <string name="toast_choose_moniter">请选择监听号码</string>
     <string name="toast_exit">再按一次退出程序</string>
-    <string name="toast_pwd_not_equal">新密码与确认密码不相同，请重新输入</string>
+    <string name="toast_pwd_not_equal">密码与确认密码不相同，请重新输入</string>
     <string name="toast_point_null">坐标点无效</string>
     <string name="toast_record_unstop">请完成录音后再发布作业</string>
 

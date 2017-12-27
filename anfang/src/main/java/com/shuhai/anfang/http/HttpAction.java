@@ -41,13 +41,8 @@ public class HttpAction {
     public static String NOTICE_DEL = HEAD + "Notice/delete";
     public static String NOTICE_ADD = HEAD + "Notice/add";
 
-    //在线提问
     public static String GET_TEACHER_BYCID = HEAD + "Comment/get_teacher_list";
-    public static String QUESTION_QUERY = HEAD + "Question/query";
-    public static String QUESTION_VIEW = HEAD + "Question/view";
-    public static String QUESTION_DEL = HEAD + "Question/delete";
-    public static String QUESTION_NEWADD = HEAD + "Question/new_add";
-    public static String QUESTION_ADD = HEAD + "Question/add";
+
     //考试名称查询
     public static String EXAM_QUERY = HEAD + "Exam/getScoresForParent";
     //考勤管理
@@ -70,7 +65,6 @@ public class HttpAction {
     //评语查询
     public static String Remark_query = HEAD + "Remark/query";
     public static String Remark_edit = HEAD + "Remark/edit";
-
 
     //报警记录
     public static String Track_alarm = HEAD + "Track/alarmRecord_v1_0_1";
@@ -97,10 +91,6 @@ public class HttpAction {
 
     public static String GetCard_Phone = HEAD + "StudentCard/get_cardphone";
     public static String SetCard_Phone = HEAD + "StudentCard/set_cardphone";
-
-    //上传upush devices_token
-    public static String Push_Token = BuildConfig.SERVICE_URL + "/parenttoken.php";
-    public static String Push_Token_ForChat = BuildConfig.SERVICE_URL + "/chattoken.php";
 
     //上传token
     public static String HOOK_PUSH_TOKEN = HEAD + "/Hook/addPushToken";
@@ -147,5 +137,8 @@ public class HttpAction {
     public static String FORGOT_PWD_STEP3 = HEAD + "ForgetPwd/checkCode";
     public static String FORGOT_PWD_STEP4 = HEAD + "ForgetPwd/PasswordReset";
 
+    //注册
+    public static String REGISTER_GETCODE = HEAD + "Register/getCode";
+    public static String REGISTER = HEAD + "Register/registerForApp";
 
 }

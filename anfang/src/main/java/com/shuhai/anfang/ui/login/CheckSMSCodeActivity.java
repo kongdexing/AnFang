@@ -52,7 +52,7 @@ public class CheckSMSCodeActivity extends BaseActivity {
         long spVal = (long) SharedPreferencesUtil.getData(this, spSMSKey, 0l);
 
         long diff = (System.currentTimeMillis() - spVal) / 1000;
-        int maxTime = 10;
+        int maxTime = 60;
         if (maxTime >= diff) {
             btnSend.setEnabled(false);
             lastTime = (int) (maxTime - diff);

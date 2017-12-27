@@ -156,22 +156,8 @@
             android:name=".ui.main.SplashActivity"
             android:theme="@style/AppTheme.Translucent" />
         <activity android:name=".ui.main.WebViewActivity" />
-        <activity
-            android:name=".ui.login.LoginActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateVisible" />
-        <activity android:name=".ui.register.RegisterActivity" />
-        <activity android:name=".ui.setting.SettingActivity" />
-        <activity android:name=".ui.setting.ChangePwdActivity" />
-        <activity android:name=".ui.setting.TutelageActivity" />
-        <activity android:name=".ui.setting.AboutActivity" />
-        <activity android:name=".ui.setting.QRCodeActivity" />
-        <activity
-            android:name=".ui.mine.MyInfoActivity"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".ui.mine.MyChildActivity" />
+
+        <!--登录注册-->
         <activity
             android:name=".ui.login.CheckUserActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -182,6 +168,26 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateVisible" />
+        <activity android:name=".ui.register.RegisterActivity" />
+        <activity android:name=".ui.register.CheckRoleActivity" />
+        <activity android:name=".ui.register.SelSchoolActivity"></activity>
+
+        <!--设置-->
+        <activity android:name=".ui.setting.SettingActivity" />
+        <activity android:name=".ui.setting.ChangePwdActivity" />
+        <activity android:name=".ui.setting.TutelageActivity" />
+        <activity android:name=".ui.setting.AboutActivity" />
+        <activity android:name=".ui.setting.QRCodeActivity" />
+        <activity
+            android:name=".ui.mine.MyInfoActivity"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".ui.mine.MyChildActivity" />
 
         <!-- 家庭作业 -->
         <activity android:name=".ui.homework.HomeWorkParentActivity" />
@@ -254,7 +260,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        <activity android:name=".ui.comment.CommentDetailActivity"></activity>
+        <activity android:name=".ui.comment.CommentDetailActivity" />
 
         <!-- 荣誉墙 -->
         <activity android:name=".ui.honor.HonorPActivity" />
@@ -264,7 +270,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        <activity android:name=".ui.honor.HonorDetailActivity"></activity>
+        <activity android:name=".ui.honor.HonorDetailActivity" />
 
         <!-- 我的班级 -->
         <activity android:name=".ui.mine.MyClassesActivity" />
@@ -306,6 +312,8 @@
                 <data android:scheme="wx1af4f660ce9e6b37" /> <!-- 需修改 -->
             </intent-filter>
         </activity>
+
+        <!--微信支付-->
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
