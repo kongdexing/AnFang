@@ -1,5 +1,5 @@
 include ':anfang', ':lint', ':library', ':multipleimageselect',
         ':network-events-library', ':processor', ':viewpagerindicator', ':PushSDK',
-        ':takephoto_library', ':widget', ':camera', ':easeui', ':redpacketlibrary'
+        ':takephoto_library', ':widget', ':camera', ':easeui', ':redpacketlibrary', ':pickerview'
 //include ':hyphenatechatsdk'
 //project(':hyphenatechatsdk').projectDir = new File('../emclient-android/hyphenatechatsdk')
