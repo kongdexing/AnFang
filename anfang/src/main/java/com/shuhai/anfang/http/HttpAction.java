@@ -137,8 +137,12 @@ public class HttpAction {
     public static String FORGOT_PWD_STEP3 = HEAD + "ForgetPwd/checkCode";
     public static String FORGOT_PWD_STEP4 = HEAD + "ForgetPwd/PasswordReset";
 
-    //注册
+    //注册获取验证码
     public static String REGISTER_GETCODE = HEAD + "Register/getCode";
-    public static String REGISTER = HEAD + "Register/registerForApp";
+    //注册
+    public static String REGISTER = HEAD + "Register/register";
+
+    //获取学校
+    public static String GET_SCHOOL = HEAD + "Register/information";
 
 }

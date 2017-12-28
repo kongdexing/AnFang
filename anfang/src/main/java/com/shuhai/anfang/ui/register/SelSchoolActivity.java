@@ -9,13 +9,21 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
+import com.android.volley.common.VolleyHttpParamsEntity;
+import com.android.volley.common.VolleyHttpResult;
+import com.android.volley.common.VolleyHttpService;
 import com.android.widget.spinner.MaterialSpinner;
+import com.android.widget.spinner.SpinnerModel;
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.shuhai.anfang.R;
+import com.shuhai.anfang.bean.BeanComment;
 import com.shuhai.anfang.bean.BeanHomeWork;
+import com.shuhai.anfang.http.HttpAction;
+import com.shuhai.anfang.http.MyVolleyRequestListener;
 import com.shuhai.anfang.model.BeanCounty;
 import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.ui.main.BaseActivity;
@@ -130,6 +138,7 @@ public class SelSchoolActivity extends BaseActivity {
                         BeanCounty county3 = counties3.get(options3);
                         toast = county1.getRegion_name() + county2.getRegion_name() + county3.getRegion_name() + "--" + county3.getRegion_code();
                         ToastUtils.showToast(SelSchoolActivity.this, toast);
+                        getSchoolListByCountyCode(county3.getRegion_code());
                     }
                 }
             }
@@ -141,8 +150,6 @@ public class SelSchoolActivity extends BaseActivity {
                 .setContentTextSize(20)
                 .build();
 
-        /*pvOptions.setPicker(options1Items);//一级选择器
-        pvOptions.setPicker(options1Items, options2Items);//二级选择器*/
         pvOptions.setPicker(options1Items, options2Items, options3Items);//三级选择器
         pvOptions.show();
     }
@@ -190,5 +197,94 @@ public class SelSchoolActivity extends BaseActivity {
         mHandler.sendEmptyMessage(MSG_LOAD_SUCCESS);
     }
 
+    private void getSchoolListByCountyCode(String countyCode) {
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.GET_SCHOOL,
+                new VolleyHttpParamsEntity()
+                        .addParam("region_id", countyCode), new MyVolleyRequestListener() {
+                    @Override
+                    public void onStart() {
+                        super.onStart();
+                        showProgress("正在获取学校信息...");
+                    }
+
+                    @Override
+                    public void onResponse(VolleyHttpResult volleyHttpResult) {
+                        super.onResponse(volleyHttpResult);
+                        hideProgress();
+                        switch (volleyHttpResult.getStatus()) {
+                            case HttpAction.SUCCESS:
+                                try {
+                                    List<SchoolInfo> schoolInfos = new ArrayList<>();
+                                    Gson gson = new Gson();
+                                    schoolInfos = gson.fromJson(volleyHttpResult.getData().toString(), new TypeToken<List<SchoolInfo>>() {
+                                    }.getType());
+                                    spnSchool.setItems(schoolInfos);
+                                    spnSchool.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<SchoolInfo>() {
+                                        @Override
+                                        public void onItemSelected(MaterialSpinner view, int position, long id, SchoolInfo item) {
+                                            spnCampus.setItems(item.getArea());
+                                        }
+                                    });
+                                    if (schoolInfos.size() > 0) {
+                                        spnCampus.setItems(schoolInfos.get(0).getArea());
+                                    } else {
+
+                                    }
+                                } catch (Exception ex) {
+                                    ToastUtils.showToast(SelSchoolActivity.this, ex.getMessage());
+                                    spnSchool.setItems("");
+                                    spnCampus.setItems("");
+                                }
+                                break;
+                            default:
+                                spnSchool.setItems("");
+                                spnCampus.setItems("");
+                                break;
+                        }
+                    }
+
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        super.onErrorResponse(volleyError);
+                        hideProgress();
+                        spnSchool.setItems("");
+                        spnCampus.setItems("");
+                    }
+                });
+    }
+
+    class SchoolInfo extends SpinnerModel {
+        private String s_id;
+        private List<SchoolArea> area;
+
+        public String getS_id() {
+            return s_id;
+        }
+
+        public void setS_id(String s_id) {
+            this.s_id = s_id;
+        }
+
+        public List<SchoolArea> getArea() {
+            return area;
+        }
+
+        public void setArea(List<SchoolArea> area) {
+            this.area = area;
+        }
+    }
+
+    class SchoolArea extends SpinnerModel {
+        private String a_id;
+
+        public String getA_id() {
+            return a_id;
+        }
+
+        public void setA_id(String a_id) {
+            this.a_id = a_id;
+        }
+
+    }
 
 }

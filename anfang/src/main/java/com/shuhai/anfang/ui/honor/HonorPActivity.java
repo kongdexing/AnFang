@@ -141,7 +141,7 @@ public class HonorPActivity extends BaseListActivity {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.Honor_query,
                 new VolleyHttpParamsEntity()
                         .addParam("stu_id", currentStudent.getStu_id())
-                        .addParam("rw_type", type)
+                        .addParam("reward_type", type)
                         .addParam("page", resultPage.getPage() + "")
                         .addParam("token", CommonUtil.encryptToken(HttpAction.HOMEWORK_QUERY)),
                 new MyVolleyRequestListener() {

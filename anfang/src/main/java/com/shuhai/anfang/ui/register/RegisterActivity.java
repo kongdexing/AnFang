@@ -204,24 +204,18 @@ public class RegisterActivity extends BaseActivity {
                     @Override
                     public void onResponse(VolleyHttpResult volleyHttpResult) {
                         super.onResponse(volleyHttpResult);
-
                         hideProgress();
                         ToastUtils.showToast(RegisterActivity.this, volleyHttpResult.getInfo());
                         if (volleyHttpResult.getStatus() == HttpAction.SUCCESS) {
-
+                            startActivity(new Intent(RegisterActivity.this, CheckRoleActivity.class));
+                            finish();
                         }
-
-                        startActivity(new Intent(RegisterActivity.this, CheckRoleActivity.class));
-                        finish();
                     }
 
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         super.onErrorResponse(volleyError);
                         hideProgress();
-
-                        startActivity(new Intent(RegisterActivity.this, CheckRoleActivity.class));
-                        finish();
                     }
                 });
     }

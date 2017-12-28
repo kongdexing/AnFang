@@ -32,7 +32,8 @@
     <string name="btn_register">注 册</string>
     <string name="login_failed">登录失败</string>
     <string name="error_empty_login">请输入用户名或密码</string>
-    <string name="login_role">用户角色</string>
+    <string name="login_role">用户角色:</string>
+    <string name="role_visitor">游客</string>
     <string name="role_teacher">老师</string>
     <string name="role_parent">家长</string>
     <string name="title_skip">跳过</string>
