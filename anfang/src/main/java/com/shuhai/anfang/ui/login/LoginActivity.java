@@ -257,6 +257,13 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
                     return;
                 }
                 easeLoginName = teacher.getU_id();
+            } else {
+                //游客不等了环信
+                if (progress != null)
+                    progress.setVisibility(View.INVISIBLE);
+                btnLogin.setEnabled(true);
+                finish();
+                return;
             }
         } catch (Exception ex) {
             Log.i(TAG, "onLoginSuccess: login ease error " + ex.getMessage());

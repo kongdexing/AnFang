@@ -15,6 +15,7 @@ import com.android.widget.view.CircularImageView;
 import com.hyphenate.chat.EMClient;
 import com.shuhai.anfang.R;
 import com.shuhai.anfang.XPTApplication;
+import com.shuhai.anfang.common.SharedPreferencesUtil;
 import com.shuhai.anfang.common.UserHelper;
 import com.shuhai.anfang.common.UserType;
 import com.shuhai.anfang.model.BeanParent;
@@ -109,8 +110,8 @@ public class MineFragment extends BaseFragment {
             } else if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
                 rlMyChild.setVisibility(View.VISIBLE);
 
-                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)rlMyChild.getLayoutParams();
-                params.setMargins(0,(int)mContext.getResources().getDimension(R.dimen.dp_20),0,0);
+                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) rlMyChild.getLayoutParams();
+                params.setMargins(0, (int) mContext.getResources().getDimension(R.dimen.dp_20), 0, 0);
                 rlMyChild.setLayoutParams(params);
 
                 rlMyClass.setVisibility(View.GONE);
@@ -127,10 +128,13 @@ public class MineFragment extends BaseFragment {
                         imgLoginHead.setImageResource(R.drawable.parent_mother);
                     }
                 }
+            } else if (UserType.VISITOR.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+                txtUserName.setText(SharedPreferencesUtil.getData(mContext, SharedPreferencesUtil.KEY_USER_NAME, "").toString());
+                txtPhone.setText("手机号：" + SharedPreferencesUtil.getData(mContext, SharedPreferencesUtil.KEY_VISITOR_NAME, ""));
             }
         } else {
-            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)rlMyChild.getLayoutParams();
-            params.setMargins(0,(int)mContext.getResources().getDimension(R.dimen.dp_1),0,0);
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) rlMyChild.getLayoutParams();
+            params.setMargins(0, (int) mContext.getResources().getDimension(R.dimen.dp_1), 0, 0);
             rlMyChild.setLayoutParams(params);
 
             rlMyChild.setVisibility(View.VISIBLE);
@@ -191,7 +195,11 @@ public class MineFragment extends BaseFragment {
                 startActivity(new Intent(getContext(), LoginActivity.class));
                 break;
             case R.id.ll_login:
-                startActivity(new Intent(getContext(), MyInfoActivity.class));
+                if (!UserType.VISITOR.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+                    startActivity(new Intent(getContext(), MyInfoActivity.class));
+                } else {
+                    ToastUtils.showToast(mContext, "游客身份需等待相关人员审核后方可查看个人信息");
+                }
                 break;
             case R.id.rlMyChild:
                 startActivity(new Intent(getContext(), MyChildActivity.class));

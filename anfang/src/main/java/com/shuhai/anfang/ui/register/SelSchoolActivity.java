@@ -6,6 +6,10 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,11 +48,27 @@ public class SelSchoolActivity extends BaseActivity {
 
     @BindView(R.id.txtcounty)
     TextView txtcounty;
+    @BindView(R.id.txtNoSchool)
+    TextView txtNoSchool;
 
     @BindView(R.id.spnSchool)
     MaterialSpinner spnSchool;
     @BindView(R.id.spnCampus)
     MaterialSpinner spnCampus;
+
+    @BindView(R.id.llExistSch)
+    LinearLayout llExistSch;
+    @BindView(R.id.llApply)
+    LinearLayout llApply;
+    @BindView(R.id.rlBnding)
+    RelativeLayout rlBnding;
+    @BindView(R.id.llBtnApply)
+    LinearLayout llBtnApply;
+
+    @BindView(R.id.edtSchName)
+    EditText edtSchName;
+    @BindView(R.id.edtCampus)
+    EditText edtCampus;
 
     private ArrayList<String> options1Items = new ArrayList<>();
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
@@ -60,6 +80,7 @@ public class SelSchoolActivity extends BaseActivity {
     private static final int MSG_LOAD_FAILED = 0x0003;
     List<BeanCounty> counties = new ArrayList<>();
     List<BeanCounty> counties1 = new ArrayList<>();
+    OptionsPickerView pvOptions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,11 +123,35 @@ public class SelSchoolActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.txtcounty})
+    @OnClick({R.id.txtcounty, R.id.txtNoSchool, R.id.btnCancel, R.id.btnBinding, R.id.btnApply})
     void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.txtcounty:
                 ShowPickerView();
+                break;
+            case R.id.txtNoSchool:
+                txtNoSchool.setVisibility(View.GONE);
+
+                llExistSch.setVisibility(View.GONE);
+                llApply.setVisibility(View.VISIBLE);
+
+                rlBnding.setVisibility(View.GONE);
+                llBtnApply.setVisibility(View.VISIBLE);
+                break;
+            case R.id.btnCancel:
+                txtNoSchool.setVisibility(View.VISIBLE);
+
+                llExistSch.setVisibility(View.VISIBLE);
+                llApply.setVisibility(View.GONE);
+
+                rlBnding.setVisibility(View.VISIBLE);
+                llBtnApply.setVisibility(View.GONE);
+                break;
+            case R.id.btnBinding:
+
+                break;
+            case R.id.btnApply:
+
                 break;
         }
     }
@@ -115,42 +160,41 @@ public class SelSchoolActivity extends BaseActivity {
         if (options1Items.size() == 0) {
             loadCountiesData();
         }
-        OptionsPickerView pvOptions = new OptionsPickerView.Builder(this, new OptionsPickerView.OnOptionsSelectListener() {
-            @Override
-            public void onOptionsSelect(int options1, int options2, int options3, View v) {
-                //返回的分别是三个级别的选中位置
-                String tx = options1Items.get(options1) + " " +
-                        options2Items.get(options1).get(options2) + " " +
-                        options3Items.get(options1).get(options2).get(options3);
-                txtcounty.setText(tx);
+        if (pvOptions == null) {
+            pvOptions = new OptionsPickerView.Builder(this, new OptionsPickerView.OnOptionsSelectListener() {
+                @Override
+                public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                    //返回的分别是三个级别的选中位置
+                    String tx = options1Items.get(options1) + " " +
+                            options2Items.get(options1).get(options2) + " " +
+                            options3Items.get(options1).get(options2).get(options3);
+                    txtcounty.setText(tx);
 
-                String toast = "";
-                //从数据库查询县 id
-                //1.获取省
-                BeanCounty county1 = counties1.get(options1);
-                List<BeanCounty> counties2 = GreenDaoHelper.getInstance().getCountiesByParentId(county1.getRegion_id());
-                if (counties2.size() > options2) {
-                    //2.获取市
-                    BeanCounty county2 = counties2.get(options2);
-                    List<BeanCounty> counties3 = GreenDaoHelper.getInstance().getCountiesByParentId(county2.getRegion_id());
-                    if (counties3.size() > options3) {
-                        //3.获取县
-                        BeanCounty county3 = counties3.get(options3);
-                        toast = county1.getRegion_name() + county2.getRegion_name() + county3.getRegion_name() + "--" + county3.getRegion_code();
-                        ToastUtils.showToast(SelSchoolActivity.this, toast);
-                        getSchoolListByCountyCode(county3.getRegion_code());
+                    String toast = "";
+                    //从数据库查询县 id
+                    //1.获取省
+                    BeanCounty county1 = counties1.get(options1);
+                    List<BeanCounty> counties2 = GreenDaoHelper.getInstance().getCountiesByParentId(county1.getRegion_id());
+                    if (counties2.size() > options2) {
+                        //2.获取市
+                        BeanCounty county2 = counties2.get(options2);
+                        List<BeanCounty> counties3 = GreenDaoHelper.getInstance().getCountiesByParentId(county2.getRegion_id());
+                        if (counties3.size() > options3) {
+                            //3.获取县
+                            BeanCounty county3 = counties3.get(options3);
+                            toast = county1.getRegion_name() + county2.getRegion_name() + county3.getRegion_name() + "--" + county3.getRegion_code();
+                            ToastUtils.showToast(SelSchoolActivity.this, toast);
+                            getSchoolListByCountyCode(county3.getRegion_code());
+                        }
                     }
                 }
-            }
-        })
-
-                .setTitleText("城市选择")
-                .setDividerColor(Color.BLACK)
-                .setTextColorCenter(Color.BLACK) //设置选中项文字颜色
-                .setContentTextSize(20)
-                .build();
-
-        pvOptions.setPicker(options1Items, options2Items, options3Items);//三级选择器
+            }).setTitleText("城市选择")
+                    .setDividerColor(Color.BLACK)
+                    .setTextColorCenter(Color.BLACK) //设置选中项文字颜色
+                    .setContentTextSize(20)
+                    .build();
+            pvOptions.setPicker(options1Items, options2Items, options3Items);//三级选择器
+        }
         pvOptions.show();
     }
 
@@ -222,13 +266,20 @@ public class SelSchoolActivity extends BaseActivity {
                                     spnSchool.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<SchoolInfo>() {
                                         @Override
                                         public void onItemSelected(MaterialSpinner view, int position, long id, SchoolInfo item) {
-                                            spnCampus.setItems(item.getArea());
+                                            if (item.getArea() != null) {
+                                                spnCampus.setItems(item.getArea());
+                                            } else {
+                                                spnCampus.setItems("暂无校区");
+                                            }
                                         }
                                     });
                                     if (schoolInfos.size() > 0) {
                                         spnCampus.setItems(schoolInfos.get(0).getArea());
+                                        //显示申请学校
+                                        txtNoSchool.setVisibility(View.VISIBLE);
+                                        rlBnding.setVisibility(View.VISIBLE);
                                     } else {
-
+                                        spnCampus.setItems("暂无校区");
                                     }
                                 } catch (Exception ex) {
                                     ToastUtils.showToast(SelSchoolActivity.this, ex.getMessage());

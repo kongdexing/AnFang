@@ -259,12 +259,11 @@ public class CommonUtil {
     }
 
     public static void analyseLoginData(VolleyHttpResult httpResult, String type, String account) throws JSONException {
+        JSONObject jsonData = new JSONObject(httpResult.getData().toString());
         if (type.equals(UserType.PARENT.toString())) {
-            JSONObject jsonData = new JSONObject(httpResult.getData().toString());
             CommonUtil.initBeanStudentByHttpResult(jsonData.getJSONArray("stuData").toString());
             CommonUtil.initParentInfoByHttpResult(jsonData.getJSONObject("login").toString(), account);
         } else if (type.equals(UserType.TEACHER.toString())) {
-            JSONObject jsonData = new JSONObject(httpResult.getData().toString());
             CommonUtil.getBeanClassesByHttpResult(jsonData.getJSONArray("class").toString());
             CommonUtil.getBeanCoursesByHttpResult(jsonData.getJSONArray("course").toString());
             JSONObject jsonLogin = jsonData.getJSONObject("login");
@@ -272,6 +271,10 @@ public class CommonUtil {
             BeanTeacher teacher = gson.fromJson(jsonLogin.toString(), BeanTeacher.class);
             teacher.setLogin_name(account);
             GreenDaoHelper.getInstance().insertTeacher(teacher);
+        } else if (type.equals(UserType.VISITOR.toString())){
+            //游客
+            JSONObject jsonLogin = jsonData.getJSONObject("login");
+            SharedPreferencesUtil.saveData(XPTApplication.getInstance(),SharedPreferencesUtil.KEY_VISITOR_NAME,jsonLogin.get("name"));
         }
         //删除联系人
 //        GreenDaoHelper.getInstance().deleteContact();

@@ -32,7 +32,7 @@
     <string name="btn_register">注 册</string>
     <string name="login_failed">登录失败</string>
     <string name="error_empty_login">请输入用户名或密码</string>
-    <string name="login_role">用户角色:</string>
+    <string name="login_role">用户角色</string>
     <string name="role_visitor">游客</string>
     <string name="role_teacher">老师</string>
     <string name="role_parent">家长</string>
@@ -41,7 +41,15 @@
     <string name="label_county">省市区:</string>
     <string name="hint_county">选择省市区</string>
     <string name="label_school">学校:</string>
+    <string name="label_school_name">学校名称:</string>
+    <string name="hint_school_name">请输入学校名称</string>
+    <string name="label_campus_name">校区名称:</string>
+    <string name="hint_campus_name">请输入校区名称</string>
     <string name="label_campus">校区:</string>
+    <string name="label_noschool"><u>学校不存在?点击进行学校申请</u></string>
+    <string name="btn_binding">绑定该学校</string>
+    <string name="btn_apply">申请学校</string>
+
 
     <string name="home_school">校园生活</string>
     <string name="home_homework">家庭作业</string>

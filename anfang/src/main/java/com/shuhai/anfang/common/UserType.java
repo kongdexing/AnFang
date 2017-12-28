@@ -5,6 +5,7 @@ package com.shuhai.anfang.common;
  */
 
 public enum UserType {
+    VISITOR("0"),
     TEACHER("3"),
     PARENT("4");
 
