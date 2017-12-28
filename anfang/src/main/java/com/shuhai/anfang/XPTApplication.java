@@ -194,9 +194,10 @@ public class XPTApplication extends Application {
             return UserType.PARENT;
         } else if (current_user_type.equals(UserType.TEACHER.toString())) {
             return UserType.TEACHER;
-        } else {
-            return null;
+        } else if (current_user_type.equals(UserType.VISITOR.toString())) {
+            return UserType.VISITOR;
         }
+        return null;
     }
 
     public void setCurrent_user_type(String current_user_type) {
