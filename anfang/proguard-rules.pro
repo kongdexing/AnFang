@@ -288,3 +288,7 @@
 -keep class com.xiaomi.ad.**{*;}
 -keep class com.miui.analytics.**{*;}
 -keep class com.xiaomi.analytics.*{public protected *;}
+
+##环信
+-keep class com.hyphenate.** {*;}
+-dontwarn  com.hyphenate.**

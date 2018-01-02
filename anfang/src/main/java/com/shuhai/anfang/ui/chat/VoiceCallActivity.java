@@ -35,6 +35,7 @@ import android.widget.Toast;
 
 import com.hyphenate.chat.EMCallStateChangeListener;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.easeui.utils.EaseLocalUserHelper;
 import com.hyphenate.exceptions.HyphenateException;
 import com.hyphenate.util.EMLog;
 import com.shuhai.anfang.R;
@@ -105,7 +106,7 @@ public class VoiceCallActivity extends CallActivity implements OnClickListener {
 
 		username = getIntent().getStringExtra("username");
 		isInComingCall = getIntent().getBooleanExtra("isComingCall", false);
-		nickTextView.setText(username);
+		nickTextView.setText(EaseLocalUserHelper.getInstance().getLocalUserNickName(username));
 		if (!isInComingCall) {// outgoing call
 			soundPool = new SoundPool(1, AudioManager.STREAM_RING, 0);
 			outgoing = soundPool.load(this, R.raw.em_outgoing, 1);
