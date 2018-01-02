@@ -65,13 +65,12 @@ public class TInfoView extends BaseInfoView {
             View view = LayoutInflater.from(context).inflate(R.layout.activity_my_info_teacher, this, true);
             ButterKnife.bind(view);
             initData();
-        }catch (Exception ex){
-            ToastUtils.showToast(mContext,ex.getMessage());
+        } catch (Exception ex) {
+            ToastUtils.showToast(mContext, ex.getMessage());
         }
     }
 
     private void initData() {
-
         BeanTeacher teacher = GreenDaoHelper.getInstance().getCurrentTeacher();
         if (teacher == null) {
             return;
@@ -90,7 +89,7 @@ public class TInfoView extends BaseInfoView {
         txtAdviser.setText(teacher.getCharge() == "1" ? "是" : "否");
     }
 
-    @OnClick({R.id.rlMinePhoto, R.id.rlMinePhone, R.id.rlExit})
+    @OnClick({R.id.rlMinePhoto, R.id.rlMinePhone})
     void viewClick(View view) {
         BeanTeacher teacher = GreenDaoHelper.getInstance().getCurrentTeacher();
         if (teacher == null) {
@@ -111,9 +110,6 @@ public class TInfoView extends BaseInfoView {
                 } catch (Exception ex) {
                     Toast.makeText(mContext, R.string.toast_startcall_error, Toast.LENGTH_SHORT).show();
                 }
-                break;
-            case R.id.rlExit:
-                exitUser();
                 break;
         }
     }

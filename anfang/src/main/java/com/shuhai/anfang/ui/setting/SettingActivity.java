@@ -5,24 +5,29 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 import com.shuhai.anfang.BuildConfig;
 import com.shuhai.anfang.R;
 import com.shuhai.anfang.XPTApplication;
 import com.shuhai.anfang.common.ExtraKey;
+import com.shuhai.anfang.common.SharedPreferencesUtil;
+import com.shuhai.anfang.common.UserHelper;
 import com.shuhai.anfang.common.UserType;
 import com.shuhai.anfang.model.BeanStudent;
 import com.shuhai.anfang.model.GreenDaoHelper;
 import com.shuhai.anfang.ui.main.BaseActivity;
 import com.shuhai.anfang.ui.main.WebViewActivity;
+import com.shuhai.anfang.view.CustomDialog;
 import com.tencent.bugly.beta.Beta;
 
 import java.util.List;
-import java.util.logging.XMLFormatter;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -31,6 +36,10 @@ public class SettingActivity extends BaseActivity {
 
     @BindView(R.id.txtVersion)
     TextView txtVersion;
+
+    @BindView(R.id.rlChangePwd)
+    RelativeLayout rlChangePwd;
+
     @BindView(R.id.rltutelage)
     RelativeLayout rltutelage;
 
@@ -54,9 +63,14 @@ public class SettingActivity extends BaseActivity {
             rltutelage.setVisibility(View.GONE);
         }
 
+        if (XPTApplication.getInstance().isLoggedIn()) {
+            rlChangePwd.setVisibility(View.VISIBLE);
+        } else {
+            rlChangePwd.setVisibility(View.GONE);
+        }
     }
 
-    @OnClick({R.id.rlChangePwd, R.id.rlTel, R.id.rlUpdate, R.id.rltutelage, R.id.rlHelp})
+    @OnClick({R.id.rlChangePwd, R.id.rlTel, R.id.rlUpdate, R.id.rltutelage, R.id.rlHelp, R.id.rlExit})
     void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.rlTel:
@@ -88,6 +102,39 @@ public class SettingActivity extends BaseActivity {
                 Intent intent = new Intent(this, WebViewActivity.class);
                 intent.putExtra(ExtraKey.WEB_URL, BuildConfig.SERVICE_URL + "/html/app-help/index.html");
                 startActivity(intent);
+                break;
+            case R.id.rlExit:
+                CustomDialog dialog = new CustomDialog(this);
+                dialog.setTitle(R.string.label_tip);
+                dialog.setMessage(R.string.msg_exit);
+                dialog.setAlertDialogClickListener(new CustomDialog.DialogClickListener() {
+                    @Override
+                    public void onPositiveClick() {
+                        //清除数据
+                        SharedPreferencesUtil.clearUserInfo(SettingActivity.this);
+                        GreenDaoHelper.getInstance().clearData();
+                        UserHelper.getInstance().userExit();
+
+                        EMClient.getInstance().logout(true, new EMCallBack() {
+                            @Override
+                            public void onSuccess() {
+                                SettingActivity.this.finish();
+                                Log.i(TAG, "logout onSuccess: ");
+                            }
+
+                            @Override
+                            public void onError(int i, String s) {
+                                Log.i(TAG, "logout onError: " + s);
+                            }
+
+                            @Override
+                            public void onProgress(int i, String s) {
+                                Log.i(TAG, "logout onProgress: " + i);
+                            }
+                        });
+
+                    }
+                });
                 break;
         }
     }

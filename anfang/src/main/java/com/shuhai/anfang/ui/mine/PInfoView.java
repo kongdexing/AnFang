@@ -77,7 +77,7 @@ public class PInfoView extends BaseInfoView {
         }
     }
 
-    @OnClick({R.id.rlMinePhoto, R.id.rlMinePhone, R.id.rlAddressPhone, R.id.rlExit})
+    @OnClick({R.id.rlMinePhoto, R.id.rlMinePhone, R.id.rlAddressPhone})
     void viewClick(View view) {
         BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
         if (parent == null) {
@@ -113,9 +113,6 @@ public class PInfoView extends BaseInfoView {
                 } catch (Exception ex) {
                     Toast.makeText(mContext, R.string.toast_startcall_error, Toast.LENGTH_SHORT).show();
                 }
-                break;
-            case R.id.rlExit:
-                exitUser();
                 break;
         }
     }

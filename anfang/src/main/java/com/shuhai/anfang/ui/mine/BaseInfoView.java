@@ -31,38 +31,4 @@ public class BaseInfoView extends LinearLayout {
         super(context, attrs);
     }
 
-    public void exitUser() {
-        CustomDialog dialog = new CustomDialog(mContext);
-        dialog.setTitle(R.string.label_tip);
-        dialog.setMessage(R.string.msg_exit);
-        dialog.setAlertDialogClickListener(new CustomDialog.DialogClickListener() {
-            @Override
-            public void onPositiveClick() {
-                //清除数据
-                SharedPreferencesUtil.clearUserInfo(mContext);
-                GreenDaoHelper.getInstance().clearData();
-                UserHelper.getInstance().userExit();
-
-                EMClient.getInstance().logout(true, new EMCallBack() {
-                    @Override
-                    public void onSuccess() {
-                        ((MyInfoActivity) mContext).finish();
-                        Log.i(TAG, "logout onSuccess: ");
-                    }
-
-                    @Override
-                    public void onError(int i, String s) {
-                        Log.i(TAG, "logout onError: " + s);
-                    }
-
-                    @Override
-                    public void onProgress(int i, String s) {
-                        Log.i(TAG, "logout onProgress: " + i);
-                    }
-                });
-
-            }
-        });
-    }
-
 }

@@ -192,23 +192,6 @@
                     android:text="否" />
             </RelativeLayout>
 
-            <!--退出登录-->
-            <RelativeLayout
-                android:id="@+id/rlExit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:background="@drawable/mine_item_selector"
-                android:clickable="true">
-
-                <TextView
-                    style="@style/mineText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:text="@string/mine_exit" />
-
-            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 

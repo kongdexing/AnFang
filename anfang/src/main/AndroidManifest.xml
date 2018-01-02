@@ -151,6 +151,7 @@
             android:name=".ui.main.MainActivity"
             android:configChanges="orientation|keyboardHidden"
             android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustPan|stateHidden"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.main.SplashActivity"

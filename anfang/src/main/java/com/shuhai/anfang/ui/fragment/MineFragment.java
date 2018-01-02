@@ -58,8 +58,8 @@ public class MineFragment extends BaseFragment {
     @BindView(R.id.rlMyChild)
     RelativeLayout rlMyChild;
 
-    @BindView(R.id.rlMyBill)
-    RelativeLayout rlMyBill;
+//    @BindView(R.id.rlMyBill)
+//    RelativeLayout rlMyBill;
     @BindView(R.id.rlMyProperty)
     RelativeLayout rlMyProperty;
 
@@ -94,7 +94,7 @@ public class MineFragment extends BaseFragment {
             if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
                 rlMyChild.setVisibility(View.GONE);
                 rlMyClass.setVisibility(View.VISIBLE);
-                rlMyBill.setVisibility(View.GONE);
+//                rlMyBill.setVisibility(View.GONE);
                 rlMyProperty.setVisibility(View.GONE);
 
                 BeanTeacher teacher = GreenDaoHelper.getInstance().getCurrentTeacher();
@@ -115,7 +115,7 @@ public class MineFragment extends BaseFragment {
                 rlMyChild.setLayoutParams(params);
 
                 rlMyClass.setVisibility(View.GONE);
-                rlMyBill.setVisibility(View.VISIBLE);
+//                rlMyBill.setVisibility(View.VISIBLE);
                 rlMyProperty.setVisibility(View.VISIBLE);
 
                 BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
@@ -139,7 +139,7 @@ public class MineFragment extends BaseFragment {
 
             rlMyChild.setVisibility(View.VISIBLE);
             rlMyClass.setVisibility(View.VISIBLE);
-            rlMyBill.setVisibility(View.VISIBLE);
+//            rlMyBill.setVisibility(View.VISIBLE);
             rlMyProperty.setVisibility(View.VISIBLE);
             ll_unlogin.setVisibility(View.VISIBLE);
             ll_login.setVisibility(View.GONE);
