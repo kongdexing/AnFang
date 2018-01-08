@@ -47,4 +47,5 @@ dependencies {
     compile files('libs/hyphenatechat_3.3.5.jar')
     provided 'org.greenrobot:greendao:3.0.1'
     compile project(':processor')
+    compile project(':library')
 }

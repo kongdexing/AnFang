@@ -307,4 +307,9 @@
     <string name="toast_updatephoto_success">更新头像成功!</string>
     <string name="toast_updatephoto_fail">更新头像失败!</string>
     <string name="quiting_the_chat_room">正在退出聊天室……</string>
+
+    <string name="permission_camera_denied">未授予【相机】权限</string>
+    <string name="permission_camera_rationale">请求授予【相机】权限</string>
+    <string name="permission_camera_never_askagain">已禁止该应用的【相机】权限，请去设置中进行设置</string>
+
 </resources>
