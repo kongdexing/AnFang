@@ -7,6 +7,7 @@ import android.support.multidex.MultiDex;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.audiorecorder.AudioManager;
@@ -32,10 +33,14 @@ import com.shuhai.anfang.ui.main.MainActivity;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.message.PushAgent;
+import com.umeng.message.UmengNotificationClickHandler;
+import com.umeng.message.entity.UMessage;
 import com.xiaomi.ad.AdSdk;
 
 import java.io.File;
 import java.net.Proxy;
+import java.util.Map;
 
 public class XPTApplication extends Application {
 
@@ -103,6 +108,28 @@ public class XPTApplication extends Application {
         MobclickAgent.setCheckDevice(true);
         //日志加密设置
         MobclickAgent.enableEncrypt(true);
+
+        //友盟
+        final PushAgent mPushAgent = PushAgent.getInstance(this);
+        UmengNotificationClickHandler notificationClickHandler = new UmengNotificationClickHandler() {
+            @Override
+            public void dealWithCustomAction(Context context, UMessage msg) {
+                Toast.makeText(context, msg.custom, Toast.LENGTH_LONG).show();
+
+                Map<String, String> msgExtra = msg.extra;
+                String activity = msgExtra.get("activity");
+                String id = msgExtra.get("id");
+
+                Log.i(TAG, "dealWithCustomAction: " + msg.custom + msg.extra);
+                Log.i(TAG, "activity: " + activity + " id:" + id);
+
+
+
+
+            }
+        };
+        mPushAgent.setNotificationClickHandler(notificationClickHandler);
+
 
         AudioManager.getInstance(getCachePath());
         FileDownloader.init(getApplicationContext(), new DownloadMgrInitialParams.InitCustomMaker()

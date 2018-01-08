@@ -37,8 +37,6 @@ public class MessageFragment extends BaseFragment {
     private Unbinder unbinder;
     @BindView(R.id.viewpager)
     ViewPager viewPager;
-//    @BindView(R.id.indicator)
-//    TabPageIndicator indicator;
 
     @BindView(R.id.llNotify)
     LinearLayout llNotify;

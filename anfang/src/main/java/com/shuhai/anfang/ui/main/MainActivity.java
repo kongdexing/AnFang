@@ -161,11 +161,15 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
     @NeedsPermission(Manifest.permission.ACCESS_FINE_LOCATION)
     void onLocationAllow() {
         Log.i(TAG, "onLocationAllow: ");
-        mLocClient.registerLocationListener(this);
-        LocationClientOption option = new LocationClientOption();
-        option.setIsNeedAddress(true);
-        mLocClient.setLocOption(option);
-        mLocClient.start();
+        try {
+            mLocClient.registerLocationListener(this);
+            LocationClientOption option = new LocationClientOption();
+            option.setIsNeedAddress(true);
+            mLocClient.setLocOption(option);
+            mLocClient.start();
+        } catch (Exception ex) {
+            Log.e(TAG, "onLocationAllow: " + ex.getMessage());
+        }
     }
 
     @OnPermissionDenied(Manifest.permission.ACCESS_FINE_LOCATION)
@@ -200,6 +204,7 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
         if (homeFragment != null) {
             ((HomeFragment) homeFragment).getBanners();
         }
+        mLocClient.stop();
     }
 
     @OnLongClick({R.id.nav_home, R.id.nav_track, R.id.nav_mine})

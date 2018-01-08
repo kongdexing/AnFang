@@ -18,11 +18,12 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.hyphenate.chat.EMMessage;
+import com.hyphenate.easeui.ui.EaseBaseActivity;
 import com.shuhai.anfang.R;
 import com.shuhai.anfang.ease.Constant;
 import com.shuhai.anfang.ui.main.BaseActivity;
 
-public class ContextMenuActivity extends BaseActivity {
+public class ContextMenuActivity extends EaseBaseActivity {
     public static final int RESULT_CODE_COPY = 1;
     public static final int RESULT_CODE_DELETE = 2;
     public static final int RESULT_CODE_FORWARD = 3;
