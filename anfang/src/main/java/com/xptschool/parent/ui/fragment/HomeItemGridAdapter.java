@@ -94,7 +94,7 @@ public class HomeItemGridAdapter extends BaseAdapter {
                     }
                 } else {
                     //任意角色可见
-
+                    mContext.startActivity(item.getIntent());
                 }
             }
         });

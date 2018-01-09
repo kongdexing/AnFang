@@ -496,6 +496,8 @@ public class HomeFragment extends BaseFragment {
         Intent newsIntent = new Intent(mContext, WebViewActivity.class);
         newsIntent.putExtra(ExtraKey.WEB_URL, "http://school.xinpingtai.com/edunews/");
         homeItems.add(new HomeItem()
+                .setShowForParent(false)
+                .setShowForTeacher(false)
                 .setIconId(R.drawable.home_news)
                 .setTitle(getString(R.string.home_news))
                 .setIntent(newsIntent));
