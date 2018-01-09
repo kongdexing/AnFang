@@ -65,7 +65,7 @@ public class EaseLocalUserHelper {
     }
 
     /**
-     * 获取用户信息
+     * 获取用户昵称
      */
     public String getLocalUserNickName(String userId) {
         try {
@@ -78,5 +78,20 @@ public class EaseLocalUserHelper {
         }
     }
 
+    /**
+     * 获取用户信息
+     * @param userId
+     * @return
+     */
+    public EaseLocalUser getLocalUser(String userId) {
+        try {
+            if (readDaoSession != null) {
+                return readDaoSession.getEaseLocalUserDao().queryBuilder().where(EaseLocalUserDao.Properties.UserId.eq(userId)).unique();
+            }
+            return null;
+        } catch (Exception ex) {
+            return null;
+        }
+    }
 
 }

@@ -930,7 +930,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         cameraFile = new File(PathUtil.getInstance().getImagePath(), EMClient.getInstance().getCurrentUser()
                 + System.currentTimeMillis() + ".jpg");
         //noinspection ResultOfMethodCallIgnored
-        Uri photoURI = FileProvider.getUriForFile(getActivity(), "com.xptschool.anfang.fileProvider", cameraFile);
+        Uri photoURI = FileProvider.getUriForFile(getActivity(), "com.xptschool.parent.fileProvider", cameraFile);
         //Uri.fromFile(cameraFile)
 
         cameraFile.getParentFile().mkdirs();

@@ -24,6 +24,8 @@ public class EaseLocalUserDao extends AbstractDao<EaseLocalUser, String> {
     public static class Properties {
         public final static Property UserId = new Property(0, String.class, "userId", true, "USER_ID");
         public final static Property NickName = new Property(1, String.class, "nickName", false, "NICK_NAME");
+        public final static Property Type = new Property(2, String.class, "type", false, "TYPE");
+        public final static Property Sex = new Property(3, String.class, "sex", false, "SEX");
     };
 
 
@@ -40,7 +42,9 @@ public class EaseLocalUserDao extends AbstractDao<EaseLocalUser, String> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"EASE_LOCAL_USER\" (" + //
                 "\"USER_ID\" TEXT PRIMARY KEY NOT NULL ," + // 0: userId
-                "\"NICK_NAME\" TEXT);"); // 1: nickName
+                "\"NICK_NAME\" TEXT," + // 1: nickName
+                "\"TYPE\" TEXT," + // 2: type
+                "\"SEX\" TEXT);"); // 3: sex
     }
 
     /** Drops the underlying database table. */
@@ -62,6 +66,16 @@ public class EaseLocalUserDao extends AbstractDao<EaseLocalUser, String> {
         if (nickName != null) {
             stmt.bindString(2, nickName);
         }
+ 
+        String type = entity.getType();
+        if (type != null) {
+            stmt.bindString(3, type);
+        }
+ 
+        String sex = entity.getSex();
+        if (sex != null) {
+            stmt.bindString(4, sex);
+        }
     }
 
     @Override
@@ -77,6 +91,16 @@ public class EaseLocalUserDao extends AbstractDao<EaseLocalUser, String> {
         if (nickName != null) {
             stmt.bindString(2, nickName);
         }
+ 
+        String type = entity.getType();
+        if (type != null) {
+            stmt.bindString(3, type);
+        }
+ 
+        String sex = entity.getSex();
+        if (sex != null) {
+            stmt.bindString(4, sex);
+        }
     }
 
     @Override
@@ -88,7 +112,9 @@ public class EaseLocalUserDao extends AbstractDao<EaseLocalUser, String> {
     public EaseLocalUser readEntity(Cursor cursor, int offset) {
         EaseLocalUser entity = new EaseLocalUser( //
             cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // userId
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1) // nickName
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // nickName
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // type
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // sex
         );
         return entity;
     }
@@ -97,6 +123,8 @@ public class EaseLocalUserDao extends AbstractDao<EaseLocalUser, String> {
     public void readEntity(Cursor cursor, EaseLocalUser entity, int offset) {
         entity.setUserId(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
         entity.setNickName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setType(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setSex(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
      }
     
     @Override

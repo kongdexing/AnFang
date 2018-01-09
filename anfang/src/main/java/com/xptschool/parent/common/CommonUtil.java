@@ -22,6 +22,8 @@ import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.CoordinateConverter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.hyphenate.easeui.model.EaseLocalUser;
+import com.hyphenate.easeui.utils.EaseLocalUserHelper;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 import com.xptschool.parent.R;
@@ -265,15 +267,11 @@ public class CommonUtil {
         } else if (type.equals(UserType.TEACHER.toString())) {
             CommonUtil.getBeanClassesByHttpResult(jsonData.getJSONArray("class").toString());
             CommonUtil.getBeanCoursesByHttpResult(jsonData.getJSONArray("course").toString());
-            JSONObject jsonLogin = jsonData.getJSONObject("login");
-            Gson gson = new Gson();
-            BeanTeacher teacher = gson.fromJson(jsonLogin.toString(), BeanTeacher.class);
-            teacher.setLogin_name(account);
-            GreenDaoHelper.getInstance().insertTeacher(teacher);
-        } else if (type.equals(UserType.VISITOR.toString())){
+            CommonUtil.initTeacherInfoByHttpResult(jsonData.getJSONObject("login").toString(), account);
+        } else if (type.equals(UserType.VISITOR.toString())) {
             //游客
             JSONObject jsonLogin = jsonData.getJSONObject("login");
-            SharedPreferencesUtil.saveData(XPTApplication.getInstance(),SharedPreferencesUtil.KEY_VISITOR_NAME,jsonLogin.get("name"));
+            SharedPreferencesUtil.saveData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_VISITOR_NAME, jsonLogin.get("name"));
         }
         //删除联系人
 //        GreenDaoHelper.getInstance().deleteContact();
@@ -314,6 +312,35 @@ public class CommonUtil {
         parent.setLoginName(login_name);
 
         GreenDaoHelper.getInstance().insertParent(parent);
+
+        EaseLocalUser localUser = new EaseLocalUser();
+        localUser.setUserId(parent.getU_id());
+        localUser.setNickName(parent.getParent_name());
+        localUser.setSex(parent.getSex());
+        localUser.setType(UserType.PARENT.toString());
+        EaseLocalUserHelper.getInstance().insertOrReplaceLocalUser(localUser);
+    }
+
+    /**
+     * 登录成功后解析教师信息
+     *
+     * @param httpResult
+     * @param login_name
+     * @throws
+     */
+    private static void initTeacherInfoByHttpResult(String httpResult, String login_name) throws JSONException {
+        JSONObject jsonLogin = new JSONObject(httpResult);
+        Gson gson = new Gson();
+        BeanTeacher teacher = gson.fromJson(jsonLogin.toString(), BeanTeacher.class);
+        teacher.setLogin_name(login_name);
+        GreenDaoHelper.getInstance().insertTeacher(teacher);
+
+        EaseLocalUser localUser = new EaseLocalUser();
+        localUser.setUserId(teacher.getU_id());
+        localUser.setNickName(teacher.getName());
+        localUser.setSex(teacher.getSex());
+        localUser.setType(UserType.TEACHER.toString());
+        EaseLocalUserHelper.getInstance().insertOrReplaceLocalUser(localUser);
     }
 
     /**

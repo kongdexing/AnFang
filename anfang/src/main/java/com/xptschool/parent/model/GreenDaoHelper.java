@@ -8,6 +8,7 @@ import com.hyphenate.easeui.model.EaseLocalUser;
 import com.hyphenate.easeui.utils.EaseLocalUserHelper;
 import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.SharedPreferencesUtil;
+import com.xptschool.parent.common.UserType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -188,8 +189,9 @@ public class GreenDaoHelper {
             EaseLocalUser localUser = new EaseLocalUser();
             localUser.setUserId(parent.getUser_id());
             localUser.setNickName(parent.getName());
+            localUser.setSex(parent.getSex());
+            localUser.setType(UserType.PARENT.toString());
             EaseLocalUserHelper.getInstance().insertOrReplaceLocalUser(localUser);
-
         }
 
     }
@@ -218,6 +220,8 @@ public class GreenDaoHelper {
             EaseLocalUser localUser = new EaseLocalUser();
             localUser.setUserId(teacher.getU_id());
             localUser.setNickName(teacher.getName());
+            localUser.setSex(teacher.getSex());
+            localUser.setType(UserType.TEACHER.toString());
             EaseLocalUserHelper.getInstance().insertOrReplaceLocalUser(localUser);
 
         }
