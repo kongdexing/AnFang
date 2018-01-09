@@ -3,7 +3,7 @@ apply plugin: 'org.greenrobot.greendao'
 
 def MZAppId = project.getProperties().get("MZ_APP_ID") ?: "100999"
 def MZAppKey = project.getProperties().get("MZ_APP_KEY") ?: "80355073480594a99470dcacccd8cf2c"
-def appPackageName = project.getProperties().get("PACKAGE_NAME") ?: "com.shuhai.anfang"
+def appPackageName = project.getProperties().get("PACKAGE_NAME") ?: "com.xptschool.anfang"
 
 println("appID = ${MZAppId} appKey = ${MZAppKey} appPackageName = ${appPackageName}")
 
@@ -20,7 +20,7 @@ android {
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
-        applicationId "com.shuhai.anfang"
+        applicationId "com.xptschool.parent"
         minSdkVersion 19
         targetSdkVersion 24
         versionCode 1

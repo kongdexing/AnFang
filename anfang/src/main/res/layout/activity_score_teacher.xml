@@ -126,7 +126,7 @@
                         android:textColor="#850"
                         android:visibility="gone" />
 
-                    <com.shuhai.anfang.ui.score.SyncScrollHorizontalView
+                    <com.xptschool.parent.ui.score.SyncScrollHorizontalView
                         android:id="@+id/item_scroll_title"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
@@ -138,7 +138,7 @@
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
                             android:orientation="horizontal"></LinearLayout>
-                    </com.shuhai.anfang.ui.score.SyncScrollHorizontalView>
+                    </com.xptschool.parent.ui.score.SyncScrollHorizontalView>
                 </LinearLayout>
 
                 <ListView

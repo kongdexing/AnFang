@@ -23,7 +23,7 @@
         android:background="@drawable/ease_mm_listitem"
         android:duplicateParentState="true" >
 
-        <com.shuhai.anfang.easeui.widget.EaseImageView
+        <com.xptschool.parent.easeui.widget.EaseImageView
             android:id="@+id/avatar"
             android:layout_width="43dp"
             android:layout_height="43dp"

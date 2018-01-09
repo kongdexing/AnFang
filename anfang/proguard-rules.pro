@@ -41,8 +41,8 @@
 -keep public class * extends android.view.View
 -keep public class com.android.vending.licensing.ILicensingService
 -keep class android.support.** {*;}
--keep class com.shuhai.anfang.**{*;}
--dontwarn com.shuhai.anfang.**
+-keep class com.xptschool.parent.**{*;}
+-dontwarn com.xptschool.parent.**
 -keep public class * extends android.view.View{
     *** get*();
     void set*(***);
@@ -108,7 +108,7 @@
 #---------------------------------------------------------------------------------------------------
 #---------------------------------实体类---------------------------------
 #修改成你对应的包名
--keep class com.shuhai.anfang.model.** { *; }
+-keep class com.xptschool.parent.model.** { *; }
 
 #---------------------------------第三方包-------------------------------
 ##greendao

@@ -14,7 +14,7 @@
         android:gravity="center"
         android:text="" />
 
-    <com.shuhai.anfang.ui.score.SyncScrollHorizontalView
+    <com.xptschool.parent.ui.score.SyncScrollHorizontalView
         android:id="@+id/item_chscroll_scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,6 +26,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"></LinearLayout>
-    </com.shuhai.anfang.ui.score.SyncScrollHorizontalView>
+    </com.xptschool.parent.ui.score.SyncScrollHorizontalView>
 
 </LinearLayout>

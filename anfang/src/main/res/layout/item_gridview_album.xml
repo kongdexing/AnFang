@@ -6,7 +6,7 @@
     android:background="@color/colorWhite"
     android:orientation="vertical">
 
-    <com.shuhai.anfang.view.FilterImageView
+    <com.xptschool.parent.view.FilterImageView
         android:id="@+id/post_add_pic"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/dp_100"

@@ -240,7 +240,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <com.shuhai.anfang.ui.album.AlbumParentViewPager
+    <com.xptschool.parent.ui.album.AlbumParentViewPager
         android:id="@+id/albumviewpager"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

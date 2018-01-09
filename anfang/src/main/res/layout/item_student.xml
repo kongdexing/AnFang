@@ -8,7 +8,7 @@
     android:clickable="true"
     android:orientation="horizontal">
 
-    <com.shuhai.anfang.view.FilterImageView
+    <com.xptschool.parent.view.FilterImageView
         android:id="@+id/imgStudent"
         android:layout_width="@dimen/dp_40"
         android:layout_height="@dimen/dp_40"

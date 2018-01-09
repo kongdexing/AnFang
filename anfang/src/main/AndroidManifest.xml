@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.shuhai.anfang">
+    package="com.xptschool.parent">
 
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <!-- To retrieve the account name (email) as part of sign-in: -->
@@ -51,10 +51,10 @@
         android:required="false" />
 
     <permission
-        android:name="com.shuhai.anfang.permission.MIPUSH_RECEIVE"
+        android:name="com.xptschool.parent.permission.MIPUSH_RECEIVE"
         android:protectionLevel="signature" />
     <!-- 这里com.xiaomi.mipushdemo改成app的包名 -->
-    <uses-permission android:name="com.shuhai.anfang.permission.MIPUSH_RECEIVE" />
+    <uses-permission android:name="com.xptschool.anfang.permission.MIPUSH_RECEIVE" />
     <!-- 这里com.xiaomi.mipushdemo改成app的包名 -->
 
 
@@ -398,7 +398,7 @@
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.shuhai.anfang.fileProvider"
+            android:authorities=".fileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -409,7 +409,7 @@
         <!-- 设置环信应用的appkey -->
         <meta-data
             android:name="EASEMOB_APPKEY"
-            android:value="1152171201178499#shuhai-anfang" />
+            android:value="1152171201178499#xptschool-anfang" />
         <!-- 声明sdk所需的service -->
         <service
             android:name="com.hyphenate.chat.EMChatService"
@@ -473,7 +473,7 @@
 
 
         <!-- <receiver -->
-        <!-- android:name="com.shuhai.anfang.receiver.MIMessageReceiver" -->
+        <!-- android:name="com.xptschool.anfang.receiver.MIMessageReceiver" -->
         <!-- android:exported="true"> -->
         <!-- <intent-filter> -->
         <!-- <action android:name="com.xiaomi.mipush.RECEIVE_MESSAGE" /> -->
@@ -504,7 +504,7 @@
         <!-- “xxx.xxx.xxx”用实际的应用包名替换 -->
         <provider
             android:name="com.huawei.hms.update.provider.UpdateProvider"
-            android:authorities="com.shuhai.anfang.hms.update.provider"
+            android:authorities="com.xptschool.parent.hms.update.provider"
             android:exported="false"
             android:grantUriPermissions="true" />
 

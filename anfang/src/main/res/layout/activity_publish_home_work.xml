@@ -287,7 +287,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <com.shuhai.anfang.ui.album.AlbumTeacherViewPager
+    <com.xptschool.parent.ui.album.AlbumTeacherViewPager
         android:id="@+id/albumviewpager"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

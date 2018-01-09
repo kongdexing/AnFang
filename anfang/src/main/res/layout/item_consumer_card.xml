@@ -10,7 +10,7 @@
     android:clickable="true"
     android:orientation="vertical">
 
-    <com.shuhai.anfang.view.RoundImageView
+    <com.xptschool.parent.view.RoundImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
