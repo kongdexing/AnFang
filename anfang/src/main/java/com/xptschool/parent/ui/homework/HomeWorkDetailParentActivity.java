@@ -98,25 +98,6 @@ public class HomeWorkDetailParentActivity extends VoicePlayActivity {
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Bundle bun = getIntent().getExtras();
-        if (bun != null) {
-            try {
-                Set<String> keySet = bun.keySet();
-                for (String key : keySet) {
-                    String value = bun.getString(key);
-                    ToastUtils.showToast(this, "作业id为：" + value);
-                }
-            } catch (Exception ex) {
-                ToastUtils.showToast(this, "");
-            }
-        } else {
-            ToastUtils.showToast(this, "bundle is null：");
-        }
-    }
-
     private void initData() {
         myPicGridAdapter = new AlbumGridParentAdapter(this, new AlbumGridParentAdapter.MyGridViewClickListener() {
             @Override
@@ -144,12 +125,12 @@ public class HomeWorkDetailParentActivity extends VoicePlayActivity {
             txtCompleteTime.setText(currentHomeWork.getFinish_time());
             txtTeacher.setText(currentHomeWork.getUser_name());
             edtContent.setText(currentHomeWork.getWork_content());
-            myPicGridAdapter.initDate(currentHomeWork.getFile_path(), false);
-
             txtPushTime.setClickable(false);
             txtCompleteTime.setClickable(false);
             txtClassName.setText(currentHomeWork.getG_name() + currentHomeWork.getC_name());
             txtSubject.setText(currentHomeWork.getCrs_name());
+
+            myPicGridAdapter.initDate(currentHomeWork.getFile_path(), false);
         }
 
         initVoice(currentHomeWork);
@@ -221,6 +202,7 @@ public class HomeWorkDetailParentActivity extends VoicePlayActivity {
                             case HttpAction.SUCCESS:
                                 try {
                                     JSONObject obj = new JSONObject(volleyHttpResult.getData().toString());//将json字符串转换为json对象
+                                    currentHomeWork = new BeanHomeWork();
                                     currentHomeWork.setG_name(obj.getString("g_name"));
                                     currentHomeWork.setC_name(obj.getString("c_name"));
                                     currentHomeWork.setCrs_name(obj.getString("crs_name"));

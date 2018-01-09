@@ -119,8 +119,6 @@ public class XPTApplication extends Application {
         UmengNotificationClickHandler notificationClickHandler = new UmengNotificationClickHandler() {
             @Override
             public void dealWithCustomAction(Context context, UMessage msg) {
-                Toast.makeText(context, msg.custom, Toast.LENGTH_LONG).show();
-
 //              @param activity
 //                |   notice  公告模块
 //                |   leave   请假管理

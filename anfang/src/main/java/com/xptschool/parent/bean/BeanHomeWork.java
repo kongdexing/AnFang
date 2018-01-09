@@ -34,7 +34,7 @@ public class BeanHomeWork implements Parcelable {
     private String user_id;
     private String user_name;
     private int subjectBgColor;
-    private List<String> file_path;
+    private List<String> file_path = new ArrayList<>();
     private String amr_file;
 
     public String getH_id() {
