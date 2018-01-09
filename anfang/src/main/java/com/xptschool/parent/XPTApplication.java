@@ -41,6 +41,8 @@ import com.umeng.message.UmengNotificationClickHandler;
 import com.umeng.message.entity.UMessage;
 import com.xiaomi.ad.AdSdk;
 
+import org.json.JSONObject;
+
 import java.io.File;
 import java.net.Proxy;
 import java.util.Map;
@@ -128,20 +130,24 @@ public class XPTApplication extends Application {
 //                |   attendance  考勤
 //                @param id
 
-                Map<String, String> msgExtra = msg.extra;
-                String activity = msgExtra.get("activity");
-                String id = msgExtra.get("id");
+                try {
+                    JSONObject object = new JSONObject(msg.custom);
+//                    Map<String, String> msgExtra = msg.extra;
+                    String activity = object.getString("activity");
+                    String id = object.getString("id");
 
-                Log.i(TAG, "dealWithCustomAction: " + msg.custom + msg.extra);
-                Log.i(TAG, "activity: " + activity + " id:" + id);
-                if ("homework".equals(activity)) {
-                    Intent intent = new Intent(XPTApplication.this, HomeWorkDetailParentActivity.class);
-                    intent.putExtra(ExtraKey.DETAIL_ID, id);
-                    startActivity(intent);
-                } else if ("notice".equals(activity)) {
+                    Log.i(TAG, "dealWithCustomAction: " + msg.custom);
+                    Log.i(TAG, "activity: " + activity + " id:" + id);
+                    if ("homework".equals(activity)) {
+                        Intent intent = new Intent(XPTApplication.this, HomeWorkDetailParentActivity.class);
+                        intent.putExtra(ExtraKey.DETAIL_ID, id);
+                        startActivity(intent);
+                    } else if ("notice".equals(activity)) {
+
+                    }
+                } catch (Exception ex) {
 
                 }
-
 
             }
         };

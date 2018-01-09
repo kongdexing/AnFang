@@ -26,6 +26,8 @@ import com.xptschool.parent.ui.album.AlbumParentViewPager;
 import com.xptschool.parent.ui.album.LocalImagePHelper;
 import com.xptschool.parent.util.ToastUtils;
 
+import org.json.JSONObject;
+
 import java.util.List;
 import java.util.Set;
 
@@ -208,19 +210,40 @@ public class HomeWorkDetailParentActivity extends VoicePlayActivity {
                     @Override
                     public void onStart() {
                         super.onStart();
-
+                        showProgress("正在获取作业信息...");
                     }
 
                     @Override
                     public void onResponse(VolleyHttpResult volleyHttpResult) {
                         super.onResponse(volleyHttpResult);
-
+                        hideProgress();
+                        switch (volleyHttpResult.getStatus()) {
+                            case HttpAction.SUCCESS:
+                                try {
+                                    JSONObject obj = new JSONObject(volleyHttpResult.getData().toString());//将json字符串转换为json对象
+                                    currentHomeWork.setG_name(obj.getString("g_name"));
+                                    currentHomeWork.setC_name(obj.getString("c_name"));
+                                    currentHomeWork.setCrs_name(obj.getString("crs_name"));
+//                                    currentHomeWork.setUser_name(obj.getString(""));
+                                    currentHomeWork.setCreate_time(obj.getString("create_time"));
+                                    currentHomeWork.setFinish_time(obj.getString("finish_time"));
+                                    currentHomeWork.setName(obj.getString("name"));
+                                    currentHomeWork.setWork_content(obj.getString("work_content"));
+                                    initData();
+                                } catch (Exception ex) {
+                                    ToastUtils.showToast(HomeWorkDetailParentActivity.this, "作业获取失败");
+                                }
+                                break;
+                            default:
+                                ToastUtils.showToast(HomeWorkDetailParentActivity.this, "作业获取失败");
+                                break;
+                        }
                     }
 
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         super.onErrorResponse(volleyError);
-
+                        hideProgress();
                     }
                 });
     }
