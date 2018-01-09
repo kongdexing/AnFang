@@ -35,6 +35,7 @@ public class HttpAction {
     public static String HOMEWORK_QUERY = HEAD + "Homework/query";
     public static String HOMEWORK_DEL = HEAD + "Homework/delete";
     public static String HOMEWORK_ADD = HEAD + "Homework/add";
+    public static String HOMEWORK_DETAIL = HEAD + "Homework/getDetail";
 
     //班级公告
     public static String NOTICE_QUERY = HEAD + "Notice/query";

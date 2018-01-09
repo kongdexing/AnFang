@@ -2,6 +2,7 @@ package com.xptschool.parent;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Environment;
 import android.support.multidex.MultiDex;
 import android.util.Log;
@@ -23,12 +24,14 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
+import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.ease.EaseHelper;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.album.LocalImagePHelper;
 import com.xptschool.parent.ui.album.LocalImageTHelper;
+import com.xptschool.parent.ui.homework.HomeWorkDetailParentActivity;
 import com.xptschool.parent.ui.main.MainActivity;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
@@ -116,14 +119,28 @@ public class XPTApplication extends Application {
             public void dealWithCustomAction(Context context, UMessage msg) {
                 Toast.makeText(context, msg.custom, Toast.LENGTH_LONG).show();
 
+//              @param activity
+//                |   notice  公告模块
+//                |   leave   请假管理
+//                |   homework 作业
+//                |   warning  警报
+//                |   chat    实时聊天
+//                |   attendance  考勤
+//                @param id
+
                 Map<String, String> msgExtra = msg.extra;
                 String activity = msgExtra.get("activity");
                 String id = msgExtra.get("id");
 
                 Log.i(TAG, "dealWithCustomAction: " + msg.custom + msg.extra);
                 Log.i(TAG, "activity: " + activity + " id:" + id);
+                if ("homework".equals(activity)) {
+                    Intent intent = new Intent(XPTApplication.this, HomeWorkDetailParentActivity.class);
+                    intent.putExtra(ExtraKey.DETAIL_ID, id);
+                    startActivity(intent);
+                } else if ("notice".equals(activity)) {
 
-
+                }
 
 
             }
@@ -204,9 +221,9 @@ public class XPTApplication extends Application {
             cacheDir = getCacheDir();
         }
         File sdCardDir = Environment.getExternalStorageDirectory();//获取SDCard目录
-//            config.diskCache(new UnlimitedDiskCache(new File(sdCardDir.getAbsolutePath() + "/XPTteacher")));
+//            config.diskCache(new UnlimitedDiskCache(new File(sdCardDir.getAbsolutePath() + "/XPTSchool")));
         if (cacheDir == null) {
-            cacheDir = new File(sdCardDir.getAbsolutePath() + "/XPTteacher");
+            cacheDir = new File(sdCardDir.getAbsolutePath() + "/XPTSchool");
             Log.i(TAG, "cacheDir is null " + cacheDir.getAbsolutePath());
         }
 

@@ -25,6 +25,8 @@ public class ExtraKey {
     public static final String WEB_TITLE = "web_title";
     public static final String LEARNING_MODEL = "learning_model";
 
+    public static final String DETAIL_ID = "detail_id";
+
 
 
 }

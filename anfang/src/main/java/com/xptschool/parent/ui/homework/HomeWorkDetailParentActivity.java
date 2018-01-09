@@ -2,6 +2,7 @@ package com.xptschool.parent.ui.homework;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.AnimationSet;
@@ -10,10 +11,16 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
+import com.android.volley.common.VolleyHttpParamsEntity;
+import com.android.volley.common.VolleyHttpResult;
+import com.android.volley.common.VolleyHttpService;
 import com.android.widget.mygridview.MyGridView;
 import com.xptschool.parent.R;
 import com.xptschool.parent.bean.BeanHomeWork;
 import com.xptschool.parent.common.ExtraKey;
+import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.ui.album.AlbumGridParentAdapter;
 import com.xptschool.parent.ui.album.AlbumParentViewPager;
 import com.xptschool.parent.ui.album.LocalImagePHelper;
@@ -73,9 +80,20 @@ public class HomeWorkDetailParentActivity extends VoicePlayActivity {
         setTitle(R.string.homework_detail);
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            currentHomeWork = bundle.getParcelable(ExtraKey.HOMEWORK_DETAIL);
+            try {
+                currentHomeWork = bundle.getParcelable(ExtraKey.HOMEWORK_DETAIL);
+                if (currentHomeWork != null) {
+                    initData();
+                }
+                String id = bundle.getString(ExtraKey.DETAIL_ID);
+                Log.i(TAG, "onCreate: " + id);
+                if (id != null && !id.isEmpty()) {
+                    getHomeWorkDetail(id);
+                }
+            } catch (Exception ex) {
+                Log.i(TAG, "onCreate bundle error: " + ex.getMessage());
+            }
         }
-        initData();
     }
 
     @Override
@@ -97,14 +115,7 @@ public class HomeWorkDetailParentActivity extends VoicePlayActivity {
         }
     }
 
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        setIntent(intent);
-    }
-
     private void initData() {
-
         myPicGridAdapter = new AlbumGridParentAdapter(this, new AlbumGridParentAdapter.MyGridViewClickListener() {
             @Override
             public void onGridViewItemClick(int position, String imgPath) {
@@ -189,6 +200,29 @@ public class HomeWorkDetailParentActivity extends VoicePlayActivity {
         alphaAnimation.setDuration(200);
         set.addAnimation(alphaAnimation);
         albumviewpager.startAnimation(set);
+    }
+
+    private void getHomeWorkDetail(String id) {
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.HOMEWORK_DETAIL,
+                new VolleyHttpParamsEntity().addParam("id", id), new MyVolleyRequestListener() {
+                    @Override
+                    public void onStart() {
+                        super.onStart();
+
+                    }
+
+                    @Override
+                    public void onResponse(VolleyHttpResult volleyHttpResult) {
+                        super.onResponse(volleyHttpResult);
+
+                    }
+
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        super.onErrorResponse(volleyError);
+
+                    }
+                });
     }
 
     @Override
