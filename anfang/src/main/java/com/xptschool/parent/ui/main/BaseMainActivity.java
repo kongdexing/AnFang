@@ -13,6 +13,7 @@ import com.huawei.hms.support.api.push.HuaweiPush;
 import com.huawei.hms.support.api.push.TokenResult;
 import com.meizu.cloud.pushsdk.PushManager;
 import com.xptschool.parent.XPTApplication;
+import com.xptschool.parent.common.UserHelper;
 import com.xptschool.parent.push.DeviceHelper;
 import com.xptschool.parent.push.UpushTokenHelper;
 import com.umeng.analytics.MobclickAgent;
@@ -34,6 +35,22 @@ public class BaseMainActivity extends BaseLoginMainActivity implements HuaweiApi
         super.onCreate(savedInstanceState);
         PushAgent.getInstance(this).onAppStart();
 
+        UserHelper.getInstance().addUserChangeListener(new UserHelper.UserChangeListener() {
+            @Override
+            public void onUserLoginSuccess() {
+                //用户切换后，重新获取token 信息
+                registerPush();
+            }
+
+            @Override
+            public void onUserExit() {
+
+            }
+        });
+        registerPush();
+    }
+
+    private void registerPush() {
         //依据手机类型，注册不同推送平台
         String model = android.os.Build.MODEL;
         String carrier = android.os.Build.MANUFACTURER;
