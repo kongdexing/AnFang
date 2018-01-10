@@ -98,7 +98,7 @@ public class GreenDaoHelper {
     }
 
     /**
-     * 添加班级
+     * 添加孩子
      *
      * @param students
      */

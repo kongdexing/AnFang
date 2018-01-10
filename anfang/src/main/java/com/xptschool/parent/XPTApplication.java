@@ -40,6 +40,7 @@ import com.umeng.message.PushAgent;
 import com.umeng.message.UmengNotificationClickHandler;
 import com.umeng.message.entity.UMessage;
 import com.xiaomi.ad.AdSdk;
+import com.xptschool.parent.ui.notice.NoticeDetailActivity;
 
 import org.json.JSONObject;
 
@@ -141,7 +142,9 @@ public class XPTApplication extends Application {
                         intent.putExtra(ExtraKey.DETAIL_ID, id);
                         startActivity(intent);
                     } else if ("notice".equals(activity)) {
-
+                        Intent intent = new Intent(XPTApplication.this, NoticeDetailActivity.class);
+                        intent.putExtra(ExtraKey.DETAIL_ID, id);
+                        startActivity(intent);
                     }
                 } catch (Exception ex) {
 

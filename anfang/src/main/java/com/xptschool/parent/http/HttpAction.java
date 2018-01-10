@@ -41,6 +41,7 @@ public class HttpAction {
     public static String NOTICE_QUERY = HEAD + "Notice/query";
     public static String NOTICE_DEL = HEAD + "Notice/delete";
     public static String NOTICE_ADD = HEAD + "Notice/add";
+    public static String NOTICE_DETAIL = HEAD + "Notice/getDetail";
 
     public static String GET_TEACHER_BYCID = HEAD + "Comment/get_teacher_list";
 
@@ -94,7 +95,7 @@ public class HttpAction {
     public static String SetCard_Phone = HEAD + "StudentCard/set_cardphone";
 
     //上传token
-    public static String HOOK_PUSH_TOKEN = HEAD + "/Hook/addPushToken";
+    public static String HOOK_PUSH_TOKEN = HEAD + "Hook/addPushToken";
 
     //添加监护人
     public static String ADD_TUTELAGE = HEAD + "AddGuardian/add";
