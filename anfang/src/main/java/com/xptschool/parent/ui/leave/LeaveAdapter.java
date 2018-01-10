@@ -105,7 +105,7 @@ public class LeaveAdapter extends BaseRecycleAdapter {
         mHolder.llLeaveItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, LeaveDetailActivity.class);
+                Intent intent = new Intent(mContext, LeavePDetailActivity.class);
                 intent.putExtra(ExtraKey.LEAVE_DETAIL, beanLeave);
                 ((LeaveActivity) mContext).startActivityForResult(intent, 1);
             }

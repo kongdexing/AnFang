@@ -32,6 +32,8 @@ import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.album.LocalImagePHelper;
 import com.xptschool.parent.ui.album.LocalImageTHelper;
 import com.xptschool.parent.ui.homework.HomeWorkDetailParentActivity;
+import com.xptschool.parent.ui.leave.LeavePDetailActivity;
+import com.xptschool.parent.ui.leave.LeaveTDetailActivity;
 import com.xptschool.parent.ui.main.MainActivity;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
@@ -145,6 +147,21 @@ public class XPTApplication extends Application {
                         Intent intent = new Intent(XPTApplication.this, NoticeDetailActivity.class);
                         intent.putExtra(ExtraKey.DETAIL_ID, id);
                         startActivity(intent);
+                    } else if ("attendance".equals(activity)) {
+                        Intent intent = new Intent(XPTApplication.this, NoticeDetailActivity.class);
+                        intent.putExtra(ExtraKey.DETAIL_ID, id);
+                        startActivity(intent);
+                    } else if ("leave".equals(activity)) {
+                        if (getCurrent_user_type().equals(UserType.PARENT)) {
+                            Intent intent = new Intent(XPTApplication.this, LeavePDetailActivity.class);
+                            intent.putExtra(ExtraKey.DETAIL_ID, id);
+                            startActivity(intent);
+                        } else if (getCurrent_user_type().equals(UserType.TEACHER)) {
+                            Intent intent = new Intent(XPTApplication.this, LeaveTDetailActivity.class);
+                            intent.putExtra(ExtraKey.DETAIL_ID, id);
+                            startActivity(intent);
+                        }
+
                     }
                 } catch (Exception ex) {
 

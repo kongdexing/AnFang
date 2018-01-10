@@ -33,8 +33,11 @@ import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.SpinnerTeacher;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.main.BaseActivity;
+import com.xptschool.parent.util.ToastUtils;
 import com.xptschool.parent.view.CustomDialog;
 import com.xptschool.parent.view.TimePickerPopupWindow;
+
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -42,9 +45,9 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * 请假管理
+ * 家长发布请假
  */
-public class LeaveDetailActivity extends BaseActivity {
+public class LeavePDetailActivity extends BaseActivity {
 
     @BindView(R.id.spnTeacher)
     MaterialSpinner spnTeacher;
@@ -94,28 +97,21 @@ public class LeaveDetailActivity extends BaseActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             currentLeave = bundle.getParcelable(ExtraKey.LEAVE_DETAIL);
-        }
-
-        initData();
-
-        if (currentLeave != null) {
-            //如果已批准，则不能编辑
-            if (currentLeave.getStatus().equals("0")) {
-                setTxtRight("编辑");
-                setTextRightClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        setViewEnable(true);
-                        btnSubmit.setVisibility(View.VISIBLE);
-                        setTxtRight("");
-
-                    }
-                });
+            String id = bundle.getString(ExtraKey.DETAIL_ID);
+            Log.i(TAG, "onCreate: " + id);
+            if (id != null && !id.isEmpty()) {
+                getLeaveDetail(id);
             }
         }
+
+        if (currentLeave != null) {
+            initData();
+        }
+
+        initView();
     }
 
-    private void initData() {
+    private void initView(){
         //学生
         List<BeanStudent> students = GreenDaoHelper.getInstance().getStudents();
         spnStudents.setItems(students);
@@ -143,6 +139,22 @@ public class LeaveDetailActivity extends BaseActivity {
         spnTeacher.setEnabled(false);
 
         spnLeaveType.setItems(leaveTypes);
+    }
+
+    private void initData() {
+        //如果已批准，则不能编辑
+        if (currentLeave.getStatus().equals("0")) {
+            setTxtRight("编辑");
+            setTextRightClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    setViewEnable(true);
+                    btnSubmit.setVisibility(View.VISIBLE);
+                    setTxtRight("");
+                }
+            });
+        }
+
         if (currentLeave != null) {
             if (currentLeave.getLeave_type().equals("1")) {
                 spnLeaveType.setSelectedIndex(0);
@@ -197,7 +209,7 @@ public class LeaveDetailActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.txtSTime:
                 if (pushDate == null) {
-                    pushDate = new TimePickerPopupWindow(LeaveDetailActivity.this, txtSTime.getText().toString(),
+                    pushDate = new TimePickerPopupWindow(LeavePDetailActivity.this, txtSTime.getText().toString(),
                             new TimePickerPopupWindow.OnTimePickerClickListener() {
 
                                 @Override
@@ -221,7 +233,7 @@ public class LeaveDetailActivity extends BaseActivity {
                 break;
             case R.id.txtETime:
                 if (completeDate == null) {
-                    completeDate = new TimePickerPopupWindow(LeaveDetailActivity.this, txtETime.getText().toString(),
+                    completeDate = new TimePickerPopupWindow(LeavePDetailActivity.this, txtETime.getText().toString(),
                             new TimePickerPopupWindow.OnTimePickerClickListener() {
 
                                 @Override
@@ -262,6 +274,68 @@ public class LeaveDetailActivity extends BaseActivity {
                 });
                 break;
         }
+    }
+
+    private void getLeaveDetail(String id) {
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Leave_Detail,
+                new VolleyHttpParamsEntity().addParam("id", id), new MyVolleyRequestListener() {
+                    @Override
+                    public void onStart() {
+                        super.onStart();
+                        showProgress("正在获取请假信息...");
+                    }
+
+                    @Override
+                    public void onResponse(VolleyHttpResult volleyHttpResult) {
+                        super.onResponse(volleyHttpResult);
+                        hideProgress();
+                        switch (volleyHttpResult.getStatus()) {
+                            case HttpAction.SUCCESS:
+                                try {
+                                    JSONObject object = new JSONObject(volleyHttpResult.getData().toString());
+                                    currentLeave = new BeanLeave();
+                                    currentLeave.setId(object.getString("id"));
+                                    currentLeave.setG_id(object.getString("g_id"));
+                                    currentLeave.setG_name(object.getString("g_name"));
+                                    currentLeave.setC_id(object.getString("c_id"));
+                                    currentLeave.setC_name(object.getString("c_name"));
+                                    currentLeave.setStu_name(object.getString("stu_name"));
+                                    currentLeave.setLeave_name(object.getString("leave_name"));
+                                    currentLeave.setStatus(object.getString("status"));
+                                    currentLeave.setStatus_name(object.getString("status_name"));
+                                    currentLeave.setStart_time(object.getString("start_time"));
+                                    currentLeave.setEnd_time(object.getString("end_time"));
+                                    currentLeave.setLeave_memo(object.getString("leave_memo"));
+                                    currentLeave.setReply(object.getString("reply"));
+
+                                    spnStudents.setText(currentLeave.getStu_name());
+                                    spnTeacher.setText(currentLeave.getT_name());
+                                    spnLeaveType.setText(currentLeave.getLeave_name());
+                                    txtStatus.setText(currentLeave.getStatus_name());
+                                    txtSTime.setText(currentLeave.getStart_time());
+                                    txtETime.setText(currentLeave.getEnd_time());
+                                    edtLeave.setText(currentLeave.getLeave_memo());
+                                    edtReply.setText(currentLeave.getReply());
+                                    setViewEnable(false);
+                                    btnSubmit.setVisibility(View.GONE);
+                                    btnDelete.setVisibility(View.GONE);
+
+                                } catch (Exception ex) {
+                                    ToastUtils.showToast(LeavePDetailActivity.this, "获取请假信息失败!");
+                                }
+                                break;
+                            default:
+                                ToastUtils.showToast(LeavePDetailActivity.this, "获取请假信息失败!");
+                                break;
+                        }
+                    }
+
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        super.onErrorResponse(volleyError);
+                        hideProgress();
+                    }
+                });
     }
 
     private void putLeaveStatus() {
@@ -307,7 +381,7 @@ public class LeaveDetailActivity extends BaseActivity {
                     public void onResponse(VolleyHttpResult volleyHttpResult) {
                         super.onResponse(volleyHttpResult);
                         hideProgress();
-                        Toast.makeText(LeaveDetailActivity.this, volleyHttpResult.getInfo(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LeavePDetailActivity.this, volleyHttpResult.getInfo(), Toast.LENGTH_SHORT).show();
                         if (volleyHttpResult.getStatus() == HttpAction.SUCCESS) {
                             if (currentLeave != null) {
                                 Intent intent = new Intent();
@@ -395,7 +469,7 @@ public class LeaveDetailActivity extends BaseActivity {
                     public void onResponse(VolleyHttpResult volleyHttpResult) {
                         super.onResponse(volleyHttpResult);
                         hideProgress();
-                        Toast.makeText(LeaveDetailActivity.this, volleyHttpResult.getInfo(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LeavePDetailActivity.this, volleyHttpResult.getInfo(), Toast.LENGTH_SHORT).show();
                         if (volleyHttpResult.getStatus() == HttpAction.SUCCESS) {
                             Intent intent = new Intent();
                             intent.putExtra(ExtraKey.LEAVE_DETAIL, currentLeave);

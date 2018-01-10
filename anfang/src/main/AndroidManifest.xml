@@ -241,7 +241,7 @@
         <activity android:name=".ui.leave.LeaveActivity" />
         <activity android:name=".ui.leave.LeaveTActivity" />
         <activity
-            android:name=".ui.leave.LeaveDetailActivity"
+            android:name=".ui.leave.LeavePDetailActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity

@@ -54,6 +54,8 @@ public class HttpAction {
     public static String Leave_Edit = HEAD + "Leave/edit";
     public static String Leave_Add = HEAD + "Leave/add_leave";
     public static String Leave_Del = HEAD + "Leave/del";
+    public static String Leave_Detail = HEAD + "Leave/getDetail";
+
     //课程表
     public static String Timetable_QUERY = HEAD + "Timetable/query";
     //荣誉墙

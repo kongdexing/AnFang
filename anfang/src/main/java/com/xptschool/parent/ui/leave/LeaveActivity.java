@@ -99,7 +99,7 @@ public class LeaveActivity extends BaseListActivity {
             setTextRightClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(new Intent(LeaveActivity.this, LeaveDetailActivity.class));
+                    startActivity(new Intent(LeaveActivity.this, LeavePDetailActivity.class));
                 }
             });
         }
