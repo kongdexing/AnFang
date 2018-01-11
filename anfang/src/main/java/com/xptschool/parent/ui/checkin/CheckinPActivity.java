@@ -81,6 +81,8 @@ public class CheckinPActivity extends BaseListActivity {
             } catch (Exception ex) {
                 Log.i(TAG, "onCreate: bundle id error " + ex.getMessage());
             }
+        } else {
+            getFirstPageData();
         }
     }
 
@@ -141,8 +143,6 @@ public class CheckinPActivity extends BaseListActivity {
                 }
             }
         });
-
-        getFirstPageData();
     }
 
     private void getCheckinDetail(String id) {
@@ -166,11 +166,11 @@ public class CheckinPActivity extends BaseListActivity {
                             case HttpAction.SUCCESS:
                                 try {
                                     JSONObject object = new JSONObject(volleyHttpResult.getData().toString());
-                                    String stu_id = object.getString("stu_id");
+                                    String imei = object.getString("imei");
                                     List<BeanStudent> students = GreenDaoHelper.getInstance().getStudents();
 //                                            spnStudents.setItems(GreenDaoHelper.getInstance().getStudents());
                                     for (int i = 0; i < students.size(); i++) {
-                                        if (students.get(i).getStu_id().equals(stu_id)) {
+                                        if (students.get(i).getImei_id().equals(imei)) {
                                             spnStudents.setSelectedIndex(i);
                                         }
                                     }
