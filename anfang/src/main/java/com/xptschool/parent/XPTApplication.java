@@ -32,6 +32,8 @@ import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.alarm.AlarmMapActivity;
 import com.xptschool.parent.ui.album.LocalImagePHelper;
 import com.xptschool.parent.ui.album.LocalImageTHelper;
+import com.xptschool.parent.ui.checkin.CheckinPActivity;
+import com.xptschool.parent.ui.comment.CommentDetailActivity;
 import com.xptschool.parent.ui.homework.HomeWorkDetailParentActivity;
 import com.xptschool.parent.ui.leave.LeavePDetailActivity;
 import com.xptschool.parent.ui.leave.LeaveTDetailActivity;
@@ -129,6 +131,8 @@ public class XPTApplication extends Application {
 //                |   homework 作业
 //                |   warning  警报
 //                |   attendance  考勤
+//                |   remark   评语
+//                |   honor  荣誉
 //                @param id
 
                 try {
@@ -148,7 +152,7 @@ public class XPTApplication extends Application {
                         intent.putExtra(ExtraKey.DETAIL_ID, id);
                         startActivity(intent);
                     } else if ("attendance".equals(activity)) {
-                        Intent intent = new Intent(XPTApplication.this, NoticeDetailActivity.class);
+                        Intent intent = new Intent(XPTApplication.this, CheckinPActivity.class);
                         intent.putExtra(ExtraKey.DETAIL_ID, id);
                         startActivity(intent);
                     } else if ("leave".equals(activity)) {
@@ -165,6 +169,13 @@ public class XPTApplication extends Application {
                         Intent intent = new Intent(XPTApplication.this, AlarmMapActivity.class);
                         intent.putExtra(ExtraKey.DETAIL_ID, id);
                         startActivity(intent);
+                    } else if ("remark".equals(activity)) {
+                        //评语
+                        Intent intent = new Intent(XPTApplication.this, CommentDetailActivity.class);
+                        intent.putExtra(ExtraKey.DETAIL_ID, id);
+                        startActivity(intent);
+                    } else if ("honor".equals(activity)) {
+
                     }
                 } catch (Exception ex) {
 

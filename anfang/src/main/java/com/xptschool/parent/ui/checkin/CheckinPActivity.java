@@ -2,6 +2,7 @@ package com.xptschool.parent.ui.checkin;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -18,12 +19,14 @@ import com.google.gson.reflect.TypeToken;
 import com.xptschool.parent.R;
 import com.xptschool.parent.bean.BeanCheckin;
 import com.xptschool.parent.common.CommonUtil;
+import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.HttpErrorMsg;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.main.BaseListActivity;
+import com.xptschool.parent.util.ToastUtils;
 
 import org.json.JSONObject;
 
@@ -69,6 +72,16 @@ public class CheckinPActivity extends BaseListActivity {
         setContentView(R.layout.activity_checkin);
         setTitle(R.string.home_checkin);
         initView();
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            try {
+                String id = bundle.getString(ExtraKey.DETAIL_ID);
+                getCheckinDetail(id);
+            } catch (Exception ex) {
+                Log.i(TAG, "onCreate: bundle id error " + ex.getMessage());
+            }
+        }
     }
 
     private void initView() {
@@ -130,6 +143,55 @@ public class CheckinPActivity extends BaseListActivity {
         });
 
         getFirstPageData();
+    }
+
+    private void getCheckinDetail(String id) {
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Attendance_Detail,
+                new VolleyHttpParamsEntity().addParam("id", id), new MyVolleyRequestListener() {
+                    @Override
+                    public void onStart() {
+                        super.onStart();
+                        if (swipeRefresh != null && resultPage.getPage() == 1) {
+                            swipeRefresh.setRefreshing(true);
+                        }
+                    }
+
+                    @Override
+                    public void onResponse(VolleyHttpResult volleyHttpResult) {
+                        super.onResponse(volleyHttpResult);
+                        if (swipeRefresh != null && resultPage.getPage() == 1) {
+                            swipeRefresh.setRefreshing(false);
+                        }
+                        switch (volleyHttpResult.getStatus()) {
+                            case HttpAction.SUCCESS:
+                                try {
+                                    JSONObject object = new JSONObject(volleyHttpResult.getData().toString());
+                                    String stu_id = object.getString("stu_id");
+                                    List<BeanStudent> students = GreenDaoHelper.getInstance().getStudents();
+//                                            spnStudents.setItems(GreenDaoHelper.getInstance().getStudents());
+                                    for (int i = 0; i < students.size(); i++) {
+                                        if (students.get(i).getStu_id().equals(stu_id)) {
+                                            spnStudents.setSelectedIndex(i);
+                                        }
+                                    }
+                                } catch (Exception ex) {
+                                    Log.e(TAG, "onResponse: " + ex.getMessage());
+                                }
+                                break;
+                            default:
+                                ToastUtils.showToast(CheckinPActivity.this, "考勤获取失败");
+                                break;
+                        }
+                    }
+
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        super.onErrorResponse(volleyError);
+                        if (swipeRefresh != null && resultPage.getPage() == 1) {
+                            swipeRefresh.setRefreshing(false);
+                        }
+                    }
+                });
     }
 
     private void getFirstPageData() {

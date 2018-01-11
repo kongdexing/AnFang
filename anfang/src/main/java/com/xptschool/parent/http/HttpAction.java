@@ -49,6 +49,8 @@ public class HttpAction {
     public static String EXAM_QUERY = HEAD + "Exam/getScoresForParent";
     //考勤管理
     public static String Attendance_QUERY = HEAD + "Attendance/query_v1_0_1";
+    public static String Attendance_Detail = HEAD + "Attendance/getDetail";
+
     //请假管理
     public static String Leave_QUERY = HEAD + "Leave/query";
     public static String Leave_Edit = HEAD + "Leave/edit";
@@ -61,14 +63,13 @@ public class HttpAction {
     //荣誉墙
     //rw_type(荣誉类型),stu_id(家长查看孩子荣誉使用),c_id(教室查看班级学生荣誉使用)
     public static String Honor_query = HEAD + "Honor/query";
-    //添加|编辑
     public static String Honor_edit = HEAD + "Honor/edit";
-    //删除
-    public static String Honor_del = HEAD + "Honor/edit";
+    public static String Honor_detail = HEAD + "Honor/getDetail";
 
     //评语查询
     public static String Remark_query = HEAD + "Remark/query";
     public static String Remark_edit = HEAD + "Remark/edit";
+    public static String Remark_detail = HEAD + "Remark/getDetail";
 
     //报警记录
     public static String Track_alarm = HEAD + "Track/alarmRecord_v1_0_1";
