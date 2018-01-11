@@ -220,7 +220,7 @@
         <activity android:name=".ui.score.ScoreTeacherActivity" />
 
         <!-- 考勤 -->
-        <activity android:name=".ui.checkin.CheckinActivity" />
+        <activity android:name=".ui.checkin.CheckinPActivity" />
         <activity android:name=".ui.checkin.CheckinTActivity" />
         <activity android:name=".ui.checkin.ChechinDetailActivity" />
 

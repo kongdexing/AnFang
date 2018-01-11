@@ -29,6 +29,7 @@ import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.ease.EaseHelper;
 import com.xptschool.parent.model.GreenDaoHelper;
+import com.xptschool.parent.ui.alarm.AlarmMapActivity;
 import com.xptschool.parent.ui.album.LocalImagePHelper;
 import com.xptschool.parent.ui.album.LocalImageTHelper;
 import com.xptschool.parent.ui.homework.HomeWorkDetailParentActivity;
@@ -127,7 +128,6 @@ public class XPTApplication extends Application {
 //                |   leave   请假管理
 //                |   homework 作业
 //                |   warning  警报
-//                |   chat    实时聊天
 //                |   attendance  考勤
 //                @param id
 
@@ -161,7 +161,10 @@ public class XPTApplication extends Application {
                             intent.putExtra(ExtraKey.DETAIL_ID, id);
                             startActivity(intent);
                         }
-
+                    } else if ("warning".equals(activity)) {
+                        Intent intent = new Intent(XPTApplication.this, AlarmMapActivity.class);
+                        intent.putExtra(ExtraKey.DETAIL_ID, id);
+                        startActivity(intent);
                     }
                 } catch (Exception ex) {
 

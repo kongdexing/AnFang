@@ -38,7 +38,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * 考勤管理
+ * 老师考勤管理
  */
 public class CheckinTActivity extends BaseListActivity {
 

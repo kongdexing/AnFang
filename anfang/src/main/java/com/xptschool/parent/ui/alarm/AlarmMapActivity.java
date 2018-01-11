@@ -30,8 +30,11 @@ import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.ui.main.BaseActivity;
 import com.xptschool.parent.view.MarkerStudentView;
 
+import org.json.JSONObject;
+
 import butterknife.BindView;
 
+//警报详情
 public class AlarmMapActivity extends BaseActivity {
 
     @BindView(R.id.bmapView)
@@ -51,9 +54,23 @@ public class AlarmMapActivity extends BaseActivity {
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            currentAlarm = bundle.getParcelable(ExtraKey.ALARM_DETAIL);
-        }
+            try {
+                currentAlarm = bundle.getParcelable(ExtraKey.ALARM_DETAIL);
+                initData();
 
+                String id = bundle.getString(ExtraKey.DETAIL_ID);
+                Log.i(TAG, "onCreate: " + id);
+                if (id != null && !id.isEmpty()) {
+                    getAlarmDetail(id);
+                }
+
+            } catch (Exception ex) {
+                Log.e(TAG, "onCreate: " + ex.getMessage());
+            }
+        }
+    }
+
+    private void initData() {
         if (currentAlarm != null) {
             setTitle(currentAlarm.getStu_name());
             initOverlay();
@@ -111,6 +128,49 @@ public class AlarmMapActivity extends BaseActivity {
                         return true;
                     }
                 });
+            }
+        });
+    }
+
+    private void getAlarmDetail(String id) {
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Track_Alarm_detail, new VolleyHttpParamsEntity()
+                .addParam("id", id), new MyVolleyRequestListener() {
+            @Override
+            public void onStart() {
+                super.onStart();
+                showProgress("正在获取报警信息...");
+            }
+
+            @Override
+            public void onResponse(VolleyHttpResult volleyHttpResult) {
+                super.onResponse(volleyHttpResult);
+                hideProgress();
+                switch (volleyHttpResult.getStatus()) {
+                    case HttpAction.SUCCESS:
+                        try {
+                            currentAlarm = new BeanAlarm();
+                            JSONObject object = new JSONObject(volleyHttpResult.getData().toString());
+                            currentAlarm.setWm_id(object.getString("wm_id"));
+                            currentAlarm.setImei(object.getString("imei"));
+                            currentAlarm.setWar_type(object.getString("war_type"));
+                            currentAlarm.setLongitude(object.getString("longitude"));
+                            currentAlarm.setLatitude(object.getString("latitude"));
+                            currentAlarm.setWar_status(object.getString("war_status"));
+                            currentAlarm.setCreate_time(object.getString("create_time"));
+                            currentAlarm.setStu_sex(object.getString("stu_sex"));
+                            currentAlarm.setStu_name(object.getString("stu_name"));
+                            initData();
+                        } catch (Exception ex) {
+                            Log.e(TAG, "getAlarmDetail onResponse: " + ex.getMessage());
+                        }
+                        break;
+                }
+            }
+
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                super.onErrorResponse(volleyError);
+                hideProgress();
             }
         });
     }

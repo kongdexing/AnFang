@@ -92,6 +92,7 @@ public class HttpAction {
 
     //报警处理
     public static String Track_Alarm_edit = HEAD + "Track/alarm_edit";
+    public static String Track_Alarm_detail = HEAD + "Track/getDetail";
 
     public static String GetCard_Phone = HEAD + "StudentCard/get_cardphone";
     public static String SetCard_Phone = HEAD + "StudentCard/set_cardphone";

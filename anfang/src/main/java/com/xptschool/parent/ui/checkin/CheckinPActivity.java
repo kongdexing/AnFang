@@ -34,9 +34,9 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * 考勤管理
+ * 家长查看考勤管理
  */
-public class CheckinActivity extends BaseListActivity {
+public class CheckinPActivity extends BaseListActivity {
 
     @BindView(R.id.spnDate)
     MaterialSpinner spnDate;
@@ -200,7 +200,7 @@ public class CheckinActivity extends BaseListActivity {
 
                                     if (listCheckins.size() == 0) {
                                         llCheckTitle.setVisibility(View.GONE);
-                                        Toast.makeText(CheckinActivity.this, R.string.toast_data_empty, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(CheckinPActivity.this, R.string.toast_data_empty, Toast.LENGTH_SHORT).show();
                                     } else {
                                         llCheckTitle.setVisibility(View.VISIBLE);
                                     }
@@ -214,11 +214,11 @@ public class CheckinActivity extends BaseListActivity {
                                     }
                                     recyclerView.notifyMoreFinish(resultPage.getTotal_page() > resultPage.getPage());
                                 } catch (Exception ex) {
-                                    Toast.makeText(CheckinActivity.this, HttpErrorMsg.ERROR_JSON, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(CheckinPActivity.this, HttpErrorMsg.ERROR_JSON, Toast.LENGTH_SHORT).show();
                                 }
                                 break;
                             default:
-                                Toast.makeText(CheckinActivity.this, httpResult.getInfo(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CheckinPActivity.this, httpResult.getInfo(), Toast.LENGTH_SHORT).show();
                                 break;
                         }
                     }

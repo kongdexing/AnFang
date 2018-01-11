@@ -45,7 +45,7 @@ import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.push.BannerHelper;
 import com.xptschool.parent.ui.alarm.AlarmActivity;
 import com.xptschool.parent.ui.alarm.AlarmTActivity;
-import com.xptschool.parent.ui.checkin.CheckinActivity;
+import com.xptschool.parent.ui.checkin.CheckinPActivity;
 import com.xptschool.parent.ui.checkin.CheckinTActivity;
 import com.xptschool.parent.ui.comment.CommentPActivity;
 import com.xptschool.parent.ui.comment.CommentTActivity;
@@ -473,7 +473,7 @@ public class HomeFragment extends BaseFragment {
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_checkin)
                 .setTitle(getString(R.string.home_checkin))
-                .setIntent(new Intent(mContext, isParent ? CheckinActivity.class : CheckinTActivity.class)));
+                .setIntent(new Intent(mContext, isParent ? CheckinPActivity.class : CheckinTActivity.class)));
 
         //报警查询
         homeItems.add(new HomeItem()
