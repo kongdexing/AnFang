@@ -11,11 +11,16 @@ import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.xptschool.parent.R;
+import com.xptschool.parent.bean.BeanComment;
 import com.xptschool.parent.bean.BeanHonor;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyRequestListener;
+import com.xptschool.parent.ui.comment.CommentDetailActivity;
 import com.xptschool.parent.ui.main.BaseActivity;
+import com.xptschool.parent.util.ToastUtils;
+
+import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -46,15 +51,16 @@ public class HonorDetailActivity extends BaseActivity {
         try {
             Bundle bundle = getIntent().getExtras();
             currentHonor = bundle.getParcelable(ExtraKey.HONOR_DETAIL);
+            if (currentHonor != null) {
+                initData();
+            }
+            String id = bundle.getString(ExtraKey.DETAIL_ID);
+            if (id != null) {
+                getHonorDetail(id);
+            }
         } catch (Exception ex) {
             Log.i(TAG, "onCreate: get bundle data error " + ex.getMessage());
         }
-
-        if (currentHonor == null) {
-            finish();
-            return;
-        }
-        initData();
     }
 
     private void initData() {
@@ -69,6 +75,49 @@ public class HonorDetailActivity extends BaseActivity {
 //                && currentComment.getUser_id().equals(GreenDaoHelper.getInstance().getCurrentTeacher().getU_id())) {
 //            btnDelete.setVisibility(View.VISIBLE);
 //        }
+    }
+
+    private void getHonorDetail(String id) {
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Honor_detail,
+                new VolleyHttpParamsEntity().addParam("id", id), new MyVolleyRequestListener() {
+                    @Override
+                    public void onStart() {
+                        super.onStart();
+                        showProgress("正在获取荣誉信息...");
+                    }
+
+                    @Override
+                    public void onResponse(VolleyHttpResult volleyHttpResult) {
+                        super.onResponse(volleyHttpResult);
+                        hideProgress();
+                        switch (volleyHttpResult.getStatus()) {
+                            case HttpAction.SUCCESS:
+                                try {
+                                    JSONObject object = new JSONObject(volleyHttpResult.getData().toString());
+                                    currentHonor = new BeanHonor();
+                                    currentHonor.setG_name(object.getString("g_name"));
+                                    currentHonor.setC_name(object.getString("c_name"));
+                                    currentHonor.setStu_name(object.getString("stu_name"));
+                                    currentHonor.setCreate_time(object.getString("create_time"));
+                                    currentHonor.setReward_type(object.getString("reward_type"));
+                                    currentHonor.setReward_details(object.getString("reward_details"));
+                                    initData();
+                                } catch (Exception ex) {
+                                    Log.i(TAG, "onResponse: " + ex.getMessage());
+                                }
+                                break;
+                            default:
+                                ToastUtils.showToast(HonorDetailActivity.this, "获取荣誉失败!");
+                                break;
+                        }
+                    }
+
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        super.onErrorResponse(volleyError);
+                        hideProgress();
+                    }
+                });
     }
 
     @OnClick(R.id.btnDelete)

@@ -35,6 +35,7 @@ import com.xptschool.parent.ui.album.LocalImageTHelper;
 import com.xptschool.parent.ui.checkin.CheckinPActivity;
 import com.xptschool.parent.ui.comment.CommentDetailActivity;
 import com.xptschool.parent.ui.homework.HomeWorkDetailParentActivity;
+import com.xptschool.parent.ui.honor.HonorDetailActivity;
 import com.xptschool.parent.ui.leave.LeavePDetailActivity;
 import com.xptschool.parent.ui.leave.LeaveTDetailActivity;
 import com.xptschool.parent.ui.main.MainActivity;
@@ -175,7 +176,10 @@ public class XPTApplication extends Application {
                         intent.putExtra(ExtraKey.DETAIL_ID, id);
                         startActivity(intent);
                     } else if ("honor".equals(activity)) {
-
+                        //荣誉
+                        Intent intent = new Intent(XPTApplication.this, HonorDetailActivity.class);
+                        intent.putExtra(ExtraKey.DETAIL_ID, id);
+                        startActivity(intent);
                     }
                 } catch (Exception ex) {
 
