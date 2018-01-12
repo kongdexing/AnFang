@@ -8,11 +8,11 @@ import java.util.List;
 
 public class DeviceHelper {
 
-//    public static String M_XIAOMI = "XIAOMI";
+    public static String M_XIAOMI = "XIAOMI";
     public static String M_HUAWEI = "HUAWEI";
     public static String M_MEIZU = "MEIZU";
 
-//    public static String P_XIAOMI = "MIPush";
+    public static String P_XIAOMI = "MIPush";
     public static String P_HUAWEI = "HWPush";
     public static String P_MEIZU = "MZPush";
     public static String P_UMENG = "UPush";

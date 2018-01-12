@@ -267,8 +267,8 @@
 
 ##huawei push
 -keep class com.huawei.android.pushagent.**{*;}
-##-keep class com.huawei.android. pushselfshow.**{*;}
-##-keep class com.huawei.android. microkernel.**{*;}
+-keep class com.huawei.android. pushselfshow.**{*;}
+-keep class com.huawei.android. microkernel.**{*;}
 -keep class com.baidu.mapapi.**{*;}
 -keep class com.huawei.hms.**{*;}
 
@@ -288,6 +288,9 @@
 -keep class com.xiaomi.ad.**{*;}
 -keep class com.miui.analytics.**{*;}
 -keep class com.xiaomi.analytics.*{public protected *;}
+
+##mipush
+##-keep class com.xptschool.parent.receiver.MIMessageReceiver {*;}
 
 ##环信
 -keep class com.hyphenate.** {*;}

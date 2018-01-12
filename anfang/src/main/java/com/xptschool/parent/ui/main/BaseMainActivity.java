@@ -12,6 +12,9 @@ import com.huawei.hms.support.api.client.ResultCallback;
 import com.huawei.hms.support.api.push.HuaweiPush;
 import com.huawei.hms.support.api.push.TokenResult;
 import com.meizu.cloud.pushsdk.PushManager;
+import com.xiaomi.channel.commonutils.logger.LoggerInterface;
+import com.xiaomi.mipush.sdk.Logger;
+import com.xiaomi.mipush.sdk.MiPushClient;
 import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.UserHelper;
 import com.xptschool.parent.push.DeviceHelper;
@@ -39,7 +42,12 @@ public class BaseMainActivity extends BaseLoginMainActivity implements HuaweiApi
             @Override
             public void onUserLoginSuccess() {
                 //用户切换后，重新获取token 信息
-                registerPush();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        registerPush();
+                    }
+                }).start();
             }
 
             @Override
@@ -47,7 +55,7 @@ public class BaseMainActivity extends BaseLoginMainActivity implements HuaweiApi
 
             }
         });
-        registerPush();
+//        registerPush();
     }
 
     private void registerPush() {
@@ -56,7 +64,29 @@ public class BaseMainActivity extends BaseLoginMainActivity implements HuaweiApi
         String carrier = android.os.Build.MANUFACTURER;
         Log.i(TAG, "onCreate: " + model + "  " + carrier);
 
-        if (carrier.toUpperCase().equals(DeviceHelper.M_HUAWEI)) {
+        if (carrier.toUpperCase().equals(DeviceHelper.M_XIAOMI)) {
+            MiPushClient.registerPush(this, XPTApplication.APP_MIPUSH_ID, XPTApplication.APP_MIPUSH_KEY);
+            LoggerInterface newLogger = new LoggerInterface() {
+
+                @Override
+                public void setTag(String tag) {
+                    // ignore
+                }
+
+                @Override
+                public void log(String content, Throwable t) {
+                    Log.d(TAG, content, t);
+                }
+
+                @Override
+                public void log(String content) {
+                    Log.d(TAG, content);
+                }
+            };
+            Logger.setLogger(this, newLogger);
+            //推送可用
+            MiPushClient.enablePush(this);
+        } else if (carrier.toUpperCase().equals(DeviceHelper.M_HUAWEI)) {
             //创建华为移动服务client实例用以使用华为push服务
             //需要指定api为HuaweiId.PUSH_API
             //连接回调以及连接失败监听

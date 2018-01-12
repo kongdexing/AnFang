@@ -57,8 +57,8 @@ import java.util.Map;
 public class XPTApplication extends Application {
 
     //小米推送
-//    public static final String APP_MIPUSH_ID = "2882303761517599079";
-//    public static final String APP_MIPUSH_KEY = "5961759967079";
+    public static final String APP_MIPUSH_ID = "2882303761517599079";
+    public static final String APP_MIPUSH_KEY = "5961759967079";
     //魅族推送
     public static final String MZ_APP_ID = "111065";
     public static final String MZ_APP_KEY = "5e44c6c91687442091c945f29c888b18";
@@ -184,11 +184,9 @@ public class XPTApplication extends Application {
                 } catch (Exception ex) {
 
                 }
-
             }
         };
         mPushAgent.setNotificationClickHandler(notificationClickHandler);
-
 
         AudioManager.getInstance(getCachePath());
         FileDownloader.init(getApplicationContext(), new DownloadMgrInitialParams.InitCustomMaker()
