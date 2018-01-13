@@ -15,11 +15,13 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <!--广告位-->
             <RelativeLayout
                 android:id="@+id/rlTipAD"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/background_light">
+                android:background="@android:color/background_light"
+                android:visibility="visible">
 
                 <com.youth.banner.Banner
                     android:id="@+id/topBanner"
@@ -40,7 +42,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:background="@color/map_transparent_gray"
                     android:paddingBottom="@dimen/dp_2"
                     android:paddingLeft="@dimen/dp_5"
                     android:paddingRight="@dimen/dp_5"
@@ -51,35 +52,66 @@
 
             </RelativeLayout>
 
-            <!--动态添加的分组-->
+            <!--课程,评语,教育头条-->
             <LinearLayout
-                android:id="@+id/llGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_20"
+                android:layout_marginTop="-20dp">
+
+                <com.xptschool.parent.view.HomeItemView
+                    android:id="@+id/home_course"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:src="@drawable/home_course"
+                    app:text="@string/home_course" />
+
+                <View
+                    android:layout_width="@dimen/dp_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimary" />
+
+                <com.xptschool.parent.view.HomeItemView
+                    android:id="@+id/home_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:src="@drawable/home_remark"
+                    app:text="@string/home_comment" />
+
+                <View
+                    android:layout_width="@dimen/dp_1"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimary" />
+
+                <com.xptschool.parent.view.HomeItemView
+                    android:id="@+id/home_news"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:src="@drawable/home_news"
+                    app:text="@string/home_news" />
+
+            </LinearLayout>
 
             <!--校园生活-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_5"
+                android:layout_marginTop="@dimen/dp_10"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
-
-                    <com.android.widget.view.CircularImageView
-                        android:layout_width="@dimen/dp_30"
-                        android:layout_height="@dimen/dp_30"
-                        android:layout_marginLeft="@dimen/dp_10"
-                        android:src="@drawable/icon_home_school" />
+                    android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_6"
+                        android:gravity="center"
                         android:text="@string/home_school"
                         android:textSize="@dimen/sp_16" />
 
@@ -99,91 +131,72 @@
                     android:verticalSpacing="@dimen/dp_1" />
             </LinearLayout>
 
-            <!--购物推荐-->
-            <FrameLayout
+            <!--教育培训-->
+            <LinearLayout
+                android:id="@+id/llOnline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_5">
-                <!--商品-->
+                android:layout_marginTop="@dimen/dp_10"
+                android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_15">
-
-                    <ImageView
-                        android:id="@+id/img_hot_good"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp_100"
-                        android:layout_weight="1"
-                        android:scaleType="fitXY" />
-
-                    <ImageView
-                        android:id="@+id/img_hot_good2"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp_100"
-                        android:layout_weight="1"
-                        android:scaleType="fitXY" />
-
-                    <ImageView
-                        android:id="@+id/img_hot_good3"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp_100"
-                        android:layout_weight="1"
-                        android:scaleType="fitXY" />
-
-                </LinearLayout>
-                <!--tip 标签-->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dp_30"
-                    android:layout_marginLeft="@dimen/dp_20"
-                    android:background="@drawable/bg_home_shop"
-                    android:gravity="center_vertical">
-
-                    <com.android.widget.view.CircularImageView
-                        android:layout_width="@dimen/dp_20"
-                        android:layout_height="@dimen/dp_20"
-                        android:layout_marginLeft="@dimen/dp_10"
-                        android:src="@drawable/icon_home_school" />
+                    android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_6"
-                        android:layout_marginRight="@dimen/dp_40"
-                        android:text="@string/home_shop"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/sp_14" />
-                </LinearLayout>
-            </FrameLayout>
+                        android:gravity="center"
+                        android:text="@string/home_edu_online"
+                        android:textSize="@dimen/sp_16" />
 
-            <FrameLayout
+                </LinearLayout>
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/pager_online"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_60"
+                    android:clipChildren="false" />
+
+            </LinearLayout>
+
+            <!--快乐成长-->
+            <LinearLayout
+                android:id="@+id/llHappy"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:layout_marginRight="@dimen/dp_10"
-                    android:layout_marginTop="@dimen/dp_5"
-                    android:background="@drawable/bg_home_shop_side"
-                    android:padding="@dimen/dp_1">
+                    android:layout_height="wrap_content">
 
-                    <com.android.widget.mygridview.MyGridView
-                        android:id="@+id/grd_school_shop"
-                        android:layout_width="fill_parent"
+                    <TextView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:horizontalSpacing="@dimen/dp_1"
-                        android:listSelector="@null"
-                        android:numColumns="3"
-                        android:scrollbars="none"
-                        android:stretchMode="columnWidth"
-                        android:verticalSpacing="@dimen/dp_1" />
+                        android:layout_marginLeft="@dimen/dp_6"
+                        android:gravity="center"
+                        android:text="@string/home_children_goods"
+                        android:textSize="@dimen/sp_16" />
+
                 </LinearLayout>
 
-            </FrameLayout>
+            </LinearLayout>
+
+            <!--理财投资-->
+
+            <!--校园购-->
+
+            <!--生活缴费-->
+
+            <!--动态添加的分组-->
+            <LinearLayout
+                android:id="@+id/llGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
 
             <LinearLayout
                 android:layout_width="match_parent"

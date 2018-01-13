@@ -165,6 +165,8 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
             mLocClient.registerLocationListener(this);
             LocationClientOption option = new LocationClientOption();
             option.setIsNeedAddress(true);
+            option.setCoorType("bd09ll"); // 设置坐标类型
+            option.setScanSpan(3000);
             mLocClient.setLocOption(option);
             mLocClient.start();
         } catch (Exception ex) {

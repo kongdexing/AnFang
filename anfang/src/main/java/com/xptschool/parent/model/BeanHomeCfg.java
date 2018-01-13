@@ -20,32 +20,20 @@ public class BeanHomeCfg {
     @Id
     private String id;
     private String title;
-    private String img;
+    private String image;
     private String url;
-    private String cell;
-    private String pid;
-    @ToMany(referencedJoinProperty = "pid")
-    private List<BeanHomeCfgChild> child;
-    /**
-     * Used for active entity operations.
-     */
-    @Generated(hash = 1846598264)
-    private transient BeanHomeCfgDao myDao;
-    /**
-     * Used to resolve relations
-     */
-    @Generated(hash = 2040040024)
-    private transient DaoSession daoSession;
+    private String mark;
+    private String type;
 
-    @Generated(hash = 927340585)
-    public BeanHomeCfg(String id, String title, String img, String url,
-                       String cell, String pid) {
+    @Generated(hash = 1082987507)
+    public BeanHomeCfg(String id, String title, String image, String url,
+            String mark, String type) {
         this.id = id;
         this.title = title;
-        this.img = img;
+        this.image = image;
         this.url = url;
-        this.cell = cell;
-        this.pid = pid;
+        this.mark = mark;
+        this.type = type;
     }
 
     @Generated(hash = 1285855885)
@@ -68,15 +56,12 @@ public class BeanHomeCfg {
         this.title = title;
     }
 
-    public String getImg() {
-        if (!img.startsWith(BuildConfig.SERVICE_URL)) {
-            img = BuildConfig.SERVICE_URL + img;
-        }
-        return img;
+    public String getImage() {
+        return image;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getUrl() {
@@ -87,81 +72,19 @@ public class BeanHomeCfg {
         this.url = url;
     }
 
-    public String getCell() {
-        return cell;
+    public String getMark() {
+        return mark;
     }
 
-    public void setCell(String cell) {
-        this.cell = cell;
+    public void setMark(String mark) {
+        this.mark = mark;
     }
 
-    public String getPid() {
-        return pid;
+    public String getType() {
+        return type;
     }
 
-    public void setPid(String pid) {
-        this.pid = pid;
-    }
-
-    @Keep
-    public List<BeanHomeCfgChild> getChild() {
-        return child;
-    }
-
-    public void setChild(List<BeanHomeCfgChild> child) {
-        this.child = child;
-    }
-
-    /**
-     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#refresh(Object)}.
-     * Entity must attached to an entity context.
-     */
-    @Generated(hash = 1942392019)
-    public void refresh() {
-        if (myDao == null) {
-            throw new DaoException("Entity is detached from DAO context");
-        }
-        myDao.refresh(this);
-    }
-
-    /**
-     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#update(Object)}.
-     * Entity must attached to an entity context.
-     */
-    @Generated(hash = 713229351)
-    public void update() {
-        if (myDao == null) {
-            throw new DaoException("Entity is detached from DAO context");
-        }
-        myDao.update(this);
-    }
-
-    /**
-     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#delete(Object)}.
-     * Entity must attached to an entity context.
-     */
-    @Generated(hash = 128553479)
-    public void delete() {
-        if (myDao == null) {
-            throw new DaoException("Entity is detached from DAO context");
-        }
-        myDao.delete(this);
-    }
-
-    /**
-     * Resets a to-many relationship, making the next get call to query for a fresh result.
-     */
-    @Generated(hash = 1024800465)
-    public synchronized void resetChild() {
-        child = null;
-    }
-
-    /**
-     * called by internal mechanisms, do not call yourself.
-     */
-    @Generated(hash = 1016321648)
-    public void __setDaoSession(DaoSession daoSession) {
-        this.daoSession = daoSession;
-        myDao = daoSession != null ? daoSession.getBeanHomeCfgDao() : null;
+    public void setType(String type) {
+        this.type = type;
     }
 }

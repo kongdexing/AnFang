@@ -388,46 +388,23 @@ public class GreenDaoHelper {
     }
 
     //保存首页配置项
-    public void insertHomeCfg(List<BeanHomeCfg> homeCfgs) {
+    public void insertHomeCfg(List<BeanHomeCfg> homeCfgs, String type) {
         if (writeDaoSession != null) {
-            writeDaoSession.getBeanHomeCfgDao().deleteAll();
+            readDaoSession.getBeanHomeCfgDao().queryBuilder()
+                    .where(BeanHomeCfgDao.Properties.Type.eq(type)).buildDelete().executeDeleteWithoutDetachingEntities();
+
             writeDaoSession.getBeanHomeCfgDao().insertOrReplaceInTx(homeCfgs);
         }
     }
 
-    //删除所有子项
-    public void deleteHomeChildCfg() {
-        if (writeDaoSession != null) {
-            writeDaoSession.getBeanHomeCfgChildDao().deleteAll();
-        }
-    }
-
-    //保存首页配置子项
-    public void insertHomeChildCfg(List<BeanHomeCfgChild> homeCfgs) {
-        if (writeDaoSession != null) {
-            writeDaoSession.getBeanHomeCfgChildDao().insertOrReplaceInTx(homeCfgs);
-        }
-    }
-
-    public List<BeanHomeCfg> getHomeCfg() {
+    public List<BeanHomeCfg> getHomeCfgByType(String type) {
         List<BeanHomeCfg> homeCfgs = null;
         if (readDaoSession != null) {
-            homeCfgs = readDaoSession.getBeanHomeCfgDao().loadAll();
+            homeCfgs = readDaoSession.getBeanHomeCfgDao().queryBuilder()
+                    .where(BeanHomeCfgDao.Properties.Type.eq(type)).list();
         }
         if (homeCfgs == null) {
             homeCfgs = new ArrayList<BeanHomeCfg>();
-        }
-        return homeCfgs;
-    }
-
-    public List<BeanHomeCfgChild> getHomeChildCfgById(String pid) {
-        List<BeanHomeCfgChild> homeCfgs = null;
-        if (readDaoSession != null) {
-            homeCfgs = readDaoSession.getBeanHomeCfgChildDao().queryBuilder()
-                    .where(BeanHomeCfgChildDao.Properties.Pid.eq(pid)).list();
-        }
-        if (homeCfgs == null) {
-            homeCfgs = new ArrayList<BeanHomeCfgChild>();
         }
         return homeCfgs;
     }

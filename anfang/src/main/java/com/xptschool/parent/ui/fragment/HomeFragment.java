@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -25,8 +24,7 @@ import com.android.widget.pulltorefresh.PullToRefreshBase;
 import com.android.widget.pulltorefresh.PullToRefreshScrollView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
+import com.viewpagerindicator.CirclePageIndicator;
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.bean.HomeItem;
@@ -47,15 +45,9 @@ import com.xptschool.parent.ui.alarm.AlarmActivity;
 import com.xptschool.parent.ui.alarm.AlarmTActivity;
 import com.xptschool.parent.ui.checkin.CheckinPActivity;
 import com.xptschool.parent.ui.checkin.CheckinTActivity;
-import com.xptschool.parent.ui.comment.CommentPActivity;
-import com.xptschool.parent.ui.comment.CommentTActivity;
-import com.xptschool.parent.ui.course.CourseActivity;
-import com.xptschool.parent.ui.course.CourseTActivity;
 import com.xptschool.parent.ui.fence.FenceListActivity;
 import com.xptschool.parent.ui.homework.HomeWorkParentActivity;
 import com.xptschool.parent.ui.homework.HomeWorkTeacherActivity;
-import com.xptschool.parent.ui.honor.HonorPActivity;
-import com.xptschool.parent.ui.honor.HonorTActivity;
 import com.xptschool.parent.ui.leave.LeaveActivity;
 import com.xptschool.parent.ui.leave.LeaveTActivity;
 import com.xptschool.parent.ui.main.WebViewActivity;
@@ -63,10 +55,10 @@ import com.xptschool.parent.ui.notice.NoticeActivity;
 import com.xptschool.parent.ui.notice.NoticeTeacherActivity;
 import com.xptschool.parent.ui.score.ScoreActivity;
 import com.xptschool.parent.ui.score.ScoreTeacherActivity;
+import com.xptschool.parent.util.HomeUtil;
 import com.xptschool.parent.util.NetWorkUsefulUtils;
 import com.xptschool.parent.util.ParentUtil;
 import com.xptschool.parent.view.autoviewpager.GlideImageLoader;
-import com.viewpagerindicator.CirclePageIndicator;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 
@@ -100,25 +92,18 @@ public class HomeFragment extends BaseFragment {
     TextView tipTitle;
     List<BeanBanner> advertList = new ArrayList<>();
 
-    @BindView(R.id.llGroup)
-    LinearLayout llGroup;
+    //教育培训,快乐成长,理财投资,校园购,生活缴费
+    @BindView(R.id.llOnline)
+    LinearLayout llOnline;
+    @BindView(R.id.pager_online)
+    ViewPager pager_online;
+
+    @BindView(R.id.llHappy)
+    LinearLayout llHappy;
 
     @BindView(R.id.grd_school)
     MyGridView grd_school;
     HomeItemGridAdapter itemAdapter;
-
-    @BindView(R.id.grd_school_shop)
-    MyGridView grd_school_shop;
-    HomeItemGridAdapter itemShopAdapter;
-
-    @BindView(R.id.img_hot_good)
-    ImageView img_hot_good;
-
-    @BindView(R.id.img_hot_good2)
-    ImageView img_hot_good2;
-
-    @BindView(R.id.img_hot_good3)
-    ImageView img_hot_good3;
 
     private Unbinder unbinder;
     //    private MyTopPagerAdapter topAdapter;
@@ -160,7 +145,6 @@ public class HomeFragment extends BaseFragment {
         Log.i(TAG, "HomeFragment initData: ");
         //先获取本地数据进行展示
         reloadTopFragment(GreenDaoHelper.getInstance().getBanners());
-        initHomeCfg();
         initHotGood();
 
         //1获取广告位，2获取分组数据，3获取商品推荐
@@ -188,7 +172,6 @@ public class HomeFragment extends BaseFragment {
         getBanners();
         //重新分配Intent
         initSchoolItem();
-        initShopItem();
     }
 
     private void initView() {
@@ -207,7 +190,6 @@ public class HomeFragment extends BaseFragment {
             Log.i(TAG, "initView setLayoutParams error: " + ex.getMessage());
         }
 
-
         //设置图片加载器
         // 1.设置幕后item的缓存数目
         topBanner.setOffscreenPageLimit(1);
@@ -223,6 +205,7 @@ public class HomeFragment extends BaseFragment {
         //设置轮播时间
         topBanner.setDelayTime(3000);
         topBanner.start();
+
         //banner设置方法全部调用完毕时最后调用
         topBanner.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -261,8 +244,6 @@ public class HomeFragment extends BaseFragment {
         });
 
         initSchoolItem();
-
-        initShopItem();
 
         fragmentHome_titleLinearId.setAlpha(0);
         ptr_scrollview.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
@@ -386,9 +367,9 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void getHomeGroupCfg() {
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Home_GroupCfg,
-                new VolleyHttpParamsEntity()
-                        .addParam("token", CommonUtil.encryptToken(HttpAction.Home_GroupCfg)),
+        Log.i(TAG, "getHomeGroupCfg: ");
+
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Home_GroupCfg, new VolleyHttpParamsEntity(),
                 new VolleyRequestListener() {
                     @Override
                     public void onStart() {
@@ -400,49 +381,89 @@ public class HomeFragment extends BaseFragment {
                         switch (volleyHttpResult.getStatus()) {
                             case HttpAction.SUCCESS:
                                 try {
-                                    String info = volleyHttpResult.getData().toString();
-                                    Log.i(TAG, "onResponse: data " + info);
+                                    JSONObject jsonData = new JSONObject(volleyHttpResult.getData().toString());
                                     Gson gson = new Gson();
-                                    List<BeanHomeCfg> beanHomeCfgs = gson.fromJson(info, new TypeToken<List<BeanHomeCfg>>() {
-                                    }.getType());
-                                    //删除所有子项
-                                    GreenDaoHelper.getInstance().deleteHomeChildCfg();
-                                    if (beanHomeCfgs.size() > 0) {
-                                        for (int i = 0; i < beanHomeCfgs.size(); i++) {
-                                            GreenDaoHelper.getInstance().insertHomeChildCfg(beanHomeCfgs.get(i).getChild());
-                                        }
+
+                                    List<BeanHomeCfg> onlines = gson.fromJson(jsonData.getJSONArray(HomeUtil.ONLINE_VIDEO).toString(),
+                                            new TypeToken<List<BeanHomeCfg>>() {
+                                            }.getType());
+                                    for (int i = 0; i < onlines.size(); i++) {
+                                        onlines.get(i).setType(HomeUtil.ONLINE_VIDEO);
                                     }
-                                    GreenDaoHelper.getInstance().insertHomeCfg(beanHomeCfgs);
-                                    Log.i(TAG, "onResponse: size " + beanHomeCfgs.size());
-                                    initHomeCfg();
+                                    GreenDaoHelper.getInstance().insertHomeCfg(onlines, HomeUtil.ONLINE_VIDEO);
+
+                                    if (onlines.size() > 0) {
+                                        llOnline.setVisibility(View.VISIBLE);
+                                        initEduOnLine(onlines);
+                                    } else {
+                                        llOnline.setVisibility(View.GONE);
+                                    }
+
+                                    List<BeanHomeCfg> children_goods = gson.fromJson(jsonData.getJSONArray(HomeUtil.CHILDREN_GOODS).toString(),
+                                            new TypeToken<List<BeanHomeCfg>>() {
+                                            }.getType());
+                                    for (int i = 0; i < children_goods.size(); i++) {
+                                        children_goods.get(i).setType(HomeUtil.CHILDREN_GOODS);
+                                    }
+                                    GreenDaoHelper.getInstance().insertHomeCfg(onlines, HomeUtil.CHILDREN_GOODS);
+
+                                    if (children_goods.size() > 0) {
+                                        llHappy.setVisibility(View.VISIBLE);
+
+                                    } else {
+                                        llHappy.setVisibility(View.GONE);
+                                    }
+
+//                                    //删除所有子项
+//                                    GreenDaoHelper.getInstance().deleteHomeChildCfg();
+//                                    if (beanHomeCfgs.size() > 0) {
+//                                        for (int i = 0; i < beanHomeCfgs.size(); i++) {
+//                                            GreenDaoHelper.getInstance().insertHomeChildCfg(beanHomeCfgs.get(i).getChild());
+//                                        }
+//                                    }
+
+//                                    Log.i(TAG, "onResponse: size " + beanHomeCfgs.size());
+//                                    initHomeCfg();
 //                                    bindHotGood(beanHomeCfgs.get(0));
                                 } catch (Exception ex) {
                                     Log.i(TAG, "onResponse: error " + ex.getMessage());
                                     //错误
-                                    initHomeCfg();
+//                                    initHomeCfg();
                                 }
                                 break;
                             default:
-                                initHomeCfg();
+//                                initHomeCfg();
                                 break;
                         }
                     }
 
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        initHomeCfg();
+//                        initHomeCfg();
                     }
                 });
     }
 
-    private void initHomeCfg() {
-        List<BeanHomeCfg> beanHomeCfgs = GreenDaoHelper.getInstance().getHomeCfg();
-        llGroup.removeAllViews();
-        for (int i = 0; i < beanHomeCfgs.size(); i++) {
-            HomeGroupView view = new HomeGroupView(mContext);
-            view.bindData(beanHomeCfgs.get(i));
-            llGroup.addView(view);
+    private void initEduOnLine(List<BeanHomeCfg> onlines) {
+        int width = XPTApplication.getInstance().getWindowWidth() / 3;
+        int height = width * 3 / 5;
+
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) pager_online.getLayoutParams();
+        layoutParams.height = height;
+        pager_online.setLayoutParams(layoutParams);
+
+        pager_online.setOffscreenPageLimit(3);
+        pager_online.setPageMargin(5);
+
+        List<View> eduViews = new ArrayList<>();
+        for (int i = 0; i < onlines.size(); i++) {
+            HomeEduView eduView = new HomeEduView(mContext);
+            eduView.bindingData(onlines.get(i));
+            eduViews.add(eduView);
         }
+
+        HomePagerAdapter adapter = new HomePagerAdapter(eduViews);
+        pager_online.setAdapter(adapter);
     }
 
     private void initSchoolItem() {
@@ -508,36 +529,6 @@ public class HomeFragment extends BaseFragment {
         itemAdapter.reloadData(homeItems);
     }
 
-    private void initShopItem() {
-        boolean isParent = false;
-        if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-            isParent = false;
-        } else if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-            isParent = true;
-        }
-
-        List<HomeItem> homeShopItems = new ArrayList<HomeItem>();
-        /*课程表*/
-        homeShopItems.add(new HomeItem()
-                .setIconId(R.drawable.home_course)
-                .setTitle(getString(R.string.home_course))
-                .setIntent(new Intent(mContext, isParent ? CourseActivity.class : CourseTActivity.class)));
-        /*老师评语*/
-        homeShopItems.add(new HomeItem()
-                .setIconId(R.drawable.home_remark)
-                .setTitle(getString(R.string.home_comment))
-                .setIntent(new Intent(mContext, isParent ? CommentPActivity.class : CommentTActivity.class)));
-        /*荣誉墙*/
-        homeShopItems.add(new HomeItem()
-                .setIconId(R.drawable.home_honour)
-                .setTitle(getString(R.string.home_honour))
-                .setIntent(new Intent(mContext, isParent ? HonorPActivity.class : HonorTActivity.class)));
-
-        itemShopAdapter = new HomeItemGridAdapter(mContext);
-        grd_school_shop.setAdapter(itemShopAdapter);
-        itemShopAdapter.reloadData(homeShopItems);
-    }
-
     /*获取推荐商品*/
     private void getHotGoods() {
         Log.i(TAG, "getHotGoods: ");
@@ -597,51 +588,12 @@ public class HomeFragment extends BaseFragment {
         if (hotGoods.size() > 0) {
             bindHotGood(hotGoods);
         } else {
-            img_hot_good.setVisibility(View.GONE);
+//            img_hot_good.setVisibility(View.GONE);
         }
     }
 
     private void bindHotGood(final List<BeanHotGood> hotGoods) {
-        if (hotGoods == null || img_hot_good == null) {
-            return;
-        }
 
-        try {
-            ImageLoader.getInstance().displayImage(hotGoods.get(0).getImage(),
-                    new ImageViewAware(img_hot_good), CommonUtil.getDefaultImageLoaderOption());
-            img_hot_good.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(mContext, WebViewActivity.class);
-                    intent.putExtra(ExtraKey.WEB_URL, hotGoods.get(0).getUrl_pc_short());
-                    mContext.startActivity(intent);
-                }
-            });
-
-            ImageLoader.getInstance().displayImage(hotGoods.get(1).getImage(),
-                    new ImageViewAware(img_hot_good2), CommonUtil.getDefaultImageLoaderOption());
-            img_hot_good2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(mContext, WebViewActivity.class);
-                    intent.putExtra(ExtraKey.WEB_URL, hotGoods.get(1).getUrl_pc_short());
-                    mContext.startActivity(intent);
-                }
-            });
-
-            ImageLoader.getInstance().displayImage(hotGoods.get(2).getImage(),
-                    new ImageViewAware(img_hot_good3), CommonUtil.getDefaultImageLoaderOption());
-            img_hot_good3.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(mContext, WebViewActivity.class);
-                    intent.putExtra(ExtraKey.WEB_URL, hotGoods.get(2).getUrl_pc_short());
-                    mContext.startActivity(intent);
-                }
-            });
-        } catch (Exception ex) {
-
-        }
     }
 
     @Override

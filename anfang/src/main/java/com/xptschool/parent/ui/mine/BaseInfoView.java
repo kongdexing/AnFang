@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 public class BaseInfoView extends LinearLayout {
 
     private String TAG = "InfoView";
-    Context mContext;
+    public Context mContext;
 
     public BaseInfoView(Context context) {
         this(context, null);
@@ -20,6 +20,7 @@ public class BaseInfoView extends LinearLayout {
 
     public BaseInfoView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        mContext = context;
     }
 
 }

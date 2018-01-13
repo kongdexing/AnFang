@@ -50,8 +50,13 @@
     <string name="btn_binding">绑定该学校</string>
     <string name="btn_apply">申请学校</string>
 
-
     <string name="home_school">校园生活</string>
+    <string name="home_edu_online">在线教育</string>
+    <string name="home_children_goods">儿童成长</string>
+    <string name="home_invest">投资理财</string>
+    <string name="home_living_payment">生活缴费</string>
+    <string name="home_shopping">校园购</string>
+
     <string name="home_homework">家庭作业</string>
     <string name="home_notice">班级公告</string>
     <string name="home_question">在线提问</string>

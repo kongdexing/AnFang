@@ -13,7 +13,6 @@ import com.xptschool.parent.model.BeanClass;
 import com.xptschool.parent.model.BeanCounty;
 import com.xptschool.parent.model.BeanCourse;
 import com.xptschool.parent.model.BeanHomeCfg;
-import com.xptschool.parent.model.BeanHomeCfgChild;
 import com.xptschool.parent.model.BeanHotGood;
 import com.xptschool.parent.model.BeanLearningModule;
 import com.xptschool.parent.model.BeanMyClass;
@@ -30,7 +29,6 @@ import com.xptschool.parent.model.BeanClassDao;
 import com.xptschool.parent.model.BeanCountyDao;
 import com.xptschool.parent.model.BeanCourseDao;
 import com.xptschool.parent.model.BeanHomeCfgDao;
-import com.xptschool.parent.model.BeanHomeCfgChildDao;
 import com.xptschool.parent.model.BeanHotGoodDao;
 import com.xptschool.parent.model.BeanLearningModuleDao;
 import com.xptschool.parent.model.BeanMyClassDao;
@@ -56,7 +54,6 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig beanCountyDaoConfig;
     private final DaoConfig beanCourseDaoConfig;
     private final DaoConfig beanHomeCfgDaoConfig;
-    private final DaoConfig beanHomeCfgChildDaoConfig;
     private final DaoConfig beanHotGoodDaoConfig;
     private final DaoConfig beanLearningModuleDaoConfig;
     private final DaoConfig beanMyClassDaoConfig;
@@ -73,7 +70,6 @@ public class DaoSession extends AbstractDaoSession {
     private final BeanCountyDao beanCountyDao;
     private final BeanCourseDao beanCourseDao;
     private final BeanHomeCfgDao beanHomeCfgDao;
-    private final BeanHomeCfgChildDao beanHomeCfgChildDao;
     private final BeanHotGoodDao beanHotGoodDao;
     private final BeanLearningModuleDao beanLearningModuleDao;
     private final BeanMyClassDao beanMyClassDao;
@@ -103,9 +99,6 @@ public class DaoSession extends AbstractDaoSession {
 
         beanHomeCfgDaoConfig = daoConfigMap.get(BeanHomeCfgDao.class).clone();
         beanHomeCfgDaoConfig.initIdentityScope(type);
-
-        beanHomeCfgChildDaoConfig = daoConfigMap.get(BeanHomeCfgChildDao.class).clone();
-        beanHomeCfgChildDaoConfig.initIdentityScope(type);
 
         beanHotGoodDaoConfig = daoConfigMap.get(BeanHotGoodDao.class).clone();
         beanHotGoodDaoConfig.initIdentityScope(type);
@@ -142,7 +135,6 @@ public class DaoSession extends AbstractDaoSession {
         beanCountyDao = new BeanCountyDao(beanCountyDaoConfig, this);
         beanCourseDao = new BeanCourseDao(beanCourseDaoConfig, this);
         beanHomeCfgDao = new BeanHomeCfgDao(beanHomeCfgDaoConfig, this);
-        beanHomeCfgChildDao = new BeanHomeCfgChildDao(beanHomeCfgChildDaoConfig, this);
         beanHotGoodDao = new BeanHotGoodDao(beanHotGoodDaoConfig, this);
         beanLearningModuleDao = new BeanLearningModuleDao(beanLearningModuleDaoConfig, this);
         beanMyClassDao = new BeanMyClassDao(beanMyClassDaoConfig, this);
@@ -159,7 +151,6 @@ public class DaoSession extends AbstractDaoSession {
         registerDao(BeanCounty.class, beanCountyDao);
         registerDao(BeanCourse.class, beanCourseDao);
         registerDao(BeanHomeCfg.class, beanHomeCfgDao);
-        registerDao(BeanHomeCfgChild.class, beanHomeCfgChildDao);
         registerDao(BeanHotGood.class, beanHotGoodDao);
         registerDao(BeanLearningModule.class, beanLearningModuleDao);
         registerDao(BeanMyClass.class, beanMyClassDao);
@@ -178,7 +169,6 @@ public class DaoSession extends AbstractDaoSession {
         beanCountyDaoConfig.getIdentityScope().clear();
         beanCourseDaoConfig.getIdentityScope().clear();
         beanHomeCfgDaoConfig.getIdentityScope().clear();
-        beanHomeCfgChildDaoConfig.getIdentityScope().clear();
         beanHotGoodDaoConfig.getIdentityScope().clear();
         beanLearningModuleDaoConfig.getIdentityScope().clear();
         beanMyClassDaoConfig.getIdentityScope().clear();
@@ -209,10 +199,6 @@ public class DaoSession extends AbstractDaoSession {
 
     public BeanHomeCfgDao getBeanHomeCfgDao() {
         return beanHomeCfgDao;
-    }
-
-    public BeanHomeCfgChildDao getBeanHomeCfgChildDao() {
-        return beanHomeCfgChildDao;
     }
 
     public BeanHotGoodDao getBeanHotGoodDao() {

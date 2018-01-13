@@ -27,7 +27,7 @@ public class HttpAction {
     public static String HOME_Banner = HEAD + "Banner/query";
     public static String SHOW_Banner = BuildConfig.SERVICE_URL + "/getadstatics.php";
     //获取分组数据
-    public static String Home_GroupCfg = HEAD + "AppHomecfg/query";
+    public static String Home_GroupCfg = HEAD + "AppHomeset/query";
     /*获取推荐商品*/
     public static String GETHotGoods = HEAD + "HotSale/query";
 
