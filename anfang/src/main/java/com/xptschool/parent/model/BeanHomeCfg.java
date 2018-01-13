@@ -1,6 +1,7 @@
 package com.xptschool.parent.model;
 
 import com.xptschool.parent.BuildConfig;
+import com.xptschool.parent.util.HomeUtil;
 
 import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
@@ -24,16 +25,18 @@ public class BeanHomeCfg {
     private String url;
     private String mark;
     private String type;
+    private String price;
 
-    @Generated(hash = 1082987507)
+    @Generated(hash = 935941846)
     public BeanHomeCfg(String id, String title, String image, String url,
-                       String mark, String type) {
+            String mark, String type, String price) {
         this.id = id;
         this.title = title;
         this.image = image;
         this.url = url;
         this.mark = mark;
         this.type = type;
+        this.price = price;
     }
 
     @Generated(hash = 1285855885)
@@ -57,8 +60,14 @@ public class BeanHomeCfg {
     }
 
     public String getImage() {
-        if (!image.contains(BuildConfig.SERVICE_URL)) {
-            image = BuildConfig.SERVICE_URL + image;
+        if (HomeUtil.SHOPPING.equals(type)) {
+            if (!image.startsWith("http:")) {
+                image = "http:" + image;
+            }
+        } else {
+            if (!image.contains(BuildConfig.SERVICE_URL)) {
+                image = BuildConfig.SERVICE_URL + image;
+            }
         }
         return image;
     }
@@ -81,6 +90,14 @@ public class BeanHomeCfg {
 
     public void setMark(String mark) {
         this.mark = mark;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 
     public String getType() {

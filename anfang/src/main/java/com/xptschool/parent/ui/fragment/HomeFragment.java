@@ -28,7 +28,6 @@ import com.viewpagerindicator.CirclePageIndicator;
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.bean.HomeItem;
-import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.common.UserHelper;
@@ -37,7 +36,6 @@ import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanBanner;
 import com.xptschool.parent.model.BeanHomeCfg;
-import com.xptschool.parent.model.BeanHotGood;
 import com.xptschool.parent.model.BeanTeacher;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.push.BannerHelper;
@@ -48,6 +46,7 @@ import com.xptschool.parent.ui.checkin.CheckinTActivity;
 import com.xptschool.parent.ui.fence.FenceListActivity;
 import com.xptschool.parent.ui.fragment.home.HomeEduView;
 import com.xptschool.parent.ui.fragment.home.HomeHappyGrowView;
+import com.xptschool.parent.ui.fragment.home.HomePayMentView;
 import com.xptschool.parent.ui.fragment.home.HomePropertyView;
 import com.xptschool.parent.ui.fragment.home.HomeShopView;
 import com.xptschool.parent.ui.homework.HomeWorkParentActivity;
@@ -66,7 +65,6 @@ import com.xptschool.parent.view.autoviewpager.GlideImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -107,6 +105,8 @@ public class HomeFragment extends BaseFragment {
     HomePropertyView propertyView;
     @BindView(R.id.shopView)
     HomeShopView shopView;
+    @BindView(R.id.paymentView)
+    HomePayMentView paymentView;
 
     @BindView(R.id.grd_school)
     MyGridView grd_school;
@@ -152,14 +152,12 @@ public class HomeFragment extends BaseFragment {
         Log.i(TAG, "HomeFragment initData: ");
         //先获取本地数据进行展示
         reloadTopFragment(GreenDaoHelper.getInstance().getBanners());
-        initHotGood();
 
         //1获取广告位，2获取分组数据，3获取商品推荐
         getBanners();
         //获取分组数据
         getHomeGroupCfg();
-        //获取热门商品数据
-        getHotGoods();
+
         UserHelper.getInstance().addUserChangeListener(new UserHelper.UserChangeListener() {
             @Override
             public void onUserLoginSuccess() {
@@ -433,6 +431,15 @@ public class HomeFragment extends BaseFragment {
                                     GreenDaoHelper.getInstance().insertHomeCfg(shops, HomeUtil.SHOPPING);
                                     shopView.bindData(shops);
 
+                                    List<BeanHomeCfg> payments = gson.fromJson(jsonData.getJSONArray(HomeUtil.LIVING_PAYMENT).toString(),
+                                            new TypeToken<List<BeanHomeCfg>>() {
+                                            }.getType());
+                                    for (int i = 0; i < payments.size(); i++) {
+                                        payments.get(i).setType(HomeUtil.LIVING_PAYMENT);
+                                    }
+                                    GreenDaoHelper.getInstance().insertHomeCfg(payments, HomeUtil.LIVING_PAYMENT);
+                                    paymentView.bindData(payments);
+                                    
                                 } catch (Exception ex) {
                                     Log.i(TAG, "onResponse: error " + ex.getMessage());
                                     //错误
@@ -535,73 +542,6 @@ public class HomeFragment extends BaseFragment {
 
         grd_school.setAdapter(itemAdapter);
         itemAdapter.reloadData(homeItems);
-    }
-
-    /*获取推荐商品*/
-    private void getHotGoods() {
-        Log.i(TAG, "getHotGoods: ");
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.GETHotGoods,
-                new VolleyHttpParamsEntity()
-                        .addParam("token", CommonUtil.encryptToken(HttpAction.GETHotGoods)), new VolleyRequestListener() {
-                    @Override
-                    public void onStart() {
-
-                    }
-
-                    @Override
-                    public void onResponse(VolleyHttpResult volleyHttpResult) {
-                        switch (volleyHttpResult.getStatus()) {
-                            case HttpAction.SUCCESS:
-                                try {
-                                    String info = volleyHttpResult.getData().toString();
-                                    Log.i(TAG, "onResponse: data " + info);
-
-                                    JSONArray array = new JSONArray(info);
-                                    List<BeanHotGood> hotGoods = new ArrayList<>();
-                                    for (int i = 0; i < array.length(); i++) {
-                                        JSONObject object = array.getJSONObject(i);
-                                        BeanHotGood hotGood = new BeanHotGood();
-                                        hotGood.setId(object.getString("id"));
-                                        hotGood.setImage(object.getString("image"));
-                                        hotGood.setUrl_pc_short(object.getString("url_pc_short"));
-                                        hotGoods.add(hotGood);
-                                    }
-
-                                    if (hotGoods.size() > 0) {
-                                        GreenDaoHelper.getInstance().insertHotGoods(hotGoods);
-                                    }
-                                    Log.i(TAG, "onResponse: size " + hotGoods.size());
-                                    bindHotGood(hotGoods);
-                                } catch (Exception ex) {
-                                    Log.i(TAG, "onResponse: error " + ex.getMessage());
-                                    //错误
-                                    initHotGood();
-                                }
-                                break;
-                            default:
-                                initHotGood();
-                                break;
-                        }
-                    }
-
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        initHotGood();
-                    }
-                });
-    }
-
-    private void initHotGood() {
-        List<BeanHotGood> hotGoods = GreenDaoHelper.getInstance().getHotGoods();
-        if (hotGoods.size() > 0) {
-            bindHotGood(hotGoods);
-        } else {
-//            img_hot_good.setVisibility(View.GONE);
-        }
-    }
-
-    private void bindHotGood(final List<BeanHotGood> hotGoods) {
-
     }
 
     @Override

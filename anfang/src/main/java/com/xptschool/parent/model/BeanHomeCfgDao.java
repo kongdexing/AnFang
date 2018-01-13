@@ -28,6 +28,7 @@ public class BeanHomeCfgDao extends AbstractDao<BeanHomeCfg, String> {
         public final static Property Url = new Property(3, String.class, "url", false, "URL");
         public final static Property Mark = new Property(4, String.class, "mark", false, "MARK");
         public final static Property Type = new Property(5, String.class, "type", false, "TYPE");
+        public final static Property Price = new Property(6, String.class, "price", false, "PRICE");
     };
 
 
@@ -48,7 +49,8 @@ public class BeanHomeCfgDao extends AbstractDao<BeanHomeCfg, String> {
                 "\"IMAGE\" TEXT," + // 2: image
                 "\"URL\" TEXT," + // 3: url
                 "\"MARK\" TEXT," + // 4: mark
-                "\"TYPE\" TEXT);"); // 5: type
+                "\"TYPE\" TEXT," + // 5: type
+                "\"PRICE\" TEXT);"); // 6: price
     }
 
     /** Drops the underlying database table. */
@@ -90,6 +92,11 @@ public class BeanHomeCfgDao extends AbstractDao<BeanHomeCfg, String> {
         if (type != null) {
             stmt.bindString(6, type);
         }
+ 
+        String price = entity.getPrice();
+        if (price != null) {
+            stmt.bindString(7, price);
+        }
     }
 
     @Override
@@ -125,6 +132,11 @@ public class BeanHomeCfgDao extends AbstractDao<BeanHomeCfg, String> {
         if (type != null) {
             stmt.bindString(6, type);
         }
+ 
+        String price = entity.getPrice();
+        if (price != null) {
+            stmt.bindString(7, price);
+        }
     }
 
     @Override
@@ -140,7 +152,8 @@ public class BeanHomeCfgDao extends AbstractDao<BeanHomeCfg, String> {
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // image
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // url
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // mark
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // type
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // type
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6) // price
         );
         return entity;
     }
@@ -153,6 +166,7 @@ public class BeanHomeCfgDao extends AbstractDao<BeanHomeCfg, String> {
         entity.setUrl(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setMark(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setType(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setPrice(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
      }
     
     @Override

@@ -57,6 +57,7 @@ public class HomeShopItemView extends BaseInfoView {
                 new ImageViewAware(goods_img), CommonUtil.getDefaultImageLoaderOption());
         goods_title.setText(homeCfg.getTitle());
         goods_address.setText(homeCfg.getMark());
+        goods_price.setText("$:" + homeCfg.getPrice());
         llShopItem.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {

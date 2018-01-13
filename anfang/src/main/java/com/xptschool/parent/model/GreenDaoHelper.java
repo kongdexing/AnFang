@@ -409,25 +409,6 @@ public class GreenDaoHelper {
         return homeCfgs;
     }
 
-    /*热门商品*/
-    public void insertHotGoods(List<BeanHotGood> hotGoods) {
-        if (writeDaoSession != null) {
-            writeDaoSession.getBeanHotGoodDao().deleteAll();
-            writeDaoSession.getBeanHotGoodDao().insertOrReplaceInTx(hotGoods);
-        }
-    }
-
-    public List<BeanHotGood> getHotGoods() {
-        List<BeanHotGood> hotGoods = null;
-        if (readDaoSession != null) {
-            hotGoods = readDaoSession.getBeanHotGoodDao().loadAll();
-        }
-        if (hotGoods == null) {
-            hotGoods = new ArrayList<BeanHotGood>();
-        }
-        return hotGoods;
-    }
-
     //插入省市区数据
     public void insertCounties(List<BeanCounty> counties) {
         if (writeDaoSession != null) {
