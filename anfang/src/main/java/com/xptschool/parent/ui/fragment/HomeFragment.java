@@ -88,8 +88,6 @@ public class HomeFragment extends BaseFragment {
     RelativeLayout rlTipAD;
     @BindView(R.id.topBanner)
     Banner topBanner;
-    @BindView(R.id.indicator)
-    CirclePageIndicator indicator;
     @BindView(R.id.tipTitle)
     TextView tipTitle;
     List<BeanBanner> advertList = new ArrayList<>();
@@ -205,10 +203,6 @@ public class HomeFragment extends BaseFragment {
         //设置图片集合
         //设置banner动画效果
 //        topBanner.setPageTransformer(true, new GalleryTransformer(getActivity()));
-        //设置自动轮播，默认为true
-        topBanner.isAutoPlay(true);
-        //设置轮播时间
-        topBanner.setDelayTime(3000);
         topBanner.start();
 
         //banner设置方法全部调用完毕时最后调用
@@ -439,7 +433,7 @@ public class HomeFragment extends BaseFragment {
                                     }
                                     GreenDaoHelper.getInstance().insertHomeCfg(payments, HomeUtil.LIVING_PAYMENT);
                                     paymentView.bindData(payments);
-                                    
+
                                 } catch (Exception ex) {
                                     Log.i(TAG, "onResponse: error " + ex.getMessage());
                                     //错误
