@@ -24,6 +24,8 @@
         android:id="@+id/pager_shop"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipChildren="false" />
+        android:clipChildren="false"
+        android:paddingLeft="@dimen/dp_2"
+        android:paddingRight="@dimen/dp_2" />
 
 </LinearLayout>

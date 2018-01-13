@@ -54,11 +54,12 @@ public class HomeShopItemView extends BaseInfoView {
         if (homeCfg == null) {
             return;
         }
-//        int width = XPTApplication.getInstance().getWindowWidth() / 3;
-//        int height = width;
 
-        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) goods_img.getLayoutParams();
-        layoutParams.height = goods_img.getWidth();
+
+        int width = XPTApplication.getInstance().getWindowWidth() / 3;
+        int height = width;
+
+        LinearLayout.LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT,height);
         goods_img.setLayoutParams(layoutParams);
 
         ImageLoader.getInstance().displayImage(homeCfg.getImage(),
