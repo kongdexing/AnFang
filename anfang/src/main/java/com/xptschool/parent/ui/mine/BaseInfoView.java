@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 
 public class BaseInfoView extends LinearLayout {
 
-    private String TAG = "InfoView";
+    public String TAG = "";
     public Context mContext;
 
     public BaseInfoView(Context context) {
@@ -21,6 +21,7 @@ public class BaseInfoView extends LinearLayout {
     public BaseInfoView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
+        TAG = this.getClass().getSimpleName();
     }
 
 }

@@ -27,7 +27,7 @@ public class BeanHomeCfg {
 
     @Generated(hash = 1082987507)
     public BeanHomeCfg(String id, String title, String image, String url,
-            String mark, String type) {
+                       String mark, String type) {
         this.id = id;
         this.title = title;
         this.image = image;
@@ -57,6 +57,9 @@ public class BeanHomeCfg {
     }
 
     public String getImage() {
+        if (!image.contains(BuildConfig.SERVICE_URL)) {
+            image = BuildConfig.SERVICE_URL + image;
+        }
         return image;
     }
 

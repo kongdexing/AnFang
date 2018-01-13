@@ -98,8 +98,8 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.pager_online)
     ViewPager pager_online;
 
-    @BindView(R.id.llHappy)
-    LinearLayout llHappy;
+    @BindView(R.id.happyGrowView)
+    HomeHappyGrowView happyGrowView;
 
     @BindView(R.id.grd_school)
     MyGridView grd_school;
@@ -407,12 +407,7 @@ public class HomeFragment extends BaseFragment {
                                     }
                                     GreenDaoHelper.getInstance().insertHomeCfg(onlines, HomeUtil.CHILDREN_GOODS);
 
-                                    if (children_goods.size() > 0) {
-                                        llHappy.setVisibility(View.VISIBLE);
-
-                                    } else {
-                                        llHappy.setVisibility(View.GONE);
-                                    }
+                                    happyGrowView.bindData(children_goods);
 
 //                                    //删除所有子项
 //                                    GreenDaoHelper.getInstance().deleteHomeChildCfg();
@@ -446,7 +441,7 @@ public class HomeFragment extends BaseFragment {
 
     private void initEduOnLine(List<BeanHomeCfg> onlines) {
         int width = XPTApplication.getInstance().getWindowWidth() / 3;
-        int height = width * 3 / 5;
+        int height = width * 3 / 4;
 
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) pager_online.getLayoutParams();
         layoutParams.height = height;

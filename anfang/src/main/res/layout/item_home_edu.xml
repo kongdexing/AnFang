@@ -11,6 +11,7 @@
         android:id="@+id/optionImg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scaleType="fitXY"
         android:clickable="false" />
 
     <TextView
@@ -21,9 +22,9 @@
         android:background="@color/colorPrimary"
         android:clickable="false"
         android:gravity="center"
-        android:padding="@dimen/dp_3"
+        android:padding="@dimen/dp_2"
         android:text="二年级"
         android:textColor="@color/white"
-        android:textSize="@dimen/sp_14" />
+        android:textSize="@dimen/sp_12" />
 
 </RelativeLayout>
