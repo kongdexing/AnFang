@@ -1,60 +1,63 @@
-package com.xptschool.parent.ui.fragment;
+package com.xptschool.parent.ui.fragment.home;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.darsh.multipleimageselect.models.Image;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
-import com.xptschool.parent.BuildConfig;
 import com.xptschool.parent.R;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.model.BeanHomeCfg;
 import com.xptschool.parent.ui.main.WebViewActivity;
 import com.xptschool.parent.ui.mine.BaseInfoView;
-import com.xptschool.parent.ui.setting.AboutActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * 教育培训
  * Created by shuhaixinxi on 2018/1/13.
  */
-public class HomeEduView extends BaseInfoView {
 
-    @BindView(R.id.rlHomeItem)
-    RelativeLayout rlHomeItem;
-    @BindView(R.id.optionImg)
-    ImageView optionImg;
-    @BindView(R.id.optionText)
-    TextView optionText;
+public class HomeShopItemView extends BaseInfoView {
 
-    public HomeEduView(Context context) {
+    @BindView(R.id.llShopItem)
+    LinearLayout llShopItem;
+    @BindView(R.id.goods_img)
+    ImageView goods_img;
+    @BindView(R.id.goods_title)
+    TextView goods_title;
+    @BindView(R.id.goods_address)
+    TextView goods_address;
+    @BindView(R.id.goods_price)
+    TextView goods_price;
+
+    public HomeShopItemView(Context context) {
         this(context, null);
     }
 
-    public HomeEduView(Context context, @Nullable AttributeSet attrs) {
+    public HomeShopItemView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        View view = LayoutInflater.from(context).inflate(R.layout.item_home_edu, this, true);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_home_shop_item, this, true);
         ButterKnife.bind(view);
     }
 
-    public void bindingData(final BeanHomeCfg homeCfg) {
+    public void bindData(final BeanHomeCfg homeCfg) {
+        if (homeCfg == null) {
+            return;
+        }
         ImageLoader.getInstance().displayImage(homeCfg.getImage(),
-                new ImageViewAware(optionImg), CommonUtil.getDefaultImageLoaderOption());
-        optionText.setText(homeCfg.getTitle());
-        rlHomeItem.setOnClickListener(new OnClickListener() {
+                new ImageViewAware(goods_img), CommonUtil.getDefaultImageLoaderOption());
+        goods_title.setText(homeCfg.getTitle());
+        goods_address.setText(homeCfg.getMark());
+        llShopItem.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, WebViewActivity.class);

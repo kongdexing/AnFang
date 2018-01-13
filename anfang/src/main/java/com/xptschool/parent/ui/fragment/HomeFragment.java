@@ -46,6 +46,10 @@ import com.xptschool.parent.ui.alarm.AlarmTActivity;
 import com.xptschool.parent.ui.checkin.CheckinPActivity;
 import com.xptschool.parent.ui.checkin.CheckinTActivity;
 import com.xptschool.parent.ui.fence.FenceListActivity;
+import com.xptschool.parent.ui.fragment.home.HomeEduView;
+import com.xptschool.parent.ui.fragment.home.HomeHappyGrowView;
+import com.xptschool.parent.ui.fragment.home.HomePropertyView;
+import com.xptschool.parent.ui.fragment.home.HomeShopView;
 import com.xptschool.parent.ui.homework.HomeWorkParentActivity;
 import com.xptschool.parent.ui.homework.HomeWorkTeacherActivity;
 import com.xptschool.parent.ui.leave.LeaveActivity;
@@ -97,12 +101,12 @@ public class HomeFragment extends BaseFragment {
     LinearLayout llOnline;
     @BindView(R.id.pager_online)
     ViewPager pager_online;
-
     @BindView(R.id.happyGrowView)
     HomeHappyGrowView happyGrowView;
-
     @BindView(R.id.propertyView)
     HomePropertyView propertyView;
+    @BindView(R.id.shopView)
+    HomeShopView shopView;
 
     @BindView(R.id.grd_school)
     MyGridView grd_school;
@@ -419,17 +423,16 @@ public class HomeFragment extends BaseFragment {
                                     GreenDaoHelper.getInstance().insertHomeCfg(invests, HomeUtil.INVEST);
                                     propertyView.bindData(invests);
 
-//                                    //删除所有子项
-//                                    GreenDaoHelper.getInstance().deleteHomeChildCfg();
-//                                    if (beanHomeCfgs.size() > 0) {
-//                                        for (int i = 0; i < beanHomeCfgs.size(); i++) {
-//                                            GreenDaoHelper.getInstance().insertHomeChildCfg(beanHomeCfgs.get(i).getChild());
-//                                        }
-//                                    }
+                                    //校园购
+                                    List<BeanHomeCfg> shops = gson.fromJson(jsonData.getJSONArray(HomeUtil.SHOPPING).toString(),
+                                            new TypeToken<List<BeanHomeCfg>>() {
+                                            }.getType());
+                                    for (int i = 0; i < shops.size(); i++) {
+                                        shops.get(i).setType(HomeUtil.SHOPPING);
+                                    }
+                                    GreenDaoHelper.getInstance().insertHomeCfg(shops, HomeUtil.SHOPPING);
+                                    shopView.bindData(shops);
 
-//                                    Log.i(TAG, "onResponse: size " + beanHomeCfgs.size());
-//                                    initHomeCfg();
-//                                    bindHotGood(beanHomeCfgs.get(0));
                                 } catch (Exception ex) {
                                     Log.i(TAG, "onResponse: error " + ex.getMessage());
                                     //错误

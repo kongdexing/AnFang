@@ -1,4 +1,4 @@
-package com.xptschool.parent.ui.fragment;
+package com.xptschool.parent.ui.fragment.home;
 
 import android.content.Context;
 import android.content.Intent;

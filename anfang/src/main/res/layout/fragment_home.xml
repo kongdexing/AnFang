@@ -163,20 +163,24 @@
             </LinearLayout>
 
             <!--快乐成长-->
-            <com.xptschool.parent.ui.fragment.HomeHappyGrowView
+            <com.xptschool.parent.ui.fragment.home.HomeHappyGrowView
                 android:id="@+id/happyGrowView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10" />
 
             <!--理财投资-->
-            <com.xptschool.parent.ui.fragment.HomePropertyView
+            <com.xptschool.parent.ui.fragment.home.HomePropertyView
                 android:id="@+id/propertyView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"/>
+                android:layout_marginTop="@dimen/dp_10" />
             <!--校园购-->
-
+            <com.xptschool.parent.ui.fragment.home.HomeShopView
+                android:id="@+id/shopView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10" />
             <!--生活缴费-->
 
             <!--动态添加的分组-->

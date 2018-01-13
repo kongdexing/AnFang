@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llShopItem"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/goods_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/goods_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:clickable="false"
+        android:ellipsize="end"
+        android:gravity="left"
+        android:lines="1"
+        android:text=""
+        android:textColor="@color/color_black_2"
+        android:textSize="@dimen/sp_12" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/goods_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/dp_2"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="上海"
+            android:textColor="@color/color_black_3"
+            android:textSize="@dimen/sp_12" />
+
+        <TextView
+            android:id="@+id/goods_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="$20"
+            android:textColor="@color/red"
+            android:textSize="@dimen/sp_12" />
+
+    </RelativeLayout>
+
+</LinearLayout>
