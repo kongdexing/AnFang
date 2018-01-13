@@ -23,7 +23,7 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/pager_shop"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_60"
+        android:layout_height="match_parent"
         android:clipChildren="false" />
 
 </LinearLayout>

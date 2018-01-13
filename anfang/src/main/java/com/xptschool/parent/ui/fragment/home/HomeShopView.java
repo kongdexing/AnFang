@@ -40,17 +40,17 @@ public class HomeShopView extends BaseInfoView {
         super(context, attrs);
         View view = LayoutInflater.from(context).inflate(R.layout.item_home_shop, this, true);
         ButterKnife.bind(view);
+        int width = XPTApplication.getInstance().getWindowWidth() / 3;
+        int height = width * 3 / 4;
+
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) pager_shop.getLayoutParams();
+        layoutParams.height = height;
+        pager_shop.setLayoutParams(layoutParams);
     }
 
     public void bindData(List<BeanHomeCfg> homeCfgs) {
         if (homeCfgs.size() > 0) {
             llHomeShop.setVisibility(VISIBLE);
-            int width = XPTApplication.getInstance().getWindowWidth() / 3;
-            int height = width * 3 / 4;
-
-            LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) pager_shop.getLayoutParams();
-            layoutParams.height = height;
-            pager_shop.setLayoutParams(layoutParams);
 
             pager_shop.setOffscreenPageLimit(3);
             pager_shop.setPageMargin(5);

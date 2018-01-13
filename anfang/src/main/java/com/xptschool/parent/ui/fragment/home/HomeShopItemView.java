@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.xptschool.parent.R;
+import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.model.BeanHomeCfg;
@@ -53,6 +54,13 @@ public class HomeShopItemView extends BaseInfoView {
         if (homeCfg == null) {
             return;
         }
+//        int width = XPTApplication.getInstance().getWindowWidth() / 3;
+//        int height = width;
+
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) goods_img.getLayoutParams();
+        layoutParams.height = goods_img.getWidth();
+        goods_img.setLayoutParams(layoutParams);
+
         ImageLoader.getInstance().displayImage(homeCfg.getImage(),
                 new ImageViewAware(goods_img), CommonUtil.getDefaultImageLoaderOption());
         goods_title.setText(homeCfg.getTitle());

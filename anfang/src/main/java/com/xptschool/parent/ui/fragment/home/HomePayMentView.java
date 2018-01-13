@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -34,8 +35,8 @@ public class HomePayMentView extends BaseInfoView {
     @BindView(R.id.llHomePay)
     LinearLayout llHomePay;
 
-    @BindView(R.id.llpay1)
-    LinearLayout llpay1;
+    @BindView(R.id.rlpay1)
+    RelativeLayout rlpay1;
     @BindView(R.id.pay1_title)
     TextView pay1_title;
     @BindView(R.id.pay1_des)
@@ -43,8 +44,8 @@ public class HomePayMentView extends BaseInfoView {
     @BindView(R.id.pay1_img)
     ImageView pay1_img;
 
-    @BindView(R.id.llpay2)
-    LinearLayout llpay2;
+    @BindView(R.id.rlpay2)
+    RelativeLayout rlpay2;
     @BindView(R.id.pay2_title)
     TextView pay2_title;
     @BindView(R.id.pay2_des)
@@ -72,7 +73,7 @@ public class HomePayMentView extends BaseInfoView {
                     pay1_des.setText(homeCfg1.getMark());
                     ImageLoader.getInstance().displayImage(homeCfg1.getImage(),
                             new ImageViewAware(pay1_img), CommonUtil.getDefaultImageLoaderOption());
-                    llpay1.setOnClickListener(new OnClickListener() {
+                    rlpay1.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             Intent intent = new Intent(mContext, WebViewActivity.class);
@@ -88,7 +89,7 @@ public class HomePayMentView extends BaseInfoView {
                     pay2_des.setText(homeCfg2.getMark());
                     ImageLoader.getInstance().displayImage(homeCfg2.getImage(),
                             new ImageViewAware(pay2_img), CommonUtil.getDefaultImageLoaderOption());
-                    llpay2.setOnClickListener(new OnClickListener() {
+                    rlpay2.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             Intent intent = new Intent(mContext, WebViewActivity.class);

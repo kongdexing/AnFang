@@ -137,8 +137,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
-                android:orientation="vertical"
-                android:visibility="gone">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -168,30 +167,46 @@
                 android:id="@+id/happyGrowView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:visibility="gone" />
+                android:layout_marginTop="@dimen/dp_10" />
 
             <!--理财投资-->
             <com.xptschool.parent.ui.fragment.home.HomePropertyView
                 android:id="@+id/propertyView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:visibility="gone" />
+                android:layout_marginTop="@dimen/dp_10" />
             <!--校园购-->
             <com.xptschool.parent.ui.fragment.home.HomeShopView
                 android:id="@+id/shopView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:visibility="gone" />
+                android:layout_marginTop="@dimen/dp_10" />
             <!--生活缴费-->
             <com.xptschool.parent.ui.fragment.home.HomePayMentView
                 android:id="@+id/paymentView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:visibility="gone" />
+                android:layout_marginTop="@dimen/dp_10"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_40"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:background="@drawable/line_contacts"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/bg_window"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:paddingRight="@dimen/dp_10"
+                    android:text="@string/home_bottom"
+                    android:textColor="@color/color_black_3"
+                    android:textSize="@dimen/sp_12" />
+            </LinearLayout>
 
         </LinearLayout>
     </com.android.widget.pulltorefresh.PullToRefreshScrollView>
