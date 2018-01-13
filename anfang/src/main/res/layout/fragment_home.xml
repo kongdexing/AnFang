@@ -166,11 +166,15 @@
             <com.xptschool.parent.ui.fragment.HomeHappyGrowView
                 android:id="@+id/happyGrowView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10" />
 
             <!--理财投资-->
-
+            <com.xptschool.parent.ui.fragment.HomePropertyView
+                android:id="@+id/propertyView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"/>
             <!--校园购-->
 
             <!--生活缴费-->

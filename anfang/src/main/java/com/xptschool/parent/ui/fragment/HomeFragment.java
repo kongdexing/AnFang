@@ -101,6 +101,9 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.happyGrowView)
     HomeHappyGrowView happyGrowView;
 
+    @BindView(R.id.propertyView)
+    HomePropertyView propertyView;
+
     @BindView(R.id.grd_school)
     MyGridView grd_school;
     HomeItemGridAdapter itemAdapter;
@@ -391,7 +394,6 @@ public class HomeFragment extends BaseFragment {
                                         onlines.get(i).setType(HomeUtil.ONLINE_VIDEO);
                                     }
                                     GreenDaoHelper.getInstance().insertHomeCfg(onlines, HomeUtil.ONLINE_VIDEO);
-
                                     if (onlines.size() > 0) {
                                         llOnline.setVisibility(View.VISIBLE);
                                         initEduOnLine(onlines);
@@ -405,9 +407,17 @@ public class HomeFragment extends BaseFragment {
                                     for (int i = 0; i < children_goods.size(); i++) {
                                         children_goods.get(i).setType(HomeUtil.CHILDREN_GOODS);
                                     }
-                                    GreenDaoHelper.getInstance().insertHomeCfg(onlines, HomeUtil.CHILDREN_GOODS);
-
+                                    GreenDaoHelper.getInstance().insertHomeCfg(children_goods, HomeUtil.CHILDREN_GOODS);
                                     happyGrowView.bindData(children_goods);
+
+                                    List<BeanHomeCfg> invests = gson.fromJson(jsonData.getJSONArray(HomeUtil.INVEST).toString(),
+                                            new TypeToken<List<BeanHomeCfg>>() {
+                                            }.getType());
+                                    for (int i = 0; i < invests.size(); i++) {
+                                        invests.get(i).setType(HomeUtil.INVEST);
+                                    }
+                                    GreenDaoHelper.getInstance().insertHomeCfg(invests, HomeUtil.INVEST);
+                                    propertyView.bindData(invests);
 
 //                                    //删除所有子项
 //                                    GreenDaoHelper.getInstance().deleteHomeChildCfg();

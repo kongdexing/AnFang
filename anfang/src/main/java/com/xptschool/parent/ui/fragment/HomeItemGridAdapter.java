@@ -108,7 +108,6 @@ public class HomeItemGridAdapter extends BaseAdapter {
         LinearLayout llHomeItem;
         TextView optionText;
         ImageView optionImg;
-
     }
 
 }
