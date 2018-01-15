@@ -44,6 +44,7 @@ import com.xptschool.parent.ui.alarm.AlarmTActivity;
 import com.xptschool.parent.ui.checkin.CheckinPActivity;
 import com.xptschool.parent.ui.checkin.CheckinTActivity;
 import com.xptschool.parent.ui.fence.FenceListActivity;
+import com.xptschool.parent.ui.fragment.home.HomeEduGroupView;
 import com.xptschool.parent.ui.fragment.home.HomeEduView;
 import com.xptschool.parent.ui.fragment.home.HomeHappyGrowView;
 import com.xptschool.parent.ui.fragment.home.HomePayMentView;
@@ -93,10 +94,8 @@ public class HomeFragment extends BaseFragment {
     List<BeanBanner> advertList = new ArrayList<>();
 
     //教育培训,快乐成长,理财投资,校园购,生活缴费
-    @BindView(R.id.llOnline)
-    LinearLayout llOnline;
-    @BindView(R.id.pager_online)
-    ViewPager pager_online;
+    @BindView(R.id.eduGroupView)
+    HomeEduGroupView eduGroupView;
     @BindView(R.id.happyGrowView)
     HomeHappyGrowView happyGrowView;
     @BindView(R.id.propertyView)
@@ -390,12 +389,7 @@ public class HomeFragment extends BaseFragment {
                                         onlines.get(i).setType(HomeUtil.ONLINE_VIDEO);
                                     }
                                     GreenDaoHelper.getInstance().insertHomeCfg(onlines, HomeUtil.ONLINE_VIDEO);
-                                    if (onlines.size() > 0) {
-                                        llOnline.setVisibility(View.VISIBLE);
-                                        initEduOnLine(onlines);
-                                    } else {
-                                        llOnline.setVisibility(View.GONE);
-                                    }
+                                    eduGroupView.initEduOnLine(onlines);
 
                                     List<BeanHomeCfg> children_goods = gson.fromJson(jsonData.getJSONArray(HomeUtil.CHILDREN_GOODS).toString(),
                                             new TypeToken<List<BeanHomeCfg>>() {
@@ -451,28 +445,6 @@ public class HomeFragment extends BaseFragment {
 //                        initHomeCfg();
                     }
                 });
-    }
-
-    private void initEduOnLine(List<BeanHomeCfg> onlines) {
-        int width = XPTApplication.getInstance().getWindowWidth() / 3;
-        int height = width * 3 / 4;
-
-        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) pager_online.getLayoutParams();
-        layoutParams.height = height;
-        pager_online.setLayoutParams(layoutParams);
-
-        pager_online.setOffscreenPageLimit(3);
-        pager_online.setPageMargin(5);
-
-        List<View> eduViews = new ArrayList<>();
-        for (int i = 0; i < onlines.size(); i++) {
-            HomeEduView eduView = new HomeEduView(mContext);
-            eduView.bindingData(onlines.get(i));
-            eduViews.add(eduView);
-        }
-
-        HomePagerAdapter adapter = new HomePagerAdapter(eduViews);
-        pager_online.setAdapter(adapter);
     }
 
     private void initSchoolItem() {

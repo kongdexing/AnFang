@@ -130,38 +130,11 @@
             </LinearLayout>
 
             <!--教育培训-->
-            <LinearLayout
-                android:id="@+id/llOnline"
+            <com.xptschool.parent.ui.fragment.home.HomeEduGroupView
+                android:id="@+id/eduGroupView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:padding="@dimen/dp_5">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/home_edu_online"
-                        android:textSize="@dimen/sp_16" />
-
-                </LinearLayout>
-
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/pager_online"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_60"
-                    android:clipChildren="false"
-                    android:paddingLeft="@dimen/dp_2"
-                    android:paddingRight="@dimen/dp_2" />
-
-            </LinearLayout>
-
+                android:layout_marginTop="@dimen/dp_10" />
             <!--快乐成长-->
             <com.xptschool.parent.ui.fragment.home.HomeHappyGrowView
                 android:id="@+id/happyGrowView"
