@@ -40,6 +40,7 @@ public class HomeShopView extends BaseInfoView {
         super(context, attrs);
         View view = LayoutInflater.from(context).inflate(R.layout.item_home_shop, this, true);
         ButterKnife.bind(view);
+        llHomeShop.setVisibility(GONE);
     }
 
     public void bindData(List<BeanHomeCfg> homeCfgs) {
@@ -66,7 +67,7 @@ public class HomeShopView extends BaseInfoView {
             HomePagerAdapter adapter = new HomePagerAdapter(eduViews);
             pager_shop.setAdapter(adapter);
         } else {
-            llHomeShop.setVisibility(VISIBLE);
+            llHomeShop.setVisibility(GONE);
         }
     }
 

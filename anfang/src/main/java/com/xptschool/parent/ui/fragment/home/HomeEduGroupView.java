@@ -39,6 +39,7 @@ public class HomeEduGroupView extends BaseInfoView {
         super(context, attrs);
         View view = LayoutInflater.from(context).inflate(R.layout.item_home_edu_group, this, true);
         ButterKnife.bind(view);
+        llOnline.setVisibility(View.GONE);
     }
 
     public void initEduOnLine(List<BeanHomeCfg> onlines) {

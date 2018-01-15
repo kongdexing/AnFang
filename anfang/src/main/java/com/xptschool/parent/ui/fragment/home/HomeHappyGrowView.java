@@ -71,6 +71,7 @@ public class HomeHappyGrowView extends BaseInfoView {
         super(context, attrs);
         View view = LayoutInflater.from(context).inflate(R.layout.item_home_happy, this, true);
         ButterKnife.bind(view);
+        llHappy.setVisibility(GONE);
     }
 
     public void bindData(List<BeanHomeCfg> children_goods) {

@@ -429,6 +429,7 @@ public class HomeFragment extends BaseFragment {
                                     GreenDaoHelper.getInstance().insertHomeCfg(shops, HomeUtil.SHOPPING);
                                     shopView.bindData(shops);
 
+                                    //生活缴费
                                     List<BeanHomeCfg> payments = gson.fromJson(jsonData.getJSONArray(HomeUtil.LIVING_PAYMENT).toString(),
                                             new TypeToken<List<BeanHomeCfg>>() {
                                             }.getType());

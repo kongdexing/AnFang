@@ -8,7 +8,7 @@ import android.widget.GridView;
  * Created by Administrator on 2016/10/27.
  * 解决在scrollview中只显示第一行数据的问题
  */
-public class MyGridView extends GridView{
+public class MyGridView extends GridView {
 
     public MyGridView(Context context) {
         super(context);

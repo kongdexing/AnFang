@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -52,6 +53,7 @@ public class HomePropertyView extends BaseInfoView {
         super(context, attrs);
         View view = LayoutInflater.from(context).inflate(R.layout.item_home_property, this, true);
         ButterKnife.bind(view);
+        llHomeInvest.setVisibility(GONE);
     }
 
     public void bindData(List<BeanHomeCfg> homeCfgs) {
@@ -100,7 +102,7 @@ public class HomePropertyView extends BaseInfoView {
         public View getView(final int position, View convertView, ViewGroup parent) {
             Log.i(TAG, "getView: " + position);
             ImageView propertyImg = new ImageView(mContext);
-            LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, 180);
+            AbsListView.LayoutParams layoutParams = new AbsListView.LayoutParams(LayoutParams.MATCH_PARENT, 180);
             propertyImg.setLayoutParams(layoutParams);
 
             propertyImg.setScaleType(ImageView.ScaleType.FIT_XY);

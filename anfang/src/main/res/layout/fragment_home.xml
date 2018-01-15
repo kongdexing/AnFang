@@ -28,11 +28,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:delay_time="3000"
-                    app:title_height="@dimen/dp_40"
-                    app:title_background="@color/translucent"
                     app:indicator_drawable_selected="@color/colorPrimary"
                     app:indicator_drawable_unselected="@color/transparent_white"
-                    app:is_auto_play="true" />
+                    app:is_auto_play="true"
+                    app:title_background="@color/translucent"
+                    app:title_height="@dimen/dp_40" />
 
                 <TextView
                     android:id="@+id/tipTitle"
@@ -53,10 +53,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_40"
-                android:layout_marginRight="@dimen/dp_40"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_marginRight="@dimen/dp_30"
                 android:layout_marginTop="-15dp"
-                android:background="@drawable/bg_home_tip"
+                android:background="@drawable/bg_home_top"
+                android:gravity="center"
                 android:padding="@dimen/dp_5">
 
                 <com.android.widget.mygridview.MyGridView

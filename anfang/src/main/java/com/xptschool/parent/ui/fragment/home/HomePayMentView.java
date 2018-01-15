@@ -61,6 +61,7 @@ public class HomePayMentView extends BaseInfoView {
         super(context, attrs);
         View view = LayoutInflater.from(context).inflate(R.layout.item_home_payment, this, true);
         ButterKnife.bind(view);
+        llHomePay.setVisibility(GONE);
     }
 
     public void bindData(List<BeanHomeCfg> homeCfgs) {
