@@ -54,6 +54,15 @@
         <item name="android:background">@color/colorPrimary</item>
     </style>
 
+    <style name="nav_home_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_margin">@dimen/dp_3</item>
+        <item name="android:textSize">@dimen/sp_12</item>
+    </style>
+
     <style name="mineText">
         <item name="android:textColor">@color/color_black_1</item>
         <item name="android:textSize">@dimen/sp_16</item>

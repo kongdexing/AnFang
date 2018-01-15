@@ -64,13 +64,33 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
 
     private List<BaseFragment> fragmentList;
     private BaseFragment mCurrentFgt, homeFragment, mapFragment, messageFragment, mineFragment;
-    private FrameLayout fl_Content;
-    private ImageButton homeBtn, mapBtn, messageBtn, mineBtn;
+    @BindView(R.id.fl_Content)
+    FrameLayout fl_Content;
+
+    @BindView(R.id.img_nav_home)
+    ImageButton homeBtn;
+    @BindView(R.id.img_nav_track)
+    ImageButton mapBtn;
+    @BindView(R.id.img_nav_message)
+    ImageButton messageBtn;
+    @BindView(R.id.img_nav_mine)
+    ImageButton mineBtn;
+
+    @BindView(R.id.txt_nav_home)
+    TextView homeTxt;
+    @BindView(R.id.txt_nav_track)
+    TextView mapTxt;
+    @BindView(R.id.txt_nav_message)
+    TextView messageTxt;
+    @BindView(R.id.txt_nav_mine)
+    TextView mineTxt;
+
+    @BindView(R.id.txtUnReadNum)
+    TextView txtUnReadNum;
+
     private FragmentManager mFgtManager;
     private FragmentTransaction mFgtTransaction;
     private long mExitTime;
-    @BindView(R.id.txtUnReadNum)
-    TextView txtUnReadNum;
     public LocationClient mLocClient;
 
     @Override
@@ -87,10 +107,6 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
 
     private void initView() {
         fl_Content = (FrameLayout) findViewById(R.id.fl_Content);
-        homeBtn = (ImageButton) findViewById(R.id.nav_home);
-        mapBtn = (ImageButton) findViewById(R.id.nav_track);
-        messageBtn = (ImageButton) findViewById(R.id.nav_message);
-        mineBtn = (ImageButton) findViewById(R.id.nav_mine);
 
         IntentFilter filter = new IntentFilter(BroadcastAction.RELOAD_BANNER);
         this.registerReceiver(MyBannerReceiver, filter);
@@ -128,6 +144,7 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
 
     private void setInitialState() {
         homeBtn.setSelected(true);
+        homeTxt.setTextColor(getResources().getColor(R.color.colorPrimary));
 
         mFgtTransaction = mFgtManager.beginTransaction();
         mCurrentFgt = fragmentList.get(0);
@@ -229,18 +246,22 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
         switch (view.getId()) {
             case R.id.nav_home:
                 homeBtn.setSelected(true);
+                homeTxt.setTextColor(getResources().getColor(R.color.colorPrimary));
                 addOrReplaceFgt(0);
                 break;
             case R.id.nav_track:
                 mapBtn.setSelected(true);
+                mapTxt.setTextColor(getResources().getColor(R.color.colorPrimary));
                 addOrReplaceFgt(1);
                 break;
             case R.id.nav_message:
                 messageBtn.setSelected(true);
+                messageTxt.setTextColor(getResources().getColor(R.color.colorPrimary));
                 addOrReplaceFgt(2);
                 break;
             case R.id.nav_mine:
                 mineBtn.setSelected(true);
+                mineTxt.setTextColor(getResources().getColor(R.color.colorPrimary));
                 addOrReplaceFgt(3);
                 break;
         }
@@ -251,6 +272,11 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
         mapBtn.setSelected(false);
         messageBtn.setSelected(false);
         mineBtn.setSelected(false);
+
+        homeTxt.setTextColor(getResources().getColor(R.color.color_black_2));
+        mapTxt.setTextColor(getResources().getColor(R.color.color_black_2));
+        messageTxt.setTextColor(getResources().getColor(R.color.color_black_2));
+        mineTxt.setTextColor(getResources().getColor(R.color.color_black_2));
     }
 
     private void addOrReplaceFgt(int position) {
