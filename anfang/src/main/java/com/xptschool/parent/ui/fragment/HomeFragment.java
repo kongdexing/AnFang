@@ -70,6 +70,7 @@ import com.xptschool.parent.util.NetWorkUsefulUtils;
 import com.xptschool.parent.util.ParentUtil;
 import com.xptschool.parent.view.autoviewpager.GlideImageLoader;
 import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
 import com.youth.banner.listener.OnBannerListener;
 
 import org.json.JSONObject;
@@ -188,7 +189,7 @@ public class HomeFragment extends BaseFragment {
         Log.i(TAG, "HomeFragment initView: ");
         int width = XPTApplication.getInstance().getWindowWidth();
 
-        int height = width / 2;
+        int height = width * 3 / 5;
         Log.i(TAG, "initView: " + width + "  " + height);
 
         try {
@@ -204,6 +205,7 @@ public class HomeFragment extends BaseFragment {
         // 1.设置幕后item的缓存数目
         topBanner.setOffscreenPageLimit(1);
         topBanner.setBackgroundResource(R.drawable.tip_ad_def);
+        topBanner.updateBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE);
 //        topBanner.setImages(new ArrayList<Integer>(){R.drawable.tip_ad_def});
 //        topBanner.setImages(listBannerImages);
         topBanner.setImageLoader(new GlideImageLoader());

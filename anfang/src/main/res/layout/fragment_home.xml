@@ -28,6 +28,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:delay_time="3000"
+                    app:title_height="@dimen/dp_40"
+                    app:title_background="@color/translucent"
                     app:indicator_drawable_selected="@color/colorPrimary"
                     app:indicator_drawable_unselected="@color/transparent_white"
                     app:is_auto_play="true" />
@@ -55,55 +57,18 @@
                 android:layout_marginRight="@dimen/dp_40"
                 android:layout_marginTop="-15dp"
                 android:background="@drawable/bg_home_tip"
-                android:paddingBottom="@dimen/dp_5"
-                android:paddingTop="@dimen/dp_5">
+                android:padding="@dimen/dp_5">
 
                 <com.android.widget.mygridview.MyGridView
                     android:id="@+id/grd_tip"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_3"
-                    android:background="@color/white"
                     android:horizontalSpacing="@dimen/dp_1"
                     android:listSelector="@null"
                     android:numColumns="3"
                     android:scrollbars="none"
                     android:stretchMode="columnWidth"
                     android:verticalSpacing="@dimen/dp_1" />
-                <!--<com.xptschool.parent.view.HomeItemView-->
-                    <!--android:id="@+id/home_course"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="1"-->
-                    <!--app:src="@drawable/home_course"-->
-                    <!--app:text="@string/home_course" />-->
-
-                <!--<View-->
-                    <!--android:layout_width="@dimen/dp_1"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:background="@color/colorPrimary" />-->
-
-                <!--<com.xptschool.parent.view.HomeItemView-->
-                    <!--android:id="@+id/home_comment"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="1"-->
-                    <!--app:src="@drawable/home_remark"-->
-                    <!--app:text="@string/home_comment" />-->
-
-                <!--<View-->
-                    <!--android:layout_width="@dimen/dp_1"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:background="@color/colorPrimary" />-->
-
-                <!--<com.xptschool.parent.view.HomeItemView-->
-                    <!--android:id="@+id/home_news"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:layout_weight="1"-->
-                    <!--app:src="@drawable/home_news"-->
-                    <!--app:text="@string/home_news" />-->
-
             </LinearLayout>
 
             <!--校园生活-->

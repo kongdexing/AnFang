@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.xptschool.parent.R;
+import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.model.BeanHomeCfg;
@@ -75,6 +76,11 @@ public class HomeHappyGrowView extends BaseInfoView {
     public void bindData(List<BeanHomeCfg> children_goods) {
         if (children_goods.size() > 0) {
             llHappy.setVisibility(VISIBLE);
+
+            LinearLayout.LayoutParams layoutParams = (LayoutParams) llHappy.getLayoutParams();
+            layoutParams.height = XPTApplication.getInstance().getWindowWidth() * 3 / 5;
+            llHappy.setLayoutParams(layoutParams);
+
             try {
                 final BeanHomeCfg homeCfg1 = children_goods.get(0);
                 if (homeCfg1 != null) {
