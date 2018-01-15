@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -12,17 +12,12 @@
         <item name="android:navigationBarColor">@color/colorPrimary</item>
         <item name="android:textColorSecondary">@color/text_black</item>
         <item name="android:textColor">@color/text_black</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowAllowEnterTransitionOverlap">true</item>
         <item name="android:windowAllowReturnTransitionOverlap">true</item>
-        <item name="android:windowSharedElementEnterTransition">@android:transition/move</item>
-        <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
-
-        作者：知乎用户
-        链接：https://www.zhihu.com/question/31468556/answer/52165454
-        来源：知乎
-        著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
     </style>
 
     <style name="AppTheme.ScrollTranslate" parent="AppTheme">

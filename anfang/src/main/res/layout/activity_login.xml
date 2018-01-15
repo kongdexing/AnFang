@@ -248,7 +248,7 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/dp_5"
                     android:text="@string/forgetpwd"
-                    android:textColor="@color/blue"
+                    android:textColor="@color/colorPrimary"
                     android:visibility="visible" />
 
                 <TextView
@@ -258,7 +258,7 @@
                     android:layout_alignParentRight="true"
                     android:padding="@dimen/dp_5"
                     android:text="@string/register"
-                    android:textColor="@color/blue"
+                    android:textColor="@color/colorPrimary"
                     android:visibility="visible" />
 
             </RelativeLayout>
