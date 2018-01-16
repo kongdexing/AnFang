@@ -55,7 +55,6 @@ public class BaseMainActivity extends BaseLoginMainActivity implements HuaweiApi
                 unRegisterPush();
             }
         });
-//        registerPush();
     }
 
     private void registerPush() {
