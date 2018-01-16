@@ -3,12 +3,15 @@
     android:id="@+id/llOnline"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="@dimen/dp_10"
     android:orientation="vertical">
+
+    <View
+        style="@style/home_horizontal_line"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
         android:background="@color/white"
         android:padding="@dimen/dp_5">
 

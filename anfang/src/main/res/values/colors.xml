@@ -59,6 +59,7 @@
     <color name="color_yinyue">#494ef8</color>
     <color name="color_yuwen">#ff6766</color>
     <color name="color_zhengzhi">#4FB68C</color>
+    <color name="color_price">#ee6464</color>
 
     <color name="color_power">#2bdfd6</color>
     <color name="color_signal">#35ace7</color>
@@ -70,5 +71,7 @@
 
     <color name="color_rcBackgroundColor">#e9eaec</color>
     <color name="color_rcSecondaryProgressColor">#15948d</color>
+
+    <color name="color_home_line">#FCFCFC</color>
 
 </resources>

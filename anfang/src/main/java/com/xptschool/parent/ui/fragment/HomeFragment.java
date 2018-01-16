@@ -371,7 +371,8 @@ public class HomeFragment extends BaseFragment {
         if (topBanner == null) {
             return;
         }
-        topBanner.update(listBannerImages, listTitles);
+//        topBanner.update(listBannerImages, listTitles);
+        topBanner.update(listBannerImages);
     }
 
     private void getHomeGroupCfg() {
