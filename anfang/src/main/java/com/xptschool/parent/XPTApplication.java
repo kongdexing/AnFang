@@ -134,55 +134,7 @@ public class XPTApplication extends Application {
 //                |   remark   评语
 //                |   honor  荣誉
 //                @param id
-
-                try {
-                    JSONObject object = new JSONObject(msg.custom);
-//                    Map<String, String> msgExtra = msg.extra;
-                    String activity = object.getString("activity");
-                    String id = object.getString("id");
-
-                    Log.i(TAG, "dealWithCustomAction: " + msg.custom);
-                    Log.i(TAG, "activity: " + activity + " id:" + id);
-                    if ("homework".equals(activity)) {
-                        Intent intent = new Intent(XPTApplication.this, HomeWorkDetailParentActivity.class);
-                        intent.putExtra(ExtraKey.DETAIL_ID, id);
-                        startActivity(intent);
-                    } else if ("notice".equals(activity)) {
-                        Intent intent = new Intent(XPTApplication.this, NoticeDetailActivity.class);
-                        intent.putExtra(ExtraKey.DETAIL_ID, id);
-                        startActivity(intent);
-                    } else if ("attendance".equals(activity)) {
-                        Intent intent = new Intent(XPTApplication.this, CheckinPActivity.class);
-                        intent.putExtra(ExtraKey.DETAIL_ID, id);
-                        startActivity(intent);
-                    } else if ("leave".equals(activity)) {
-                        if (getCurrent_user_type().equals(UserType.PARENT)) {
-                            Intent intent = new Intent(XPTApplication.this, LeavePDetailActivity.class);
-                            intent.putExtra(ExtraKey.DETAIL_ID, id);
-                            startActivity(intent);
-                        } else if (getCurrent_user_type().equals(UserType.TEACHER)) {
-                            Intent intent = new Intent(XPTApplication.this, LeaveTDetailActivity.class);
-                            intent.putExtra(ExtraKey.DETAIL_ID, id);
-                            startActivity(intent);
-                        }
-                    } else if ("warning".equals(activity)) {
-                        Intent intent = new Intent(XPTApplication.this, AlarmMapActivity.class);
-                        intent.putExtra(ExtraKey.DETAIL_ID, id);
-                        startActivity(intent);
-                    } else if ("remark".equals(activity)) {
-                        //评语
-                        Intent intent = new Intent(XPTApplication.this, CommentDetailActivity.class);
-                        intent.putExtra(ExtraKey.DETAIL_ID, id);
-                        startActivity(intent);
-                    } else if ("honor".equals(activity)) {
-                        //荣誉
-                        Intent intent = new Intent(XPTApplication.this, HonorDetailActivity.class);
-                        intent.putExtra(ExtraKey.DETAIL_ID, id);
-                        startActivity(intent);
-                    }
-                } catch (Exception ex) {
-
-                }
+                resolvePushMsg(msg.custom);
             }
         };
         mPushAgent.setNotificationClickHandler(notificationClickHandler);
@@ -207,6 +159,57 @@ public class XPTApplication extends Application {
 
         //init demo helper
         EaseHelper.getInstance().init(mInstance);
+    }
+
+    public void resolvePushMsg(String message) {
+        try {
+            JSONObject object = new JSONObject(message);
+//                    Map<String, String> msgExtra = msg.extra;
+            String activity = object.getString("activity");
+            String id = object.getString("id");
+
+            Log.i(TAG, "dealWithCustomAction: " + message);
+            Log.i(TAG, "activity: " + activity + " id:" + id);
+            if ("homework".equals(activity)) {
+                Intent intent = new Intent(XPTApplication.this, HomeWorkDetailParentActivity.class);
+                intent.putExtra(ExtraKey.DETAIL_ID, id);
+                startActivity(intent);
+            } else if ("notice".equals(activity)) {
+                Intent intent = new Intent(XPTApplication.this, NoticeDetailActivity.class);
+                intent.putExtra(ExtraKey.DETAIL_ID, id);
+                startActivity(intent);
+            } else if ("attendance".equals(activity)) {
+                Intent intent = new Intent(XPTApplication.this, CheckinPActivity.class);
+                intent.putExtra(ExtraKey.DETAIL_ID, id);
+                startActivity(intent);
+            } else if ("leave".equals(activity)) {
+                if (getCurrent_user_type().equals(UserType.PARENT)) {
+                    Intent intent = new Intent(XPTApplication.this, LeavePDetailActivity.class);
+                    intent.putExtra(ExtraKey.DETAIL_ID, id);
+                    startActivity(intent);
+                } else if (getCurrent_user_type().equals(UserType.TEACHER)) {
+                    Intent intent = new Intent(XPTApplication.this, LeaveTDetailActivity.class);
+                    intent.putExtra(ExtraKey.DETAIL_ID, id);
+                    startActivity(intent);
+                }
+            } else if ("warning".equals(activity)) {
+                Intent intent = new Intent(XPTApplication.this, AlarmMapActivity.class);
+                intent.putExtra(ExtraKey.DETAIL_ID, id);
+                startActivity(intent);
+            } else if ("remark".equals(activity)) {
+                //评语
+                Intent intent = new Intent(XPTApplication.this, CommentDetailActivity.class);
+                intent.putExtra(ExtraKey.DETAIL_ID, id);
+                startActivity(intent);
+            } else if ("honor".equals(activity)) {
+                //荣誉
+                Intent intent = new Intent(XPTApplication.this, HonorDetailActivity.class);
+                intent.putExtra(ExtraKey.DETAIL_ID, id);
+                startActivity(intent);
+            }
+        } catch (Exception ex) {
+
+        }
     }
 
     private void initBugly() {

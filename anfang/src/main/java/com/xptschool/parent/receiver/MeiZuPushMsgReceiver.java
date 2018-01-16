@@ -13,6 +13,7 @@ import com.meizu.cloud.pushsdk.platform.message.SubAliasStatus;
 import com.meizu.cloud.pushsdk.platform.message.SubTagsStatus;
 import com.meizu.cloud.pushsdk.platform.message.UnRegisterStatus;
 import com.xptschool.parent.R;
+import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.push.DeviceHelper;
 import com.xptschool.parent.push.UpushTokenHelper;
 
@@ -101,6 +102,8 @@ public class MeiZuPushMsgReceiver extends MzPushMessageReceiver {
     @Override
     public void onNotificationClicked(Context context, String title, String content, String selfDefineContentString) {
         DebugLogger.i(TAG, "onNotificationClicked title " + title + "content " + content + " selfDefineContentString " + selfDefineContentString);
+        //解析
+        XPTApplication.getInstance().resolvePushMsg(selfDefineContentString);
     }
 
     @Override
