@@ -28,6 +28,7 @@
         android:id="@+id/pager_online"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_60"
+        android:layout_marginTop="@dimen/dp_10"
         android:clipChildren="false"
         android:paddingLeft="@dimen/dp_2"
         android:paddingRight="@dimen/dp_2" />

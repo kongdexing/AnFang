@@ -365,14 +365,14 @@ public class HomeFragment extends BaseFragment {
 
         for (int i = 0; i < banners.size(); i++) {
             listBannerImages.add(banners.get(i).getImg());
-            listTitles.add(banners.get(i).getTitle());
+//            listTitles.add(banners.get(i).getTitle());
+            listTitles.add("");
             Log.i(TAG, "reloadTopFragment: " + banners.get(i).getImg());
         }
         if (topBanner == null) {
             return;
         }
-//        topBanner.update(listBannerImages, listTitles);
-        topBanner.update(listBannerImages);
+        topBanner.update(listBannerImages, listTitles);
     }
 
     private void getHomeGroupCfg() {
