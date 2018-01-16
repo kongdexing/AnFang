@@ -15,8 +15,6 @@ import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.common.SharedPreferencesUtil;
-import com.xiaomi.ad.SplashAdListener;
-import com.xiaomi.ad.adView.SplashAd;
 
 import butterknife.BindView;
 import permissions.dispatcher.NeedsPermission;
@@ -41,28 +39,28 @@ public class WelcomeActivity extends BaseActivity {
         llContent.setBackgroundColor(Color.TRANSPARENT);
         showActionBar(false);
 
-        new SplashAd(this, rlAD_bottom, R.drawable.company_logo, new SplashAdListener() {
-            @Override
-            public void onAdPresent() {
-
-            }
-
-            @Override
-            public void onAdClick() {
-
-            }
-
-            @Override
-            public void onAdDismissed() {
-
-            }
-
-            @Override
-            public void onAdFailed(String s) {
-                Log.i(TAG, "onAdFailed: "+s);
-            }
-        })
-                .requestAd("9820dad84ce71c6015ef8d3a4bbcfcee");
+//        new SplashAd(this, rlAD_bottom, R.drawable.company_logo, new SplashAdListener() {
+//            @Override
+//            public void onAdPresent() {
+//
+//            }
+//
+//            @Override
+//            public void onAdClick() {
+//
+//            }
+//
+//            @Override
+//            public void onAdDismissed() {
+//
+//            }
+//
+//            @Override
+//            public void onAdFailed(String s) {
+//                Log.i(TAG, "onAdFailed: "+s);
+//            }
+//        })
+//                .requestAd("9820dad84ce71c6015ef8d3a4bbcfcee");
 
 
         analyLogin();

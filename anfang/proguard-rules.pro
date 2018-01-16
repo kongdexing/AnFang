@@ -291,6 +291,9 @@
 
 ##mipush
 ##-keep class com.xptschool.parent.receiver.MIMessageReceiver {*;}
+-keep class com.xiaomi.**{*;}
+-keep public class * extends com.xiaomi.mipush.sdk.PushMessageReceiver
+
 
 ##环信
 -keep class com.hyphenate.** {*;}

@@ -45,7 +45,6 @@ import com.umeng.analytics.MobclickAgent;
 import com.umeng.message.PushAgent;
 import com.umeng.message.UmengNotificationClickHandler;
 import com.umeng.message.entity.UMessage;
-import com.xiaomi.ad.AdSdk;
 import com.xptschool.parent.ui.notice.NoticeDetailActivity;
 
 import org.json.JSONObject;
@@ -109,7 +108,7 @@ public class XPTApplication extends Application {
             display = windowManager.getDefaultDisplay();
         }
 
-        AdSdk.initialize(this, "2882303761517634324");
+//        AdSdk.initialize(this, "2882303761517634324");
 
         //baidumap
         SDKInitializer.initialize(this);

@@ -12,7 +12,7 @@ import net.grandcentrix.tray.TrayPreferences;
 
 public class MyModulePreference extends TrayPreferences {
 
-    private static final String FILE_NAME = "com.xptschool.anfang";
+    private static final String FILE_NAME = "com.xptschool.parent";
 
     public MyModulePreference(@NonNull Context context) {
         super(context, FILE_NAME, 1);

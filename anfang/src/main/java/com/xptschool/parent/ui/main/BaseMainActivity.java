@@ -85,7 +85,7 @@ public class BaseMainActivity extends BaseLoginMainActivity implements HuaweiApi
             };
             Logger.setLogger(this, newLogger);
             //推送可用
-            MiPushClient.enablePush(this);
+            MiPushClient.enablePush(XPTApplication.getInstance());
         } else if (carrier.toUpperCase().equals(DeviceHelper.M_HUAWEI)) {
             //创建华为移动服务client实例用以使用华为push服务
             //需要指定api为HuaweiId.PUSH_API

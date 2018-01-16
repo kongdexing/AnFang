@@ -94,7 +94,6 @@ public class MIMessageReceiver extends PushMessageReceiver {
         } else if (!TextUtils.isEmpty(message.getAlias())) {
             mAlias = message.getAlias();
         }
-//        XPTApplication.getHandler().sendMessage(msg);
     }
 
     @Override

@@ -51,10 +51,10 @@ android {
             keyPassword 'shuhai123'
         }
         debugCfg {
-            storeFile file('../keystore/debug.keystore')
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
+            storeFile file('../keystore/school.jks')
+            storePassword 'shuhai123'
+            keyAlias 'XPTSchool'
+            keyPassword 'shuhai123'
         }
     }
 
