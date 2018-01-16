@@ -52,7 +52,7 @@ public class BaseMainActivity extends BaseLoginMainActivity implements HuaweiApi
 
             @Override
             public void onUserExit() {
-
+                unRegisterPush();
             }
         });
 //        registerPush();
@@ -139,6 +139,38 @@ public class BaseMainActivity extends BaseLoginMainActivity implements HuaweiApi
                 @Override
                 public void onFailure(String s, String s1) {
                     Log.i(TAG, "PushAgent enable onFailure: " + s + " s1 " + s1);
+                }
+            });
+        }
+    }
+
+    private void unRegisterPush() {
+        //依据手机类型，注册不同推送平台
+        String model = android.os.Build.MODEL;
+        String carrier = android.os.Build.MANUFACTURER;
+        Log.i(TAG, "onCreate: " + model + "  " + carrier);
+
+        if (carrier.toUpperCase().equals(DeviceHelper.M_XIAOMI)) {
+            MiPushClient.disablePush(XPTApplication.getInstance());
+        } else if (carrier.toUpperCase().equals(DeviceHelper.M_HUAWEI)) {
+            if (client != null && (client.isConnected() || client.isConnecting())) {
+                client.disconnect();
+            }
+        } else if (carrier.toUpperCase().equals(DeviceHelper.M_MEIZU)) {
+            PushManager.unRegister(this, XPTApplication.MZ_APP_ID, XPTApplication.MZ_APP_KEY);
+        } else {
+            //友盟
+            final PushAgent mPushAgent = PushAgent.getInstance(this);
+            //拒绝接收通知
+            mPushAgent.disable(new IUmengCallback() {
+                @Override
+                public void onSuccess() {
+                    Log.i(TAG, "PushAgent disable onSuccess: ");
+                }
+
+                @Override
+                public void onFailure(String s, String s1) {
+                    Log.i(TAG, "PushAgent disable onFailure: " + s + " s1 " + s1);
                 }
             });
         }
