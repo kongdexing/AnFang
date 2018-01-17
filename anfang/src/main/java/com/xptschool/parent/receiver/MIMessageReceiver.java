@@ -84,12 +84,12 @@ public class MIMessageReceiver extends PushMessageReceiver {
             mAlias = message.getAlias();
         }
         try {
-            Map<String, String> extras = message.getExtra();
-            JSONObject object = new JSONObject();
-            object.put("activity", extras.get("activity"));
-            object.put("id", extras.get("id"));
+//            Map<String, String> extras = message.getContent();
+//            JSONObject object = new JSONObject();
+//            object.put("activity", extras.get("activity"));
+//            object.put("id", extras.get("id"));
 
-            XPTApplication.getInstance().resolvePushMsg(object.toString());
+            XPTApplication.getInstance().resolvePushMsg(message.getContent());
         } catch (Exception ex) {
             Log.v(XPTApplication.TAG,
                     "onNotificationMessageClicked error. " + ex.getMessage());

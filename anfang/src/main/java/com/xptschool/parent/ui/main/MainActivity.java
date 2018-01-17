@@ -218,6 +218,7 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
 //        ToastUtils.showToast(this, bdLocation.getCityCode() + bdLocation.getCity());
         if (bdLocation == null || bdLocation.getCity() == null) {
             Log.i(TAG, "onReceiveLocation: bdLocation is null");
+            mLocClient.stop();
             return;
         }
         Log.i(TAG, "onReceiveLocation: " + bdLocation.getCountryCode() + bdLocation.getProvince());

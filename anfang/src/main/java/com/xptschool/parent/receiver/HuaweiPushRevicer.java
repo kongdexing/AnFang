@@ -52,6 +52,8 @@ public class HuaweiPushRevicer extends PushReceiver {
     }
 
     public void onEvent(Context context, Event event, Bundle extras) {
+        Log.i(TAG, "收到通知栏消息点击事件");
+
         if (Event.NOTIFICATION_OPENED.equals(event) || Event.NOTIFICATION_CLICK_BTN.equals(event)) {
             int notifyId = extras.getInt(BOUND_KEY.pushNotifyId, 0);
             Log.i(TAG, "收到通知栏消息点击事件,notifyId:" + notifyId);
