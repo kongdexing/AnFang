@@ -206,7 +206,7 @@ public class HomeWorkDetailParentActivity extends VoicePlayActivity {
                                     currentHomeWork.setG_name(obj.getString("g_name"));
                                     currentHomeWork.setC_name(obj.getString("c_name"));
                                     currentHomeWork.setCrs_name(obj.getString("crs_name"));
-//                                    currentHomeWork.setUser_name(obj.getString(""));
+                                    currentHomeWork.setUser_name(obj.getString("t_name"));
                                     currentHomeWork.setCreate_time(obj.getString("create_time"));
                                     currentHomeWork.setFinish_time(obj.getString("finish_time"));
                                     currentHomeWork.setName(obj.getString("name"));
