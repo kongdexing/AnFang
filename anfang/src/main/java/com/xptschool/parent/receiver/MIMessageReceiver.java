@@ -14,9 +14,12 @@ import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.push.DeviceHelper;
 import com.xptschool.parent.push.UpushTokenHelper;
 
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 1、PushMessageReceiver 是个抽象类，该类继承了 BroadcastReceiver。<br/>
@@ -80,8 +83,17 @@ public class MIMessageReceiver extends PushMessageReceiver {
         } else if (!TextUtils.isEmpty(message.getAlias())) {
             mAlias = message.getAlias();
         }
+        try {
+            Map<String, String> extras = message.getExtra();
+            JSONObject object = new JSONObject();
+            object.put("activity", extras.get("activity"));
+            object.put("id", extras.get("id"));
 
-//        XPTApplication.getHandler().sendMessage(msg);
+            XPTApplication.getInstance().resolvePushMsg(object.toString());
+        } catch (Exception ex) {
+            Log.v(XPTApplication.TAG,
+                    "onNotificationMessageClicked error. " + ex.getMessage());
+        }
     }
 
     @Override
