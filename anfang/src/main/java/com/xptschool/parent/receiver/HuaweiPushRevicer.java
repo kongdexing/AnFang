@@ -8,11 +8,14 @@ package com.xptschool.parent.receiver;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.huawei.hms.support.api.push.PushReceiver;
+import com.meizu.cloud.pushsdk.PushManager;
+import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.push.DeviceHelper;
 import com.xptschool.parent.push.UpushTokenHelper;
-import com.xptschool.parent.util.Log;
+import com.xptschool.parent.util.ToastUtils;
 
 /**
  * 应用需要创建一个子类继承com.huawei.hms.support.api.push.PushReceiver，
@@ -30,17 +33,32 @@ public class HuaweiPushRevicer extends PushReceiver {
 
 //    public static final String ACTION_UPDATEUI = "action.updateUI";
 
+    /**
+     * 连接上华为服务时会调用,可以获取token值
+     *
+     * @param context
+     * @param token
+     * @param extras
+     */
     @Override
     public void onToken(Context context, String token, Bundle extras) {
         String belongId = extras.getString("belongId");
         Log.i(TAG, "belongId为:" + belongId);
         Log.i(TAG, "Token为:" + token);
-
         UpushTokenHelper.uploadDevicesToken(token, DeviceHelper.P_HUAWEI);
     }
 
+    /**
+     * 透传消息的回调方法
+     *
+     * @param context
+     * @param msg
+     * @param bundle
+     * @return
+     */
     @Override
     public boolean onPushMsg(Context context, byte[] msg, Bundle bundle) {
+        Log.i(TAG, "onPushMsg: ");
         try {
             //CP可以自己解析消息内容，然后做相应的处理
             String content = new String(msg, "UTF-8");
@@ -51,26 +69,38 @@ public class HuaweiPushRevicer extends PushReceiver {
         return false;
     }
 
+    /**
+     * 自定义的消息的回调方法
+     *
+     * @param context
+     * @param event
+     * @param extras
+     */
     public void onEvent(Context context, Event event, Bundle extras) {
-        Log.i(TAG, "收到通知栏消息点击事件");
-
+//        PushManager.getInstance().notifyPush(extras.getString(BOUND_KEY.pushMsgKey));
         if (Event.NOTIFICATION_OPENED.equals(event) || Event.NOTIFICATION_CLICK_BTN.equals(event)) {
             int notifyId = extras.getInt(BOUND_KEY.pushNotifyId, 0);
-            Log.i(TAG, "收到通知栏消息点击事件,notifyId:" + notifyId);
             if (0 != notifyId) {
                 NotificationManager manager = (NotificationManager) context
                         .getSystemService(Context.NOTIFICATION_SERVICE);
                 manager.cancel(notifyId);
             }
+            String content = "--------receive extented notification message: " + extras.getString
+                    (BOUND_KEY.pushMsgKey);
+            Log.e(TAG, content);
         }
-
-        String message = extras.getString(BOUND_KEY.pushMsgKey);
         super.onEvent(context, event, extras);
     }
 
+    /**
+     * 连接状态的回调方法
+     *
+     * @param context
+     * @param pushState
+     */
     @Override
     public void onPushState(Context context, boolean pushState) {
-        Log.i("TAG", "Push连接状态为:" + pushState);
+        Log.i(TAG, "Push连接状态为:" + pushState);
 
 //        Intent intent = new Intent();
 //        intent.setAction(ACTION_UPDATEUI);

@@ -1,6 +1,7 @@
 package com.xptschool.parent.ui.homework;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -94,6 +95,14 @@ public class HomeWorkDetailParentActivity extends VoicePlayActivity {
                 }
             } catch (Exception ex) {
                 Log.i(TAG, "onCreate bundle error: " + ex.getMessage());
+            }
+        }
+
+        Uri uri = getIntent().getData();
+        if (uri != null) {
+            String id = uri.getQueryParameter("id");
+            if (id != null && !id.isEmpty()) {
+                getHomeWorkDetail(id);
             }
         }
     }

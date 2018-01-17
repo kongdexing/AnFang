@@ -180,7 +180,7 @@ dependencies {
     compile project(':network-events-library')
     // Greenrobot EventBus 3 Beta
     compile 'org.greenrobot:eventbus:3.0.0'
-    compile 'com.huawei.android.hms:push:2.5.2.201'
+    compile 'com.huawei.android.hms:push:2.5.2.300'
     //meizu push
     compile 'com.meizu.flyme.internet:push-internal:3.4.+@aar'
     //sharedPreferences 跨进程
