@@ -98,6 +98,7 @@ public class HomeWorkDetailParentActivity extends VoicePlayActivity {
             }
         }
 
+        //华为机型推送使用uri传值
         Uri uri = getIntent().getData();
         if (uri != null) {
             String id = uri.getQueryParameter("id");

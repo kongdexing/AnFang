@@ -1,6 +1,7 @@
 package com.xptschool.parent.ui.alarm;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -68,6 +69,16 @@ public class AlarmMapActivity extends BaseActivity {
                 Log.e(TAG, "onCreate: " + ex.getMessage());
             }
         }
+
+        //华为机型推送使用uri传值
+        Uri uri = getIntent().getData();
+        if (uri != null) {
+            String id = uri.getQueryParameter("id");
+            if (id != null && !id.isEmpty()) {
+                getAlarmDetail(id);
+            }
+        }
+
     }
 
     private void initData() {

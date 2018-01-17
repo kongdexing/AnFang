@@ -1,5 +1,6 @@
 package com.xptschool.parent.ui.honor;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -48,19 +49,31 @@ public class HonorDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_honor_detail);
         setTitle(R.string.title_honor_detail);
 
-        try {
-            Bundle bundle = getIntent().getExtras();
-            currentHonor = bundle.getParcelable(ExtraKey.HONOR_DETAIL);
-            if (currentHonor != null) {
-                initData();
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            try {
+                currentHonor = bundle.getParcelable(ExtraKey.HONOR_DETAIL);
+                if (currentHonor != null) {
+                    initData();
+                }
+                String id = bundle.getString(ExtraKey.DETAIL_ID);
+                if (id != null) {
+                    getHonorDetail(id);
+                }
+            } catch (Exception ex) {
+                Log.i(TAG, "onCreate: get bundle data error " + ex.getMessage());
             }
-            String id = bundle.getString(ExtraKey.DETAIL_ID);
-            if (id != null) {
+        }
+
+        //华为机型推送使用uri传值
+        Uri uri = getIntent().getData();
+        if (uri != null) {
+            String id = uri.getQueryParameter("id");
+            if (id != null && !id.isEmpty()) {
                 getHonorDetail(id);
             }
-        } catch (Exception ex) {
-            Log.i(TAG, "onCreate: get bundle data error " + ex.getMessage());
         }
+
     }
 
     private void initData() {

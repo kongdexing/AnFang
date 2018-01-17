@@ -1,5 +1,6 @@
 package com.xptschool.parent.ui.comment;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -49,18 +50,29 @@ public class CommentDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_comment_detail);
         setTitle(R.string.title_comment_detail);
 
-        try {
-            Bundle bundle = getIntent().getExtras();
-            currentComment = bundle.getParcelable(ExtraKey.COMMENT_DETAIL);
-            if (currentComment != null) {
-                initData();
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            try {
+                currentComment = bundle.getParcelable(ExtraKey.COMMENT_DETAIL);
+                if (currentComment != null) {
+                    initData();
+                }
+                String id = bundle.getString(ExtraKey.DETAIL_ID);
+                if (id != null) {
+                    getCommentDetail(id);
+                }
+            } catch (Exception ex) {
+                Log.i(TAG, "onCreate: get bundle data error " + ex.getMessage());
             }
-            String id = bundle.getString(ExtraKey.DETAIL_ID);
-            if (id != null) {
+        }
+
+        //华为机型推送使用uri传值
+        Uri uri = getIntent().getData();
+        if (uri != null) {
+            String id = uri.getQueryParameter("id");
+            if (id != null && !id.isEmpty()) {
                 getCommentDetail(id);
             }
-        } catch (Exception ex) {
-            Log.i(TAG, "onCreate: get bundle data error " + ex.getMessage());
         }
     }
 

@@ -1,5 +1,6 @@
 package com.xptschool.parent.ui.checkin;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -82,7 +83,16 @@ public class CheckinPActivity extends BaseListActivity {
                 Log.i(TAG, "onCreate: bundle id error " + ex.getMessage());
             }
         } else {
-            getFirstPageData();
+            //华为机型推送使用uri传值
+            Uri uri = getIntent().getData();
+            if (uri != null) {
+                String id = uri.getQueryParameter("id");
+                if (id != null && !id.isEmpty()) {
+                    getCheckinDetail(id);
+                }
+            } else {
+                getFirstPageData();
+            }
         }
     }
 

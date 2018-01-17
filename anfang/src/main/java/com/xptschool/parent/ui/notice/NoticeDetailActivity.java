@@ -1,5 +1,6 @@
 package com.xptschool.parent.ui.notice;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -63,6 +64,15 @@ public class NoticeDetailActivity extends BaseActivity {
                 }
             } catch (Exception ex) {
                 Log.e(TAG, "onCreate: bundle error " + ex.getMessage());
+            }
+        }
+
+        //华为机型推送使用uri传值
+        Uri uri = getIntent().getData();
+        if (uri != null) {
+            String id = uri.getQueryParameter("id");
+            if (id != null && !id.isEmpty()) {
+                getNoticeDetail(id);
             }
         }
     }

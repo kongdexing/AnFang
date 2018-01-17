@@ -1,6 +1,7 @@
 package com.xptschool.parent.ui.leave;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -84,6 +85,15 @@ public class LeaveTDetailActivity extends BaseActivity {
                 }
             } catch (Exception ex) {
                 Log.e(TAG, "onCreate: " + ex.getMessage());
+            }
+        }
+
+        //华为机型推送使用uri传值
+        Uri uri = getIntent().getData();
+        if (uri != null) {
+            String id = uri.getQueryParameter("id");
+            if (id != null && !id.isEmpty()) {
+                getLeaveDetail(id);
             }
         }
     }

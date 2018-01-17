@@ -217,7 +217,17 @@
         <activity
             android:name=".ui.notice.NoticeDetailActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="${PACKAGE_NAME}"
+                    android:path="/notice_p"
+                    android:scheme="shuhai" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".ui.notice.NoticeDetailTActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -228,14 +238,33 @@
         <activity android:name=".ui.score.ScoreTeacherActivity" />
 
         <!-- 考勤 -->
-        <activity android:name=".ui.checkin.CheckinPActivity" />
+        <activity android:name=".ui.checkin.CheckinPActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="${PACKAGE_NAME}"
+                    android:path="/attendance_p"
+                    android:scheme="shuhai" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".ui.checkin.CheckinTActivity" />
         <activity android:name=".ui.checkin.ChechinDetailActivity" />
 
         <!-- 报警查询 -->
         <activity android:name=".ui.alarm.AlarmActivity" />
         <activity android:name=".ui.alarm.AlarmTActivity" />
-        <activity android:name=".ui.alarm.AlarmMapActivity" />
+        <activity android:name=".ui.alarm.AlarmMapActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="${PACKAGE_NAME}"
+                    android:path="/warning_p"
+                    android:scheme="shuhai" />
+            </intent-filter>
+        </activity>
 
         <!-- 电子围栏 -->
         <activity
@@ -251,11 +280,29 @@
         <activity
             android:name=".ui.leave.LeavePDetailActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="${PACKAGE_NAME}"
+                    android:path="/leave_p"
+                    android:scheme="shuhai" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.leave.LeaveTDetailActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="${PACKAGE_NAME}"
+                    android:path="/leave_t"
+                    android:scheme="shuhai" />
+            </intent-filter>
+        </activity>
 
         <!-- 课程表 -->
         <activity android:name=".ui.course.CourseActivity" />
@@ -269,7 +316,16 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        <activity android:name=".ui.comment.CommentDetailActivity" />
+        <activity android:name=".ui.comment.CommentDetailActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="${PACKAGE_NAME}"
+                    android:path="/remark_p"
+                    android:scheme="shuhai" />
+            </intent-filter>
+        </activity>
 
         <!-- 荣誉墙 -->
         <activity android:name=".ui.honor.HonorPActivity" />
@@ -279,7 +335,16 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        <activity android:name=".ui.honor.HonorDetailActivity" />
+        <activity android:name=".ui.honor.HonorDetailActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="${PACKAGE_NAME}"
+                    android:path="/honor_p"
+                    android:scheme="shuhai" />
+            </intent-filter>
+        </activity>
 
         <!-- 我的班级 -->
         <activity android:name=".ui.mine.MyClassesActivity" />

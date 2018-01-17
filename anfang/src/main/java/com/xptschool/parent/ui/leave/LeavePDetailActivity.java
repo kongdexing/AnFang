@@ -2,6 +2,7 @@ package com.xptschool.parent.ui.leave;
 
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -97,6 +98,9 @@ public class LeavePDetailActivity extends BaseActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             currentLeave = bundle.getParcelable(ExtraKey.LEAVE_DETAIL);
+            if (currentLeave != null) {
+                initData();
+            }
             String id = bundle.getString(ExtraKey.DETAIL_ID);
             Log.i(TAG, "onCreate: " + id);
             if (id != null && !id.isEmpty()) {
@@ -104,8 +108,13 @@ public class LeavePDetailActivity extends BaseActivity {
             }
         }
 
-        if (currentLeave != null) {
-            initData();
+        //华为机型推送使用uri传值
+        Uri uri = getIntent().getData();
+        if (uri != null) {
+            String id = uri.getQueryParameter("id");
+            if (id != null && !id.isEmpty()) {
+                getLeaveDetail(id);
+            }
         }
 
         initView();
