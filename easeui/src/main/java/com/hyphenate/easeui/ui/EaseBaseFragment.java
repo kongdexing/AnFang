@@ -8,10 +8,10 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
 import com.hyphenate.easeui.R;
-import com.hyphenate.easeui.widget.EaseTitleBar;
+import com.hyphenate.easeui.widget.EaseMyTitleBar;
 
 public abstract class EaseBaseFragment extends Fragment{
-    protected EaseTitleBar titleBar;
+    protected EaseMyTitleBar titleBar;
     protected InputMethodManager inputMethodManager;
 
     @Override
@@ -19,24 +19,12 @@ public abstract class EaseBaseFragment extends Fragment{
         super.onActivityCreated(savedInstanceState);
         inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         //noinspection ConstantConditions
-        titleBar = (EaseTitleBar) getView().findViewById(R.id.title_bar);
+        titleBar = (EaseMyTitleBar) getView().findViewById(R.id.title_bar);
         
         initView();
         setUpView();
     }
-    
-    public void showTitleBar(){
-        if(titleBar != null){
-            titleBar.setVisibility(View.VISIBLE);
-        }
-    }
-    
-    public void hideTitleBar(){
-        if(titleBar != null){
-            titleBar.setVisibility(View.GONE);
-        }
-    }
-    
+
     protected void hideSoftKeyboard() {
         if (getActivity().getWindow().getAttributes().softInputMode != WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN) {
             if (getActivity().getCurrentFocus() != null)

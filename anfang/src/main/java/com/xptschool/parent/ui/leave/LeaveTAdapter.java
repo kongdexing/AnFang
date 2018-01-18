@@ -86,7 +86,7 @@ public class LeaveTAdapter extends BaseRecycleAdapter {
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, LeaveTDetailActivity.class);
                 intent.putExtra(ExtraKey.LEAVE_DETAIL, beanLeave);
-                ((LeaveActivity) mContext).startActivityForResult(intent, 1);
+                ((LeaveTActivity) mContext).startActivityForResult(intent, 1);
             }
         });
     }

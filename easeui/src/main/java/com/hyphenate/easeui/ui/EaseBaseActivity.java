@@ -19,6 +19,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -26,7 +27,7 @@ import android.view.inputmethod.InputMethodManager;
 import com.hyphenate.easeui.EaseUI;
 
 @SuppressLint({"NewApi", "Registered"})
-public class EaseBaseActivity extends FragmentActivity {
+public class EaseBaseActivity extends AppCompatActivity {
 
     protected InputMethodManager inputMethodManager;
 

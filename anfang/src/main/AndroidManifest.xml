@@ -361,8 +361,9 @@
             android:name=".ui.chat.ChatActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@style/horizontal_slide"
+            android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize" />
+
         <activity android:name=".ui.chat.ImageGridActivity" />
         <activity android:name=".ui.chat.RecorderVideoActivity" />
         <activity android:name=".ui.chat.VideoCallActivity" />

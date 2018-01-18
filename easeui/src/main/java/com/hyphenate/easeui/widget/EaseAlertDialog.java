@@ -83,8 +83,7 @@ public class EaseAlertDialog extends Dialog {
 		this.showCancel = showCancel;
 		this.setCanceledOnTouchOutside(true);
 	}
-	
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
