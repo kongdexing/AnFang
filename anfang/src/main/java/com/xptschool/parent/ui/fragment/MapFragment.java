@@ -110,20 +110,6 @@ public class MapFragment extends MapBaseFragment {
     public MapFragment() {
     }
 
-//    @Override
-//    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-//        super.onViewCreated(view, savedInstanceState);
-//        ImmersionBar.setTitleBar(getActivity(), mRootView.findViewById(R.id.fragmentHome_titleLinearId));
-//        //初始化传感器
-//        mSensorManager = (SensorManager) getContext().getSystemService(Context.SENSOR_SERVICE);
-//        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
-//    }
-//
-//    @Override
-//    protected int setLayoutId() {
-//        return R.layout.fragment_map;
-//    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -177,7 +163,6 @@ public class MapFragment extends MapBaseFragment {
     private void initSpinnerData() {
         Log.i(TAG, "initSpinnerData: " + XPTApplication.getInstance().getCurrent_user_type());
         if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-            ToastUtils.showToast(getActivity(),"map 家长");
             llStudentName.setVisibility(View.VISIBLE);
             txtStudentName.setVisibility(View.GONE);
 
@@ -209,12 +194,10 @@ public class MapFragment extends MapBaseFragment {
                 }
             });
         } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-            ToastUtils.showToast(getActivity(),"map 教师");
             llStudentName.setVisibility(View.GONE);
             txtStudentName.setVisibility(View.VISIBLE);
             getStudents();
         } else {
-            ToastUtils.showToast(getActivity(),"map 游客");
             llStudentName.setVisibility(View.VISIBLE);
             txtStudentName.setVisibility(View.GONE);
 
