@@ -33,6 +33,7 @@ import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.MapView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.gyf.barlibrary.ImmersionBar;
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.bean.BeanHTLocation;
@@ -109,13 +110,25 @@ public class MapFragment extends MapBaseFragment {
     public MapFragment() {
     }
 
+//    @Override
+//    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+//        super.onViewCreated(view, savedInstanceState);
+//        ImmersionBar.setTitleBar(getActivity(), mRootView.findViewById(R.id.fragmentHome_titleLinearId));
+//        //初始化传感器
+//        mSensorManager = (SensorManager) getContext().getSystemService(Context.SENSOR_SERVICE);
+//        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+//    }
+//
+//    @Override
+//    protected int setLayoutId() {
+//        return R.layout.fragment_map;
+//    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.fragment_map, container, false);
         ButterKnife.bind(this, mRootView);
-        mMapView = (MapView) mRootView.findViewById(R.id.mapView);
-        progress = (ProgressBar) mRootView.findViewById(R.id.progress);
         //初始化传感器
         mSensorManager = (SensorManager) getContext().getSystemService(Context.SENSOR_SERVICE);
         mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
@@ -130,7 +143,7 @@ public class MapFragment extends MapBaseFragment {
         mBaiduMap.getUiSettings().setRotateGesturesEnabled(true);
         mBaiduMap.setMyLocationEnabled(true);
         // 定位初始化
-        mLocClient = new LocationClient(mContext);
+        mLocClient = new LocationClient(getActivity());
         mLocClient.registerLocationListener(this);
 
         LocationClientOption option = new LocationClientOption();
@@ -164,7 +177,7 @@ public class MapFragment extends MapBaseFragment {
     private void initSpinnerData() {
         Log.i(TAG, "initSpinnerData: " + XPTApplication.getInstance().getCurrent_user_type());
         if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-            ToastUtils.showToast(mContext,"map 家长");
+            ToastUtils.showToast(getActivity(),"map 家长");
             llStudentName.setVisibility(View.VISIBLE);
             txtStudentName.setVisibility(View.GONE);
 
@@ -196,12 +209,12 @@ public class MapFragment extends MapBaseFragment {
                 }
             });
         } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-            ToastUtils.showToast(mContext,"map 教师");
+            ToastUtils.showToast(getActivity(),"map 教师");
             llStudentName.setVisibility(View.GONE);
             txtStudentName.setVisibility(View.VISIBLE);
             getStudents();
         } else {
-            ToastUtils.showToast(mContext,"map 游客");
+            ToastUtils.showToast(getActivity(),"map 游客");
             llStudentName.setVisibility(View.VISIBLE);
             txtStudentName.setVisibility(View.GONE);
 
@@ -247,7 +260,7 @@ public class MapFragment extends MapBaseFragment {
             case R.id.llLocation:
                 if (view.getTag() == null || !(Boolean) view.getTag()) {
                     if (currentStudent == null) {
-                        Toast.makeText(mContext, R.string.toast_choose_student, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), R.string.toast_choose_student, Toast.LENGTH_SHORT).show();
                         return;
                     }
                     startRTLocationTimer();
@@ -262,7 +275,7 @@ public class MapFragment extends MapBaseFragment {
             case R.id.llTrack:
                 if (view.getTag() == null || !(Boolean) view.getTag()) {
                     if (currentStudent == null) {
-                        Toast.makeText(mContext, R.string.toast_choose_student, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), R.string.toast_choose_student, Toast.LENGTH_SHORT).show();
                         return;
                     }
                     cancelRTLocationTimer();
@@ -285,7 +298,7 @@ public class MapFragment extends MapBaseFragment {
             case R.id.llRailings:
                 if (view.getTag() == null || !(Boolean) view.getTag()) {
                     if (currentStudent == null) {
-                        Toast.makeText(mContext, R.string.toast_choose_student, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), R.string.toast_choose_student, Toast.LENGTH_SHORT).show();
                         return;
                     }
                     Log.i(TAG, "viewClick: llRailings " + false);
@@ -538,11 +551,11 @@ public class MapFragment extends MapBaseFragment {
                                     message.obj = rtLocation;
                                     mHandler.sendMessage(message);
                                 } catch (Exception ex) {
-                                    Toast.makeText(mContext, HttpErrorMsg.ERROR_JSON, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), HttpErrorMsg.ERROR_JSON, Toast.LENGTH_SHORT).show();
                                 }
                                 break;
                             default:
-                                Toast.makeText(mContext, volleyHttpResult.getInfo(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), volleyHttpResult.getInfo(), Toast.LENGTH_SHORT).show();
                                 cancelRTLocationTimer();
                                 break;
                         }
@@ -599,11 +612,11 @@ public class MapFragment extends MapBaseFragment {
                                             }.getType());
                                     drawTrack(listLocations);
                                 } catch (Exception ex) {
-                                    Toast.makeText(mContext, HttpErrorMsg.ERROR_JSON, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), HttpErrorMsg.ERROR_JSON, Toast.LENGTH_SHORT).show();
                                 }
                                 break;
                             default:
-                                Toast.makeText(mContext, volleyHttpResult.getInfo(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), volleyHttpResult.getInfo(), Toast.LENGTH_SHORT).show();
                                 break;
                         }
                     }
@@ -645,15 +658,15 @@ public class MapFragment extends MapBaseFragment {
                                             new TypeToken<List<BeanRail>>() {
                                             }.getType());
                                     if (listFence.size() == 0) {
-                                        Toast.makeText(mContext, R.string.toast_railing_empty, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getActivity(), R.string.toast_railing_empty, Toast.LENGTH_SHORT).show();
                                     }
                                     drawRail(listFence);
                                 } catch (Exception ex) {
-                                    Toast.makeText(mContext, "解析错误" + ex.getMessage(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "解析错误" + ex.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                                 break;
                             default:
-                                Toast.makeText(mContext, volleyHttpResult.getInfo(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), volleyHttpResult.getInfo(), Toast.LENGTH_SHORT).show();
                                 break;
                         }
                     }
@@ -662,7 +675,7 @@ public class MapFragment extends MapBaseFragment {
                     public void onErrorResponse(VolleyError volleyError) {
                         if (progress_bar != null)
                             progress_bar.setVisibility(View.GONE);
-                        Toast.makeText(mContext, "获取失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "获取失败", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

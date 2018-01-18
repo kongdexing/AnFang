@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
+import com.gyf.barlibrary.BarHide;
+import com.gyf.barlibrary.ImmersionBar;
 import com.huawei.hms.api.ConnectionResult;
 import com.huawei.hms.api.HuaweiApiAvailability;
 import com.huawei.hms.api.HuaweiApiClient;
@@ -36,6 +38,7 @@ public class BaseMainActivity extends BaseLoginMainActivity implements HuaweiApi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         PushAgent.getInstance(this).onAppStart();
 
         UserHelper.getInstance().addUserChangeListener(new UserHelper.UserChangeListener() {

@@ -1,9 +1,13 @@
 package com.xptschool.parent.ui.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.ColorUtils;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +28,8 @@ import com.android.widget.pulltorefresh.PullToRefreshBase;
 import com.android.widget.pulltorefresh.PullToRefreshScrollView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.gyf.barlibrary.BarHide;
+import com.gyf.barlibrary.ImmersionBar;
 import com.viewpagerindicator.CirclePageIndicator;
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
@@ -84,13 +90,10 @@ import butterknife.Unbinder;
 
 public class HomeFragment extends BaseFragment {
 
-    @BindView(R.id.fragmentHome_titleLinearId)
-    RelativeLayout fragmentHome_titleLinearId;
-    @BindView(R.id.txtTitle)
-    TextView txtTitle;
-
     @BindView(R.id.scrollView)
     PullToRefreshScrollView ptr_scrollview;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
 
     @BindView(R.id.rlTipAD)
     RelativeLayout rlTipAD;
@@ -117,6 +120,8 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.grd_school)
     MyGridView grd_school;
 
+//    protected ImmersionBar mImmersionBar;
+
     private Unbinder unbinder;
     //    private MyTopPagerAdapter topAdapter;
     private List<BeanBanner> topBanners = new ArrayList<>();
@@ -124,16 +129,27 @@ public class HomeFragment extends BaseFragment {
     public HomeFragment() {
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+//        mImmersionBar = ImmersionBar.with(this);
+//        mImmersionBar
+//                .navigationBarColor(R.color.colorPrimary)
+//                .fullScreen(true)
+//                .addTag("PicAndColor")  //给上面参数打标记，以后可以通过标记恢复
+//                .init();
+//        ImmersionBar.setTitleBar(getActivity(), mToolbar);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.i(TAG, "HomeFragment inflateView: ");
         mRootView = inflater.inflate(R.layout.fragment_home, container, false);
         unbinder = ButterKnife.bind(this, mRootView);
         initView();
-        Log.i(TAG, "onCreateView start location: ");
         return mRootView;
     }
+
 
     @Override
     public void onResume() {
@@ -185,7 +201,7 @@ public class HomeFragment extends BaseFragment {
         initSchoolItem();
     }
 
-    private void initView() {
+    protected void initView() {
         Log.i(TAG, "HomeFragment initView: ");
         int width = XPTApplication.getInstance().getWindowWidth();
 
@@ -218,17 +234,14 @@ public class HomeFragment extends BaseFragment {
         topBanner.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             @Override
             public void onPageSelected(int position) {
-
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
         });
         topBanner.setOnBannerListener(new OnBannerListener() {
@@ -240,9 +253,9 @@ public class HomeFragment extends BaseFragment {
                 try {
                     BeanBanner banner = advertList.get(position);
                     if (banner.getTurn_type().equals("1")) {
-                        Intent intent = new Intent(mContext, WebViewActivity.class);
+                        Intent intent = new Intent(getActivity(), WebViewActivity.class);
                         intent.putExtra(ExtraKey.WEB_URL, banner.getUrl());
-                        mContext.startActivity(intent);
+                        getActivity().startActivity(intent);
                         BannerHelper.postShowBanner(banner, "2");
                     }
                 } catch (Exception ex) {
@@ -253,7 +266,7 @@ public class HomeFragment extends BaseFragment {
 
         initSchoolItem();
 
-        fragmentHome_titleLinearId.setAlpha(0);
+        mToolbar.setAlpha(0);
         ptr_scrollview.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         ptr_scrollview.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
             @Override
@@ -276,12 +289,13 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onScrollChanged(PullToRefreshScrollView who, int x, int y, int oldl, int oldt) {
                 float alpha = 0;
-                if (oldt <= 180) {
-                    alpha = ((float) oldt) / 180;
-                    fragmentHome_titleLinearId.setAlpha(alpha);
-                } else {
-                    fragmentHome_titleLinearId.setAlpha(1);
-                }
+//                if (oldt <= 180) {
+//                    alpha = ((float) oldt) / 180;
+//                    mToolbar.setAlpha(alpha);
+//                } else {
+//                    mToolbar.setAlpha(1);
+//                }
+
             }
         });
 
@@ -310,7 +324,7 @@ public class HomeFragment extends BaseFragment {
             s_id = "";
         }
 
-        String cityName = SharedPreferencesUtil.getData(mContext, SharedPreferencesUtil.KEY_CITY, "").toString();
+        String cityName = SharedPreferencesUtil.getData(getActivity(), SharedPreferencesUtil.KEY_CITY, "").toString();
 
         String url = HttpAction.HOME_Banner;
         VolleyHttpService.getInstance().sendPostRequest(url, new VolleyHttpParamsEntity()
@@ -480,14 +494,14 @@ public class HomeFragment extends BaseFragment {
         tipItems.add(new HomeItem()
                 .setIconId(R.drawable.home_course)
                 .setTitle(getString(R.string.home_course))
-                .setIntent(new Intent(mContext, isParent ? CourseActivity.class : CourseTActivity.class)));
+                .setIntent(new Intent(getActivity(), isParent ? CourseActivity.class : CourseTActivity.class)));
         /*老师评语*/
         tipItems.add(new HomeItem()
                 .setIconId(R.drawable.home_remark)
                 .setTitle(getString(R.string.home_comment))
-                .setIntent(new Intent(mContext, isParent ? CommentPActivity.class : CommentTActivity.class)));
+                .setIntent(new Intent(getActivity(), isParent ? CommentPActivity.class : CommentTActivity.class)));
         /*教育新闻*/
-        Intent newsIntent = new Intent(mContext, WebViewActivity.class);
+        Intent newsIntent = new Intent(getActivity(), WebViewActivity.class);
         newsIntent.putExtra(ExtraKey.WEB_URL, "http://school.xinpingtai.com/edunews/");
         tipItems.add(new HomeItem()
                 .setShowForParent(false)
@@ -495,7 +509,7 @@ public class HomeFragment extends BaseFragment {
                 .setIconId(R.drawable.home_news)
                 .setTitle(getString(R.string.home_news))
                 .setIntent(newsIntent));
-        HomeItemGridAdapter tipAdapter = new HomeItemGridAdapter(mContext);
+        HomeItemGridAdapter tipAdapter = new HomeItemGridAdapter(getActivity());
 
         grd_tip.setAdapter(tipAdapter);
         tipAdapter.reloadData(tipItems);
@@ -505,46 +519,46 @@ public class HomeFragment extends BaseFragment {
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_homework)
                 .setTitle(getString(R.string.home_homework))
-                .setIntent(new Intent(mContext, isParent ? HomeWorkParentActivity.class : HomeWorkTeacherActivity.class)));
+                .setIntent(new Intent(getActivity(), isParent ? HomeWorkParentActivity.class : HomeWorkTeacherActivity.class)));
         //成绩
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_classes)
                 .setTitle(getString(R.string.home_score))
-                .setIntent(new Intent(mContext, isParent ? ScoreActivity.class : ScoreTeacherActivity.class)));
+                .setIntent(new Intent(getActivity(), isParent ? ScoreActivity.class : ScoreTeacherActivity.class)));
         //电子围栏
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_fence)
                 .setTitle(getString(R.string.home_fence))
-                .setIntent(new Intent(mContext, FenceListActivity.class)));
+                .setIntent(new Intent(getActivity(), FenceListActivity.class)));
         //报警查询
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_alarm)
                 .setTitle(getString(R.string.home_alarm))
-                .setIntent(new Intent(mContext, isParent ? AlarmActivity.class : AlarmTActivity.class)));
+                .setIntent(new Intent(getActivity(), isParent ? AlarmActivity.class : AlarmTActivity.class)));
 
         //在线请假
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_notice)
                 .setTitle(getString(R.string.home_leave))
-                .setIntent(new Intent(mContext, isParent ? LeaveActivity.class : LeaveTActivity.class)));
+                .setIntent(new Intent(getActivity(), isParent ? LeaveActivity.class : LeaveTActivity.class)));
         //考勤
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_checkin)
                 .setTitle(getString(R.string.home_checkin))
-                .setIntent(new Intent(mContext, isParent ? CheckinPActivity.class : CheckinTActivity.class)));
+                .setIntent(new Intent(getActivity(), isParent ? CheckinPActivity.class : CheckinTActivity.class)));
         //班级公告
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_notice)
                 .setTitle(getString(R.string.home_notice))
-                .setIntent(new Intent(mContext, isParent ? NoticeActivity.class : NoticeTeacherActivity.class)));
+                .setIntent(new Intent(getActivity(), isParent ? NoticeActivity.class : NoticeTeacherActivity.class)));
 
         /*荣誉墙*/
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_honour)
                 .setTitle(getString(R.string.home_honour))
-                .setIntent(new Intent(mContext, isParent ? HonorPActivity.class : HonorTActivity.class)));
+                .setIntent(new Intent(getActivity(), isParent ? HonorPActivity.class : HonorTActivity.class)));
 
-        HomeItemGridAdapter itemAdapter = new HomeItemGridAdapter(mContext);
+        HomeItemGridAdapter itemAdapter = new HomeItemGridAdapter(getActivity());
 
         grd_school.setAdapter(itemAdapter);
         itemAdapter.reloadData(homeItems);

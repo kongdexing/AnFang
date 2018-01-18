@@ -100,6 +100,7 @@ public class WelcomeActivity extends BaseActivity {
             @Override
             public void run() {
                 intent.setClass(WelcomeActivity.this, MainActivity.class);
+//                intent.setClass(WelcomeActivity.this, PicAndColorActivity.class);
                 intent.putExtra(ExtraKey.LOGIN_ORIGIN, "0");
                 startActivity(intent);
                 finish();

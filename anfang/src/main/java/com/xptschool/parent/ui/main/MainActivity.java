@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -26,6 +27,7 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
+import com.gyf.barlibrary.ImmersionBar;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.xptschool.parent.R;
@@ -38,7 +40,6 @@ import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.GreenDaoHelper;
-import com.xptschool.parent.ui.fragment.BaseFragment;
 import com.xptschool.parent.ui.fragment.HomeFragment;
 import com.xptschool.parent.ui.fragment.MapFragment;
 import com.xptschool.parent.ui.fragment.MessageFragment;
@@ -62,8 +63,8 @@ import permissions.dispatcher.RuntimePermissions;
 @RuntimePermissions
 public class MainActivity extends BaseMainActivity implements BDLocationListener {
 
-    private List<BaseFragment> fragmentList;
-    private BaseFragment mCurrentFgt, homeFragment, mapFragment, messageFragment, mineFragment;
+    private List<Fragment> fragmentList;
+    private Fragment mCurrentFgt, homeFragment, mapFragment, messageFragment, mineFragment;
     @BindView(R.id.fl_Content)
     FrameLayout fl_Content;
 
@@ -92,12 +93,14 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
     private FragmentTransaction mFgtTransaction;
     private long mExitTime;
     public LocationClient mLocClient;
+    protected ImmersionBar mImmersionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle(R.string.app_name);
+        mImmersionBar = ImmersionBar.with(this);
+//        mImmersionBar.init();
 
         initView();
         initData();
@@ -432,6 +435,8 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
         super.onDestroy();
         try {
             this.unregisterReceiver(MyBannerReceiver);
+            if (mImmersionBar != null)
+                mImmersionBar.destroy();  //在BaseActivity里销毁
         } catch (Exception ex) {
 
         }

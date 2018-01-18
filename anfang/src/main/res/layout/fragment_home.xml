@@ -1,9 +1,9 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:clickable="true">
+    android:orientation="vertical">
 
     <com.android.widget.pulltorefresh.PullToRefreshScrollView
         android:id="@+id/scrollView"
@@ -21,6 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/background_light"
+                android:fitsSystemWindows="true"
                 android:visibility="visible">
 
                 <com.youth.banner.Banner
@@ -207,22 +208,39 @@
         </LinearLayout>
     </com.android.widget.pulltorefresh.PullToRefreshScrollView>
 
-    <RelativeLayout
-        android:id="@+id/fragmentHome_titleLinearId"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
-        android:layout_alignParentTop="true"
-        android:background="@color/colorPrimaryDark">
+        android:background="@color/colorPrimary"
+        app:contentInsetStart="0dp">
 
         <TextView
             android:id="@+id/txtTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
+            android:gravity="center"
             android:lines="1"
             android:text="@string/nav_home"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_18" />
-    </RelativeLayout>
-</RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+    <!--<RelativeLayout-->
+    <!--android:id="@+id/fragmentHome_titleLinearId"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/dp_50"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:background="@color/colorPrimaryDark">-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/txtTitle"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:layout_centerVertical="true"-->
+    <!--android:lines="1"-->
+    <!--android:text="@string/nav_home"-->
+    <!--android:textColor="@color/white"-->
+    <!--android:textSize="@dimen/sp_18" />-->
+    <!--</RelativeLayout>-->
+</FrameLayout>

@@ -46,6 +46,8 @@ import com.xptschool.parent.view.MarkerStudentView;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+
 /**
  * Created by dexing on 2016/12/6.
  * No1
@@ -69,8 +71,10 @@ public class MapBaseFragment extends BaseFragment implements BDLocationListener,
     private final int TIME_SENSOR = 100;
     private float mAngle;
 
-    public MapView mMapView;
-    public ProgressBar progress;
+    @BindView(R.id.mapView)
+    MapView mMapView;
+    @BindView(R.id.progress)
+    ProgressBar progress;
     private Marker mMarkerStudent;
     private List<BeanHTLocation> htLocations = null;
     private List<BeanRail> listRail = null;
@@ -200,7 +204,7 @@ public class MapBaseFragment extends BaseFragment implements BDLocationListener,
             return;
         }
 
-        MarkerStudentView studentView = new MarkerStudentView(mContext);
+        MarkerStudentView studentView = new MarkerStudentView(getActivity());
         studentView.isBoy(currentStudent.getSex().equals("1"));
         BitmapDescriptor descriptor = BitmapDescriptorFactory.fromView(studentView);
 
@@ -256,7 +260,7 @@ public class MapBaseFragment extends BaseFragment implements BDLocationListener,
             //marker初始化
             mHandler.sendEmptyMessage(DrawTrack);
         } else {
-            Toast.makeText(mContext, "无轨迹信息", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "无轨迹信息", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -527,7 +531,11 @@ public class MapBaseFragment extends BaseFragment implements BDLocationListener,
     }
 
     public void unRegisterSensorListener() {
-        mSensorManager.unregisterListener(this, mSensor);
+        try {
+            mSensorManager.unregisterListener(this, mSensor);
+        } catch (Exception ex) {
+
+        }
     }
 
 }
