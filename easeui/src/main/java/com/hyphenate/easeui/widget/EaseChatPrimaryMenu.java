@@ -5,6 +5,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -18,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hyphenate.easeui.R;
+import com.hyphenate.easeui.utils.MyPermissionUtil;
 import com.hyphenate.util.EMLog;
 
 /**
@@ -25,6 +27,7 @@ import com.hyphenate.util.EMLog;
  *
  */
 public class EaseChatPrimaryMenu extends EaseChatPrimaryMenuBase implements OnClickListener {
+
     private EditText editText;
     private View buttonSetModeKeyboard;
     private RelativeLayout edittext_layout;
@@ -183,7 +186,7 @@ public class EaseChatPrimaryMenu extends EaseChatPrimaryMenuBase implements OnCl
             editText.dispatchKeyEvent(event);
         }
     }
-    
+
     /**
      * on clicked event
      * @param view
@@ -198,10 +201,22 @@ public class EaseChatPrimaryMenu extends EaseChatPrimaryMenuBase implements OnCl
                 listener.onSendBtnClicked(s);
             }
         } else if (id == R.id.btn_set_mode_voice) {
-            setModeVoice();
-            showNormalFaceImage();
-            if(listener != null)
-                listener.onToggleVoiceBtnClicked();
+            //判断权限
+            int result = MyPermissionUtil.checkOp(this.getContext(), MyPermissionUtil.OP_RECORD_AUDIO);
+            Log.i("Chat", "permission : " + result);
+            //0 允许,4 询问,1 拒绝,-1 <4.4.4
+            if (result == 4 && audioRecorderCallBack != null) {
+                audioRecorderCallBack.onPermissionAsk();
+                return;
+            } else if (result == 1 && audioRecorderCallBack != null) {
+                audioRecorderCallBack.onPermissionDenied();
+                return;
+            } else {
+                setModeVoice();
+                showNormalFaceImage();
+                if(listener != null)
+                    listener.onToggleVoiceBtnClicked();
+            }
         } else if (id == R.id.btn_set_mode_keyboard) {
             setModeKeyboard();
             showNormalFaceImage();

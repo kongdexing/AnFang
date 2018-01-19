@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 
 public abstract class EaseChatPrimaryMenuBase extends RelativeLayout{
     protected EaseChatPrimaryMenuListener listener;
+    protected AudioRecorderCallBack audioRecorderCallBack;
     protected Activity activity;
     protected InputMethodManager inputManager;
 
@@ -77,8 +78,24 @@ public abstract class EaseChatPrimaryMenuBase extends RelativeLayout{
                 inputManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
     }
-    
-    
+
+    public void setAudioRecorderCallBack(AudioRecorderCallBack listener) {
+        audioRecorderCallBack = listener;
+    }
+
+    /**
+     * @param
+     * @author ldm
+     * @description 录音完成后的回调
+     * @time 2016/6/25 11:18
+     */
+    public interface AudioRecorderCallBack {
+
+        void onPermissionAsk();
+
+        void onPermissionDenied();
+    }
+
     public interface EaseChatPrimaryMenuListener{
         /**
          * when send button clicked

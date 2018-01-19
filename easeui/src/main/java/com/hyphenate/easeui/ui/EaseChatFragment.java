@@ -57,6 +57,7 @@ import com.hyphenate.easeui.widget.EaseChatExtendMenu;
 import com.hyphenate.easeui.widget.EaseChatInputMenu;
 import com.hyphenate.easeui.widget.EaseChatInputMenu.ChatInputMenuListener;
 import com.hyphenate.easeui.widget.EaseChatMessageList;
+import com.hyphenate.easeui.widget.EaseChatPrimaryMenu;
 import com.hyphenate.easeui.widget.EaseVoiceRecorderView;
 import com.hyphenate.easeui.widget.EaseVoiceRecorderView.EaseVoiceRecorderCallback;
 import com.hyphenate.easeui.widget.chatrow.EaseCustomChatRowProvider;
@@ -172,6 +173,35 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         registerExtendMenuItem();
         // init input menu
         inputMenu.init(null);
+        //录音权限判断
+        inputMenu.setEaseChatVoiceBtnListener(new EaseChatPrimaryMenu.AudioRecorderCallBack() {
+            @Override
+            public void onPermissionAsk() {
+                Log.i(TAG, "onPermissionAsk: ");
+                final int version = Build.VERSION.SDK_INT;
+                if (version > 19) {
+                    Toast.makeText(getActivity(), R.string.permission_voice_rationale, Toast.LENGTH_SHORT).show();
+                    EaseChatFragmentPermissionsDispatcher.onStartRecordingWithCheck(EaseChatFragment.this);
+                } else {
+                    Toast.makeText(getActivity(), R.string.permission_voice_rationale, Toast.LENGTH_SHORT).show();
+//                    CommonUtil.goAppDetailSettingIntent(ChatActivity.this);
+                }
+            }
+
+            @Override
+            public void onPermissionDenied() {
+                Log.i(TAG, "onPermissionDenied: ");
+                final int version = Build.VERSION.SDK_INT;
+                if (version > 19) {
+                    Toast.makeText(getActivity(), R.string.permission_voice_never_askagain, Toast.LENGTH_SHORT).show();
+                    EaseChatFragmentPermissionsDispatcher.onStartRecordingWithCheck(EaseChatFragment.this);
+                } else {
+                    Toast.makeText(getActivity(), R.string.permission_voice_never_askagain, Toast.LENGTH_SHORT).show();
+//                    CommonUtil.goAppDetailSettingIntent(ChatActivity.this);
+                }
+            }
+        });
+
         inputMenu.setChatInputMenuListener(new ChatInputMenuListener() {
 
             @Override
@@ -685,6 +715,30 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     void onCameraNeverAskAgain() {
         Log.i(TAG, "onCameraNeverAskAgain: ");
         Toast.makeText(this.getContext(), R.string.permission_camera_never_askagain, Toast.LENGTH_SHORT).show();
+    }
+
+
+    @NeedsPermission({Manifest.permission.RECORD_AUDIO})
+    void onStartRecording() {
+
+    }
+
+    @OnPermissionDenied({Manifest.permission.RECORD_AUDIO})
+    void onStartRecordingDenied() {
+        Log.i(TAG, "onStartRecordingDenied: ");
+        Toast.makeText(this.getContext(), R.string.permission_voice_denied, Toast.LENGTH_SHORT).show();
+    }
+
+    @OnShowRationale({Manifest.permission.RECORD_AUDIO})
+    void showRationaleForStartRecording(PermissionRequest request) {
+        Log.i(TAG, "showRationaleForStartRecording: ");
+        request.proceed();
+    }
+
+    @OnNeverAskAgain({Manifest.permission.RECORD_AUDIO})
+    void onStartRecordingNeverAskAgain() {
+        Toast.makeText(this.getContext(), R.string.permission_voice_never_askagain, Toast.LENGTH_SHORT).show();
+//        CommonUtil.goAppDetailSettingIntent(this);
     }
 
     /**

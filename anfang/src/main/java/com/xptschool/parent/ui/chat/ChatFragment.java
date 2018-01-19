@@ -346,7 +346,8 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
 //                startVoiceCall();
                 break;
             case ITEM_VIDEO_CALL:
-                startVideoCall();
+                //判断相机，录音权限
+                ChatFragmentPermissionsDispatcher.onCameraVoiceAllowWithCheck(ChatFragment.this);
                 break;
             //red packet code : 进入发红包页面
             case ITEM_RED_PACKET:
@@ -414,6 +415,35 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
     void onVoiceNeverAskAgain() {
         Log.i(TAG, "onVoiceNeverAskAgain: ");
         Toast.makeText(this.getContext(), R.string.permission_voice_never_askagain, Toast.LENGTH_SHORT).show();
+    }
+
+
+    @NeedsPermission({Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO})
+    void onCameraVoiceAllow() {
+        Log.i(TAG, "onCameraVoiceAllow: startVideoCall()");
+        startVideoCall();
+    }
+
+    @OnPermissionDenied({Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO})
+    void onCameraVoiceDenied() {
+        Log.i(TAG, "onCameraVoiceDenied: ");
+        // NOTE: Deal with a denied permission, e.g. by showing specific UI
+        // or disabling certain functionality
+        Toast.makeText(this.getContext(), R.string.permission_cameravoice_denied, Toast.LENGTH_SHORT).show();
+    }
+
+    @OnShowRationale({Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO})
+    void showRationaleForCameraVoice(PermissionRequest request) {
+        // NOTE: Show a rationale to explain why the permission is needed, e.g. with a dialog.
+        // Call proceed() or cancel() on the provided PermissionRequest to continue or abort
+        Log.i(TAG, "showRationaleForCameraVoice: ");
+        request.proceed();
+    }
+
+    @OnNeverAskAgain({Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO})
+    void onCameraVoiceNeverAskAgain() {
+        Log.i(TAG, "onCameraVoiceNeverAskAgain: ");
+        Toast.makeText(this.getContext(), R.string.permission_cameravoice_never_askagain, Toast.LENGTH_SHORT).show();
     }
 
     /**
