@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao'
+// 依赖插件脚本
+apply from: 'tinker-support.gradle'
 
 def MZAppId = project.getProperties().get("MZ_APP_ID") ?: "100999"
 def MZAppKey = project.getProperties().get("MZ_APP_KEY") ?: "80355073480594a99470dcacccd8cf2c"
@@ -23,8 +25,8 @@ android {
         applicationId "com.xptschool.parent"
         minSdkVersion 19
         targetSdkVersion 24
-        versionCode 1
-        versionName "1.0"
+        versionCode 20
+        versionName "2.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [API_KEY_BAIDU       : rootProject.appKeyBaiduMap,
                                 UMENG_APPKEY        : rootProject.UMENG_APPKEY,
@@ -32,6 +34,11 @@ android {
                                 MZ_APP_ID           : MZAppId,
                                 MZ_APP_KEY          : MZAppKey,
                                 PACKAGE_NAME        : appPackageName]
+
+//        ndk {
+//            //设置支持的SO库架构
+//            abiFilters 'armeabi' , 'x86', 'armeabi-v7a'
+//        }
     }
 
     // recommend
@@ -63,7 +70,7 @@ android {
             debuggable true
             minifyEnabled false
             signingConfig signingConfigs.release
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
             minifyEnabled true
@@ -84,7 +91,6 @@ android {
     productFlavors.all { flavor ->
         def service_url
         def app_instruction_url = "http://shuhaixinxi.com/plus/list.php?tid=88";
-        def chat_video_url = "video.pcuion.com";
 
         if (name == "official") {
             service_url = "http://school.xinpingtai.com"
@@ -95,7 +101,6 @@ android {
 
         buildConfigField "String", "SERVICE_URL", "\"$service_url\""
         buildConfigField "String", "APP_INSTRUCTION_URL", "\"$app_instruction_url\""
-        buildConfigField "String", "CHAT_VIDEO_URL", "\"$chat_video_url\""
     }
 
     sourceSets {
@@ -133,21 +138,20 @@ android {
 }
 
 greendao {
-    schemaVersion 3
+    schemaVersion 10
     targetGenDir 'src/main/java'
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile(name: 'volley', ext: 'aar')
     compile(name: 'AgentWebLibrary', ext: 'aar')
     //    compile(name: 'widget', ext: 'aar')
-    compile(project(':library')) { exclude group: 'com.android.support', module: 'support-v13' }
-    provided project(':processor')
+//    compile(project(':library')) { exclude group: 'com.android.support', module: 'support-v13' }
+//    provided project(':processor')
     compile project(':viewpagerindicator')
     compile project(':PushSDK')
     compile project(':takephoto_library')
@@ -161,7 +165,7 @@ dependencies {
     compile 'com.android.support:support-v4:24.2.0'
     compile 'com.android.support:design:24.2.0'
     compile 'com.google.code.gson:gson:2.3.1'
-    compile 'org.greenrobot:greendao:3.0.1'
+//    compile 'org.greenrobot:greendao:3.0.1'
     compile 'com.jakewharton:butterknife:8.5.1'
     // bugly 多dex配置
     compile 'com.android.support:multidex:1.0.1'

@@ -302,3 +302,14 @@
 ##环信
 -keep class com.hyphenate.** {*;}
 -dontwarn  com.hyphenate.**
+
+-dontwarn kotlin.**
+
+#-keep class permissions.dispatcher.processor.**{*;}
+#-dontwarn permissions.dispatcher.processor.**
+
+-keep class permissions.dispatcher.**{*;}
+-dontwarn permissions.dispatcher.**
+
+-keep class permissions.dispatcher.GrantableRequest
+-dontwarn permissions.dispatcher.GrantableRequest

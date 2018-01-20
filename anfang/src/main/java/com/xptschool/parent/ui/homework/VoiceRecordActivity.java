@@ -12,10 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.widget.MyPermissionUtil;
 import com.android.widget.audiorecorder.AudioManager;
 import com.android.widget.audiorecorder.MediaPlayerManager;
 import com.android.widget.roundcornerprogressbar.RoundCornerProgressBar;
+import com.hyphenate.easeui.utils.MyPermissionUtil;
 import com.liulishuo.filedownloader.BaseDownloadTask;
 import com.liulishuo.filedownloader.FileDownloadListener;
 import com.liulishuo.filedownloader.FileDownloader;

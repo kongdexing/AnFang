@@ -160,7 +160,7 @@
     <string name="Move_into_blacklist_success">移入黑名单成功</string>
     <string name="Move_into_blacklist_failure">移入黑名单失败</string>
     <string name="you_are_group">你被群创建者从此群中移除</string>
-    <string name="the_current_group_destroyed">当前群聊已被群创建者解散</string>
+     <string name="the_current_group_destroyed">当前群聊已被群创建者解散</string>
     <string name="the_current_chat_room_destroyed">当前聊天室已被创建者解散</string>
     <string name="Cant_chat_with_yourself">不能和自己聊天</string>
     <string name="deleting">正在删除……</string>
