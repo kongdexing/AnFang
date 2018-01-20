@@ -303,6 +303,9 @@
 -keep class com.hyphenate.** {*;}
 -dontwarn  com.hyphenate.**
 
+-keep class com.squareup.picasso.**{*;}
+-dontwarn com.squareup.picasso.**
+
 -dontwarn kotlin.**
 
 #-keep class permissions.dispatcher.processor.**{*;}
@@ -311,5 +314,5 @@
 -keep class permissions.dispatcher.**{*;}
 -dontwarn permissions.dispatcher.**
 
--keep class permissions.dispatcher.GrantableRequest
--dontwarn permissions.dispatcher.GrantableRequest
+#-keep class permissions.dispatcher.GrantableRequest
+#-dontwarn permissions.dispatcher.GrantableRequest

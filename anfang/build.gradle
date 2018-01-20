@@ -35,10 +35,10 @@ android {
                                 MZ_APP_KEY          : MZAppKey,
                                 PACKAGE_NAME        : appPackageName]
 
-//        ndk {
-//            //设置支持的SO库架构
-//            abiFilters 'armeabi' , 'x86', 'armeabi-v7a'
-//        }
+        ndk {
+            //设置支持的SO库架构
+            abiFilters 'armeabi' , 'x86', 'armeabi-v7a'
+        }
     }
 
     // recommend
@@ -150,8 +150,8 @@ dependencies {
     compile(name: 'volley', ext: 'aar')
     compile(name: 'AgentWebLibrary', ext: 'aar')
     //    compile(name: 'widget', ext: 'aar')
-//    compile(project(':library')) { exclude group: 'com.android.support', module: 'support-v13' }
-//    provided project(':processor')
+    compile(project(':library')) { exclude group: 'com.android.support', module: 'support-v13' }
+    provided project(':processor')
     compile project(':viewpagerindicator')
     compile project(':PushSDK')
     compile project(':takephoto_library')
@@ -161,7 +161,7 @@ dependencies {
     compile project(':easeui')
     compile project(':pickerview')
     //compile 'com.umeng.analytics:analytics:latest.integration'
-    compile 'com.android.support:appcompat-v7:25.2.0'
+//    compile 'com.android.support:appcompat-v7:25.2.0'
     compile 'com.android.support:support-v4:24.2.0'
     compile 'com.android.support:design:24.2.0'
     compile 'com.google.code.gson:gson:2.3.1'
