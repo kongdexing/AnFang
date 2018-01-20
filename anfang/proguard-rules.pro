@@ -300,8 +300,8 @@
 
 
 ##环信
--keep class com.hyphenate.** {*;}
--dontwarn  com.hyphenate.**
+#-keep class com.hyphenate.easeui.** {*;}
+#-dontwarn  com.hyphenate.easeui.**
 
 -keep class com.squareup.picasso.**{*;}
 -dontwarn com.squareup.picasso.**

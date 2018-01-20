@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao'
 // 依赖插件脚本
-apply from: 'tinker-support.gradle'
+//apply from: 'tinker-support.gradle'
 
 def MZAppId = project.getProperties().get("MZ_APP_ID") ?: "100999"
 def MZAppKey = project.getProperties().get("MZ_APP_KEY") ?: "80355073480594a99470dcacccd8cf2c"
@@ -70,11 +70,11 @@ android {
             debuggable true
             minifyEnabled false
             signingConfig signingConfigs.release
-//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false  //是否开启混淆
+            shrinkResources true  //资源压缩
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

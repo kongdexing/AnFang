@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 
 import com.hyphenate.easeui.domain.EaseUser;
-import com.hyphenate.easeui.utils.EaseCommonUtils;
+//import com.hyphenate.easeui.utils2.EaseCommonUtils;
 import com.hyphenate.util.HanziToPinyin;
 import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.ease.Constant;
@@ -63,25 +63,25 @@ public class DemoDBManager {
     synchronized public Map<String, EaseUser> getContactList() {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Map<String, EaseUser> users = new Hashtable<String, EaseUser>();
-        if (db.isOpen()) {
-            Cursor cursor = db.rawQuery("select * from " + UserDao.TABLE_NAME /* + " desc" */, null);
-            while (cursor.moveToNext()) {
-                String username = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_ID));
-                String nick = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_NICK));
-                String avatar = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_AVATAR));
-                EaseUser user = new EaseUser(username);
-                user.setNick(nick);
-                user.setAvatar(avatar);
-                if (username.equals(Constant.NEW_FRIENDS_USERNAME) || username.equals(Constant.GROUP_USERNAME)
-                        || username.equals(Constant.CHAT_ROOM)|| username.equals(Constant.CHAT_ROBOT)) {
-                        user.setInitialLetter("");
-                } else {
-                    EaseCommonUtils.setUserInitialLetter(user);
-                }
-                users.put(username, user);
-            }
-            cursor.close();
-        }
+//        if (db.isOpen()) {
+//            Cursor cursor = db.rawQuery("select * from " + UserDao.TABLE_NAME /* + " desc" */, null);
+//            while (cursor.moveToNext()) {
+//                String username = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_ID));
+//                String nick = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_NICK));
+//                String avatar = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_AVATAR));
+//                EaseUser user = new EaseUser(username);
+//                user.setNick(nick);
+//                user.setAvatar(avatar);
+//                if (username.equals(Constant.NEW_FRIENDS_USERNAME) || username.equals(Constant.GROUP_USERNAME)
+//                        || username.equals(Constant.CHAT_ROOM)|| username.equals(Constant.CHAT_ROBOT)) {
+//                        user.setInitialLetter("");
+//                } else {
+//                    EaseCommonUtils.setUserInitialLetter(user);
+//                }
+//                users.put(username, user);
+//            }
+//            cursor.close();
+//        }
         return users;
     }
     
