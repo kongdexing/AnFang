@@ -32,7 +32,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/home_icon_selector"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/dp_10"
             android:paddingRight="@dimen/dp_5">
@@ -88,7 +87,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/home_icon_selector"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/dp_5"
             android:paddingRight="@dimen/dp_10">
