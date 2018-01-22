@@ -46,7 +46,9 @@ public class HttpAction {
     public static String GET_TEACHER_BYCID = HEAD + "Comment/get_teacher_list";
 
     //考试名称查询
-    public static String EXAM_QUERY = HEAD + "Exam/getScoresForParent";
+    public static String EXAM_QUERY_FOR_PARENT = HEAD + "Exam/getScoresForParent";
+    public static String EXAM_QUERY = HEAD + "Exam/query";
+
     //考勤管理
     public static String Attendance_QUERY = HEAD + "Attendance/query_v1_0_1";
     public static String Attendance_Detail = HEAD + "Attendance/getDetail";

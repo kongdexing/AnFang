@@ -545,7 +545,10 @@ public class VoiceRecordActivity extends AlbumTeacherActivity implements VoiceLi
         int duration = 0;
         try {
             localAmrFile = path;
+            Log.i(TAG, "getAmrDuration localAmrFile "+localAmrFile);
             MediaPlayer mediaPlayer = new MediaPlayer();
+            mAudioManager.setCurrentFilePath(localAmrFile);
+
             mediaPlayer.setDataSource(path);
             mediaPlayer.prepare();
             float dur = (float) mediaPlayer.getDuration() / 1000;

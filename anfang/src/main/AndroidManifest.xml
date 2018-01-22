@@ -372,7 +372,7 @@
         <activity
             android:name=".ui.chat.ContextMenuActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/MyDialogStyle" />
+            android:theme="@style/Theme.AppCompat" />
 
         <!-- 显示下载大图页面 -->
         <activity

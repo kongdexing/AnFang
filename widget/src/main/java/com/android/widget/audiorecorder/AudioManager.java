@@ -191,4 +191,8 @@ public class AudioManager {
 
         return mCurrentFilePath;
     }
+
+    public void setCurrentFilePath(String mCurrentFilePath) {
+        this.mCurrentFilePath = mCurrentFilePath;
+    }
 }

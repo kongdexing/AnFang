@@ -134,10 +134,10 @@ public class ScoreActivity extends BaseListActivity {
     private void getScoreList() {
         BeanStudent student = (BeanStudent) spnStudents.getSelectedItem();
 
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.EXAM_QUERY, new VolleyHttpParamsEntity()
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.EXAM_QUERY_FOR_PARENT, new VolleyHttpParamsEntity()
                         .addParam("stu_id", student.getStu_id())
                         .addParam("dates", spnDate.getText().toString())
-                        .addParam("token", CommonUtil.encryptToken(HttpAction.EXAM_QUERY)),
+                        .addParam("token", CommonUtil.encryptToken(HttpAction.EXAM_QUERY_FOR_PARENT)),
                 new MyVolleyRequestListener() {
                     @Override
                     public void onStart() {
