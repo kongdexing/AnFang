@@ -25,8 +25,8 @@ android {
         applicationId "com.xptschool.parent"
         minSdkVersion 19
         targetSdkVersion 24
-        versionCode 20
-        versionName "2.0"
+        versionCode 21
+        versionName "2.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [API_KEY_BAIDU       : rootProject.appKeyBaiduMap,
                                 UMENG_APPKEY        : rootProject.UMENG_APPKEY,
@@ -74,7 +74,7 @@ android {
         }
         release {
             minifyEnabled false  //是否开启混淆
-            shrinkResources true  //资源压缩
+            shrinkResources false  //资源压缩
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

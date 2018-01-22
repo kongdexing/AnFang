@@ -31,6 +31,10 @@ android {
         }
     }
     buildToolsVersion '26.0.2'
+
+    lintOptions {
+        abortOnError false
+    }
 }
 
 configurations {
@@ -38,7 +42,7 @@ configurations {
 }
 
 dependencies {
-    provided "com.android.support:support-v4:$SUPPORT_LIBRARY_VERSION"
+    provided "com.android.support:support-v4:24.1.1"
     provided "com.android.support:support-v13:$SUPPORT_LIBRARY_VERSION",optional
     testCompile "junit:junit:$JUNIT_VERSION"
     testCompile "org.mockito:mockito-core:$MOCKITO_VERSION"

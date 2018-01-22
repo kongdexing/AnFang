@@ -107,12 +107,12 @@ public class MessageFragment extends BaseFragment {
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);
 
-        if (!EMClient.getInstance().isLoggedInBefore()) {
-            //login
-            ToastUtils.showToast(mContext, " not isLoggedInBefore");
-        } else {
-            ToastUtils.showToast(mContext, "Ease isLoggedInBefore");
-        }
+//        if (!EMClient.getInstance().isLoggedInBefore()) {
+//            //login
+//            ToastUtils.showToast(mContext, " not isLoggedInBefore");
+//        } else {
+//            ToastUtils.showToast(mContext, "Ease isLoggedInBefore");
+//        }
     }
 
     @OnClick({R.id.llNotify, R.id.llContact})
