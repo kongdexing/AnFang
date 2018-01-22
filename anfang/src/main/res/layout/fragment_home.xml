@@ -160,7 +160,7 @@
                 android:layout_marginTop="@dimen/dp_15" />
 
             <!--快乐成长-->
-            <com.xptschool.parent.ui.fragment.home.HomeHappyGrowView
+            <com.xptschool.parent.ui.fragment.home.HomeHappyGroupView
                 android:id="@+id/happyGrowView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

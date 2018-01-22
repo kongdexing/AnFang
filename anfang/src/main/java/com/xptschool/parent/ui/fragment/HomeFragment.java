@@ -56,6 +56,7 @@ import com.xptschool.parent.ui.course.CourseTActivity;
 import com.xptschool.parent.ui.fence.FenceListActivity;
 import com.xptschool.parent.ui.fragment.home.HomeEduGroupView;
 import com.xptschool.parent.ui.fragment.home.HomeEduView;
+import com.xptschool.parent.ui.fragment.home.HomeHappyGroupView;
 import com.xptschool.parent.ui.fragment.home.HomeHappyGrowView;
 import com.xptschool.parent.ui.fragment.home.HomePayMentView;
 import com.xptschool.parent.ui.fragment.home.HomePropertyView;
@@ -107,7 +108,7 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.eduGroupView)
     HomeEduGroupView eduGroupView;
     @BindView(R.id.happyGrowView)
-    HomeHappyGrowView happyGrowView;
+    HomeHappyGroupView happyGrowView;
     @BindView(R.id.propertyView)
     HomePropertyView propertyView;
     @BindView(R.id.shopView)

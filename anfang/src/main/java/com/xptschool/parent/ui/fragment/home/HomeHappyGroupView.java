@@ -18,15 +18,11 @@ import com.android.widget.mygridview.MyGridView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.xptschool.parent.R;
-import com.xptschool.parent.XPTApplication;
-import com.xptschool.parent.bean.HomeItem;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.model.BeanHomeCfg;
-import com.xptschool.parent.ui.login.LoginActivity;
 import com.xptschool.parent.ui.main.WebViewActivity;
 import com.xptschool.parent.ui.mine.BaseInfoView;
-import com.xptschool.parent.view.CustomDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,37 +34,37 @@ import butterknife.ButterKnife;
  * Created by shuhaixinxi on 2018/1/13.
  */
 
-public class HomePropertyView extends BaseInfoView {
+public class HomeHappyGroupView extends BaseInfoView {
 
-    @BindView(R.id.llHomeInvest)
-    LinearLayout llHomeInvest;
+    @BindView(R.id.llHappy)
+    LinearLayout llHappy;
     @BindView(R.id.txtGroupName)
     TextView txtGroupName;
-    @BindView(R.id.grd_invest)
-    MyGridView grd_invest;
+    @BindView(R.id.grd_children)
+    MyGridView grd_children;
 
-    public HomePropertyView(Context context) {
+    public HomeHappyGroupView(Context context) {
         super(context);
     }
 
-    public HomePropertyView(Context context, @Nullable AttributeSet attrs) {
+    public HomeHappyGroupView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        View view = LayoutInflater.from(context).inflate(R.layout.item_home_property, this, true);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_home_happy_group, this, true);
         ButterKnife.bind(view);
-        llHomeInvest.setVisibility(GONE);
+        llHappy.setVisibility(GONE);
     }
 
     public void bindData(List<BeanHomeCfg> homeCfgs) {
         if (homeCfgs.size() > 0) {
             txtGroupName.setText(homeCfgs.get(0).getProduct_name());
 
-            llHomeInvest.setVisibility(VISIBLE);
+            llHappy.setVisibility(VISIBLE);
             MyPropertyAdapter itemAdapter = new MyPropertyAdapter(mContext);
-            grd_invest.setAdapter(itemAdapter);
+            grd_children.setAdapter(itemAdapter);
 
             itemAdapter.reloadData(homeCfgs);
         } else {
-            llHomeInvest.setVisibility(GONE);
+            llHappy.setVisibility(GONE);
         }
     }
 

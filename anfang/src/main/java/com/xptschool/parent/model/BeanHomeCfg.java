@@ -21,17 +21,19 @@ public class BeanHomeCfg {
     @Id
     private String id;
     private String title;
+    private String product_name;
     private String image;
     private String url;
     private String mark;
     private String type;
     private String price;
 
-    @Generated(hash = 935941846)
-    public BeanHomeCfg(String id, String title, String image, String url,
-            String mark, String type, String price) {
+    @Generated(hash = 1277836386)
+    public BeanHomeCfg(String id, String title, String product_name, String image,
+            String url, String mark, String type, String price) {
         this.id = id;
         this.title = title;
+        this.product_name = product_name;
         this.image = image;
         this.url = url;
         this.mark = mark;
@@ -106,5 +108,13 @@ public class BeanHomeCfg {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getProduct_name() {
+        return product_name;
+    }
+
+    public void setProduct_name(String product_name) {
+        this.product_name = product_name;
     }
 }

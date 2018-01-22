@@ -21,7 +21,7 @@
     <string name="hint_username">请输入登录名/手机号</string>
     <string name="userpwd">密码</string>
     <string name="hint_userpwd">请输入密码</string>
-    <string name="hint_nickname">请输入用户名</string>
+    <string name="hint_nickname">请输入用户昵称</string>
 
     <string name="forgetpwd"><u>忘记密码</u></string>
     <string name="register"><u>新用户注册</u></string>

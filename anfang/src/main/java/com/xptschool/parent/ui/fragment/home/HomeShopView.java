@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
@@ -29,6 +30,8 @@ public class HomeShopView extends BaseInfoView {
 
     @BindView(R.id.llHomeShop)
     LinearLayout llHomeShop;
+    @BindView(R.id.txtGroupName)
+    TextView txtGroupName;
     @BindView(R.id.pager_shop)
     ViewPager pager_shop;
 
@@ -46,6 +49,8 @@ public class HomeShopView extends BaseInfoView {
     public void bindData(List<BeanHomeCfg> homeCfgs) {
         if (homeCfgs.size() > 0) {
             llHomeShop.setVisibility(VISIBLE);
+
+            txtGroupName.setText(homeCfgs.get(0).getProduct_name());
 
             int width = XPTApplication.getInstance().getWindowWidth() / 3;
             int height = width * 4 / 3;

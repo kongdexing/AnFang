@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
@@ -28,6 +29,8 @@ public class HomeEduGroupView extends BaseInfoView {
 
     @BindView(R.id.llOnline)
     LinearLayout llOnline;
+    @BindView(R.id.txtGroupName)
+    TextView txtGroupName;
     @BindView(R.id.pager_online)
     ViewPager pager_online;
 
@@ -44,6 +47,9 @@ public class HomeEduGroupView extends BaseInfoView {
 
     public void initEduOnLine(List<BeanHomeCfg> onlines) {
         if (onlines.size() > 0) {
+
+            txtGroupName.setText(onlines.get(0).getProduct_name());
+
             llOnline.setVisibility(View.VISIBLE);
             int width = XPTApplication.getInstance().getWindowWidth() / 3;
             int height = width * 3 / 4;

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/llOnline"
+    android:id="@+id/llHappy"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center"
     android:orientation="vertical">
 
     <View
@@ -11,9 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_10"
-        android:background="@color/white"
-        android:padding="@dimen/dp_5">
+        android:layout_margin="@dimen/dp_10">
 
         <TextView
             android:id="@+id/txtGroupName"
@@ -24,13 +24,15 @@
 
     </LinearLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager_online"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_60"
+    <com.android.widget.mygridview.MyGridView
+        android:id="@+id/grd_children"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
-        android:clipChildren="false"
-        android:paddingLeft="@dimen/dp_2"
-        android:paddingRight="@dimen/dp_2" />
-
+        android:horizontalSpacing="@dimen/dp_1"
+        android:listSelector="@null"
+        android:numColumns="3"
+        android:scrollbars="none"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="@dimen/dp_5" />
 </LinearLayout>
