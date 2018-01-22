@@ -214,7 +214,7 @@ public class XPTApplication extends Application {
 
     private void initBugly() {
         // 设置开发设备
-        Bugly.setIsDevelopmentDevice(this, true);
+//        Bugly.setIsDevelopmentDevice(this, true);
         // 这里实现SDK初始化，appId替换成你的在Bugly平台申请的appId
         Beta.autoInit = true;
         Beta.autoCheckUpgrade = true;
@@ -225,8 +225,8 @@ public class XPTApplication extends Application {
         Beta.storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
         Beta.showInterruptedStrategy = true;
         Beta.canShowUpgradeActs.add(MainActivity.class);
-        Beta.autoDownloadOnWifi = false;
-        Bugly.init(this, APP_ID, true);
+        Beta.autoDownloadOnWifi = true;
+        Bugly.init(this, APP_ID, false);
     }
 
     // Initialize the image loader stratetry
