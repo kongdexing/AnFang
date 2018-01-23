@@ -191,7 +191,7 @@ dependencies {
     //agentweb
     compile 'com.lcodecorex:tkrefreshlayout:1.0.7'
     //轮播图控件
-    compile 'com.youth.banner:banner:1.4.9'
+    compile 'com.youth.banner:banner:+'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.parse:parse-android:1.13.1'
     compile project(':barlibrary')
