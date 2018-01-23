@@ -325,7 +325,7 @@ public class HomeFragment extends BaseFragment {
             s_id = "";
         }
 
-        String cityName = SharedPreferencesUtil.getData(getActivity(), SharedPreferencesUtil.KEY_CITY, "").toString();
+        String cityName = SharedPreferencesUtil.getData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_CITY, "").toString();
 
         String url = HttpAction.HOME_Banner;
         VolleyHttpService.getInstance().sendPostRequest(url, new VolleyHttpParamsEntity()
