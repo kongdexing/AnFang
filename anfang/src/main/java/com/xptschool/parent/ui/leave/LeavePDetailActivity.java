@@ -163,6 +163,7 @@ public class LeavePDetailActivity extends BaseActivity {
                     public void onClick(View view) {
                         setViewEnable(true);
                         btnSubmit.setVisibility(View.VISIBLE);
+                        getTeacherByStudent();
                         setTxtRight("");
                     }
                 });
@@ -176,6 +177,8 @@ public class LeavePDetailActivity extends BaseActivity {
                 spnLeaveType.setSelectedIndex(2);
             }
             txtStatus.setText(currentLeave.getStatus_name());
+            spnTeacher.setText(currentLeave.getT_name());
+
             if (currentLeave.getStatus_name().equals("已提交")) {
                 btnDelete.setVisibility(View.VISIBLE);
                 btnSubmit.setVisibility(View.GONE);
