@@ -193,6 +193,12 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".ui.mine.MyChildActivity" />
 
+        <!--学生卡设置-->
+        <activity android:name=".ui.cardset.CardSOSActivity" />
+        <activity android:name=".ui.cardset.CardWhiteListActivity" />
+        <activity android:name=".ui.cardset.CardMoniterActivity" />
+
+
         <!-- 家庭作业 -->
         <activity android:name=".ui.homework.HomeWorkParentActivity" />
         <activity android:name=".ui.homework.HomeWorkTeacherActivity" />
