@@ -98,14 +98,14 @@ public class LeavePDetailActivity extends BaseActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             currentLeave = bundle.getParcelable(ExtraKey.LEAVE_DETAIL);
-            if (currentLeave != null) {
-                initData();
-            }
+            initData();
             String id = bundle.getString(ExtraKey.DETAIL_ID);
             Log.i(TAG, "onCreate: " + id);
             if (id != null && !id.isEmpty()) {
                 getLeaveDetail(id);
             }
+        } else {
+            initData();
         }
 
         //华为机型推送使用uri传值
@@ -120,7 +120,7 @@ public class LeavePDetailActivity extends BaseActivity {
         initView();
     }
 
-    private void initView(){
+    private void initView() {
         //学生
         List<BeanStudent> students = GreenDaoHelper.getInstance().getStudents();
         spnStudents.setItems(students);
@@ -133,8 +133,8 @@ public class LeavePDetailActivity extends BaseActivity {
                     break;
                 }
             }
-        }
 
+        }
         spnStudents.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
             public void onItemSelected(MaterialSpinner materialSpinner, int i, long l, Object o) {
@@ -142,29 +142,32 @@ public class LeavePDetailActivity extends BaseActivity {
             }
         });
 
-        //老师及请假类型
-        spnTeacher.setItems("正在获取老师信息");
-        getTeacherByStudent();
-        spnTeacher.setEnabled(false);
-
+        //发布请假时获取老师信息
+        if (currentLeave == null) {
+            //老师及请假类型
+            spnTeacher.setItems("正在获取老师信息");
+            getTeacherByStudent();
+            spnTeacher.setEnabled(false);
+        }
         spnLeaveType.setItems(leaveTypes);
     }
 
     private void initData() {
-        //如果已批准，则不能编辑
-        if (currentLeave.getStatus().equals("0")) {
-            setTxtRight("编辑");
-            setTextRightClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    setViewEnable(true);
-                    btnSubmit.setVisibility(View.VISIBLE);
-                    setTxtRight("");
-                }
-            });
-        }
 
         if (currentLeave != null) {
+            //如果已批准，则不能编辑
+            if (currentLeave.getStatus().equals("0")) {
+                setTxtRight("编辑");
+                setTextRightClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        setViewEnable(true);
+                        btnSubmit.setVisibility(View.VISIBLE);
+                        setTxtRight("");
+                    }
+                });
+            }
+
             if (currentLeave.getLeave_type().equals("1")) {
                 spnLeaveType.setSelectedIndex(0);
             } else if (currentLeave.getLeave_type().equals("2")) {
