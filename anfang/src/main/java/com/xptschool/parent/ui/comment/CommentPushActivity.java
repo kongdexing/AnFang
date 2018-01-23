@@ -7,6 +7,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -33,6 +34,9 @@ import com.xptschool.parent.util.ToastUtils;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+/**
+ * 老师发布评语
+ */
 public class CommentPushActivity extends BaseActivity {
 
     @BindView(R.id.spnClasses)
@@ -51,6 +55,9 @@ public class CommentPushActivity extends BaseActivity {
 
     @BindView(R.id.btnDelete)
     Button btnDelete;
+
+    @BindView(R.id.flTransparent)
+    FrameLayout flTransparent;
 
     private BeanStudent currentStudent;
     private BeanClass currentClass;
@@ -149,7 +156,7 @@ public class CommentPushActivity extends BaseActivity {
             studentPopup.setOnDismissListener(new PopupWindow.OnDismissListener() {
                 @Override
                 public void onDismiss() {
-//                    flTransparent.setVisibility(View.GONE);
+                    flTransparent.setVisibility(View.GONE);
 //                    txtStudentName.collapse();
                 }
             });
@@ -157,7 +164,7 @@ public class CommentPushActivity extends BaseActivity {
 
         studentPopup.setContentView(studentPopupWindowView);
 
-//        flTransparent.setVisibility(View.VISIBLE);
+        flTransparent.setVisibility(View.VISIBLE);
         studentPopup.showAtLocation(txtStudent, Gravity.BOTTOM, 0, 0);
     }
 

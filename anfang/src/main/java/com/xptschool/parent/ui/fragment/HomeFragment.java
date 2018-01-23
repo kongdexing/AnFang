@@ -494,12 +494,12 @@ public class HomeFragment extends BaseFragment {
          /*课程表*/
         tipItems.add(new HomeItem()
                 .setIconId(R.drawable.home_course)
-                .setTitle(getString(R.string.home_course))
+                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_course))
                 .setIntent(new Intent(getActivity(), isParent ? CourseActivity.class : CourseTActivity.class)));
         /*老师评语*/
         tipItems.add(new HomeItem()
                 .setIconId(R.drawable.home_remark)
-                .setTitle(getString(R.string.home_comment))
+                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_comment))
                 .setIntent(new Intent(getActivity(), isParent ? CommentPActivity.class : CommentTActivity.class)));
         /*教育新闻*/
         Intent newsIntent = new Intent(getActivity(), WebViewActivity.class);
@@ -508,7 +508,7 @@ public class HomeFragment extends BaseFragment {
                 .setShowForParent(false)
                 .setShowForTeacher(false)
                 .setIconId(R.drawable.home_news)
-                .setTitle(getString(R.string.home_news))
+                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_news))
                 .setIntent(newsIntent));
         HomeItemGridAdapter tipAdapter = new HomeItemGridAdapter(getActivity());
 
@@ -519,44 +519,44 @@ public class HomeFragment extends BaseFragment {
         //家庭作业
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_homework)
-                .setTitle(getString(R.string.home_homework))
+                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_homework))
                 .setIntent(new Intent(getActivity(), isParent ? HomeWorkParentActivity.class : HomeWorkTeacherActivity.class)));
         //成绩
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_classes)
-                .setTitle(getString(R.string.home_score))
+                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_score))
                 .setIntent(new Intent(getActivity(), isParent ? ScoreActivity.class : ScoreTeacherActivity.class)));
         //电子围栏
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_fence)
-                .setTitle(getString(R.string.home_fence))
+                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_fence))
                 .setIntent(new Intent(getActivity(), FenceListActivity.class)));
         //报警查询
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_alarm)
-                .setTitle(getString(R.string.home_alarm))
+                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_alarm))
                 .setIntent(new Intent(getActivity(), isParent ? AlarmActivity.class : AlarmTActivity.class)));
 
         //在线请假
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_notice)
-                .setTitle(getString(R.string.home_leave))
+                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_leave))
                 .setIntent(new Intent(getActivity(), isParent ? LeaveActivity.class : LeaveTActivity.class)));
         //考勤
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_checkin)
-                .setTitle(getString(R.string.home_checkin))
+                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_checkin))
                 .setIntent(new Intent(getActivity(), isParent ? CheckinPActivity.class : CheckinTActivity.class)));
         //班级公告
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_notice)
-                .setTitle(getString(R.string.home_notice))
+                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_notice))
                 .setIntent(new Intent(getActivity(), isParent ? NoticeActivity.class : NoticeTeacherActivity.class)));
 
         /*荣誉墙*/
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_honour)
-                .setTitle(getString(R.string.home_honour))
+                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_honour))
                 .setIntent(new Intent(getActivity(), isParent ? HonorPActivity.class : HonorTActivity.class)));
 
         HomeItemGridAdapter itemAdapter = new HomeItemGridAdapter(getActivity());
