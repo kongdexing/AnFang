@@ -7,6 +7,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -33,7 +34,14 @@ import com.xptschool.parent.util.ToastUtils;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+/**
+ * 老师发布荣誉
+ */
 public class HonorPushActivity extends BaseActivity {
+
+
+    @BindView(R.id.flTransparent)
+    FrameLayout flTransparent;
 
     @BindView(R.id.spnClasses)
     MaterialSpinner spnClasses;
@@ -150,7 +158,7 @@ public class HonorPushActivity extends BaseActivity {
             studentPopup.setOnDismissListener(new PopupWindow.OnDismissListener() {
                 @Override
                 public void onDismiss() {
-//                    flTransparent.setVisibility(View.GONE);
+                    flTransparent.setVisibility(View.GONE);
 //                    txtStudentName.collapse();
                 }
             });
@@ -158,7 +166,7 @@ public class HonorPushActivity extends BaseActivity {
 
         studentPopup.setContentView(studentPopupWindowView);
 
-//        flTransparent.setVisibility(View.VISIBLE);
+        flTransparent.setVisibility(View.VISIBLE);
         studentPopup.showAtLocation(txtStudent, Gravity.BOTTOM, 0, 0);
     }
 
