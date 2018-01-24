@@ -3,6 +3,7 @@ package com.xptschool.parent.ui.main;
 import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
@@ -30,13 +31,17 @@ import com.baidu.location.LocationClientOption;
 import com.gyf.barlibrary.ImmersionBar;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.util.EMLog;
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.BroadcastAction;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.common.SharedPreferencesUtil;
+import com.xptschool.parent.common.UserHelper;
 import com.xptschool.parent.common.UserType;
+import com.xptschool.parent.ease.Constant;
+import com.xptschool.parent.ease.EaseHelper;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.GreenDaoHelper;
@@ -45,6 +50,7 @@ import com.xptschool.parent.ui.fragment.MapFragment;
 import com.xptschool.parent.ui.fragment.MessageFragment;
 import com.xptschool.parent.ui.fragment.MineFragment;
 import com.xptschool.parent.ui.login.LoginActivity;
+import com.xptschool.parent.ui.setting.SettingActivity;
 import com.xptschool.parent.util.ToastUtils;
 
 import java.util.ArrayList;
@@ -94,6 +100,8 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
     private long mExitTime;
     public LocationClient mLocClient;
     protected ImmersionBar mImmersionBar;
+    private android.app.AlertDialog.Builder exceptionBuilder;
+    private boolean isExceptionDialogShow =  false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +112,8 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
 
         initView();
         initData();
+
+        showExceptionDialogFromIntent(getIntent());
 
         MainActivityPermissionsDispatcher.onLocationAllowWithCheck(this);
     }
@@ -418,6 +428,77 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
         }
     }
 
+    private int getExceptionMessageId(String exceptionType) {
+        if(exceptionType.equals(Constant.ACCOUNT_CONFLICT)) {
+            return R.string.connect_conflict;
+        } else if (exceptionType.equals(Constant.ACCOUNT_REMOVED)) {
+            return R.string.em_user_remove;
+        } else if (exceptionType.equals(Constant.ACCOUNT_FORBIDDEN)) {
+            return R.string.user_forbidden;
+        }
+        return R.string.Network_error;
+    }
+    /**
+     * show the dialog when user met some exception: such as login on another device, user removed or user forbidden
+     */
+    private void showExceptionDialog(String exceptionType) {
+        isExceptionDialogShow = true;
+        EaseHelper.getInstance().logout(false,null);
+        String st = getResources().getString(R.string.Logoff_notification);
+        if (!MainActivity.this.isFinishing()) {
+            // clear up global variables
+            try {
+                if (exceptionBuilder == null)
+                    exceptionBuilder = new android.app.AlertDialog.Builder(MainActivity.this);
+                exceptionBuilder.setTitle(st);
+                exceptionBuilder.setMessage(getExceptionMessageId(exceptionType));
+                exceptionBuilder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        exceptionBuilder = null;
+                        isExceptionDialogShow = false;
+                        //清除数据
+                        SharedPreferencesUtil.clearUserInfo(MainActivity.this);
+                        UserHelper.getInstance().userExit();
+
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+//                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }
+                });
+                exceptionBuilder.setCancelable(false);
+                exceptionBuilder.create().show();
+//                isConflict = true;
+            } catch (Exception e) {
+                EMLog.e(TAG, "---------color conflictBuilder error" + e.getMessage());
+            }
+        }
+    }
+
+    private void showExceptionDialogFromIntent(Intent intent) {
+        EMLog.e(TAG, "showExceptionDialogFromIntent");
+        if (!isExceptionDialogShow && intent.getBooleanExtra(Constant.ACCOUNT_CONFLICT, false)) {
+            showExceptionDialog(Constant.ACCOUNT_CONFLICT);
+        } else if (!isExceptionDialogShow && intent.getBooleanExtra(Constant.ACCOUNT_REMOVED, false)) {
+            showExceptionDialog(Constant.ACCOUNT_REMOVED);
+        } else if (!isExceptionDialogShow && intent.getBooleanExtra(Constant.ACCOUNT_FORBIDDEN, false)) {
+            showExceptionDialog(Constant.ACCOUNT_FORBIDDEN);
+        } else if (intent.getBooleanExtra(Constant.ACCOUNT_KICKED_BY_CHANGE_PASSWORD, false) ||
+                intent.getBooleanExtra(Constant.ACCOUNT_KICKED_BY_OTHER_DEVICE, false)) {
+            this.finish();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        showExceptionDialogFromIntent(intent);
+    }
+
+
     BroadcastReceiver MyBannerReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -433,6 +514,12 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (exceptionBuilder != null) {
+            exceptionBuilder.create().dismiss();
+            exceptionBuilder = null;
+            isExceptionDialogShow = false;
+        }
+
         try {
             this.unregisterReceiver(MyBannerReceiver);
             if (mImmersionBar != null)
