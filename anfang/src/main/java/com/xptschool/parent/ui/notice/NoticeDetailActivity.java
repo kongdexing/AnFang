@@ -116,7 +116,15 @@ public class NoticeDetailActivity extends BaseActivity {
                             currentNotice = new BeanNotice();
                             JSONObject object = new JSONObject(volleyHttpResult.getData().toString());
 
-                            currentNotice.setC_id(object.getString("c_id"));
+                            String c_ids = object.getString("c_id");
+                            if (!c_ids.startsWith(",")) {
+                                c_ids = "," + c_ids;
+                            }
+                            if (!c_ids.endsWith(",")) {
+                                c_ids += ",";
+                            }
+
+                            currentNotice.setC_id(c_ids);
                             currentNotice.setTitle(object.getString("title"));
                             currentNotice.setContent(object.getString("content"));
                             currentNotice.setCreate_time(object.getString("create_time"));
@@ -124,7 +132,8 @@ public class NoticeDetailActivity extends BaseActivity {
                             List<BeanStudent> students = GreenDaoHelper.getInstance().getStudents();
                             for (int i = 0; i < students.size(); i++) {
                                 BeanStudent student = students.get(i);
-                                if (student.getC_id().equals(currentNotice.getC_id())) {
+
+                                if (c_ids.contains(student.getC_id())) {
                                     txtClassName.setText(student.getG_name() + student.getC_name());
                                     break;
                                 }

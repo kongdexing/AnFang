@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">火柴盒</string>
+    <string name="app_name">信平台</string>
     <string name="company_tel">400-8788-165</string>
     <string name="company_name">数海信息技术有限公司</string>
-    <string name="company_name_es">Copyright©2016-2017 xptschool Information Technology \nCo.,Ltd. All rights reserved</string>
+    <string name="company_name_es">Copyright©2016-2018 xptschool Information Technology \nCo.,Ltd. All rights reserved</string>
 
     <string name="btn_confirm">确定</string>
     <string name="btn_cancel">取消</string>
