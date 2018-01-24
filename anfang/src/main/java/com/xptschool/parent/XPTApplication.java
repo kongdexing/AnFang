@@ -208,7 +208,7 @@ public class XPTApplication extends Application {
                 startActivity(intent);
             }
         } catch (Exception ex) {
-
+            Log.i(TAG, "resolvePushMsg: "+ex.getMessage());
         }
     }
 
