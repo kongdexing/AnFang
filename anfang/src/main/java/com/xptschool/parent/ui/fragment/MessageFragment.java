@@ -115,6 +115,13 @@ public class MessageFragment extends BaseFragment {
 //        }
     }
 
+    public ConversationListFragment getConversationListFragment() {
+        if (conversationListFragment==null){
+            conversationListFragment = new ConversationListFragment();
+        }
+        return conversationListFragment;
+    }
+
     @OnClick({R.id.llNotify, R.id.llContact})
     void tipViewClick(View view) {
         switch (view.getId()) {

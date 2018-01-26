@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -30,7 +31,9 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.gyf.barlibrary.ImmersionBar;
 import com.hyphenate.EMCallBack;
+import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMMessage;
 import com.hyphenate.util.EMLog;
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
@@ -50,7 +53,6 @@ import com.xptschool.parent.ui.fragment.MapFragment;
 import com.xptschool.parent.ui.fragment.MessageFragment;
 import com.xptschool.parent.ui.fragment.MineFragment;
 import com.xptschool.parent.ui.login.LoginActivity;
-import com.xptschool.parent.ui.setting.SettingActivity;
 import com.xptschool.parent.util.ToastUtils;
 
 import java.util.ArrayList;
@@ -70,6 +72,7 @@ import permissions.dispatcher.RuntimePermissions;
 public class MainActivity extends BaseMainActivity implements BDLocationListener {
 
     private List<Fragment> fragmentList;
+    private int currentTabIndex = 0;
     private Fragment mCurrentFgt, homeFragment, mapFragment, messageFragment, mineFragment;
     @BindView(R.id.fl_Content)
     FrameLayout fl_Content;
@@ -92,8 +95,8 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
     @BindView(R.id.txt_nav_mine)
     TextView mineTxt;
 
-    @BindView(R.id.txtUnReadNum)
-    TextView txtUnReadNum;
+    @BindView(R.id.unread_msg_number)
+    TextView unread_msg_number;
 
     private FragmentManager mFgtManager;
     private FragmentTransaction mFgtTransaction;
@@ -101,7 +104,11 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
     public LocationClient mLocClient;
     protected ImmersionBar mImmersionBar;
     private android.app.AlertDialog.Builder exceptionBuilder;
-    private boolean isExceptionDialogShow =  false;
+    private boolean isExceptionDialogShow = false;
+
+    private BroadcastReceiver broadcastReceiver;
+    private LocalBroadcastManager broadcastManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,8 +120,12 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
         initView();
         initData();
 
-        showExceptionDialogFromIntent(getIntent());
+        //register broadcast receiver to receive the change of group from DemoHelper
+        registerBroadcastReceiver();
 
+        //检测异地登录bug
+        showExceptionDialogFromIntent(getIntent());
+        //申请定位权限
         MainActivityPermissionsDispatcher.onLocationAllowWithCheck(this);
     }
 
@@ -177,6 +188,24 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
                 login(userName, password, SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_TYPE, "").toString());
             }
         }
+
+        updateUnreadLabel();
+
+        // unregister this event listener when this activity enters the
+        // background
+        EaseHelper sdkHelper = EaseHelper.getInstance();
+        sdkHelper.pushActivity(this);
+
+        EMClient.getInstance().chatManager().addMessageListener(messageListener);
+    }
+
+    @Override
+    protected void onStop() {
+        EMClient.getInstance().chatManager().removeMessageListener(messageListener);
+        EaseHelper sdkHelper = EaseHelper.getInstance();
+        sdkHelper.popActivity(this);
+
+        super.onStop();
     }
 
     @Override
@@ -294,6 +323,7 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
     }
 
     private void addOrReplaceFgt(int position) {
+        currentTabIndex = position;
         if (mCurrentFgt == fragmentList.get(position)) {
             Log.e(TAG, "当前Fragment相同，不需要切换");
             return;
@@ -309,6 +339,101 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
         mCurrentFgt.onPause();
         mCurrentFgt = fragmentList.get(position);
         mCurrentFgt.onResume();
+    }
+
+    EMMessageListener messageListener = new EMMessageListener() {
+
+        @Override
+        public void onMessageReceived(List<EMMessage> messages) {
+            // notify new message
+            for (EMMessage message : messages) {
+                EaseHelper.getInstance().getNotifier().onNewMsg(message);
+            }
+            refreshUIWithMessage();
+        }
+
+        @Override
+        public void onCmdMessageReceived(List<EMMessage> messages) {
+            //red packet code : 处理红包回执透传消息
+//            for (EMMessage message : messages) {
+//                EMCmdMessageBody cmdMsgBody = (EMCmdMessageBody) message.getBody();
+//                final String action = cmdMsgBody.action();//获取自定义action
+//                if (action.equals(RPConstant.REFRESH_GROUP_RED_PACKET_ACTION)) {
+//                    RedPacketUtil.receiveRedPacketAckMessage(message);
+//                }
+//            }
+            //end of red packet code
+            refreshUIWithMessage();
+        }
+
+        @Override
+        public void onMessageRead(List<EMMessage> messages) {
+        }
+
+        @Override
+        public void onMessageDelivered(List<EMMessage> message) {
+        }
+
+        @Override
+        public void onMessageRecalled(List<EMMessage> messages) {
+            refreshUIWithMessage();
+        }
+
+        @Override
+        public void onMessageChanged(EMMessage message, Object change) {}
+    };
+
+    private void refreshUIWithMessage() {
+        runOnUiThread(new Runnable() {
+            public void run() {
+                // refresh unread count
+                updateUnreadLabel();
+            }
+        });
+    }
+
+
+    private void registerBroadcastReceiver() {
+        broadcastManager = LocalBroadcastManager.getInstance(this);
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(Constant.ACTION_CONTACT_CHANAGED);
+        intentFilter.addAction(Constant.ACTION_GROUP_CHANAGED);
+        broadcastReceiver = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                updateUnreadLabel();
+                //red packet code : 处理红包回执透传消息
+//                if (action.equals(RPConstant.REFRESH_GROUP_RED_PACKET_ACTION)){
+//                    if (conversationListFragment != null){
+//                        conversationListFragment.refresh();
+//                    }
+//                }
+                //end of red packet code
+            }
+        };
+        broadcastManager.registerReceiver(broadcastReceiver, intentFilter);
+    }
+
+    /**
+     * update unread message count
+     */
+    public void updateUnreadLabel() {
+        int count = EMClient.getInstance().chatManager().getUnreadMsgsCount();
+        if (count > 0) {
+            unread_msg_number.setText(String.valueOf(count));
+            unread_msg_number.setVisibility(View.VISIBLE);
+        } else {
+            unread_msg_number.setVisibility(View.INVISIBLE);
+        }
+
+        //刷新消息列表
+        if (currentTabIndex == 2) {
+            // refresh conversation list
+            if (messageFragment != null) {
+                ((MessageFragment) messageFragment).getConversationListFragment().refresh();
+            }
+        }
     }
 
     private void login(final String account, final String password, final String type) {
@@ -429,7 +554,7 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
     }
 
     private int getExceptionMessageId(String exceptionType) {
-        if(exceptionType.equals(Constant.ACCOUNT_CONFLICT)) {
+        if (exceptionType.equals(Constant.ACCOUNT_CONFLICT)) {
             return R.string.connect_conflict;
         } else if (exceptionType.equals(Constant.ACCOUNT_REMOVED)) {
             return R.string.em_user_remove;
@@ -438,12 +563,13 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
         }
         return R.string.Network_error;
     }
+
     /**
      * show the dialog when user met some exception: such as login on another device, user removed or user forbidden
      */
     private void showExceptionDialog(String exceptionType) {
         isExceptionDialogShow = true;
-        EaseHelper.getInstance().logout(false,null);
+        EaseHelper.getInstance().logout(false, null);
         String st = getResources().getString(R.string.Logoff_notification);
         if (!MainActivity.this.isFinishing()) {
             // clear up global variables
@@ -519,7 +645,7 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
             exceptionBuilder = null;
             isExceptionDialogShow = false;
         }
-
+        broadcastManager.unregisterReceiver(broadcastReceiver);
         try {
             this.unregisterReceiver(MyBannerReceiver);
             if (mImmersionBar != null)

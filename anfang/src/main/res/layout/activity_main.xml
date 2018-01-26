@@ -96,13 +96,13 @@
                     android:src="@drawable/home_message_selector" />
 
                 <TextView
-                    android:id="@+id/txtUnReadNum"
-                    android:layout_width="@dimen/dp_15"
-                    android:layout_height="@dimen/dp_15"
+                    android:id="@+id/unread_msg_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/dp_30"
+                    android:layout_marginRight="@dimen/dp_20"
                     android:layout_marginTop="@dimen/dp_4"
-                    android:background="@drawable/bg_circle_dot"
+                    android:background="@drawable/em_unread_dot"
                     android:gravity="center"
                     android:text="38"
                     android:textColor="@color/white"
