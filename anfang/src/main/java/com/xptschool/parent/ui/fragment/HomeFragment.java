@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -103,6 +104,9 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.tipTitle)
     TextView tipTitle;
     List<BeanBanner> advertList = new ArrayList<>();
+
+    @BindView(R.id.llTip)
+    LinearLayout llTip;
 
     //教育培训,快乐成长,理财投资,校园购,生活缴费
     @BindView(R.id.eduGroupView)
@@ -206,7 +210,7 @@ public class HomeFragment extends BaseFragment {
         Log.i(TAG, "HomeFragment initView: ");
         int width = XPTApplication.getInstance().getWindowWidth();
 
-        int height = width * 3 / 5;
+        int height = width * 2 / 5;
         Log.i(TAG, "initView: " + width + "  " + height);
 
         try {
@@ -475,14 +479,33 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void initHomeCfg() {
-        eduGroupView.initEduOnLine(GreenDaoHelper.getInstance().getHomeCfgByType(HomeUtil.ONLINE_VIDEO));
+//        eduGroupView.initEduOnLine(GreenDaoHelper.getInstance().getHomeCfgByType(HomeUtil.ONLINE_VIDEO));
         happyGrowView.bindData(GreenDaoHelper.getInstance().getHomeCfgByType(HomeUtil.CHILDREN_GOODS));
         propertyView.bindData(GreenDaoHelper.getInstance().getHomeCfgByType(HomeUtil.INVEST));
-        shopView.bindData(GreenDaoHelper.getInstance().getHomeCfgByType(HomeUtil.SHOPPING));
+//        shopView.bindData(GreenDaoHelper.getInstance().getHomeCfgByType(HomeUtil.SHOPPING));
         paymentView.bindData(GreenDaoHelper.getInstance().getHomeCfgByType(HomeUtil.LIVING_PAYMENT));
     }
 
     private void initSchoolItem() {
+        //判断角色
+        if (UserType.VISITOR.equals(XPTApplication.getInstance().getCurrent_user_type()) ||
+                XPTApplication.getInstance().getCurrent_user_type() == null) {
+            llTip.setVisibility(View.GONE);
+
+            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) happyGrowView.getLayoutParams();
+            lp.setMargins(0,20,0,0);
+            happyGrowView.setLayoutParams(lp);
+
+            return;
+        } else {
+            llTip.setVisibility(View.VISIBLE);
+
+            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) happyGrowView.getLayoutParams();
+            lp.setMargins(0,0,0,0);
+            happyGrowView.setLayoutParams(lp);
+
+        }
+
         boolean isParent = false;
         if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
             isParent = false;

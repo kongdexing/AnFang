@@ -50,106 +50,115 @@
 
             </RelativeLayout>
 
-            <!--课程,评语,教育头条-->
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp_30"
-                android:layout_marginRight="@dimen/dp_30"
-                android:layout_marginTop="-15dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_home_top"
-                    android:gravity="center"
-                    android:padding="@dimen/dp_5">
-
-                    <com.android.widget.mygridview.MyGridView
-                        android:id="@+id/grd_tip"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:horizontalSpacing="@dimen/dp_1"
-                        android:listSelector="@null"
-                        android:numColumns="3"
-                        android:scrollbars="none"
-                        android:stretchMode="columnWidth"
-                        android:verticalSpacing="@dimen/dp_1" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-
-                    <View
-                        android:layout_width="@dimen/dp_1"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/dp_20"
-                        android:layout_marginTop="@dimen/dp_20"
-                        android:background="@color/colorPrimary" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-
-                    <View
-                        android:layout_width="@dimen/dp_1"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/dp_20"
-                        android:layout_marginTop="@dimen/dp_20"
-                        android:background="@color/colorPrimary" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-
-                </LinearLayout>
-            </FrameLayout>
-
-            <View
-                style="@style/home_horizontal_line"
-                android:layout_marginTop="@dimen/dp_15" />
-
-            <!--校园生活-->
             <LinearLayout
+                android:id="@+id/llTip"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
+                android:visibility="gone"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <!--课程,评语,教育头条-->
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_30"
+                    android:layout_marginRight="@dimen/dp_30"
+                    android:layout_marginTop="-15dp">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/dp_5"
+                        android:background="@drawable/bg_home_top"
                         android:gravity="center"
-                        android:text="@string/home_school"
-                        android:textSize="@dimen/sp_16" />
+                        android:padding="@dimen/dp_5">
 
+                        <com.android.widget.mygridview.MyGridView
+                            android:id="@+id/grd_tip"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:horizontalSpacing="@dimen/dp_1"
+                            android:listSelector="@null"
+                            android:numColumns="3"
+                            android:scrollbars="none"
+                            android:stretchMode="columnWidth"
+                            android:verticalSpacing="@dimen/dp_1" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <View
+                            android:layout_width="@dimen/dp_1"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/dp_20"
+                            android:layout_marginTop="@dimen/dp_20"
+                            android:background="@color/colorPrimary" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <View
+                            android:layout_width="@dimen/dp_1"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/dp_20"
+                            android:layout_marginTop="@dimen/dp_20"
+                            android:background="@color/colorPrimary" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                    </LinearLayout>
+                </FrameLayout>
+
+                <View
+                    style="@style/home_horizontal_line"
+                    android:layout_marginTop="@dimen/dp_15" />
+
+                <!--校园生活-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dp_5"
+                            android:gravity="center"
+                            android:text="@string/home_school"
+                            android:textSize="@dimen/sp_16" />
+
+                    </LinearLayout>
+
+                    <com.android.widget.mygridview.MyGridView
+                        android:id="@+id/grd_school"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_3"
+                        android:background="@color/white"
+                        android:horizontalSpacing="@dimen/dp_1"
+                        android:listSelector="@null"
+                        android:numColumns="4"
+                        android:scrollbars="none"
+                        android:stretchMode="columnWidth"
+                        android:verticalSpacing="@dimen/dp_5" />
                 </LinearLayout>
 
-                <com.android.widget.mygridview.MyGridView
-                    android:id="@+id/grd_school"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_3"
-                    android:background="@color/white"
-                    android:horizontalSpacing="@dimen/dp_1"
-                    android:listSelector="@null"
-                    android:numColumns="4"
-                    android:scrollbars="none"
-                    android:stretchMode="columnWidth"
-                    android:verticalSpacing="@dimen/dp_5" />
             </LinearLayout>
 
             <!--教育培训-->
@@ -157,6 +166,7 @@
                 android:id="@+id/eduGroupView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_marginTop="@dimen/dp_15" />
 
             <!--快乐成长-->
@@ -165,6 +175,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20" />
+
             <!--理财投资-->
             <com.xptschool.parent.ui.fragment.home.HomePropertyView
                 android:id="@+id/propertyView"
