@@ -205,7 +205,7 @@ public class RegisterActivity extends BaseActivity {
                         hideProgress();
                         ToastUtils.showToast(RegisterActivity.this, volleyHttpResult.getInfo());
                         if (volleyHttpResult.getStatus() == HttpAction.SUCCESS) {
-                            startActivity(new Intent(RegisterActivity.this, CheckRoleActivity.class));
+//                            startActivity(new Intent(RegisterActivity.this, CheckRoleActivity.class));
                             finish();
                         }
                     }
