@@ -158,6 +158,7 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
         //login
         String userName = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_NAME, "");
         String password = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_PWD, "");
+        Log.i(TAG, "initData: userName:" + userName + "  pwd:" + password);
 
         if (!userName.isEmpty() && !password.isEmpty()) {
             login(userName, password,
@@ -167,8 +168,9 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
     }
 
     private void setInitialState() {
+        resetNavBar();
         homeBtn.setSelected(true);
-        homeTxt.setTextColor(getResources().getColor(R.color.colorPrimary));
+        homeTxt.setTextColor(getResources().getColor(R.color.text_black));
 
         mFgtTransaction = mFgtManager.beginTransaction();
         mCurrentFgt = fragmentList.get(0);
@@ -289,22 +291,22 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
         switch (view.getId()) {
             case R.id.nav_home:
                 homeBtn.setSelected(true);
-                homeTxt.setTextColor(getResources().getColor(R.color.colorPrimary));
+                homeTxt.setTextColor(getResources().getColor(R.color.text_black));
                 addOrReplaceFgt(0);
                 break;
             case R.id.nav_track:
                 mapBtn.setSelected(true);
-                mapTxt.setTextColor(getResources().getColor(R.color.colorPrimary));
+                mapTxt.setTextColor(getResources().getColor(R.color.text_black));
                 addOrReplaceFgt(1);
                 break;
             case R.id.nav_message:
                 messageBtn.setSelected(true);
-                messageTxt.setTextColor(getResources().getColor(R.color.colorPrimary));
+                messageTxt.setTextColor(getResources().getColor(R.color.text_black));
                 addOrReplaceFgt(2);
                 break;
             case R.id.nav_mine:
                 mineBtn.setSelected(true);
-                mineTxt.setTextColor(getResources().getColor(R.color.colorPrimary));
+                mineTxt.setTextColor(getResources().getColor(R.color.text_black));
                 addOrReplaceFgt(3);
                 break;
         }
@@ -316,10 +318,10 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
         messageBtn.setSelected(false);
         mineBtn.setSelected(false);
 
-        homeTxt.setTextColor(getResources().getColor(R.color.color_black_2));
-        mapTxt.setTextColor(getResources().getColor(R.color.color_black_2));
-        messageTxt.setTextColor(getResources().getColor(R.color.color_black_2));
-        mineTxt.setTextColor(getResources().getColor(R.color.color_black_2));
+        homeTxt.setTextColor(getResources().getColor(R.color.color_black_4));
+        mapTxt.setTextColor(getResources().getColor(R.color.color_black_4));
+        messageTxt.setTextColor(getResources().getColor(R.color.color_black_4));
+        mineTxt.setTextColor(getResources().getColor(R.color.color_black_4));
     }
 
     private void addOrReplaceFgt(int position) {
@@ -380,7 +382,8 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
         }
 
         @Override
-        public void onMessageChanged(EMMessage message, Object change) {}
+        public void onMessageChanged(EMMessage message, Object change) {
+        }
     };
 
     private void refreshUIWithMessage() {

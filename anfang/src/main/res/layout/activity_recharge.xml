@@ -26,7 +26,7 @@
             android:gravity="center"
             android:tag="50"
             android:text="50元"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/txt_recharge_100"
@@ -38,7 +38,7 @@
             android:gravity="center"
             android:tag="100"
             android:text="100元"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/txt_recharge_150"
@@ -51,7 +51,7 @@
             android:gravity="center"
             android:tag="150"
             android:text="150元"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/white" />
 
     </LinearLayout>
 
@@ -71,7 +71,7 @@
             android:gravity="center"
             android:tag="200"
             android:text="200元"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/txt_recharge_300"
@@ -83,7 +83,7 @@
             android:gravity="center"
             android:tag="300"
             android:text="300元"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/txt_recharge_400"
@@ -96,7 +96,7 @@
             android:gravity="center"
             android:tag="400"
             android:text="400元"
-            android:textColor="@color/colorPrimary" />
+            android:textColor="@color/white" />
 
     </LinearLayout>
 

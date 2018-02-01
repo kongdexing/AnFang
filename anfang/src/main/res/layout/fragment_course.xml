@@ -24,6 +24,7 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/llCheckTitle"
             android:layout_centerVertical="true"
+            android:background="@color/bg_window"
             android:layout_marginTop="@dimen/dp_10"
             android:listSelector="@null"
             android:numColumns="8"

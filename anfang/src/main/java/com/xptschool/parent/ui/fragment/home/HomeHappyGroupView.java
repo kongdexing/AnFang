@@ -102,7 +102,7 @@ public class HomeHappyGroupView extends BaseInfoView {
         public View getView(final int position, View convertView, ViewGroup parent) {
             Log.i(TAG, "getView: " + position);
             ImageView propertyImg = new ImageView(mContext);
-            AbsListView.LayoutParams layoutParams = new AbsListView.LayoutParams(LayoutParams.MATCH_PARENT, 180);
+            AbsListView.LayoutParams layoutParams = new AbsListView.LayoutParams(LayoutParams.MATCH_PARENT, 160);
             propertyImg.setLayoutParams(layoutParams);
 
             propertyImg.setScaleType(ImageView.ScaleType.FIT_XY);

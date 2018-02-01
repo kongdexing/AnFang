@@ -42,9 +42,4 @@
         android:textSize="@dimen/sp_10"
         android:visibility="gone" />
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1.0dp"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/line_contacts" />
 </RelativeLayout>

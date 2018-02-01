@@ -30,7 +30,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_45"
                 android:layout_marginTop="@dimen/dp_20"
-                android:background="@drawable/login_edt_bg"
                 android:gravity="center_vertical">
 
                 <ImageView
@@ -71,7 +70,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_45"
                 android:layout_marginTop="@dimen/dp_15"
-                android:background="@drawable/login_edt_bg"
                 android:gravity="center_vertical">
 
                 <ImageView
@@ -211,17 +209,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_40"
                 android:layout_marginTop="@dimen/dp_10"
-                android:background="@drawable/btn_bg"
                 android:gravity="center_vertical">
 
                 <TextView
                     android:id="@+id/btnLogin"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/btn_bg"
                     android:gravity="center"
+                    android:background="@drawable/btn_bg"
                     android:text="登 录"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/sp_16" />
@@ -231,7 +227,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_margin="@dimen/dp_10"
+                    android:layout_margin="@dimen/dp_5"
                     android:visibility="invisible" />
 
             </RelativeLayout>
@@ -248,7 +244,6 @@
                     android:layout_height="wrap_content"
                     android:padding="@dimen/dp_5"
                     android:text="@string/forgetpwd"
-                    android:textColor="@color/colorPrimary"
                     android:visibility="visible" />
 
                 <TextView
@@ -258,7 +253,6 @@
                     android:layout_alignParentRight="true"
                     android:padding="@dimen/dp_5"
                     android:text="@string/register"
-                    android:textColor="@color/colorPrimary"
                     android:visibility="visible" />
 
             </RelativeLayout>

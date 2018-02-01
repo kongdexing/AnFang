@@ -2,7 +2,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:orientation="vertical">
 
     <com.android.widget.pulltorefresh.PullToRefreshScrollView
@@ -20,7 +19,6 @@
                 android:id="@+id/rlTipAD"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/background_light"
                 android:fitsSystemWindows="true"
                 android:visibility="visible">
 
@@ -29,7 +27,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:delay_time="3000"
-                    app:indicator_drawable_selected="@color/colorPrimary"
+                    app:indicator_drawable_selected="@color/text_black"
                     app:indicator_drawable_unselected="@color/transparent_white"
                     app:is_auto_play="true"
                     app:title_background="@color/translucent"
@@ -54,6 +52,7 @@
                 android:id="@+id/llTip"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="-15dp"
                 android:visibility="gone"
                 android:orientation="vertical">
 
@@ -62,8 +61,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_30"
-                    android:layout_marginRight="@dimen/dp_30"
-                    android:layout_marginTop="-15dp">
+                    android:layout_marginRight="@dimen/dp_30">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -80,8 +78,7 @@
                             android:listSelector="@null"
                             android:numColumns="3"
                             android:scrollbars="none"
-                            android:stretchMode="columnWidth"
-                            android:verticalSpacing="@dimen/dp_1" />
+                            android:stretchMode="columnWidth" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -96,9 +93,9 @@
                         <View
                             android:layout_width="@dimen/dp_1"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/dp_20"
-                            android:layout_marginTop="@dimen/dp_20"
-                            android:background="@color/colorPrimary" />
+                            android:layout_marginBottom="@dimen/dp_10"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:background="@color/color_black_4" />
 
                         <View
                             android:layout_width="match_parent"
@@ -108,9 +105,9 @@
                         <View
                             android:layout_width="@dimen/dp_1"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/dp_20"
-                            android:layout_marginTop="@dimen/dp_20"
-                            android:background="@color/colorPrimary" />
+                            android:layout_marginBottom="@dimen/dp_10"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:background="@color/color_black_4" />
 
                         <View
                             android:layout_width="match_parent"
@@ -149,9 +146,8 @@
                         android:id="@+id/grd_school"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_3"
-                        android:background="@color/white"
-                        android:horizontalSpacing="@dimen/dp_1"
+                        android:layout_margin="@dimen/dp_8"
+                        android:horizontalSpacing="@dimen/dp_10"
                         android:listSelector="@null"
                         android:numColumns="4"
                         android:scrollbars="none"
@@ -174,7 +170,7 @@
                 android:id="@+id/happyGrowView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_20" />
+                android:layout_marginTop="@dimen/dp_30" />
 
             <!--理财投资-->
             <com.xptschool.parent.ui.fragment.home.HomePropertyView
@@ -234,7 +230,6 @@
             android:gravity="center"
             android:lines="1"
             android:text="@string/nav_home"
-            android:textColor="@color/white"
             android:textSize="@dimen/sp_18" />
     </android.support.v7.widget.Toolbar>
     <!--<RelativeLayout-->

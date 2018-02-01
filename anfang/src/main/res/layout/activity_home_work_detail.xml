@@ -20,8 +20,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:background="@color/colorWhite"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -46,7 +44,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
-                android:background="@color/colorWhite"
                 android:gravity="center">
 
                 <TextView
@@ -68,8 +65,7 @@
                 android:id="@+id/llTeacher"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:background="@color/colorWhite">
+                android:layout_marginTop="@dimen/dp_10">
 
                 <TextView
                     style="@style/itemText"
@@ -90,8 +86,7 @@
                 android:id="@+id/llCreateTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:background="@color/colorWhite">
+                android:layout_marginTop="@dimen/dp_10">
 
                 <TextView
                     style="@style/itemText"
@@ -111,8 +106,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:background="@color/colorWhite">
+                android:layout_marginTop="@dimen/dp_10">
 
                 <TextView
                     style="@style/itemText"
@@ -132,8 +126,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:background="@color/colorWhite">
+                android:layout_marginTop="@dimen/dp_10">
 
                 <TextView
                     style="@style/itemText"
@@ -154,8 +147,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:background="@color/colorWhite">
+                android:layout_marginTop="@dimen/dp_10">
 
                 <TextView
                     android:id="@+id/txtContent"

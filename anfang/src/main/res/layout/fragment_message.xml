@@ -21,7 +21,6 @@
             android:layout_centerVertical="true"
             android:lines="1"
             android:text="@string/nav_message"
-            android:textColor="@color/white"
             android:textSize="@dimen/sp_18" />
     </RelativeLayout>
 
@@ -121,7 +120,7 @@
                 android:id="@+id/rlTip"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_60"
-                android:background="@color/transparent_gray_map"/>
+                android:background="@color/transparent_gray"/>
 
         </FrameLayout>
         <!--最近聊天记录-->

@@ -23,14 +23,13 @@
                 android:layout_centerVertical="true"
                 android:lines="1"
                 android:text="@string/nav_location"
-                android:textColor="@color/white"
                 android:textSize="@dimen/sp_18" />
         </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_40"
-            android:background="@color/colorWhite">
+            android:background="@color/color_black_1">
 
             <com.android.widget.view.ArrowTextView
                 android:id="@+id/txtSDate"
@@ -75,6 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+
                 android:background="@drawable/mine_item_selector"
                 android:gravity="center"
                 android:visibility="gone"
@@ -87,17 +87,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/mine_item_selector"
                 android:gravity="center">
 
                 <com.android.widget.spinner.MaterialSpinner
                     android:id="@+id/spnStudents"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@drawable/mine_item_selector"
                     app:ms_dropdown_height="wrap_content"
                     app:ms_dropdown_max_height="@dimen/dp_350"
                     app:ms_dropdown_width="match_parent"
                     app:ms_text_color="@color/color_black_2"
+                    app:ms_background_color="@color/bg_window"
                     app:ms_text_size="@dimen/sp_int_14" />
 
             </LinearLayout>

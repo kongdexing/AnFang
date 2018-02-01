@@ -64,20 +64,21 @@
     <style name="home_horizontal_line">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/dp_3</item>
+        <item name="android:visibility">gone</item>
         <item name="android:background">@color/color_home_line</item>
     </style>
 
     <style name="mineText">
         <item name="android:textColor">@color/color_black_1</item>
         <item name="android:textSize">@dimen/sp_16</item>
-        <item name="android:layout_margin">@dimen/dp_10</item>
+        <item name="android:layout_margin">@dimen/dp_5</item>
         <item name="android:layout_gravity">center</item>
     </style>
 
     <style name="itemText">
         <item name="android:textColor">@color/color_black_1</item>
         <item name="android:textSize">@dimen/sp_14</item>
-        <item name="android:layout_margin">@dimen/dp_10</item>
+        <item name="android:layout_margin">@dimen/dp_5</item>
         <item name="android:layout_gravity">center</item>
     </style>
 
@@ -123,7 +124,7 @@
         <item name="android:layout_height">@dimen/dp_15</item>
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:layout_centerVertical">true</item>
-        <item name="android:layout_marginRight">@dimen/dp_8</item>
+        <item name="android:layout_marginRight">@dimen/dp_5</item>
         <item name="android:src">@drawable/iau</item>
     </style>
 
@@ -203,5 +204,14 @@
     </style>
 
     <style name="AppWebTheme" parent="Theme.AppCompat.Light.DarkActionBar"></style>
+
+    <style name="line1">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.2dp</item>
+        <item name="android:layout_marginLeft">@dimen/dp_5</item>
+        <item name="android:layout_marginRight">@dimen/dp_5</item>
+        <item name="android:background">@color/color_black_3</item>
+        <item name="android:layout_alignParentBottom">true</item>
+    </style>
 
 </resources>

@@ -18,8 +18,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:background="@color/colorWhite">
+                android:layout_marginTop="@dimen/dp_10">
 
                 <TextView
                     style="@style/mineText"
@@ -51,8 +50,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
-                android:background="@color/colorWhite">
+                android:layout_marginTop="@dimen/dp_1">
 
                 <TextView
                     style="@style/mineText"
@@ -77,8 +75,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
-                android:background="@color/colorWhite">
+                android:layout_marginTop="@dimen/dp_1">
 
                 <TextView
                     style="@style/mineText"
@@ -104,7 +101,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_1"
-                android:background="@color/colorWhite"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -132,8 +128,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
-                android:background="@color/colorWhite">
+                android:layout_marginTop="@dimen/dp_1">
 
                 <TextView
                     style="@style/mineText"
@@ -158,8 +153,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
-                android:background="@color/colorWhite">
+                android:layout_marginTop="@dimen/dp_1">
 
                 <TextView
                     style="@style/mineText"
@@ -228,8 +222,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
-                android:background="@color/colorWhite">
+                android:layout_marginTop="@dimen/dp_1">
 
                 <TextView
                     style="@style/mineText"
@@ -255,8 +248,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
-                android:background="@color/colorWhite">
+                android:layout_marginTop="@dimen/dp_1">
 
                 <TextView
                     style="@style/mineText"
@@ -281,8 +273,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
-                android:background="@color/colorWhite">
+                android:layout_marginTop="@dimen/dp_1">
 
                 <TextView
                     style="@style/mineText"
@@ -307,8 +298,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
-                android:background="@color/colorWhite">
+                android:layout_marginTop="@dimen/dp_1">
 
                 <TextView
                     style="@style/mineText"

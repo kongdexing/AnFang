@@ -81,6 +81,7 @@
             android:background="@drawable/btn_bg_normal"
             android:gravity="center"
             android:text="@string/btn_confirm"
+            android:textColor="@color/white"
             android:textSize="14sp" />
     </RelativeLayout>
 

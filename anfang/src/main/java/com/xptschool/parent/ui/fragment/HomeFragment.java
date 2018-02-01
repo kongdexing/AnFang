@@ -210,7 +210,7 @@ public class HomeFragment extends BaseFragment {
         Log.i(TAG, "HomeFragment initView: ");
         int width = XPTApplication.getInstance().getWindowWidth();
 
-        int height = width * 2 / 5;
+        int height = width * 3 / 5;
         Log.i(TAG, "initView: " + width + "  " + height);
 
         try {
@@ -493,7 +493,7 @@ public class HomeFragment extends BaseFragment {
             llTip.setVisibility(View.GONE);
 
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) happyGrowView.getLayoutParams();
-            lp.setMargins(0,20,0,0);
+            lp.setMargins(0,0,0,0);
             happyGrowView.setLayoutParams(lp);
 
             return;
@@ -501,7 +501,7 @@ public class HomeFragment extends BaseFragment {
             llTip.setVisibility(View.VISIBLE);
 
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) happyGrowView.getLayoutParams();
-            lp.setMargins(0,0,0,0);
+            lp.setMargins(0,20,0,0);
             happyGrowView.setLayoutParams(lp);
 
         }

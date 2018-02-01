@@ -21,7 +21,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
-                android:background="@color/colorWhite"
                 android:orientation="horizontal">
 
                 <TextView
@@ -45,7 +44,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
-                android:background="@color/colorWhite"
                 android:gravity="center">
 
                 <TextView
@@ -68,7 +66,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
-                android:background="@color/colorWhite"
                 android:visibility="gone">
 
                 <TextView
@@ -89,8 +86,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:background="@color/colorWhite">
+                android:layout_marginTop="@dimen/dp_10">
 
                 <TextView
                     style="@style/mineText"
@@ -110,8 +106,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:background="@color/colorWhite">
+                android:layout_marginTop="@dimen/dp_10">
 
                 <TextView
                     style="@style/mineText"
@@ -132,8 +127,7 @@
                 android:id="@+id/llCreateTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:background="@color/colorWhite">
+                android:layout_marginTop="@dimen/dp_10">
 
                 <TextView
                     style="@style/mineText"
@@ -153,8 +147,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:background="@color/colorWhite">
+                android:layout_marginTop="@dimen/dp_10">
 
                 <TextView
                     style="@style/mineText"
@@ -174,8 +167,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:background="@color/colorWhite">
+                android:layout_marginTop="@dimen/dp_10">
 
                 <TextView
                     android:id="@+id/txtContent"
@@ -202,8 +194,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:background="@color/colorWhite">
+                android:layout_marginTop="@dimen/dp_10">
 
                 <TextView
                     android:id="@+id/txtReply"

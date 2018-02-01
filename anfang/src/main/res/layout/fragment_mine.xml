@@ -28,7 +28,6 @@
                     android:layout_centerVertical="true"
                     android:lines="1"
                     android:text="@string/nav_mine"
-                    android:textColor="@color/white"
                     android:textSize="@dimen/sp_18" />
 
 
@@ -62,11 +61,10 @@
                         android:id="@+id/txtToLogin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_5"
+                        android:layout_marginTop="@dimen/dp_8"
                         android:background="@drawable/bg_mine_info"
-                        android:padding="@dimen/dp_2"
+                        android:padding="@dimen/dp_4"
                         android:text="@string/mine_unlogin"
-                        android:textColor="@color/colorWhite"
                         android:textSize="@dimen/sp_14" />
 
                 </LinearLayout>
@@ -103,7 +101,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:text=""
-                        android:textColor="@color/colorWhite"
                         android:textSize="@dimen/sp_14" />
 
                     <TextView
@@ -112,13 +109,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_5"
                         android:text=""
-                        android:textColor="@color/colorWhite"
                         android:textSize="@dimen/sp_14" />
 
                 </LinearLayout>
 
-                <ImageView style="@style/arrow_right" />
-
+                <ImageView
+                    style="@style/arrow_right"
+                    android:layout_marginRight="@dimen/dp_10" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -127,7 +124,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20"
                 android:background="@drawable/mine_item_selector"
-                android:clickable="true">
+                android:clickable="true"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingTop="@dimen/dp_5">
 
                 <TextView
                     style="@style/mineText"
@@ -136,6 +135,8 @@
                     android:text="@string/mine_class" />
 
                 <ImageView style="@style/arrow_right" />
+
+                <View style="@style/line1" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -144,7 +145,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_1"
                 android:background="@drawable/mine_item_selector"
-                android:clickable="true">
+                android:clickable="true"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingTop="@dimen/dp_5">
 
                 <TextView
                     style="@style/mineText"
@@ -153,6 +156,8 @@
                     android:text="@string/mine_child" />
 
                 <ImageView style="@style/arrow_right" />
+
+                <View style="@style/line1" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -160,8 +165,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_1"
-                android:background="@drawable/mine_item_selector"
                 android:clickable="true"
+                android:padding="@dimen/dp_5"
                 android:visibility="gone">
 
                 <TextView
@@ -172,6 +177,8 @@
 
                 <ImageView style="@style/arrow_right" />
 
+                <View style="@style/line1" />
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -180,8 +187,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
                 android:background="@drawable/mine_item_selector"
-                android:visibility="gone"
-                android:clickable="true">
+                android:clickable="true"
+                android:padding="@dimen/dp_5"
+                android:visibility="gone">
 
                 <TextView
                     style="@style/mineText"
@@ -190,6 +198,8 @@
                     android:text="@string/mine_bill" />
 
                 <ImageView style="@style/arrow_right" />
+
+                <View style="@style/line1" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -198,7 +208,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_1"
                 android:background="@drawable/mine_item_selector"
-                android:clickable="true">
+                android:clickable="true"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingTop="@dimen/dp_5">
 
                 <TextView
                     android:id="@+id/txtContact"
@@ -208,6 +220,8 @@
                     android:text="@string/mine_property" />
 
                 <ImageView style="@style/arrow_right" />
+
+                <View style="@style/line1" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -216,7 +230,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_5"
                 android:background="@drawable/mine_item_selector"
-                android:clickable="true">
+                android:clickable="true"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingTop="@dimen/dp_5">
 
                 <TextView
                     style="@style/mineText"
@@ -226,6 +242,7 @@
 
                 <ImageView style="@style/arrow_right" />
 
+                <View style="@style/line1" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -234,7 +251,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_1"
                 android:background="@drawable/mine_item_selector"
-                android:clickable="true">
+                android:clickable="true"
+                android:paddingLeft="@dimen/dp_5"
+                android:paddingTop="@dimen/dp_5">
 
                 <TextView
                     style="@style/mineText"
@@ -243,7 +262,10 @@
                     android:text="@string/mine_qr_code" />
 
                 <ImageView style="@style/arrow_right" />
+
+                <View style="@style/line1" />
             </RelativeLayout>
+
 
         </LinearLayout>
     </ScrollView>
