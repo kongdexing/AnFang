@@ -9,8 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_40"
-        android:background="@color/colorWhite">
+        android:layout_height="@dimen/dp_40">
 
         <com.android.widget.view.ArrowTextView
             android:id="@+id/txtDate"

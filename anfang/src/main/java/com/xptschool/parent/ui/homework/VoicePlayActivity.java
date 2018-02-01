@@ -72,13 +72,13 @@ public class VoicePlayActivity extends BaseActivity implements VoicePlayListener
         if (voiceBar == null) {
             return;
         }
-        voiceBar.setProgressBackgroundColor(this.getResources().getColor(R.color.colorPrimaryDark));
+        voiceBar.setProgressBackgroundColor(this.getResources().getColor(R.color.color_black_1));
         voiceBar.setMax(maxProgress);
         voiceBar.setPadding(3);
         voiceBar.setSecondaryProgressColor(this.getResources().getColor(R.color.color_rcBackgroundColor));
         voiceBar.setSecondaryProgress(voiceBar.getMax());
         voiceBar.setProgress(progress);
-        voiceBar.setProgressColor(this.getResources().getColor(R.color.colorPrimaryDark));
+        voiceBar.setProgressColor(this.getResources().getColor(R.color.color_black_1));
     }
 
     private void setImgMicStatus(int status) {

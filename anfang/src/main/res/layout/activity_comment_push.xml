@@ -20,7 +20,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
-                android:background="@color/colorWhite"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -48,7 +47,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_6"
-                android:background="@color/colorWhite"
                 android:gravity="center">
 
                 <TextView
@@ -71,7 +69,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
-                android:background="@color/colorWhite"
                 android:visibility="gone">
 
                 <TextView
@@ -93,8 +90,7 @@
                 android:id="@+id/llCreateTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_6"
-                android:background="@color/colorWhite">
+                android:layout_marginTop="@dimen/dp_6">
 
                 <TextView
                     style="@style/mineText"
@@ -117,8 +113,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_6"
-                android:background="@color/colorWhite">
+                android:layout_marginTop="@dimen/dp_6">
 
                 <TextView
                     android:id="@+id/txtContent"
@@ -156,7 +151,6 @@
                 android:background="@drawable/btn_bg_normal"
                 android:padding="@dimen/dp_5"
                 android:text="@string/push"
-                android:textColor="@color/colorWhite"
                 android:textSize="@dimen/sp_18" />
 
             <Button
@@ -170,7 +164,6 @@
                 android:background="@drawable/btn_delete_bg"
                 android:padding="@dimen/dp_5"
                 android:text="@string/btn_delete"
-                android:textColor="@color/colorWhite"
                 android:textSize="@dimen/sp_18"
                 android:visibility="gone" />
 

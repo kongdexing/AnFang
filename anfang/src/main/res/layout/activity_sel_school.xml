@@ -18,8 +18,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_20"
-                android:background="@color/colorWhite">
+                android:layout_marginTop="@dimen/dp_20">
 
                 <TextView
                     style="@style/mineText"
@@ -52,7 +51,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_6"
-                    android:background="@color/colorWhite"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -81,7 +79,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_6"
-                    android:background="@color/colorWhite"
                     android:gravity="center">
 
                     <TextView
@@ -127,8 +124,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorWhite">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         style="@style/mineText"
@@ -155,14 +151,12 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_6"
-                    android:background="@color/colorWhite">
+                    android:layout_marginTop="@dimen/dp_6">
 
                     <TextView
                         style="@style/mineText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/colorWhite"
                         android:text="@string/label_campus_name" />
 
                     <EditText
@@ -200,7 +194,6 @@
                     android:background="@drawable/btn_bg"
                     android:gravity="center"
                     android:text="@string/btn_binding"
-                    android:textColor="@color/colorWhite"
                     android:textSize="@dimen/sp_16" />
 
             </RelativeLayout>

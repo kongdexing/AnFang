@@ -20,7 +20,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
-                android:background="@color/colorWhite"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -48,7 +47,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_6"
-                android:background="@color/colorWhite"
                 android:gravity="center">
 
                 <TextView
@@ -71,7 +69,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
-                android:background="@color/colorWhite"
                 android:visibility="gone">
 
                 <TextView
@@ -92,8 +89,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_6"
-                android:background="@color/colorWhite">
+                android:layout_marginTop="@dimen/dp_6">
 
                 <TextView
                     style="@style/mineText"
@@ -116,8 +112,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_6"
-                android:background="@color/colorWhite">
+                android:layout_marginTop="@dimen/dp_6">
 
                 <TextView
                     android:id="@+id/txtContent"
@@ -138,7 +133,7 @@
                     android:hint="@string/hint_honor_content"
                     android:maxLength="500"
                     android:minLines="5"
-                    android:paddingTop="@dimen/dp_10"
+                    android:paddingTop="@dimen/dp_5"
                     android:text=""
                     android:textColor="@color/text_black_2"
                     android:textColorHint="@color/text_grey"

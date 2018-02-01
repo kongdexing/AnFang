@@ -141,13 +141,13 @@ public class VoiceRecordActivity extends AlbumTeacherActivity implements VoiceLi
 
     public void initProgress(int progress) {
         Log.i(TAG, "initProgress: max " + maxLength + " progress:" + progress);
-        voiceBar.setProgressBackgroundColor(this.getResources().getColor(R.color.colorPrimaryDark));
+        voiceBar.setProgressBackgroundColor(this.getResources().getColor(R.color.color_black_1));
         voiceBar.setMax(maxLength);
         voiceBar.setPadding(3);
         voiceBar.setSecondaryProgressColor(this.getResources().getColor(R.color.color_rcBackgroundColor));
         voiceBar.setSecondaryProgress(voiceBar.getMax());
         voiceBar.setProgress(progress);
-        voiceBar.setProgressColor(this.getResources().getColor(R.color.colorPrimaryDark));
+        voiceBar.setProgressColor(this.getResources().getColor(R.color.color_black_1));
     }
 
     private Handler mHandler = new Handler() {
