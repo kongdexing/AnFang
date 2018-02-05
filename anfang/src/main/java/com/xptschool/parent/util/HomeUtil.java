@@ -11,5 +11,7 @@ public class HomeUtil {
     public static String INVEST = "invest";
     public static String LIVING_PAYMENT = "living_payment";
     public static String SHOPPING = "shopping";
+    public static String EDU_NEWS = "edu_news";
+
 
 }

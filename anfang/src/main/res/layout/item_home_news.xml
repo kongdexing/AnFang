@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="新闻资讯"
+            android:text=""
             android:textSize="@dimen/sp_16" />
 
         <TextView
@@ -35,13 +35,15 @@
 
     </RelativeLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager_news"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipChildren="false"
+    <com.android.widget.mygridview.MyGridView
+        android:id="@+id/grd_news"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:horizontalSpacing="@dimen/dp_1"
+        android:listSelector="@drawable/line_contacts"
         android:numColumns="1"
-        android:paddingLeft="@dimen/dp_2"
-        android:paddingRight="@dimen/dp_2" />
+        android:scrollbars="none"
+        android:stretchMode="columnWidth" />
 
 </LinearLayout>

@@ -58,7 +58,6 @@ import com.xptschool.parent.ui.fence.FenceListActivity;
 import com.xptschool.parent.ui.fragment.home.HomeEduGroupView;
 import com.xptschool.parent.ui.fragment.home.HomeEduView;
 import com.xptschool.parent.ui.fragment.home.HomeHappyGroupView;
-import com.xptschool.parent.ui.fragment.home.HomeHappyGrowView;
 import com.xptschool.parent.ui.fragment.home.HomeNewsView;
 import com.xptschool.parent.ui.fragment.home.HomePayMentView;
 import com.xptschool.parent.ui.fragment.home.HomePropertyView;
@@ -429,6 +428,7 @@ public class HomeFragment extends BaseFragment {
                                     GreenDaoHelper.getInstance().insertHomeCfg(onlines, HomeUtil.ONLINE_VIDEO);
                                     eduGroupView.initEduOnLine(onlines);
 
+                                    //快乐成长
                                     List<BeanHomeCfg> children_goods = gson.fromJson(jsonData.getJSONArray(HomeUtil.CHILDREN_GOODS).toString(),
                                             new TypeToken<List<BeanHomeCfg>>() {
                                             }.getType());
@@ -438,6 +438,7 @@ public class HomeFragment extends BaseFragment {
                                     GreenDaoHelper.getInstance().insertHomeCfg(children_goods, HomeUtil.CHILDREN_GOODS);
                                     happyGrowView.bindData(children_goods);
 
+                                    //投资理财
                                     List<BeanHomeCfg> invests = gson.fromJson(jsonData.getJSONArray(HomeUtil.INVEST).toString(),
                                             new TypeToken<List<BeanHomeCfg>>() {
                                             }.getType());
@@ -447,15 +448,25 @@ public class HomeFragment extends BaseFragment {
                                     GreenDaoHelper.getInstance().insertHomeCfg(invests, HomeUtil.INVEST);
                                     propertyView.bindData(invests);
 
-                                    //校园购
-                                    List<BeanHomeCfg> shops = gson.fromJson(jsonData.getJSONArray(HomeUtil.SHOPPING).toString(),
+                                    //教育新闻
+                                    List<BeanHomeCfg> edu_news = gson.fromJson(jsonData.getJSONArray(HomeUtil.EDU_NEWS).toString(),
                                             new TypeToken<List<BeanHomeCfg>>() {
                                             }.getType());
-                                    for (int i = 0; i < shops.size(); i++) {
-                                        shops.get(i).setType(HomeUtil.SHOPPING);
+                                    for (int i = 0; i < edu_news.size(); i++) {
+                                        edu_news.get(i).setType(HomeUtil.EDU_NEWS);
                                     }
-                                    GreenDaoHelper.getInstance().insertHomeCfg(shops, HomeUtil.SHOPPING);
-                                    shopView.bindData(shops);
+                                    GreenDaoHelper.getInstance().insertHomeCfg(edu_news, HomeUtil.EDU_NEWS);
+                                    newsView.bindData(edu_news);
+
+                                    //校园购
+//                                    List<BeanHomeCfg> shops = gson.fromJson(jsonData.getJSONArray(HomeUtil.SHOPPING).toString(),
+//                                            new TypeToken<List<BeanHomeCfg>>() {
+//                                            }.getType());
+//                                    for (int i = 0; i < shops.size(); i++) {
+//                                        shops.get(i).setType(HomeUtil.SHOPPING);
+//                                    }
+//                                    GreenDaoHelper.getInstance().insertHomeCfg(shops, HomeUtil.SHOPPING);
+//                                    shopView.bindData(shops);
 
                                     //生活缴费
                                     List<BeanHomeCfg> payments = gson.fromJson(jsonData.getJSONArray(HomeUtil.LIVING_PAYMENT).toString(),

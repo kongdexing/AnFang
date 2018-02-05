@@ -5,13 +5,22 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.widget.mygridview.MyGridView;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
+import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.model.BeanHomeCfg;
 import com.xptschool.parent.ui.fragment.HomePagerAdapter;
@@ -39,8 +48,8 @@ public class HomeNewsView extends BaseInfoView {
     @BindView(R.id.txtMore)
     TextView txtMore;
 
-    @BindView(R.id.pager_news)
-    ViewPager pager_news;
+    @BindView(R.id.grd_news)
+    MyGridView grd_news;
 
     public HomeNewsView(Context context) {
         super(context);
@@ -67,27 +76,54 @@ public class HomeNewsView extends BaseInfoView {
 
             txtGroupName.setText(homeCfgs.get(0).getProduct_name());
 
-            int width = XPTApplication.getInstance().getWindowWidth() / 3;
-            int height = width * 4 / 3;
+            MyNewsAdapter itemAdapter = new MyNewsAdapter(mContext);
+            grd_news.setAdapter(itemAdapter);
 
-//            LayoutParams layoutParams = (LayoutParams) pager_news.getLayoutParams();
-//            layoutParams.height = height;
-//            pager_news.setLayoutParams(layoutParams);
-//
-//            pager_news.setOffscreenPageLimit(3);
-//            pager_news.setPageMargin(5);
-//
-//            List<View> eduViews = new ArrayList<>();
-//            for (int i = 0; i < homeCfgs.size(); i++) {
-//                HomeShopItemView itemView = new HomeShopItemView(mContext);
-//                itemView.bindData(homeCfgs.get(i));
-//                eduViews.add(itemView);
-//            }
-//
-//            HomePagerAdapter adapter = new HomePagerAdapter(eduViews);
-//            pager_news.setAdapter(adapter);
+            itemAdapter.reloadData(homeCfgs);
+
         } else {
             llHomeNews.setVisibility(GONE);
+        }
+    }
+
+
+    class MyNewsAdapter extends BaseAdapter {
+
+        private Context mContext;
+        public List<BeanHomeCfg> homeItems = new ArrayList<>();
+
+        public MyNewsAdapter(Context mContext) {
+            super();
+            this.mContext = mContext;
+        }
+
+        public void reloadData(List<BeanHomeCfg> items) {
+            this.homeItems = items;
+            notifyDataSetChanged();
+        }
+
+        @Override
+        public int getCount() {
+            return homeItems.size();
+        }
+
+        @Override
+        public BeanHomeCfg getItem(int position) {
+            return homeItems.size() > position ? homeItems.get(position) : null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            Log.i(TAG, "getView: " + position);
+            final BeanHomeCfg homeCfg = getItem(position);
+            HomeNewsItemView itemView = new HomeNewsItemView(mContext);
+            itemView.bindData(homeCfg);
+            return itemView;
         }
     }
 

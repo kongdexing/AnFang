@@ -23,18 +23,21 @@ public class BeanHomeCfg {
     private String title;
     private String product_name;
     private String image;
+    //来源
+    private String source;
     private String url;
     private String mark;
     private String type;
     private String price;
 
-    @Generated(hash = 1277836386)
+    @Generated(hash = 1341329873)
     public BeanHomeCfg(String id, String title, String product_name, String image,
-            String url, String mark, String type, String price) {
+            String source, String url, String mark, String type, String price) {
         this.id = id;
         this.title = title;
         this.product_name = product_name;
         this.image = image;
+        this.source = source;
         this.url = url;
         this.mark = mark;
         this.type = type;
@@ -72,6 +75,14 @@ public class BeanHomeCfg {
             }
         }
         return image;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 
     public void setImage(String image) {

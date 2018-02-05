@@ -26,10 +26,11 @@ public class BeanHomeCfgDao extends AbstractDao<BeanHomeCfg, String> {
         public final static Property Title = new Property(1, String.class, "title", false, "TITLE");
         public final static Property Product_name = new Property(2, String.class, "product_name", false, "PRODUCT_NAME");
         public final static Property Image = new Property(3, String.class, "image", false, "IMAGE");
-        public final static Property Url = new Property(4, String.class, "url", false, "URL");
-        public final static Property Mark = new Property(5, String.class, "mark", false, "MARK");
-        public final static Property Type = new Property(6, String.class, "type", false, "TYPE");
-        public final static Property Price = new Property(7, String.class, "price", false, "PRICE");
+        public final static Property Source = new Property(4, String.class, "source", false, "SOURCE");
+        public final static Property Url = new Property(5, String.class, "url", false, "URL");
+        public final static Property Mark = new Property(6, String.class, "mark", false, "MARK");
+        public final static Property Type = new Property(7, String.class, "type", false, "TYPE");
+        public final static Property Price = new Property(8, String.class, "price", false, "PRICE");
     };
 
 
@@ -49,10 +50,11 @@ public class BeanHomeCfgDao extends AbstractDao<BeanHomeCfg, String> {
                 "\"TITLE\" TEXT," + // 1: title
                 "\"PRODUCT_NAME\" TEXT," + // 2: product_name
                 "\"IMAGE\" TEXT," + // 3: image
-                "\"URL\" TEXT," + // 4: url
-                "\"MARK\" TEXT," + // 5: mark
-                "\"TYPE\" TEXT," + // 6: type
-                "\"PRICE\" TEXT);"); // 7: price
+                "\"SOURCE\" TEXT," + // 4: source
+                "\"URL\" TEXT," + // 5: url
+                "\"MARK\" TEXT," + // 6: mark
+                "\"TYPE\" TEXT," + // 7: type
+                "\"PRICE\" TEXT);"); // 8: price
     }
 
     /** Drops the underlying database table. */
@@ -85,24 +87,29 @@ public class BeanHomeCfgDao extends AbstractDao<BeanHomeCfg, String> {
             stmt.bindString(4, image);
         }
  
+        String source = entity.getSource();
+        if (source != null) {
+            stmt.bindString(5, source);
+        }
+ 
         String url = entity.getUrl();
         if (url != null) {
-            stmt.bindString(5, url);
+            stmt.bindString(6, url);
         }
  
         String mark = entity.getMark();
         if (mark != null) {
-            stmt.bindString(6, mark);
+            stmt.bindString(7, mark);
         }
  
         String type = entity.getType();
         if (type != null) {
-            stmt.bindString(7, type);
+            stmt.bindString(8, type);
         }
  
         String price = entity.getPrice();
         if (price != null) {
-            stmt.bindString(8, price);
+            stmt.bindString(9, price);
         }
     }
 
@@ -130,24 +137,29 @@ public class BeanHomeCfgDao extends AbstractDao<BeanHomeCfg, String> {
             stmt.bindString(4, image);
         }
  
+        String source = entity.getSource();
+        if (source != null) {
+            stmt.bindString(5, source);
+        }
+ 
         String url = entity.getUrl();
         if (url != null) {
-            stmt.bindString(5, url);
+            stmt.bindString(6, url);
         }
  
         String mark = entity.getMark();
         if (mark != null) {
-            stmt.bindString(6, mark);
+            stmt.bindString(7, mark);
         }
  
         String type = entity.getType();
         if (type != null) {
-            stmt.bindString(7, type);
+            stmt.bindString(8, type);
         }
  
         String price = entity.getPrice();
         if (price != null) {
-            stmt.bindString(8, price);
+            stmt.bindString(9, price);
         }
     }
 
@@ -163,10 +175,11 @@ public class BeanHomeCfgDao extends AbstractDao<BeanHomeCfg, String> {
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // title
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // product_name
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // image
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // url
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // mark
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // type
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7) // price
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // source
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // url
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // mark
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // type
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8) // price
         );
         return entity;
     }
@@ -177,10 +190,11 @@ public class BeanHomeCfgDao extends AbstractDao<BeanHomeCfg, String> {
         entity.setTitle(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setProduct_name(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setImage(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setUrl(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setMark(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setType(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setPrice(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setSource(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setUrl(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setMark(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setType(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setPrice(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
      }
     
     @Override
