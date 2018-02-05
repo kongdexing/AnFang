@@ -59,6 +59,7 @@ import com.xptschool.parent.ui.fragment.home.HomeEduGroupView;
 import com.xptschool.parent.ui.fragment.home.HomeEduView;
 import com.xptschool.parent.ui.fragment.home.HomeHappyGroupView;
 import com.xptschool.parent.ui.fragment.home.HomeHappyGrowView;
+import com.xptschool.parent.ui.fragment.home.HomeNewsView;
 import com.xptschool.parent.ui.fragment.home.HomePayMentView;
 import com.xptschool.parent.ui.fragment.home.HomePropertyView;
 import com.xptschool.parent.ui.fragment.home.HomeShopView;
@@ -111,12 +112,19 @@ public class HomeFragment extends BaseFragment {
     //教育培训,快乐成长,理财投资,校园购,生活缴费
     @BindView(R.id.eduGroupView)
     HomeEduGroupView eduGroupView;
+
     @BindView(R.id.happyGrowView)
     HomeHappyGroupView happyGrowView;
+
     @BindView(R.id.propertyView)
     HomePropertyView propertyView;
+
     @BindView(R.id.shopView)
     HomeShopView shopView;
+
+    @BindView(R.id.newsView)
+    HomeNewsView newsView;
+
     @BindView(R.id.paymentView)
     HomePayMentView paymentView;
 
@@ -479,7 +487,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void initHomeCfg() {
-//        eduGroupView.initEduOnLine(GreenDaoHelper.getInstance().getHomeCfgByType(HomeUtil.ONLINE_VIDEO));
+        eduGroupView.initEduOnLine(GreenDaoHelper.getInstance().getHomeCfgByType(HomeUtil.ONLINE_VIDEO));
         happyGrowView.bindData(GreenDaoHelper.getInstance().getHomeCfgByType(HomeUtil.CHILDREN_GOODS));
         propertyView.bindData(GreenDaoHelper.getInstance().getHomeCfgByType(HomeUtil.INVEST));
 //        shopView.bindData(GreenDaoHelper.getInstance().getHomeCfgByType(HomeUtil.SHOPPING));
@@ -501,7 +509,7 @@ public class HomeFragment extends BaseFragment {
             llTip.setVisibility(View.VISIBLE);
 
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) happyGrowView.getLayoutParams();
-            lp.setMargins(0,20,0,0);
+            lp.setMargins(0,10,0,0);
             happyGrowView.setLayoutParams(lp);
 
         }

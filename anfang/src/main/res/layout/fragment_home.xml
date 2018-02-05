@@ -161,37 +161,38 @@
             <com.xptschool.parent.ui.fragment.home.HomeEduGroupView
                 android:id="@+id/eduGroupView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:layout_marginTop="@dimen/dp_15" />
+                android:layout_height="wrap_content" />
 
             <!--快乐成长-->
             <com.xptschool.parent.ui.fragment.home.HomeHappyGroupView
                 android:id="@+id/happyGrowView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_30" />
+                android:layout_height="wrap_content" />
 
             <!--理财投资-->
             <com.xptschool.parent.ui.fragment.home.HomePropertyView
                 android:id="@+id/propertyView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_15" />
+                android:layout_height="wrap_content" />
 
             <!--校园购-->
             <com.xptschool.parent.ui.fragment.home.HomeShopView
                 android:id="@+id/shopView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:layout_marginTop="@dimen/dp_15" />
+                android:visibility="gone" />
+
+            <!--新闻资讯-->
+            <com.xptschool.parent.ui.fragment.home.HomeNewsView
+                android:id="@+id/newsView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <!--生活缴费-->
             <com.xptschool.parent.ui.fragment.home.HomePayMentView
                 android:id="@+id/paymentView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_15" />
+                android:layout_height="wrap_content" />
 
             <LinearLayout
                 android:layout_width="match_parent"
