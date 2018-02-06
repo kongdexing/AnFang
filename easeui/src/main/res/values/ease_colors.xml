@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="bg_window">#222331</color>
+    <color name="color_black_1">#CFB268</color>
+    <color name="color_black_2">#CFB268</color>
+    <color name="color_black_3">#C6AC9D</color>
+    <color name="color_black_4">#666666</color>
+
+
     <color name="common_top_bar_blue">#4ebcd3</color>
     <color name="btn_login_normal">#00acff</color>
     <color name="btn_login_pressed">#46678d</color>

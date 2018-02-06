@@ -97,7 +97,8 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
             holder.motioned = (TextView) convertView.findViewById(R.id.mentioned);
             convertView.setTag(holder);
         }
-        holder.list_itease_layout.setBackgroundResource(R.drawable.ease_mm_listitem);
+//        holder.list_itease_layout.setBackgroundResource(R.drawable.ease_mm_listitem);
+        holder.list_itease_layout.setBackgroundResource(R.drawable.mine_item_selector);
 
         // get conversation
         EMConversation conversation = getItem(position);
@@ -168,9 +169,9 @@ public class EaseConversationAdapter extends ArrayAdapter<EMConversation> {
         }
 
         //set property
-        holder.name.setTextColor(primaryColor);
-        holder.message.setTextColor(secondaryColor);
-        holder.time.setTextColor(timeColor);
+//        holder.name.setTextColor(primaryColor);
+//        holder.message.setTextColor(secondaryColor);
+//        holder.time.setTextColor(timeColor);
         if (primarySize != 0)
             holder.name.setTextSize(TypedValue.COMPLEX_UNIT_PX, primarySize);
         if (secondarySize != 0)
