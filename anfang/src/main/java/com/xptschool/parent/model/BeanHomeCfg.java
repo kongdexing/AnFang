@@ -18,7 +18,6 @@ import java.util.List;
 @Entity
 public class BeanHomeCfg {
 
-    @Id
     private String id;
     private String title;
     private String product_name;
@@ -32,7 +31,7 @@ public class BeanHomeCfg {
 
     @Generated(hash = 1341329873)
     public BeanHomeCfg(String id, String title, String product_name, String image,
-            String source, String url, String mark, String type, String price) {
+                       String source, String url, String mark, String type, String price) {
         this.id = id;
         this.title = title;
         this.product_name = product_name;
@@ -65,6 +64,10 @@ public class BeanHomeCfg {
     }
 
     public String getImage() {
+        if (image == null || image.isEmpty()) {
+            return "";
+        }
+
         if (HomeUtil.SHOPPING.equals(type)) {
             if (!image.startsWith("http:")) {
                 image = "http:" + image;

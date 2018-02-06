@@ -13,7 +13,7 @@ import org.greenrobot.greendao.database.DatabaseStatement;
 /** 
  * DAO for table "BEAN_HOME_CFG".
 */
-public class BeanHomeCfgDao extends AbstractDao<BeanHomeCfg, String> {
+public class BeanHomeCfgDao extends AbstractDao<BeanHomeCfg, Void> {
 
     public static final String TABLENAME = "BEAN_HOME_CFG";
 
@@ -22,7 +22,7 @@ public class BeanHomeCfgDao extends AbstractDao<BeanHomeCfg, String> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property Id = new Property(0, String.class, "id", true, "ID");
+        public final static Property Id = new Property(0, String.class, "id", false, "ID");
         public final static Property Title = new Property(1, String.class, "title", false, "TITLE");
         public final static Property Product_name = new Property(2, String.class, "product_name", false, "PRODUCT_NAME");
         public final static Property Image = new Property(3, String.class, "image", false, "IMAGE");
@@ -46,7 +46,7 @@ public class BeanHomeCfgDao extends AbstractDao<BeanHomeCfg, String> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"BEAN_HOME_CFG\" (" + //
-                "\"ID\" TEXT PRIMARY KEY NOT NULL ," + // 0: id
+                "\"ID\" TEXT," + // 0: id
                 "\"TITLE\" TEXT," + // 1: title
                 "\"PRODUCT_NAME\" TEXT," + // 2: product_name
                 "\"IMAGE\" TEXT," + // 3: image
@@ -164,8 +164,8 @@ public class BeanHomeCfgDao extends AbstractDao<BeanHomeCfg, String> {
     }
 
     @Override
-    public String readKey(Cursor cursor, int offset) {
-        return cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0);
+    public Void readKey(Cursor cursor, int offset) {
+        return null;
     }    
 
     @Override
@@ -198,17 +198,14 @@ public class BeanHomeCfgDao extends AbstractDao<BeanHomeCfg, String> {
      }
     
     @Override
-    protected final String updateKeyAfterInsert(BeanHomeCfg entity, long rowId) {
-        return entity.getId();
+    protected final Void updateKeyAfterInsert(BeanHomeCfg entity, long rowId) {
+        // Unsupported or missing PK type
+        return null;
     }
     
     @Override
-    public String getKey(BeanHomeCfg entity) {
-        if(entity != null) {
-            return entity.getId();
-        } else {
-            return null;
-        }
+    public Void getKey(BeanHomeCfg entity) {
+        return null;
     }
 
     @Override

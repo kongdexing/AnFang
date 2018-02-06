@@ -11,6 +11,8 @@ import com.hyphenate.easeui.R;
 import com.hyphenate.easeui.widget.EaseMyTitleBar;
 
 public abstract class EaseBaseFragment extends Fragment{
+
+    public String TAG = EaseBaseFragment.class.getSimpleName();
     protected EaseMyTitleBar titleBar;
     protected InputMethodManager inputMethodManager;
 

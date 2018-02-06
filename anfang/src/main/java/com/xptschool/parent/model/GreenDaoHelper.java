@@ -389,9 +389,13 @@ public class GreenDaoHelper {
 
     //保存首页配置项
     public void insertHomeCfg(List<BeanHomeCfg> homeCfgs, String type) {
+        Log.i(TAG, "insertHomeCfg: " + type + " size: " + homeCfgs.size());
+
         if (writeDaoSession != null) {
             readDaoSession.getBeanHomeCfgDao().queryBuilder()
-                    .where(BeanHomeCfgDao.Properties.Type.eq(type)).buildDelete().executeDeleteWithoutDetachingEntities();
+                    .where(BeanHomeCfgDao.Properties.Type.eq(type))
+                    .buildDelete()
+                    .executeDeleteWithoutDetachingEntities();
 
             writeDaoSession.getBeanHomeCfgDao().insertOrReplaceInTx(homeCfgs);
         }
@@ -400,12 +404,15 @@ public class GreenDaoHelper {
     public List<BeanHomeCfg> getHomeCfgByType(String type) {
         List<BeanHomeCfg> homeCfgs = null;
         if (readDaoSession != null) {
-            homeCfgs = readDaoSession.getBeanHomeCfgDao().queryBuilder()
-                    .where(BeanHomeCfgDao.Properties.Type.eq(type)).list();
+            homeCfgs = readDaoSession.getBeanHomeCfgDao()
+                    .queryBuilder()
+                    .where(BeanHomeCfgDao.Properties.Type.eq(type))
+                    .list();
         }
         if (homeCfgs == null) {
             homeCfgs = new ArrayList<BeanHomeCfg>();
         }
+        Log.i(TAG, "getHomeCfgByType: " + type + " size: " + homeCfgs.size());
         return homeCfgs;
     }
 

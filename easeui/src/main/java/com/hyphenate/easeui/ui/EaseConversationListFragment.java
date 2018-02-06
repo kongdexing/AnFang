@@ -3,6 +3,7 @@ package com.hyphenate.easeui.ui;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -75,6 +76,7 @@ public class EaseConversationListFragment extends EaseBaseFragment {
 
     @Override
     protected void setUpView() {
+        Log.i(TAG, "setUpView: ");
         conversationList.addAll(loadConversationList());
         conversationListView.init(conversationList);
 
@@ -91,7 +93,6 @@ public class EaseConversationListFragment extends EaseBaseFragment {
 
         EMClient.getInstance().addConnectionListener(connectionListener);
 
-
         conversationListView.setOnTouchListener(new OnTouchListener() {
 
             @Override
@@ -107,6 +108,7 @@ public class EaseConversationListFragment extends EaseBaseFragment {
 
         @Override
         public void onDisconnected(int error) {
+            Log.i(TAG, "onDisconnected error: " + error);
             if (error == EMError.USER_REMOVED || error == EMError.USER_LOGIN_ANOTHER_DEVICE || error == EMError.SERVER_SERVICE_RESTRICTED
                     || error == EMError.USER_KICKED_BY_CHANGE_PASSWORD || error == EMError.USER_KICKED_BY_OTHER_DEVICE) {
                 isConflict = true;

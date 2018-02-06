@@ -1,6 +1,7 @@
 package com.xptschool.parent.ui.chat;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
@@ -70,8 +71,16 @@ public class ConversationListFragment extends EaseConversationListFragment {
     }
 
     @Override
+    protected void onConnectionConnected() {
+        super.onConnectionConnected();
+        Log.i(TAG, "onConnectionConnected: ");
+
+    }
+
+    @Override
     protected void onConnectionDisconnected() {
         super.onConnectionDisconnected();
+        Log.i(TAG, "onConnectionDisconnected: ");
         if (NetUtils.hasNetwork(getActivity())) {
             errorText.setText(R.string.can_not_connect_chat_server_connection);
         } else {

@@ -19,7 +19,7 @@ buildscript {
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.6'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
         // 注册MobSDK
-//        classpath "com.mob.sdk:MobSDK:+"
+        classpath "com.mob.sdk:MobSDK:+"
     }
 }
 

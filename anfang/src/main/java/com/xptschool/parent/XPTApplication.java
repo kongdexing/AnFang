@@ -18,6 +18,7 @@ import com.hyphenate.easeui.utils.EaseLocalUserHelper;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.liulishuo.filedownloader.connection.FileDownloadUrlConnection;
 import com.liulishuo.filedownloader.services.DownloadMgrInitialParams;
+import com.mob.MobSDK;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -159,6 +160,8 @@ public class XPTApplication extends Application {
 
         //init demo helper
         EaseHelper.getInstance().init(mInstance);
+
+        MobSDK.init(this);
     }
 
     public void resolvePushMsg(String message) {
@@ -275,6 +278,9 @@ public class XPTApplication extends Application {
     }
 
     public UserType getCurrent_user_type() {
+        if (!isLoggedIn()){
+            return null;
+        }
         String current_user_type = SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_TYPE, "").toString();
         if (current_user_type.equals(UserType.PARENT.toString())) {
             return UserType.PARENT;

@@ -47,6 +47,7 @@ public class WebViewActivity extends BaseActivity {
                 .createAgentWeb()//
                 .ready()
                 .go(getUrl());
+
     }
 
     private WebViewClient mWebViewClient = new WebViewClient() {
@@ -59,6 +60,9 @@ public class WebViewActivity extends BaseActivity {
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             //do you  work
             Log.i("Info", "BaseWebActivity onPageStarted");
+
+//            view.loadData();
+
         }
     };
     private WebChromeClient mWebChromeClient = new WebChromeClient() {

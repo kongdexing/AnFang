@@ -191,19 +191,6 @@ public class HomeFragment extends BaseFragment {
         getBanners();
         //获取分组数据
         getHomeGroupCfg();
-
-        UserHelper.getInstance().addUserChangeListener(new UserHelper.UserChangeListener() {
-            @Override
-            public void onUserLoginSuccess() {
-                //用户切换后，重新获取广告位信息
-                reloadPageData();
-            }
-
-            @Override
-            public void onUserExit() {
-                reloadPageData();
-            }
-        });
     }
 
     public void reloadPageData() {
@@ -308,6 +295,19 @@ public class HomeFragment extends BaseFragment {
 //                    mToolbar.setAlpha(1);
 //                }
 
+            }
+        });
+
+        UserHelper.getInstance().addUserChangeListener(new UserHelper.UserChangeListener() {
+            @Override
+            public void onUserLoginSuccess() {
+                //用户切换后，重新获取广告位信息
+                reloadPageData();
+            }
+
+            @Override
+            public void onUserExit() {
+                reloadPageData();
             }
         });
 
@@ -501,6 +501,7 @@ public class HomeFragment extends BaseFragment {
         eduGroupView.initEduOnLine(GreenDaoHelper.getInstance().getHomeCfgByType(HomeUtil.ONLINE_VIDEO));
         happyGrowView.bindData(GreenDaoHelper.getInstance().getHomeCfgByType(HomeUtil.CHILDREN_GOODS));
         propertyView.bindData(GreenDaoHelper.getInstance().getHomeCfgByType(HomeUtil.INVEST));
+        newsView.bindData(GreenDaoHelper.getInstance().getHomeCfgByType(HomeUtil.EDU_NEWS));
 //        shopView.bindData(GreenDaoHelper.getInstance().getHomeCfgByType(HomeUtil.SHOPPING));
         paymentView.bindData(GreenDaoHelper.getInstance().getHomeCfgByType(HomeUtil.LIVING_PAYMENT));
     }

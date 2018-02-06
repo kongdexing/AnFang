@@ -115,6 +115,11 @@ public class MessageFragment extends BaseFragment {
 //        }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
     public ConversationListFragment getConversationListFragment() {
         if (conversationListFragment==null){
             conversationListFragment = new ConversationListFragment();
