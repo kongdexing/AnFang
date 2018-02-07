@@ -1,6 +1,7 @@
 package com.xptschool.parent.ui.shop;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import com.xptschool.parent.adapter.BaseRecycleAdapter;
 import com.xptschool.parent.adapter.RecyclerViewHolderBase;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.bean.BeanShop;
+import com.xptschool.parent.common.ExtraKey;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,9 +73,9 @@ public class ShopListAdapter extends BaseRecycleAdapter {
         mHolder.llhomeworkItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(mContext, HomeWorkDetailTeacherActivity.class);
-//                intent.putExtra(ExtraKey.HOMEWORK_DETAIL, work);
-//                ((HomeWorkTeacherActivity) mContext).startActivityForResult(intent, 1);
+                Intent intent = new Intent(mContext, ShopDetailActivity.class);
+                intent.putExtra(ExtraKey.SHOP_GOODS, work);
+                mContext.startActivity(intent);
             }
         });
     }

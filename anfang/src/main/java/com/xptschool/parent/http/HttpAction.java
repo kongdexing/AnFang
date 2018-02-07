@@ -155,6 +155,8 @@ public class HttpAction {
 
     //获取商品列表
     public static String GET_SHOPLIST = HEAD + "Goods/getGoodsList";
+    public static String GET_GOODDETAIL = HEAD + "Goods/getGoodsDetail";
+
 
 
 }

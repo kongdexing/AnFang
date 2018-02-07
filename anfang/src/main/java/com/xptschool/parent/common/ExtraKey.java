@@ -28,7 +28,7 @@ public class ExtraKey {
     public static final String DETAIL_ID = "detail_id";
 
     public static final String CATEGORY_ID = "category_id";
-    public static final String CATEGORY_TITLE = "category_title";
+    public static final String SHOP_GOODS = "shop_goods";
 
 
 

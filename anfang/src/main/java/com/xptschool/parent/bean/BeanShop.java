@@ -2,10 +2,12 @@ package com.xptschool.parent.bean;
 
 import com.xptschool.parent.BuildConfig;
 
+import java.io.Serializable;
+
 /**
  * Created by gn on 2018/2/7.
  */
-public class BeanShop {
+public class BeanShop implements Serializable{
 
     private String id;
     private String brand;
