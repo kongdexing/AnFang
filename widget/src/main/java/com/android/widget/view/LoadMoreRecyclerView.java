@@ -366,7 +366,6 @@ public class LoadMoreRecyclerView extends RecyclerView {
         }
         getAdapter().notifyItemRemoved(mLoadMorePosition);
         mIsLoadingMore = false;
-
     }
 
     public void deleteByPosition(int position) {

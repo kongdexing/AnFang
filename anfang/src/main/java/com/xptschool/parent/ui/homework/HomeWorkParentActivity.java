@@ -118,8 +118,8 @@ public class HomeWorkParentActivity extends BaseListActivity {
 
     private void getFirstPageData() {
         flTransparent.setVisibility(View.GONE);
-        resultPage.setPage(1);
-        adapter.refreshData(new ArrayList<BeanHomeWork>());
+//        resultPage.setPage(1);
+//        adapter.refreshData(new ArrayList<BeanHomeWork>());
         getHomeWorkList();
     }
 

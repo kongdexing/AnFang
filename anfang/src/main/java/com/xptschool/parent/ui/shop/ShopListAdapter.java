@@ -1,7 +1,6 @@
 package com.xptschool.parent.ui.shop;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,12 +15,8 @@ import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.xptschool.parent.R;
 import com.xptschool.parent.adapter.BaseRecycleAdapter;
 import com.xptschool.parent.adapter.RecyclerViewHolderBase;
-import com.xptschool.parent.bean.BeanHomeWork;
 import com.xptschool.parent.common.CommonUtil;
-import com.xptschool.parent.common.ExtraKey;
-import com.xptschool.parent.model.BeanShop;
-import com.xptschool.parent.ui.homework.HomeWorkDetailTeacherActivity;
-import com.xptschool.parent.ui.homework.HomeWorkTeacherActivity;
+import com.xptschool.parent.bean.BeanShop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +38,7 @@ public class ShopListAdapter extends BaseRecycleAdapter {
     }
 
     public void refreshData(List<BeanShop> listShops) {
-        Log.i(TAG, "refreshData: ");
+        Log.i(TAG, "refreshData: " + listShops.size());
         beanShops = listShops;
     }
 
@@ -63,7 +58,7 @@ public class ShopListAdapter extends BaseRecycleAdapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         Log.i(TAG, "showData: " + position);
-        final ShopListAdapter.ViewHolder mHolder = (ShopListAdapter.ViewHolder) holder;
+        final ViewHolder mHolder = (ViewHolder) holder;
         final BeanShop work = beanShops.get(position);
         mHolder.txtShopName.setText(work.getShop_name());
         mHolder.txtDes.setText(work.getDescribe());
@@ -85,6 +80,7 @@ public class ShopListAdapter extends BaseRecycleAdapter {
 
     @Override
     public int getItemCount() {
+        Log.i(TAG, "getItemCount: " + beanShops.size());
         return beanShops.size();
     }
 

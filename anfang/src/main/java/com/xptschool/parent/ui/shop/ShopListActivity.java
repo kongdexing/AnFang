@@ -1,11 +1,11 @@
 package com.xptschool.parent.ui.shop;
 
-import android.content.Intent;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,16 +17,11 @@ import com.android.widget.view.LoadMoreRecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xptschool.parent.R;
-import com.xptschool.parent.bean.BeanHomeWork;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanHomeCfg;
-import com.xptschool.parent.model.BeanShop;
-import com.xptschool.parent.ui.homework.HomeWorkDetailTeacherActivity;
-import com.xptschool.parent.ui.homework.HomeWorkTeacherActivity;
-import com.xptschool.parent.ui.homework.HomeWorkTeacherAdapter;
-import com.xptschool.parent.ui.main.BaseActivity;
+import com.xptschool.parent.bean.BeanShop;
 import com.xptschool.parent.ui.main.BaseListActivity;
 
 import java.util.ArrayList;
@@ -41,7 +36,6 @@ public class ShopListActivity extends BaseListActivity {
 
     BeanHomeCfg currentCfg;
 
-
     @BindView(R.id.txt_des)
     TextView txt_des;
     @BindView(R.id.recyclerview)
@@ -53,17 +47,23 @@ public class ShopListActivity extends BaseListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_list);
 
+        initView();
+
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             currentCfg = (BeanHomeCfg) bundle.get(ExtraKey.CATEGORY_ID);
 
             if (currentCfg != null) {
                 setTitle(currentCfg.getTitle());
-                txt_des.setText(currentCfg.getMark());
+
+                SpannableStringBuilder span = new SpannableStringBuilder("缩进" + currentCfg.getMark());
+                span.setSpan(new ForegroundColorSpan(Color.TRANSPARENT), 0, 2,
+                        Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+
+                txt_des.setText(span);
                 getShopList(currentCfg.getId());
             }
         }
-        initView();
     }
 
     private void initView() {
@@ -75,7 +75,7 @@ public class ShopListActivity extends BaseListActivity {
     private void getShopList(String id) {
 
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.GET_SHOPLIST,
-                new VolleyHttpParamsEntity().addParam("cate_id", id),
+                new VolleyHttpParamsEntity().addParam("cate_id", "g_" + id),
                 new MyVolleyRequestListener() {
 
                     @Override
@@ -93,9 +93,9 @@ public class ShopListActivity extends BaseListActivity {
                                     Gson gson = new Gson();
                                     shops = gson.fromJson(volleyHttpResult.getData().toString(),
                                             new TypeToken<List<BeanShop>>() {
-                                    }.getType());
+                                            }.getType());
                                     adapter.refreshData(shops);
-
+                                    recyclerView.setAdapter(adapter);
                                 } catch (Exception ex) {
                                     Log.i(TAG, "onResponse: " + ex.getMessage());
                                     Toast.makeText(ShopListActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();

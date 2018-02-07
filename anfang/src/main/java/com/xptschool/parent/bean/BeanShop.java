@@ -1,4 +1,6 @@
-package com.xptschool.parent.model;
+package com.xptschool.parent.bean;
+
+import com.xptschool.parent.BuildConfig;
 
 /**
  * Created by gn on 2018/2/7.
@@ -62,6 +64,9 @@ public class BeanShop {
     }
 
     public String getImage() {
+        if (!image.contains(BuildConfig.SERVICE_URL)) {
+            image = BuildConfig.SERVICE_URL + image;
+        }
         return image;
     }
 
