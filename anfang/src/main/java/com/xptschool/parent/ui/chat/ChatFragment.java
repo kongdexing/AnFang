@@ -334,8 +334,8 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
     public boolean onExtendMenuItemClick(int itemId, View view) {
         switch (itemId) {
             case ITEM_VIDEO:
-                Intent intent = new Intent(getActivity(), ImageGridActivity.class);
-                startActivityForResult(intent, REQUEST_CODE_SELECT_VIDEO);
+                //发送本地短视频
+                ChatFragmentPermissionsDispatcher.onVideoFileAllowWithCheck(ChatFragment.this);
                 break;
             case ITEM_FILE: //file
                 selectFileFromLocal();
@@ -417,7 +417,6 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
         Toast.makeText(this.getContext(), R.string.permission_voice_never_askagain, Toast.LENGTH_SHORT).show();
     }
 
-
     @NeedsPermission({Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO})
     void onCameraVoiceAllow() {
         Log.i(TAG, "onCameraVoiceAllow: startVideoCall()");
@@ -444,6 +443,35 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
     void onCameraVoiceNeverAskAgain() {
         Log.i(TAG, "onCameraVoiceNeverAskAgain: ");
         Toast.makeText(this.getContext(), R.string.permission_cameravoice_never_askagain, Toast.LENGTH_SHORT).show();
+    }
+
+    @NeedsPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+    void onVideoFileAllow() {
+        Log.i(TAG, "onVideoFileAllow: start select Video file");
+        Intent intent = new Intent(getActivity(), ImageGridActivity.class);
+        startActivityForResult(intent, REQUEST_CODE_SELECT_VIDEO);
+    }
+
+    @OnPermissionDenied(Manifest.permission.READ_EXTERNAL_STORAGE)
+    void onVideoFileDenied() {
+        Log.i(TAG, "onVideoFileDenied: ");
+        // NOTE: Deal with a denied permission, e.g. by showing specific UI
+        // or disabling certain functionality
+        Toast.makeText(this.getContext(), R.string.permission_storage_denied, Toast.LENGTH_SHORT).show();
+    }
+
+    @OnShowRationale(Manifest.permission.READ_EXTERNAL_STORAGE)
+    void showRationaleForVideoFile(PermissionRequest request) {
+        // NOTE: Show a rationale to explain why the permission is needed, e.g. with a dialog.
+        // Call proceed() or cancel() on the provided PermissionRequest to continue or abort
+        Log.i(TAG, "showRationaleForVideoFile: ");
+        request.proceed();
+    }
+
+    @OnNeverAskAgain(Manifest.permission.READ_EXTERNAL_STORAGE)
+    void onVideoFileNeverAskAgain() {
+        Log.i(TAG, "onVideoFileNeverAskAgain: ");
+        Toast.makeText(this.getContext(), R.string.permission_storage_never_askagain, Toast.LENGTH_SHORT).show();
     }
 
     /**

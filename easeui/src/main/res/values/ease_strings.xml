@@ -316,4 +316,6 @@
     <string name="permission_voice_rationale">请求授予【录音】权限</string>
     <string name="permission_voice_never_askagain">已禁止该应用的【录音】权限，请去设置中进行设置</string>
 
+
+
 </resources>
