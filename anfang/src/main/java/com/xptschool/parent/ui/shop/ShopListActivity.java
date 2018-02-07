@@ -68,6 +68,8 @@ public class ShopListActivity extends BaseListActivity {
 
     private void initView() {
         initRecyclerView(recyclerView, null);
+
+        recyclerView.setNestedScrollingEnabled(false);
         adapter = new ShopListAdapter(this);
         recyclerView.setAdapter(adapter);
     }

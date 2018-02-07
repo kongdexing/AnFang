@@ -46,6 +46,8 @@ public class ShopDetailActivity extends BaseActivity {
     TextView txtDes;
     @BindView(R.id.txtPrice)
     TextView txtPrice;
+    @BindView(R.id.txtAddress)
+    TextView txtAddress;
 
     @BindView(R.id.webView)
     WebView webView;
@@ -70,6 +72,7 @@ public class ShopDetailActivity extends BaseActivity {
 
                 txtDes.setText(currentGood.getDescribe());
                 txtPrice.setText(currentGood.getPrice());
+                txtAddress.setText(currentGood.getAddress());
 
                 setTitle(currentGood.getDescribe());
                 getDetail();
