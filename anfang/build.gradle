@@ -38,7 +38,7 @@ android {
 
         ndk {
             //设置支持的SO库架构
-            abiFilters 'armeabi' , 'x86', 'armeabi-v7a'
+            abiFilters 'armeabi', 'x86', 'armeabi-v7a'
         }
     }
 
@@ -145,6 +145,7 @@ greendao {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })

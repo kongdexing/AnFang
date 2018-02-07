@@ -28,21 +28,21 @@ public class QRCodeActivity extends BaseActivity implements PlatformActionListen
         setTitle(R.string.mine_qr_code);
 
 
-        Platform weibo = ShareSDK.getPlatform(QQ.NAME);
-        weibo.SSOSetting(false);  //设置false表示使用SSO授权方式
-        weibo.setPlatformActionListener(this); // 设置分享事件回调
+//        Platform weibo = ShareSDK.getPlatform(QQ.NAME);
+//        weibo.SSOSetting(false);  //设置false表示使用SSO授权方式
+//        weibo.setPlatformActionListener(this); // 设置分享事件回调
+//
+//        weibo.authorize();//单独授权
+//        weibo.showUser(null);//授权并获取用户信息
 
-        weibo.authorize();//单独授权
-        weibo.showUser(null);//授权并获取用户信息
 
-
-        setTxtRight("分享");
-        setTextRightClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showShare();
-            }
-        });
+//        setTxtRight("分享");
+//        setTextRightClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showShare();
+//            }
+//        });
     }
 
     @Override

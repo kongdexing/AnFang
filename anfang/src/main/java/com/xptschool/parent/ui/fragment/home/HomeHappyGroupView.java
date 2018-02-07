@@ -23,6 +23,7 @@ import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.model.BeanHomeCfg;
 import com.xptschool.parent.ui.main.WebViewActivity;
 import com.xptschool.parent.ui.mine.BaseInfoView;
+import com.xptschool.parent.ui.shop.ShopListActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -114,8 +115,8 @@ public class HomeHappyGroupView extends BaseInfoView {
                 propertyImg.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(mContext, WebViewActivity.class);
-                        intent.putExtra(ExtraKey.WEB_URL, homeCfg.getUrl());
+                        Intent intent = new Intent(mContext, ShopListActivity.class);
+                        intent.putExtra(ExtraKey.CATEGORY_ID, homeCfg);
                         mContext.startActivity(intent);
                     }
                 });

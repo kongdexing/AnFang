@@ -153,4 +153,8 @@ public class HttpAction {
     //获取学校
     public static String GET_SCHOOL = HEAD + "Register/information";
 
+    //获取商品列表
+    public static String GET_SHOPLIST = HEAD + "Goods/getGoodsList";
+
+
 }
