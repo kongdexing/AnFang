@@ -63,7 +63,7 @@ public class CheckinPActivity extends BaseListActivity {
     @BindView(R.id.flTransparent)
     FrameLayout flTransparent;
 
-    private CheckinAdapter adapter;
+    private CheckinPAdapter adapter;
     //循序固定，勿乱动
     private static final String[] statuses = {"全部", "进校", "出校"};
 
@@ -135,7 +135,7 @@ public class CheckinPActivity extends BaseListActivity {
         spnDate.setOnNothingSelectedListener(spinnerNothingSelectedListener);
         spnType.setOnNothingSelectedListener(spinnerNothingSelectedListener);
 
-        adapter = new CheckinAdapter(this);
+        adapter = new CheckinPAdapter(this);
         recyclerView.setAdapter(adapter);
 
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

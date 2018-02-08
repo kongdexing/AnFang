@@ -24,11 +24,11 @@ import butterknife.Unbinder;
 /**
  * Created by Administrator on 2016/10/26.
  */
-public class CheckinAdapter extends BaseRecycleAdapter {
+public class CheckinPAdapter extends BaseRecycleAdapter {
 
     private List<BeanCheckin> listBeanCheckins = new ArrayList<>();
 
-    public CheckinAdapter(Context context) {
+    public CheckinPAdapter(Context context) {
         super(context);
     }
 

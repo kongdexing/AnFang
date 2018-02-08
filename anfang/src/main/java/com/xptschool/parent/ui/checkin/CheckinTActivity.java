@@ -64,7 +64,7 @@ public class CheckinTActivity extends BaseListActivity {
     FrameLayout flTransparent;
 
     private PopupWindow datePopup;
-    private CheckinAdapter adapter;
+    private CheckinTAdapter adapter;
 
     //循序固定，勿乱动
     private static final String[] statuses = {"全部", "进校", "出校"};
@@ -81,7 +81,7 @@ public class CheckinTActivity extends BaseListActivity {
     private void initView() {
         initRecyclerView(recyclerView, swipeRefresh);
 
-        adapter = new CheckinAdapter(this);
+        adapter = new CheckinTAdapter(this);
         recyclerView.setAdapter(adapter);
 
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
