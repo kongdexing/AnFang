@@ -68,36 +68,43 @@ public class HomePayMentView extends BaseInfoView {
         if (homeCfgs.size() > 0) {
             llHomePay.setVisibility(VISIBLE);
             try {
-                final BeanHomeCfg homeCfg1 = homeCfgs.get(0);
-                if (homeCfg1 != null) {
-                    pay1_title.setText(homeCfg1.getTitle());
-                    pay1_des.setText(homeCfg1.getMark());
-                    ImageLoader.getInstance().displayImage(homeCfg1.getImage(),
-                            new ImageViewAware(pay1_img), CommonUtil.getDefaultImageLoaderOption());
-                    rlpay1.setOnClickListener(new OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Intent intent = new Intent(mContext, WebViewActivity.class);
-                            intent.putExtra(ExtraKey.WEB_URL, homeCfg1.getUrl());
-                            mContext.startActivity(intent);
-                        }
-                    });
+                if (homeCfgs.size() >= 1) {
+                    final BeanHomeCfg homeCfg1 = homeCfgs.get(0);
+                    if (homeCfg1 != null) {
+                        pay1_title.setText(homeCfg1.getTitle());
+                        pay1_des.setText(homeCfg1.getMark());
+                        ImageLoader.getInstance().displayImage(homeCfg1.getImage(),
+                                new ImageViewAware(pay1_img), CommonUtil.getDefaultImageLoaderOption());
+                        rlpay1.setOnClickListener(new OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent = new Intent(mContext, WebViewActivity.class);
+                                intent.putExtra(ExtraKey.WEB_URL, homeCfg1.getUrl());
+                                mContext.startActivity(intent);
+                            }
+                        });
+                    }
                 }
 
-                final BeanHomeCfg homeCfg2 = homeCfgs.get(1);
-                if (homeCfg2 != null) {
-                    pay2_title.setText(homeCfg2.getTitle());
-                    pay2_des.setText(homeCfg2.getMark());
-                    ImageLoader.getInstance().displayImage(homeCfg2.getImage(),
-                            new ImageViewAware(pay2_img), CommonUtil.getDefaultImageLoaderOption());
-                    rlpay2.setOnClickListener(new OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Intent intent = new Intent(mContext, WebViewActivity.class);
-                            intent.putExtra(ExtraKey.WEB_URL, homeCfg2.getUrl());
-                            mContext.startActivity(intent);
-                        }
-                    });
+                if (homeCfgs.size() > 1) {
+                    final BeanHomeCfg homeCfg2 = homeCfgs.get(1);
+                    if (homeCfg2 != null) {
+                        rlpay2.setVisibility(VISIBLE);
+                        pay2_title.setText(homeCfg2.getTitle());
+                        pay2_des.setText(homeCfg2.getMark());
+                        ImageLoader.getInstance().displayImage(homeCfg2.getImage(),
+                                new ImageViewAware(pay2_img), CommonUtil.getDefaultImageLoaderOption());
+                        rlpay2.setOnClickListener(new OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent = new Intent(mContext, WebViewActivity.class);
+                                intent.putExtra(ExtraKey.WEB_URL, homeCfg2.getUrl());
+                                mContext.startActivity(intent);
+                            }
+                        });
+                    }
+                } else {
+                    rlpay2.setVisibility(GONE);
                 }
 
             } catch (Exception ex) {

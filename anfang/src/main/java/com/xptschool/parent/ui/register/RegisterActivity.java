@@ -107,31 +107,31 @@ public class RegisterActivity extends BaseActivity {
                     edtCode.setError(getResources().getString(R.string.hint_code));
                     return;
                 }
-                String userName = edtNickName.getText().toString().trim();
-                if (userName.isEmpty()) {
-                    ToastUtils.showToast(RegisterActivity.this, R.string.hint_nickname);
-                    edtNickName.setError(getResources().getString(R.string.hint_nickname));
-                    return;
-                }
+//                String userName = edtNickName.getText().toString().trim();
+//                if (userName.isEmpty()) {
+//                    ToastUtils.showToast(RegisterActivity.this, R.string.hint_nickname);
+//                    edtNickName.setError(getResources().getString(R.string.hint_nickname));
+//                    return;
+//                }
                 String pwd = edtPwd.getText().toString().trim();
                 if (pwd.isEmpty()) {
                     ToastUtils.showToast(RegisterActivity.this, R.string.hint_userpwd);
                     edtPwd.setError(getResources().getString(R.string.hint_userpwd));
                     return;
                 }
-                String repwd = edtRePwd.getText().toString().trim();
-                if (repwd.isEmpty()) {
-                    ToastUtils.showToast(RegisterActivity.this, R.string.hint_new_pwd2);
-                    edtRePwd.setError(getResources().getString(R.string.hint_new_pwd2));
-                    return;
-                }
-                if (!pwd.equals(repwd)) {
-                    ToastUtils.showToast(RegisterActivity.this, R.string.toast_pwd_not_equal);
-                    edtRePwd.setSelection(repwd.length());
-                    return;
-                }
+//                String repwd = edtRePwd.getText().toString().trim();
+//                if (repwd.isEmpty()) {
+//                    ToastUtils.showToast(RegisterActivity.this, R.string.hint_new_pwd2);
+//                    edtRePwd.setError(getResources().getString(R.string.hint_new_pwd2));
+//                    return;
+//                }
+//                if (!pwd.equals(repwd)) {
+//                    ToastUtils.showToast(RegisterActivity.this, R.string.toast_pwd_not_equal);
+//                    edtRePwd.setSelection(repwd.length());
+//                    return;
+//                }
 
-                register(phone, userName, code, CommonUtil.md5(pwd));
+                register(phone, "", code, CommonUtil.md5(pwd));
 //                checkVerifyCode(code);
                 break;
         }

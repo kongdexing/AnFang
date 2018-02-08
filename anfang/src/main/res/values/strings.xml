@@ -70,7 +70,7 @@
     <string name="home_leave">在线请假</string>
     <string name="home_alarm">警报查询</string>
     <string name="home_fence">电子围栏</string>
-    <string name="home_news">教育新闻</string>
+    <string name="home_news">教育头条</string>
     <string name="home_shop">校园购</string>
     <string name="home_bottom">我是有底线的</string>
 
@@ -100,7 +100,7 @@
     <string name="mine_bill">电子账单</string>
     <string name="mine_property">宝贝管理</string>
     <string name="mine_qr_code">二维码</string>
-    <string name="setting_qrcode_title">民生银行-数海信息安防校园\n邀请码</string>
+    <string name="setting_qrcode_title">数海信息安防校园邀请码</string>
 
     <string name="mine_ms_ele_account">民生银行电子账户</string>
     <string name="mine_ms_payment">代收代缴</string>
