@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
@@ -71,7 +72,17 @@ public class ShopDetailActivity extends BaseActivity {
                         new ImageViewAware(goods_img), CommonUtil.getDefaultImageLoaderOption());
 
                 txtDes.setText(currentGood.getDescribe());
-                txtPrice.setText(currentGood.getPrice());
+                try {
+                    double price = Double.parseDouble(currentGood.getPrice());
+                    if (0 >= price) {
+                        txtPrice.setVisibility(View.GONE);
+                    } else {
+                        txtPrice.setText(currentGood.getPrice());
+                    }
+                } catch (Exception ex) {
+                    txtPrice.setVisibility(View.GONE);
+                }
+
                 txtAddress.setText(currentGood.getAddress());
 
                 setTitle(currentGood.getDescribe());

@@ -64,7 +64,16 @@ public class ShopListAdapter extends BaseRecycleAdapter {
         final BeanShop work = beanShops.get(position);
         mHolder.txtShopName.setText(work.getShop_name());
         mHolder.txtDes.setText(work.getDescribe());
-        mHolder.txtPrice.setText(work.getPrice());
+        try {
+            double price = Double.parseDouble(work.getPrice());
+            if (0 >= price) {
+                mHolder.txtPrice.setVisibility(View.GONE);
+            } else {
+                mHolder.txtPrice.setText(work.getPrice());
+            }
+        } catch (Exception ex) {
+            mHolder.txtPrice.setVisibility(View.GONE);
+        }
         mHolder.txtAddress.setText(work.getAddress());
 
         ImageLoader.getInstance().displayImage(work.getImage(),

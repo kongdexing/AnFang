@@ -26,8 +26,8 @@ android {
         applicationId "com.xptschool.parent"
         minSdkVersion 19
         targetSdkVersion 24
-        versionCode 24
-        versionName "2.1.0"
+        versionCode 25
+        versionName "2.1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [API_KEY_BAIDU       : rootProject.appKeyBaiduMap,
                                 UMENG_APPKEY        : rootProject.UMENG_APPKEY,
@@ -139,7 +139,7 @@ android {
 }
 
 greendao {
-    schemaVersion 12
+    schemaVersion 13
     targetGenDir 'src/main/java'
 }
 
