@@ -16,6 +16,7 @@ import com.just.library.ChromeClientCallbackManager;
 import com.xptschool.parent.R;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.model.GreenDaoHelper;
+import com.xptschool.parent.ui.web.AndroidInterface;
 
 import butterknife.BindView;
 
@@ -37,7 +38,7 @@ public class WebViewActivity extends BaseActivity {
 
         mAgentWeb = AgentWeb.with(this)//
                 .setAgentWebParent(mLinearLayout, new LinearLayout.LayoutParams(-1, -1))//
-                .useDefaultIndicator()//
+                .useDefaultIndicator()//使用默认进度条
                 .defaultProgressBarColor()
                 .setReceivedTitleCallback(mCallback)
                 .setWebChromeClient(mWebChromeClient)
@@ -47,6 +48,11 @@ public class WebViewActivity extends BaseActivity {
                 .createAgentWeb()//
                 .ready()
                 .go(getUrl());
+
+        if(mAgentWeb!=null){
+            //注入对象
+            mAgentWeb.getJsInterfaceHolder().addJavaObject("android",new AndroidInterface(mAgentWeb,this));
+        }
 
     }
 

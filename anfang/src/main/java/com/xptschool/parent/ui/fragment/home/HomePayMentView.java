@@ -79,7 +79,9 @@ public class HomePayMentView extends BaseInfoView {
                             @Override
                             public void onClick(View view) {
                                 Intent intent = new Intent(mContext, WebViewActivity.class);
-                                intent.putExtra(ExtraKey.WEB_URL, homeCfg1.getUrl());
+
+                                intent.putExtra(ExtraKey.WEB_URL, "http://192.168.1.142:8011/index.php/Wap/AppHook/livingPayment");
+//                                intent.putExtra(ExtraKey.WEB_URL, homeCfg1.getUrl());
                                 mContext.startActivity(intent);
                             }
                         });

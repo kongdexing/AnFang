@@ -34,7 +34,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * 成绩管理
+ * 家长~成绩管理
  */
 public class ScoreActivity extends BaseListActivity {
 
