@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import com.just.library.AgentWeb;
 import com.just.library.ChromeClientCallbackManager;
 import com.xptschool.parent.R;
+import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.web.AndroidInterface;
@@ -49,9 +50,9 @@ public class WebViewActivity extends BaseActivity {
                 .ready()
                 .go(getUrl());
 
-        if(mAgentWeb!=null){
+        if (mAgentWeb != null) {
             //注入对象
-            mAgentWeb.getJsInterfaceHolder().addJavaObject("android",new AndroidInterface(mAgentWeb,this));
+            mAgentWeb.getJsInterfaceHolder().addJavaObject("Android", new AndroidInterface(mAgentWeb, this));
         }
 
     }
@@ -91,7 +92,7 @@ public class WebViewActivity extends BaseActivity {
             setTitle(title);
         }
         try {
-            webUrl += "?user_id=" + GreenDaoHelper.getInstance().getCurrentParent().getU_id();
+            webUrl += "?user_id=" + XPTApplication.getInstance().getCurrentUserId();
         } catch (Exception ex) {
             Log.i(TAG, "loadUrl: user_id is null");
         }

@@ -292,6 +292,18 @@ public class XPTApplication extends Application {
         return null;
     }
 
+    public String getCurrentUserId(){
+        String userId = "";
+        if (UserType.PARENT.equals(getCurrent_user_type())) {
+            userId = GreenDaoHelper.getInstance().getCurrentParent().getU_id();
+        } else if (UserType.TEACHER.equals(getCurrent_user_type())) {
+            userId = GreenDaoHelper.getInstance().getCurrentTeacher().getU_id();
+        } else if(UserType.VISITOR.equals(getCurrent_user_type())){
+            userId = SharedPreferencesUtil.getData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_UID, "").toString();
+        }
+        return userId;
+    }
+
     public void setCurrent_user_type(String current_user_type) {
         SharedPreferencesUtil.saveData(this, SharedPreferencesUtil.KEY_USER_TYPE, current_user_type);
     }
