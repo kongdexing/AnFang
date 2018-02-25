@@ -65,11 +65,10 @@ public class WebViewActivity extends BaseActivity {
 
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            view.loadUrl(url += "?user_id=" + XPTApplication.getInstance().getCurrentUserId());
             //do you  work
-            Log.i("Info", "BaseWebActivity onPageStarted");
-
+            Log.i(TAG, "BaseWebActivity onPageStarted:" + view.getUrl());
 //            view.loadData();
-
         }
     };
     private WebChromeClient mWebChromeClient = new WebChromeClient() {
@@ -91,12 +90,12 @@ public class WebViewActivity extends BaseActivity {
         if (title != null && !title.isEmpty()) {
             setTitle(title);
         }
-        try {
-            webUrl += "?user_id=" + XPTApplication.getInstance().getCurrentUserId();
-        } catch (Exception ex) {
-            Log.i(TAG, "loadUrl: user_id is null");
-        }
-        Log.i(TAG, "getUrl: " + webUrl);
+//        try {
+//            webUrl += "?user_id=" + XPTApplication.getInstance().getCurrentUserId();
+//        } catch (Exception ex) {
+//            Log.i(TAG, "loadUrl: user_id is null");
+//        }
+//        Log.i(TAG, "getUrl: " + webUrl);
         return webUrl;
     }
 

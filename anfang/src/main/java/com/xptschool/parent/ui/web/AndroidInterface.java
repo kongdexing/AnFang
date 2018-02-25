@@ -3,11 +3,25 @@ package com.xptschool.parent.ui.web;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
 import android.widget.Toast;
 
+import com.alipay.sdk.app.PayTask;
 import com.just.library.AgentWeb;
+import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+import com.xptschool.parent.XPTApplication;
+import com.xptschool.parent.ui.main.WebViewActivity;
+import com.xptschool.parent.ui.wallet.alipay.PayResult;
+import com.xptschool.parent.ui.wallet.pocket.RechargeActivity;
+
+import org.json.JSONObject;
+
+import java.util.Map;
 
 /**
  * Created by cenxiaozhong on 2017/5/14.
@@ -16,9 +30,12 @@ import com.just.library.AgentWeb;
 
 public class AndroidInterface {
 
+    private String TAG = "Pay";
     private Handler deliver = new Handler(Looper.getMainLooper());
     private AgentWeb agent;
     private Context context;
+    private static final int SDK_PAY_FLAG = 1;
+
 
     public AndroidInterface(AgentWeb agent, Context context) {
         this.agent = agent;
@@ -26,18 +43,84 @@ public class AndroidInterface {
     }
 
     @JavascriptInterface
-    public void callAndroid(final String msg, final String option2) {
+    public void callAndroid(final String option1, final String option2) {
 
         deliver.post(new Runnable() {
             @Override
             public void run() {
                 Log.i("Info", "main Thread:" + Thread.currentThread());
-                Toast.makeText(context.getApplicationContext(), msg + "\n" + option2, Toast.LENGTH_LONG).show();
+                Toast.makeText(context.getApplicationContext(), option1 + "\n" + option2, Toast.LENGTH_LONG).show();
             }
         });
 
-        Log.i("Info", "Thread:" + Thread.currentThread());
+        if ("weixin".equals(option1)) {
+            try {
+                JSONObject jsonObject = new JSONObject(option2);
+                IWXAPI api = WXAPIFactory.createWXAPI(context, XPTApplication.getInstance().WXAPP_ID);
+                boolean register = api.registerApp(XPTApplication.getInstance().WXAPP_ID);
+                PayReq req = new PayReq();
+                req.appId = XPTApplication.getInstance().WXAPP_ID;
+                req.partnerId = jsonObject.getString("partnerid");
+                req.prepayId = jsonObject.getString("prepayid");
+                req.nonceStr = jsonObject.getString("noncestr");
+                req.timeStamp = jsonObject.getString("timestamp");
+                req.packageValue = jsonObject.getString("package");
+                req.sign = jsonObject.getString("sign");
+//                req.extData = "app data"; // optional
+//                Toast.makeText(this, "正常调起支付", Toast.LENGTH_SHORT).show();
+                // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
+                boolean rst = api.sendReq(req);
+//                        Toast.makeText(RechargeActivity.this, "register:" + register + " sendReq result " + rst, Toast.LENGTH_SHORT).show();
+            } catch (Exception ex) {
 
+            }
+        } else if ("alipay".equals(option1)) {
+            Runnable payRunnable = new Runnable() {
+
+                @Override
+                public void run() {
+                    PayTask alipay = new PayTask((WebViewActivity) context);
+                    Map<String, String> result = alipay.payV2(option2, true);
+                    Log.i(TAG, "payV2:" + result.toString());
+                    Message msg = new Message();
+                    msg.what = SDK_PAY_FLAG;
+                    msg.obj = result;
+                    mHandler.sendMessage(msg);
+                }
+            };
+            // 必须异步调用
+            Thread payThread = new Thread(payRunnable);
+            payThread.start();
+        }
+        Log.i("Info", "Thread:" + Thread.currentThread());
     }
+
+    private Handler mHandler = new Handler() {
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case SDK_PAY_FLAG: {
+                    PayResult payResult = new PayResult((Map<String, String>) msg.obj);
+                    /**
+                     对于支付结果，请商户依赖服务端的异步通知结果。同步通知结果，仅作为支付结束的通知。
+                     */
+                    String resultInfo = payResult.getResult();// 同步返回需要验证的信息
+                    String resultStatus = payResult.getResultStatus();
+                    Log.i(TAG, "handleMessage: " + resultInfo + " status :" + resultStatus);
+                    // 判断resultStatus 为9000则代表支付成功
+                    if (TextUtils.equals(resultStatus, "9000")) {
+                        // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
+                        Toast.makeText(context, "支付成功", Toast.LENGTH_SHORT).show();
+//                        RechargeActivity.this.finish();
+                    } else {
+                        // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
+                        Toast.makeText(context, "支付失败", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                }
+            }
+        }
+
+        ;
+    };
 
 }
