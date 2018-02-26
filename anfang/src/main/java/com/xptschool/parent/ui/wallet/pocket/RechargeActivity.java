@@ -157,8 +157,9 @@ public class RechargeActivity extends BaseActivity {
         }
 
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.GET_OrderInfo, new VolleyHttpParamsEntity()
-//                .addParam("deal_price", recharge_limit + "")
-                .addParam("deal_price", "0.01")
+                .addParam("deal_price", recharge_limit + "")
+//                .addParam("deal_price", "0.01")
+                .addParam("user_id", XPTApplication.getInstance().getCurrentUserId())
                 .addParam("num", "1")
                 .addParam("payment_id", payment_id) //支付方式 0支付宝 1微信 2银联
                 .addParam("type", "0") //充值
@@ -174,48 +175,52 @@ public class RechargeActivity extends BaseActivity {
             public void onResponse(VolleyHttpResult volleyHttpResult) {
                 super.onResponse(volleyHttpResult);
                 hideProgress();
-                if (cbx_wxpay.isChecked()) {
-                    try {
-                        JSONObject jsonObject = new JSONObject(volleyHttpResult.getData().toString());
-                        IWXAPI api = WXAPIFactory.createWXAPI(RechargeActivity.this, XPTApplication.getInstance().WXAPP_ID);
-                        boolean register = api.registerApp(XPTApplication.getInstance().WXAPP_ID);
-                        PayReq req = new PayReq();
-                        req.appId = XPTApplication.getInstance().WXAPP_ID;
-                        req.partnerId = jsonObject.getString("partnerid");
-                        req.prepayId = jsonObject.getString("prepayid");
-                        req.nonceStr = jsonObject.getString("noncestr");
-                        req.timeStamp = jsonObject.getString("timestamp");
-                        req.packageValue = jsonObject.getString("package");
-                        req.sign = jsonObject.getString("sign");
+                if (volleyHttpResult.getStatus() == HttpAction.SUCCESS) {
+                    if (cbx_wxpay.isChecked()) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(volleyHttpResult.getData().toString());
+                            IWXAPI api = WXAPIFactory.createWXAPI(RechargeActivity.this, XPTApplication.getInstance().WXAPP_ID);
+                            boolean register = api.registerApp(XPTApplication.getInstance().WXAPP_ID);
+                            PayReq req = new PayReq();
+                            req.appId = XPTApplication.getInstance().WXAPP_ID;
+                            req.partnerId = jsonObject.getString("partnerid");
+                            req.prepayId = jsonObject.getString("prepayid");
+                            req.nonceStr = jsonObject.getString("noncestr");
+                            req.timeStamp = jsonObject.getString("timestamp");
+                            req.packageValue = jsonObject.getString("package");
+                            req.sign = jsonObject.getString("sign");
 //                req.extData = "app data"; // optional
 //                Toast.makeText(this, "正常调起支付", Toast.LENGTH_SHORT).show();
-                        // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
-                        boolean rst = api.sendReq(req);
+                            // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
+                            boolean rst = api.sendReq(req);
 //                        Toast.makeText(RechargeActivity.this, "register:" + register + " sendReq result " + rst, Toast.LENGTH_SHORT).show();
-                    } catch (Exception ex) {
+                        } catch (Exception ex) {
 
-                    }
-//                    toWXpay();
-                } else if (cbx_alipay.isChecked()) {
-                    final String orderInfo = volleyHttpResult.getInfo();
-                    Runnable payRunnable = new Runnable() {
-
-                        @Override
-                        public void run() {
-                            PayTask alipay = new PayTask(RechargeActivity.this);
-                            Map<String, String> result = alipay.payV2(orderInfo, true);
-                            Log.i(TAG, "payV2:" + result.toString());
-                            Message msg = new Message();
-                            msg.what = SDK_PAY_FLAG;
-                            msg.obj = result;
-                            mHandler.sendMessage(msg);
                         }
-                    };
-                    // 必须异步调用
-                    Thread payThread = new Thread(payRunnable);
-                    payThread.start();
+//                    toWXpay();
+                    } else if (cbx_alipay.isChecked()) {
+                        final String orderInfo = volleyHttpResult.getInfo();
+                        Runnable payRunnable = new Runnable() {
+
+                            @Override
+                            public void run() {
+                                PayTask alipay = new PayTask(RechargeActivity.this);
+                                Map<String, String> result = alipay.payV2(orderInfo, true);
+                                Log.i(TAG, "payV2:" + result.toString());
+                                Message msg = new Message();
+                                msg.what = SDK_PAY_FLAG;
+                                msg.obj = result;
+                                mHandler.sendMessage(msg);
+                            }
+                        };
+                        // 必须异步调用
+                        Thread payThread = new Thread(payRunnable);
+                        payThread.start();
+                    } else {
+                        UPPayAssistEx.startPay(RechargeActivity.this, null, null, volleyHttpResult.getInfo().toString(), mMode);
+                    }
                 } else {
-                    UPPayAssistEx.startPay(RechargeActivity.this, null, null, volleyHttpResult.getInfo().toString(), mMode);
+                    Toast.makeText(RechargeActivity.this, volleyHttpResult.getInfo().toString(), Toast.LENGTH_SHORT).show();
                 }
             }
 

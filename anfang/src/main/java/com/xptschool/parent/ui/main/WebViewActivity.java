@@ -54,7 +54,6 @@ public class WebViewActivity extends BaseActivity {
             //注入对象
             mAgentWeb.getJsInterfaceHolder().addJavaObject("Android", new AndroidInterface(mAgentWeb, this));
         }
-
     }
 
     private WebViewClient mWebViewClient = new WebViewClient() {
@@ -65,12 +64,20 @@ public class WebViewActivity extends BaseActivity {
 
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
-            view.loadUrl(url += "?user_id=" + XPTApplication.getInstance().getCurrentUserId());
+            String newUrl = url;
+            if (!newUrl.contains("?user_id")) {
+                newUrl += "?user_id=" + XPTApplication.getInstance().getCurrentUserId();
+            } else {
+                newUrl = newUrl.substring(0,newUrl.indexOf("?"));
+                newUrl += "?user_id=" + XPTApplication.getInstance().getCurrentUserId();
+            }
+            super.onPageStarted(view, newUrl, favicon);
             //do you  work
-            Log.i(TAG, "BaseWebActivity onPageStarted:" + view.getUrl());
+            Log.i(TAG, "BaseWebActivity onPageStarted:" + newUrl);
 //            view.loadData();
         }
     };
+
     private WebChromeClient mWebChromeClient = new WebChromeClient() {
         @Override
         public void onProgressChanged(WebView view, int newProgress) {

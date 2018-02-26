@@ -10,14 +10,18 @@ import android.webkit.JavascriptInterface;
 import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
+import com.android.volley.common.VolleyHttpResult;
 import com.just.library.AgentWeb;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.xptschool.parent.XPTApplication;
+import com.xptschool.parent.common.UserType;
+import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.ui.main.WebViewActivity;
 import com.xptschool.parent.ui.wallet.alipay.PayResult;
 import com.xptschool.parent.ui.wallet.pocket.RechargeActivity;
+import com.xptschool.parent.util.ToastUtils;
 
 import org.json.JSONObject;
 
@@ -42,57 +46,92 @@ public class AndroidInterface {
         this.context = context;
     }
 
+//    @JavascriptInterface
+//    public void callAndroid(final String option1) {
+//        Log.i(TAG, "callAndroid:" + option1);
+//    }
+
     @JavascriptInterface
     public void callAndroid(final String option1, final String option2) {
 
-        deliver.post(new Runnable() {
-            @Override
-            public void run() {
-                Log.i("Info", "main Thread:" + Thread.currentThread());
-                Toast.makeText(context.getApplicationContext(), option1 + "\n" + option2, Toast.LENGTH_LONG).show();
-            }
-        });
+        if (XPTApplication.getInstance().getCurrent_user_type() == null) {
+            ToastUtils.showToast(context, "请登录后进行操作");
+            return;
+        }
 
-        if ("weixin".equals(option1)) {
+        Log.i(TAG, "callAndroid: " + option1 + "\n" + option2);
+
+        final VolleyHttpResult volleyHttpResult = new VolleyHttpResult();
+        try {
+            JSONObject json = new JSONObject(option2);
+            volleyHttpResult.setStatus(json.getInt("status"));
+            volleyHttpResult.setUrl(json.getString("url"));
             try {
-                JSONObject jsonObject = new JSONObject(option2);
-                IWXAPI api = WXAPIFactory.createWXAPI(context, XPTApplication.getInstance().WXAPP_ID);
-                boolean register = api.registerApp(XPTApplication.getInstance().WXAPP_ID);
-                PayReq req = new PayReq();
-                req.appId = XPTApplication.getInstance().WXAPP_ID;
-                req.partnerId = jsonObject.getString("partnerid");
-                req.prepayId = jsonObject.getString("prepayid");
-                req.nonceStr = jsonObject.getString("noncestr");
-                req.timeStamp = jsonObject.getString("timestamp");
-                req.packageValue = jsonObject.getString("package");
-                req.sign = jsonObject.getString("sign");
+                volleyHttpResult.setData(json.get("data"));
+                Log.i(TAG, "analyseResponse: data--" + volleyHttpResult.getData());
+            } catch (Exception ex) {
+                Log.e(TAG, "analyseResponse: data " + ex.getMessage());
+            }
+
+            try {
+                volleyHttpResult.setInfo(json.getString("info"));
+                Log.i(TAG, "analyseResponse: info--" + volleyHttpResult.getInfo());
+            } catch (Exception ex) {
+                Log.e(TAG, "analyseResponse: info " + ex.getMessage());
+            }
+        } catch (Exception ex) {
+            Log.i(TAG, "callAndroid json error: " + ex.getMessage());
+            return;
+        }
+
+        switch (volleyHttpResult.getStatus()) {
+            case HttpAction.SUCCESS:
+                if ("1".equals(option1)) {
+                    //微信支付
+                    try {
+                        JSONObject jsonObject = new JSONObject(volleyHttpResult.getData().toString());
+                        IWXAPI api = WXAPIFactory.createWXAPI(context, XPTApplication.getInstance().WXAPP_ID);
+                        boolean register = api.registerApp(XPTApplication.getInstance().WXAPP_ID);
+                        PayReq req = new PayReq();
+                        req.appId = XPTApplication.getInstance().WXAPP_ID;
+                        req.partnerId = jsonObject.getString("partnerid");
+                        req.prepayId = jsonObject.getString("prepayid");
+                        req.nonceStr = jsonObject.getString("noncestr");
+                        req.timeStamp = jsonObject.getString("timestamp");
+                        req.packageValue = jsonObject.getString("package");
+                        req.sign = jsonObject.getString("sign");
 //                req.extData = "app data"; // optional
 //                Toast.makeText(this, "正常调起支付", Toast.LENGTH_SHORT).show();
-                // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
-                boolean rst = api.sendReq(req);
+                        // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
+                        boolean rst = api.sendReq(req);
 //                        Toast.makeText(RechargeActivity.this, "register:" + register + " sendReq result " + rst, Toast.LENGTH_SHORT).show();
-            } catch (Exception ex) {
+                    } catch (Exception ex) {
 
-            }
-        } else if ("alipay".equals(option1)) {
-            Runnable payRunnable = new Runnable() {
+                    }
+                } else if ("0".equals(option1)) {
+                    //支付宝
+                    Runnable payRunnable = new Runnable() {
 
-                @Override
-                public void run() {
-                    PayTask alipay = new PayTask((WebViewActivity) context);
-                    Map<String, String> result = alipay.payV2(option2, true);
-                    Log.i(TAG, "payV2:" + result.toString());
-                    Message msg = new Message();
-                    msg.what = SDK_PAY_FLAG;
-                    msg.obj = result;
-                    mHandler.sendMessage(msg);
+                        @Override
+                        public void run() {
+                            PayTask alipay = new PayTask((WebViewActivity) context);
+                            Map<String, String> result = alipay.payV2(volleyHttpResult.getInfo().toString(), true);
+                            Log.i(TAG, "payV2:" + result.toString());
+                            Message msg = new Message();
+                            msg.what = SDK_PAY_FLAG;
+                            msg.obj = result;
+                            mHandler.sendMessage(msg);
+                        }
+                    };
+                    // 必须异步调用
+                    Thread payThread = new Thread(payRunnable);
+                    payThread.start();
                 }
-            };
-            // 必须异步调用
-            Thread payThread = new Thread(payRunnable);
-            payThread.start();
+                break;
+            default:
+                ToastUtils.showToast(context, volleyHttpResult.getInfo().toString());
+                break;
         }
-        Log.i("Info", "Thread:" + Thread.currentThread());
     }
 
     private Handler mHandler = new Handler() {
