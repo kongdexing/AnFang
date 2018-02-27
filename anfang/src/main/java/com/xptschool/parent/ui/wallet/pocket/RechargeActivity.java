@@ -234,7 +234,6 @@ public class RechargeActivity extends BaseActivity {
 
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
-            hideProgress();
             switch (msg.what) {
                 case SDK_PAY_FLAG: {
                     PayResult payResult = new PayResult((Map<String, String>) msg.obj);

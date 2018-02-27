@@ -40,7 +40,6 @@ public class AndroidInterface {
     private Context context;
     private static final int SDK_PAY_FLAG = 1;
 
-
     public AndroidInterface(AgentWeb agent, Context context) {
         this.agent = agent;
         this.context = context;
@@ -99,7 +98,7 @@ public class AndroidInterface {
 //                Toast.makeText(this, "正常调起支付", Toast.LENGTH_SHORT).show();
                         // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
                         boolean rst = api.sendReq(req);
-//                        Toast.makeText(RechargeActivity.this, "register:" + register + " sendReq result " + rst, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "register:" + register + " sendReq result " + rst, Toast.LENGTH_SHORT).show();
                     } catch (Exception ex) {
 
                     }
