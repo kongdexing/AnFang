@@ -65,11 +65,13 @@ public class WebViewActivity extends BaseActivity {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             String newUrl = url;
-            if (!newUrl.contains("?user_id")) {
+            if (!newUrl.contains("?")) {
+                newUrl += "?user_id=" + XPTApplication.getInstance().getCurrentUserId();
+            } else if (newUrl.contains("?user_id")) {
+                newUrl = newUrl.substring(0, newUrl.indexOf("?"));
                 newUrl += "?user_id=" + XPTApplication.getInstance().getCurrentUserId();
             } else {
-                newUrl = newUrl.substring(0,newUrl.indexOf("?"));
-                newUrl += "?user_id=" + XPTApplication.getInstance().getCurrentUserId();
+                newUrl += "&user_id=" + XPTApplication.getInstance().getCurrentUserId();
             }
             super.onPageStarted(view, newUrl, favicon);
             //do you  work

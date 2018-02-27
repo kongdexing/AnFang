@@ -46,11 +46,6 @@ public class AndroidInterface {
         this.context = context;
     }
 
-//    @JavascriptInterface
-//    public void callAndroid(final String option1) {
-//        Log.i(TAG, "callAndroid:" + option1);
-//    }
-
     @JavascriptInterface
     public void callAndroid(final String option1, final String option2) {
 

@@ -251,7 +251,7 @@ public class HomeFragment extends BaseFragment {
                 }
                 try {
                     BeanBanner banner = advertList.get(position);
-                    if (banner.getTurn_type().equals("1")) {
+                    if (banner.getTurn_type().equals("1") && !banner.getUrl().isEmpty()) {
                         Intent intent = new Intent(getActivity(), WebViewActivity.class);
                         intent.putExtra(ExtraKey.WEB_URL, banner.getUrl());
                         getActivity().startActivity(intent);
@@ -513,7 +513,7 @@ public class HomeFragment extends BaseFragment {
             llTip.setVisibility(View.GONE);
 
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) happyGrowView.getLayoutParams();
-            lp.setMargins(0,0,0,0);
+            lp.setMargins(0, 0, 0, 0);
             happyGrowView.setLayoutParams(lp);
 
             return;
@@ -521,7 +521,7 @@ public class HomeFragment extends BaseFragment {
             llTip.setVisibility(View.VISIBLE);
 
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) happyGrowView.getLayoutParams();
-            lp.setMargins(0,10,0,0);
+            lp.setMargins(0, 10, 0, 0);
             happyGrowView.setLayoutParams(lp);
 
         }
