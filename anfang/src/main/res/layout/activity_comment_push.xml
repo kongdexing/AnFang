@@ -151,6 +151,7 @@
                 android:background="@drawable/btn_bg_normal"
                 android:padding="@dimen/dp_5"
                 android:text="@string/push"
+                android:textColor="@color/white"
                 android:textSize="@dimen/sp_18" />
 
             <Button

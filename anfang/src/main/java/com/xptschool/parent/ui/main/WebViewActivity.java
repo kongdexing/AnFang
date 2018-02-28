@@ -115,18 +115,12 @@ public class WebViewActivity extends BaseActivity {
         }
     };
 
-//    @Override
-//    public void onBackPressed() {
-//        CustomDialog dialog = new CustomDialog(WebViewActivity.this);
-//        dialog.setTitle(R.string.label_tip);
-//        dialog.setMessage("您确定要关闭该页面吗?");
-//        dialog.setAlertDialogClickListener(new CustomDialog.DialogClickListener() {
-//            @Override
-//            public void onPositiveClick() {
-//                WebViewActivity.this.finish();
-//            }
-//        });
-//    }
+    @Override
+    public void onBackPressed() {
+        if (!mAgentWeb.back()) {
+            finish();
+        }
+    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
