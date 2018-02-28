@@ -56,9 +56,6 @@ public class ScoreTeacherActivity extends BaseListActivity {
     @BindView(R.id.spnExams)
     MaterialSpinner spnExams;
 
-    @BindView(R.id.swipe_refresh_widget)
-    SwipeRefreshLayout swipeRefresh;
-
     @BindView(R.id.item_scroll_title)
     SyncScrollHorizontalView headerScroll;
 
@@ -91,13 +88,6 @@ public class ScoreTeacherActivity extends BaseListActivity {
     }
 
     private void initView() {
-        swipeRefresh.setColorSchemeColors(getResources().getIntArray(R.array.google_colors));
-        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getFirstPageData();
-            }
-        });
     }
 
     private void initDate() {
@@ -189,7 +179,7 @@ public class ScoreTeacherActivity extends BaseListActivity {
         }
     }
 
-    private void getFirstPageData(){
+    private void getFirstPageData() {
         mAdapter.loadScore(new ArrayList<BeanScoreTeacher>());
         llScoreTitle.removeAllViews();
         getScoreList();
@@ -271,9 +261,6 @@ public class ScoreTeacherActivity extends BaseListActivity {
         }
         if (exam == null) {
             Toast.makeText(this, "请先选择一场考试", Toast.LENGTH_SHORT).show();
-            if (swipeRefresh != null) {
-                swipeRefresh.setRefreshing(false);
-            }
             return;
         }
 
@@ -289,17 +276,11 @@ public class ScoreTeacherActivity extends BaseListActivity {
                 new MyVolleyRequestListener() {
                     @Override
                     public void onStart() {
-                        if (swipeRefresh != null) {
-                            swipeRefresh.setRefreshing(true);
-                        }
                     }
 
                     @Override
                     public void onResponse(VolleyHttpResult httpResult) {
                         super.onResponse(httpResult);
-                        if (swipeRefresh != null) {
-                            swipeRefresh.setRefreshing(false);
-                        }
                         switch (httpResult.getStatus()) {
                             case HttpAction.SUCCESS:
                                 try {
@@ -401,9 +382,6 @@ public class ScoreTeacherActivity extends BaseListActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         super.onErrorResponse(error);
-                        if (swipeRefresh != null) {
-                            swipeRefresh.setRefreshing(false);
-                        }
                     }
                 });
     }
