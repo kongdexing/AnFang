@@ -85,6 +85,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:persistent="true"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="icon,name">
         <meta-data
@@ -494,15 +495,65 @@
             android:theme="@android:style/Theme.Translucent" />
 
         <!--购物-->
-        <activity android:name=".ui.shop.ShopListActivity"
+        <activity
+            android:name=".ui.shop.ShopListActivity"
             android:configChanges="orientation|keyboardHidden|fontScale"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
 
-        <activity android:name=".ui.shop.ShopDetailActivity"
+        <activity
+            android:name=".ui.shop.ShopDetailActivity"
             android:configChanges="orientation|keyboardHidden|fontScale"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
+
+        <!--UMShare-->
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name="com.umeng.socialize.media.WBShareCallBackActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
+
+        <activity
+            android:name="com.sina.weibo.sdk.share.WbShareTransActivity"
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
+            <intent-filter>
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent100424468" />
+            </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!--UMShare-->
 
 
         <provider

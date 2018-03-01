@@ -18,13 +18,16 @@ import com.hyphenate.easeui.utils.EaseLocalUserHelper;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.liulishuo.filedownloader.connection.FileDownloadUrlConnection;
 import com.liulishuo.filedownloader.services.DownloadMgrInitialParams;
-import com.mob.MobSDK;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.socialize.Config;
+import com.umeng.socialize.PlatformConfig;
+import com.umeng.socialize.UMShareAPI;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.common.UserType;
@@ -42,7 +45,6 @@ import com.xptschool.parent.ui.leave.LeaveTDetailActivity;
 import com.xptschool.parent.ui.main.MainActivity;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
-import com.umeng.analytics.MobclickAgent;
 import com.umeng.message.PushAgent;
 import com.umeng.message.UmengNotificationClickHandler;
 import com.umeng.message.entity.UMessage;
@@ -69,6 +71,12 @@ public class XPTApplication extends Application {
     public static final String WXAPP_ID = "wx1af4f660ce9e6b37";
     private Display display;
     public static String TAG = XPTApplication.class.getSimpleName();
+
+    {
+        PlatformConfig.setWeixin("wx1af4f660ce9e6b37", "5bb696d9ccd75a38c8a0bfe0675559b3");
+        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
+        PlatformConfig.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad", "http://sns.whalecloud.com");
+    }
 
     /**
      * bugly打包
@@ -160,8 +168,12 @@ public class XPTApplication extends Application {
 
         //init demo helper
         EaseHelper.getInstance().init(mInstance);
-
-        MobSDK.init(this);
+        Config.DEBUG = true;
+        try {
+            UMShareAPI.get(this);
+        } catch (Exception ex) {
+            Log.i(TAG, "init: UMShareAPI " + ex.getMessage());
+        }
     }
 
     public void resolvePushMsg(String message) {
@@ -211,7 +223,7 @@ public class XPTApplication extends Application {
                 startActivity(intent);
             }
         } catch (Exception ex) {
-            Log.i(TAG, "resolvePushMsg: "+ex.getMessage());
+            Log.i(TAG, "resolvePushMsg: " + ex.getMessage());
         }
     }
 
@@ -278,7 +290,7 @@ public class XPTApplication extends Application {
     }
 
     public UserType getCurrent_user_type() {
-        if (!isLoggedIn()){
+        if (!isLoggedIn()) {
             return null;
         }
         String current_user_type = SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_TYPE, "").toString();
@@ -292,13 +304,13 @@ public class XPTApplication extends Application {
         return null;
     }
 
-    public String getCurrentUserId(){
+    public String getCurrentUserId() {
         String userId = "";
         if (UserType.PARENT.equals(getCurrent_user_type())) {
             userId = GreenDaoHelper.getInstance().getCurrentParent().getU_id();
         } else if (UserType.TEACHER.equals(getCurrent_user_type())) {
             userId = GreenDaoHelper.getInstance().getCurrentTeacher().getU_id();
-        } else if(UserType.VISITOR.equals(getCurrent_user_type())){
+        } else if (UserType.VISITOR.equals(getCurrent_user_type())) {
             userId = SharedPreferencesUtil.getData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_UID, "").toString();
         }
         return userId;

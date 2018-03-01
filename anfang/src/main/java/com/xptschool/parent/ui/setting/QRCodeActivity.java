@@ -1,25 +1,28 @@
 package com.xptschool.parent.ui.setting;
 
+import android.Manifest;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.xptschool.parent.R;
 import com.xptschool.parent.ui.main.BaseActivity;
 
 import java.util.HashMap;
 
-import cn.sharesdk.framework.Platform;
-import cn.sharesdk.framework.PlatformActionListener;
-import cn.sharesdk.framework.ShareSDK;
-import cn.sharesdk.onekeyshare.OnekeyShare;
-import cn.sharesdk.tencent.qq.QQ;
-
 /**
  * Created by dexing on 2017-11-15 0015.
  */
 
-public class QRCodeActivity extends BaseActivity implements PlatformActionListener{
+public class QRCodeActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,56 +31,64 @@ public class QRCodeActivity extends BaseActivity implements PlatformActionListen
         setTitle(R.string.mine_qr_code);
 
 
-//        Platform weibo = ShareSDK.getPlatform(QQ.NAME);
-//        weibo.SSOSetting(false);  //设置false表示使用SSO授权方式
-//        weibo.setPlatformActionListener(this); // 设置分享事件回调
-//
-//        weibo.authorize();//单独授权
-//        weibo.showUser(null);//授权并获取用户信息
+        setTxtRight("分享");
+        setTextRightClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showShare();
+            }
+        });
+    }
 
-
-//        setTxtRight("分享");
-//        setTextRightClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showShare();
-//            }
-//        });
+    //QQ，新浪
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
-    public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
-        Log.i(TAG, "onComplete: ");
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (Build.VERSION.SDK_INT >= 23) {
+            String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.CALL_PHONE,
+                    Manifest.permission.READ_LOGS, Manifest.permission.READ_PHONE_STATE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.SET_DEBUG_APP,
+                    Manifest.permission.SYSTEM_ALERT_WINDOW, Manifest.permission.GET_ACCOUNTS,
+                    Manifest.permission.WRITE_APN_SETTINGS};
+            ActivityCompat.requestPermissions(this, mPermissionList, 123);
+        }
     }
 
-    @Override
-    public void onError(Platform platform, int i, Throwable throwable) {
-        Log.i(TAG, "onError: "+throwable.getMessage());
-    }
-
-    @Override
-    public void onCancel(Platform platform, int i) {
-        Log.i(TAG, "onCancel: ");
-    }
 
     private void showShare() {
-        OnekeyShare oks = new OnekeyShare();
-        //关闭sso授权
-//        oks.disableSSOWhenAuthorize();
+        new ShareAction(QRCodeActivity.this)
+                .setPlatform(SHARE_MEDIA.WEIXIN)//传入平台
+                .withText("hello")//分享内容
+                .setCallback(new UMShareListener() {
 
-        // title标题，微信、QQ和QQ空间等平台使用
-        oks.setTitle("数海安防校园");
-        // titleUrl QQ和QQ空间跳转链接
-        oks.setTitleUrl("http://sharesdk.cn");
-        // text是分享文本，所有平台都需要这个字段
-        oks.setText("欢迎下载使用信平台APP");
-        // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
-//        oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
-        // url在微信、微博，Facebook等平台中使用
-        oks.setUrl("http://school.xinpingtai.com/app/index.html");
-        // comment是我对这条分享的评论，仅在人人网使用
-//        oks.setComment("我是测试评论文本");
-        // 启动分享GUI
-        oks.show(this);
+                    @Override
+                    public void onStart(SHARE_MEDIA share_media) {
+
+                    }
+
+                    @Override
+                    public void onResult(SHARE_MEDIA share_media) {
+
+                    }
+
+                    @Override
+                    public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+
+                    }
+
+                    @Override
+                    public void onCancel(SHARE_MEDIA share_media) {
+
+                    }
+                })//回调监听器
+                .share();
+
     }
 }
