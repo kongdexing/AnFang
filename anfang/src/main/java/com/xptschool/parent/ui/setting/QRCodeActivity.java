@@ -13,6 +13,7 @@ import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMWeb;
 import com.xptschool.parent.R;
 import com.xptschool.parent.ui.main.BaseActivity;
 
@@ -61,11 +62,16 @@ public class QRCodeActivity extends BaseActivity {
         }
     }
 
-
     private void showShare() {
+        UMWeb web = new UMWeb(getString(R.string.label_app_download_url));
+        web.setTitle("数海信息信平台客户端");//标题
+//        web.setThumb(thumb);  //缩略图
+        web.setDescription("诚邀您下载数海信平台客户端进行体验");//描述
+
         new ShareAction(QRCodeActivity.this)
-                .setPlatform(SHARE_MEDIA.WEIXIN)//传入平台
-                .withText("hello")//分享内容
+                .setDisplayList(SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE,
+                        SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE)//传入平台
+                .withMedia(web)//分享内容
                 .setCallback(new UMShareListener() {
 
                     @Override
@@ -88,7 +94,7 @@ public class QRCodeActivity extends BaseActivity {
 
                     }
                 })//回调监听器
-                .share();
+                .open();
 
     }
 }

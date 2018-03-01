@@ -383,4 +383,6 @@
     <!-- 消息成功率统计： 通道将消息转发给SDK后，SDK通知通道消息已接收到 -->
     <string name="hwpush_ability_value" translatable="false">successRateAnalytics</string>
 
+    <string name="label_app_download_url">http://school.xinpingtai.com/app/index.html</string>
+
 </resources>
