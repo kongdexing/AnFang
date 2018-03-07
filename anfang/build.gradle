@@ -197,4 +197,6 @@ dependencies {
     compile 'com.parse:parse-android:1.13.1'
     compile project(':barlibrary')
 
+    compile 'com.google.zxing:core:3.2.1'
+
 }
