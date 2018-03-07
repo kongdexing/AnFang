@@ -265,10 +265,11 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
             mLocClient.stop();
             return;
         }
-        Log.i(TAG, "onReceiveLocation: " + bdLocation.getCountryCode() + bdLocation.getProvince());
-        Log.i(TAG, "onReceiveLocation: " + bdLocation.getCity());
+        Log.i(TAG, "onReceiveLocation: 省：" + bdLocation.getProvince() +"  市： " + bdLocation.getCity());
         //保存本地城市
+        SharedPreferencesUtil.saveData(this, SharedPreferencesUtil.KEY_PROVINCE, bdLocation.getProvince());
         SharedPreferencesUtil.saveData(this, SharedPreferencesUtil.KEY_CITY, bdLocation.getCity());
+
         if (homeFragment != null) {
             ((HomeFragment) homeFragment).getBanners();
         }

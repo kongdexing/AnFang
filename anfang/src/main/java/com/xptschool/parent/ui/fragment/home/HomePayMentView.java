@@ -17,6 +17,7 @@ import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.xptschool.parent.R;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
+import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.model.BeanHomeCfg;
 import com.xptschool.parent.ui.main.WebViewActivity;
 import com.xptschool.parent.ui.mine.BaseInfoView;
@@ -78,10 +79,14 @@ public class HomePayMentView extends BaseInfoView {
                         rlpay1.setOnClickListener(new OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Intent intent = new Intent(mContext, WebViewActivity.class);
+                                //传入当前省市
 
+
+                                Intent intent = new Intent(mContext, WebViewActivity.class);
 //                                intent.putExtra(ExtraKey.WEB_URL, "http://192.168.1.142:8011/index.php/Wap/AppHook/livingPayment");
-                                intent.putExtra(ExtraKey.WEB_URL, homeCfg1.getUrl());
+                                intent.putExtra(ExtraKey.WEB_URL, homeCfg1.getUrl()
+                                        +"?province="+ SharedPreferencesUtil.getData(mContext,SharedPreferencesUtil.KEY_PROVINCE,"北京")
+                                        +"&city="+SharedPreferencesUtil.getData(mContext,SharedPreferencesUtil.KEY_CITY,"北京"));
                                 mContext.startActivity(intent);
                             }
                         });
@@ -100,7 +105,9 @@ public class HomePayMentView extends BaseInfoView {
                             @Override
                             public void onClick(View view) {
                                 Intent intent = new Intent(mContext, WebViewActivity.class);
-                                intent.putExtra(ExtraKey.WEB_URL, homeCfg2.getUrl());
+                                intent.putExtra(ExtraKey.WEB_URL, homeCfg2.getUrl()
+                                        +"?province="+ SharedPreferencesUtil.getData(mContext,SharedPreferencesUtil.KEY_PROVINCE,"北京")
+                                        +"&city="+SharedPreferencesUtil.getData(mContext,SharedPreferencesUtil.KEY_CITY,"北京"));
                                 mContext.startActivity(intent);
                             }
                         });
