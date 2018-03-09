@@ -272,7 +272,7 @@ public class CommonUtil {
             //游客
             JSONObject jsonLogin = jsonData.getJSONObject("login");
             SharedPreferencesUtil.saveData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_VISITOR_NAME, jsonLogin.get("name"));
-            SharedPreferencesUtil.saveData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_UID, jsonLogin.get("u_id"));
+            SharedPreferencesUtil.saveData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_UID, jsonLogin.get("user_id"));
         }
         //删除联系人
 //        GreenDaoHelper.getInstance().deleteContact();

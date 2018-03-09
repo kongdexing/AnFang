@@ -42,7 +42,6 @@ public class RegisterActivity extends BaseActivity {
     private int lastTime = 0;
     private final int START_TIMER_DELAY = 1;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

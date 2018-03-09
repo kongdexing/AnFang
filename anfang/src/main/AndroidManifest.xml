@@ -148,7 +148,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.main.PicAndColorActivity"></activity>
+        <activity android:name=".ui.main.PicAndColorActivity" />
         <activity
             android:name=".ui.main.MainActivity"
             android:configChanges="orientation|keyboardHidden"
@@ -494,20 +494,19 @@
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
             android:theme="@android:style/Theme.Translucent" />
 
-        <!--购物-->
+        <!-- 购物 -->
         <activity
             android:name=".ui.shop.ShopListActivity"
             android:configChanges="orientation|keyboardHidden|fontScale"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
-
         <activity
             android:name=".ui.shop.ShopDetailActivity"
             android:configChanges="orientation|keyboardHidden|fontScale"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
 
-        <!--UMShare-->
+        <!-- UMShare -->
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -520,23 +519,21 @@
             android:exported="false"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
-
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name="com.sina.weibo.sdk.share.WbShareTransActivity"
             android:launchMode="singleTask"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
             android:noHistory="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -545,16 +542,13 @@
 
                 <data android:scheme="tencent100424468" />
             </intent-filter>
-
         </activity>
-
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <!--UMShare-->
-
+        <!-- UMShare -->
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -693,6 +687,7 @@
         <!-- android:name="com.baidu.lbsapi.API_KEY" -->
         <!-- android:value="3ecea51f560650b1ed8a4b99808f52e8" /> -->
 
+        <activity android:name=".ui.mine.MyInviteActivity"></activity>
     </application>
 
 </manifest>

@@ -157,6 +157,7 @@ public class HttpAction {
     public static String GET_SHOPLIST = HEAD + "Goods/getGoodsList";
     public static String GET_GOODDETAIL = HEAD + "Goods/getGoodsDetail";
 
+    public static String GET_REFER = Index +"/Wap/Register/getReferrer";
 
 
 }

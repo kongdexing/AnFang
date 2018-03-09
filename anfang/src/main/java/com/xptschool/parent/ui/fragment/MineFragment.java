@@ -25,6 +25,7 @@ import com.xptschool.parent.ui.login.LoginActivity;
 import com.xptschool.parent.ui.mine.MyChildActivity;
 import com.xptschool.parent.ui.mine.MyClassesActivity;
 import com.xptschool.parent.ui.mine.MyInfoActivity;
+import com.xptschool.parent.ui.mine.MyInviteActivity;
 import com.xptschool.parent.ui.setting.QRCodeActivity;
 import com.xptschool.parent.ui.setting.SettingActivity;
 import com.xptschool.parent.ui.wallet.WalletActivity;
@@ -57,7 +58,7 @@ public class MineFragment extends BaseFragment {
     @BindView(R.id.rlMyChild)
     RelativeLayout rlMyChild;
 
-//    @BindView(R.id.rlMyBill)
+    //    @BindView(R.id.rlMyBill)
 //    RelativeLayout rlMyBill;
     @BindView(R.id.rlMyProperty)
     RelativeLayout rlMyProperty;
@@ -165,13 +166,14 @@ public class MineFragment extends BaseFragment {
         });
     }
 
-    @OnClick({R.id.imgHead, R.id.txtToLogin, R.id.ll_login, R.id.rlMyChild,
+    @OnClick({R.id.imgHead, R.id.txtToLogin, R.id.ll_login, R.id.rlMyChild, R.id.rlMyInvite,
             R.id.rlMyBill, R.id.rlMyClass, R.id.rlMyProperty, R.id.rlSetting, R.id.rlQRCode})
     void viewClick(View view) {
         switch (view.getId()) {
             case R.id.rlMyClass:
             case R.id.rlMyChild:
             case R.id.rlMyBill:
+            case R.id.rlMyInvite:
             case R.id.rlMyProperty:
                 if (!XPTApplication.getInstance().isLoggedIn()) {
                     //弹出登录对话框
@@ -205,6 +207,9 @@ public class MineFragment extends BaseFragment {
                 break;
             case R.id.rlMyClass:
                 startActivity(new Intent(getContext(), MyClassesActivity.class));
+                break;
+            case R.id.rlMyInvite:
+                startActivity(new Intent(getContext(), MyInviteActivity.class));
                 break;
             case R.id.rlMyProperty:
                 List<BeanStudent> students = GreenDaoHelper.getInstance().getStudents();

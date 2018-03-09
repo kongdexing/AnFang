@@ -56,7 +56,8 @@ public class QRCodeActivity extends BaseActivity {
             final String encodedText = Base64.encodeToString(textByte, Base64.DEFAULT);
 
             shareURL = "http://school.xinpingtai.com/index.php/Wap/Register/index?ref=" + encodedText;
-            Bitmap bitmap = QRCodeUtil.createCode(shareURL, BitmapFactory.decodeResource(getResources(), R.drawable.logo_shuhai));
+            Log.i(TAG, "onCreate: " + shareURL);
+            Bitmap bitmap = QRCodeUtil.createCode(shareURL, BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
 
             if (bitmap != null) {
                 QRImg.setImageBitmap(bitmap);

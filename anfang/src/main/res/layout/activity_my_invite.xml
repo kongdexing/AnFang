@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/llInviteTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/txtStuName"
+                style="@style/TextAlarm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="用户" />
+
+            <View
+                android:layout_width="@dimen/dp_0.5"
+                android:layout_height="match_parent"
+                android:background="@color/text_grey" />
+
+            <TextView
+                android:id="@+id/txtSignType"
+                style="@style/TextAlarm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="邀请时间" />
+
+            <View
+                android:layout_width="@dimen/dp_0.5"
+                android:layout_height="match_parent"
+                android:background="@color/text_grey" />
+
+            <TextView
+                android:id="@+id/txtSTime"
+                style="@style/TextAlarm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="状态" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/llInviteTitle">
+
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_refresh_widget"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.android.widget.view.LoadMoreRecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/dp_5" />
+
+            </android.support.v4.widget.SwipeRefreshLayout>
+
+        </FrameLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>
