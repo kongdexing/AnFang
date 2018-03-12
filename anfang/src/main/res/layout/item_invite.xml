@@ -18,12 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="用户" />
-
-        <View
-            android:layout_width="@dimen/dp_0.5"
-            android:layout_height="match_parent"
-            android:background="@color/text_grey" />
+            android:text="" />
 
         <TextView
             android:id="@+id/txtTime"
@@ -32,12 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="邀请时间" />
-
-        <View
-            android:layout_width="@dimen/dp_0.5"
-            android:layout_height="match_parent"
-            android:background="@color/text_grey" />
+            android:text="" />
 
         <TextView
             android:id="@+id/txtStatus"
@@ -46,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="状态" />
+            android:text="" />
     </LinearLayout>
 
 </LinearLayout>

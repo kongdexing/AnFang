@@ -11,44 +11,39 @@
             android:id="@+id/llInviteTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="visible">
+            android:orientation="vertical"
+            android:visibility="gone">
 
-            <TextView
-                android:id="@+id/txtStuName"
-                style="@style/TextAlarm"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="用户" />
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/txtStuName"
+                    style="@style/TextAlarm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="用户" />
 
-            <View
-                android:layout_width="@dimen/dp_0.5"
-                android:layout_height="match_parent"
-                android:background="@color/text_grey" />
+                <TextView
+                    android:id="@+id/txtSignType"
+                    style="@style/TextAlarm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="邀请时间" />
 
-            <TextView
-                android:id="@+id/txtSignType"
-                style="@style/TextAlarm"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="邀请时间" />
-
-            <View
-                android:layout_width="@dimen/dp_0.5"
-                android:layout_height="match_parent"
-                android:background="@color/text_grey" />
-
-            <TextView
-                android:id="@+id/txtSTime"
-                style="@style/TextAlarm"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="状态" />
+                <TextView
+                    android:id="@+id/txtSTime"
+                    style="@style/TextAlarm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="状态" />
+            </LinearLayout>
 
         </LinearLayout>
 

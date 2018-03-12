@@ -59,6 +59,8 @@ public class MyInviteActivity extends BaseListActivity {
         setContentView(R.layout.activity_my_invite);
         setTitle(R.string.mine_invite);
         initView();
+
+        getFirstPageData();
     }
 
     private void initView() {
@@ -135,8 +137,12 @@ public class MyInviteActivity extends BaseListActivity {
                                     } else {
                                         //第一页数据
                                         if (beanInvites.size() == 0) {
+                                            llInviteTitle.setVisibility(View.GONE);
                                             Toast.makeText(MyInviteActivity.this, R.string.toast_data_empty, Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            llInviteTitle.setVisibility(View.VISIBLE);
                                         }
+
                                         recyclerView.removeAllViews();
                                         adapter.refreshData(beanInvites);
                                     }
