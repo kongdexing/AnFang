@@ -130,7 +130,7 @@ public class MineFragment extends BaseFragment {
                 }
             } else if (UserType.VISITOR.equals(XPTApplication.getInstance().getCurrent_user_type())) {
                 txtUserName.setText(SharedPreferencesUtil.getData(mContext, SharedPreferencesUtil.KEY_USER_NAME, "").toString());
-                txtPhone.setText("手机号：" + SharedPreferencesUtil.getData(mContext, SharedPreferencesUtil.KEY_VISITOR_NAME, ""));
+//                txtPhone.setText("手机号：" + SharedPreferencesUtil.getData(mContext, SharedPreferencesUtil.KEY_VISITOR_NAME, ""));
             }
         } else {
             LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) rlMyChild.getLayoutParams();
