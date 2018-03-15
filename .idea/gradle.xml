@@ -9,6 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/PushSDK" />
+            <option value="$PROJECT_DIR$/agentweb-core" />
             <option value="$PROJECT_DIR$/anfang" />
             <option value="$PROJECT_DIR$/barlibrary" />
             <option value="$PROJECT_DIR$/camera" />

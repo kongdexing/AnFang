@@ -20,7 +20,7 @@
         android:layout_alignParentBottom="true"
         android:clickable="false"
         android:gravity="center"
-        android:background="@drawable/bg_home_top"
+        android:background="@color/map_transparent_gray"
         android:textColor="@color/color_black_3"
         android:text="2"
         android:padding="@dimen/dp_2"

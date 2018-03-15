@@ -306,11 +306,12 @@ public class XPTApplication extends Application {
 
     public String getCurrentUserId() {
         String userId = "";
-        if (UserType.PARENT.equals(getCurrent_user_type())) {
+        UserType type = getCurrent_user_type();
+        if (UserType.PARENT.equals(type)) {
             userId = GreenDaoHelper.getInstance().getCurrentParent().getU_id();
-        } else if (UserType.TEACHER.equals(getCurrent_user_type())) {
+        } else if (UserType.TEACHER.equals(type)) {
             userId = GreenDaoHelper.getInstance().getCurrentTeacher().getU_id();
-        } else if (UserType.VISITOR.equals(getCurrent_user_type())) {
+        } else if (UserType.VISITOR.equals(type)) {
             userId = SharedPreferencesUtil.getData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_UID, "").toString();
         }
         return userId;

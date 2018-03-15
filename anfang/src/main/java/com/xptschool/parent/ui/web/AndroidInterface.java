@@ -11,13 +11,14 @@ import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
 import com.android.volley.common.VolleyHttpResult;
-import com.just.library.AgentWeb;
+import com.just.agentweb.AgentWeb;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.ui.main.WebCommonActivity;
 import com.xptschool.parent.ui.main.WebViewActivity;
 import com.xptschool.parent.ui.wallet.alipay.PayResult;
 import com.xptschool.parent.ui.wallet.pocket.RechargeActivity;
@@ -108,7 +109,7 @@ public class AndroidInterface {
 
                         @Override
                         public void run() {
-                            PayTask alipay = new PayTask((WebViewActivity) context);
+                            PayTask alipay = new PayTask((WebCommonActivity) context);
                             Map<String, String> result = alipay.payV2(volleyHttpResult.getInfo().toString(), true);
                             Log.i(TAG, "payV2:" + result.toString());
                             Message msg = new Message();

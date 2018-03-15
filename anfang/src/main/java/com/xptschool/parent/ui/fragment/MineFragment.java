@@ -91,7 +91,9 @@ public class MineFragment extends BaseFragment {
             ll_unlogin.setVisibility(View.GONE);
             ll_login.setVisibility(View.VISIBLE);
 
-            if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+            UserType type = XPTApplication.getInstance().getCurrent_user_type();
+
+            if (UserType.TEACHER.equals(type)) {
                 rlMyChild.setVisibility(View.GONE);
                 rlMyClass.setVisibility(View.VISIBLE);
 //                rlMyBill.setVisibility(View.GONE);
@@ -107,7 +109,7 @@ public class MineFragment extends BaseFragment {
                         imgLoginHead.setImageResource(R.drawable.teacher_woman);
                     }
                 }
-            } else if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+            } else if (UserType.PARENT.equals(type)) {
                 rlMyChild.setVisibility(View.VISIBLE);
 
                 LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) rlMyChild.getLayoutParams();
@@ -128,7 +130,10 @@ public class MineFragment extends BaseFragment {
                         imgLoginHead.setImageResource(R.drawable.parent_mother);
                     }
                 }
-            } else if (UserType.VISITOR.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+            } else if (UserType.VISITOR.equals(type)) {
+                rlMyClass.setVisibility(View.GONE);
+                rlMyChild.setVisibility(View.GONE);
+                rlMyProperty.setVisibility(View.GONE);
                 txtUserName.setText(SharedPreferencesUtil.getData(mContext, SharedPreferencesUtil.KEY_USER_NAME, "").toString());
 //                txtPhone.setText("手机号：" + SharedPreferencesUtil.getData(mContext, SharedPreferencesUtil.KEY_VISITOR_NAME, ""));
             }

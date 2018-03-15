@@ -205,7 +205,6 @@
     <string name="hint_contract_name">联系人</string>
     <string name="hint_phone">请输入手机号</string>
 
-
     <string name="input_error_phone">手机号格式不正确</string>
     <string name="label_fence_name">围栏名称</string>
     <string name="input_fence_name">请输入围栏名称</string>
@@ -380,6 +379,8 @@
 
     <string name="label_chat_option_revert">撤回</string>
     <string name="label_chat_option_delete">删除</string>
+
+    <string name="toast_unlogin">该功能需登录后再试</string>
 
     <!-- 消息成功率统计： 通道将消息转发给SDK后，SDK通知通道消息已接收到 -->
     <string name="hwpush_ability_value" translatable="false">successRateAnalytics</string>

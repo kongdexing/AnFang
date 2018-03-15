@@ -15,12 +15,16 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.xptschool.parent.R;
+import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.model.BeanHomeCfg;
+import com.xptschool.parent.ui.login.LoginActivity;
+import com.xptschool.parent.ui.main.WebCommonActivity;
 import com.xptschool.parent.ui.main.WebViewActivity;
 import com.xptschool.parent.ui.mine.BaseInfoView;
+import com.xptschool.parent.util.ToastUtils;
 
 import java.util.List;
 
@@ -79,15 +83,18 @@ public class HomePayMentView extends BaseInfoView {
                         rlpay1.setOnClickListener(new OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                //传入当前省市
-
-
-                                Intent intent = new Intent(mContext, WebViewActivity.class);
+                                if (XPTApplication.getInstance().isLoggedIn()) {
+                                    //传入当前省市
+                                    Intent intent = new Intent(mContext, WebCommonActivity.class);
 //                                intent.putExtra(ExtraKey.WEB_URL, "http://192.168.1.142:8011/index.php/Wap/AppHook/livingPayment");
-                                intent.putExtra(ExtraKey.WEB_URL, homeCfg1.getUrl()
-                                        +"?province="+ SharedPreferencesUtil.getData(mContext,SharedPreferencesUtil.KEY_PROVINCE,"北京")
-                                        +"&city="+SharedPreferencesUtil.getData(mContext,SharedPreferencesUtil.KEY_CITY,"北京"));
-                                mContext.startActivity(intent);
+                                    intent.putExtra(ExtraKey.WEB_URL, homeCfg1.getUrl()
+                                            + "?province=" + SharedPreferencesUtil.getData(mContext, SharedPreferencesUtil.KEY_PROVINCE, "北京")
+                                            + "&city=" + SharedPreferencesUtil.getData(mContext, SharedPreferencesUtil.KEY_CITY, "北京"));
+                                    mContext.startActivity(intent);
+                                } else {
+                                    ToastUtils.showToast(mContext,R.string.toast_unlogin);
+                                    mContext.startActivity(new Intent(mContext, LoginActivity.class));
+                                }
                             }
                         });
                     }
@@ -104,11 +111,16 @@ public class HomePayMentView extends BaseInfoView {
                         rlpay2.setOnClickListener(new OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Intent intent = new Intent(mContext, WebViewActivity.class);
-                                intent.putExtra(ExtraKey.WEB_URL, homeCfg2.getUrl()
-                                        +"?province="+ SharedPreferencesUtil.getData(mContext,SharedPreferencesUtil.KEY_PROVINCE,"北京")
-                                        +"&city="+SharedPreferencesUtil.getData(mContext,SharedPreferencesUtil.KEY_CITY,"北京"));
-                                mContext.startActivity(intent);
+                                if (XPTApplication.getInstance().isLoggedIn()) {
+                                    Intent intent = new Intent(mContext, WebCommonActivity.class);
+                                    intent.putExtra(ExtraKey.WEB_URL, homeCfg2.getUrl()
+                                            + "?province=" + SharedPreferencesUtil.getData(mContext, SharedPreferencesUtil.KEY_PROVINCE, "北京")
+                                            + "&city=" + SharedPreferencesUtil.getData(mContext, SharedPreferencesUtil.KEY_CITY, "北京"));
+                                    mContext.startActivity(intent);
+                                } else {
+                                    ToastUtils.showToast(mContext,R.string.toast_unlogin);
+                                    mContext.startActivity(new Intent(mContext, LoginActivity.class));
+                                }
                             }
                         });
                     }

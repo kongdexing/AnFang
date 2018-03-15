@@ -27,7 +27,7 @@ keytool -list -v -keystore mystore.keystore
 证书指纹:
 
          MD5: 69:BA:1B:7E:FA:EB:5D:DE:34:5A:01:58:1F:63:DE:D8
-         
+         签名：69ba1b7efaeb5dde345a01581f63ded8
          SHA1: DC:8A:DB:40:47:BD:92:0A:01:BE:34:A1:7E:10:2C:1C:EC:34:80:76
          
          SHA256: 50:0E:3A:2A:2C:31:B5:CC:79:41:04:45:6E:4B:67:39:8F:48:3B:0F:94:B6:62:07:F8:77:66:87:23:55:7D:C5

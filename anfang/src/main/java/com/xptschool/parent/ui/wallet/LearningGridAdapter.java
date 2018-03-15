@@ -20,6 +20,7 @@ import com.xptschool.parent.BuildConfig;
 import com.xptschool.parent.R;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.model.BeanLearningModule;
+import com.xptschool.parent.ui.main.WebCommonActivity;
 import com.xptschool.parent.ui.main.WebViewActivity;
 
 import java.util.ArrayList;
@@ -96,7 +97,7 @@ public class LearningGridAdapter extends BaseAdapter {
                         mContext.startActivity(intent);
                     }
                 } else {
-                    Intent intent = new Intent(mContext, WebViewActivity.class);
+                    Intent intent = new Intent(mContext, WebCommonActivity.class);
                     intent.putExtra(ExtraKey.WEB_URL, module.getWeb_url());
                     intent.putExtra(ExtraKey.WEB_TITLE, module.getTitle());
                     mContext.startActivity(intent);

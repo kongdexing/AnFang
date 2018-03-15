@@ -1,17 +1,14 @@
 package com.xptschool.parent.ui.shop;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,8 +16,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
-import com.just.library.AgentWeb;
-import com.just.library.ChromeClientCallbackManager;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.xptschool.parent.R;
@@ -29,9 +24,7 @@ import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyRequestListener;
-import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.main.BaseActivity;
-import com.xptschool.parent.ui.main.WebLayout;
 
 import org.json.JSONObject;
 
@@ -115,14 +108,6 @@ public class ShopDetailActivity extends BaseActivity {
 //            Log.i("Info","progress:"+newProgress);
         }
     };
-
-    private ChromeClientCallbackManager.ReceivedTitleCallback mCallback = new ChromeClientCallbackManager.ReceivedTitleCallback() {
-        @Override
-        public void onReceivedTitle(WebView view, String title) {
-//            setTitle(title);
-        }
-    };
-
 
     private void getDetail() {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.GET_GOODDETAIL,

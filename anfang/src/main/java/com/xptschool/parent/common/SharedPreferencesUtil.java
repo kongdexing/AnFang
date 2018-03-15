@@ -1,9 +1,11 @@
 package com.xptschool.parent.common;
 
 import android.content.Context;
+import android.util.Log;
 
 public class SharedPreferencesUtil {
 
+    private static String TAG = SharedPreferencesUtil.class.getSimpleName();
     public static final String KEY_SPLASH_INIT = "splash_init";
 
     public static final String KEY_USER_NAME = "username";
@@ -25,6 +27,9 @@ public class SharedPreferencesUtil {
      * @param data
      */
     public static void saveData(Context context, String key, Object data) {
+
+        if (key == KEY_UID)
+            Log.i(TAG, "saveData: " + key + " data:" + data.toString());
 
         MyModulePreference myModulePreference = new MyModulePreference(context);
 
@@ -52,6 +57,7 @@ public class SharedPreferencesUtil {
      */
     public static Object getData(Context context, String key, Object defValue) {
 
+        Log.i(TAG, "getData: " + key);
         MyModulePreference myModulePreference = new MyModulePreference(context);
 
         String type = defValue.getClass().getSimpleName();
@@ -72,6 +78,7 @@ public class SharedPreferencesUtil {
     }
 
     public static void clearUserInfo(Context context) {
+        Log.i(TAG, "clearUserInfo: ");
         saveData(context, KEY_PWD, "");
         saveData(context, KEY_USER_TYPE, "");
         saveData(context, KEY_UID, "");

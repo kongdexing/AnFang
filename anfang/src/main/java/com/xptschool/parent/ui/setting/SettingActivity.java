@@ -24,6 +24,7 @@ import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.main.BaseActivity;
+import com.xptschool.parent.ui.main.WebCommonActivity;
 import com.xptschool.parent.ui.main.WebViewActivity;
 import com.xptschool.parent.view.CustomDialog;
 import com.tencent.bugly.beta.Beta;
@@ -100,7 +101,8 @@ public class SettingActivity extends BaseActivity {
                 }
                 break;
             case R.id.rlHelp:
-                Intent intent = new Intent(this, WebViewActivity.class);
+                Intent intent = new Intent(this, WebCommonActivity.class);
+//                intent.putExtra(ExtraKey.WEB_URL,"http://www.jq22.com/yanshi15349");
                 intent.putExtra(ExtraKey.WEB_URL, BuildConfig.SERVICE_URL + "/html/app-help/index.html");
                 startActivity(intent);
                 break;

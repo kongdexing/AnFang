@@ -24,6 +24,7 @@ import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.model.BeanHomeCfg;
 import com.xptschool.parent.ui.fragment.HomePagerAdapter;
+import com.xptschool.parent.ui.main.WebCommonActivity;
 import com.xptschool.parent.ui.main.WebViewActivity;
 import com.xptschool.parent.ui.mine.BaseInfoView;
 
@@ -63,7 +64,7 @@ public class HomeNewsView extends BaseInfoView {
         txtMore.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent newsIntent = new Intent(mContext, WebViewActivity.class);
+                Intent newsIntent = new Intent(mContext, WebCommonActivity.class);
                 newsIntent.putExtra(ExtraKey.WEB_URL, "http://school.xinpingtai.com/edunews/");
                 mContext.startActivity(newsIntent);
             }

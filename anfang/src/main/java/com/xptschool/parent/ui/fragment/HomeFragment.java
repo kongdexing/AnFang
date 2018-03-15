@@ -68,6 +68,7 @@ import com.xptschool.parent.ui.honor.HonorPActivity;
 import com.xptschool.parent.ui.honor.HonorTActivity;
 import com.xptschool.parent.ui.leave.LeaveActivity;
 import com.xptschool.parent.ui.leave.LeaveTActivity;
+import com.xptschool.parent.ui.main.WebCommonActivity;
 import com.xptschool.parent.ui.main.WebViewActivity;
 import com.xptschool.parent.ui.notice.NoticeActivity;
 import com.xptschool.parent.ui.notice.NoticeTeacherActivity;
@@ -252,7 +253,7 @@ public class HomeFragment extends BaseFragment {
                 try {
                     BeanBanner banner = advertList.get(position);
                     if (banner.getTurn_type().equals("1") && !banner.getUrl().isEmpty()) {
-                        Intent intent = new Intent(getActivity(), WebViewActivity.class);
+                        Intent intent = new Intent(getActivity(), WebCommonActivity.class);
                         intent.putExtra(ExtraKey.WEB_URL, banner.getUrl());
                         getActivity().startActivity(intent);
                         BannerHelper.postShowBanner(banner, "2");
@@ -510,7 +511,8 @@ public class HomeFragment extends BaseFragment {
         //判断角色
         if (UserType.VISITOR.equals(XPTApplication.getInstance().getCurrent_user_type()) ||
                 XPTApplication.getInstance().getCurrent_user_type() == null) {
-            llTip.setVisibility(View.GONE);
+            if (llTip != null)
+                llTip.setVisibility(View.GONE);
 
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) happyGrowView.getLayoutParams();
             lp.setMargins(0, 0, 0, 0);
@@ -518,7 +520,8 @@ public class HomeFragment extends BaseFragment {
 
             return;
         } else {
-            llTip.setVisibility(View.VISIBLE);
+            if (llTip != null)
+                llTip.setVisibility(View.VISIBLE);
 
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) happyGrowView.getLayoutParams();
             lp.setMargins(0, 10, 0, 0);
@@ -545,7 +548,7 @@ public class HomeFragment extends BaseFragment {
                 .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_comment))
                 .setIntent(new Intent(getActivity(), isParent ? CommentPActivity.class : CommentTActivity.class)));
         /*教育新闻*/
-        Intent newsIntent = new Intent(getActivity(), WebViewActivity.class);
+        Intent newsIntent = new Intent(getActivity(), WebCommonActivity.class);
         newsIntent.putExtra(ExtraKey.WEB_URL, "http://school.xinpingtai.com/edunews/");
         tipItems.add(new HomeItem()
                 .setShowForParent(false)

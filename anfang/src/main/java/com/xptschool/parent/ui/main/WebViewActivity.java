@@ -5,14 +5,15 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-import com.just.library.AgentWeb;
-import com.just.library.ChromeClientCallbackManager;
+import com.just.agentweb.AgentWeb;
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.ExtraKey;
@@ -26,26 +27,26 @@ public class WebViewActivity extends BaseActivity {
     private String TAG = WebViewActivity.class.getSimpleName();
     protected AgentWeb mAgentWeb;
     @BindView(R.id.container)
-    LinearLayout mLinearLayout;
+    FrameLayout mLinearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agentweb);
 
-        if (getSupportActionBar() != null)
-            // Enable the Up button
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        if (getSupportActionBar() != null)
+//            // Enable the Up button
+//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mAgentWeb = AgentWeb.with(this)//
                 .setAgentWebParent(mLinearLayout, new LinearLayout.LayoutParams(-1, -1))//
                 .useDefaultIndicator()//使用默认进度条
-                .defaultProgressBarColor()
-                .setReceivedTitleCallback(mCallback)
+//                .defaultProgressBarColor()
+//                .setReceivedTitleCallback(mCallback)
                 .setWebChromeClient(mWebChromeClient)
                 .setWebViewClient(mWebViewClient)
-                .setSecutityType(AgentWeb.SecurityType.strict)
-                .setWebLayout(new WebLayout(this))
+//                .setSecutityType(AgentWeb.SecurityType.strict)
+//                .setWebLayout(new WebLayout(this))
                 .createAgentWeb()//
                 .ready()
                 .go(getUrl());
@@ -89,7 +90,6 @@ public class WebViewActivity extends BaseActivity {
     };
 
     public String getUrl() {
-
         Bundle bundle = getIntent().getExtras();
         if (bundle == null) {
             return "";
@@ -99,21 +99,8 @@ public class WebViewActivity extends BaseActivity {
         if (title != null && !title.isEmpty()) {
             setTitle(title);
         }
-//        try {
-//            webUrl += "?user_id=" + XPTApplication.getInstance().getCurrentUserId();
-//        } catch (Exception ex) {
-//            Log.i(TAG, "loadUrl: user_id is null");
-//        }
-//        Log.i(TAG, "getUrl: " + webUrl);
         return webUrl;
     }
-
-    private ChromeClientCallbackManager.ReceivedTitleCallback mCallback = new ChromeClientCallbackManager.ReceivedTitleCallback() {
-        @Override
-        public void onReceivedTitle(WebView view, String title) {
-//            setTitle(title);
-        }
-    };
 
     @Override
     public void onBackPressed() {
@@ -124,7 +111,6 @@ public class WebViewActivity extends BaseActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-
         if (mAgentWeb.handleKeyEvent(keyCode, event)) {
             return true;
         }
@@ -146,10 +132,9 @@ public class WebViewActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Log.i("Info", "result:" + requestCode + " result:" + resultCode);
-        mAgentWeb.uploadFileResult(requestCode, resultCode, data);
+//        mAgentWeb.uploadFileResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
     }
-
 
     @Override
     protected void onDestroy() {

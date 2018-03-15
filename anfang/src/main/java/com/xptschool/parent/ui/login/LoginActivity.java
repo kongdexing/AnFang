@@ -243,13 +243,14 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
         String easeLoginName = "";
 
         try {
-            if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+            UserType type = XPTApplication.getInstance().getCurrent_user_type();
+            if (UserType.PARENT.equals(type)) {
                 BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
                 if (parent == null) {
                     return;
                 }
                 easeLoginName = parent.getU_id();
-            } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+            } else if (UserType.TEACHER.equals(type)) {
                 BeanTeacher teacher = GreenDaoHelper.getInstance().getCurrentTeacher();
                 if (teacher == null) {
                     return;

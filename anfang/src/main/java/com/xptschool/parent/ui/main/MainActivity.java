@@ -265,7 +265,7 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
             mLocClient.stop();
             return;
         }
-        Log.i(TAG, "onReceiveLocation: 省：" + bdLocation.getProvince() +"  市： " + bdLocation.getCity());
+        Log.i(TAG, "onReceiveLocation: 省：" + bdLocation.getProvince() + "  市： " + bdLocation.getCity());
         //保存本地城市
         SharedPreferencesUtil.saveData(this, SharedPreferencesUtil.KEY_PROVINCE, bdLocation.getProvince());
         SharedPreferencesUtil.saveData(this, SharedPreferencesUtil.KEY_CITY, bdLocation.getCity());
@@ -504,13 +504,17 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
 
         String userId = "";
         try {
-            if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+            UserType type = XPTApplication.getInstance().getCurrent_user_type();
+            if (UserType.PARENT.equals(type)) {
                 userId = GreenDaoHelper.getInstance().getCurrentParent().getU_id();
-            } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+            } else if (UserType.TEACHER.equals(type)) {
                 userId = GreenDaoHelper.getInstance().getCurrentTeacher().getU_id();
+            } else {
+                return;
             }
         } catch (Exception ex) {
-
+            Log.i(TAG, "onLoginSuccess: " + ex.getMessage());
+            return;
         }
 
         EMClient.getInstance().login(userId, CommonUtil.md5("SHUHAIXINXI" + userId), new EMCallBack() {

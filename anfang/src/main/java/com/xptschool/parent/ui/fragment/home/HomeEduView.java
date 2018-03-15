@@ -20,6 +20,7 @@ import com.xptschool.parent.R;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.model.BeanHomeCfg;
+import com.xptschool.parent.ui.main.WebCommonActivity;
 import com.xptschool.parent.ui.main.WebViewActivity;
 import com.xptschool.parent.ui.mine.BaseInfoView;
 import com.xptschool.parent.ui.setting.AboutActivity;
@@ -57,7 +58,7 @@ public class HomeEduView extends BaseInfoView {
         rlHomeItem.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, WebViewActivity.class);
+                Intent intent = new Intent(mContext, WebCommonActivity.class);
                 intent.putExtra(ExtraKey.WEB_URL, homeCfg.getUrl());
                 mContext.startActivity(intent);
             }

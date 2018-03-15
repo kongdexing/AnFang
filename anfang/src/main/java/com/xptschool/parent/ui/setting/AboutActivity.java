@@ -13,6 +13,7 @@ import com.xptschool.parent.BuildConfig;
 import com.xptschool.parent.R;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.ui.main.BaseActivity;
+import com.xptschool.parent.ui.main.WebCommonActivity;
 import com.xptschool.parent.ui.main.WebViewActivity;
 import com.tencent.bugly.beta.Beta;
 
@@ -43,7 +44,7 @@ public class AboutActivity extends BaseActivity {
     void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.rlInstruction:
-                Intent intent = new Intent(AboutActivity.this, WebViewActivity.class);
+                Intent intent = new Intent(AboutActivity.this, WebCommonActivity.class);
                 intent.putExtra(ExtraKey.WEB_URL, BuildConfig.APP_INSTRUCTION_URL);
                 startActivity(intent);
                 break;

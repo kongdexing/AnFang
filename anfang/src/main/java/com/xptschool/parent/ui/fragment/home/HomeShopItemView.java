@@ -17,6 +17,7 @@ import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.model.BeanHomeCfg;
+import com.xptschool.parent.ui.main.WebCommonActivity;
 import com.xptschool.parent.ui.main.WebViewActivity;
 import com.xptschool.parent.ui.mine.BaseInfoView;
 
@@ -70,7 +71,7 @@ public class HomeShopItemView extends BaseInfoView {
         llShopItem.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, WebViewActivity.class);
+                Intent intent = new Intent(mContext, WebCommonActivity.class);
                 intent.putExtra(ExtraKey.WEB_URL, homeCfg.getUrl());
                 mContext.startActivity(intent);
             }
