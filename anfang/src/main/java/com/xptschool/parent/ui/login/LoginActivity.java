@@ -209,9 +209,24 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
                 startActivity(new Intent(this, CheckUserActivity.class));
                 break;
             case R.id.txtRegister:
-                startActivity(new Intent(this, RegisterActivity.class));
+                startActivityForResult(new Intent(this, RegisterActivity.class), 1);
 //                startActivity(new Intent(this, SelSchoolActivity.class));
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //跳转至注册 && 注册成功
+        if (requestCode == 1 && resultCode == 1) {
+            String userName = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_NAME, "");
+            edtAccount.setText(userName);
+            edtAccount.setSelection(edtAccount.getText().length());
+            String pwd = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_PWD, "");
+            edtPwd.setText(pwd);
+            //自动登录
+            login(userName, pwd, "0", null);
         }
     }
 

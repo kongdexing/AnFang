@@ -106,31 +106,14 @@ public class RegisterActivity extends BaseActivity {
                     edtCode.setError(getResources().getString(R.string.hint_code));
                     return;
                 }
-//                String userName = edtNickName.getText().toString().trim();
-//                if (userName.isEmpty()) {
-//                    ToastUtils.showToast(RegisterActivity.this, R.string.hint_nickname);
-//                    edtNickName.setError(getResources().getString(R.string.hint_nickname));
-//                    return;
-//                }
                 String pwd = edtPwd.getText().toString().trim();
                 if (pwd.isEmpty()) {
                     ToastUtils.showToast(RegisterActivity.this, R.string.hint_userpwd);
                     edtPwd.setError(getResources().getString(R.string.hint_userpwd));
                     return;
                 }
-//                String repwd = edtRePwd.getText().toString().trim();
-//                if (repwd.isEmpty()) {
-//                    ToastUtils.showToast(RegisterActivity.this, R.string.hint_new_pwd2);
-//                    edtRePwd.setError(getResources().getString(R.string.hint_new_pwd2));
-//                    return;
-//                }
-//                if (!pwd.equals(repwd)) {
-//                    ToastUtils.showToast(RegisterActivity.this, R.string.toast_pwd_not_equal);
-//                    edtRePwd.setSelection(repwd.length());
-//                    return;
-//                }
 
-                register(phone, "", code, CommonUtil.md5(pwd));
+                register(phone, "", code, pwd);
 //                checkVerifyCode(code);
                 break;
         }
@@ -185,13 +168,13 @@ public class RegisterActivity extends BaseActivity {
                 });
     }
 
-    private void register(String phone, String userName, String code, String pwd) {
+    private void register(final String phone, String userName, String code, final String pwd) {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.REGISTER,
                 new VolleyHttpParamsEntity()
                         .addParam("phone", phone)
                         .addParam("name", userName)
                         .addParam("code", code)
-                        .addParam("pwd", pwd), new MyVolleyRequestListener() {
+                        .addParam("pwd", CommonUtil.md5(pwd)), new MyVolleyRequestListener() {
                     @Override
                     public void onStart() {
                         super.onStart();
@@ -205,6 +188,9 @@ public class RegisterActivity extends BaseActivity {
                         ToastUtils.showToast(RegisterActivity.this, volleyHttpResult.getInfo());
                         if (volleyHttpResult.getStatus() == HttpAction.SUCCESS) {
 //                            startActivity(new Intent(RegisterActivity.this, CheckRoleActivity.class));
+                            SharedPreferencesUtil.saveData(RegisterActivity.this, SharedPreferencesUtil.KEY_USER_NAME, phone);
+                            SharedPreferencesUtil.saveData(RegisterActivity.this, SharedPreferencesUtil.KEY_PWD, pwd);
+                            setResult(1);
                             finish();
                         }
                     }
