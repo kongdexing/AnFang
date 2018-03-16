@@ -19,7 +19,9 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.just.agentweb.AgentWeb;
@@ -40,8 +42,14 @@ import java.util.HashMap;
 
 public class AgentWebFragment extends Fragment implements FragmentKeyDown {
 
+    private ImageView mBackImageView;
+    private View mLineView;
+    private ImageView mFinishImageView;
+    private TextView mTitleTextView;
     protected AgentWeb mAgentWeb;
     public static final String URL_KEY = "url_key";
+    public static final String TITLE_KEY = "title_key";
+
     /**
      * 用于方便打印测试
      */
@@ -78,8 +86,8 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
                 .setSecurityType(AgentWeb.SecurityType.STRICT_CHECK) //严格模式 Android 4.2.2 以下会放弃注入对象 ，使用AgentWebView没影响。
                 .setAgentWebUIController(new UIController(getActivity())) //自定义UI  AgentWeb3.0.0 加入。
                 .setMainFrameErrorView(R.layout.agentweb_error_page, -1) //参数1是错误显示的布局，参数2点击刷新控件ID -1表示点击整个布局都刷新， AgentWeb 3.0.0 加入。
-				.useMiddlewareWebChrome(getMiddlewareWebChrome()) //设置WebChromeClient中间件，支持多个WebChromeClient，AgentWeb 3.0.0 加入。
-				.useMiddlewareWebClient(getMiddlewareWebClient()) //设置WebViewClient中间件，支持多个WebViewClient， AgentWeb 3.0.0 加入。
+                .useMiddlewareWebChrome(getMiddlewareWebChrome()) //设置WebChromeClient中间件，支持多个WebChromeClient，AgentWeb 3.0.0 加入。
+                .useMiddlewareWebClient(getMiddlewareWebClient()) //设置WebViewClient中间件，支持多个WebViewClient， AgentWeb 3.0.0 加入。
 //                .setDownloadListener(mDownloadListener) 4.0.0 删除该API//下载回调
 //                .openParallelDownload()// 4.0.0删除该api 打开并行下载 , 默认串行下载。 请通过AgentWebDownloader#Extra实现并行下载
 //                .setNotifyIcon(R.drawable.ic_file_download_black_24dp) 4.0.0删除该api //下载通知图标。4.0.0后的版本请通过AgentWebDownloader#Extra修改icon
@@ -90,6 +98,8 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
                 .go(getUrl()); //WebView载入该url地址的页面并显示。
 
 //        AgentWebConfig.debug();
+
+        initView(view);
 
         // AgentWeb 4.0 开始，删除该类以及删除相关的API
 //        DefaultMsgConfig.DownloadMsgConfig mDownloadMsgConfig = mAgentWeb.getDefaultMsgConfig().getDownloadMsgConfig();
@@ -156,12 +166,12 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
         @Override
         public void onReceivedTitle(WebView view, String title) {
             super.onReceivedTitle(view, title);
-//			if (mTitleTextView != null && !TextUtils.isEmpty(title)) {
-//				if (title.length() > 10) {
-//					title = title.substring(0, 10).concat("...");
-//				}
-//			}
-//			mTitleTextView.setText(title);
+//            if (mTitleTextView != null && !TextUtils.isEmpty(title)) {
+//                if (title.length() > 10) {
+//                    title = title.substring(0, 10).concat("...");
+//                }
+//            }
+//            mTitleTextView.setText(title);
         }
     };
 
@@ -192,7 +202,7 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
                 return true;
             }
             /*else if (isAlipay(view, mUrl))   //1.2.5开始不用调用该方法了 ，只要引入支付宝sdk即可 ， DefaultWebClient 默认会处理相应url调起支付宝
-			    return true;*/
+                return true;*/
 
 
             return false;
@@ -203,11 +213,11 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
 
             Log.i(TAG, "mUrl:" + url + " onPageStarted  target:" + getUrl());
             timer.put(url, System.currentTimeMillis());
-            if (url.equals(getUrl())) {
-                pageNavigator(View.GONE);
-            } else {
-                pageNavigator(View.VISIBLE);
-            }
+//            if (url.equals(getUrl())) {
+//                pageNavigator(View.GONE);
+//            } else {
+//                pageNavigator(View.VISIBLE);
+//            }
 
         }
 
@@ -222,8 +232,8 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
             }
 
         }
-		/*错误页回调该方法 ， 如果重写了该方法， 上面传入了布局将不会显示 ， 交由开发者实现，注意参数对齐。*/
-	   /* public void onMainFrameError(AbsAgentWebUIController agentWebUIController, WebView view, int errorCode, String description, String failingUrl) {
+        /*错误页回调该方法 ， 如果重写了该方法， 上面传入了布局将不会显示 ， 交由开发者实现，注意参数对齐。*/
+       /* public void onMainFrameError(AbsAgentWebUIController agentWebUIController, WebView view, int errorCode, String description, String failingUrl) {
 
             Log.i(TAG, "AgentWebFragment onMainFrameError");
             agentWebUIController.onMainFrameError(view,errorCode,description,failingUrl);
@@ -256,6 +266,45 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
 //        mAgentWeb.uploadFileResult(requestCode, resultCode, data);
     }
 
+    protected void initView(View view) {
+        mBackImageView = (ImageView) view.findViewById(R.id.iv_back);
+        mLineView = view.findViewById(R.id.view_line);
+        mFinishImageView = (ImageView) view.findViewById(R.id.iv_finish);
+        mTitleTextView = (TextView) view.findViewById(R.id.toolbar_title);
+        mBackImageView.setOnClickListener(mOnClickListener);
+        mFinishImageView.setOnClickListener(mOnClickListener);
+//        pageNavigator(View.GONE);
+        String title = this.getArguments().getString(TITLE_KEY);
+        if (title != null && !title.isEmpty()) {
+            mTitleTextView.setText(title);
+        } else {
+            mTitleTextView.setText(R.string.app_name);
+        }
+
+
+    }
+
+    private View.OnClickListener mOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.iv_back:
+                    // true表示AgentWeb处理了该事件
+                    if (!mAgentWeb.back()) {
+                        AgentWebFragment.this.getActivity().finish();
+                    }
+                    break;
+                case R.id.iv_finish:
+                    AgentWebFragment.this.getActivity().finish();
+                    break;
+                default:
+                    break;
+
+            }
+        }
+
+    };
+
     @Override
     public void onResume() {
         mAgentWeb.getWebLifeCycle().onResume();//恢复
@@ -287,13 +336,13 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
      *
      * @return
      */
-	protected MiddlewareWebClientBase getMiddlewareWebClient() {
-		return this.mMiddleWareWebClient = new MiddlewareWebViewClient() {
-		};
-	}
+    protected MiddlewareWebClientBase getMiddlewareWebClient() {
+        return this.mMiddleWareWebClient = new MiddlewareWebViewClient() {
+        };
+    }
 
-	protected MiddlewareWebChromeBase getMiddlewareWebChrome() {
-		return this.mMiddleWareWebChrome = new MiddlewareChromeClient() {
-		};
-	}
+    protected MiddlewareWebChromeBase getMiddlewareWebChrome() {
+        return this.mMiddleWareWebChrome = new MiddlewareChromeClient() {
+        };
+    }
 }

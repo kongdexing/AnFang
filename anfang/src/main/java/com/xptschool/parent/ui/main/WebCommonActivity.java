@@ -14,8 +14,9 @@ import com.xptschool.parent.ui.web.AgentWebFragment;
 import com.xptschool.parent.ui.web.FragmentKeyDown;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
-public class WebCommonActivity extends BaseActivity {
+public class WebCommonActivity extends AppCompatActivity {
 
     @BindView(R.id.container_framelayout)
     FrameLayout mFrameLayout;
@@ -27,6 +28,7 @@ public class WebCommonActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_common);
+        ButterKnife.bind(this);
 
         mFragmentManager = this.getSupportFragmentManager();
 
@@ -34,6 +36,7 @@ public class WebCommonActivity extends BaseActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             webUrl = bundle.getString(ExtraKey.WEB_URL);
+
             String title = bundle.getString(ExtraKey.WEB_TITLE);
             if (title != null && !title.isEmpty()) {
                 setTitle(title);
