@@ -5,6 +5,8 @@
       <module fileurl="file://$PROJECT_DIR$/AnFang.iml" filepath="$PROJECT_DIR$/AnFang.iml" />
       <module fileurl="file://$PROJECT_DIR$/PushSDK/PushSDK.iml" filepath="$PROJECT_DIR$/PushSDK/PushSDK.iml" />
       <module fileurl="file://$PROJECT_DIR$/agentweb-core/agentweb-core.iml" filepath="$PROJECT_DIR$/agentweb-core/agentweb-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/agentweb-download/agentweb-download.iml" filepath="$PROJECT_DIR$/agentweb-download/agentweb-download.iml" />
+      <module fileurl="file://$PROJECT_DIR$/agentweb-filechooser/agentweb-filechooser.iml" filepath="$PROJECT_DIR$/agentweb-filechooser/agentweb-filechooser.iml" />
       <module fileurl="file://$PROJECT_DIR$/anfang/anfang.iml" filepath="$PROJECT_DIR$/anfang/anfang.iml" />
       <module fileurl="file://$PROJECT_DIR$/barlibrary/barlibrary.iml" filepath="$PROJECT_DIR$/barlibrary/barlibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/camera/camera.iml" filepath="$PROJECT_DIR$/camera/camera.iml" />
