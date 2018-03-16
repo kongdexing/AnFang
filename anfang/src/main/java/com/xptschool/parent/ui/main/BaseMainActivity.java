@@ -239,7 +239,6 @@ public class BaseMainActivity extends BaseLoginMainActivity implements HuaweiApi
     protected void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
-        Log.i(TAG, "onResume: ");
     }
 
     @Override

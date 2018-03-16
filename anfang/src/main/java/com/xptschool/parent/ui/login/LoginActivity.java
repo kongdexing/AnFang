@@ -252,8 +252,8 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
     }
 
     @Override
-    protected void onLoginSuccess() {
-        super.onLoginSuccess();
+    protected void onLoginSuccess(String newAccount) {
+        super.onLoginSuccess(newAccount);
 
         String easeLoginName = "";
 

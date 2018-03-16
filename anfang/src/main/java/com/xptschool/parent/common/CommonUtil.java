@@ -274,14 +274,20 @@ public class CommonUtil {
             SharedPreferencesUtil.saveData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_VISITOR_NAME, jsonLogin.get("name"));
             SharedPreferencesUtil.saveData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_UID, jsonLogin.get("user_id"));
         }
+        XPTApplication.getInstance().setCurrent_user_type(type);
+    }
+
+    public static void changeUserStatus(String newAccount){
         //删除联系人
 //        GreenDaoHelper.getInstance().deleteContact();
-        XPTApplication.getInstance().setCurrent_user_type(type);
-        if (!SharedPreferencesUtil.getData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_USER_NAME, "").equals(account)) {
-            SharedPreferencesUtil.saveData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_USER_NAME, account);
+
+        if (!SharedPreferencesUtil.getData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_USER_NAME, "").equals(newAccount)) {
+            SharedPreferencesUtil.saveData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_USER_NAME, newAccount);
+            Log.i(TAG, "analyseLoginData: changeAccount");
             //切换账号
             UserHelper.getInstance().changeAccount();
         } else {
+            Log.i(TAG, "analyseLoginData: success");
             UserHelper.getInstance().userLoginSuccess();
         }
     }

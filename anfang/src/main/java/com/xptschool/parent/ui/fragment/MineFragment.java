@@ -79,15 +79,16 @@ public class MineFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (rlMyChild == null || ll_unlogin == null) {
-            return;
-        }
         reloadMineUI();
     }
 
     private void reloadMineUI() {
+        if (rlMyChild == null || ll_unlogin == null) {
+            return;
+        }
         //判断登录状态
         if (XPTApplication.getInstance().isLoggedIn()) {
+
             ll_unlogin.setVisibility(View.GONE);
             ll_login.setVisibility(View.VISIBLE);
 

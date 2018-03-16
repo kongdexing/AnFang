@@ -181,13 +181,19 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
     protected void onResume() {
         super.onResume();
 
+        Log.i(TAG, "onResume: ");
+
         String cookie = CookieUtil.getCookie();
         if (cookie == null || cookie.isEmpty()) {
             Log.i(TAG, "onResume: cookie is null");
+            String userType = SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_TYPE, "").toString();
+            if (userType.isEmpty()) {
+                return;
+            }
             String userName = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_NAME, "");
             String password = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_PWD, "");
             if (!userName.isEmpty() || !password.isEmpty()) {
-                login(userName, password, SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_TYPE, "").toString());
+                login(userName, password, userType);
             }
         }
 
@@ -206,7 +212,6 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
         EMClient.getInstance().chatManager().removeMessageListener(messageListener);
         EaseHelper sdkHelper = EaseHelper.getInstance();
         sdkHelper.popActivity(this);
-
         super.onStop();
     }
 
@@ -495,9 +500,10 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
     }
 
     @Override
-    protected void onLoginSuccess() {
-        super.onLoginSuccess();
+    protected void onLoginSuccess(String newAccount) {
+        super.onLoginSuccess(newAccount);
         //登录成功后，根据用户角色获取广告位
+        Log.i(TAG, "login onLoginSuccess: ");
         if (homeFragment != null) {
             ((HomeFragment) homeFragment).reloadPageData();
         }
@@ -510,12 +516,15 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
             } else if (UserType.TEACHER.equals(type)) {
                 userId = GreenDaoHelper.getInstance().getCurrentTeacher().getU_id();
             } else {
+                Log.i(TAG, "onLoginSuccess: 游客身份");
                 return;
             }
         } catch (Exception ex) {
             Log.i(TAG, "onLoginSuccess: " + ex.getMessage());
             return;
         }
+
+        Log.i(TAG, "onLoginSuccess: login to em");
 
         EMClient.getInstance().login(userId, CommonUtil.md5("SHUHAIXINXI" + userId), new EMCallBack() {
 

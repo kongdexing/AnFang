@@ -56,8 +56,9 @@ public class SharedPreferencesUtil {
      * @return
      */
     public static Object getData(Context context, String key, Object defValue) {
+        if (key == KEY_UID)
+            Log.i(TAG, "getData: " + key);
 
-        Log.i(TAG, "getData: " + key);
         MyModulePreference myModulePreference = new MyModulePreference(context);
 
         String type = defValue.getClass().getSimpleName();

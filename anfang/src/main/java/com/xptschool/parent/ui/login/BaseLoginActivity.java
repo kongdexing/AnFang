@@ -57,11 +57,12 @@ public class BaseLoginActivity extends BaseActivity {
                                 SharedPreferencesUtil.saveData(BaseLoginActivity.this, SharedPreferencesUtil.KEY_PWD, password);
                                 try {
                                     CommonUtil.analyseLoginData(httpResult, type, account);
-                                    onLoginSuccess();
                                 } catch (Exception ex) {
                                     Log.i(TAG, "onResponse: exception " + ex.getMessage());
                                     onLoginFailed("登录失败");
+                                    return;
                                 }
+                                onLoginSuccess(account);
                                 break;
                             default:
                                 onLoginFailed(httpResult.getInfo());
@@ -80,7 +81,8 @@ public class BaseLoginActivity extends BaseActivity {
         SharedPreferencesUtil.saveData(this, SharedPreferencesUtil.KEY_PWD, "");
     }
 
-    protected void onLoginSuccess() {
+    protected void onLoginSuccess(String newAccount) {
+        CommonUtil.changeUserStatus(newAccount);
     }
 
     protected void onLoginFailed(String msg) {

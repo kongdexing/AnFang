@@ -54,14 +54,15 @@ public class BaseLoginMainActivity extends AppCompatActivity {
                         switch (httpResult.getStatus()) {
                             case HttpAction.SUCCESS:
                                 SharedPreferencesUtil.saveData(BaseLoginMainActivity.this, SharedPreferencesUtil.KEY_PWD, password);
-
+                                Log.i(TAG, "login success onResponse: ");
                                 try {
                                     CommonUtil.analyseLoginData(httpResult, type, account);
-                                    onLoginSuccess();
                                 } catch (Exception ex) {
-                                    Log.i(TAG, "onResponse: exception " + ex.getMessage());
+                                    Log.i(TAG, "BaseLoginMainActivity onResponse: exception " + ex.getMessage());
                                     onLoginFailed("登录失败");
+                                    return;
                                 }
+                                onLoginSuccess(account);
                                 break;
                             default:
                                 onLoginFailed(httpResult.getInfo());
@@ -80,11 +81,13 @@ public class BaseLoginMainActivity extends AppCompatActivity {
         SharedPreferencesUtil.saveData(this, SharedPreferencesUtil.KEY_PWD, "");
     }
 
-    protected void onLoginSuccess() {
+    protected void onLoginSuccess(String newAccount) {
+        CommonUtil.changeUserStatus(newAccount);
 
     }
 
     protected void onLoginFailed(String msg) {
+        Log.i(TAG, "onLoginFailed: ");
         SharedPreferencesUtil.saveData(this, SharedPreferencesUtil.KEY_UID, "");
     }
 }
