@@ -162,7 +162,6 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
 
         if (!userName.isEmpty() && !password.isEmpty()) {
             login(userName, password,
-                    SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_TYPE, "").toString(),
                     new DefaultRetryPolicy(4 * 1000, 0, 1));
         }
     }
@@ -186,18 +185,18 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
         String cookie = CookieUtil.getCookie();
         if (cookie == null || cookie.isEmpty()) {
             Log.i(TAG, "onResume: cookie is null");
-            String userType = SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_TYPE, "").toString();
-            if (userType.isEmpty()) {
-                return;
-            }
+
             String userName = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_NAME, "");
             String password = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_PWD, "");
             if (!userName.isEmpty() || !password.isEmpty()) {
-                login(userName, password, userType);
+                login(userName, password);
             }
         }
 
-        updateUnreadLabel();
+        String userType = SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_TYPE, "").toString();
+        if (UserType.PARENT.toString().equals(userType) || UserType.TEACHER.toString().equals(userType)) {
+            updateUnreadLabel();
+        }
 
         // unregister this event listener when this activity enters the
         // background
@@ -445,12 +444,11 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
         }
     }
 
-    private void login(final String account, final String password, final String type) {
+    private void login(final String account, final String password) {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.LOGIN,
                 new MyVolleyHttpParamsEntity()
                         .addParam("username", account)
-                        .addParam("password", password)
-                        .addParam("type", type),
+                        .addParam("password", password),
                 new MyVolleyRequestListener() {
                     @Override
                     public void onStart() {
@@ -462,7 +460,7 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
                         switch (httpResult.getStatus()) {
                             case HttpAction.SUCCESS:
                                 try {
-                                    CommonUtil.analyseLoginData(httpResult, type, account);
+                                    CommonUtil.analyseLoginData(httpResult, account);
 
                                     Intent intent = new Intent(MainActivity.this, MainActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

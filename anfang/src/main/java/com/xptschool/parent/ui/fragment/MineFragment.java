@@ -52,6 +52,8 @@ public class MineFragment extends BaseFragment {
     TextView txtUserName;
     @BindView(R.id.txtPhone)
     TextView txtPhone;
+    @BindView(R.id.txtRole)
+    TextView txtRole;
 
     @BindView(R.id.rlMyClass)
     RelativeLayout rlMyClass;
@@ -95,6 +97,7 @@ public class MineFragment extends BaseFragment {
             UserType type = XPTApplication.getInstance().getCurrent_user_type();
 
             if (UserType.TEACHER.equals(type)) {
+                txtRole.setText("角色：老师");
                 rlMyChild.setVisibility(View.GONE);
                 rlMyClass.setVisibility(View.VISIBLE);
 //                rlMyBill.setVisibility(View.GONE);
@@ -111,6 +114,7 @@ public class MineFragment extends BaseFragment {
                     }
                 }
             } else if (UserType.PARENT.equals(type)) {
+                txtRole.setText("角色：家长");
                 rlMyChild.setVisibility(View.VISIBLE);
 
                 LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) rlMyChild.getLayoutParams();
@@ -132,6 +136,7 @@ public class MineFragment extends BaseFragment {
                     }
                 }
             } else if (UserType.VISITOR.equals(type)) {
+                txtRole.setText("角色：会员");
                 rlMyClass.setVisibility(View.GONE);
                 rlMyChild.setVisibility(View.GONE);
                 rlMyProperty.setVisibility(View.GONE);

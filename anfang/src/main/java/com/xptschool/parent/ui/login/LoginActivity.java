@@ -57,13 +57,6 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
     @BindView(R.id.imgCompany)
     ImageView imgCompany;
 
-    @BindView(R.id.cbx_parent)
-    SmoothCheckBox cbx_parent;
-    @BindView(R.id.cbx_teacher)
-    SmoothCheckBox cbx_teacher;
-    @BindView(R.id.cbx_visitor)
-    SmoothCheckBox cbx_visitor;
-
     HuaweiApiClient client;
 
     @Override
@@ -140,7 +133,6 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
     }
 
     private void initView() {
-        cbx_visitor.setChecked(true);
         llParent.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
@@ -158,8 +150,7 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
         });
     }
 
-    @OnClick({R.id.imgDel, R.id.imgToggle, R.id.btnLogin, R.id.ll_visitor, R.id.cbx_visitor, R.id.ll_parent, R.id.cbx_parent,
-            R.id.ll_teacher, R.id.cbx_teacher, R.id.txtForgetPWD, R.id.txtRegister})
+    @OnClick({R.id.imgDel, R.id.imgToggle, R.id.btnLogin, R.id.txtForgetPWD, R.id.txtRegister})
     void buttonOnclick(View view) {
         switch (view.getId()) {
             case R.id.imgDel:
@@ -176,34 +167,10 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
                 if ((!TextUtils.isEmpty(account)) && (!TextUtils.isEmpty(password))) {
                     btnLogin.setEnabled(false);
                     CommonUtil.hideInputWindow(LoginActivity.this, btnLogin);
-                    String type = "0";
-                    if (cbx_parent.isChecked()) {
-                        type = UserType.PARENT.toString();
-                    } else if (cbx_teacher.isChecked()) {
-                        type = UserType.TEACHER.toString();
-                    }
-                    login(account, password, type, null);
+                    login(account, CommonUtil.md5(password), null);
                 } else {
                     Toast.makeText(LoginActivity.this, R.string.error_empty_login, Toast.LENGTH_SHORT).show();
                 }
-                break;
-            case R.id.ll_visitor:
-            case R.id.cbx_visitor:
-                cbx_visitor.setChecked(true);
-                cbx_parent.setChecked(false);
-                cbx_teacher.setChecked(false);
-                break;
-            case R.id.ll_parent:
-            case R.id.cbx_parent:
-                cbx_visitor.setChecked(false);
-                cbx_parent.setChecked(true);
-                cbx_teacher.setChecked(false);
-                break;
-            case R.id.ll_teacher:
-            case R.id.cbx_teacher:
-                cbx_visitor.setChecked(false);
-                cbx_parent.setChecked(false);
-                cbx_teacher.setChecked(true);
                 break;
             case R.id.txtForgetPWD:
                 startActivity(new Intent(this, CheckUserActivity.class));
@@ -226,7 +193,7 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
             String pwd = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_PWD, "");
             edtPwd.setText(pwd);
             //自动登录
-            login(userName, pwd, "0", null);
+            login(userName, pwd, null);
         }
     }
 

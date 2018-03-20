@@ -15,9 +15,9 @@ public class HttpAction {
     public static String Index = BuildConfig.SERVICE_URL + "/index.php";
     public static String HEAD = BuildConfig.SERVICE_URL + "/index.php/Api/";
     /*登录*/
-    public static String LOGIN = HEAD + "Login";
+    public static String LOGIN = HEAD + "Login/login2_1_3";
     /*更改密码*/
-    public static String UPDATE_PASSWORD = LOGIN + "/edit_password";
+    public static String UPDATE_PASSWORD = "Login/edit_password";
 
     public static String GetClass = HEAD + "Comment/get_class";
     public static String GetCourse = HEAD + "Comment/get_course";
@@ -157,7 +157,7 @@ public class HttpAction {
     public static String GET_SHOPLIST = HEAD + "Goods/getGoodsList";
     public static String GET_GOODDETAIL = HEAD + "Goods/getGoodsDetail";
 
-    public static String GET_REFER = Index +"/Wap/Register/getReferrer";
+    public static String GET_REFER = Index + "/Wap/Register/getReferrer";
 
 
 }

@@ -111,6 +111,14 @@
                         android:text=""
                         android:textSize="@dimen/sp_14" />
 
+                    <TextView
+                        android:id="@+id/txtRole"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_5"
+                        android:text=""
+                        android:textSize="@dimen/sp_14" />
+
                 </LinearLayout>
 
                 <ImageView

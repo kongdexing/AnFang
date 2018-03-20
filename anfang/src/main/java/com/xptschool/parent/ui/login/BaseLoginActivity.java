@@ -35,13 +35,12 @@ public class BaseLoginActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    public void login(final String account, final String password, final String type, DefaultRetryPolicy retryPolicy) {
+    public void login(final String account, final String password, DefaultRetryPolicy retryPolicy) {
         //login
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.LOGIN,
                 new MyVolleyHttpParamsEntity()
                         .addParam("username", account)
-                        .addParam("password", password)
-                        .addParam("type", type), retryPolicy,
+                        .addParam("password", password), retryPolicy,
                 new MyVolleyRequestListener() {
                     @Override
                     public void onStart() {
@@ -55,7 +54,7 @@ public class BaseLoginActivity extends BaseActivity {
                             case HttpAction.SUCCESS:
                                 SharedPreferencesUtil.saveData(BaseLoginActivity.this, SharedPreferencesUtil.KEY_PWD, password);
                                 try {
-                                    CommonUtil.analyseLoginData(httpResult, type, account);
+                                    CommonUtil.analyseLoginData(httpResult, account);
                                 } catch (Exception ex) {
                                     Log.i(TAG, "onResponse: exception " + ex.getMessage());
                                     onLoginFailed("登录失败");
