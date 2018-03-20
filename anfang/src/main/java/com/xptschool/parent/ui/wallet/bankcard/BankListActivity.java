@@ -12,7 +12,6 @@ import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.view.LoadMoreRecyclerView;
@@ -22,6 +21,7 @@ import com.xptschool.parent.R;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.HttpErrorMsg;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.ui.main.BaseListActivity;
 
@@ -96,7 +96,7 @@ public class BankListActivity extends BaseListActivity {
 
     private void getBankList() {
 
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.GET_BankCards, new VolleyHttpParamsEntity()
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.GET_BankCards, new MyVolleyHttpParamsEntity()
                 .addParam("token", CommonUtil.encryptToken(HttpAction.GET_BankCards)), new MyVolleyRequestListener() {
             @Override
             public void onStart() {
@@ -151,7 +151,7 @@ public class BankListActivity extends BaseListActivity {
     }
 
     private void deleteBankCard(BeanBankCard bankCard) {
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Delete_BankCard, new VolleyHttpParamsEntity()
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Delete_BankCard, new MyVolleyHttpParamsEntity()
                 .addParam("id", bankCard.getId())
                 .addParam("token", CommonUtil.encryptToken(HttpAction.Delete_BankCard)), new MyVolleyRequestListener() {
             @Override

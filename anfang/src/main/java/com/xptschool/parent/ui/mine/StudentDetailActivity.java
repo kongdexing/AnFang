@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.view.CircularImageView;
@@ -27,6 +26,7 @@ import com.xptschool.parent.bean.BeanStudentDetail;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.ui.main.BaseActivity;
@@ -105,7 +105,7 @@ public class StudentDetailActivity extends BaseActivity {
     }
 
     public void getStudentById() {
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.MyStudent_Detail, new VolleyHttpParamsEntity()
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.MyStudent_Detail, new MyVolleyHttpParamsEntity()
                         .addParam("stu_id", currentStudent.getStu_id())
                         .addParam("token", CommonUtil.encryptToken(HttpAction.MyStudent_Detail)),
                 new MyVolleyRequestListener() {

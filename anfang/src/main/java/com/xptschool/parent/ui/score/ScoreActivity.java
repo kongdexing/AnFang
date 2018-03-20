@@ -8,7 +8,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.groupexpandable.FloatingGroupExpandableListView;
@@ -22,6 +21,7 @@ import com.xptschool.parent.bean.BeanScore;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.HttpErrorMsg;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.GreenDaoHelper;
@@ -134,7 +134,7 @@ public class ScoreActivity extends BaseListActivity {
     private void getScoreList() {
         BeanStudent student = (BeanStudent) spnStudents.getSelectedItem();
 
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.EXAM_QUERY_FOR_PARENT, new VolleyHttpParamsEntity()
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.EXAM_QUERY_FOR_PARENT, new MyVolleyHttpParamsEntity()
                         .addParam("stu_id", student.getStu_id())
                         .addParam("dates", spnDate.getText().toString())
                         .addParam("token", CommonUtil.encryptToken(HttpAction.EXAM_QUERY_FOR_PARENT)),

@@ -7,11 +7,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.xptschool.parent.R;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.ui.main.BaseActivity;
 import com.xptschool.parent.util.ToastUtils;
@@ -68,7 +68,7 @@ public class SetPasswordActivity extends BaseActivity {
 
     private void resetPassword(String password) {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.FORGOT_PWD_STEP4,
-                new VolleyHttpParamsEntity()
+                new MyVolleyHttpParamsEntity()
                         .addParam("pass", password)
                         .addParam("password", password)
                         .addParam("username", userName), new MyVolleyRequestListener() {

@@ -12,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.spinner.MaterialSpinner;
@@ -22,6 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xptschool.parent.R;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanCounty;
 import com.xptschool.parent.model.GreenDaoHelper;
@@ -237,7 +237,7 @@ public class SelSchoolActivity extends BaseActivity {
 
     private void getSchoolListByCountyCode(String countyCode) {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.GET_SCHOOL,
-                new VolleyHttpParamsEntity()
+                new MyVolleyHttpParamsEntity()
                         .addParam("region_id", countyCode), new MyVolleyRequestListener() {
                     @Override
                     public void onStart() {

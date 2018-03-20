@@ -28,6 +28,7 @@ import com.xptschool.parent.common.ActivityResultCode;
 import com.xptschool.parent.common.BroadcastAction;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.ui.album.LocalImagePHelper;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyRequestListener;
@@ -375,7 +376,7 @@ public class HomeWorkDetailTeacherActivity extends VoiceRecordActivity {
     }
 
     private void createHomework(final BeanHomeWork homeWork) {
-        VolleyHttpParamsEntity entity = new VolleyHttpParamsEntity()
+        VolleyHttpParamsEntity entity = new MyVolleyHttpParamsEntity()
                 .addParam("h_id", currentHomeWork == null ? "0" : currentHomeWork.getH_id())
                 .addParam("name", homeWork.getName())
                 .addParam("a_id", GreenDaoHelper.getInstance().getCurrentTeacher().getA_id())
@@ -486,7 +487,7 @@ public class HomeWorkDetailTeacherActivity extends VoiceRecordActivity {
         if (currentHomeWork == null) {
             return;
         }
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.HOMEWORK_DEL, new VolleyHttpParamsEntity()
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.HOMEWORK_DEL, new MyVolleyHttpParamsEntity()
                         .addParam("h_id", currentHomeWork.getH_id())
                         .addParam("token", CommonUtil.encryptToken(HttpAction.HOMEWORK_DEL)),
                 new MyVolleyRequestListener() {

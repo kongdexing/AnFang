@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -23,6 +22,7 @@ import com.xptschool.parent.bean.BeanShop;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.ui.main.BaseActivity;
 
@@ -111,7 +111,7 @@ public class ShopDetailActivity extends BaseActivity {
 
     private void getDetail() {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.GET_GOODDETAIL,
-                new VolleyHttpParamsEntity().addParam("id", currentGood.getId()), new MyVolleyRequestListener() {
+                new MyVolleyHttpParamsEntity().addParam("id", currentGood.getId()), new MyVolleyRequestListener() {
                     @Override
                     public void onStart() {
                         super.onStart();

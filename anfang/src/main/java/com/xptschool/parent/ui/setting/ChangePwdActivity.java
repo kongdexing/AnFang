@@ -7,13 +7,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.xptschool.parent.R;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.login.LoginActivity;
@@ -68,7 +68,7 @@ public class ChangePwdActivity extends BaseActivity {
     private void updatePassword(String oldpwd, String newpwd) {
 
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.UPDATE_PASSWORD,
-                new VolleyHttpParamsEntity()
+                new MyVolleyHttpParamsEntity()
                         .addParam("user_id", GreenDaoHelper.getInstance().getCurrentParent().getU_id())
                         .addParam("ypassword", oldpwd)
                         .addParam("password", newpwd),

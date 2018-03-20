@@ -11,12 +11,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.xptschool.parent.R;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanStudent;
 
@@ -67,7 +67,7 @@ public class CourseFragment extends Fragment {
 
     private void getCourseByStudent(BeanStudent student) {
 
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Timetable_QUERY, new VolleyHttpParamsEntity()
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Timetable_QUERY, new MyVolleyHttpParamsEntity()
                         .addParam("c_id", student.getC_id())
                         .addParam("token", CommonUtil.encryptToken(HttpAction.Timetable_QUERY)),
                 new MyVolleyRequestListener() {

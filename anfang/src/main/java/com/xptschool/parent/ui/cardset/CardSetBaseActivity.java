@@ -7,7 +7,6 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.xptschool.parent.R;
@@ -15,6 +14,7 @@ import com.xptschool.parent.common.BroadcastAction;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.GreenDaoHelper;
@@ -58,7 +58,7 @@ public class CardSetBaseActivity extends ContractClickActivity {
 
     public void getCardPhone() {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.GetCard_Phone,
-                new VolleyHttpParamsEntity()
+                new MyVolleyHttpParamsEntity()
                         .addParam("stu_id", currentStudent.getStu_id())
                         .addParam("token", CommonUtil.encryptToken(HttpAction.GetCard_Phone)),
                 new MyVolleyRequestListener() {
@@ -109,7 +109,7 @@ public class CardSetBaseActivity extends ContractClickActivity {
     }
 
     private void sendPhoneNumber(final String values) {
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.SetCard_Phone, new VolleyHttpParamsEntity()
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.SetCard_Phone, new MyVolleyHttpParamsEntity()
                         .addParam("stu_id", currentStudent.getStu_id())
                         .addParam("typeFlag", CardType)
                         .addParam("s_id", currentStudent.getS_id())

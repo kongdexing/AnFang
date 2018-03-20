@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.spinner.MaterialSpinner;
@@ -23,6 +22,7 @@ import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.HttpErrorMsg;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.GreenDaoHelper;
@@ -157,7 +157,7 @@ public class CheckinPActivity extends BaseListActivity {
 
     private void getCheckinDetail(String id) {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.Attendance_Detail,
-                new VolleyHttpParamsEntity().addParam("id", id), new MyVolleyRequestListener() {
+                new MyVolleyHttpParamsEntity().addParam("id", id), new MyVolleyRequestListener() {
                     @Override
                     public void onStart() {
                         super.onStart();
@@ -232,7 +232,7 @@ public class CheckinPActivity extends BaseListActivity {
         }
 
         //sign_type '进校 1 出校 0'
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Attendance_QUERY, new VolleyHttpParamsEntity()
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Attendance_QUERY, new MyVolleyHttpParamsEntity()
                         .addParam("dates", spnDate.getText().toString())
                         .addParam("page", resultPage.getPage() + "")
                         .addParam("sign_type", sign_type)

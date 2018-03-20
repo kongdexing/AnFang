@@ -12,7 +12,6 @@ import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.spinner.MaterialSpinner;
@@ -27,6 +26,7 @@ import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.HttpErrorMsg;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.GreenDaoHelper;
@@ -171,7 +171,7 @@ public class NoticeActivity extends BaseListActivity {
         BeanStudent student = (BeanStudent) spnStudents.getSelectedItem();
 
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.NOTICE_QUERY,
-                new VolleyHttpParamsEntity()
+                new MyVolleyHttpParamsEntity()
                         .addParam("c_id", student == null ? "" : student.getC_id())
                         .addParam("sdate", startTime)
                         .addParam("edate", endTime)

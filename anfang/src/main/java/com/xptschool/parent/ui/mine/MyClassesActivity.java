@@ -8,7 +8,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.google.gson.Gson;
@@ -16,6 +15,7 @@ import com.google.gson.reflect.TypeToken;
 import com.xptschool.parent.R;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanMyClass;
 import com.xptschool.parent.ui.main.BaseListActivity;
@@ -64,7 +64,7 @@ public class MyClassesActivity extends BaseListActivity {
 
     private void getClassesList() {
 
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.MyClass_QUERY, new VolleyHttpParamsEntity()
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.MyClass_QUERY, new MyVolleyHttpParamsEntity()
                         .addParam("token", CommonUtil.encryptToken(HttpAction.MyClass_QUERY)),
                 new MyVolleyRequestListener() {
                     @Override

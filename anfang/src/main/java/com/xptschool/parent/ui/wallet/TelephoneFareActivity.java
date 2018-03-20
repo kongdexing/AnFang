@@ -8,7 +8,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.xptschool.parent.R;
@@ -16,6 +15,7 @@ import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanLearningModule;
 import com.xptschool.parent.model.GreenDaoHelper;
@@ -139,7 +139,7 @@ public class TelephoneFareActivity extends ContractClickActivity {
 
     private void getTelFareOrder(String phone) {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.GET_TEL_RECHARGE_ORDER,
-                new VolleyHttpParamsEntity()
+                new MyVolleyHttpParamsEntity()
                         .addParam("mobile", phone)
                         .addParam("money", recharge_limit + "")
                         .addParam("token", CommonUtil.encryptToken(HttpAction.GET_TEL_RECHARGE_ORDER)),
@@ -184,7 +184,7 @@ public class TelephoneFareActivity extends ContractClickActivity {
 
     private void doTelTopUp(String access_token, String notice_sn) {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.TEL_RECHARGE,
-                new VolleyHttpParamsEntity()
+                new MyVolleyHttpParamsEntity()
                         .addParam("access_token", access_token)
                         .addParam("notice_sn", notice_sn)
                         .addParam("token", CommonUtil.encryptToken(HttpAction.TEL_RECHARGE)),

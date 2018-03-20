@@ -21,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.volley.common.VolleyRequestListener;
@@ -41,6 +40,7 @@ import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.common.UserHelper;
 import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanBanner;
 import com.xptschool.parent.model.BeanHomeCfg;
@@ -345,7 +345,7 @@ public class HomeFragment extends BaseFragment {
         String cityName = SharedPreferencesUtil.getData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_CITY, "").toString();
 
         String url = HttpAction.HOME_Banner;
-        VolleyHttpService.getInstance().sendPostRequest(url, new VolleyHttpParamsEntity()
+        VolleyHttpService.getInstance().sendPostRequest(url, new MyVolleyHttpParamsEntity()
                 .addParam("s_id", s_id)
                 .addParam("area_name", cityName), new MyVolleyRequestListener() {
             @Override
@@ -410,7 +410,7 @@ public class HomeFragment extends BaseFragment {
     private void getHomeGroupCfg() {
         Log.i(TAG, "getHomeGroupCfg: ");
 
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Home_GroupCfg, new VolleyHttpParamsEntity(),
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Home_GroupCfg, new MyVolleyHttpParamsEntity(),
                 new VolleyRequestListener() {
                     @Override
                     public void onStart() {

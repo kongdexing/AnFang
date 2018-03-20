@@ -8,7 +8,6 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.spinner.MaterialSpinner;
@@ -19,6 +18,7 @@ import com.xptschool.parent.R;
 import com.xptschool.parent.bean.BeanHonor;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.GreenDaoHelper;
@@ -139,7 +139,7 @@ public class HonorPActivity extends BaseListActivity {
         String type = spnHonorType.getSelectedIndex() + "";
 
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.Honor_query,
-                new VolleyHttpParamsEntity()
+                new MyVolleyHttpParamsEntity()
                         .addParam("stu_id", currentStudent.getStu_id())
                         .addParam("reward_type", type)
                         .addParam("page", resultPage.getPage() + "")

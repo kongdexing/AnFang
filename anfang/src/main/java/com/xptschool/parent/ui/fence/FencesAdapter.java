@@ -18,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.xptschool.parent.R;
@@ -27,6 +26,7 @@ import com.xptschool.parent.common.BroadcastAction;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.view.CustomDialog;
@@ -215,7 +215,7 @@ public class FencesAdapter extends BaseExpandableListAdapter {
     private void deleteFence(final String sr_id) {
 
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.Track_deleteStudentFence,
-                new VolleyHttpParamsEntity()
+                new MyVolleyHttpParamsEntity()
                         .addParam("sr_id", sr_id)
                         .addParam("token", CommonUtil.encryptToken(HttpAction.Track_deleteStudentFence)),
                 new MyVolleyRequestListener() {

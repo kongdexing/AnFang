@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.mygridview.MyGridView;
@@ -15,6 +14,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xptschool.parent.R;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanLearningModule;
 import com.xptschool.parent.ui.main.BaseActivity;
@@ -107,7 +107,7 @@ public class WalletActivity extends BaseActivity {
     }
 
     private void getLearningServer() {
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Learning_Server, new VolleyHttpParamsEntity()
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Learning_Server, new MyVolleyHttpParamsEntity()
                 .addParam("s_id", ParentUtil.getStuSid()), new MyVolleyRequestListener() {
             @Override
             public void onStart() {

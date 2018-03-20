@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.spinner.MaterialSpinner;
@@ -26,6 +25,7 @@ import com.xptschool.parent.bean.BeanScoreTeacher;
 import com.xptschool.parent.bean.ExamType;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanClass;
 import com.xptschool.parent.model.GreenDaoHelper;
@@ -199,7 +199,7 @@ public class ScoreTeacherActivity extends BaseListActivity {
     private void getExamName() {
         this.currentClass = (BeanClass) spnClass.getSelectedItem();
 
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.GETExams, new VolleyHttpParamsEntity()
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.GETExams, new MyVolleyHttpParamsEntity()
                 .addParam("years", spnDate.getText().toString())
                 .addParam("g_id", currentClass.getG_id())
                 .addParam("c_id", currentClass.getC_id()), new MyVolleyRequestListener() {
@@ -267,7 +267,7 @@ public class ScoreTeacherActivity extends BaseListActivity {
         final String type = exam.getType();
         BeanClass beanClass = (BeanClass) spnClass.getSelectedItem();
 
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.EXAM_QUERY, new VolleyHttpParamsEntity()
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.EXAM_QUERY, new MyVolleyHttpParamsEntity()
                         .addParam("type", type)
                         .addParam("e_id", exam.getE_id())
                         .addParam("g_id", beanClass != null ? beanClass.getG_id() : "")

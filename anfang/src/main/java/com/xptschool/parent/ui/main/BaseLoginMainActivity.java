@@ -6,12 +6,12 @@ import android.util.Log;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 
 import butterknife.ButterKnife;
@@ -37,7 +37,7 @@ public class BaseLoginMainActivity extends AppCompatActivity {
 
     public void login(final String account, final String password, final String type, DefaultRetryPolicy retryPolicy) {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.LOGIN,
-                new VolleyHttpParamsEntity()
+                new MyVolleyHttpParamsEntity()
                         .addParam("username", account)
                         .addParam("password", password)
                         .addParam("system_model", "1")

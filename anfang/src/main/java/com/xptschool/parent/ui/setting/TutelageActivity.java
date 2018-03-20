@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.spinner.MaterialSpinner;
@@ -16,6 +15,7 @@ import com.xptschool.parent.R;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.GreenDaoHelper;
@@ -182,7 +182,7 @@ public class TutelageActivity extends BaseActivity {
             stuIds = student.getStu_id();
         }
 
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.ADD_TUTELAGE, new VolleyHttpParamsEntity()
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.ADD_TUTELAGE, new MyVolleyHttpParamsEntity()
                 .addParam("stu_id", stuIds)
                 .addParam("username", username)
                 .addParam("name", name)

@@ -10,12 +10,12 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.xptschool.parent.R;
 import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.ui.main.BaseActivity;
 import com.xptschool.parent.util.ToastUtils;
@@ -110,7 +110,7 @@ public class CheckSMSCodeActivity extends BaseActivity {
 
     private void getVerifyCode(String phone) {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.FORGOT_PWD_STEP2,
-                new VolleyHttpParamsEntity()
+                new MyVolleyHttpParamsEntity()
                         .addParam("phone", phone)
                         .addParam("username", userName), new MyVolleyRequestListener() {
                     @Override
@@ -139,7 +139,7 @@ public class CheckSMSCodeActivity extends BaseActivity {
 
     private void checkVerifyCode(String code) {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.FORGOT_PWD_STEP3,
-                new VolleyHttpParamsEntity()
+                new MyVolleyHttpParamsEntity()
                         .addParam("code", code)
                         .addParam("username", userName), new MyVolleyRequestListener() {
                     @Override

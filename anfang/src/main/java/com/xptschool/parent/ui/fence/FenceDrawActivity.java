@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.baidu.location.BDLocation;
@@ -38,6 +37,7 @@ import com.xptschool.parent.R;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.ui.main.BaseActivity;
@@ -278,7 +278,7 @@ public class FenceDrawActivity extends BaseActivity implements BDLocationListene
         }
 
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.Track_addStudentFence,
-                new VolleyHttpParamsEntity()
+                new MyVolleyHttpParamsEntity()
                         .addParam("stu_id", student.getStu_id())
                         .addParam("s_id", student.getS_id())
                         .addParam("a_id", student.getA_id())

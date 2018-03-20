@@ -13,7 +13,6 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.mygridview.MyGridView;
@@ -21,6 +20,7 @@ import com.xptschool.parent.R;
 import com.xptschool.parent.bean.BeanHomeWork;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.ui.album.AlbumGridParentAdapter;
 import com.xptschool.parent.ui.album.AlbumParentViewPager;
@@ -197,7 +197,7 @@ public class HomeWorkDetailParentActivity extends VoicePlayActivity {
 
     private void getHomeWorkDetail(String id) {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.HOMEWORK_DETAIL,
-                new VolleyHttpParamsEntity().addParam("id", id), new MyVolleyRequestListener() {
+                new MyVolleyHttpParamsEntity().addParam("id", id), new MyVolleyRequestListener() {
                     @Override
                     public void onStart() {
                         super.onStart();

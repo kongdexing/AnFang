@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.view.SmoothCheckBox;
@@ -18,6 +17,7 @@ import com.xptschool.parent.R;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.ui.main.BaseActivity;
 import com.xptschool.parent.util.ToastUtils;
@@ -148,7 +148,7 @@ public class AddBankCardActivity extends BaseActivity {
             final String cardType = cbx_card1.isChecked() ? "0" : "1";
 
             final String _cardType = this.cardAddType;
-            VolleyHttpService.getInstance().sendPostRequest(HttpAction.Add_BankCard, new VolleyHttpParamsEntity()
+            VolleyHttpService.getInstance().sendPostRequest(HttpAction.Add_BankCard, new MyVolleyHttpParamsEntity()
                             .addParam("cardholder", username)
                             .addParam("card_no", card)
                             .addParam("card_type", cardType)

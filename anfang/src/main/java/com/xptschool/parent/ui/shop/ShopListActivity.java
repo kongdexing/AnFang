@@ -10,7 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.view.LoadMoreRecyclerView;
@@ -19,6 +18,7 @@ import com.google.gson.reflect.TypeToken;
 import com.xptschool.parent.R;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanHomeCfg;
 import com.xptschool.parent.bean.BeanShop;
@@ -77,7 +77,7 @@ public class ShopListActivity extends BaseListActivity {
     private void getShopList(String id) {
 
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.GET_SHOPLIST,
-                new VolleyHttpParamsEntity().addParam("cate_id", "g_" + id),
+                new MyVolleyHttpParamsEntity().addParam("cate_id", "g_" + id),
                 new MyVolleyRequestListener() {
 
                     @Override

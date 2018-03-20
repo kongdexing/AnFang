@@ -10,12 +10,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.google.gson.Gson;
 import com.xptschool.parent.R;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.ui.fragment.BaseFragment;
 import com.xptschool.parent.ui.wallet.pocket.BeanPocketRecord;
@@ -78,7 +78,7 @@ public class InMoneyFragment extends BaseFragment {
     }
 
     private void getBillDetail(final BeanPocketRecord record) {
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.POCKET_BILL_DETAIL, new VolleyHttpParamsEntity()
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.POCKET_BILL_DETAIL, new MyVolleyHttpParamsEntity()
                         .addParam("id", record.getId()),
                 new MyVolleyRequestListener() {
                     @Override

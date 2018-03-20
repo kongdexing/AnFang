@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.view.SmoothCheckBox;
@@ -19,6 +18,7 @@ import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.ui.main.BaseActivity;
 import com.xptschool.parent.ui.wallet.alipay.PayResult;
@@ -156,7 +156,7 @@ public class RechargeActivity extends BaseActivity {
             payment_id = "2";
         }
 
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.GET_OrderInfo, new VolleyHttpParamsEntity()
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.GET_OrderInfo, new MyVolleyHttpParamsEntity()
                 .addParam("deal_price", recharge_limit + "")
 //                .addParam("deal_price", "0.01")
                 .addParam("user_id", XPTApplication.getInstance().getCurrentUserId())

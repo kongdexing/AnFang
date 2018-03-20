@@ -3,13 +3,13 @@ package com.xptschool.parent.ui.wallet.pocket;
 import android.util.Log;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.ui.wallet.card.BeanCardBalance;
 
@@ -40,7 +40,7 @@ public class BalanceUtil {
 
     public static void getBalance(final BalanceCallBack callBack) {
 
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.POCKET_BALANCE, new VolleyHttpParamsEntity()
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.POCKET_BALANCE, new MyVolleyHttpParamsEntity()
                 .addParam("token", CommonUtil.encryptToken(HttpAction.POCKET_BALANCE)), new MyVolleyRequestListener() {
             @Override
             public void onStart() {

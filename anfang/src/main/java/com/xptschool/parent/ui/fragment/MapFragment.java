@@ -23,7 +23,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.spinner.MaterialSpinner;
@@ -44,6 +43,7 @@ import com.xptschool.parent.common.UserHelper;
 import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.HttpErrorMsg;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.GreenDaoHelper;
@@ -509,7 +509,7 @@ public class MapFragment extends MapBaseFragment {
 
     private void getRealTimeLocationByStu() {
         locationTime++;
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Track_RealTime, new VolleyHttpParamsEntity()
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Track_RealTime, new MyVolleyHttpParamsEntity()
                         .addParam("stu_id", currentStudent.getStu_id())
                         .addParam("token", CommonUtil.encryptToken(HttpAction.Track_RealTime)),
                 new MyVolleyRequestListener() {
@@ -563,7 +563,7 @@ public class MapFragment extends MapBaseFragment {
             state_bind_road = "1";
         }
 
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Track_HistoryTrack, new VolleyHttpParamsEntity()
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Track_HistoryTrack, new MyVolleyHttpParamsEntity()
                         .addParam("sdate", startTime + ":00")
                         .addParam("edate", endTime + ":00")
                         .addParam("state", state_bind_road)
@@ -617,7 +617,7 @@ public class MapFragment extends MapBaseFragment {
 
     private void getStudentRail() {
 
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Track_StudentFence, new VolleyHttpParamsEntity()
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Track_StudentFence, new MyVolleyHttpParamsEntity()
                         .addParam("stu_id", currentStudent.getStu_id())
                         .addParam("token", CommonUtil.encryptToken(HttpAction.Track_StudentFence)),
                 new MyVolleyRequestListener() {

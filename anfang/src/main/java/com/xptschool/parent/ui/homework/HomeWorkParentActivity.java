@@ -11,7 +11,6 @@ import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.spinner.MaterialSpinner;
@@ -24,6 +23,7 @@ import com.xptschool.parent.bean.BeanHomeWork;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.HttpErrorMsg;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.GreenDaoHelper;
@@ -145,7 +145,7 @@ public class HomeWorkParentActivity extends BaseListActivity {
         BeanStudent student = (BeanStudent) spnStudents.getSelectedItem();
 
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.HOMEWORK_QUERY,
-                new VolleyHttpParamsEntity()
+                new MyVolleyHttpParamsEntity()
                         .addParam("s_id", student.getS_id())
                         .addParam("a_id", student.getA_id())
                         .addParam("g_id", student.getG_id())

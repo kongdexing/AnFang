@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.xptschool.parent.R;
@@ -15,6 +14,7 @@ import com.xptschool.parent.bean.BeanClassInfo;
 import com.xptschool.parent.bean.BeanNotice;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.GreenDaoHelper;
@@ -98,7 +98,7 @@ public class NoticeDetailActivity extends BaseActivity {
     }
 
     private void getNoticeDetail(String id) {
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.NOTICE_DETAIL, new VolleyHttpParamsEntity()
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.NOTICE_DETAIL, new MyVolleyHttpParamsEntity()
                 .addParam("id", id), new MyVolleyRequestListener() {
             @Override
             public void onStart() {

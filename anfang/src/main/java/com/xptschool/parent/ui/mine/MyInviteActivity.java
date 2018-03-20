@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.spinner.MaterialSpinner;
@@ -23,6 +22,7 @@ import com.xptschool.parent.bean.BeanHomeWork;
 import com.xptschool.parent.bean.BeanInvite;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanClass;
 import com.xptschool.parent.model.BeanCourse;
@@ -95,7 +95,7 @@ public class MyInviteActivity extends BaseListActivity {
     private void getInviteList() {
 
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.GET_REFER,
-                new VolleyHttpParamsEntity()
+                new MyVolleyHttpParamsEntity()
                         .addParam("page", resultPage.getPage() + "")
                         .addParam("user_id", XPTApplication.getInstance().getCurrentUserId()),
                 new MyVolleyRequestListener() {

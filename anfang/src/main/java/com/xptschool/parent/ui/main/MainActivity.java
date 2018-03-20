@@ -22,7 +22,6 @@ import android.widget.Toast;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.common.CookieUtil;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.baidu.location.BDLocation;
@@ -46,6 +45,7 @@ import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.ease.Constant;
 import com.xptschool.parent.ease.EaseHelper;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.fragment.HomeFragment;
@@ -447,7 +447,7 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
 
     private void login(final String account, final String password, final String type) {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.LOGIN,
-                new VolleyHttpParamsEntity()
+                new MyVolleyHttpParamsEntity()
                         .addParam("username", account)
                         .addParam("password", password)
                         .addParam("type", type),

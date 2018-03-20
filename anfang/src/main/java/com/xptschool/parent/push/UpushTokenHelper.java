@@ -3,13 +3,13 @@ package com.xptschool.parent.push;
 import android.util.Log;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.volley.common.VolleyRequestListener;
 import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.model.BeanParent;
 import com.xptschool.parent.model.BeanTeacher;
 import com.xptschool.parent.model.GreenDaoHelper;
@@ -53,7 +53,7 @@ public class UpushTokenHelper {
         }
 
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.HOOK_PUSH_TOKEN,
-                new VolleyHttpParamsEntity()
+                new MyVolleyHttpParamsEntity()
                         .addParam("status", "1")    //1登录 2其他(切换\退出)
                         .addParam("user_name", user_name)
                         .addParam("system_model", "1") //1Android 0ios
@@ -87,7 +87,7 @@ public class UpushTokenHelper {
      */
     public static void exitAccount(String user_name, String user_id) {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.HOOK_PUSH_TOKEN,
-                new VolleyHttpParamsEntity()
+                new MyVolleyHttpParamsEntity()
                         .addParam("status", "2")    //1登录 2其他(切换\退出)
                         .addParam("user_name", user_name)
                         .addParam("system_model", "1") //1Android 0ios

@@ -6,7 +6,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.view.LoadMoreRecyclerView;
@@ -16,6 +15,7 @@ import com.xptschool.parent.R;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.HttpErrorMsg;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.ui.main.BaseListActivity;
 
@@ -79,7 +79,7 @@ public class BillActivity extends BaseListActivity {
     }
 
     private void getBill() {
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.STU_CARD_BILL, new VolleyHttpParamsEntity()
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.STU_CARD_BILL, new MyVolleyHttpParamsEntity()
                 .addParam("stu_id", stu_id)
                 .addParam("page", resultPage.getPage() + "")
                 .addParam("token", CommonUtil.encryptToken(HttpAction.STU_CARD_BILL)), new MyVolleyRequestListener() {

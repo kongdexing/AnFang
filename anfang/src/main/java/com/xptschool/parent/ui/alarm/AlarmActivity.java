@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.spinner.MaterialSpinner;
@@ -27,6 +26,7 @@ import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.HttpErrorMsg;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.GreenDaoHelper;
@@ -151,7 +151,7 @@ public class AlarmActivity extends BaseListActivity {
         BeanStudent student = (BeanStudent) spnStudents.getSelectedItem();
 
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.Track_alarm,
-                new VolleyHttpParamsEntity()
+                new MyVolleyHttpParamsEntity()
                         .addParam("dates", spnDate.getText().toString())
                         .addParam("stu_id", student.getStu_id())
                         .addParam("page", resultPage.getPage() + "")

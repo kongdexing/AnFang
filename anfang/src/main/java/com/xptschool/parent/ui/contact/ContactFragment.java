@@ -15,7 +15,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.groupexpandable.FloatingGroupExpandableListView;
@@ -29,6 +28,7 @@ import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.UserHelper;
 import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.ContactParent;
@@ -168,7 +168,7 @@ public class ContactFragment extends BaseFragment {
 
     private void getContactForParent() {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.MyContacts_ForParent,
-                new VolleyHttpParamsEntity()
+                new MyVolleyHttpParamsEntity()
                         .addParam("token", CommonUtil.encryptToken(HttpAction.MyContacts_ForParent)),
                 new MyVolleyRequestListener() {
                     @Override
@@ -217,7 +217,7 @@ public class ContactFragment extends BaseFragment {
 
     private void getContactForTeacher() {
         try {
-            VolleyHttpService.getInstance().sendPostRequest(HttpAction.MyContacts_ForTeacher, new VolleyHttpParamsEntity()
+            VolleyHttpService.getInstance().sendPostRequest(HttpAction.MyContacts_ForTeacher, new MyVolleyHttpParamsEntity()
                             .addParam("s_id", GreenDaoHelper.getInstance().getCurrentTeacher().getS_id())
                             .addParam("a_id", GreenDaoHelper.getInstance().getCurrentTeacher().getA_id())
                             .addParam("token", CommonUtil.encryptToken(HttpAction.MyContacts_ForTeacher)),

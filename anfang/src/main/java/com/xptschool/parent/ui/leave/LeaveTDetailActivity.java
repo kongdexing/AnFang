@@ -11,7 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.xptschool.parent.R;
@@ -20,6 +19,7 @@ import com.xptschool.parent.common.ActivityResultCode;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.main.BaseActivity;
@@ -144,7 +144,7 @@ public class LeaveTDetailActivity extends BaseActivity {
 
     private void getLeaveDetail(String id) {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.Leave_Detail,
-                new VolleyHttpParamsEntity().addParam("id", id), new MyVolleyRequestListener() {
+                new MyVolleyHttpParamsEntity().addParam("id", id), new MyVolleyRequestListener() {
                     @Override
                     public void onStart() {
                         super.onStart();
@@ -192,7 +192,7 @@ public class LeaveTDetailActivity extends BaseActivity {
     }
 
     private void putLeaveStatus() {
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Leave_Edit, new VolleyHttpParamsEntity()
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Leave_Edit, new MyVolleyHttpParamsEntity()
                         .addParam("status", currentLeave.getStatus())
                         .addParam("reply", currentLeave.getReply())
                         .addParam("id", currentLeave.getId())

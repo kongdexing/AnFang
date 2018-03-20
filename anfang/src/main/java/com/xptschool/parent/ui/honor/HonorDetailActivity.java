@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.xptschool.parent.R;
@@ -16,6 +15,7 @@ import com.xptschool.parent.bean.BeanComment;
 import com.xptschool.parent.bean.BeanHonor;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.ui.comment.CommentDetailActivity;
 import com.xptschool.parent.ui.main.BaseActivity;
@@ -92,7 +92,7 @@ public class HonorDetailActivity extends BaseActivity {
 
     private void getHonorDetail(String id) {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.Honor_detail,
-                new VolleyHttpParamsEntity().addParam("id", id), new MyVolleyRequestListener() {
+                new MyVolleyHttpParamsEntity().addParam("id", id), new MyVolleyRequestListener() {
                     @Override
                     public void onStart() {
                         super.onStart();
@@ -138,7 +138,7 @@ public class HonorDetailActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.btnDelete:
                 VolleyHttpService.getInstance().sendPostRequest(HttpAction.ACTION_LOGIN,
-                        new VolleyHttpParamsEntity(), new MyVolleyRequestListener() {
+                        new MyVolleyHttpParamsEntity(), new MyVolleyRequestListener() {
                             @Override
                             public void onStart() {
                                 super.onStart();

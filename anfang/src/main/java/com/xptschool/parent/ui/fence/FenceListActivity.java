@@ -9,7 +9,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.groupexpandable.FloatingGroupExpandableListView;
@@ -22,6 +21,7 @@ import com.xptschool.parent.common.BroadcastAction;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.HttpErrorMsg;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.GreenDaoHelper;
@@ -113,7 +113,7 @@ public class FenceListActivity extends BaseActivity {
         }
 
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.Track_StudentFence,
-                new VolleyHttpParamsEntity()
+                new MyVolleyHttpParamsEntity()
                         .addParam("stu_id", stuIds)
                         .addParam("token", CommonUtil.encryptToken(HttpAction.Track_StudentFence)),
                 new MyVolleyRequestListener() {

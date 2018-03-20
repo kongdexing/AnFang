@@ -17,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.spinner.MaterialSpinner;
@@ -29,6 +28,7 @@ import com.xptschool.parent.common.ActivityResultCode;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.SpinnerTeacher;
@@ -293,7 +293,7 @@ public class LeavePDetailActivity extends BaseActivity {
 
     private void getLeaveDetail(String id) {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.Leave_Detail,
-                new VolleyHttpParamsEntity().addParam("id", id), new MyVolleyRequestListener() {
+                new MyVolleyHttpParamsEntity().addParam("id", id), new MyVolleyRequestListener() {
                     @Override
                     public void onStart() {
                         super.onStart();
@@ -377,7 +377,7 @@ public class LeavePDetailActivity extends BaseActivity {
             currentLeave.setEnd_time(txtETime.getText().toString());
         }
 
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Leave_Add, new VolleyHttpParamsEntity()
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Leave_Add, new MyVolleyHttpParamsEntity()
                         .addParam("id", currentLeave == null ? "0" : currentLeave.getId())
                         .addParam("stu_id", student.getStu_id())
                         .addParam("t_id", teacher.getT_id())
@@ -419,7 +419,7 @@ public class LeavePDetailActivity extends BaseActivity {
         BeanStudent student = (BeanStudent) spnStudents.getSelectedItem();
 
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.GET_TEACHER_BYCID,
-                new VolleyHttpParamsEntity()
+                new MyVolleyHttpParamsEntity()
                         .addParam("c_id", student.getC_id())
                         .addParam("g_id", student.getG_id()),
                 new MyVolleyRequestListener() {
@@ -471,7 +471,7 @@ public class LeavePDetailActivity extends BaseActivity {
 
     private void deleteLeave() {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.Leave_Del,
-                new VolleyHttpParamsEntity()
+                new MyVolleyHttpParamsEntity()
                         .addParam("id", currentLeave.getId())
                         .addParam("token", CommonUtil.encryptToken(HttpAction.Leave_Del)),
                 new MyVolleyRequestListener() {

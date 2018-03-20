@@ -11,7 +11,6 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.google.gson.Gson;
@@ -20,6 +19,7 @@ import com.xptschool.parent.R;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanClass;
 import com.xptschool.parent.model.BeanStudent;
@@ -66,7 +66,7 @@ public class StudentFragment extends DialogFragment {
     }
 
     private void getStudentByClassId(BeanClass beanClass) {
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.MyStudent_QUERY, new VolleyHttpParamsEntity()
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.MyStudent_QUERY, new MyVolleyHttpParamsEntity()
                         .addParam("c_id", beanClass.getC_id())
                         .addParam("g_id", beanClass.getG_id())
                         .addParam("token", CommonUtil.encryptToken(HttpAction.MyStudent_QUERY)),

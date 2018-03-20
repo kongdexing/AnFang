@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.google.gson.Gson;
@@ -22,6 +21,7 @@ import com.xptschool.parent.R;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.ui.main.BaseActivity;
 import com.xptschool.parent.ui.wallet.bankcard.AddBankCardActivity;
@@ -151,7 +151,7 @@ public class TakeOutMoneyActivity extends BaseActivity {
 
     private void getBankList() {
 
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.GET_BankCards, new VolleyHttpParamsEntity()
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.GET_BankCards, new MyVolleyHttpParamsEntity()
                 .addParam("token", CommonUtil.encryptToken(HttpAction.GET_BankCards)), new MyVolleyRequestListener() {
             @Override
             public void onStart() {
@@ -202,7 +202,7 @@ public class TakeOutMoneyActivity extends BaseActivity {
     }
 
     private void takeoutMoney(String money, String bankId) {
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.REFUND_ADD, new VolleyHttpParamsEntity()
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.REFUND_ADD, new MyVolleyHttpParamsEntity()
                 .addParam("money", money)
                 .addParam("memo", "零钱提款")
                 .addParam("bank_id", bankId)

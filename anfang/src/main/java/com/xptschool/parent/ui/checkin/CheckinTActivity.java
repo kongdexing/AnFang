@@ -11,7 +11,6 @@ import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.spinner.MaterialSpinner;
@@ -23,6 +22,7 @@ import com.xptschool.parent.R;
 import com.xptschool.parent.bean.BeanCheckin;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanClass;
 import com.xptschool.parent.model.GreenDaoHelper;
@@ -164,7 +164,7 @@ public class CheckinTActivity extends BaseListActivity {
         }
 
         //sign_type '进校 1 出校 0'
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Attendance_QUERY, new VolleyHttpParamsEntity()
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.Attendance_QUERY, new MyVolleyHttpParamsEntity()
                         .addParam("dates", txtDate.getText().toString())
                         .addParam("g_id", currentClass.getG_id())
                         .addParam("c_id", currentClass.getC_id())

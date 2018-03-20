@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.view.LoadMoreRecyclerView;
@@ -16,6 +15,7 @@ import com.xptschool.parent.R;
 import com.xptschool.parent.common.BroadcastAction;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.main.BaseListActivity;
@@ -102,7 +102,7 @@ public class StuCardActivity extends BaseListActivity {
                 String stu_id = intent.getStringExtra("stu_id");
                 String freeze_type = intent.getStringExtra("freeze");
 
-                VolleyHttpService.getInstance().sendPostRequest(HttpAction.STU_CARD_FREEZE, new VolleyHttpParamsEntity()
+                VolleyHttpService.getInstance().sendPostRequest(HttpAction.STU_CARD_FREEZE, new MyVolleyHttpParamsEntity()
                         .addParam("stu_id", stu_id)
                         .addParam("type", freeze_type)
                         .addParam("token", CommonUtil.encryptToken(HttpAction.STU_CARD_FREEZE)), new MyVolleyRequestListener() {

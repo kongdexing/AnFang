@@ -13,7 +13,6 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.spinner.MaterialSpinner;
@@ -21,6 +20,7 @@ import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanClass;
 import com.xptschool.parent.model.BeanStudent;
@@ -173,7 +173,7 @@ public class HonorPushActivity extends BaseActivity {
     private void addHonor(String content) {
 
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.Honor_edit,
-                new VolleyHttpParamsEntity()
+                new MyVolleyHttpParamsEntity()
                         .addParam("stu_id", currentStudent.getStu_id())
                         .addParam("s_id", GreenDaoHelper.getInstance().getCurrentTeacher().getS_id())
                         .addParam("a_id", GreenDaoHelper.getInstance().getCurrentTeacher().getA_id())

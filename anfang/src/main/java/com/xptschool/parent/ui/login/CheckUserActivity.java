@@ -7,13 +7,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.view.SmoothCheckBox;
 import com.xptschool.parent.R;
 import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.ui.main.BaseActivity;
 import com.xptschool.parent.util.ToastUtils;
@@ -86,7 +86,7 @@ public class CheckUserActivity extends BaseActivity {
 
     private void checkUserName(final String username, String type) {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.FORGOT_PWD_STEP1,
-                new VolleyHttpParamsEntity()
+                new MyVolleyHttpParamsEntity()
                         .addParam("type", type)
                         .addParam("username", username), new MyVolleyRequestListener() {
                     @Override

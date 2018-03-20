@@ -10,13 +10,13 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.xptschool.parent.R;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.ui.main.BaseActivity;
 import com.xptschool.parent.util.ToastUtils;
@@ -139,7 +139,7 @@ public class RegisterActivity extends BaseActivity {
 
     private void getVerifyCode(final String phone) {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.REGISTER_GETCODE,
-                new VolleyHttpParamsEntity()
+                new MyVolleyHttpParamsEntity()
                         .addParam("phone", phone), new MyVolleyRequestListener() {
                     @Override
                     public void onStart() {
@@ -170,7 +170,7 @@ public class RegisterActivity extends BaseActivity {
 
     private void register(final String phone, String userName, String code, final String pwd) {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.REGISTER,
-                new VolleyHttpParamsEntity()
+                new MyVolleyHttpParamsEntity()
                         .addParam("phone", phone)
                         .addParam("name", userName)
                         .addParam("code", code)

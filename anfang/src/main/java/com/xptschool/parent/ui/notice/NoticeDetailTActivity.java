@@ -12,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.mygridview.MyGridView;
@@ -23,6 +22,7 @@ import com.xptschool.parent.common.ActivityResultCode;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanClass;
 import com.xptschool.parent.model.BeanTeacher;
@@ -195,7 +195,7 @@ public class NoticeDetailTActivity extends BaseActivity {
             return;
         }
 
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.NOTICE_ADD, new VolleyHttpParamsEntity()
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.NOTICE_ADD, new MyVolleyHttpParamsEntity()
                         .addParam("a_id", teacher.getA_id())
                         .addParam("s_id", teacher.getS_id())
                         .addParam("g_id", notice.getG_id())
@@ -228,7 +228,7 @@ public class NoticeDetailTActivity extends BaseActivity {
     }
 
     private void deleteNotice() {
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.NOTICE_DEL, new VolleyHttpParamsEntity()
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.NOTICE_DEL, new MyVolleyHttpParamsEntity()
                         .addParam("m_id", currentNotice.getM_id())
                         .addParam("token", CommonUtil.encryptToken(HttpAction.NOTICE_DEL)),
                 new MyVolleyRequestListener() {

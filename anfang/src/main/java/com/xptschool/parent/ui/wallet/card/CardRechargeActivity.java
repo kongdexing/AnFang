@@ -10,13 +10,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.xptschool.parent.R;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.ui.main.BaseActivity;
 import com.xptschool.parent.ui.wallet.pocket.BalanceUtil;
@@ -191,7 +191,7 @@ public class CardRechargeActivity extends BaseActivity {
     private void onStuCardRecharge(String money, String orderId, String accessToken) {
 
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.STU_CARD_RECHARGE,
-                new VolleyHttpParamsEntity()
+                new MyVolleyHttpParamsEntity()
                         .addParam("stu_id", current_stuId)
                         .addParam("account", money)
                         .addParam("order_id", orderId)
