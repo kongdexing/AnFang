@@ -263,6 +263,7 @@ public class CommonUtil {
         JSONObject jsonData = new JSONObject(httpResult.getData().toString());
         JSONObject jsonLogin = new JSONObject(jsonData.getJSONObject("login").toString());
         String type = jsonLogin.getString("type");
+
         if (type.equals(UserType.PARENT.toString())) {
             CommonUtil.initBeanStudentByHttpResult(jsonData.getJSONArray("stuData").toString());
             CommonUtil.initParentInfoByHttpResult(jsonData.getJSONObject("login").toString(), account);
@@ -270,8 +271,9 @@ public class CommonUtil {
             CommonUtil.getBeanClassesByHttpResult(jsonData.getJSONArray("class").toString());
             CommonUtil.getBeanCoursesByHttpResult(jsonData.getJSONArray("course").toString());
             CommonUtil.initTeacherInfoByHttpResult(jsonData.getJSONObject("login").toString(), account);
-        } else if (type.equals(UserType.VISITOR.toString())) {
-            //游客
+        } else if (type.equals(UserType.VISITOR.toString()) || type.equals(UserType.COMPANY.toString())
+                || type.equals(UserType.PROXY.toString()) || type.equals(UserType.CITYPROXY.toString())) {
+            //会员|第三方公司|代理商|区县代理商
             SharedPreferencesUtil.saveData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_VISITOR_NAME, jsonLogin.get("name"));
             SharedPreferencesUtil.saveData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_UID, jsonLogin.get("user_id"));
         }

@@ -5,6 +5,9 @@ import android.os.Bundle;
 import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.ui.main.BaseActivity;
+import com.xptschool.parent.ui.mine.role.PInfoView;
+import com.xptschool.parent.ui.mine.role.TInfoView;
+import com.xptschool.parent.ui.mine.role.VisitorInfoView;
 
 public class MyInfoActivity extends BaseActivity {
 
@@ -12,13 +15,19 @@ public class MyInfoActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //判断老师家长
-        if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+        UserType type = XPTApplication.getInstance().getCurrent_user_type();
+
+        if (UserType.PARENT.equals(type)) {
             PInfoView pInfoView = new PInfoView(this);
             setContentView(pInfoView);
-        } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+        } else if (UserType.TEACHER.equals(type)) {
             TInfoView tInfoView = new TInfoView(this);
             setContentView(tInfoView);
+        } else {
+            VisitorInfoView vInfoView = new VisitorInfoView(this);
+            setContentView(vInfoView);
         }
+
         setTitle("个人信息");
     }
 

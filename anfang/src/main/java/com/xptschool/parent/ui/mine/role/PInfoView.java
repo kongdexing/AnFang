@@ -1,4 +1,4 @@
-package com.xptschool.parent.ui.mine;
+package com.xptschool.parent.ui.mine.role;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +14,7 @@ import com.android.widget.view.CircularImageView;
 import com.xptschool.parent.R;
 import com.xptschool.parent.model.BeanParent;
 import com.xptschool.parent.model.GreenDaoHelper;
+import com.xptschool.parent.ui.mine.BaseInfoView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

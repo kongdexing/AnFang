@@ -294,14 +294,7 @@ public class XPTApplication extends Application {
             return null;
         }
         String current_user_type = SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_TYPE, "").toString();
-        if (current_user_type.equals(UserType.PARENT.toString())) {
-            return UserType.PARENT;
-        } else if (current_user_type.equals(UserType.TEACHER.toString())) {
-            return UserType.TEACHER;
-        } else if (current_user_type.equals(UserType.VISITOR.toString())) {
-            return UserType.VISITOR;
-        }
-        return null;
+        return UserType.getUserTypeByStr(current_user_type);
     }
 
     public String getCurrentUserId() {
@@ -311,7 +304,7 @@ public class XPTApplication extends Application {
             userId = GreenDaoHelper.getInstance().getCurrentParent().getU_id();
         } else if (UserType.TEACHER.equals(type)) {
             userId = GreenDaoHelper.getInstance().getCurrentTeacher().getU_id();
-        } else if (UserType.VISITOR.equals(type)) {
+        } else {
             userId = SharedPreferencesUtil.getData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_UID, "").toString();
         }
         return userId;

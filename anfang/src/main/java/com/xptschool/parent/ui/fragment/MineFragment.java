@@ -95,9 +95,10 @@ public class MineFragment extends BaseFragment {
             ll_login.setVisibility(View.VISIBLE);
 
             UserType type = XPTApplication.getInstance().getCurrent_user_type();
-
+            if (type == null) {
+                return;
+            }
             if (UserType.TEACHER.equals(type)) {
-                txtRole.setText("角色：老师");
                 rlMyChild.setVisibility(View.GONE);
                 rlMyClass.setVisibility(View.VISIBLE);
 //                rlMyBill.setVisibility(View.GONE);
@@ -114,7 +115,6 @@ public class MineFragment extends BaseFragment {
                     }
                 }
             } else if (UserType.PARENT.equals(type)) {
-                txtRole.setText("角色：家长");
                 rlMyChild.setVisibility(View.VISIBLE);
 
                 LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) rlMyChild.getLayoutParams();
@@ -135,14 +135,14 @@ public class MineFragment extends BaseFragment {
                         imgLoginHead.setImageResource(R.drawable.parent_mother);
                     }
                 }
-            } else if (UserType.VISITOR.equals(type)) {
-                txtRole.setText("角色：会员");
+            } else if (UserType.VISITOR.equals(type) || UserType.COMPANY.equals(type) || UserType.PROXY.equals(type) || UserType.CITYPROXY.equals(type)) {
                 rlMyClass.setVisibility(View.GONE);
                 rlMyChild.setVisibility(View.GONE);
                 rlMyProperty.setVisibility(View.GONE);
                 txtUserName.setText(SharedPreferencesUtil.getData(mContext, SharedPreferencesUtil.KEY_USER_NAME, "").toString());
 //                txtPhone.setText("手机号：" + SharedPreferencesUtil.getData(mContext, SharedPreferencesUtil.KEY_VISITOR_NAME, ""));
             }
+            txtRole.setText("角色：" + type.getRoleName());
         } else {
             LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) rlMyChild.getLayoutParams();
             params.setMargins(0, (int) mContext.getResources().getDimension(R.dimen.dp_1), 0, 0);
@@ -207,11 +207,7 @@ public class MineFragment extends BaseFragment {
                 startActivity(new Intent(getContext(), LoginActivity.class));
                 break;
             case R.id.ll_login:
-                if (!UserType.VISITOR.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-                    startActivity(new Intent(getContext(), MyInfoActivity.class));
-                } else {
-                    ToastUtils.showToast(mContext, "游客身份需等待相关人员审核后方可查看个人信息");
-                }
+                startActivity(new Intent(getContext(), MyInfoActivity.class));
                 break;
             case R.id.rlMyChild:
                 startActivity(new Intent(getContext(), MyChildActivity.class));

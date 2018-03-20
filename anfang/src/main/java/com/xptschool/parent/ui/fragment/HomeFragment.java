@@ -521,8 +521,18 @@ public class HomeFragment extends BaseFragment {
     private void initSchoolItem() {
         Log.i(TAG, "initSchoolItem: ");
         //判断角色
-        if (UserType.VISITOR.equals(XPTApplication.getInstance().getCurrent_user_type()) ||
-                XPTApplication.getInstance().getCurrent_user_type() == null) {
+        UserType type = XPTApplication.getInstance().getCurrent_user_type();
+        if (UserType.PARENT.equals(type) || UserType.TEACHER.equals(type)) {
+            //家长|老师显示校园生活
+            if (llTip != null)
+                llTip.setVisibility(View.VISIBLE);
+
+            if (happyGrowView != null) {
+                LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) happyGrowView.getLayoutParams();
+                lp.setMargins(0, 10, 0, 0);
+                happyGrowView.setLayoutParams(lp);
+            }
+        } else {
             if (llTip != null)
                 llTip.setVisibility(View.GONE);
 
@@ -532,15 +542,6 @@ public class HomeFragment extends BaseFragment {
                 happyGrowView.setLayoutParams(lp);
             }
             return;
-        } else {
-            if (llTip != null)
-                llTip.setVisibility(View.VISIBLE);
-
-            if (happyGrowView != null) {
-                LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) happyGrowView.getLayoutParams();
-                lp.setMargins(0, 10, 0, 0);
-                happyGrowView.setLayoutParams(lp);
-            }
         }
 
         boolean isParent = false;
