@@ -14,8 +14,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
@@ -23,35 +21,27 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMWeb;
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
-import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.ui.main.BaseActivity;
 import com.xptschool.parent.util.QRCodeUtil;
-
-import java.util.HashMap;
 
 import butterknife.BindView;
 
 /**
- * Created by dexing on 2017-11-15 0015.
+ * 下载二维码
  */
 
-public class QRCodeActivity extends BaseActivity {
+public class DownloadQRCodeActivity extends BaseActivity {
 
     @BindView(R.id.QRImg)
     ImageView QRImg;
-
-    @BindView(R.id.txtUserName)
-    TextView txtUserName;
-    @BindView(R.id.txtUserRole)
-    TextView txtUserRole;
 
     String shareURL = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_qrcode);
-        setTitle(R.string.mine_qr_code);
+        setContentView(R.layout.activity_download_qrcode);
+        setTitle(R.string.mine_download_code);
 
         setTxtRight("分享");
         setTextRightClickListener(new View.OnClickListener() {
@@ -62,13 +52,7 @@ public class QRCodeActivity extends BaseActivity {
         });
 
         try {
-
-            final String text = XPTApplication.getInstance().getCurrentRefId();
-            final byte[] textByte = text.getBytes("UTF-8");
-            //编码
-            final String encodedText = Base64.encodeToString(textByte, Base64.DEFAULT);
-
-            shareURL = "http://school.xinpingtai.com/index.php/Wap/Register/index?ref=" + encodedText;
+            shareURL = "http://school.xinpingtai.com/app/index.html";
             Log.i(TAG, "onCreate: " + shareURL);
             Bitmap bitmap = QRCodeUtil.createCode(shareURL, BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
 
@@ -76,12 +60,6 @@ public class QRCodeActivity extends BaseActivity {
                 QRImg.setImageBitmap(bitmap);
             }
 
-            if (XPTApplication.getInstance().isLoggedIn()) {
-                txtUserName.setText(XPTApplication.getInstance().getCurrentUserName());
-                txtUserRole.setText("角色：" + XPTApplication.getInstance().getCurrent_user_type().getRoleName());
-            } else {
-                txtUserRole.setText("未登录");
-            }
         } catch (Exception ex) {
             Log.i(TAG, "onCreate: " + ex.getMessage());
         }
@@ -112,9 +90,9 @@ public class QRCodeActivity extends BaseActivity {
         UMWeb web = new UMWeb(shareURL);
         web.setTitle("信平台");//标题
 //        web.setThumb(thumb);  //缩略图
-        web.setDescription("诚邀您注册并下载数海信平台客户端进行体验");//描述
+        web.setDescription("诚邀您下载数海信平台客户端进行体验");//描述
 
-        new ShareAction(QRCodeActivity.this)
+        new ShareAction(DownloadQRCodeActivity.this)
                 .setDisplayList(SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE,
                         SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE)//传入平台
                 .withMedia(web)//分享内容

@@ -104,6 +104,7 @@
     <string name="mine_download_code">APP下载二维码</string>
 
     <string name="setting_qrcode_title">数海信息安防校园邀请码</string>
+    <string name="setting_download_qrcode_title">扫码下载信平台App</string>
 
     <string name="mine_ms_ele_account">民生银行电子账户</string>
     <string name="mine_ms_payment">代收代缴</string>

@@ -26,6 +26,7 @@ import com.xptschool.parent.ui.mine.MyChildActivity;
 import com.xptschool.parent.ui.mine.MyClassesActivity;
 import com.xptschool.parent.ui.mine.MyInfoActivity;
 import com.xptschool.parent.ui.mine.MyInviteActivity;
+import com.xptschool.parent.ui.setting.DownloadQRCodeActivity;
 import com.xptschool.parent.ui.setting.QRCodeActivity;
 import com.xptschool.parent.ui.setting.SettingActivity;
 import com.xptschool.parent.ui.wallet.WalletActivity;
@@ -234,7 +235,7 @@ public class MineFragment extends BaseFragment {
                 startActivity(new Intent(getContext(), QRCodeActivity.class));
                 break;
             case R.id.rlDownloadQRCode:
-
+                startActivity(new Intent(getContext(), DownloadQRCodeActivity.class));
                 break;
         }
     }
