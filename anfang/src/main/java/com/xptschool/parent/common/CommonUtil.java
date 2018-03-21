@@ -276,6 +276,8 @@ public class CommonUtil {
             //会员|第三方公司|代理商|区县代理商
             SharedPreferencesUtil.saveData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_VISITOR_NAME, jsonLogin.get("name"));
             SharedPreferencesUtil.saveData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_UID, jsonLogin.get("user_id"));
+            SharedPreferencesUtil.saveData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_REF_ID, jsonLogin.get("ref_id"));
+
         }
         XPTApplication.getInstance().setCurrent_user_type(type);
     }

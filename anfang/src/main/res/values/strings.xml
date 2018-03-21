@@ -100,7 +100,9 @@
 
     <string name="mine_bill">电子账单</string>
     <string name="mine_property">宝贝管理</string>
-    <string name="mine_qr_code">二维码</string>
+    <string name="mine_qr_code">邀请二维码</string>
+    <string name="mine_download_code">APP下载二维码</string>
+
     <string name="setting_qrcode_title">数海信息安防校园邀请码</string>
 
     <string name="mine_ms_ele_account">民生银行电子账户</string>

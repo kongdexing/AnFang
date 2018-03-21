@@ -12,6 +12,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
@@ -38,6 +39,12 @@ public class QRCodeActivity extends BaseActivity {
 
     @BindView(R.id.QRImg)
     ImageView QRImg;
+
+    @BindView(R.id.txtUserName)
+    TextView txtUserName;
+    @BindView(R.id.txtUserRole)
+    TextView txtUserRole;
+
     String shareURL = "";
 
     @Override
@@ -46,11 +53,17 @@ public class QRCodeActivity extends BaseActivity {
         setContentView(R.layout.activity_qrcode);
         setTitle(R.string.mine_qr_code);
 
-//        Bitmap bitmap = QRCodeUtil.createQRCodeBitmap("http://school.xinpingtai.com/register?user_id=100", 100,
-//                BitmapFactory.decodeResource(getResources(), R.drawable.logo_shuhai), 0.2f);
+        setTxtRight("分享");
+        setTextRightClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showShare();
+            }
+        });
 
         try {
-            final String text = XPTApplication.getInstance().getCurrentUserId();
+
+            final String text = XPTApplication.getInstance().getCurrentRefId();
             final byte[] textByte = text.getBytes("UTF-8");
             //编码
             final String encodedText = Base64.encodeToString(textByte, Base64.DEFAULT);
@@ -62,17 +75,16 @@ public class QRCodeActivity extends BaseActivity {
             if (bitmap != null) {
                 QRImg.setImageBitmap(bitmap);
             }
-        } catch (Exception ex) {
 
-        }
-
-        setTxtRight("分享");
-        setTextRightClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showShare();
+            if (XPTApplication.getInstance().isLoggedIn()) {
+                txtUserName.setText(XPTApplication.getInstance().getCurrentUserName());
+                txtUserRole.setText("角色：" + XPTApplication.getInstance().getCurrent_user_type().getRoleName());
+            } else {
+                txtUserRole.setText("未登录");
             }
-        });
+        } catch (Exception ex) {
+            Log.i(TAG, "onCreate: " + ex.getMessage());
+        }
     }
 
     //QQ，新浪

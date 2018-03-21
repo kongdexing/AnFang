@@ -140,6 +140,7 @@ public class MineFragment extends BaseFragment {
                 rlMyChild.setVisibility(View.GONE);
                 rlMyProperty.setVisibility(View.GONE);
                 txtUserName.setText(SharedPreferencesUtil.getData(mContext, SharedPreferencesUtil.KEY_USER_NAME, "").toString());
+                txtPhone.setVisibility(View.GONE);
 //                txtPhone.setText("手机号：" + SharedPreferencesUtil.getData(mContext, SharedPreferencesUtil.KEY_VISITOR_NAME, ""));
             }
             txtRole.setText("角色：" + type.getRoleName());
@@ -178,7 +179,7 @@ public class MineFragment extends BaseFragment {
     }
 
     @OnClick({R.id.imgHead, R.id.txtToLogin, R.id.ll_login, R.id.rlMyChild, R.id.rlMyInvite,
-            R.id.rlMyBill, R.id.rlMyClass, R.id.rlMyProperty, R.id.rlSetting, R.id.rlQRCode})
+            R.id.rlMyBill, R.id.rlMyClass, R.id.rlMyProperty, R.id.rlSetting, R.id.rlQRCode, R.id.rlDownloadQRCode})
     void viewClick(View view) {
         switch (view.getId()) {
             case R.id.rlMyClass:
@@ -226,17 +227,14 @@ public class MineFragment extends BaseFragment {
                     Toast.makeText(mContext, "暂无绑定的学生", Toast.LENGTH_SHORT).show();
                 }
                 break;
-//            case R.id.txtChangeAccount:
-//                startActivity(new Intent(getContext(), LoginActivity.class));
-//                break;
-//            case R.id.rlMyContacts:
-//                startActivity(new Intent(getContext(), ContactsActivity.class));
-//                break;
             case R.id.rlSetting:
                 startActivity(new Intent(getContext(), SettingActivity.class));
                 break;
             case R.id.rlQRCode:
                 startActivity(new Intent(getContext(), QRCodeActivity.class));
+                break;
+            case R.id.rlDownloadQRCode:
+
                 break;
         }
     }

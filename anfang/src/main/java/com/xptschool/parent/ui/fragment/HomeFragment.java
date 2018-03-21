@@ -574,7 +574,8 @@ public class HomeFragment extends BaseFragment {
                 .setIntent(newsIntent));
         HomeItemGridAdapter tipAdapter = new HomeItemGridAdapter(activity);
 
-        grd_tip.setAdapter(tipAdapter);
+        if (grd_tip != null)
+            grd_tip.setAdapter(tipAdapter);
         tipAdapter.reloadData(tipItems);
 
         List<HomeItem> homeItems = new ArrayList<HomeItem>();

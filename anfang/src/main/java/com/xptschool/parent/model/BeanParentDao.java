@@ -29,12 +29,13 @@ public class BeanParentDao extends AbstractDao<BeanParent, Void> {
         public final static Property Relation = new Property(4, String.class, "relation", false, "RELATION");
         public final static Property Sex = new Property(5, String.class, "sex", false, "SEX");
         public final static Property U_id = new Property(6, String.class, "u_id", false, "U_ID");
-        public final static Property Address = new Property(7, String.class, "address", false, "ADDRESS");
-        public final static Property Work_unit = new Property(8, String.class, "work_unit", false, "WORK_UNIT");
-        public final static Property Family_tel = new Property(9, String.class, "family_tel", false, "FAMILY_TEL");
-        public final static Property Email = new Property(10, String.class, "email", false, "EMAIL");
-        public final static Property Api_id = new Property(11, String.class, "api_id", false, "API_ID");
-        public final static Property Security_key = new Property(12, String.class, "security_key", false, "SECURITY_KEY");
+        public final static Property Ref_id = new Property(7, String.class, "ref_id", false, "REF_ID");
+        public final static Property Address = new Property(8, String.class, "address", false, "ADDRESS");
+        public final static Property Work_unit = new Property(9, String.class, "work_unit", false, "WORK_UNIT");
+        public final static Property Family_tel = new Property(10, String.class, "family_tel", false, "FAMILY_TEL");
+        public final static Property Email = new Property(11, String.class, "email", false, "EMAIL");
+        public final static Property Api_id = new Property(12, String.class, "api_id", false, "API_ID");
+        public final static Property Security_key = new Property(13, String.class, "security_key", false, "SECURITY_KEY");
     };
 
 
@@ -57,12 +58,13 @@ public class BeanParentDao extends AbstractDao<BeanParent, Void> {
                 "\"RELATION\" TEXT," + // 4: relation
                 "\"SEX\" TEXT," + // 5: sex
                 "\"U_ID\" TEXT," + // 6: u_id
-                "\"ADDRESS\" TEXT," + // 7: address
-                "\"WORK_UNIT\" TEXT," + // 8: work_unit
-                "\"FAMILY_TEL\" TEXT," + // 9: family_tel
-                "\"EMAIL\" TEXT," + // 10: email
-                "\"API_ID\" TEXT," + // 11: api_id
-                "\"SECURITY_KEY\" TEXT);"); // 12: security_key
+                "\"REF_ID\" TEXT," + // 7: ref_id
+                "\"ADDRESS\" TEXT," + // 8: address
+                "\"WORK_UNIT\" TEXT," + // 9: work_unit
+                "\"FAMILY_TEL\" TEXT," + // 10: family_tel
+                "\"EMAIL\" TEXT," + // 11: email
+                "\"API_ID\" TEXT," + // 12: api_id
+                "\"SECURITY_KEY\" TEXT);"); // 13: security_key
     }
 
     /** Drops the underlying database table. */
@@ -110,34 +112,39 @@ public class BeanParentDao extends AbstractDao<BeanParent, Void> {
             stmt.bindString(7, u_id);
         }
  
+        String ref_id = entity.getRef_id();
+        if (ref_id != null) {
+            stmt.bindString(8, ref_id);
+        }
+ 
         String address = entity.getAddress();
         if (address != null) {
-            stmt.bindString(8, address);
+            stmt.bindString(9, address);
         }
  
         String work_unit = entity.getWork_unit();
         if (work_unit != null) {
-            stmt.bindString(9, work_unit);
+            stmt.bindString(10, work_unit);
         }
  
         String family_tel = entity.getFamily_tel();
         if (family_tel != null) {
-            stmt.bindString(10, family_tel);
+            stmt.bindString(11, family_tel);
         }
  
         String email = entity.getEmail();
         if (email != null) {
-            stmt.bindString(11, email);
+            stmt.bindString(12, email);
         }
  
         String api_id = entity.getApi_id();
         if (api_id != null) {
-            stmt.bindString(12, api_id);
+            stmt.bindString(13, api_id);
         }
  
         String security_key = entity.getSecurity_key();
         if (security_key != null) {
-            stmt.bindString(13, security_key);
+            stmt.bindString(14, security_key);
         }
     }
 
@@ -180,34 +187,39 @@ public class BeanParentDao extends AbstractDao<BeanParent, Void> {
             stmt.bindString(7, u_id);
         }
  
+        String ref_id = entity.getRef_id();
+        if (ref_id != null) {
+            stmt.bindString(8, ref_id);
+        }
+ 
         String address = entity.getAddress();
         if (address != null) {
-            stmt.bindString(8, address);
+            stmt.bindString(9, address);
         }
  
         String work_unit = entity.getWork_unit();
         if (work_unit != null) {
-            stmt.bindString(9, work_unit);
+            stmt.bindString(10, work_unit);
         }
  
         String family_tel = entity.getFamily_tel();
         if (family_tel != null) {
-            stmt.bindString(10, family_tel);
+            stmt.bindString(11, family_tel);
         }
  
         String email = entity.getEmail();
         if (email != null) {
-            stmt.bindString(11, email);
+            stmt.bindString(12, email);
         }
  
         String api_id = entity.getApi_id();
         if (api_id != null) {
-            stmt.bindString(12, api_id);
+            stmt.bindString(13, api_id);
         }
  
         String security_key = entity.getSecurity_key();
         if (security_key != null) {
-            stmt.bindString(13, security_key);
+            stmt.bindString(14, security_key);
         }
     }
 
@@ -226,12 +238,13 @@ public class BeanParentDao extends AbstractDao<BeanParent, Void> {
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // relation
             cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // sex
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // u_id
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // address
-            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // work_unit
-            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // family_tel
-            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // email
-            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // api_id
-            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12) // security_key
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // ref_id
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // address
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // work_unit
+            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // family_tel
+            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // email
+            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // api_id
+            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13) // security_key
         );
         return entity;
     }
@@ -245,12 +258,13 @@ public class BeanParentDao extends AbstractDao<BeanParent, Void> {
         entity.setRelation(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setSex(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
         entity.setU_id(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setAddress(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
-        entity.setWork_unit(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
-        entity.setFamily_tel(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
-        entity.setEmail(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
-        entity.setApi_id(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
-        entity.setSecurity_key(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
+        entity.setRef_id(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setAddress(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setWork_unit(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
+        entity.setFamily_tel(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
+        entity.setEmail(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
+        entity.setApi_id(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
+        entity.setSecurity_key(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
      }
     
     @Override

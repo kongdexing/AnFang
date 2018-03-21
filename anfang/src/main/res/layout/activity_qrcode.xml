@@ -19,4 +19,24 @@
         android:layout_height="@dimen/dp_250"
         android:layout_gravity="center"/>
 
+    <TextView
+        android:id="@+id/txtUserName"
+        style="@style/mineText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30"
+        android:gravity="center"
+        android:text=""
+        android:textSize="@dimen/sp_20" />
+
+    <TextView
+        android:id="@+id/txtUserRole"
+        style="@style/mineText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center"
+        android:text=""
+        android:textSize="@dimen/sp_20" />
+
 </LinearLayout>

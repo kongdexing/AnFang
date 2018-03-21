@@ -173,7 +173,7 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
                 }
                 break;
             case R.id.txtForgetPWD:
-                startActivity(new Intent(this, CheckUserActivity.class));
+                startActivityForResult(new Intent(this, CheckUserActivity.class), 2);
                 break;
             case R.id.txtRegister:
                 startActivityForResult(new Intent(this, RegisterActivity.class), 1);
@@ -186,7 +186,7 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //跳转至注册 && 注册成功
-        if (requestCode == 1 && resultCode == 1) {
+        if ((requestCode == 1 && resultCode == 1) || (requestCode == 2 && resultCode == 1)) {
             String userName = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_NAME, "");
             edtAccount.setText(userName);
             edtAccount.setSelection(edtAccount.getText().length());

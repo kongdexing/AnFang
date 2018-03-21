@@ -26,12 +26,14 @@ public class BeanTeacher {
     //0否 1是
     private String charge;   //是否为班主任
     private String u_id;      //用户id
+    private String ref_id;  //上级 ID（用于邀请会员
 
-    @Generated(hash = 2077314905)
-    public BeanTeacher(String login_name, String api_id, String security_key,
-                       String t_id, String name, String phone, String s_id, String s_name,
-                       String a_id, String a_name, String d_id, String d_name,
-                       String education, String sex, String charge, String u_id) {
+
+    @Generated(hash = 457838311)
+    public BeanTeacher(String login_name, String api_id, String security_key, String t_id,
+            String name, String phone, String s_id, String s_name, String a_id,
+            String a_name, String d_id, String d_name, String education, String sex,
+            String charge, String u_id, String ref_id) {
         this.login_name = login_name;
         this.api_id = api_id;
         this.security_key = security_key;
@@ -48,6 +50,7 @@ public class BeanTeacher {
         this.sex = sex;
         this.charge = charge;
         this.u_id = u_id;
+        this.ref_id = ref_id;
     }
 
     @Generated(hash = 1398456292)
@@ -156,6 +159,14 @@ public class BeanTeacher {
 
     public void setU_id(String u_id) {
         this.u_id = u_id;
+    }
+
+    public String getRef_id() {
+        return ref_id;
+    }
+
+    public void setRef_id(String ref_id) {
+        this.ref_id = ref_id;
     }
 
     public String getS_name() {

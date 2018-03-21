@@ -17,6 +17,7 @@ public class BeanParent {
     private String relation;
     private String sex;
     private String u_id;
+    private String ref_id;  //上级 ID（用于邀请会员）
     private String address;
     private String work_unit;
     private String family_tel;
@@ -24,9 +25,9 @@ public class BeanParent {
     private String api_id;
     private String security_key;
 
-    @Generated(hash = 944454190)
+    @Generated(hash = 1264482746)
     public BeanParent(String login_name, String sp_id, String parent_name, String parent_phone,
-            String relation, String sex, String u_id, String address, String work_unit,
+            String relation, String sex, String u_id, String ref_id, String address, String work_unit,
             String family_tel, String email, String api_id, String security_key) {
         this.login_name = login_name;
         this.sp_id = sp_id;
@@ -35,6 +36,7 @@ public class BeanParent {
         this.relation = relation;
         this.sex = sex;
         this.u_id = u_id;
+        this.ref_id = ref_id;
         this.address = address;
         this.work_unit = work_unit;
         this.family_tel = family_tel;
@@ -93,6 +95,14 @@ public class BeanParent {
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public String getRef_id() {
+        return ref_id;
+    }
+
+    public void setRef_id(String ref_id) {
+        this.ref_id = ref_id;
     }
 
     public String getU_id() {

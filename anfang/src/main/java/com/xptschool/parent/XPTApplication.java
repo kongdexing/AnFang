@@ -310,6 +310,32 @@ public class XPTApplication extends Application {
         return userId;
     }
 
+    public String getCurrentUserName() {
+        String userName = "";
+        UserType type = getCurrent_user_type();
+        if (UserType.PARENT.equals(type)) {
+            userName = GreenDaoHelper.getInstance().getCurrentParent().getParent_name();
+        } else if (UserType.TEACHER.equals(type)) {
+            userName = GreenDaoHelper.getInstance().getCurrentTeacher().getName();
+        } else {
+            userName = SharedPreferencesUtil.getData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_USER_NAME, "").toString();
+        }
+        return userName;
+    }
+
+    public String getCurrentRefId() {
+        String refId = "10847";
+        UserType type = getCurrent_user_type();
+        if (UserType.PARENT.equals(type)) {
+            refId = GreenDaoHelper.getInstance().getCurrentParent().getRef_id();
+        } else if (UserType.TEACHER.equals(type)) {
+            refId = GreenDaoHelper.getInstance().getCurrentTeacher().getRef_id();
+        } else {
+            refId = SharedPreferencesUtil.getData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_REF_ID, "").toString();
+        }
+        return refId;
+    }
+
     public void setCurrent_user_type(String current_user_type) {
         SharedPreferencesUtil.saveData(this, SharedPreferencesUtil.KEY_USER_TYPE, current_user_type);
     }

@@ -10,6 +10,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.xptschool.parent.R;
+import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
@@ -66,7 +67,7 @@ public class SetPasswordActivity extends BaseActivity {
         }
     }
 
-    private void resetPassword(String password) {
+    private void resetPassword(final String password) {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.FORGOT_PWD_STEP4,
                 new MyVolleyHttpParamsEntity()
                         .addParam("pass", password)
@@ -82,6 +83,9 @@ public class SetPasswordActivity extends BaseActivity {
                         super.onResponse(volleyHttpResult);
                         if (volleyHttpResult.getStatus() == HttpAction.SUCCESS) {
                             //返回登录页面
+                            SharedPreferencesUtil.saveData(SetPasswordActivity.this, SharedPreferencesUtil.KEY_USER_NAME, userName);
+                            SharedPreferencesUtil.saveData(SetPasswordActivity.this, SharedPreferencesUtil.KEY_PWD, password);
+
                             startActivity(new Intent(SetPasswordActivity.this, LoginActivity.class));
                         }
                         ToastUtils.showToast(SetPasswordActivity.this, volleyHttpResult.getInfo());

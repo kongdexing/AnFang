@@ -11,6 +11,8 @@ public class SharedPreferencesUtil {
     public static final String KEY_USER_NAME = "username";
     public static final String KEY_PWD = "password";
     public static final String KEY_UID = "userid";
+    public static final String KEY_REF_ID = "ref_id";  //上级代理 Id
+
     public static final String KEY_USER_TYPE = "usertype";
 
     public static final String KEY_PROVINCE = "local_province"; //省
