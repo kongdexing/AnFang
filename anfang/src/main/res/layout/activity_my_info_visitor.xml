@@ -60,6 +60,7 @@
                     android:id="@+id/txtName"
                     style="@style/mineVal"
                     android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dp_40"
                     android:text="无" />
             </RelativeLayout>
 
@@ -88,6 +89,29 @@
                 <ImageView
                     android:id="@+id/img_phone"
                     style="@style/arrow_right" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_1"
+                android:background="@drawable/mine_item_normal"
+                android:clickable="true">
+
+                <TextView
+                    style="@style/mineText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="级别：" />
+
+                <TextView
+                    android:id="@+id/txtRole"
+                    style="@style/mineVal"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dp_40"
+                    android:text="无" />
+
             </RelativeLayout>
 
         </LinearLayout>
