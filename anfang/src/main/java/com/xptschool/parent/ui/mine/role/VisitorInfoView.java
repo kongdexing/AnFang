@@ -67,6 +67,9 @@ public class VisitorInfoView extends BaseInfoView {
     @OnClick({R.id.rlMinePhoto, R.id.rlMinePhone})
     void viewClick(View view) {
         switch (view.getId()) {
+            case R.id.rlMinePhoto:
+                choosePic(txtRole);
+                break;
             case R.id.rlMinePhone:
                 String phone = SharedPreferencesUtil.getData(mContext, SharedPreferencesUtil.KEY_USER_NAME, "").toString();
                 if (phone.isEmpty()) {

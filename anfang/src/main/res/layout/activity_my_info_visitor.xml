@@ -18,7 +18,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20"
-                android:background="@drawable/mine_item_normal"
+                android:background="@drawable/mine_item_selector"
                 android:clickable="true">
 
                 <TextView
@@ -69,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_1"
-                android:background="@drawable/mine_item_normal"
+                android:background="@drawable/mine_item_selector"
                 android:clickable="true">
 
                 <TextView

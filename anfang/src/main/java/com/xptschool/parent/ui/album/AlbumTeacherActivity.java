@@ -25,6 +25,7 @@ import com.jph.takephoto.model.TResult;
 import com.jph.takephoto.model.TakePhotoOptions;
 import com.jph.takephoto.uitl.TFileUtils;
 import com.xptschool.parent.R;
+import com.xptschool.parent.util.TakePhotoUtil;
 import com.xptschool.parent.view.AlbumSourceView;
 
 import java.io.File;
@@ -64,11 +65,11 @@ public class AlbumTeacherActivity extends TakePhotoActivity {
                         return;
                     }
                     TakePhoto takePhoto = getTakePhoto();
-                    configCompress(takePhoto);
-                    configTakePhotoOption(takePhoto);
+                    TakePhotoUtil.configCompress(takePhoto);
+                    TakePhotoUtil.configTakePhotoOption(takePhoto);
                     int limit = LocalImageTHelper.getInstance().getCurrentEnableMaxChoiceSize();
 //                    takePhoto.onPickMultiple(limit);
-                    takePhoto.onPickMultipleWithCrop(limit, getCropOptions());
+                    takePhoto.onPickMultipleWithCrop(limit, TakePhotoUtil.getCropOptions());
                     picPopup.dismiss();
                 }
 
@@ -86,10 +87,10 @@ public class AlbumTeacherActivity extends TakePhotoActivity {
                         Uri imageUri = Uri.fromFile(file);
                         Log.i(TAG, "onCameraClick: " + file.getAbsolutePath());
                         TakePhoto takePhoto = getTakePhoto();
-                        configCompress(takePhoto);
-                        configTakePhotoOption(takePhoto);
+                        TakePhotoUtil.configCompress(takePhoto);
+                        TakePhotoUtil.configTakePhotoOption(takePhoto);
 
-                        takePhoto.onPickFromCaptureWithCrop(imageUri, getCropOptions());
+                        takePhoto.onPickFromCaptureWithCrop(imageUri, TakePhotoUtil.getCropOptions());
 
                         //getTakePhoto().onPickFromCaptureWithCrop(imageUri, getCropOptions());
 //                        takePhoto.onPickFromCapture(imageUri);
@@ -121,39 +122,6 @@ public class AlbumTeacherActivity extends TakePhotoActivity {
         }
         backgroundAlpha(0.5f);
         picPopup.showAtLocation(view, Gravity.BOTTOM, 0, 0);
-    }
-
-    private void configCompress(TakePhoto takePhoto) {
-        int maxSize = 204800;
-        int width = 800;
-        int height = 800;
-        boolean showProgressBar = true;
-        boolean enableRawFile = false;
-        CompressConfig config = new CompressConfig.Builder()
-                .setMaxSize(maxSize)
-                .setMaxPixel(width >= height ? width : height)
-                .enableReserveRaw(enableRawFile)
-                .create();
-        takePhoto.onEnableCompress(config, showProgressBar);
-    }
-
-    public void configTakePhotoOption(TakePhoto takePhoto) {
-        TakePhotoOptions.Builder builder = new TakePhotoOptions.Builder();
-        builder.setWithOwnGallery(true);
-        builder.setCorrectImage(true);
-        takePhoto.setTakePhotoOptions(builder.create());
-    }
-
-    private CropOptions getCropOptions() {
-        int height = 800;
-        int width = 800;
-        boolean withWonCrop = true;
-
-        CropOptions.Builder builder = new CropOptions.Builder();
-
-        builder.setOutputX(width).setOutputY(height);
-        builder.setWithOwnCrop(withWonCrop);
-        return builder.create();
     }
 
     @Override
