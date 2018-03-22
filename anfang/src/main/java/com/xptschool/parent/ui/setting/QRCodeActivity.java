@@ -51,7 +51,7 @@ public class QRCodeActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qrcode);
-        setTitle(R.string.mine_qr_code);
+        setTitle(R.string.mine_invite_qr_code);
 
         setTxtRight("分享");
         setTextRightClickListener(new View.OnClickListener() {
@@ -78,7 +78,7 @@ public class QRCodeActivity extends BaseActivity {
 
             if (XPTApplication.getInstance().isLoggedIn()) {
                 txtUserName.setText(XPTApplication.getInstance().getCurrentUserName());
-                txtUserRole.setText("角色：" + XPTApplication.getInstance().getCurrent_user_type().getRoleName());
+                txtUserRole.setText(XPTApplication.getInstance().getCurrent_user_type().getRoleName());
             } else {
                 txtUserRole.setText("未登录");
             }
