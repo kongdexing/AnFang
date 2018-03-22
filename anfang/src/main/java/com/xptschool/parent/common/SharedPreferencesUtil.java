@@ -8,6 +8,9 @@ public class SharedPreferencesUtil {
     private static String TAG = SharedPreferencesUtil.class.getSimpleName();
     public static final String KEY_SPLASH_INIT = "splash_init";
 
+    /**
+     * 登录名
+     */
     public static final String KEY_USER_NAME = "username";
     public static final String KEY_PWD = "password";
     public static final String KEY_UID = "userid";
@@ -17,6 +20,10 @@ public class SharedPreferencesUtil {
 
     public static final String KEY_PROVINCE = "local_province"; //省
     public static final String KEY_CITY = "local_city";         //市
+
+    /**
+     * 非家长老师身份的用户名
+     */
     public static final String KEY_VISITOR_NAME = "visitor_name";
     public static final String KEY_LAST_REGISTER = "last_register_time";
 
@@ -29,9 +36,8 @@ public class SharedPreferencesUtil {
      * @param data
      */
     public static void saveData(Context context, String key, Object data) {
-
-        if (key == KEY_UID)
-            Log.i(TAG, "saveData: " + key + " data:" + data.toString());
+        if (key == KEY_PWD)
+            Log.i(TAG, "saveData pwd " + data);
 
         MyModulePreference myModulePreference = new MyModulePreference(context);
 

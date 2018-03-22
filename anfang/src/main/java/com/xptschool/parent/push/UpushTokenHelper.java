@@ -7,6 +7,7 @@ import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.volley.common.VolleyRequestListener;
 import com.xptschool.parent.XPTApplication;
+import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
@@ -34,14 +35,15 @@ public class UpushTokenHelper {
         }
         String user_name = "";
         String user_id = "";
+        UserType type = XPTApplication.getInstance().getCurrent_user_type();
         //家长登录
-        if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+        if (UserType.PARENT.equals(type)) {
             BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
             if (parent != null) {
                 user_name = parent.getLoginName();
                 user_id = parent.getU_id();
             }
-        } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+        } else if (UserType.TEACHER.equals(type)) {
             //老师登录
             BeanTeacher teacher = GreenDaoHelper.getInstance().getCurrentTeacher();
             if (teacher != null) {
@@ -49,19 +51,22 @@ public class UpushTokenHelper {
                 user_id = teacher.getU_id();
             }
         } else {
-            return;
+//            return;
+            user_id = SharedPreferencesUtil.getData(XPTApplication.getInstance(),SharedPreferencesUtil.KEY_UID,"").toString();
+            user_name = SharedPreferencesUtil.getData(XPTApplication.getInstance(),SharedPreferencesUtil.KEY_USER_NAME,"").toString();
+
+
         }
 
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.HOOK_PUSH_TOKEN,
                 new MyVolleyHttpParamsEntity()
                         .addParam("status", "1")    //1登录 2其他(切换\退出)
                         .addParam("user_name", user_name)
-                        .addParam("system_model", "1") //1Android 0ios
                         .addParam("user_id", user_id)
                         .addParam("device_token", device_token)
                         .addParam("mobile_model", android.os.Build.MODEL)
                         .addParam("push_name", push)
-                        .addParam("user_type", XPTApplication.getInstance().getCurrent_user_type().toString())
+                        .addParam("user_type", type.toString())
                 , new VolleyRequestListener() {
                     @Override
                     public void onStart() {

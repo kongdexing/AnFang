@@ -36,11 +36,11 @@ public class BaseLoginMainActivity extends AppCompatActivity {
     }
 
     public void login(final String account, final String password, DefaultRetryPolicy retryPolicy) {
+        Log.i(TAG, "start login: "+password);
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.LOGIN,
                 new MyVolleyHttpParamsEntity()
                         .addParam("username", account)
-                        .addParam("password", password)
-                        .addParam("system_model", "1"), retryPolicy,
+                        .addParam("password", password), retryPolicy,
                 new MyVolleyRequestListener() {
                     @Override
                     public void onStart() {
@@ -58,26 +58,25 @@ public class BaseLoginMainActivity extends AppCompatActivity {
                                     CommonUtil.analyseLoginData(httpResult, account);
                                 } catch (Exception ex) {
                                     Log.i(TAG, "BaseLoginMainActivity onResponse: exception " + ex.getMessage());
-                                    onLoginFailed("登录失败");
                                     return;
                                 }
                                 onLoginSuccess(account);
                                 break;
                             default:
-                                onLoginFailed(httpResult.getInfo());
+                                Log.i(TAG, "onResponse: " + httpResult.getInfo());
                                 break;
                         }
                     }
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        onLoginFailed("登录失败");
+                        Log.i(TAG, "login fail onErrorResponse: " + error.getMessage());
                     }
                 });
     }
 
     protected void onStartLogin() {
-        SharedPreferencesUtil.saveData(this, SharedPreferencesUtil.KEY_PWD, "");
+
     }
 
     protected void onLoginSuccess(String newAccount) {
@@ -88,5 +87,7 @@ public class BaseLoginMainActivity extends AppCompatActivity {
     protected void onLoginFailed(String msg) {
         Log.i(TAG, "onLoginFailed: ");
         SharedPreferencesUtil.saveData(this, SharedPreferencesUtil.KEY_UID, "");
+        SharedPreferencesUtil.saveData(this, SharedPreferencesUtil.KEY_REF_ID, "");
+
     }
 }

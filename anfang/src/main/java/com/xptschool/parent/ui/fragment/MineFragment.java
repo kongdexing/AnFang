@@ -144,7 +144,7 @@ public class MineFragment extends BaseFragment {
                 txtPhone.setVisibility(View.GONE);
 //                txtPhone.setText("手机号：" + SharedPreferencesUtil.getData(mContext, SharedPreferencesUtil.KEY_VISITOR_NAME, ""));
             }
-            txtRole.setText("角色：" + type.getRoleName());
+            txtRole.setText(type.getRoleName());
         } else {
             LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) rlMyChild.getLayoutParams();
             params.setMargins(0, (int) mContext.getResources().getDimension(R.dimen.dp_1), 0, 0);

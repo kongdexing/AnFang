@@ -193,7 +193,7 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
             String pwd = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_PWD, "");
             edtPwd.setText(pwd);
             //自动登录
-            login(userName, pwd, null);
+            login(userName, CommonUtil.md5(pwd), null);
         }
     }
 
@@ -239,7 +239,7 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
                 }
                 easeLoginName = teacher.getU_id();
             } else {
-                //游客不等了环信
+                //游客不登录环信
                 if (progress != null)
                     progress.setVisibility(View.INVISIBLE);
                 btnLogin.setEnabled(true);

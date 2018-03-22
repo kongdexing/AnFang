@@ -161,8 +161,7 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
         Log.i(TAG, "initData: userName:" + userName + "  pwd:" + password);
 
         if (!userName.isEmpty() && !password.isEmpty()) {
-            login(userName, password,
-                    new DefaultRetryPolicy(4 * 1000, 0, 1));
+            login(userName, password, new DefaultRetryPolicy(4 * 1000, 0, 1));
         }
     }
 
@@ -514,7 +513,7 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
             } else if (UserType.TEACHER.equals(type)) {
                 userId = GreenDaoHelper.getInstance().getCurrentTeacher().getU_id();
             } else {
-                Log.i(TAG, "onLoginSuccess: 游客身份");
+                Log.i(TAG, "onLoginSuccess: 非家长老师角色，不登录环信");
                 return;
             }
         } catch (Exception ex) {
@@ -638,7 +637,6 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
         super.onNewIntent(intent);
         showExceptionDialogFromIntent(intent);
     }
-
 
     BroadcastReceiver MyBannerReceiver = new BroadcastReceiver() {
         @Override

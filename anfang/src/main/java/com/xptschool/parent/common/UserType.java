@@ -42,13 +42,6 @@ public enum UserType {
             roleName = "区县代理商";
         }
         return roleName;
-//        if (text)
-//            switch (text){
-//                case VISITOR.toString():
-//
-//                    break;
-//            }
-
     }
 
     public static UserType getUserTypeByStr(String str) {

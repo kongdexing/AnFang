@@ -18,7 +18,7 @@
     <string name="nav_mine">我的</string>
 
     <string name="username">用户名</string>
-    <string name="hint_username">请输入登录名/手机号</string>
+    <string name="hint_username">请输入手机号</string>
     <string name="userpwd">密码</string>
     <string name="hint_userpwd">请输入密码</string>
     <string name="hint_nickname">请输入用户昵称</string>
