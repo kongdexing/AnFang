@@ -14,6 +14,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.xptschool.parent.R;
+import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.view.FilterImageView;
 
 import java.util.ArrayList;
@@ -25,20 +26,11 @@ public class AlbumGridParentAdapter extends BaseAdapter {
     public List<String> imgPaths = new ArrayList<>();
     private MyGridViewClickListener myGridViewClickListener;
     private boolean canDelete = true;
-    private DisplayImageOptions options;
 
     public AlbumGridParentAdapter(Context mContext, MyGridViewClickListener listener) {
         super();
         this.mContext = mContext;
         this.myGridViewClickListener = listener;
-        options = new DisplayImageOptions.Builder()
-                .cacheInMemory(true)
-                .cacheOnDisk(true)
-                .showImageForEmptyUri(R.drawable.pictures_no)
-                .showImageOnFail(R.drawable.pictures_no)
-                .showImageOnLoading(R.drawable.pictures_no)
-                .bitmapConfig(Bitmap.Config.RGB_565)
-                .displayer(new SimpleBitmapDisplayer()).build();
     }
 
     public void reloadPicture(List<String> imgs) {
@@ -101,11 +93,11 @@ public class AlbumGridParentAdapter extends BaseAdapter {
         if (position == 0) {
             viewHolder.imgDelete.setVisibility(View.GONE);
             if (!canDelete) {
-                ImageLoader.getInstance().displayImage(imgPaths.get(position), new ImageViewAware(viewHolder.imageView), options);
+                ImageLoader.getInstance().displayImage(imgPaths.get(position), new ImageViewAware(viewHolder.imageView), CommonUtil.getDefaultImageLoaderOption());
             }
         } else {
             viewHolder.imgDelete.setVisibility(canDelete ? View.VISIBLE : View.GONE);
-            ImageLoader.getInstance().displayImage(imgPaths.get(position), new ImageViewAware(viewHolder.imageView), options);
+            ImageLoader.getInstance().displayImage(imgPaths.get(position), new ImageViewAware(viewHolder.imageView), CommonUtil.getDefaultImageLoaderOption());
         }
         return convertView;
     }

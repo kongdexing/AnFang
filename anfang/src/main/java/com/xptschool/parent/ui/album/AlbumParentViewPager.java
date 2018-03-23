@@ -38,7 +38,6 @@ public class AlbumParentViewPager extends ViewPager implements MatrixImageView.O
      * 界面单击事件 用以显示和隐藏菜单栏
      */
     private MatrixImageView.OnSingleTapListener onSingleTapListener;
-    DisplayImageOptions options;
     //本地图片的option
     DisplayImageOptions localOptions;
 

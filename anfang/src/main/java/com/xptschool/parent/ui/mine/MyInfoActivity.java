@@ -7,30 +7,30 @@ import com.jph.takephoto.model.TResult;
 import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.ui.album.TakePhotoActivity;
-import com.xptschool.parent.ui.main.BaseActivity;
+import com.xptschool.parent.ui.mine.role.BaseUserView;
 import com.xptschool.parent.ui.mine.role.PInfoView;
 import com.xptschool.parent.ui.mine.role.TInfoView;
 import com.xptschool.parent.ui.mine.role.VisitorInfoView;
 
 public class MyInfoActivity extends TakePhotoActivity {
 
+    private BaseUserView baseUserView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         //判断老师家长
         UserType type = XPTApplication.getInstance().getCurrent_user_type();
 
         if (UserType.PARENT.equals(type)) {
-            PInfoView pInfoView = new PInfoView(this);
-            setContentView(pInfoView);
+            baseUserView = new PInfoView(this);
         } else if (UserType.TEACHER.equals(type)) {
-            TInfoView tInfoView = new TInfoView(this);
-            setContentView(tInfoView);
+            baseUserView = new TInfoView(this);
         } else {
-            VisitorInfoView vInfoView = new VisitorInfoView(this);
-            setContentView(vInfoView);
+            baseUserView = new VisitorInfoView(this);
         }
-
+        setContentView(baseUserView);
         setTitle("个人信息");
     }
 
@@ -50,8 +50,8 @@ public class MyInfoActivity extends TakePhotoActivity {
         super.takeSuccess(result);
 //        showImg(result.getImages());
 
+        baseUserView.setHeadImage("file://" + result.getImage().getCompressPath(), XPTApplication.getInstance().getCurrentUserId());
 
     }
-
 
 }

@@ -37,7 +37,7 @@
                     android:layout_marginBottom="@dimen/dp_5"
                     android:layout_marginRight="@dimen/dp_25"
                     android:layout_marginTop="@dimen/dp_5"
-                    android:src="@drawable/user_defaulthead" />
+                    android:background="@drawable/user_defaulthead" />
 
                 <ImageView style="@style/arrow_right" />
             </RelativeLayout>

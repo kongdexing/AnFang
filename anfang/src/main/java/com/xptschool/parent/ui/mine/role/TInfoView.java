@@ -25,10 +25,7 @@ import butterknife.OnClick;
  * Created by dexing on 2017-11-29 0029.
  */
 
-public class TInfoView extends BaseInfoView {
-
-    @BindView(R.id.imgHead)
-    CircularImageView imgHead;
+public class TInfoView extends BaseUserView {
 
     @BindView(R.id.txtTeacherName)
     TextView txtTeacherName;
@@ -93,6 +90,9 @@ public class TInfoView extends BaseInfoView {
             return;
         }
         switch (view.getId()) {
+            case R.id.rlMinePhoto:
+                choosePic(imgHead);
+                break;
             case R.id.rlMinePhone:
                 if (teacher.getPhone().isEmpty()) {
                     Toast.makeText(mContext, R.string.toast_phone_empty, Toast.LENGTH_SHORT).show();

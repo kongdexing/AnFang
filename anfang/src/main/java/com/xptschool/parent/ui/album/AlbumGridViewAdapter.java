@@ -21,6 +21,7 @@ import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
+import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.LocalFile;
 
 import java.util.List;
@@ -31,7 +32,6 @@ import java.util.List;
 
 public class AlbumGridViewAdapter extends BaseAdapter {
 
-    DisplayImageOptions options;
     List<LocalFile> paths;
     private Context mContext;
     private AlbumGridViewClickListener clickListener;
@@ -39,15 +39,6 @@ public class AlbumGridViewAdapter extends BaseAdapter {
     public AlbumGridViewAdapter(Context context, AlbumGridViewClickListener listener) {
         mContext = context;
         clickListener = listener;
-        options = new DisplayImageOptions.Builder()
-                .cacheInMemory(true)
-                .cacheOnDisk(false)
-                .showImageForEmptyUri(R.drawable.pictures_no)
-                .showImageOnFail(R.drawable.pictures_no)
-                .showImageOnLoading(R.drawable.pictures_no)
-                .bitmapConfig(Bitmap.Config.RGB_565)
-                .setImageSize(new ImageSize(((XPTApplication) context.getApplicationContext()).getQuarterWidth(), 0))
-                .displayer(new SimpleBitmapDisplayer()).build();
     }
 
 
@@ -92,7 +83,7 @@ public class AlbumGridViewAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         final LocalFile localFile = paths.get(i);
-        ImageLoader.getInstance().displayImage(localFile.getThumbnailUri(), new ImageViewAware(viewHolder.imageView), options,
+        ImageLoader.getInstance().displayImage(localFile.getThumbnailUri(), new ImageViewAware(viewHolder.imageView), CommonUtil.getDefaultImageLoaderOption(),
                 loadingListener, null);
         viewHolder.checkBox.setTag(localFile);
 //        viewHolder.checkBox.setChecked(LocalImagePHelper.getInstance().getCheckedItems().contains(localFile));

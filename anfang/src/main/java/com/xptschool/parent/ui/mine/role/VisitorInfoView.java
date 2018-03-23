@@ -5,18 +5,24 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.widget.view.CircularImageView;
+import com.jph.takephoto.model.TResult;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
+import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.model.BeanTeacher;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.mine.BaseInfoView;
+import com.xptschool.parent.ui.mine.MyInfoActivity;
 import com.xptschool.parent.util.ToastUtils;
 
 import org.w3c.dom.Text;
@@ -29,10 +35,7 @@ import butterknife.OnClick;
  * Created by dexing on 2017-11-29 0029.
  */
 
-public class VisitorInfoView extends BaseInfoView {
-
-    @BindView(R.id.imgHead)
-    CircularImageView imgHead;
+public class VisitorInfoView extends BaseUserView {
 
     @BindView(R.id.txtName)
     TextView txtName;
