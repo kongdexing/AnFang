@@ -20,11 +20,14 @@ import com.hyphenate.easeui.model.EaseAtMessageHelper;
 import com.hyphenate.easeui.ui.EaseConversationListFragment;
 import com.hyphenate.util.NetUtils;
 import com.xptschool.parent.R;
+import com.xptschool.parent.XPTApplication;
+import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.ease.Constant;
 import com.xptschool.parent.ease.db.InviteMessgeDao;
 
 public class ConversationListFragment extends EaseConversationListFragment {
 
+    private LinearLayout llEMNet;
     private TextView errorText;
 
     @Override
@@ -32,6 +35,7 @@ public class ConversationListFragment extends EaseConversationListFragment {
         super.initView();
         View errorView = (LinearLayout) View.inflate(getActivity(), R.layout.em_chat_neterror_item, null);
         errorItemContainer.addView(errorView);
+        llEMNet = (LinearLayout) errorView.findViewById(R.id.llEMNet);
         errorText = (TextView) errorView.findViewById(R.id.tv_connect_errormsg);
     }
 
@@ -71,6 +75,12 @@ public class ConversationListFragment extends EaseConversationListFragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        reloadUI();
+    }
+
+    @Override
     protected void onConnectionConnected() {
         super.onConnectionConnected();
         Log.i(TAG, "onConnectionConnected: ");
@@ -80,9 +90,19 @@ public class ConversationListFragment extends EaseConversationListFragment {
     @Override
     protected void onConnectionDisconnected() {
         super.onConnectionDisconnected();
+        reloadUI();
+    }
+
+    private void reloadUI() {
+        llEMNet.setVisibility(View.VISIBLE);
         Log.i(TAG, "onConnectionDisconnected: ");
         if (NetUtils.hasNetwork(getActivity())) {
-            errorText.setText(R.string.can_not_connect_chat_server_connection);
+            UserType type = XPTApplication.getInstance().getCurrent_user_type();
+            if (UserType.TEACHER.equals(type) || UserType.PARENT.equals(type) || type == null) {
+                errorText.setText(R.string.can_not_connect_chat_server_connection);
+            } else {
+                llEMNet.setVisibility(View.GONE);
+            }
         } else {
             errorText.setText(R.string.the_current_network);
         }
