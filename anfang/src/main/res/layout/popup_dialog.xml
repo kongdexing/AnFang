@@ -11,7 +11,7 @@
         android:layout_height="@dimen/dp_40"
         android:gravity="left|center_vertical"
         android:paddingLeft="@dimen/dp_15"
-        android:text="123546"
+        android:text=""
         android:textColor="#3dd1a5"
         android:textSize="15sp"
         android:visibility="visible" />
@@ -47,7 +47,7 @@
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 android:paddingTop="20dp"
-                android:text="123"
+                android:text="1"
                 android:textColor="#1a1a1a"
                 android:textSize="16sp" />
         </LinearLayout>

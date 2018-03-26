@@ -41,12 +41,14 @@
 
                 <ImageView style="@style/arrow_right" />
             </RelativeLayout>
+            <View style="@style/line1" />
 
             <RelativeLayout
+                android:id="@+id/rlSex"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_1"
-                android:background="@drawable/mine_item_normal"
+                android:background="@drawable/mine_item_selector"
                 android:clickable="true">
 
                 <TextView
@@ -54,16 +56,36 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="姓名：" />
+                    android:text="性别" />
+
+                <TextView
+                    android:id="@+id/txtSex"
+                    style="@style/mineVal"
+                    android:text="无" />
+
+            </RelativeLayout>
+            <View style="@style/line1" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_1"
+                android:background="@drawable/mine_item_selector"
+                android:clickable="true">
+
+                <TextView
+                    style="@style/mineText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="姓名" />
 
                 <TextView
                     android:id="@+id/txtName"
                     style="@style/mineVal"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/dp_40"
                     android:text="无" />
-            </RelativeLayout>
 
+            </RelativeLayout>
+            <View style="@style/line1" />
             <RelativeLayout
                 android:id="@+id/rlMinePhone"
                 android:layout_width="match_parent"
@@ -77,7 +99,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="手机号：" />
+                    android:text="手机号" />
 
                 <TextView
                     android:id="@+id/txtPhone"
@@ -90,12 +112,12 @@
                     android:id="@+id/img_phone"
                     style="@style/arrow_right" />
             </RelativeLayout>
-
+            <View style="@style/line1" />
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_1"
-                android:background="@drawable/mine_item_normal"
+                android:background="@drawable/mine_item_selector"
                 android:clickable="true">
 
                 <TextView
@@ -103,16 +125,83 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="级别：" />
+                    android:text="邮箱" />
+
+                <TextView
+                    android:id="@+id/txtMail"
+                    style="@style/mineVal"
+                    android:text="无" />
+
+            </RelativeLayout>
+            <View style="@style/line1" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_1"
+                android:background="@drawable/mine_item_selector"
+                android:clickable="true">
+
+                <TextView
+                    style="@style/mineText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="级别" />
 
                 <TextView
                     android:id="@+id/txtRole"
                     style="@style/mineVal"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/dp_40"
                     android:text="无" />
 
             </RelativeLayout>
+            <View style="@style/line1" />
+            <!--代理商显示代理地址|第三方公司显示公司信息-->
+            <RelativeLayout
+                android:id="@+id/rlProxy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_1"
+                android:background="@drawable/mine_item_selector"
+                android:visibility="gone"
+                android:clickable="true">
+
+                <TextView
+                    style="@style/mineText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="代理地区" />
+
+                <TextView
+                    android:id="@+id/txtArea"
+                    style="@style/mineVal"
+                    android:text="无" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlCompanay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_1"
+                android:background="@drawable/mine_item_selector"
+                android:visibility="gone"
+                android:clickable="true">
+
+                <TextView
+                    style="@style/mineText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="公司名称" />
+
+                <TextView
+                    android:id="@+id/txtCompanay"
+                    style="@style/mineVal"
+                    android:text="无" />
+
+            </RelativeLayout>
+
 
         </LinearLayout>
     </ScrollView>

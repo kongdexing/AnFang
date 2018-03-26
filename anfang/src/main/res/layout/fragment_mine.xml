@@ -277,7 +277,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20"
-                android:background="@drawable/mine_item_selector"
                 android:clickable="true"
                 android:paddingLeft="@dimen/dp_5"
                 android:paddingTop="@dimen/dp_5">
@@ -290,6 +289,7 @@
 
                 <View style="@style/line1" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/rlQRCode"
                 android:layout_width="match_parent"

@@ -66,7 +66,7 @@ public class MessageFragment extends BaseFragment {
     protected void initData() {
         conversationListFragment = new ConversationListFragment();
         contactListFragment = new ContactFragment();
-        fragments = new Fragment[]{conversationListFragment, contactListFragment};
+        fragments = new Fragment[]{contactListFragment, conversationListFragment};
 
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) rlTip.getLayoutParams();
         indicatorWidth = XPTApplication.getInstance().getWindowWidth() / 2;
@@ -121,7 +121,7 @@ public class MessageFragment extends BaseFragment {
     }
 
     public ConversationListFragment getConversationListFragment() {
-        if (conversationListFragment==null){
+        if (conversationListFragment == null) {
             conversationListFragment = new ConversationListFragment();
         }
         return conversationListFragment;
@@ -138,7 +138,6 @@ public class MessageFragment extends BaseFragment {
                 currIndex = 1;
                 viewPager.setCurrentItem(1);
                 break;
-
         }
     }
 

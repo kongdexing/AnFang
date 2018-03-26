@@ -67,9 +67,12 @@ public class VisitorInfoView extends BaseUserView {
         txtRole.setText(XPTApplication.getInstance().getCurrent_user_type().getRoleName());
     }
 
-    @OnClick({R.id.rlMinePhoto, R.id.rlMinePhone})
+    @OnClick({R.id.rlSex, R.id.rlMinePhoto, R.id.rlMinePhone})
     void viewClick(View view) {
         switch (view.getId()) {
+            case R.id.rlSex:
+                changeSex("1", XPTApplication.getInstance().getCurrentUserId());
+                break;
             case R.id.rlMinePhoto:
                 choosePic(txtRole);
                 break;

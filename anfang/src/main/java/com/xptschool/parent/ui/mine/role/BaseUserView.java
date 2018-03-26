@@ -21,9 +21,12 @@ import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.xptschool.parent.R;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.ui.album.LocalImageTHelper;
+import com.xptschool.parent.ui.fence.FenceDrawActivity;
 import com.xptschool.parent.ui.mine.MyInfoActivity;
 import com.xptschool.parent.util.TakePhotoUtil;
 import com.xptschool.parent.view.AlbumSourceView;
+import com.xptschool.parent.view.CustomEditDialog;
+import com.xptschool.parent.view.CustomSexDialog;
 
 import java.io.File;
 
@@ -68,8 +71,7 @@ public class BaseUserView extends LinearLayout {
                     TakePhoto takePhoto = ((MyInfoActivity) mContext).getTakePhoto();
                     TakePhotoUtil.configCompress(takePhoto);
                     TakePhotoUtil.configTakePhotoOption(takePhoto);
-                    int limit = LocalImageTHelper.getInstance().getCurrentEnableMaxChoiceSize();
-                    takePhoto.onPickMultipleWithCrop(limit, TakePhotoUtil.getCropOptions());
+                    takePhoto.onPickMultipleWithCrop(1, TakePhotoUtil.getCropOptions());
                     picPopup.dismiss();
                 }
 
@@ -118,6 +120,18 @@ public class BaseUserView extends LinearLayout {
         }
         ((MyInfoActivity) mContext).backgroundAlpha(0.5f);
         picPopup.showAtLocation(view, Gravity.BOTTOM, 0, 0);
+    }
+
+    //更改用户性别
+    public void changeSex(String currentSex, String userId) {
+        CustomSexDialog dialog = new CustomSexDialog(mContext);
+        dialog.setSexVal(currentSex);
+        dialog.setAlertDialogClickListener(new CustomSexDialog.DialogClickListener() {
+            @Override
+            public void onPositiveClick(String value) {
+                Toast.makeText(mContext, value, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void setHeadImage(String result, String userId) {
