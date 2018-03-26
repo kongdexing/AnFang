@@ -66,6 +66,13 @@ public class CustomEditDialog implements View.OnClickListener {
         edtMessage.setHint(message);
     }
 
+    public void setEdtMessage(String message) {
+        if (message != null || !message.isEmpty()) {
+            edtMessage.setText(message);
+            edtMessage.setSelection(message.length());
+        }
+    }
+
     public void setEdtInputType(int type) {
         edtMessage.setInputType(type);
     }

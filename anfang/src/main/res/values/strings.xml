@@ -212,6 +212,8 @@
     <string name="input_error_phone">手机号格式不正确</string>
     <string name="label_fence_name">围栏名称</string>
     <string name="input_fence_name">请输入围栏名称</string>
+    <string name="input_user_name">请输入用户昵称</string>
+
     <string name="hint_old_pwd">请输入旧密码</string>
     <string name="hint_new_pwd1">请输入新密码</string>
     <string name="hint_new_pwd2">请重新输入新密码</string>
@@ -289,6 +291,9 @@
     <string name="toast_pwd_not_equal">密码与确认密码不相同，请重新输入</string>
     <string name="toast_point_null">坐标点无效</string>
     <string name="toast_record_unstop">请完成录音后再发布作业</string>
+    <string name="toast_modify_success">修改成功</string>
+    <string name="toast_modify_failed">修改失败</string>
+
 
     <string name="progress_add_question">正在发布提问</string>
     <string name="progress_add_homework">正在发布作业</string>

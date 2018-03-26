@@ -49,8 +49,7 @@ public class MyInfoActivity extends TakePhotoActivity {
     public void takeSuccess(TResult result) {
         super.takeSuccess(result);
 //        showImg(result.getImages());
-
-        baseUserView.setHeadImage("file://" + result.getImage().getCompressPath(), XPTApplication.getInstance().getCurrentUserId());
+        baseUserView.setHeadImage(result.getImage().getCompressPath());
 
     }
 

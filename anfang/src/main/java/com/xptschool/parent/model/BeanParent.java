@@ -24,11 +24,12 @@ public class BeanParent {
     private String email;
     private String api_id;
     private String security_key;
+    private String head_portrait;
 
-    @Generated(hash = 1264482746)
-    public BeanParent(String login_name, String sp_id, String parent_name, String parent_phone,
-            String relation, String sex, String u_id, String ref_id, String address, String work_unit,
-            String family_tel, String email, String api_id, String security_key) {
+    @Generated(hash = 1570598412)
+    public BeanParent(String login_name, String sp_id, String parent_name, String parent_phone, String relation,
+            String sex, String u_id, String ref_id, String address, String work_unit, String family_tel,
+            String email, String api_id, String security_key, String head_portrait) {
         this.login_name = login_name;
         this.sp_id = sp_id;
         this.parent_name = parent_name;
@@ -43,6 +44,7 @@ public class BeanParent {
         this.email = email;
         this.api_id = api_id;
         this.security_key = security_key;
+        this.head_portrait = head_portrait;
     }
 
     @Generated(hash = 111404833)
@@ -167,5 +169,13 @@ public class BeanParent {
 
     public void setLogin_name(String login_name) {
         this.login_name = login_name;
+    }
+
+    public String getHead_portrait() {
+        return head_portrait;
+    }
+
+    public void setHead_portrait(String head_portrait) {
+        this.head_portrait = head_portrait;
     }
 }

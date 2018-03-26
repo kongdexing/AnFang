@@ -27,13 +27,13 @@ public class BeanTeacher {
     private String charge;   //是否为班主任
     private String u_id;      //用户id
     private String ref_id;  //上级 ID（用于邀请会员
+    private String head_portrait;
 
-
-    @Generated(hash = 457838311)
+    @Generated(hash = 1926607133)
     public BeanTeacher(String login_name, String api_id, String security_key, String t_id,
             String name, String phone, String s_id, String s_name, String a_id,
             String a_name, String d_id, String d_name, String education, String sex,
-            String charge, String u_id, String ref_id) {
+            String charge, String u_id, String ref_id, String head_portrait) {
         this.login_name = login_name;
         this.api_id = api_id;
         this.security_key = security_key;
@@ -51,6 +51,7 @@ public class BeanTeacher {
         this.charge = charge;
         this.u_id = u_id;
         this.ref_id = ref_id;
+        this.head_portrait = head_portrait;
     }
 
     @Generated(hash = 1398456292)
@@ -199,5 +200,13 @@ public class BeanTeacher {
 
     public void setLogin_name(String login_name) {
         this.login_name = login_name;
+    }
+
+    public String getHead_portrait() {
+        return head_portrait;
+    }
+
+    public void setHead_portrait(String head_portrait) {
+        this.head_portrait = head_portrait;
     }
 }

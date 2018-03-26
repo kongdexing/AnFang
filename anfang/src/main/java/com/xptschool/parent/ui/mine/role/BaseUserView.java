@@ -11,24 +11,41 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
+import com.android.volley.common.VolleyHttpParamsEntity;
+import com.android.volley.common.VolleyHttpResult;
+import com.android.volley.common.VolleyHttpService;
 import com.android.widget.view.CircularImageView;
 import com.jph.takephoto.app.TakePhoto;
 import com.jph.takephoto.uitl.TFileUtils;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.xptschool.parent.R;
+import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.CommonUtil;
+import com.xptschool.parent.common.UserType;
+import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
+import com.xptschool.parent.http.MyVolleyRequestListener;
+import com.xptschool.parent.model.BeanUser;
+import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.album.LocalImageTHelper;
 import com.xptschool.parent.ui.fence.FenceDrawActivity;
 import com.xptschool.parent.ui.mine.MyInfoActivity;
 import com.xptschool.parent.util.TakePhotoUtil;
+import com.xptschool.parent.util.ToastUtils;
 import com.xptschool.parent.view.AlbumSourceView;
 import com.xptschool.parent.view.CustomEditDialog;
 import com.xptschool.parent.view.CustomSexDialog;
 
+import org.json.JSONObject;
+
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -44,6 +61,12 @@ public class BaseUserView extends LinearLayout {
 
     @BindView(R.id.imgHead)
     CircularImageView imgHead;
+    @BindView(R.id.txtName)
+    TextView txtName;
+    @BindView(R.id.txtSex)
+    TextView txtSex;
+    @BindView(R.id.txtMail)
+    TextView txtMail;
 
     public BaseUserView(Context context) {
         this(context, null);
@@ -53,6 +76,10 @@ public class BaseUserView extends LinearLayout {
         super(context, attrs);
         mContext = context;
         TAG = this.getClass().getSimpleName();
+    }
+
+    protected void initData(){
+
     }
 
     //弹起头像选择器
@@ -123,21 +150,175 @@ public class BaseUserView extends LinearLayout {
     }
 
     //更改用户性别
-    public void changeSex(String currentSex, String userId) {
+    public void changeSex(String currentSex) {
         CustomSexDialog dialog = new CustomSexDialog(mContext);
         dialog.setSexVal(currentSex);
         dialog.setAlertDialogClickListener(new CustomSexDialog.DialogClickListener() {
             @Override
             public void onPositiveClick(String value) {
-                Toast.makeText(mContext, value, Toast.LENGTH_SHORT).show();
+                postUserInfo(new MyVolleyHttpParamsEntity()
+                        .addParam("sex", value)
+                        .addParam("user_id", XPTApplication.getInstance().getCurrentUserId()));
             }
         });
     }
 
-    public void setHeadImage(String result, String userId) {
-        Log.i(TAG, "setHeadImage: " + result + "  userId:" + userId);
-        ImageLoader.getInstance().displayImage(result,
-                new ImageViewAware(imgHead), CommonUtil.getDefaultImageLoaderOption());
+    public void setHeadImage(String result) {
+        Log.i(TAG, "setHeadImage: " + result);
+        uploadHeadImg(result);
+    }
+
+    //更改用户名称
+    public void changeName(String name) {
+        CustomEditDialog dialog = new CustomEditDialog(mContext);
+        dialog.setTitle("姓名");
+        dialog.setEdtMessage(name);
+        dialog.setAlertDialogClickListener(new CustomEditDialog.DialogClickListener() {
+            @Override
+            public void onPositiveClick(String value) {
+                if (value.isEmpty()) {
+                    Toast.makeText(mContext, R.string.input_user_name, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                postUserInfo(new MyVolleyHttpParamsEntity()
+                        .addParam("name", value)
+                        .addParam("user_id", XPTApplication.getInstance().getCurrentUserId()));
+            }
+        });
+    }
+
+    public void changeEmail(String email) {
+        CustomEditDialog dialog = new CustomEditDialog(mContext);
+        dialog.setTitle("邮箱");
+        dialog.setEdtMessage(email);
+        dialog.setAlertDialogClickListener(new CustomEditDialog.DialogClickListener() {
+            @Override
+            public void onPositiveClick(String value) {
+                if (value.isEmpty()) {
+                    Toast.makeText(mContext, R.string.input_user_name, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                postUserInfo(new MyVolleyHttpParamsEntity()
+                        .addParam("email", value)
+                        .addParam("user_id", XPTApplication.getInstance().getCurrentUserId()));
+            }
+        });
+    }
+
+    private void uploadHeadImg(String imgFile) {
+        List<String> imgs = new ArrayList<>();
+        imgs.add(imgFile);
+
+        VolleyHttpService.getInstance().uploadFiles(HttpAction.UserInfo, new MyVolleyHttpParamsEntity()
+                .addParam("user_id", XPTApplication.getInstance().getCurrentUserId()), imgs, new MyVolleyRequestListener() {
+            @Override
+            public void onStart() {
+                super.onStart();
+                ((MyInfoActivity) mContext).showProgress("正在上传头像");
+            }
+
+            @Override
+            public void onResponse(VolleyHttpResult volleyHttpResult) {
+                super.onResponse(volleyHttpResult);
+                ((MyInfoActivity) mContext).hideProgress();
+
+                switch (volleyHttpResult.getStatus()) {
+                    case HttpAction.SUCCESS:
+                        try {
+                            JSONObject object = new JSONObject(volleyHttpResult.getData().toString());
+                            String head_img = object.getString("head_portrait");
+                            if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+
+                            } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+
+                            } else {
+                                BeanUser currentUser = GreenDaoHelper.getInstance().getCurrentUser();
+                                if (currentUser != null) {
+                                    currentUser.setHead_portrait(head_img);
+                                    GreenDaoHelper.getInstance().insertUser(currentUser);
+                                    ToastUtils.showToast(mContext, R.string.toast_modify_success);
+
+                                    ImageLoader.getInstance().displayImage(currentUser.getHead_portrait(),
+                                            new ImageViewAware(imgHead), CommonUtil.getDefaultImageLoaderOption());
+                                }
+                            }
+                        } catch (Exception ex) {
+                            ToastUtils.showToast(mContext, R.string.toast_modify_failed);
+                        }
+                        break;
+                    default:
+                        ToastUtils.showToast(mContext, R.string.toast_modify_failed);
+                        break;
+                }
+            }
+
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                super.onErrorResponse(volleyError);
+                ((MyInfoActivity) mContext).hideProgress();
+                ToastUtils.showToast(mContext, R.string.toast_modify_failed);
+            }
+        });
+
+    }
+
+    private void postUserInfo(VolleyHttpParamsEntity entity) {
+
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.UserInfo, entity, new MyVolleyRequestListener() {
+
+            @Override
+            public void onStart() {
+                super.onStart();
+                ((MyInfoActivity) mContext).showProgress("正在保存用户信息");
+            }
+
+            @Override
+            public void onResponse(VolleyHttpResult volleyHttpResult) {
+                super.onResponse(volleyHttpResult);
+                ((MyInfoActivity) mContext).hideProgress();
+
+                switch (volleyHttpResult.getStatus()) {
+                    case HttpAction.SUCCESS:
+                        try {
+                            JSONObject object = new JSONObject(volleyHttpResult.getData().toString());
+                            String sex = object.getString("sex");
+                            String email = object.getString("email");
+                            String name = object.getString("name");
+
+                            if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+
+                            } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+
+                            } else {
+                                BeanUser currentUser = GreenDaoHelper.getInstance().getCurrentUser();
+                                if (currentUser != null) {
+                                    currentUser.setName(name);
+                                    currentUser.setSex(sex);
+                                    currentUser.setEmail(email);
+
+                                    GreenDaoHelper.getInstance().insertUser(currentUser);
+                                    initData();
+                                }
+                            }
+                            ToastUtils.showToast(mContext, R.string.toast_modify_success);
+                        } catch (Exception ex) {
+                            ToastUtils.showToast(mContext, R.string.toast_modify_failed);
+                        }
+                        break;
+                    default:
+                        ToastUtils.showToast(mContext, R.string.toast_modify_failed);
+                        break;
+                }
+            }
+
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                super.onErrorResponse(volleyError);
+                ((MyInfoActivity) mContext).hideProgress();
+                ToastUtils.showToast(mContext, R.string.toast_modify_failed);
+            }
+        });
+
     }
 
 }

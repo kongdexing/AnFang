@@ -34,6 +34,7 @@ import com.xptschool.parent.model.BeanCourse;
 import com.xptschool.parent.model.BeanParent;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.BeanTeacher;
+import com.xptschool.parent.model.BeanUser;
 import com.xptschool.parent.model.GreenDaoHelper;
 
 import org.json.JSONArray;
@@ -274,9 +275,17 @@ public class CommonUtil {
         } else if (type.equals(UserType.VISITOR.toString()) || type.equals(UserType.COMPANY.toString())
                 || type.equals(UserType.PROXY.toString()) || type.equals(UserType.CITYPROXY.toString())) {
             //会员|第三方公司|代理商|区县代理商
-            SharedPreferencesUtil.saveData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_VISITOR_NAME, jsonLogin.get("name"));
-            SharedPreferencesUtil.saveData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_UID, jsonLogin.get("user_id"));
-            SharedPreferencesUtil.saveData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_REF_ID, jsonLogin.get("ref_id"));
+            BeanUser user = new BeanUser();
+            user.setUser_id(jsonLogin.getString("user_id"));
+            user.setType(jsonLogin.getString("type"));
+            user.setName(jsonLogin.getString("name"));
+            user.setUsername(jsonLogin.getString("username"));
+            user.setSex(jsonLogin.getString("sex"));
+            user.setPhone(jsonLogin.getString("phone"));
+            user.setEmail(jsonLogin.getString("email"));
+            user.setHead_portrait(jsonLogin.getString("head_portrait"));
+            user.setRef_id(jsonLogin.getString("ref_id"));
+            GreenDaoHelper.getInstance().insertUser(user);
 
         }
         XPTApplication.getInstance().setCurrent_user_type(type);

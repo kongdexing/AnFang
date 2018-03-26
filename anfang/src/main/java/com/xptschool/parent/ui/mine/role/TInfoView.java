@@ -64,7 +64,7 @@ public class TInfoView extends BaseUserView {
         }
     }
 
-    private void initData() {
+    protected void initData() {
         BeanTeacher teacher = GreenDaoHelper.getInstance().getCurrentTeacher();
         if (teacher == null) {
             return;

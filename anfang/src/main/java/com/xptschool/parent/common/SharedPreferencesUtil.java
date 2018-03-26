@@ -21,10 +21,6 @@ public class SharedPreferencesUtil {
     public static final String KEY_PROVINCE = "local_province"; //省
     public static final String KEY_CITY = "local_city";         //市
 
-    /**
-     * 非家长老师身份的用户名
-     */
-    public static final String KEY_VISITOR_NAME = "visitor_name";
     public static final String KEY_LAST_REGISTER = "last_register_time";
 
 

@@ -36,6 +36,7 @@ public class BeanParentDao extends AbstractDao<BeanParent, Void> {
         public final static Property Email = new Property(11, String.class, "email", false, "EMAIL");
         public final static Property Api_id = new Property(12, String.class, "api_id", false, "API_ID");
         public final static Property Security_key = new Property(13, String.class, "security_key", false, "SECURITY_KEY");
+        public final static Property Head_portrait = new Property(14, String.class, "head_portrait", false, "HEAD_PORTRAIT");
     };
 
 
@@ -64,7 +65,8 @@ public class BeanParentDao extends AbstractDao<BeanParent, Void> {
                 "\"FAMILY_TEL\" TEXT," + // 10: family_tel
                 "\"EMAIL\" TEXT," + // 11: email
                 "\"API_ID\" TEXT," + // 12: api_id
-                "\"SECURITY_KEY\" TEXT);"); // 13: security_key
+                "\"SECURITY_KEY\" TEXT," + // 13: security_key
+                "\"HEAD_PORTRAIT\" TEXT);"); // 14: head_portrait
     }
 
     /** Drops the underlying database table. */
@@ -146,6 +148,11 @@ public class BeanParentDao extends AbstractDao<BeanParent, Void> {
         if (security_key != null) {
             stmt.bindString(14, security_key);
         }
+ 
+        String head_portrait = entity.getHead_portrait();
+        if (head_portrait != null) {
+            stmt.bindString(15, head_portrait);
+        }
     }
 
     @Override
@@ -221,6 +228,11 @@ public class BeanParentDao extends AbstractDao<BeanParent, Void> {
         if (security_key != null) {
             stmt.bindString(14, security_key);
         }
+ 
+        String head_portrait = entity.getHead_portrait();
+        if (head_portrait != null) {
+            stmt.bindString(15, head_portrait);
+        }
     }
 
     @Override
@@ -244,7 +256,8 @@ public class BeanParentDao extends AbstractDao<BeanParent, Void> {
             cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // family_tel
             cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // email
             cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // api_id
-            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13) // security_key
+            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // security_key
+            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14) // head_portrait
         );
         return entity;
     }
@@ -265,6 +278,7 @@ public class BeanParentDao extends AbstractDao<BeanParent, Void> {
         entity.setEmail(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
         entity.setApi_id(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
         entity.setSecurity_key(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
+        entity.setHead_portrait(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
      }
     
     @Override

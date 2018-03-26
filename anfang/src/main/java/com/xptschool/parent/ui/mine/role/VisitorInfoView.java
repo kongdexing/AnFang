@@ -20,6 +20,7 @@ import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.model.BeanTeacher;
+import com.xptschool.parent.model.BeanUser;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.mine.BaseInfoView;
 import com.xptschool.parent.ui.mine.MyInfoActivity;
@@ -37,13 +38,12 @@ import butterknife.OnClick;
 
 public class VisitorInfoView extends BaseUserView {
 
-    @BindView(R.id.txtName)
-    TextView txtName;
-
     @BindView(R.id.txtPhone)
     TextView txtPhone;
+
     @BindView(R.id.txtRole)
     TextView txtRole;
+    private BeanUser currentUser;
 
     public VisitorInfoView(Context context) {
         this(context, null);
@@ -61,23 +61,41 @@ public class VisitorInfoView extends BaseUserView {
         }
     }
 
-    private void initData() {
-        txtName.setText(SharedPreferencesUtil.getData(mContext, SharedPreferencesUtil.KEY_VISITOR_NAME, "").toString());
-        txtPhone.setText(SharedPreferencesUtil.getData(mContext, SharedPreferencesUtil.KEY_USER_NAME, "").toString());
+    protected void initData() {
+        super.initData();
+        currentUser = GreenDaoHelper.getInstance().getCurrentUser();
+        if (currentUser == null) {
+            return;
+        }
+        txtName.setText(currentUser.getName());
+        txtPhone.setText(currentUser.getPhone());
+        txtSex.setText("1".equals(currentUser.getSex()) ? "男" : "女");
+        txtMail.setText(currentUser.getEmail());
         txtRole.setText(XPTApplication.getInstance().getCurrent_user_type().getRoleName());
+
+        ImageLoader.getInstance().displayImage(currentUser.getHead_portrait(),
+                new ImageViewAware(imgHead), CommonUtil.getDefaultImageLoaderOption());
     }
 
-    @OnClick({R.id.rlSex, R.id.rlMinePhoto, R.id.rlMinePhone})
+    @OnClick({R.id.rlSex, R.id.rlName, R.id.rlEmail, R.id.rlMinePhoto, R.id.rlMinePhone})
     void viewClick(View view) {
         switch (view.getId()) {
             case R.id.rlSex:
-                changeSex("1", XPTApplication.getInstance().getCurrentUserId());
+                //更改性别
+                changeSex(currentUser.getSex());
+                break;
+            case R.id.rlName:
+                //更改姓名
+                changeName(currentUser.getName());
                 break;
             case R.id.rlMinePhoto:
                 choosePic(txtRole);
                 break;
+            case R.id.rlEmail:
+                changeEmail(currentUser.getEmail());
+                break;
             case R.id.rlMinePhone:
-                String phone = SharedPreferencesUtil.getData(mContext, SharedPreferencesUtil.KEY_USER_NAME, "").toString();
+                String phone = currentUser.getPhone();
                 if (phone.isEmpty()) {
                     Toast.makeText(mContext, R.string.toast_phone_empty, Toast.LENGTH_SHORT).show();
                     return;

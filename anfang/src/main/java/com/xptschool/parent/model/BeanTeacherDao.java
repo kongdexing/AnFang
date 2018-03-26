@@ -39,6 +39,7 @@ public class BeanTeacherDao extends AbstractDao<BeanTeacher, Void> {
         public final static Property Charge = new Property(14, String.class, "charge", false, "CHARGE");
         public final static Property U_id = new Property(15, String.class, "u_id", false, "U_ID");
         public final static Property Ref_id = new Property(16, String.class, "ref_id", false, "REF_ID");
+        public final static Property Head_portrait = new Property(17, String.class, "head_portrait", false, "HEAD_PORTRAIT");
     };
 
 
@@ -70,7 +71,8 @@ public class BeanTeacherDao extends AbstractDao<BeanTeacher, Void> {
                 "\"SEX\" TEXT," + // 13: sex
                 "\"CHARGE\" TEXT," + // 14: charge
                 "\"U_ID\" TEXT," + // 15: u_id
-                "\"REF_ID\" TEXT);"); // 16: ref_id
+                "\"REF_ID\" TEXT," + // 16: ref_id
+                "\"HEAD_PORTRAIT\" TEXT);"); // 17: head_portrait
     }
 
     /** Drops the underlying database table. */
@@ -167,6 +169,11 @@ public class BeanTeacherDao extends AbstractDao<BeanTeacher, Void> {
         if (ref_id != null) {
             stmt.bindString(17, ref_id);
         }
+ 
+        String head_portrait = entity.getHead_portrait();
+        if (head_portrait != null) {
+            stmt.bindString(18, head_portrait);
+        }
     }
 
     @Override
@@ -257,6 +264,11 @@ public class BeanTeacherDao extends AbstractDao<BeanTeacher, Void> {
         if (ref_id != null) {
             stmt.bindString(17, ref_id);
         }
+ 
+        String head_portrait = entity.getHead_portrait();
+        if (head_portrait != null) {
+            stmt.bindString(18, head_portrait);
+        }
     }
 
     @Override
@@ -283,7 +295,8 @@ public class BeanTeacherDao extends AbstractDao<BeanTeacher, Void> {
             cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // sex
             cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // charge
             cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // u_id
-            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16) // ref_id
+            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // ref_id
+            cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17) // head_portrait
         );
         return entity;
     }
@@ -307,6 +320,7 @@ public class BeanTeacherDao extends AbstractDao<BeanTeacher, Void> {
         entity.setCharge(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
         entity.setU_id(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
         entity.setRef_id(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
+        entity.setHead_portrait(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
      }
     
     @Override

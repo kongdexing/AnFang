@@ -16,6 +16,10 @@ public class HttpAction {
     public static String HEAD = BuildConfig.SERVICE_URL + "/index.php/Api/";
     /*登录*/
     public static String LOGIN = HEAD + "Login/login2_1_3";
+
+    /*修改用户信息*/
+    public static String UserInfo = HEAD + "UserInfo/updateUserInfo";
+
     /*更改密码*/
     public static String UPDATE_PASSWORD = "Login/edit_password";
 

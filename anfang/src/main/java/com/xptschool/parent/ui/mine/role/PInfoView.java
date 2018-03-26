@@ -53,7 +53,7 @@ public class PInfoView extends BaseUserView {
         initData();
     }
 
-    private void initData() {
+    protected void initData() {
 
         BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
         if (parent != null) {

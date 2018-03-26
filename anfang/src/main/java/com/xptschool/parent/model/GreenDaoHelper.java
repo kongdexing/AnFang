@@ -71,7 +71,7 @@ public class GreenDaoHelper {
     }
 
     /**
-     * 删除后再插入
+     * 家长：删除后再插入
      */
     public void insertParent(BeanParent parent) {
         currentParent = parent;
@@ -84,7 +84,7 @@ public class GreenDaoHelper {
     }
 
     /**
-     * 删除后再插入
+     * 教师：删除后再插入
      */
     public void insertTeacher(BeanTeacher teacher) {
         currentTeacher = teacher;
@@ -95,6 +95,31 @@ public class GreenDaoHelper {
             writeDaoSession.getBeanTeacherDao().deleteAll();
             writeDaoSession.getBeanTeacherDao().insert(teacher);
         }
+    }
+
+    /**
+     * 会员，代理商，第三方公司，区域代理商：删除后再插入
+     */
+    public void insertUser(BeanUser user) {
+        SharedPreferencesUtil.saveData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_UID, user.getUser_id());
+        SharedPreferencesUtil.saveData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_REF_ID, user.getRef_id());
+
+        Log.i(TAG, "insertUser: " + user.getUsername());
+
+        if (writeDaoSession != null) {
+            writeDaoSession.getBeanUserDao().deleteAll();
+            writeDaoSession.getBeanUserDao().insert(user);
+        }
+    }
+
+    public BeanUser getCurrentUser(){
+        if (readDaoSession != null) {
+            List<BeanUser> beanUsers = readDaoSession.getBeanUserDao().loadAll();
+            if (beanUsers.size() > 0) {
+                return beanUsers.get(0);
+            }
+        }
+        return null;
     }
 
     /**
