@@ -624,7 +624,8 @@ public class HomeFragment extends BaseFragment {
 
         HomeItemGridAdapter itemAdapter = new HomeItemGridAdapter(activity);
 
-        grd_school.setAdapter(itemAdapter);
+        if (grd_school != null)
+            grd_school.setAdapter(itemAdapter);
         itemAdapter.reloadData(homeItems);
     }
 

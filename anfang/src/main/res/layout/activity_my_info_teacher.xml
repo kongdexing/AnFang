@@ -42,6 +42,8 @@
                 <ImageView style="@style/arrow_right" />
             </RelativeLayout>
 
+            <View style="@style/line1" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,6 +64,8 @@
                     android:layout_alignParentRight="true"
                     android:text="无" />
             </RelativeLayout>
+
+            <View style="@style/line1" />
 
             <RelativeLayout
                 android:id="@+id/rlMinePhone"
@@ -90,6 +94,8 @@
                     style="@style/arrow_right" />
             </RelativeLayout>
 
+            <View style="@style/line1" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -110,6 +116,8 @@
                     android:text="无" />
             </RelativeLayout>
 
+            <View style="@style/line1" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -129,6 +137,8 @@
                     style="@style/mineVal"
                     android:text="无" />
             </RelativeLayout>
+
+            <View style="@style/line1" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -152,6 +162,8 @@
                     android:text="无" />
             </RelativeLayout>
 
+            <View style="@style/line1" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -171,6 +183,8 @@
                     style="@style/mineVal"
                     android:text="无" />
             </RelativeLayout>
+
+            <View style="@style/line1" />
 
             <RelativeLayout
                 android:layout_width="match_parent"

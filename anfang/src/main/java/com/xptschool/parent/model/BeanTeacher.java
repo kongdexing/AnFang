@@ -1,5 +1,7 @@
 package com.xptschool.parent.model;
 
+import com.xptschool.parent.BuildConfig;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 
@@ -203,6 +205,9 @@ public class BeanTeacher {
     }
 
     public String getHead_portrait() {
+        if (!head_portrait.contains(BuildConfig.SERVICE_URL)) {
+            head_portrait = BuildConfig.SERVICE_URL + head_portrait;
+        }
         return head_portrait;
     }
 

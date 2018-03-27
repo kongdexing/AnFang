@@ -38,11 +38,14 @@
                     android:layout_marginRight="@dimen/dp_25"
                     android:layout_marginTop="@dimen/dp_5"
                     android:src="@drawable/user_defaulthead" />
-                <ImageView
-                    style="@style/arrow_right" />
+
+                <ImageView style="@style/arrow_right" />
             </RelativeLayout>
 
+            <View style="@style/line1" />
+
             <RelativeLayout
+                android:id="@+id/rlName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_1"
@@ -62,6 +65,32 @@
                     android:text="无" />
 
             </RelativeLayout>
+
+            <View style="@style/line1" />
+
+            <RelativeLayout
+                android:id="@+id/rlSex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_1"
+                android:background="@drawable/mine_item_selector"
+                android:clickable="true">
+
+                <TextView
+                    style="@style/mineText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="性别" />
+
+                <TextView
+                    android:id="@+id/txtSex"
+                    style="@style/mineVal"
+                    android:text="无" />
+
+            </RelativeLayout>
+
+            <View style="@style/line1" />
 
             <RelativeLayout
                 android:id="@+id/rlMinePhone"
@@ -90,7 +119,10 @@
                     style="@style/arrow_right" />
             </RelativeLayout>
 
+            <View style="@style/line1" />
+
             <RelativeLayout
+                android:id="@+id/rlMail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_1"
@@ -110,6 +142,8 @@
                     android:text="无" />
 
             </RelativeLayout>
+
+            <View style="@style/line1" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -131,6 +165,8 @@
                     android:text="无" />
             </RelativeLayout>
 
+            <View style="@style/line1" />
+
             <RelativeLayout
                 android:id="@+id/rlAddressPhone"
                 android:layout_width="match_parent"
@@ -151,8 +187,8 @@
                     android:id="@+id/txtHomeTel"
                     style="@style/mineVal"
                     android:layout_alignParentRight="false"
-                    android:layout_toLeftOf="@+id/img_addtel"
                     android:layout_marginRight="@dimen/dp_20"
+                    android:layout_toLeftOf="@+id/img_addtel"
                     android:text="无" />
 
                 <ImageView

@@ -30,6 +30,8 @@ import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
+import com.xptschool.parent.model.BeanParent;
+import com.xptschool.parent.model.BeanTeacher;
 import com.xptschool.parent.model.BeanUser;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.album.LocalImageTHelper;
@@ -61,12 +63,6 @@ public class BaseUserView extends LinearLayout {
 
     @BindView(R.id.imgHead)
     CircularImageView imgHead;
-    @BindView(R.id.txtName)
-    TextView txtName;
-    @BindView(R.id.txtSex)
-    TextView txtSex;
-    @BindView(R.id.txtMail)
-    TextView txtMail;
 
     public BaseUserView(Context context) {
         this(context, null);
@@ -78,7 +74,7 @@ public class BaseUserView extends LinearLayout {
         TAG = this.getClass().getSimpleName();
     }
 
-    protected void initData(){
+    protected void initData() {
 
     }
 
@@ -228,20 +224,25 @@ public class BaseUserView extends LinearLayout {
                             JSONObject object = new JSONObject(volleyHttpResult.getData().toString());
                             String head_img = object.getString("head_portrait");
                             if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+                                BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
+                                parent.setHead_portrait(head_img);
+                                GreenDaoHelper.getInstance().insertParent(parent);
 
                             } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-
+                                BeanTeacher teacher = GreenDaoHelper.getInstance().getCurrentTeacher();
+                                teacher.setHead_portrait(head_img);
+                                GreenDaoHelper.getInstance().insertTeacher(teacher);
                             } else {
                                 BeanUser currentUser = GreenDaoHelper.getInstance().getCurrentUser();
                                 if (currentUser != null) {
                                     currentUser.setHead_portrait(head_img);
                                     GreenDaoHelper.getInstance().insertUser(currentUser);
-                                    ToastUtils.showToast(mContext, R.string.toast_modify_success);
-
                                     ImageLoader.getInstance().displayImage(currentUser.getHead_portrait(),
                                             new ImageViewAware(imgHead), CommonUtil.getDefaultImageLoaderOption());
                                 }
                             }
+                            initData();
+                            ToastUtils.showToast(mContext, R.string.toast_modify_success);
                         } catch (Exception ex) {
                             ToastUtils.showToast(mContext, R.string.toast_modify_failed);
                         }
@@ -286,7 +287,11 @@ public class BaseUserView extends LinearLayout {
                             String name = object.getString("name");
 
                             if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-
+                                BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
+                                parent.setSex(sex);
+                                parent.setEmail(email);
+                                parent.setParent_name(name);
+                                GreenDaoHelper.getInstance().insertParent(parent);
                             } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
 
                             } else {
@@ -297,9 +302,9 @@ public class BaseUserView extends LinearLayout {
                                     currentUser.setEmail(email);
 
                                     GreenDaoHelper.getInstance().insertUser(currentUser);
-                                    initData();
                                 }
                             }
+                            initData();
                             ToastUtils.showToast(mContext, R.string.toast_modify_success);
                         } catch (Exception ex) {
                             ToastUtils.showToast(mContext, R.string.toast_modify_failed);

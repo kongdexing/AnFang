@@ -5,13 +5,17 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.widget.view.CircularImageView;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.xptschool.parent.R;
+import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.model.BeanParent;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.mine.BaseInfoView;
@@ -57,11 +61,9 @@ public class PInfoView extends BaseUserView {
 
         BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
         if (parent != null) {
-            if (parent.getSex().equals("1")) {
-                imgHead.setImageResource(R.drawable.parent_father);
-            } else {
-                imgHead.setImageResource(R.drawable.parent_mother);
-            }
+            Log.i(TAG, "initData: "+parent.getHead_portrait());
+            ImageLoader.getInstance().displayImage(parent.getHead_portrait(),
+                    new ImageViewAware(imgHead), CommonUtil.getDefaultImageLoaderOption());
 
             txtMineName.setText(parent.getParent_name());
             txtPhone.setText(parent.getParent_phone());
@@ -71,16 +73,25 @@ public class PInfoView extends BaseUserView {
         }
     }
 
-    @OnClick({R.id.rlMinePhoto, R.id.rlMinePhone, R.id.rlAddressPhone})
+    @OnClick({R.id.rlName, R.id.rlMail, R.id.rlSex, R.id.rlMinePhoto, R.id.rlMinePhone, R.id.rlAddressPhone})
     void viewClick(View view) {
         BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
         if (parent == null) {
             return;
         }
         switch (view.getId()) {
+//            case R.id.rlName:
+//                changeName(parent.getParent_name());
+//                break;
             case R.id.rlMinePhoto:
                 choosePic(imgHead);
                 break;
+//            case R.id.rlMail:
+//                changeEmail(parent.getEmail());
+//                break;
+//            case R.id.rlSex:
+//                changeSex(parent.getSex());
+//                break;
             case R.id.rlMinePhone:
                 if (parent.getParent_phone().isEmpty()) {
                     Toast.makeText(mContext, R.string.toast_phone_empty, Toast.LENGTH_SHORT).show();

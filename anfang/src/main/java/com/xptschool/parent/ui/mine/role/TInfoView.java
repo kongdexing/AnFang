@@ -11,7 +11,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.widget.view.CircularImageView;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.xptschool.parent.R;
+import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.model.BeanTeacher;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.mine.BaseInfoView;
@@ -69,11 +72,10 @@ public class TInfoView extends BaseUserView {
         if (teacher == null) {
             return;
         }
-        if (teacher.getSex().equals("1")) {
-            imgHead.setImageResource(R.drawable.teacher_man);
-        } else {
-            imgHead.setImageResource(R.drawable.teacher_woman);
-        }
+
+        ImageLoader.getInstance().displayImage(teacher.getHead_portrait(),
+                new ImageViewAware(imgHead), CommonUtil.getDefaultImageLoaderOption());
+
         txtTeacherName.setText(teacher.getName());
         txtPhone.setText(teacher.getPhone());
         txtEducation.setText(teacher.getEducation());

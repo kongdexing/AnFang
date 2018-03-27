@@ -12,14 +12,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.widget.view.CircularImageView;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
+import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.common.UserHelper;
 import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.model.BeanParent;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.BeanTeacher;
+import com.xptschool.parent.model.BeanUser;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.login.LoginActivity;
 import com.xptschool.parent.ui.mine.MyChildActivity;
@@ -99,6 +103,8 @@ public class MineFragment extends BaseFragment {
             if (type == null) {
                 return;
             }
+            String headImg = "";
+
             if (UserType.TEACHER.equals(type)) {
                 rlMyChild.setVisibility(View.GONE);
                 rlMyClass.setVisibility(View.VISIBLE);
@@ -109,11 +115,7 @@ public class MineFragment extends BaseFragment {
                 if (teacher != null) {
                     txtUserName.setText(teacher.getName());
                     txtPhone.setText("手机号：" + teacher.getPhone());
-                    if (teacher.getSex().equals("1")) {
-                        imgLoginHead.setImageResource(R.drawable.teacher_man);
-                    } else {
-                        imgLoginHead.setImageResource(R.drawable.teacher_woman);
-                    }
+                    headImg = teacher.getHead_portrait();
                 }
             } else if (UserType.PARENT.equals(type)) {
                 rlMyChild.setVisibility(View.VISIBLE);
@@ -130,20 +132,22 @@ public class MineFragment extends BaseFragment {
                 if (parent != null) {
                     txtUserName.setText(parent.getParent_name());
                     txtPhone.setText("手机号：" + parent.getParent_phone());
-                    if (parent.getSex().equals("1")) {
-                        imgLoginHead.setImageResource(R.drawable.parent_father);
-                    } else {
-                        imgLoginHead.setImageResource(R.drawable.parent_mother);
-                    }
+                    headImg = parent.getHead_portrait();
                 }
             } else if (UserType.VISITOR.equals(type) || UserType.COMPANY.equals(type) || UserType.PROXY.equals(type) || UserType.CITYPROXY.equals(type)) {
                 rlMyClass.setVisibility(View.GONE);
                 rlMyChild.setVisibility(View.GONE);
                 rlMyProperty.setVisibility(View.GONE);
-                txtUserName.setText(SharedPreferencesUtil.getData(mContext, SharedPreferencesUtil.KEY_USER_NAME, "").toString());
+                BeanUser user = GreenDaoHelper.getInstance().getCurrentUser();
+                if (user != null) {
+                    headImg = user.getHead_portrait();
+                    txtUserName.setText(user.getUsername());
+                }
                 txtPhone.setVisibility(View.GONE);
-//                txtPhone.setText("手机号：" + SharedPreferencesUtil.getData(mContext, SharedPreferencesUtil.KEY_VISITOR_NAME, ""));
             }
+            ImageLoader.getInstance().displayImage(headImg,
+                    new ImageViewAware(imgLoginHead), CommonUtil.getDefaultImageLoaderOption());
+
             txtRole.setText(type.getRoleName());
         } else {
             LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) rlMyChild.getLayoutParams();

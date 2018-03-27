@@ -41,6 +41,12 @@ public class VisitorInfoView extends BaseUserView {
     @BindView(R.id.txtPhone)
     TextView txtPhone;
 
+    @BindView(R.id.txtName)
+    TextView txtName;
+    @BindView(R.id.txtSex)
+    TextView txtSex;
+    @BindView(R.id.txtMail)
+    TextView txtMail;
     @BindView(R.id.txtRole)
     TextView txtRole;
     private BeanUser currentUser;
