@@ -371,7 +371,6 @@ public class MapFragment extends MapBaseFragment implements OnGetShareUrlResultL
                 //判断手机地图
                 if (CommonUtil.isMapAppInstalled()) {
                     CustomMapDialog dialog = new CustomMapDialog(mContext);
-
                 } else {
                     ToastUtils.showToast(mContext,"没有检测到其他地图");
                 }

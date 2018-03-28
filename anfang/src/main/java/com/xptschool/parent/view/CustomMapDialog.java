@@ -32,7 +32,7 @@ public class CustomMapDialog implements View.OnClickListener {
         alertDialog.setView(new EditText(context));
         alertDialog.show();
         alertDialog.getWindow().setLayout(XPTApplication.getInstance().getWindowWidth() * 4 / 5,
-                XPTApplication.getInstance().getWindowHeight() / 3);
+                LinearLayout.LayoutParams.WRAP_CONTENT);
 
         alertDialog.setCanceledOnTouchOutside(true);
 
