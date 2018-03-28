@@ -7,10 +7,12 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,9 +32,21 @@ import com.android.widget.view.ArrowTextView;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.search.share.LocationShareURLOption;
+import com.baidu.mapapi.search.share.OnGetShareUrlResultListener;
+import com.baidu.mapapi.search.share.PoiDetailShareURLOption;
+import com.baidu.mapapi.search.share.ShareUrlResult;
+import com.baidu.mapapi.search.share.ShareUrlSearch;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.gyf.barlibrary.ImmersionBar;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.media.UMWeb;
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.bean.BeanHTLocation;
@@ -48,8 +62,10 @@ import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.alarm.AlarmActivity;
+import com.xptschool.parent.ui.main.MainActivity;
 import com.xptschool.parent.ui.mine.StudentAdapter;
 import com.xptschool.parent.ui.mine.StudentPopupWindowView;
+import com.xptschool.parent.ui.setting.QRCodeActivity;
 import com.xptschool.parent.util.ToastUtils;
 import com.xptschool.parent.view.TimePickerPopupWindow;
 
@@ -69,7 +85,7 @@ import permissions.dispatcher.PermissionRequest;
 import permissions.dispatcher.RuntimePermissions;
 
 @RuntimePermissions
-public class MapFragment extends MapBaseFragment {
+public class MapFragment extends MapBaseFragment implements OnGetShareUrlResultListener {
 
     @BindView(R.id.spnStudents)
     MaterialSpinner spnStudents;
@@ -96,6 +112,15 @@ public class MapFragment extends MapBaseFragment {
     @BindView(R.id.switchBindRoad)
     Button switchBindRoad;
 
+    //学生选择控制器
+    @BindView(R.id.llStudentDrop)
+    LinearLayout llStudentDrop;
+    //左侧工具栏
+    @BindView(R.id.llMyTools)
+    LinearLayout llMyTools;
+    @BindView(R.id.llShare)
+    LinearLayout llShare;
+
     @BindView(R.id.progress_bar)
     ProgressBar progress_bar;
 
@@ -106,6 +131,15 @@ public class MapFragment extends MapBaseFragment {
     TimePickerPopupWindow sDatePopup, eDatePopup;
     private String startTime, endTime;
     private int locationTime = 0;
+
+    /**
+     * 共享URL查询接口
+     * <p>
+     * 共享URL是指代表特定信息(poi详情/位置)的一条经过压缩的URL，
+     * 该URL可通过任何途径传播。 当终端用户点击该URL时，
+     * 该URL所代表的特定信息会通过百度地图(客户端/web)重新呈现
+     */
+    private ShareUrlSearch mShareUrlSearch = null;
 
     public MapFragment() {
     }
@@ -161,8 +195,14 @@ public class MapFragment extends MapBaseFragment {
     }
 
     private void initSpinnerData() {
-        Log.i(TAG, "initSpinnerData: " + XPTApplication.getInstance().getCurrent_user_type());
-        if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+        llMyTools.setVisibility(View.VISIBLE);
+        llStudentDrop.setVisibility(View.VISIBLE);
+        llShare.setVisibility(View.GONE);
+
+        UserType type = XPTApplication.getInstance().getCurrent_user_type();
+        Log.i(TAG, "initSpinnerData: " + type);
+
+        if (UserType.PARENT.equals(type)) {
             llStudentName.setVisibility(View.VISIBLE);
             txtStudentName.setVisibility(View.GONE);
 
@@ -193,11 +233,19 @@ public class MapFragment extends MapBaseFragment {
                     flTransparent.setVisibility(View.GONE);
                 }
             });
-        } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+        } else if (UserType.TEACHER.equals(type)) {
             llStudentName.setVisibility(View.GONE);
             txtStudentName.setVisibility(View.VISIBLE);
             getStudents();
         } else {
+            //隐藏学生功能
+            llMyTools.setVisibility(View.GONE);
+            llStudentDrop.setVisibility(View.GONE);
+            llShare.setVisibility(View.VISIBLE);
+
+            mShareUrlSearch = ShareUrlSearch.newInstance();
+            mShareUrlSearch.setOnGetShareUrlResultListener(this);
+
             llStudentName.setVisibility(View.VISIBLE);
             txtStudentName.setVisibility(View.GONE);
 
@@ -223,7 +271,8 @@ public class MapFragment extends MapBaseFragment {
     }
 
     @OnClick({R.id.txtSDate, R.id.txtEDate, R.id.llLocation, R.id.llTrack, R.id.llRailings,
-            R.id.switchBindRoad, R.id.spnStudents, R.id.txtStudentName, R.id.llAlarm, R.id.llMyLocation})
+            R.id.switchBindRoad, R.id.spnStudents, R.id.txtStudentName, R.id.llAlarm, R.id.llMyLocation,
+            R.id.txtShare, R.id.txtMap})
     void viewClick(View view) {
         switch (view.getId()) {
             case R.id.txtSDate:
@@ -299,6 +348,20 @@ public class MapFragment extends MapBaseFragment {
                 break;
             case R.id.llMyLocation:
                 MapFragmentPermissionsDispatcher.onLocationPermitWithCheck(this);
+                break;
+            case R.id.txtShare:
+                if (currentLocation == null) {
+                    ToastUtils.showToast(mContext, "无定位信息");
+                    return;
+                }
+                LatLng ll = new LatLng(currentLocation.getLatitude(),
+                        currentLocation.getLongitude());
+                Log.i(TAG, "viewClick: " + currentLocation.getAddrStr());
+
+                //请求位置信息分享URL
+                mShareUrlSearch.requestLocationShareUrl(new LocationShareURLOption()
+                        .location(ll).name("共享位置").snippet(""));
+                // 共享点位置 --- 共享点名称 --- 通过短URL调起客户端时作为附加信息显示在名称下面
                 break;
         }
     }
@@ -494,6 +557,34 @@ public class MapFragment extends MapBaseFragment {
     public void onPause() {
         super.onPause();
         cancelRTLocationTimer();
+    }
+
+    @Override
+    public void onGetPoiDetailShareUrlResult(ShareUrlResult shareUrlResult) {
+        Log.i(TAG, "onGetPoiDetailShareUrlResult: " + shareUrlResult.getUrl());
+    }
+
+    @Override
+    public void onGetLocationShareUrlResult(final ShareUrlResult shareUrlResult) {
+        Log.i(TAG, "onGetLocationShareUrlResult: " + shareUrlResult.getUrl());
+
+        UMImage image = new UMImage((MainActivity) mContext, R.mipmap.ic_launcher);//资源文件
+        UMWeb web = new UMWeb(shareUrlResult.getUrl());
+        web.setTitle("信平台");//标题
+        web.setThumb(image);  //缩略图
+        web.setDescription("点击查看此点位置");//描述
+
+        new ShareAction((MainActivity) mContext)
+                .setDisplayList(SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE,
+                        SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE)//传入平台
+                .withMedia(web)//分享内容
+                .setCallback(null)//回调监听器
+                .open();
+    }
+
+    @Override
+    public void onGetRouteShareUrlResult(ShareUrlResult shareUrlResult) {
+        Log.i(TAG, "onGetRouteShareUrlResult: " + shareUrlResult.getUrl());
     }
 
     private void cancelRTLocationTimer() {

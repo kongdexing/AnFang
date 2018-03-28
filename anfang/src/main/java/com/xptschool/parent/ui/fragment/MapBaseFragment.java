@@ -87,6 +87,7 @@ public class MapBaseFragment extends BaseFragment implements BDLocationListener,
     public boolean isBindRoadForHistoryTrack = false;
     public boolean mapStatusChange = false;
     private InfoWindow locationInfoWindow;
+    public BDLocation currentLocation;
 
     @Override
     public void onSensorChanged(SensorEvent event) {
@@ -126,11 +127,11 @@ public class MapBaseFragment extends BaseFragment implements BDLocationListener,
     public void onReceiveLocation(BDLocation location) {
         // map view 销毁后不在处理新接收的位置
         Log.i(TAG, "onReceiveLocation: " + location.getAddrStr());
+        currentLocation = location;
 
         if (location == null || mMapView == null) {
             return;
         }
-
         MyLocationData locData = new MyLocationData.Builder()
                 .accuracy(location.getRadius())
                 // 此处设置开发者获取到的方向信息，顺时针0-360
@@ -141,6 +142,7 @@ public class MapBaseFragment extends BaseFragment implements BDLocationListener,
 
         LatLng ll = new LatLng(location.getLatitude(),
                 location.getLongitude());
+
         MarkerOptions markerOptions = new MarkerOptions().position(ll).icon(
                 BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.location_marker)));
         if (mGPSMarker != null) {
