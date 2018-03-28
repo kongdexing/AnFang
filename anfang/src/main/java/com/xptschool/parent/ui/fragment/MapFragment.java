@@ -67,6 +67,8 @@ import com.xptschool.parent.ui.mine.StudentAdapter;
 import com.xptschool.parent.ui.mine.StudentPopupWindowView;
 import com.xptschool.parent.ui.setting.QRCodeActivity;
 import com.xptschool.parent.util.ToastUtils;
+import com.xptschool.parent.view.CustomMapDialog;
+import com.xptschool.parent.view.CustomSexDialog;
 import com.xptschool.parent.view.TimePickerPopupWindow;
 
 import java.text.SimpleDateFormat;
@@ -354,6 +356,8 @@ public class MapFragment extends MapBaseFragment implements OnGetShareUrlResultL
                     ToastUtils.showToast(mContext, "无定位信息");
                     return;
                 }
+                ((MainActivity) mContext).showProgress("正在获取定位信息");
+
                 LatLng ll = new LatLng(currentLocation.getLatitude(),
                         currentLocation.getLongitude());
                 Log.i(TAG, "viewClick: " + currentLocation.getAddrStr());
@@ -363,6 +367,16 @@ public class MapFragment extends MapBaseFragment implements OnGetShareUrlResultL
                         .location(ll).name("共享位置").snippet(""));
                 // 共享点位置 --- 共享点名称 --- 通过短URL调起客户端时作为附加信息显示在名称下面
                 break;
+            case R.id.txtMap:
+                //判断手机地图
+                if (CommonUtil.isMapAppInstalled()) {
+                    CustomMapDialog dialog = new CustomMapDialog(mContext);
+
+                } else {
+                    ToastUtils.showToast(mContext,"没有检测到其他地图");
+                }
+                break;
+
         }
     }
 
@@ -567,6 +581,8 @@ public class MapFragment extends MapBaseFragment implements OnGetShareUrlResultL
     @Override
     public void onGetLocationShareUrlResult(final ShareUrlResult shareUrlResult) {
         Log.i(TAG, "onGetLocationShareUrlResult: " + shareUrlResult.getUrl());
+
+        ((MainActivity) mContext).hideProgress();
 
         UMImage image = new UMImage((MainActivity) mContext, R.mipmap.ic_launcher);//资源文件
         UMWeb web = new UMWeb(shareUrlResult.getUrl());

@@ -1,13 +1,16 @@
 package com.xptschool.parent.ui.main;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
+import com.xptschool.parent.R;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.http.HttpAction;
@@ -22,6 +25,7 @@ import butterknife.ButterKnife;
  */
 public class BaseLoginMainActivity extends AppCompatActivity {
     public String TAG = "";
+    private Dialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +92,33 @@ public class BaseLoginMainActivity extends AppCompatActivity {
         Log.i(TAG, "onLoginFailed: ");
         SharedPreferencesUtil.saveData(this, SharedPreferencesUtil.KEY_UID, "");
         SharedPreferencesUtil.saveData(this, SharedPreferencesUtil.KEY_REF_ID, "");
-
     }
+
+    public void showProgress(String str) {
+        if (progressDialog == null) {
+            progressDialog = new Dialog(this, R.style.CustomDialog);
+            progressDialog.setContentView(R.layout.layout_dialog);
+            progressDialog.setCancelable(true);
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        }
+        TextView msg = (TextView) progressDialog.findViewById(R.id.tv_load_dialog);
+        msg.setText(str);
+        try {
+            progressDialog.show();
+        } catch (Exception ex) {
+            Log.e(TAG, "showProgress: " + ex.getMessage());
+        }
+    }
+
+    public void showProgress(int strId) {
+        showProgress(getResources().getString(strId));
+    }
+
+    public void hideProgress() {
+        if (progressDialog != null) {
+            progressDialog.hide();
+        }
+    }
+
 }

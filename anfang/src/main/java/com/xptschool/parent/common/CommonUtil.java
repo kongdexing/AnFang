@@ -2,6 +2,7 @@ package com.xptschool.parent.common;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
@@ -49,7 +50,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -526,6 +530,48 @@ public class CommonUtil {
         }
         InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    public static HashMap<String, String> getMapPackNames() {
+        HashMap<String, String> mapStrs = new HashMap<>();
+        mapStrs.put("com.baidu.BaiduMap", "百度地图");
+        mapStrs.put("com.autonavi.minimap", "高德地图");
+        mapStrs.put("com.tencent.map", "腾讯地图");
+        mapStrs.put("com.sogou.map.android.maps", "搜狗地图");
+        return mapStrs;
+    }
+
+    //判断是否安装地图
+    public static boolean isMapAppInstalled() {
+        HashMap<String, String> mapStrs = getMapPackNames();
+
+        boolean installed = false;
+        Set<Map.Entry<String, String>> sets = mapStrs.entrySet();
+        for (Map.Entry<String, String> entry : sets) {
+//            System.out.print(entry.getKey() + ", ");
+//            System.out.println(entry.getValue());
+            if (isAppInstalled(entry.getKey())) {
+                installed = true;
+            }
+        }
+        return installed;
+    }
+
+    //判断应用是否安装
+    public static boolean isAppInstalled(String packName) {
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = XPTApplication.getInstance().getPackageManager().getPackageInfo(packName, 0);
+        } catch (Exception ex) {
+            packageInfo = null;
+        }
+
+        if (packageInfo == null) {
+            return false;
+        } else {
+            return true;
+        }
+
     }
 
 }

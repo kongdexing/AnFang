@@ -98,7 +98,7 @@
         <Button
             android:id="@+id/cancel"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp_40"
+            android:layout_height="@dimen/dp_35"
             android:layout_marginBottom="@dimen/dp_10"
             android:layout_marginRight="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_10"
@@ -107,12 +107,12 @@
             android:gravity="center"
             android:text="@string/btn_cancel"
             android:textColor="@color/colorWhite"
-            android:textSize="14sp" />
+            android:textSize="12sp" />
 
         <Button
             android:id="@+id/ok"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp_40"
+            android:layout_height="@dimen/dp_35"
             android:layout_alignParentRight="true"
             android:layout_marginBottom="@dimen/dp_10"
             android:layout_marginRight="15dp"
@@ -121,7 +121,7 @@
             android:gravity="center"
             android:text="@string/btn_confirm"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="12sp" />
     </RelativeLayout>
 
 </RelativeLayout>
