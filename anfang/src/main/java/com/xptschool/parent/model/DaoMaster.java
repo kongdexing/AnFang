@@ -31,11 +31,11 @@ public class DaoMaster extends AbstractDaoMaster {
         BeanParentDao.createTable(db, ifNotExists);
         BeanStudentDao.createTable(db, ifNotExists);
         BeanTeacherDao.createTable(db, ifNotExists);
+        BeanUserDao.createTable(db, ifNotExists);
         ContactParentDao.createTable(db, ifNotExists);
         ContactSchoolDao.createTable(db, ifNotExists);
         ContactStudentDao.createTable(db, ifNotExists);
         ContactTeacherDao.createTable(db, ifNotExists);
-        BeanUserDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -50,11 +50,11 @@ public class DaoMaster extends AbstractDaoMaster {
         BeanParentDao.dropTable(db, ifExists);
         BeanStudentDao.dropTable(db, ifExists);
         BeanTeacherDao.dropTable(db, ifExists);
+        BeanUserDao.dropTable(db, ifExists);
         ContactParentDao.dropTable(db, ifExists);
         ContactSchoolDao.dropTable(db, ifExists);
         ContactStudentDao.dropTable(db, ifExists);
         ContactTeacherDao.dropTable(db, ifExists);
-        BeanUserDao.dropTable(db, ifExists);
     }
 
     /**
@@ -83,11 +83,11 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(BeanParentDao.class);
         registerDaoClass(BeanStudentDao.class);
         registerDaoClass(BeanTeacherDao.class);
+        registerDaoClass(BeanUserDao.class);
         registerDaoClass(ContactParentDao.class);
         registerDaoClass(ContactSchoolDao.class);
         registerDaoClass(ContactStudentDao.class);
         registerDaoClass(ContactTeacherDao.class);
-        registerDaoClass(BeanUserDao.class);
     }
 
     public DaoSession newSession() {

@@ -128,16 +128,18 @@ public class ContactFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-        Log.i(TAG, "initData: "+XPTApplication.getInstance().getCurrent_user_type());
+        UserType type = XPTApplication.getInstance().getCurrent_user_type();
+
+        Log.i(TAG, "initData: " + type);
         //判断老师家长
-        if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+        if (UserType.PARENT.equals(type)) {
             ArrayList<Object> listTeacher = (ArrayList) GreenDaoHelper.getInstance().getContactTeacher();
             ArrayList<Object> listSchool = (ArrayList) GreenDaoHelper.getInstance().getSchoolInfo();
 
             if (listTeacher.size() > 0 || listSchool.size() > 0) {
                 setContactForParent(listTeacher, listSchool);
             }
-        } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+        } else if (UserType.TEACHER.equals(type)) {
             ArrayList<Object> listTeacher = (ArrayList) GreenDaoHelper.getInstance().getContactTeacher();
             ArrayList<Object> listStudent = (ArrayList) GreenDaoHelper.getInstance().getContactStudent();
             for (int i = 0; i < listStudent.size(); i++) {

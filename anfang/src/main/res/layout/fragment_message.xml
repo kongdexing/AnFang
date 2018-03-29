@@ -31,17 +31,17 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="@dimen/dp_60">
 
             <!--通知，互动，通讯录-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_60"
+                android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:visibility="visible">
 
                 <LinearLayout
-                    android:id="@+id/llContact"
+                    android:id="@+id/llMessage1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -52,11 +52,13 @@
                     android:padding="@dimen/dp_5">
 
                     <ImageView
+                        android:id="@+id/img1"
                         android:layout_width="@dimen/dp_25"
                         android:layout_height="@dimen/dp_25"
                         android:background="@drawable/icon_msg_contracts" />
 
                     <TextView
+                        android:id="@+id/txt1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/dp_3"
@@ -66,7 +68,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/llNotify"
+                    android:id="@+id/llMessage2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -77,11 +79,13 @@
                     android:padding="@dimen/dp_5">
 
                     <ImageView
+                        android:id="@+id/img2"
                         android:layout_width="@dimen/dp_25"
                         android:layout_height="@dimen/dp_25"
                         android:background="@drawable/icon_msg_notice" />
 
                     <TextView
+                        android:id="@+id/txt2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/dp_3"
@@ -95,7 +99,7 @@
             <RelativeLayout
                 android:id="@+id/rlTip"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_60"
+                android:layout_height="match_parent"
                 android:background="@color/transparent_gray" />
 
         </FrameLayout>

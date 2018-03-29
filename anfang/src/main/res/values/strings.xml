@@ -94,6 +94,11 @@
     <string name="msg_notify">通知</string>
     <string name="msg_interact">互动</string>
     <string name="msg_contacts">通讯录</string>
+    <string name="msg_callboard">公告</string>
+    <string name="msg_newproj">新品推荐</string>
+    <string name="msg_fortune">致富财经</string>
+
+
     <string name="btn_sendmsg">发消息</string>
     <string name="label_call">打电话</string>
     <string name="label_chat">发消息</string>

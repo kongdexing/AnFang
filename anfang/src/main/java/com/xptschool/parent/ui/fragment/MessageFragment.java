@@ -12,16 +12,21 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-import com.hyphenate.chat.EMClient;
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
+import com.xptschool.parent.common.NewsType;
+import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.ui.chat.ConversationListFragment;
 import com.xptschool.parent.ui.contact.ContactFragment;
 import com.xptschool.parent.ui.main.MainActivity;
-import com.xptschool.parent.util.ToastUtils;
+import com.xptschool.parent.ui.message.Msg1NoticeFragment;
+import com.xptschool.parent.ui.message.Msg2NotifyFragment;
+import com.xptschool.parent.ui.message.Msg3NewsFragment;
+import com.xptschool.parent.ui.message.Msg4NewsFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,16 +43,21 @@ public class MessageFragment extends BaseFragment {
     @BindView(R.id.viewpager)
     ViewPager viewPager;
 
-    @BindView(R.id.llNotify)
-    LinearLayout llNotify;
-    @BindView(R.id.llContact)
-    LinearLayout llContact;
+    @BindView(R.id.img1)
+    ImageView img1;
+    @BindView(R.id.img2)
+    ImageView img2;
+
+    @BindView(R.id.txt1)
+    TextView txt1;
+    @BindView(R.id.txt2)
+    TextView txt2;
+
     @BindView(R.id.rlTip)
     RelativeLayout rlTip;
 
     private Fragment[] fragments;
     private ConversationListFragment conversationListFragment;
-    private ContactFragment contactListFragment;
     private int currIndex = 0;
     private int indicatorWidth = 0;
 
@@ -64,9 +74,44 @@ public class MessageFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-        conversationListFragment = new ConversationListFragment();
-        contactListFragment = new ContactFragment();
-        fragments = new Fragment[]{contactListFragment, conversationListFragment};
+        UserType type = XPTApplication.getInstance().getCurrent_user_type();
+        if (UserType.PARENT.equals(type) || UserType.TEACHER.equals(type)) {
+            //显示通讯录，通知
+            //改变头部 view
+            txt1.setText(R.string.msg_contacts);
+            txt2.setText(R.string.msg_notify);
+            conversationListFragment = new ConversationListFragment();
+            ContactFragment contactListFragment = new ContactFragment();
+            fragments = new Fragment[]{contactListFragment, conversationListFragment};
+
+        } else if (UserType.COMPANY.equals(type) || UserType.PROXY.equals(type) ||
+                UserType.CITYPROXY.equals(type)) {
+            //公告，通知
+            txt1.setText(R.string.msg_callboard);
+            txt2.setText(R.string.msg_notify);
+
+            Msg1NoticeFragment msg1 = new Msg1NoticeFragment();
+            Msg2NotifyFragment msg2 = new Msg2NotifyFragment();
+
+            fragments = new Fragment[]{msg1, msg2};
+        } else {
+            //普通会员，显示新品推荐，致富财经
+            txt1.setText(R.string.msg_newproj);
+            txt2.setText(R.string.msg_fortune);
+
+            Msg3NewsFragment msg1 = new Msg3NewsFragment();
+            Bundle bundle1 = new Bundle();
+            bundle1.putString("type", NewsType.RECOMMEND.toString());
+            msg1.setArguments(bundle1);
+
+            Msg3NewsFragment msg2 = new Msg3NewsFragment();
+            Bundle bundle2 = new Bundle();
+            bundle2.putString("type", NewsType.RICH_NEWS.toString());
+            msg2.setArguments(bundle2);
+
+            fragments = new Fragment[]{msg1, msg2};
+        }
+
 
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) rlTip.getLayoutParams();
         indicatorWidth = XPTApplication.getInstance().getWindowWidth() / 2;
@@ -107,12 +152,6 @@ public class MessageFragment extends BaseFragment {
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);
 
-//        if (!EMClient.getInstance().isLoggedInBefore()) {
-//            //login
-//            ToastUtils.showToast(mContext, " not isLoggedInBefore");
-//        } else {
-//            ToastUtils.showToast(mContext, "Ease isLoggedInBefore");
-//        }
     }
 
     @Override
@@ -127,14 +166,14 @@ public class MessageFragment extends BaseFragment {
         return conversationListFragment;
     }
 
-    @OnClick({R.id.llNotify, R.id.llContact})
+    @OnClick({R.id.llMessage1, R.id.llMessage2})
     void tipViewClick(View view) {
         switch (view.getId()) {
-            case R.id.llNotify:
+            case R.id.llMessage1:
                 currIndex = 0;
                 viewPager.setCurrentItem(0);
                 break;
-            case R.id.llContact:
+            case R.id.llMessage2:
                 currIndex = 1;
                 viewPager.setCurrentItem(1);
                 break;
@@ -154,7 +193,7 @@ public class MessageFragment extends BaseFragment {
 
         @Override
         public int getCount() {
-            return fragments.length;
+            return fragments == null ? 0 : fragments.length;
         }
     }
 

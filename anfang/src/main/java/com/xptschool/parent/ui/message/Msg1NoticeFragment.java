@@ -9,7 +9,7 @@ import com.xptschool.parent.ui.fragment.BaseFragment;
  * Created by shuhaixinxi on 2018/3/23.
  */
 
-public class Message1Fragment extends BaseFragment {
+public class Msg1NoticeFragment extends BaseFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -163,5 +163,7 @@ public class HttpAction {
 
     public static String GET_REFER = Index + "/Wap/Register/getReferrer";
 
+    public static String GET_MESSAGE = HEAD + "UserMessage/getMessageList";
+
 
 }
