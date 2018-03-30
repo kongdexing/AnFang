@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.NewsType;
+import com.xptschool.parent.common.UserHelper;
 import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.ui.chat.ConversationListFragment;
 import com.xptschool.parent.ui.contact.ContactFragment;
@@ -60,6 +62,7 @@ public class MessageFragment extends BaseFragment {
     private ConversationListFragment conversationListFragment;
     private int currIndex = 0;
     private int indicatorWidth = 0;
+    private int[][] tipImgs = new int[2][2];
 
     public MessageFragment() {
     }
@@ -74,44 +77,6 @@ public class MessageFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-        UserType type = XPTApplication.getInstance().getCurrent_user_type();
-        if (UserType.PARENT.equals(type) || UserType.TEACHER.equals(type)) {
-            //显示通讯录，通知
-            //改变头部 view
-            txt1.setText(R.string.msg_contacts);
-            txt2.setText(R.string.msg_notify);
-            conversationListFragment = new ConversationListFragment();
-            ContactFragment contactListFragment = new ContactFragment();
-            fragments = new Fragment[]{contactListFragment, conversationListFragment};
-
-        } else if (UserType.COMPANY.equals(type) || UserType.PROXY.equals(type) ||
-                UserType.CITYPROXY.equals(type)) {
-            //公告，通知
-            txt1.setText(R.string.msg_callboard);
-            txt2.setText(R.string.msg_notify);
-
-            Msg1NoticeFragment msg1 = new Msg1NoticeFragment();
-            Msg2NotifyFragment msg2 = new Msg2NotifyFragment();
-
-            fragments = new Fragment[]{msg1, msg2};
-        } else {
-            //普通会员，显示新品推荐，致富财经
-            txt1.setText(R.string.msg_newproj);
-            txt2.setText(R.string.msg_fortune);
-
-            Msg3NewsFragment msg1 = new Msg3NewsFragment();
-            Bundle bundle1 = new Bundle();
-            bundle1.putString("type", NewsType.RECOMMEND.toString());
-            msg1.setArguments(bundle1);
-
-            Msg3NewsFragment msg2 = new Msg3NewsFragment();
-            Bundle bundle2 = new Bundle();
-            bundle2.putString("type", NewsType.RICH_NEWS.toString());
-            msg2.setArguments(bundle2);
-
-            fragments = new Fragment[]{msg1, msg2};
-        }
-
 
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) rlTip.getLayoutParams();
         indicatorWidth = XPTApplication.getInstance().getWindowWidth() / 2;
@@ -140,6 +105,14 @@ public class MessageFragment extends BaseFragment {
                 animation.setFillAfter(true);// True:图片停在动画结束位置
                 animation.setDuration(300);
                 rlTip.startAnimation(animation);
+
+                if (position == 0) {
+                    img1.setBackgroundResource(tipImgs[0][1]);
+                    img2.setBackgroundResource(tipImgs[1][0]);
+                } else if (position == 1) {
+                    img1.setBackgroundResource(tipImgs[0][0]);
+                    img2.setBackgroundResource(tipImgs[1][1]);
+                }
             }
 
             @Override
@@ -148,11 +121,84 @@ public class MessageFragment extends BaseFragment {
             }
         });
 
+        initFragmentTip();
+
+        UserHelper.getInstance().addUserChangeListener(new UserHelper.UserChangeListener() {
+            @Override
+            public void onUserLoginSuccess() {
+                Log.i(TAG, "onUserLoginSuccess: ");
+                initFragmentTip();
+            }
+
+            @Override
+            public void onUserExit() {
+                initFragmentTip();
+            }
+        });
+
+    }
+
+    private void initFragmentTip() {
+        UserType type = XPTApplication.getInstance().getCurrent_user_type();
+        if (UserType.PARENT.equals(type) || UserType.TEACHER.equals(type)) {
+            //显示通讯录，通知
+            //改变头部 view
+            txt1.setText(R.string.msg_contacts);
+            txt2.setText(R.string.msg_notify);
+
+            tipImgs[0][0] = R.drawable.icon_msg_contracts_def;
+            tipImgs[0][1] = R.drawable.icon_msg_contracts_pre;
+            tipImgs[1][0] = R.drawable.icon_msg_notice_def;
+            tipImgs[1][1] = R.drawable.icon_msg_notice_pre;
+
+            conversationListFragment = new ConversationListFragment();
+            ContactFragment contactListFragment = new ContactFragment();
+            fragments = new Fragment[]{contactListFragment, conversationListFragment};
+
+        } else if (UserType.COMPANY.equals(type) || UserType.PROXY.equals(type) ||
+                UserType.CITYPROXY.equals(type)) {
+            //公告，通知
+            txt1.setText(R.string.msg_callboard);
+            txt2.setText(R.string.msg_notify);
+
+            tipImgs[0][0] = R.drawable.icon_msg_gg_def;
+            tipImgs[0][1] = R.drawable.icon_msg_gg_pre;
+            tipImgs[1][0] = R.drawable.icon_msg_notice_def;
+            tipImgs[1][1] = R.drawable.icon_msg_notice_pre;
+
+            Msg1NoticeFragment msg1 = new Msg1NoticeFragment();
+            Msg2NotifyFragment msg2 = new Msg2NotifyFragment();
+
+            fragments = new Fragment[]{msg1, msg2};
+        } else {
+            //普通会员，显示新品推荐，致富财经
+            txt1.setText(R.string.msg_newproj);
+            txt2.setText(R.string.msg_fortune);
+
+            tipImgs[0][0] = R.drawable.icon_msg_xptj_def;
+            tipImgs[0][1] = R.drawable.icon_msg_xptj_pre;
+            tipImgs[1][0] = R.drawable.icon_msg_cf_def;
+            tipImgs[1][1] = R.drawable.icon_msg_cf_pre;
+
+            Msg3NewsFragment msg1 = new Msg3NewsFragment();
+            Bundle bundle1 = new Bundle();
+            bundle1.putString("type", NewsType.RECOMMEND.toString());
+            msg1.setArguments(bundle1);
+
+            Msg3NewsFragment msg2 = new Msg3NewsFragment();
+            Bundle bundle2 = new Bundle();
+            bundle2.putString("type", NewsType.RICH_NEWS.toString());
+            msg2.setArguments(bundle2);
+
+            fragments = new Fragment[]{msg1, msg2};
+        }
         FragmentPagerAdapter adapter = new MyPagerAdapter(((MainActivity) mContext).getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(0);
-
+        img1.setBackgroundResource(tipImgs[0][1]);
+        img2.setBackgroundResource(tipImgs[1][0]);
     }
+
 
     @Override
     public void onResume() {
@@ -188,6 +234,7 @@ public class MessageFragment extends BaseFragment {
 
         @Override
         public Fragment getItem(int position) {
+            Log.i(TAG, "getItem: " + position);
             return fragments[position];
         }
 

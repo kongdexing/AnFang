@@ -163,7 +163,10 @@ public class HttpAction {
 
     public static String GET_REFER = Index + "/Wap/Register/getReferrer";
 
+    //获取新品新闻|理财咨询等
     public static String GET_MESSAGE = HEAD + "UserMessage/getMessageList";
+    public static String GET_NEWS_DETAIL = HEAD + "UserMessage/getMessageDetail";
+
 
 
 }

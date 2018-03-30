@@ -54,8 +54,7 @@
                     <ImageView
                         android:id="@+id/img1"
                         android:layout_width="@dimen/dp_25"
-                        android:layout_height="@dimen/dp_25"
-                        android:background="@drawable/icon_msg_contracts" />
+                        android:layout_height="@dimen/dp_25" />
 
                     <TextView
                         android:id="@+id/txt1"
@@ -81,8 +80,7 @@
                     <ImageView
                         android:id="@+id/img2"
                         android:layout_width="@dimen/dp_25"
-                        android:layout_height="@dimen/dp_25"
-                        android:background="@drawable/icon_msg_notice" />
+                        android:layout_height="@dimen/dp_25" />
 
                     <TextView
                         android:id="@+id/txt2"

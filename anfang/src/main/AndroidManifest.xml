@@ -193,7 +193,6 @@
         <activity android:name=".ui.setting.AboutActivity" />
         <activity android:name=".ui.setting.QRCodeActivity" />
         <activity android:name=".ui.setting.DownloadQRCodeActivity" />
-
         <activity
             android:name=".ui.mine.MyInfoActivity"
             android:theme="@style/AppTheme" />
@@ -500,12 +499,11 @@
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
             android:theme="@android:style/Theme.Translucent" />
-
         <activity
             android:name=".ui.main.WebCommonActivity"
             android:configChanges="orientation|screenSize"
             android:hardwareAccelerated="true"
-            android:launchMode="singleTop"></activity>
+            android:launchMode="singleTop" />
 
         <!-- 购物 -->
         <activity
@@ -701,7 +699,7 @@
         <!-- android:value="3ecea51f560650b1ed8a4b99808f52e8" /> -->
 
         <activity android:name=".ui.mine.MyInviteActivity" />
-
+        <activity android:name=".ui.message.NewsDetailActivity"></activity>
     </application>
 
 </manifest>
