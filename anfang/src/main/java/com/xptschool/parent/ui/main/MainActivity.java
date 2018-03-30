@@ -200,14 +200,13 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
         String userType = SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_TYPE, "").toString();
         if (UserType.PARENT.toString().equals(userType) || UserType.TEACHER.toString().equals(userType)) {
             updateUnreadLabel();
+            // unregister this event listener when this activity enters the
+            // background
+            EaseHelper sdkHelper = EaseHelper.getInstance();
+            sdkHelper.pushActivity(this);
+
+            EMClient.getInstance().chatManager().addMessageListener(messageListener);
         }
-
-        // unregister this event listener when this activity enters the
-        // background
-        EaseHelper sdkHelper = EaseHelper.getInstance();
-        sdkHelper.pushActivity(this);
-
-        EMClient.getInstance().chatManager().addMessageListener(messageListener);
     }
 
     @Override

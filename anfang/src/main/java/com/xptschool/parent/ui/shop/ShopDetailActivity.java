@@ -1,13 +1,9 @@
 package com.xptschool.parent.ui.shop;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.webkit.WebChromeClient;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -82,32 +78,7 @@ public class ShopDetailActivity extends BaseActivity {
                 getDetail();
             }
         }
-
-
     }
-
-    private WebViewClient mWebViewClient = new WebViewClient() {
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-            return super.shouldOverrideUrlLoading(view, request);
-        }
-
-        @Override
-        public void onPageStarted(WebView view, String url, Bitmap favicon) {
-            //do you  work
-            Log.i("Info", "BaseWebActivity onPageStarted");
-
-//            view.loadData();
-
-        }
-    };
-    private WebChromeClient mWebChromeClient = new WebChromeClient() {
-        @Override
-        public void onProgressChanged(WebView view, int newProgress) {
-            //do you work
-//            Log.i("Info","progress:"+newProgress);
-        }
-    };
 
     private void getDetail() {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.GET_GOODDETAIL,

@@ -171,7 +171,7 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.i(TAG, "onResume: startAutoPlay");
+        Log.i(TAG, "HomeFragment onResume: startAutoPlay");
         topBanner.startAutoPlay();
         //根据登录状态显示不同icon
         //当状态有更改时才变化Item
@@ -181,7 +181,7 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onPause() {
         super.onPause();
-        Log.i(TAG, "onPause: stopAutoPlay");
+        Log.i(TAG, "HomeFragment onPause: stopAutoPlay");
         topBanner.stopAutoPlay();
     }
 
@@ -320,8 +320,8 @@ public class HomeFragment extends BaseFragment {
     }
 
     /*
-    * 获取广告位
-    * */
+     * 获取广告位
+     * */
     public void getBanners() {
         Log.i(TAG, "getBanners: ");
         String s_id = "";
@@ -553,7 +553,7 @@ public class HomeFragment extends BaseFragment {
 
         List<HomeItem> tipItems = new ArrayList<>();
         Intent courseIntent = new Intent(activity, isParent ? CourseActivity.class : CourseTActivity.class);
-         /*课程表*/
+        /*课程表*/
         tipItems.add(new HomeItem()
                 .setIconId(R.drawable.home_course)
                 .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_course))

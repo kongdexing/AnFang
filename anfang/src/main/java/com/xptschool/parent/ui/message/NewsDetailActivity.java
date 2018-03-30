@@ -20,6 +20,8 @@ import com.xptschool.parent.ui.shop.ShopDetailActivity;
 
 import org.json.JSONObject;
 
+import java.net.URLEncoder;
+
 import butterknife.BindView;
 
 public class NewsDetailActivity extends BaseActivity {

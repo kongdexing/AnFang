@@ -18,7 +18,7 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
-    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CAMERA" />Sh
     <uses-permission android:name="android.permission.CAPTURE_AUDIO_OUTPUT" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
@@ -517,6 +517,11 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
 
+        <activity android:name=".ui.message.NewsDetailActivity"
+            android:configChanges="orientation|keyboardHidden|fontScale"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"/>
+
         <!-- UMShare -->
         <activity
             android:name=".wxapi.WXEntryActivity"
@@ -699,7 +704,7 @@
         <!-- android:value="3ecea51f560650b1ed8a4b99808f52e8" /> -->
 
         <activity android:name=".ui.mine.MyInviteActivity" />
-        <activity android:name=".ui.message.NewsDetailActivity"></activity>
+
     </application>
 
 </manifest>
