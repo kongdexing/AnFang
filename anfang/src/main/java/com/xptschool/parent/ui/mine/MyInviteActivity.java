@@ -52,6 +52,7 @@ public class MyInviteActivity extends BaseListActivity {
     LoadMoreRecyclerView recyclerView;
 
     MyInviteAdapter adapter;
+    private String userId = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,11 @@ public class MyInviteActivity extends BaseListActivity {
         setContentView(R.layout.activity_my_invite);
         setTitle(R.string.mine_invite);
         initView();
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            userId = bundle.getString("user_id");
+        }
 
         getFirstPageData();
     }
@@ -97,7 +103,7 @@ public class MyInviteActivity extends BaseListActivity {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.GET_REFER,
                 new MyVolleyHttpParamsEntity()
                         .addParam("page", resultPage.getPage() + "")
-                        .addParam("user_id", XPTApplication.getInstance().getCurrentUserId()),
+                        .addParam("user_id", userId),
                 new MyVolleyRequestListener() {
                     @Override
                     public void onStart() {

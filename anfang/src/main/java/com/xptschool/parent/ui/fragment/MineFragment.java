@@ -146,7 +146,7 @@ public class MineFragment extends BaseFragment {
                 txtPhone.setVisibility(View.GONE);
             }
             ImageLoader.getInstance().displayImage(headImg,
-                    new ImageViewAware(imgLoginHead), CommonUtil.getDefaultImageLoaderOption());
+                    new ImageViewAware(imgLoginHead), CommonUtil.getDefaultUserImageLoaderOption());
 
             txtRole.setText(type.getRoleName());
         } else {
@@ -222,7 +222,9 @@ public class MineFragment extends BaseFragment {
                 startActivity(new Intent(getContext(), MyClassesActivity.class));
                 break;
             case R.id.rlMyInvite:
-                startActivity(new Intent(getContext(), MyInviteActivity.class));
+                Intent intent = new Intent(getContext(), MyInviteActivity.class);
+                intent.putExtra("user_id", XPTApplication.getInstance().getCurrentUserId());
+                startActivity(intent);
                 break;
             case R.id.rlMyProperty:
                 List<BeanStudent> students = GreenDaoHelper.getInstance().getStudents();

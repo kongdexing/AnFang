@@ -63,7 +63,7 @@ public class PInfoView extends BaseUserView {
         if (parent != null) {
             Log.i(TAG, "initData: "+parent.getHead_portrait());
             ImageLoader.getInstance().displayImage(parent.getHead_portrait(),
-                    new ImageViewAware(imgHead), CommonUtil.getDefaultImageLoaderOption());
+                    new ImageViewAware(imgHead), CommonUtil.getDefaultUserImageLoaderOption());
 
             txtMineName.setText(parent.getParent_name());
             txtPhone.setText(parent.getParent_phone());

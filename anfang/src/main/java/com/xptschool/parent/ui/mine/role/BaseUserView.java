@@ -238,7 +238,7 @@ public class BaseUserView extends LinearLayout {
                                     currentUser.setHead_portrait(head_img);
                                     GreenDaoHelper.getInstance().insertUser(currentUser);
                                     ImageLoader.getInstance().displayImage(currentUser.getHead_portrait(),
-                                            new ImageViewAware(imgHead), CommonUtil.getDefaultImageLoaderOption());
+                                            new ImageViewAware(imgHead), CommonUtil.getDefaultUserImageLoaderOption());
                                 }
                             }
                             initData();

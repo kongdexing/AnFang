@@ -74,7 +74,7 @@ public class TInfoView extends BaseUserView {
         }
 
         ImageLoader.getInstance().displayImage(teacher.getHead_portrait(),
-                new ImageViewAware(imgHead), CommonUtil.getDefaultImageLoaderOption());
+                new ImageViewAware(imgHead), CommonUtil.getDefaultUserImageLoaderOption());
 
         txtTeacherName.setText(teacher.getName());
         txtPhone.setText(teacher.getPhone());

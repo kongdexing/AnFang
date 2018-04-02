@@ -80,7 +80,7 @@ public class VisitorInfoView extends BaseUserView {
         txtRole.setText(XPTApplication.getInstance().getCurrent_user_type().getRoleName());
 
         ImageLoader.getInstance().displayImage(currentUser.getHead_portrait(),
-                new ImageViewAware(imgHead), CommonUtil.getDefaultImageLoaderOption());
+                new ImageViewAware(imgHead), CommonUtil.getDefaultUserImageLoaderOption());
     }
 
     @OnClick({R.id.rlSex, R.id.rlName, R.id.rlEmail, R.id.rlMinePhoto, R.id.rlMinePhone})

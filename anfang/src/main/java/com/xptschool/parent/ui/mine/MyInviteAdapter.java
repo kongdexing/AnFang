@@ -1,17 +1,25 @@
 package com.xptschool.parent.ui.mine;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.widget.view.CircularImageView;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.xptschool.parent.R;
+import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.adapter.BaseRecycleAdapter;
 import com.xptschool.parent.adapter.RecyclerViewHolderBase;
 import com.xptschool.parent.bean.BeanInvite;
+import com.xptschool.parent.common.CommonUtil;
+import com.xptschool.parent.common.UserType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,9 +64,25 @@ public class MyInviteAdapter extends BaseRecycleAdapter {
         final ViewHolder mHolder = (ViewHolder) holder;
         Log.i(TAG, "onBindViewHolder: " + position);
         final BeanInvite beanInvite = beanInvites.get(position);
-        mHolder.txtUserName.setText(beanInvite.getUsername());
+        mHolder.txtUserName.setText(beanInvite.getName());
+        mHolder.txtPhone.setText(beanInvite.getUsername());
         mHolder.txtTime.setText(beanInvite.getCreate_time());
-        mHolder.txtStatus.setText(beanInvite.getStatus());
+        mHolder.txtStatus.setText(UserType.getUserTypeByStr(beanInvite.getType()).getRoleName());
+
+        ImageLoader.getInstance().displayImage(beanInvite.getHead_portrait(),
+                new ImageViewAware(mHolder.imgHead), CommonUtil.getDefaultUserImageLoaderOption());
+
+        if (UserType.getUserTypeByStr(beanInvite.getType()).equals(UserType.CITYPROXY)) {
+            Log.i(TAG, "onBindViewHolder 代理商: ");
+            mHolder.llItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(mContext, MyInviteActivity.class);
+                    intent.putExtra("user_id", beanInvite.getUser_id());
+                    mContext.startActivity(intent);
+                }
+            });
+        }
     }
 
     @Override
@@ -70,11 +94,20 @@ public class MyInviteAdapter extends BaseRecycleAdapter {
     public class ViewHolder extends RecyclerViewHolderBase {
         private Unbinder unbinder;
 
+        @BindView(R.id.llItem)
+        LinearLayout llItem;
+
+        @BindView(R.id.imgHead)
+        CircularImageView imgHead;
+
         @BindView(R.id.txtUserName)
         TextView txtUserName;
 
         @BindView(R.id.txtTime)
         TextView txtTime;
+
+        @BindView(R.id.txtPhone)
+        TextView txtPhone;
 
         @BindView(R.id.txtStatus)
         TextView txtStatus;

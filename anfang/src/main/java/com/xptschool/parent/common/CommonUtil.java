@@ -66,7 +66,6 @@ public class CommonUtil {
 
     private static String TAG = CommonUtil.class.getSimpleName();
     public static String CARD_KEY = "shuhaixinxi_stu_card_recharge_order";
-    private static DisplayImageOptions options;
 
     public static String getCurrentDate() {
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -213,18 +212,29 @@ public class CommonUtil {
     }
 
     public static DisplayImageOptions getDefaultImageLoaderOption() {
-        if (options == null) {
-            options = new DisplayImageOptions.Builder()
-                    .cacheInMemory(true)
-                    .cacheOnDisk(true)
-                    .showImageForEmptyUri(R.drawable.pictures_no)
-                    .showImageOnFail(R.drawable.pictures_no)
-                    .showImageOnLoading(R.drawable.pictures_no)
-                    .bitmapConfig(Bitmap.Config.RGB_565)
-                    .displayer(new SimpleBitmapDisplayer()).build();
-        }
+        DisplayImageOptions  options = new DisplayImageOptions.Builder()
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .showImageForEmptyUri(R.drawable.pictures_no)
+                .showImageOnFail(R.drawable.pictures_no)
+                .showImageOnLoading(R.drawable.pictures_no)
+                .bitmapConfig(Bitmap.Config.RGB_565)
+                .displayer(new SimpleBitmapDisplayer()).build();
         return options;
     }
+
+    public static DisplayImageOptions getDefaultUserImageLoaderOption() {
+        DisplayImageOptions  options = new DisplayImageOptions.Builder()
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .showImageForEmptyUri(R.drawable.user_defaulthead)
+                .showImageOnFail(R.drawable.user_defaulthead)
+                .showImageOnLoading(R.drawable.user_defaulthead)
+                .bitmapConfig(Bitmap.Config.RGB_565)
+                .displayer(new SimpleBitmapDisplayer()).build();
+        return options;
+    }
+
 
     public static String encryptToken(String action) {
         String security_key = "";
