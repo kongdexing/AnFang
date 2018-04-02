@@ -45,7 +45,7 @@ public class NotifiesAdapter extends BaseRecycleAdapter {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Log.i(TAG, "onCreateViewHolder: ");
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_news_item, parent, false);
+                .inflate(R.layout.item_notifies_item, parent, false);
         return new ViewHolder(view);
     }
 

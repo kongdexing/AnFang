@@ -72,13 +72,14 @@ public class MyInviteAdapter extends BaseRecycleAdapter {
         ImageLoader.getInstance().displayImage(beanInvite.getHead_portrait(),
                 new ImageViewAware(mHolder.imgHead), CommonUtil.getDefaultUserImageLoaderOption());
 
-        if (UserType.getUserTypeByStr(beanInvite.getType()).equals(UserType.CITYPROXY)) {
+        if (UserType.getUserTypeByStr(beanInvite.getType()).equals(UserType.PROXY)) {
             Log.i(TAG, "onBindViewHolder 代理商: ");
             mHolder.llItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(mContext, MyInviteActivity.class);
                     intent.putExtra("user_id", beanInvite.getUser_id());
+                    intent.putExtra("user_name", beanInvite.getName());
                     mContext.startActivity(intent);
                 }
             });

@@ -58,12 +58,18 @@ public class MyInviteActivity extends BaseListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_invite);
-        setTitle(R.string.mine_invite);
+
         initView();
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             userId = bundle.getString("user_id");
+            if (userId.equals(XPTApplication.getInstance().getCurrentUserId())) {
+                setTitle(R.string.mine_invite);
+            } else {
+                String userName = bundle.getString("user_name");
+                setTitle("【" + userName + "】的会员");
+            }
         }
 
         getFirstPageData();
