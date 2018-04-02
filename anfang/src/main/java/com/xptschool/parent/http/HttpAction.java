@@ -167,6 +167,7 @@ public class HttpAction {
     public static String GET_MESSAGE = HEAD + "UserMessage/getMessageList";
     public static String GET_NEWS_DETAIL = HEAD + "UserMessage/getMessageDetail";
 
+    public static String GET_NOTIFY_LIST = HEAD + "UserMessage/getNotifyList";
 
 
 }

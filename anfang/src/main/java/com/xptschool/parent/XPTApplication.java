@@ -49,6 +49,7 @@ import com.umeng.message.PushAgent;
 import com.umeng.message.UmengNotificationClickHandler;
 import com.umeng.message.entity.UMessage;
 import com.xptschool.parent.ui.notice.NoticeDetailActivity;
+import com.xptschool.parent.util.ToastUtils;
 
 import org.json.JSONObject;
 
@@ -221,6 +222,10 @@ public class XPTApplication extends Application {
                 Intent intent = new Intent(XPTApplication.this, HonorDetailActivity.class);
                 intent.putExtra(ExtraKey.DETAIL_ID, id);
                 startActivity(intent);
+            } else if ("register".equals(activity)) {
+
+                ToastUtils.showToast(XPTApplication.this,"您的用户注册成功了。。。");
+
             }
         } catch (Exception ex) {
             Log.i(TAG, "resolvePushMsg: " + ex.getMessage());
