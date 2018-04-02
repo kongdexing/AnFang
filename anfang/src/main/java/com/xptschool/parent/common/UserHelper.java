@@ -1,5 +1,7 @@
 package com.xptschool.parent.common;
 
+import android.util.Log;
+
 import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.model.BeanParent;
 import com.xptschool.parent.model.BeanTeacher;
@@ -36,9 +38,7 @@ public class UserHelper {
         if (listener == null) {
             return;
         }
-        if (!listeners.contains(listener)) {
-            listeners.add(listener);
-        }
+        listeners.add(listener);
     }
 
     /**
@@ -46,6 +46,7 @@ public class UserHelper {
      */
     public void changeAccount() {
         UserType type = XPTApplication.getInstance().getCurrent_user_type();
+        Log.i(TAG, "changeAccount: " + type.getRoleName());
         if (UserType.PARENT.equals(type)) {
             BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
             if (parent != null) {
@@ -61,12 +62,14 @@ public class UserHelper {
     }
 
     public void userLoginSuccess() {
+        Log.i(TAG, "userLoginSuccess: listener size " + listeners.size());
         for (int i = 0; i < listeners.size(); i++) {
             listeners.get(i).onUserLoginSuccess();
         }
     }
 
     public void userExit() {
+        Log.i(TAG, "userExit: listener size " + listeners.size());
         XPTApplication.getInstance().setCurrent_user_type("");
         for (int i = 0; i < listeners.size(); i++) {
             listeners.get(i).onUserExit();

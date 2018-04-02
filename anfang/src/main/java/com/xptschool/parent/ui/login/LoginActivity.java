@@ -322,7 +322,10 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
             public void run() {
                 if (progress != null)
                     progress.setVisibility(View.INVISIBLE);
-                btnLogin.setEnabled(true);
+
+                if (btnLogin != null) {
+                    btnLogin.setEnabled(true);
+                }
                 finish();
             }
         });
@@ -334,7 +337,9 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
         ToastUtils.showToast(this, msg);
         if (progress != null)
             progress.setVisibility(View.INVISIBLE);
-        btnLogin.setEnabled(true);
+        if (btnLogin == null) {
+            btnLogin.setEnabled(true);
+        }
     }
 
 }

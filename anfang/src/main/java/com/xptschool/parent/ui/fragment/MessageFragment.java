@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -58,11 +59,11 @@ public class MessageFragment extends BaseFragment {
     @BindView(R.id.rlTip)
     RelativeLayout rlTip;
 
-    private Fragment[] fragments;
     private ConversationListFragment conversationListFragment;
     private int currIndex = 0;
     private int indicatorWidth = 0;
     private int[][] tipImgs = new int[2][2];
+    private MyPagerAdapter adapter;
 
     public MessageFragment() {
     }
@@ -132,6 +133,7 @@ public class MessageFragment extends BaseFragment {
 
             @Override
             public void onUserExit() {
+                Log.i(TAG, "onUserExit: ");
                 initFragmentTip();
             }
         });
@@ -139,8 +141,10 @@ public class MessageFragment extends BaseFragment {
     }
 
     private void initFragmentTip() {
+        Fragment[] fragments = null;
         UserType type = XPTApplication.getInstance().getCurrent_user_type();
         if (UserType.PARENT.equals(type) || UserType.TEACHER.equals(type)) {
+            Log.i(TAG, "initFragmentTip: parent teacher");
             //显示通讯录，通知
             //改变头部 view
             txt1.setText(R.string.msg_contacts);
@@ -157,6 +161,7 @@ public class MessageFragment extends BaseFragment {
 
         } else if (UserType.COMPANY.equals(type) || UserType.PROXY.equals(type) ||
                 UserType.CITYPROXY.equals(type)) {
+            Log.i(TAG, "initFragmentTip: company proxy cityproxy");
             //公告，通知
             txt1.setText(R.string.msg_callboard);
             txt2.setText(R.string.msg_notify);
@@ -166,11 +171,20 @@ public class MessageFragment extends BaseFragment {
             tipImgs[1][0] = R.drawable.icon_msg_notice_def;
             tipImgs[1][1] = R.drawable.icon_msg_notice_pre;
 
-            Msg1NoticeFragment msg1 = new Msg1NoticeFragment();
+            Msg3NewsFragment msg1 = new Msg3NewsFragment();
+//            Bundle bundle1 = new Bundle();
+//            bundle1.putString("type", NewsType.NOTICE.toString());
+//            msg1.setArguments(bundle1);
+            msg1.setNewsType(NewsType.NOTICE.toString());
+
             Msg2NotifyFragment msg2 = new Msg2NotifyFragment();
 
             fragments = new Fragment[]{msg1, msg2};
+//            ((BaseFragment) fragments[0]).initData();
+
         } else {
+
+            Log.i(TAG, "initFragmentTip: 推荐，财经");
             //普通会员，显示新品推荐，致富财经
             txt1.setText(R.string.msg_newproj);
             txt2.setText(R.string.msg_fortune);
@@ -181,22 +195,35 @@ public class MessageFragment extends BaseFragment {
             tipImgs[1][1] = R.drawable.icon_msg_cf_pre;
 
             Msg3NewsFragment msg1 = new Msg3NewsFragment();
-            Bundle bundle1 = new Bundle();
-            bundle1.putString("type", NewsType.RECOMMEND.toString());
-            msg1.setArguments(bundle1);
+//            Bundle bundle1 = new Bundle();
+//            bundle1.putString("type", NewsType.RECOMMEND.toString());
+//            msg1.setArguments(bundle1);
+            msg1.setNewsType(NewsType.RECOMMEND.toString());
 
             Msg3NewsFragment msg2 = new Msg3NewsFragment();
-            Bundle bundle2 = new Bundle();
-            bundle2.putString("type", NewsType.RICH_NEWS.toString());
-            msg2.setArguments(bundle2);
+//            Bundle bundle2 = new Bundle();
+//            bundle2.putString("type", NewsType.RICH_NEWS.toString());
+//            msg2.setArguments(bundle2);
+            msg2.setNewsType(NewsType.RICH_NEWS.toString());
 
             fragments = new Fragment[]{msg1, msg2};
+
+//            ((BaseFragment) fragments[0]).initData();
+
         }
-        FragmentPagerAdapter adapter = new MyPagerAdapter(((MainActivity) mContext).getSupportFragmentManager());
-        viewPager.setAdapter(adapter);
-        viewPager.setCurrentItem(0);
+
+        if (adapter == null) {
+            adapter = new MyPagerAdapter(((MainActivity) mContext).getSupportFragmentManager());
+            viewPager.setAdapter(adapter);
+        }
+        adapter.setMyFragments(fragments);
+
+//        viewPager.setCurrentItem(0);
         img1.setBackgroundResource(tipImgs[0][1]);
         img2.setBackgroundResource(tipImgs[1][0]);
+
+        tipViewClick(((MainActivity) mContext).findViewById(R.id.llMessage1));
+
     }
 
 
@@ -226,16 +253,69 @@ public class MessageFragment extends BaseFragment {
         }
     }
 
-    class MyPagerAdapter extends FragmentPagerAdapter {
+    public class MyPagerAdapter extends FragmentPagerAdapter {
+
+        private Fragment[] fragments;
+        private FragmentManager fm;
+        private boolean[] flags;//标识,重新设置fragment时全设为true
+        private long time;
 
         public MyPagerAdapter(FragmentManager fm) {
             super(fm);
+            this.fm = fm;
         }
+
+        public void setMyFragments(Fragment[] fragments) {
+            this.fragments = fragments;
+            if (this.fragments != null) {
+                flags = new boolean[fragments.length];
+                for (int i = 0; i < fragments.length; i++) {
+                    flags[i] = true;
+                }
+            }
+            time = System.currentTimeMillis();
+            this.fragments = fragments;
+            notifyDataSetChanged();
+        }
+
+//        @Override
+//        public Object instantiateItem(ViewGroup container, int position) {
+//            if (flags != null && flags[position]) {
+//                /**得到缓存的fragment, 拿到tag并替换成新的fragment*/
+//                Fragment fragment = (Fragment) super.instantiateItem(container, position);
+//                String fragmentTag = fragment.getTag();
+//                FragmentTransaction ft = fm.beginTransaction();
+//                ft.remove(fragment);
+//                fragment = fragments[position];
+//                ft.add(container.getId(), fragment, fragmentTag);
+//                ft.attach(fragment);
+//                ft.commit();
+//                /**替换完成后设为false*/
+//                flags[position] = false;
+//                if (fragment != null) {
+//                    return fragment;
+//                } else {
+//                    return super.instantiateItem(container, position);
+//                }
+//            } else {
+//                return super.instantiateItem(container, position);
+//            }
+//        }
 
         @Override
         public Fragment getItem(int position) {
             Log.i(TAG, "getItem: " + position);
             return fragments[position];
+        }
+
+        @Override
+        public int getItemPosition(Object object) {
+            return POSITION_NONE;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return super.getItemId(position) + time;
         }
 
         @Override

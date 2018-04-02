@@ -62,10 +62,11 @@ public class Msg3NewsFragment extends BaseListFragment {
         mRootView = inflater.inflate(R.layout.fragment_1_news, container, false);
         ButterKnife.bind(this, mRootView);
 
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            newsType = bundle.getString("type");
-        }
+//        Bundle bundle = getArguments();
+//        if (bundle != null) {
+//            newsType = bundle.getString("type");
+//            Log.i(TAG, "onCreateView: type " + newsType);
+//        }
         initView();
         return mRootView;
     }
@@ -92,6 +93,11 @@ public class Msg3NewsFragment extends BaseListFragment {
             }
         });
         recyclerView.setAdapter(adapter);
+    }
+
+    public void setNewsType(String type) {
+        Log.i(TAG, "setNewsType: " + type);
+        newsType = type;
     }
 
     @Override

@@ -27,7 +27,9 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Log.i(TAG, "onActivityCreated: ");
         TAG = getClass().getSimpleName();
+        mContext = getActivity();
         initData();
     }
 
