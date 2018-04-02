@@ -224,6 +224,9 @@ public class MessageFragment extends BaseFragment {
 
     @OnClick({R.id.llMessage1, R.id.llMessage2})
     void tipViewClick(View view) {
+        if (view == null) {
+            return;
+        }
         switch (view.getId()) {
             case R.id.llMessage1:
                 currIndex = 0;
@@ -248,7 +251,11 @@ public class MessageFragment extends BaseFragment {
         public void setMyFragments(Fragment[] fragments) {
             time = System.currentTimeMillis();
             this.fragments = fragments;
-            notifyDataSetChanged();
+            try {
+                notifyDataSetChanged();
+            } catch (Exception ex) {
+                Log.i(TAG, "setMyFragments: " + ex.getMessage());
+            }
         }
 
         @Override
