@@ -10,6 +10,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.xptschool.parent.R;
+import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
@@ -86,7 +87,10 @@ public class SetPasswordActivity extends BaseActivity {
                             SharedPreferencesUtil.saveData(SetPasswordActivity.this, SharedPreferencesUtil.KEY_USER_NAME, userName);
                             SharedPreferencesUtil.saveData(SetPasswordActivity.this, SharedPreferencesUtil.KEY_PWD, password);
 
-                            startActivity(new Intent(SetPasswordActivity.this, LoginActivity.class));
+                            Intent intent = new Intent(SetPasswordActivity.this, LoginActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            intent.putExtra(ExtraKey.LOGIN_ORIGIN, "1");
+                            startActivity(intent);
                         }
                         ToastUtils.showToast(SetPasswordActivity.this, volleyHttpResult.getInfo());
                     }

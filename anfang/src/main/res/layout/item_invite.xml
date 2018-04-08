@@ -53,15 +53,25 @@
         android:gravity="center"
         android:text="创建时间" />
 
-    <TextView
-        android:id="@+id/txtStatus"
-        style="@style/TextClass"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="角色" />
+        android:layout_gravity="center"
+        android:layout_weight="1">
 
+        <TextView
+            android:id="@+id/txtStatus"
+            style="@style/TextClass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="角色" />
+
+        <ImageView
+            android:id="@+id/imgNext"
+            style="@style/arrow_right"
+            android:visibility="gone" />
+    </RelativeLayout>
 
 </LinearLayout>
 

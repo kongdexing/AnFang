@@ -31,6 +31,7 @@ import com.xptschool.parent.model.BeanParent;
 import com.xptschool.parent.model.BeanTeacher;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.push.DeviceHelper;
+import com.xptschool.parent.ui.main.MainActivity;
 import com.xptschool.parent.ui.register.RegisterActivity;
 import com.xptschool.parent.util.ToastUtils;
 import com.umeng.message.IUmengCallback;
@@ -58,6 +59,7 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
     ImageView imgCompany;
 
     HuaweiApiClient client;
+    String origin = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +68,9 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
         initView();
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            String origin = bundle.getString(ExtraKey.LOGIN_ORIGIN);
+            origin = bundle.getString(ExtraKey.LOGIN_ORIGIN);
             if (origin != null && origin.equals("0")) {
-//                showImgBack(false);
+                showImgBack(false);
                 //推送不可用
                 //拒收通知
                 String model = android.os.Build.MODEL;
@@ -99,7 +101,12 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
                         }
                     });
                 }
-
+            } else if (origin != null && origin.equals("1")) {
+                String userName = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_NAME, "");
+                edtAccount.setText(userName);
+                String userPwd = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_PWD, "");
+                edtPwd.setText(userPwd);
+                login(userName, CommonUtil.md5(userPwd), null);
             }
         }
 
@@ -243,7 +250,7 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
                 if (progress != null)
                     progress.setVisibility(View.INVISIBLE);
                 btnLogin.setEnabled(true);
-                finish();
+                finishActivity();
                 return;
             }
         } catch (Exception ex) {
@@ -326,7 +333,7 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
                 if (btnLogin != null) {
                     btnLogin.setEnabled(true);
                 }
-                finish();
+                finishActivity();
             }
         });
     }
@@ -337,9 +344,24 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
         ToastUtils.showToast(this, msg);
         if (progress != null)
             progress.setVisibility(View.INVISIBLE);
-        if (btnLogin == null) {
+        if (btnLogin != null) {
             btnLogin.setEnabled(true);
         }
     }
 
+    private void finishActivity() {
+        if (origin != null && origin.equals("1")) {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        } else {
+            finish();
+        }
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }

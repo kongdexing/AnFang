@@ -21,7 +21,7 @@ public class HttpAction {
     public static String UserInfo = HEAD + "UserInfo/updateUserInfo";
 
     /*更改密码*/
-    public static String UPDATE_PASSWORD = "Login/edit_password";
+    public static String UPDATE_PASSWORD = HEAD + "Login/edit_password";
 
     public static String GetClass = HEAD + "Comment/get_class";
     public static String GetCourse = HEAD + "Comment/get_course";

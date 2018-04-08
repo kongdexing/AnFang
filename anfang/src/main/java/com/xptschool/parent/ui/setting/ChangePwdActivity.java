@@ -10,6 +10,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.xptschool.parent.R;
+import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.http.HttpAction;
@@ -65,11 +66,11 @@ public class ChangePwdActivity extends BaseActivity {
         }
     }
 
-    private void updatePassword(String oldpwd, String newpwd) {
+    private void updatePassword(String oldpwd,final String newpwd) {
 
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.UPDATE_PASSWORD,
                 new MyVolleyHttpParamsEntity()
-                        .addParam("user_id", GreenDaoHelper.getInstance().getCurrentParent().getU_id())
+                        .addParam("user_id", XPTApplication.getInstance().getCurrentUserId())
                         .addParam("ypassword", oldpwd)
                         .addParam("password", newpwd),
                 new MyVolleyRequestListener() {
@@ -85,10 +86,11 @@ public class ChangePwdActivity extends BaseActivity {
                         hideProgress();
                         Toast.makeText(ChangePwdActivity.this, volleyHttpResult.getInfo(), Toast.LENGTH_SHORT).show();
                         if (volleyHttpResult.getStatus() == HttpAction.SUCCESS) {
-                            SharedPreferencesUtil.saveData(ChangePwdActivity.this, SharedPreferencesUtil.KEY_PWD, "");
+                            SharedPreferencesUtil.saveData(ChangePwdActivity.this, SharedPreferencesUtil.KEY_PWD, newpwd);
+
                             Intent intent = new Intent(ChangePwdActivity.this, LoginActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            intent.putExtra(ExtraKey.LOGIN_ORIGIN, "0");
+                            intent.putExtra(ExtraKey.LOGIN_ORIGIN, "1");
                             startActivity(intent);
                         }
                     }

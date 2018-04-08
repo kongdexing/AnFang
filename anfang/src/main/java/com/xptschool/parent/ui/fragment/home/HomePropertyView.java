@@ -117,6 +117,7 @@ public class HomePropertyView extends BaseInfoView {
             if (homeCfg != null) {
                 ImageLoader.getInstance().displayImage(homeCfg.getImage(),
                         new ImageViewAware(propertyImg), CommonUtil.getDefaultImageLoaderOption());
+
                 propertyImg.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View view) {

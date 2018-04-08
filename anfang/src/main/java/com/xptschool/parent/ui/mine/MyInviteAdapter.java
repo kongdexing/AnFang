@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -46,10 +47,8 @@ public class MyInviteAdapter extends BaseRecycleAdapter {
     }
 
     public void refreshData(List<BeanInvite> invites) {
-        beanInvites.clear();
-        beanInvites.addAll(invites);
+        beanInvites = invites;
         Log.i(TAG, "refreshData: " + beanInvites.size());
-        notifyDataSetChanged();
     }
 
     @Override
@@ -60,9 +59,8 @@ public class MyInviteAdapter extends BaseRecycleAdapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         final ViewHolder mHolder = (ViewHolder) holder;
-        Log.i(TAG, "onBindViewHolder: " + position);
         final BeanInvite beanInvite = beanInvites.get(position);
         mHolder.txtUserName.setText(beanInvite.getName());
         mHolder.txtPhone.setText(beanInvite.getUsername());
@@ -71,24 +69,31 @@ public class MyInviteAdapter extends BaseRecycleAdapter {
 
         ImageLoader.getInstance().displayImage(beanInvite.getHead_portrait(),
                 new ImageViewAware(mHolder.imgHead), CommonUtil.getDefaultUserImageLoaderOption());
+        mHolder.llItem.setTag(position);
 
         if (UserType.getUserTypeByStr(beanInvite.getType()).equals(UserType.PROXY)) {
-            Log.i(TAG, "onBindViewHolder 代理商: ");
+            mHolder.imgNext.setVisibility(View.VISIBLE);
             mHolder.llItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(mContext, MyInviteActivity.class);
-                    intent.putExtra("user_id", beanInvite.getUser_id());
-                    intent.putExtra("user_name", beanInvite.getName());
-                    mContext.startActivity(intent);
+                    int clickPosition = (int) mHolder.llItem.getTag();
+                    BeanInvite invite = beanInvites.get(clickPosition);
+                    if (UserType.getUserTypeByStr(invite.getType()).equals(UserType.PROXY)) {
+//                    Log.i(TAG, "onBindViewHolder 代理商 position: " + position + " clickPosition: " + clickPosition + " userId:" + beanInvite.getUser_id() + " phone:" + beanInvite.getUsername());
+                        Intent intent = new Intent(mContext, MyInviteActivity.class);
+                        intent.putExtra("user_id", invite.getUser_id());
+                        intent.putExtra("user_name", invite.getName());
+                        mContext.startActivity(intent);
+                    }
                 }
             });
+        } else {
+            mHolder.imgNext.setVisibility(View.GONE);
         }
     }
 
     @Override
     public int getItemCount() {
-        Log.i(TAG, "getItemCount: " + beanInvites.size());
         return beanInvites.size();
     }
 
@@ -112,6 +117,9 @@ public class MyInviteAdapter extends BaseRecycleAdapter {
 
         @BindView(R.id.txtStatus)
         TextView txtStatus;
+
+        @BindView(R.id.imgNext)
+        ImageView imgNext;
 
         public ViewHolder(View itemView) {
             super(itemView);
