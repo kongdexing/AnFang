@@ -318,7 +318,8 @@
                 android:background="@drawable/mine_item_selector"
                 android:clickable="true"
                 android:paddingLeft="@dimen/dp_5"
-                android:paddingTop="@dimen/dp_3">
+                android:paddingTop="@dimen/dp_3"
+                android:visibility="gone">
 
                 <TextView
                     style="@style/mineText"

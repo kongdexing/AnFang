@@ -126,7 +126,7 @@
         <item name="android:layout_height">@dimen/dp_15</item>
         <item name="android:layout_alignParentRight">true</item>
         <item name="android:layout_centerVertical">true</item>
-        <item name="android:layout_marginRight">@dimen/dp_5</item>
+        <item name="android:layout_marginRight">@dimen/dp_10</item>
         <item name="android:src">@drawable/iau</item>
     </style>
 

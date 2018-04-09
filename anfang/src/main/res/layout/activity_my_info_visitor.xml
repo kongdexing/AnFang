@@ -179,6 +179,7 @@
                 <TextView
                     android:id="@+id/txtRole"
                     style="@style/mineVal"
+                    android:layout_marginRight="@dimen/dp_15"
                     android:text="无" />
 
             </RelativeLayout>

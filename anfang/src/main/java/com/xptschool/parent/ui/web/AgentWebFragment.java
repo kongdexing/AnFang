@@ -128,7 +128,6 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
 
     }
 
-
     protected PermissionInterceptor mPermissionInterceptor = new PermissionInterceptor() {
 
         /**
