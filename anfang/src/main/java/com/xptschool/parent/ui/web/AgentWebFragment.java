@@ -89,7 +89,7 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
         mAgentWeb = AgentWeb.with(this)//
                 .setAgentWebParent((LinearLayout) view, -1, new LinearLayout.LayoutParams(-1, -1))//传入AgentWeb的父控件。
                 .useDefaultIndicator(-1, 2)//设置进度条颜色与高度，-1为默认值，高度为2，单位为dp。
-				.setAgentWebWebSettings(getSettings())//设置 IAgentWebSettings。
+                .setAgentWebWebSettings(getSettings())//设置 IAgentWebSettings。
                 .setWebViewClient(mWebViewClient)//WebViewClient ， 与 WebView 使用一致 ，但是请勿获取WebView调用setWebViewClient(xx)方法了,会覆盖AgentWeb DefaultWebClient,同时相应的中间件也会失效。
                 .setWebChromeClient(mWebChromeClient) //WebChromeClient
                 .setPermissionInterceptor(mPermissionInterceptor) //权限拦截 2.0.0 加入。
@@ -106,6 +106,8 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
                 .createAgentWeb()//创建AgentWeb。
                 .ready()//设置 WebSettings。
                 .go(getUrl()); //WebView载入该url地址的页面并显示。
+
+        mAgentWeb.getAgentWebSettings().getWebSettings().setDefaultTextEncodingName("utf-8");
 
 //        AgentWebConfig.debug();
 
@@ -244,6 +246,7 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
             @Override
             protected void bindAgentWebSupport(AgentWeb agentWeb) {
                 this.mAgentWeb = agentWeb;
+                this.mAgentWeb.getAgentWebSettings().getWebSettings().setDefaultTextEncodingName("UTF-8");
             }
 
             /**
@@ -412,8 +415,6 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
         } else {
             mTitleTextView.setText(R.string.app_name);
         }
-
-
     }
 
     private View.OnClickListener mOnClickListener = new View.OnClickListener() {
@@ -431,7 +432,6 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
                     break;
                 default:
                     break;
-
             }
         }
 

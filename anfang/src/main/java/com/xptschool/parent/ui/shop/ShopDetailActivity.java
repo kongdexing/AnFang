@@ -99,7 +99,7 @@ public class ShopDetailActivity extends BaseActivity {
 
                                     String desc = object.getString("desc");
 
-                                    webView.loadData(desc, "text/html", null);
+                                    webView.loadData(desc, "text/html; charset=UTF-8", null);
 
                                 } catch (Exception ex) {
                                     Log.i(TAG, "onResponse: " + ex.getMessage());
