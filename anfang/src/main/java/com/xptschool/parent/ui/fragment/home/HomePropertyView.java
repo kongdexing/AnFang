@@ -18,16 +18,11 @@ import com.android.widget.mygridview.MyGridView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.xptschool.parent.R;
-import com.xptschool.parent.XPTApplication;
-import com.xptschool.parent.bean.HomeItem;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.model.BeanHomeCfg;
-import com.xptschool.parent.ui.login.LoginActivity;
 import com.xptschool.parent.ui.main.WebCommonActivity;
-import com.xptschool.parent.ui.main.WebViewActivity;
 import com.xptschool.parent.ui.mine.BaseInfoView;
-import com.xptschool.parent.view.CustomDialog;
 
 import java.util.ArrayList;
 import java.util.List;

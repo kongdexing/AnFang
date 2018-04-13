@@ -16,7 +16,6 @@ import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
-import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.login.LoginActivity;
 import com.xptschool.parent.ui.main.BaseActivity;
 

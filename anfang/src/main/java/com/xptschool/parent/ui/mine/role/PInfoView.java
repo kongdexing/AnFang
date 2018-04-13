@@ -11,14 +11,12 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.widget.view.CircularImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.xptschool.parent.R;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.model.BeanParent;
 import com.xptschool.parent.model.GreenDaoHelper;
-import com.xptschool.parent.ui.mine.BaseInfoView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

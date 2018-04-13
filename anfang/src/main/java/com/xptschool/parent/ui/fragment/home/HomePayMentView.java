@@ -22,7 +22,6 @@ import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.model.BeanHomeCfg;
 import com.xptschool.parent.ui.login.LoginActivity;
 import com.xptschool.parent.ui.main.WebCommonActivity;
-import com.xptschool.parent.ui.main.WebViewActivity;
 import com.xptschool.parent.ui.mine.BaseInfoView;
 import com.xptschool.parent.util.ToastUtils;
 

@@ -9,10 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.viewpagerindicator.CirclePageIndicator;
 import com.xptschool.parent.R;
 import com.xptschool.parent.model.BeanClass;
 import com.xptschool.parent.model.GreenDaoHelper;
-import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
 import java.util.List;

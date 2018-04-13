@@ -1,7 +1,6 @@
 package com.xptschool.parent.bean;
 
 import com.xptschool.parent.BuildConfig;
-import com.xptschool.parent.common.UserType;
 
 /**
  * Created by shuhaixinxi on 2018/3/9.

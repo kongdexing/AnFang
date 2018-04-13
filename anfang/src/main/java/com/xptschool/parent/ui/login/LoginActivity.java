@@ -14,13 +14,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.widget.view.SmoothCheckBox;
 import com.huawei.hms.api.ConnectionResult;
 import com.huawei.hms.api.HuaweiApiClient;
 import com.huawei.hms.support.api.push.HuaweiPush;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.meizu.cloud.pushsdk.PushManager;
+import com.umeng.message.IUmengCallback;
+import com.umeng.message.PushAgent;
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.CommonUtil;
@@ -34,8 +35,6 @@ import com.xptschool.parent.push.DeviceHelper;
 import com.xptschool.parent.ui.main.MainActivity;
 import com.xptschool.parent.ui.register.RegisterActivity;
 import com.xptschool.parent.util.ToastUtils;
-import com.umeng.message.IUmengCallback;
-import com.umeng.message.PushAgent;
 
 import butterknife.BindView;
 import butterknife.OnClick;

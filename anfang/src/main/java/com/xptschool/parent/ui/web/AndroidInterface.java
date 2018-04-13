@@ -16,12 +16,9 @@ import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.xptschool.parent.XPTApplication;
-import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.ui.main.WebCommonActivity;
-import com.xptschool.parent.ui.main.WebViewActivity;
 import com.xptschool.parent.ui.wallet.alipay.PayResult;
-import com.xptschool.parent.ui.wallet.pocket.RechargeActivity;
 import com.xptschool.parent.util.ToastUtils;
 
 import org.json.JSONObject;

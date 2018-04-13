@@ -18,11 +18,8 @@ import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.jph.takephoto.app.TakePhoto;
-import com.jph.takephoto.compress.CompressConfig;
-import com.jph.takephoto.model.CropOptions;
 import com.jph.takephoto.model.TImage;
 import com.jph.takephoto.model.TResult;
-import com.jph.takephoto.model.TakePhotoOptions;
 import com.jph.takephoto.uitl.TFileUtils;
 import com.xptschool.parent.R;
 import com.xptschool.parent.util.TakePhotoUtil;

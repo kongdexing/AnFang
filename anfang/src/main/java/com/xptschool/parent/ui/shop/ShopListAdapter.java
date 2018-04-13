@@ -16,8 +16,8 @@ import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.xptschool.parent.R;
 import com.xptschool.parent.adapter.BaseRecycleAdapter;
 import com.xptschool.parent.adapter.RecyclerViewHolderBase;
-import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.bean.BeanShop;
+import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
 
 import java.util.ArrayList;

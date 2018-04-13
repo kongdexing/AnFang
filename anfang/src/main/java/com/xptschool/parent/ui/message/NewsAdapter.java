@@ -16,14 +16,9 @@ import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.xptschool.parent.R;
 import com.xptschool.parent.adapter.BaseRecycleAdapter;
 import com.xptschool.parent.adapter.RecyclerViewHolderBase;
-import com.xptschool.parent.bean.BeanHomeWork;
 import com.xptschool.parent.bean.BeanNews;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
-import com.xptschool.parent.ui.homework.HomeWorkDetailTeacherActivity;
-import com.xptschool.parent.ui.homework.HomeWorkTeacherActivity;
-import com.xptschool.parent.ui.homework.HomeWorkTeacherAdapter;
-import com.xptschool.parent.ui.main.WebCommonActivity;
 
 import java.util.ArrayList;
 import java.util.List;

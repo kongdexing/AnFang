@@ -11,11 +11,8 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.huawei.hms.support.api.push.PushReceiver;
-import com.meizu.cloud.pushsdk.PushManager;
-import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.push.DeviceHelper;
 import com.xptschool.parent.push.UpushTokenHelper;
-import com.xptschool.parent.util.ToastUtils;
 
 /**
  * 应用需要创建一个子类继承com.huawei.hms.support.api.push.PushReceiver，

@@ -17,7 +17,6 @@ import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.CommonUtil;
-import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.common.UserHelper;
 import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.model.BeanParent;
@@ -34,7 +33,6 @@ import com.xptschool.parent.ui.setting.DownloadQRCodeActivity;
 import com.xptschool.parent.ui.setting.QRCodeActivity;
 import com.xptschool.parent.ui.setting.SettingActivity;
 import com.xptschool.parent.ui.wallet.WalletActivity;
-import com.xptschool.parent.util.ToastUtils;
 import com.xptschool.parent.view.CustomDialog;
 
 import java.util.List;

@@ -21,7 +21,6 @@ import com.xptschool.parent.R;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.model.BeanLearningModule;
 import com.xptschool.parent.ui.main.WebCommonActivity;
-import com.xptschool.parent.ui.main.WebViewActivity;
 
 import java.util.ArrayList;
 import java.util.List;

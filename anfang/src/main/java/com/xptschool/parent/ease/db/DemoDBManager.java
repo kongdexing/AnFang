@@ -6,10 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 
 import com.hyphenate.easeui.domain.EaseUser;
-//import com.hyphenate.easeui.utils2.EaseCommonUtils;
 import com.hyphenate.util.HanziToPinyin;
 import com.xptschool.parent.XPTApplication;
-import com.xptschool.parent.ease.Constant;
 import com.xptschool.parent.ease.domain.InviteMessage;
 import com.xptschool.parent.ease.domain.RobotUser;
 
@@ -18,6 +16,8 @@ import java.util.Collections;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+
+//import com.hyphenate.easeui.utils2.EaseCommonUtils;
 
 public class DemoDBManager {
     static private DemoDBManager dbMgr = new DemoDBManager();

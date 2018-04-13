@@ -8,7 +8,6 @@ import android.support.multidex.MultiDex;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.audiorecorder.AudioManager;
@@ -24,7 +23,12 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
+import com.tencent.bugly.Bugly;
+import com.tencent.bugly.beta.Beta;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.message.PushAgent;
+import com.umeng.message.UmengNotificationClickHandler;
+import com.umeng.message.entity.UMessage;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
@@ -43,11 +47,6 @@ import com.xptschool.parent.ui.honor.HonorDetailActivity;
 import com.xptschool.parent.ui.leave.LeavePDetailActivity;
 import com.xptschool.parent.ui.leave.LeaveTDetailActivity;
 import com.xptschool.parent.ui.main.MainActivity;
-import com.tencent.bugly.Bugly;
-import com.tencent.bugly.beta.Beta;
-import com.umeng.message.PushAgent;
-import com.umeng.message.UmengNotificationClickHandler;
-import com.umeng.message.entity.UMessage;
 import com.xptschool.parent.ui.notice.NoticeDetailActivity;
 import com.xptschool.parent.util.ToastUtils;
 
@@ -55,7 +54,6 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.net.Proxy;
-import java.util.Map;
 
 public class XPTApplication extends Application {
 

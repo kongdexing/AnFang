@@ -4,9 +4,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.xptschool.parent.XPTApplication;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+import com.xptschool.parent.XPTApplication;
 
 public class AppRegister extends BroadcastReceiver {
 

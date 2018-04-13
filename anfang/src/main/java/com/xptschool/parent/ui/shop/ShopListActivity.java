@@ -16,12 +16,12 @@ import com.android.widget.view.LoadMoreRecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xptschool.parent.R;
+import com.xptschool.parent.bean.BeanShop;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanHomeCfg;
-import com.xptschool.parent.bean.BeanShop;
 import com.xptschool.parent.ui.main.BaseListActivity;
 
 import java.util.ArrayList;

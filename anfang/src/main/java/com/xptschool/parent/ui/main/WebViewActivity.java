@@ -2,22 +2,25 @@ package com.xptschool.parent.ui.main;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.ViewGroup;
+import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.just.agentweb.AgentWeb;
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.ExtraKey;
-import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.web.AndroidInterface;
 
 import butterknife.BindView;
@@ -25,122 +28,98 @@ import butterknife.BindView;
 public class WebViewActivity extends BaseActivity {
 
     private String TAG = WebViewActivity.class.getSimpleName();
-    protected AgentWeb mAgentWeb;
-    @BindView(R.id.container)
-    FrameLayout mLinearLayout;
+    @BindView(R.id.web_error)
+    View web_error;
+    @BindView(R.id.rl_progress)
+    RelativeLayout rl_progress;
+    @BindView(R.id.web_content)
+    WebView web_content;
+    @BindView(R.id.btn_refresh)
+    View btn_refresh;
+    @BindView(R.id.progressBar1)
+    ProgressBar progressBar1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_agentweb);
-
-//        if (getSupportActionBar() != null)
-//            // Enable the Up button
-//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        mAgentWeb = AgentWeb.with(this)//
-                .setAgentWebParent(mLinearLayout, new LinearLayout.LayoutParams(-1, -1))//
-                .useDefaultIndicator()//使用默认进度条
-//                .defaultProgressBarColor()
-//                .setReceivedTitleCallback(mCallback)
-                .setWebChromeClient(mWebChromeClient)
-                .setWebViewClient(mWebViewClient)
-//                .setSecutityType(AgentWeb.SecurityType.strict)
-//                .setWebLayout(new WebLayout(this))
-                .createAgentWeb()//
-                .ready()
-                .go(getUrl());
-
-        if (mAgentWeb != null) {
-            //注入对象
-            mAgentWeb.getJsInterfaceHolder().addJavaObject("Android", new AndroidInterface(mAgentWeb, this));
-        }
-    }
-
-    private WebViewClient mWebViewClient = new WebViewClient() {
-        @Override
-        public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-            return super.shouldOverrideUrlLoading(view, request);
-        }
-
-        @Override
-        public void onPageStarted(WebView view, String url, Bitmap favicon) {
-            String newUrl = url;
-            if (!newUrl.contains("?")) {
-                newUrl += "?user_id=" + XPTApplication.getInstance().getCurrentUserId();
-            } else if (newUrl.contains("?user_id")) {
-                newUrl = newUrl.substring(0, newUrl.indexOf("?"));
-                newUrl += "?user_id=" + XPTApplication.getInstance().getCurrentUserId();
-            } else {
-                newUrl += "&user_id=" + XPTApplication.getInstance().getCurrentUserId();
-            }
-            super.onPageStarted(view, newUrl, favicon);
-            //do you  work
-            Log.i(TAG, "BaseWebActivity onPageStarted:" + newUrl);
-//            view.loadData();
-        }
-    };
-
-    private WebChromeClient mWebChromeClient = new WebChromeClient() {
-        @Override
-        public void onProgressChanged(WebView view, int newProgress) {
-            //do you work
-//            Log.i("Info","progress:"+newProgress);
-        }
-    };
-
-    public String getUrl() {
+        setContentView(R.layout.activity_web_view);
         Bundle bundle = getIntent().getExtras();
         if (bundle == null) {
-            return "";
+            web_error.setVisibility(View.VISIBLE);
+            return;
         }
-        String webUrl = bundle.getString(ExtraKey.WEB_URL);
-        String title = bundle.getString(ExtraKey.WEB_TITLE);
-        if (title != null && !title.isEmpty()) {
-            setTitle(title);
+        final String webUrl = bundle.getString(ExtraKey.WEB_URL);
+        btn_refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadUrl(webUrl);
+            }
+        });
+        loadUrl(webUrl);
+    }
+
+    private void loadUrl(String webUrl) {
+        if (!webUrl.contains("http://") && !webUrl.contains("https://")) {
+            webUrl = "http://" + webUrl;
         }
-        return webUrl;
+        web_error.setVisibility(View.GONE);
+        web_content.clearCache(true);
+        web_content.clearView();
+        web_content.setBackgroundColor(Color.WHITE);
+        WebSettings webSettings = web_content.getSettings();
+        webSettings.setDisplayZoomControls(true);
+        webSettings.setSupportZoom(true);
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setUseWideViewPort(true);
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        webSettings.setLoadWithOverviewMode(true);
+
+        web_content.requestFocus();
+
+        web_content.setWebViewClient(new MyWebClient());
+
+        MyWebChromeClient wn = new MyWebChromeClient();
+        web_content.setWebChromeClient(wn);
+        web_content.loadUrl(webUrl);
+    }
+
+    private class MyWebChromeClient extends WebChromeClient {
+
+        @Override
+        public void onProgressChanged(WebView view, int newProgress) {
+            if (progressBar1 == null) {
+                return;
+            }
+            progressBar1.setProgress(newProgress);
+            if (newProgress == 100) {
+                progressBar1.setVisibility(View.GONE);
+            }
+            super.onProgressChanged(view, newProgress);
+        }
     }
 
     @Override
     public void onBackPressed() {
-        if (!mAgentWeb.back()) {
-            finish();
+        if (web_content.canGoBack()) {
+            web_content.goBack();
+        } else {
+            super.onBackPressed();
         }
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (mAgentWeb.handleKeyEvent(keyCode, event)) {
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
-
-    @Override
-    protected void onPause() {
-        mAgentWeb.getWebLifeCycle().onPause();
-        super.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        mAgentWeb.getWebLifeCycle().onResume();
-        super.onResume();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.i("Info", "result:" + requestCode + " result:" + resultCode);
-//        mAgentWeb.uploadFileResult(requestCode, resultCode, data);
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //mAgentWeb.destroy();
-        mAgentWeb.getWebLifeCycle().onDestroy();
+    }
+
+    private class MyWebClient extends WebViewClient {
+
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            view.loadUrl(url);
+            return true;
+        }
+
     }
 
 }

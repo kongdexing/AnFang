@@ -7,8 +7,6 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.PopupMenu;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -18,6 +16,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
@@ -27,7 +26,6 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.just.agentweb.AbsAgentWebSettings;
 import com.just.agentweb.AgentWeb;
-import com.just.agentweb.AgentWebConfig;
 import com.just.agentweb.DefaultWebClient;
 import com.just.agentweb.IAgentWebSettings;
 import com.just.agentweb.LogUtils;
@@ -69,7 +67,6 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
     private DownloadingService mDownloadingService;
 
     public static AgentWebFragment getInstance(Bundle bundle) {
-
         AgentWebFragment mAgentWebFragment = new AgentWebFragment();
         if (bundle != null) {
             mAgentWebFragment.setArguments(bundle);
@@ -87,7 +84,8 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mAgentWeb = AgentWeb.with(this)//
-                .setAgentWebParent((LinearLayout) view, -1, new LinearLayout.LayoutParams(-1, -1))//传入AgentWeb的父控件。
+                .setAgentWebParent((LinearLayout) view, -1, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT))//传入AgentWeb的父控件。
                 .useDefaultIndicator(-1, 2)//设置进度条颜色与高度，-1为默认值，高度为2，单位为dp。
                 .setAgentWebWebSettings(getSettings())//设置 IAgentWebSettings。
                 .setWebViewClient(mWebViewClient)//WebViewClient ， 与 WebView 使用一致 ，但是请勿获取WebView调用setWebViewClient(xx)方法了,会覆盖AgentWeb DefaultWebClient,同时相应的中间件也会失效。
@@ -107,7 +105,8 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
                 .ready()//设置 WebSettings。
                 .go(getUrl()); //WebView载入该url地址的页面并显示。
 
-        mAgentWeb.getAgentWebSettings().getWebSettings().setDefaultTextEncodingName("utf-8");
+        mAgentWeb.getAgentWebSettings().getWebSettings().setSupportZoom(true);
+        mAgentWeb.getAgentWebSettings().getWebSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
 
 //        AgentWebConfig.debug();
 
@@ -246,7 +245,6 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
             @Override
             protected void bindAgentWebSupport(AgentWeb agentWeb) {
                 this.mAgentWeb = agentWeb;
-                this.mAgentWeb.getAgentWebSettings().getWebSettings().setDefaultTextEncodingName("UTF-8");
             }
 
             /**

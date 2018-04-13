@@ -6,14 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.xptschool.parent.XPTApplication;
-import com.xptschool.parent.util.ToastUtils;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+import com.xptschool.parent.XPTApplication;
+import com.xptschool.parent.util.ToastUtils;
 
 public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 

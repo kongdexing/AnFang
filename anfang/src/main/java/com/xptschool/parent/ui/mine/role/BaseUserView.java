@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
@@ -35,7 +34,6 @@ import com.xptschool.parent.model.BeanTeacher;
 import com.xptschool.parent.model.BeanUser;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.album.LocalImageTHelper;
-import com.xptschool.parent.ui.fence.FenceDrawActivity;
 import com.xptschool.parent.ui.mine.MyInfoActivity;
 import com.xptschool.parent.util.TakePhotoUtil;
 import com.xptschool.parent.util.ToastUtils;

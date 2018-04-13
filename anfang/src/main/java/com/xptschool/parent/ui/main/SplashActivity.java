@@ -5,10 +5,10 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.viewpagerindicator.CirclePageIndicator;
 import com.xptschool.parent.R;
 import com.xptschool.parent.adapter.SplashAdapter;
 import com.xptschool.parent.common.SharedPreferencesUtil;
-import com.viewpagerindicator.CirclePageIndicator;
 
 import butterknife.BindView;
 import butterknife.OnClick;

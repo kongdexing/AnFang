@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
-import com.tencent.bugly.Bugly;
+import com.tencent.bugly.beta.Beta;
 import com.xptschool.parent.BuildConfig;
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
@@ -25,9 +25,7 @@ import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.main.BaseActivity;
 import com.xptschool.parent.ui.main.WebCommonActivity;
-import com.xptschool.parent.ui.main.WebViewActivity;
 import com.xptschool.parent.view.CustomDialog;
-import com.tencent.bugly.beta.Beta;
 
 import java.util.List;
 

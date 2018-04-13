@@ -1,6 +1,5 @@
 package com.xptschool.parent.ui.homework;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,7 +29,6 @@ import com.xptschool.parent.util.ToastUtils;
 import org.json.JSONObject;
 
 import java.util.List;
-import java.util.Set;
 
 import butterknife.BindView;
 

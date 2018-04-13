@@ -14,7 +14,6 @@ import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.model.BeanParent;
 import com.xptschool.parent.model.BeanTeacher;
 import com.xptschool.parent.model.GreenDaoHelper;
-import com.xptschool.parent.util.ParentUtil;
 
 /**
  * Created by dexing on 2017/2/4.

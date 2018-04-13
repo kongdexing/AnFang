@@ -46,9 +46,9 @@ import com.hyphenate.easeui.utils.EaseLocalUserHelper;
 import com.hyphenate.exceptions.HyphenateException;
 import com.hyphenate.media.EMCallSurfaceView;
 import com.hyphenate.util.EMLog;
+import com.superrtc.sdk.VideoView;
 import com.xptschool.parent.R;
 import com.xptschool.parent.ease.EaseHelper;
-import com.superrtc.sdk.VideoView;
 
 import java.io.File;
 import java.util.Date;

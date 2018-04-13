@@ -14,8 +14,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
@@ -23,11 +21,8 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMWeb;
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
-import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.ui.main.BaseActivity;
 import com.xptschool.parent.util.QRCodeUtil;
-
-import java.util.HashMap;
 
 import butterknife.BindView;
 
@@ -76,12 +71,15 @@ public class QRCodeActivity extends BaseActivity {
                 QRImg.setImageBitmap(bitmap);
             }
 
-            if (XPTApplication.getInstance().isLoggedIn()) {
-                txtUserName.setText(XPTApplication.getInstance().getCurrentUserName());
-                txtUserRole.setText(XPTApplication.getInstance().getCurrent_user_type().getRoleName());
-            } else {
-                txtUserRole.setText("未登录");
-            }
+//            if (XPTApplication.getInstance().isLoggedIn()) {
+//                txtUserName.setText(XPTApplication.getInstance().getCurrentUserName());
+//                txtUserRole.setText(XPTApplication.getInstance().getCurrent_user_type().getRoleName());
+//            } else {
+//                txtUserRole.setText("未登录");
+//            }
+            txtUserName.setText("高收益理财，亦高效沟通");
+            txtUserRole.setText("多样化商城，建数海科技");
+
         } catch (Exception ex) {
             Log.i(TAG, "onCreate: " + ex.getMessage());
         }

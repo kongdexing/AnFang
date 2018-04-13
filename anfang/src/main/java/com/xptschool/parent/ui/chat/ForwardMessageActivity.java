@@ -16,10 +16,10 @@ package com.xptschool.parent.ui.chat;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.xptschool.parent.R;
 import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.widget.EaseAlertDialog;
 import com.hyphenate.easeui.widget.EaseAlertDialog.AlertDialogUser;
+import com.xptschool.parent.R;
 
 public class ForwardMessageActivity extends PickContactNoCheckboxActivity {
 	private EaseUser selectUser;

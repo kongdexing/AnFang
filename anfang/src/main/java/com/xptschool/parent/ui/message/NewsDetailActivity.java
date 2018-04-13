@@ -1,6 +1,5 @@
 package com.xptschool.parent.ui.message;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.webkit.WebView;
@@ -10,17 +9,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.xptschool.parent.R;
-import com.xptschool.parent.bean.BeanShop;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.http.HttpAction;
-import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.ui.main.BaseActivity;
-import com.xptschool.parent.ui.shop.ShopDetailActivity;
 
 import org.json.JSONObject;
-
-import java.net.URLEncoder;
 
 import butterknife.BindView;
 

@@ -7,13 +7,10 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.android.widget.view.SmoothCheckBox;
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
-
-import butterknife.BindView;
 
 /**
  * Created by Administrator on 2017/03/26.

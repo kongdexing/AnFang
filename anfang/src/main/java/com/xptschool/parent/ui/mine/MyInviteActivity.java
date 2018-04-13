@@ -1,8 +1,7 @@
 package com.xptschool.parent.ui.mine;
 
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -11,26 +10,15 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
-import com.android.widget.spinner.MaterialSpinner;
 import com.android.widget.view.LoadMoreRecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
-import com.xptschool.parent.bean.BeanCheckin;
-import com.xptschool.parent.bean.BeanHomeWork;
 import com.xptschool.parent.bean.BeanInvite;
-import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
-import com.xptschool.parent.model.BeanClass;
-import com.xptschool.parent.model.BeanCourse;
-import com.xptschool.parent.model.BeanMyClass;
-import com.xptschool.parent.model.GreenDaoHelper;
-import com.xptschool.parent.ui.checkin.CheckinTAdapter;
-import com.xptschool.parent.ui.homework.HomeWorkTeacherActivity;
-import com.xptschool.parent.ui.main.BaseActivity;
 import com.xptschool.parent.ui.main.BaseListActivity;
 
 import org.json.JSONObject;

@@ -20,7 +20,6 @@ import com.xptschool.parent.ui.main.BaseActivity;
 import com.xptschool.parent.util.ToastUtils;
 
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import butterknife.BindView;
 import butterknife.OnClick;

@@ -11,13 +11,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.xptschool.parent.R;
-import com.xptschool.parent.bean.BeanComment;
 import com.xptschool.parent.bean.BeanHonor;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
-import com.xptschool.parent.ui.comment.CommentDetailActivity;
 import com.xptschool.parent.ui.main.BaseActivity;
 import com.xptschool.parent.util.ToastUtils;
 

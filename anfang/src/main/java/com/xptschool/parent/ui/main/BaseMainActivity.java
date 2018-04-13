@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
-import com.gyf.barlibrary.BarHide;
-import com.gyf.barlibrary.ImmersionBar;
 import com.huawei.hms.api.ConnectionResult;
 import com.huawei.hms.api.HuaweiApiAvailability;
 import com.huawei.hms.api.HuaweiApiClient;
@@ -14,6 +12,10 @@ import com.huawei.hms.support.api.client.ResultCallback;
 import com.huawei.hms.support.api.push.HuaweiPush;
 import com.huawei.hms.support.api.push.TokenResult;
 import com.meizu.cloud.pushsdk.PushManager;
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.message.IUmengCallback;
+import com.umeng.message.IUmengRegisterCallback;
+import com.umeng.message.PushAgent;
 import com.xiaomi.channel.commonutils.logger.LoggerInterface;
 import com.xiaomi.mipush.sdk.Logger;
 import com.xiaomi.mipush.sdk.MiPushClient;
@@ -21,10 +23,6 @@ import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.UserHelper;
 import com.xptschool.parent.push.DeviceHelper;
 import com.xptschool.parent.push.UpushTokenHelper;
-import com.umeng.analytics.MobclickAgent;
-import com.umeng.message.IUmengCallback;
-import com.umeng.message.IUmengRegisterCallback;
-import com.umeng.message.PushAgent;
 
 /**
  * Created by dexing on 2017/6/5.
