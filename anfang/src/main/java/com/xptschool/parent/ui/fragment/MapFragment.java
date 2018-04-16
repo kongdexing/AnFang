@@ -167,10 +167,7 @@ public class MapFragment extends MapBaseFragment implements OnGetShareUrlResultL
         mLocClient.start();
         Log.i(TAG, "initData: start loc");
 
-        startTime = (new SimpleDateFormat("yyyy-MM-dd HH:mm")).format(CommonUtil.getDateBefore(1));
-        endTime = CommonUtil.getCurrentDateTime();
-        txtSDate.setText(startTime);
-        txtEDate.setText(endTime);
+
 
         UserHelper.getInstance().addUserChangeListener(new UserHelper.UserChangeListener() {
             @Override
@@ -195,41 +192,48 @@ public class MapFragment extends MapBaseFragment implements OnGetShareUrlResultL
         UserType type = XPTApplication.getInstance().getCurrent_user_type();
         Log.i(TAG, "initSpinnerData: " + type);
 
-        if (UserType.PARENT.equals(type)) {
-            llStudentName.setVisibility(View.VISIBLE);
-            txtStudentName.setVisibility(View.GONE);
+        if(UserType.PARENT.equals(type)||UserType.TEACHER.equals(type)){
+            startTime = (new SimpleDateFormat("yyyy-MM-dd HH:mm")).format(CommonUtil.getDateBefore(1));
+            endTime = CommonUtil.getCurrentDateTime();
+            txtSDate.setText(startTime);
+            txtEDate.setText(endTime);
 
-            if (GreenDaoHelper.getInstance().getStudents().size() == 0) {
-                spnStudents.setText(R.string.title_no_student);
-                spnStudents.setEnabled(false);
-                return;
+            if (UserType.PARENT.equals(type)) {
+                llStudentName.setVisibility(View.VISIBLE);
+                txtStudentName.setVisibility(View.GONE);
+
+                if (GreenDaoHelper.getInstance().getStudents().size() == 0) {
+                    spnStudents.setText(R.string.title_no_student);
+                    spnStudents.setEnabled(false);
+                    return;
+                }
+
+                spnStudents.setEnabled(true);
+                spnStudents.setItems(GreenDaoHelper.getInstance().getStudents());
+                currentStudent = (BeanStudent) spnStudents.getSelectedItem();
+
+                spnStudents.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<BeanStudent>() {
+                    @Override
+                    public void onItemSelected(MaterialSpinner view, int position, long id, BeanStudent item) {
+                        flTransparent.setVisibility(View.GONE);
+                        currentStudent = item;
+                        locationTime = 0;
+                        //获取不同数据
+                        reloadDataByStatus();
+                    }
+                });
+
+                spnStudents.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+                    @Override
+                    public void onNothingSelected(MaterialSpinner spinner) {
+                        flTransparent.setVisibility(View.GONE);
+                    }
+                });
+            } else if (UserType.TEACHER.equals(type)) {
+                llStudentName.setVisibility(View.GONE);
+                txtStudentName.setVisibility(View.VISIBLE);
+                getStudents();
             }
-
-            spnStudents.setEnabled(true);
-            spnStudents.setItems(GreenDaoHelper.getInstance().getStudents());
-            currentStudent = (BeanStudent) spnStudents.getSelectedItem();
-
-            spnStudents.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<BeanStudent>() {
-                @Override
-                public void onItemSelected(MaterialSpinner view, int position, long id, BeanStudent item) {
-                    flTransparent.setVisibility(View.GONE);
-                    currentStudent = item;
-                    locationTime = 0;
-                    //获取不同数据
-                    reloadDataByStatus();
-                }
-            });
-
-            spnStudents.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
-                @Override
-                public void onNothingSelected(MaterialSpinner spinner) {
-                    flTransparent.setVisibility(View.GONE);
-                }
-            });
-        } else if (UserType.TEACHER.equals(type)) {
-            llStudentName.setVisibility(View.GONE);
-            txtStudentName.setVisibility(View.VISIBLE);
-            getStudents();
         } else {
             //隐藏学生功能
             llMyTools.setVisibility(View.GONE);

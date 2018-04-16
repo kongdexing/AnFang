@@ -128,12 +128,7 @@ public class HomeFragment extends BaseFragment {
     MyGridView grd_school;
 
     public MainActivity activity;
-
-//    protected ImmersionBar mImmersionBar;
-
     private Unbinder unbinder;
-    //    private MyTopPagerAdapter topAdapter;
-    private List<BeanBanner> topBanners = new ArrayList<>();
 
     public HomeFragment() {
     }
@@ -167,14 +162,13 @@ public class HomeFragment extends BaseFragment {
         topBanner.startAutoPlay();
         //根据登录状态显示不同icon
         //当状态有更改时才变化Item
-
     }
 
     @Override
     public void onPause() {
         super.onPause();
         Log.i(TAG, "HomeFragment onPause: stopAutoPlay");
-        topBanner.stopAutoPlay();
+//        topBanner.stopAutoPlay();
     }
 
     @Override

@@ -421,7 +421,6 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
         });
     }
 
-
     private void registerBroadcastReceiver() {
         broadcastManager = LocalBroadcastManager.getInstance(this);
         IntentFilter intentFilter = new IntentFilter();
