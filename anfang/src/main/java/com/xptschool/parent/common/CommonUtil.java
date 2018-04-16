@@ -286,8 +286,7 @@ public class CommonUtil {
             CommonUtil.getBeanClassesByHttpResult(jsonData.getJSONArray("class").toString());
             CommonUtil.getBeanCoursesByHttpResult(jsonData.getJSONArray("course").toString());
             CommonUtil.initTeacherInfoByHttpResult(jsonData.getJSONObject("login").toString(), account);
-        } else if (type.equals(UserType.VISITOR.toString()) || type.equals(UserType.COMPANY.toString())
-                || type.equals(UserType.PROXY.toString()) || type.equals(UserType.CITYPROXY.toString())) {
+        } else {
             //会员|第三方公司|代理商|区县代理商
             BeanUser user = new BeanUser();
             user.setUser_id(jsonLogin.getString("user_id"));
@@ -300,7 +299,6 @@ public class CommonUtil {
             user.setHead_portrait(jsonLogin.getString("head_portrait"));
             user.setRef_id(jsonLogin.getString("ref_id"));
             GreenDaoHelper.getInstance().insertUser(user);
-
         }
         XPTApplication.getInstance().setCurrent_user_type(type);
     }

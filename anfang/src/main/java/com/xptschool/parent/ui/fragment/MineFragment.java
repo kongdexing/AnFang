@@ -132,7 +132,7 @@ public class MineFragment extends BaseFragment {
                     txtPhone.setText("手机号：" + parent.getParent_phone());
                     headImg = parent.getHead_portrait();
                 }
-            } else if (UserType.VISITOR.equals(type) || UserType.COMPANY.equals(type) || UserType.PROXY.equals(type) || UserType.CITYPROXY.equals(type)) {
+            } else {
                 rlMyClass.setVisibility(View.GONE);
                 rlMyChild.setVisibility(View.GONE);
                 rlMyProperty.setVisibility(View.GONE);

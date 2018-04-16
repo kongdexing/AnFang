@@ -360,6 +360,16 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        try {
+            CommonUtil.hideInputWindow(this, edtAccount);
+        } catch (Exception ex) {
+
+        }
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
     }
