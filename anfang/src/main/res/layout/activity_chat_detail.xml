@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rlVoice01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10">
+
+        <com.android.widget.view.CircularImageView
+            android:id="@+id/imgUser"
+            android:layout_width="@dimen/dp_45"
+            android:layout_height="@dimen/dp_45"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/user_defaulthead"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:id="@+id/llContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_toLeftOf="@+id/imgUser">
+            <!--声音-->
+            <RelativeLayout
+                android:id="@+id/rlVoice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/id_recorder_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp_6"
+                    android:text="2"
+                    android:textColor="@color/white" />
+
+                <RelativeLayout
+                    android:id="@+id/id_recorder_length"
+                    android:layout_width="@dimen/dp_70"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/id_recorder_time"
+                    android:background="@drawable/chatto_bg">
+
+                    <View
+                        android:id="@+id/id_recorder_anim"
+                        android:layout_width="@dimen/dp_25"
+                        android:layout_height="@dimen/dp_25"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/adj" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlVoice02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rlVoice01"
+        android:padding="@dimen/dp_10">
+
+        <com.android.widget.view.CircularImageView
+            android:id="@+id/imgUser1"
+            android:layout_width="@dimen/dp_45"
+            android:layout_height="@dimen/dp_45"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/user_defaulthead"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:id="@+id/llContent1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_toLeftOf="@+id/imgUser1">
+            <!--声音-->
+            <RelativeLayout
+                android:id="@+id/rlVoice1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/id_recorder_time1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp_6"
+                    android:text="10"
+                    android:textColor="@color/white" />
+
+                <RelativeLayout
+                    android:id="@+id/id_recorder_length1"
+                    android:layout_width="@dimen/dp_200"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/id_recorder_time1"
+                    android:background="@drawable/chatto_bg">
+
+                    <View
+                        android:id="@+id/id_recorder_anim1"
+                        android:layout_width="@dimen/dp_25"
+                        android:layout_height="@dimen/dp_25"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/adj" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlVoice03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rlVoice02"
+        android:padding="@dimen/dp_10">
+
+        <com.android.widget.view.CircularImageView
+            android:id="@+id/imgUser3"
+            android:layout_width="@dimen/dp_45"
+            android:layout_height="@dimen/dp_45"
+            android:background="@drawable/user_defaulthead"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:id="@+id/llContent3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_toRightOf="@+id/imgUser3">
+            <!--声音-->
+            <RelativeLayout
+                android:id="@+id/rlVoice3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible">
+
+                <RelativeLayout
+                    android:id="@+id/id_recorder_length3"
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:paddingLeft="@dimen/dp_10"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:background="@drawable/chatfrom_bg">
+
+                    <View
+                        android:id="@+id/id_recorder_anim3"
+                        android:layout_width="@dimen/dp_25"
+                        android:layout_height="@dimen/dp_25"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/adj_right" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/id_recorder_time3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:layout_toRightOf="@+id/id_recorder_length3"
+                    android:text="3'"
+                    android:textColor="@color/white" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlMeVoice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rlVoice03"
+        android:visibility="gone"
+        android:padding="@dimen/dp_10">
+
+        <com.android.widget.view.CircularImageView
+            android:id="@+id/imgUser2"
+            android:layout_width="@dimen/dp_45"
+            android:layout_height="@dimen/dp_45"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/user_defaulthead"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:id="@+id/llContent2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_toLeftOf="@+id/imgUser2">
+            <!--声音-->
+            <RelativeLayout
+                android:id="@+id/rlVoice2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/id_recorder_time2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp_6"
+                    android:text="5"
+                    android:textColor="@color/white" />
+
+                <RelativeLayout
+                    android:id="@+id/id_recorder_length2"
+                    android:layout_width="@dimen/dp_100"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/id_recorder_time2"
+                    android:background="@drawable/chatto_bg">
+
+                    <View
+                        android:id="@+id/id_recorder_anim2"
+                        android:layout_width="@dimen/dp_25"
+                        android:layout_height="@dimen/dp_25"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/adj" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <com.android.widget.audiorecorder.AudioRecorderButton
+        android:id="@+id/id_recorder_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/dp_10"
+        android:background="@drawable/btn_recorder_normal"
+        android:gravity="center"
+        android:minHeight="0dp"
+        android:padding="5dp"
+        android:text="@string/str_recorder_normal"
+        android:textColor="#727272"
+        android:visibility="visible" />
+
+</RelativeLayout>

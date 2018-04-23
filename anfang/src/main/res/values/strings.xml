@@ -57,14 +57,23 @@
     <string name="home_living_payment">生活缴费</string>
     <string name="home_shopping">校园购</string>
 
+    <string name="home_secret">安全设置</string>
+
     <string name="home_homework">家庭作业</string>
     <string name="home_notice">班级公告</string>
     <string name="home_question">在线提问</string>
     <string name="home_location">位置查询</string>
-    <string name="home_score">孩子成绩</string>
+    <string name="home_score">成绩查询</string>
     <string name="home_course">课程表</string>
     <string name="home_comment">老师评语</string>
     <string name="home_honour">荣誉墙</string>
+
+    <string name="home_moniter">语音监护</string>
+    <string name="home_friend">碰碰交友</string>
+    <string name="home_chat">微聊</string>
+    <string name="home_walk">计步</string>
+    <string name="home_clock">闹钟设置</string>
+    <string name="home_shutdown">远程关机</string>
 
     <string name="home_checkin">考勤记录</string>
     <string name="home_leave">在线请假</string>

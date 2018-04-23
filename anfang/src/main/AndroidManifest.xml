@@ -18,7 +18,8 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
-    <uses-permission android:name="android.permission.CAMERA" />Sh
+    <uses-permission android:name="android.permission.CAMERA" />
+    Sh
     <uses-permission android:name="android.permission.CAPTURE_AUDIO_OUTPUT" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
@@ -516,11 +517,11 @@
             android:configChanges="orientation|keyboardHidden|fontScale"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
-
-        <activity android:name=".ui.message.NewsDetailActivity"
+        <activity
+            android:name=".ui.message.NewsDetailActivity"
             android:configChanges="orientation|keyboardHidden|fontScale"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
 
         <!-- UMShare -->
         <activity
@@ -704,7 +705,14 @@
         <!-- android:value="3ecea51f560650b1ed8a4b99808f52e8" /> -->
 
         <activity android:name=".ui.mine.MyInviteActivity" />
-
+        <activity android:name=".ui.watch.FriendActivity" />
+        <activity android:name=".ui.watch.ChatListActivity" />
+        <activity android:name=".ui.watch.ChatDetailActivity" />
+        <activity android:name=".ui.watch.WalkActivity" />
+        <activity android:name=".ui.watch.ShutDownActivity" />
+        <activity android:name=".ui.watch.ClockActivity" />
+        <activity android:name=".ui.watch.ClockDetailActivity" />
+        <activity android:name=".ui.watch.MoniterActivity"></activity>
     </application>
 
 </manifest>

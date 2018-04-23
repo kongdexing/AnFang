@@ -88,7 +88,7 @@ public class ChangePwdActivity extends BaseActivity {
                             SharedPreferencesUtil.saveData(ChangePwdActivity.this, SharedPreferencesUtil.KEY_PWD, newpwd);
 
                             Intent intent = new Intent(ChangePwdActivity.this, LoginActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             intent.putExtra(ExtraKey.LOGIN_ORIGIN, "1");
                             startActivity(intent);
                         }

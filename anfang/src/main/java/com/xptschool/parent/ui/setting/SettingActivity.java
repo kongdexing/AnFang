@@ -100,8 +100,8 @@ public class SettingActivity extends BaseActivity {
                 break;
             case R.id.rlHelp:
                 Intent intent = new Intent(this, WebCommonActivity.class);
-                intent.putExtra(ExtraKey.WEB_URL, BuildConfig.SERVICE_URL + "/html/app-help/index.html");
-//                intent.putExtra(ExtraKey.WEB_URL, "http://18600849987.shuangpinkeji.com/weshop/");
+//                intent.putExtra(ExtraKey.WEB_URL, BuildConfig.SERVICE_URL + "/html/app-help/index.html");
+                intent.putExtra(ExtraKey.WEB_URL, "http://18600849987.shuangpinkeji.com/weshop/");
                 startActivity(intent);
                 break;
             case R.id.rlExit:

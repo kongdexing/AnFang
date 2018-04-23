@@ -67,6 +67,9 @@ public class HomeItemGridAdapter extends BaseAdapter {
         }
 
         final HomeItem item = getItem(position);
+        viewHolder.optionImg.setBackgroundResource(item.getIconId());
+        viewHolder.optionText.setText(item.getTitle());
+
         if (item.getIntent() == null) {
             return convertView;
         }
@@ -98,9 +101,6 @@ public class HomeItemGridAdapter extends BaseAdapter {
                 }
             }
         });
-
-        viewHolder.optionImg.setBackgroundResource(item.getIconId());
-        viewHolder.optionText.setText(item.getTitle());
         return convertView;
     }
 

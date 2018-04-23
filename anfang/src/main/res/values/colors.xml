@@ -17,6 +17,7 @@
     <color name="translucent">#00000000</color>
     <color name="window_bg">#f0f0f0</color>
 
+    <color name="color_lay1">#44404246</color>
     <color name="colorUserName">#9298AC</color>
     <color name="bg_window">#222331</color>
     <color name="transparent_gray">#60000000</color>

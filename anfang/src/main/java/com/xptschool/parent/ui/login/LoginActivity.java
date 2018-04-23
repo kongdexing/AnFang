@@ -351,7 +351,6 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
     private void finishActivity() {
         if (origin != null && origin.equals("1")) {
             Intent intent = new Intent(this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         } else {
             finish();
