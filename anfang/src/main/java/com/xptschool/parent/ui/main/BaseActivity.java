@@ -179,6 +179,10 @@ public class BaseActivity extends AppCompatActivity {
         getWindow().setAttributes(lp);
     }
 
+    public void showProgress() {
+        showProgress("");
+    }
+
     public void showProgress(String str) {
         if (progressDialog == null) {
             progressDialog = new Dialog(this, R.style.CustomDialog);
@@ -188,7 +192,11 @@ public class BaseActivity extends AppCompatActivity {
             progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         }
         TextView msg = (TextView) progressDialog.findViewById(R.id.tv_load_dialog);
-        msg.setText(str);
+        if (str == null || str.isEmpty()) {
+            msg.setVisibility(View.GONE);
+        } else {
+            msg.setText(str);
+        }
         try {
             progressDialog.show();
         } catch (Exception ex) {

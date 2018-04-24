@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/txtNoFriend"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        android:gravity="center"
+        android:textSize="@dimen/sp_18"
+        android:text="您还没有碰碰好友呦，赶紧碰碰添加吧！"/>
 
     <RelativeLayout
         android:id="@+id/rlFriend1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
         android:background="@color/color_lay1"
-        android:layout_marginTop="@dimen/dp_10">
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/img_watch"
@@ -20,12 +28,13 @@
             android:background="@drawable/user_defaulthead" />
 
         <TextView
+            android:id="@+id/txtIMEI"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/img_watch"
-            android:textSize="@dimen/sp_18"
-            android:text="39876899405" />
+            android:text="39876899405"
+            android:textSize="@dimen/sp_18" />
 
         <Button
             android:id="@+id/btnDelete"
@@ -40,4 +49,4 @@
 
     </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>

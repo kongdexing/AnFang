@@ -5,8 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.android.volley.VolleyError;
+import com.android.volley.common.VolleyHttpParamsEntity;
+import com.android.volley.common.VolleyHttpResult;
+import com.android.volley.common.VolleyHttpService;
 import com.xptschool.parent.R;
+import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.ui.login.LoginActivity;
 import com.xptschool.parent.ui.main.BaseActivity;
 import com.xptschool.parent.util.ToastUtils;
@@ -19,13 +26,15 @@ public class FriendActivity extends BaseActivity {
 
     @BindView(R.id.rlFriend1)
     RelativeLayout rlFriend1;
+    @BindView(R.id.txtNoFriend)
+    TextView txtNoFriend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend);
         setTitle(R.string.home_friend);
-
+        getFriendList();
     }
 
     @OnClick({R.id.btnDelete})
@@ -45,6 +54,39 @@ public class FriendActivity extends BaseActivity {
                 });
                 break;
         }
+    }
+
+    private void getFriendList() {
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.GET_WATCH_FRIENDLIST,
+                new VolleyHttpParamsEntity().addParam("imei", "867587027680824"),
+                new MyVolleyRequestListener() {
+                    @Override
+                    public void onStart() {
+                        super.onStart();
+                        showProgress("正在获取好友列表");
+                    }
+
+                    @Override
+                    public void onResponse(VolleyHttpResult volleyHttpResult) {
+                        super.onResponse(volleyHttpResult);
+                        hideProgress();
+                        switch (volleyHttpResult.getStatus()) {
+                            case HttpAction.SUCCESS:
+
+                                break;
+                            case HttpAction.FAILED:
+                                rlFriend1.setVisibility(View.GONE);
+                                txtNoFriend.setVisibility(View.VISIBLE);
+                                break;
+                        }
+                    }
+
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        super.onErrorResponse(volleyError);
+                        hideProgress();
+                    }
+                });
     }
 
 

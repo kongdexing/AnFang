@@ -169,5 +169,11 @@ public class HttpAction {
 
     public static String GET_NOTIFY_LIST = HEAD + "UserMessage/getNotifyList";
 
+    //计步
+    public static String GET_WATCH_STEP = HEAD + "Watch/GetStepNum";
+    //关机
+    public static String GET_WATCH_SHUTDOWN = HEAD + "Watch/SetShutDown";
+    //碰碰好友列表
+    public static String GET_WATCH_FRIENDLIST = HEAD + "Watch/friendList";
 
 }
