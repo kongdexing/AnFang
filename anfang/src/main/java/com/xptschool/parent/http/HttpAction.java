@@ -175,5 +175,9 @@ public class HttpAction {
     public static String GET_WATCH_SHUTDOWN = HEAD + "Watch/SetShutDown";
     //碰碰好友列表
     public static String GET_WATCH_FRIENDLIST = HEAD + "Watch/friendList";
+    //获取闹钟列表
+    public static String GET_WATCH_ALARM_LIST = HEAD + "Watch/UpAlarmTime";
+    //修改闹钟
+    public static String GET_WATCH_ALARM_EDIT = HEAD + "Watch/SetAlarmTime";
 
 }

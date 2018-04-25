@@ -6,7 +6,13 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.android.volley.VolleyError;
+import com.android.volley.common.VolleyHttpParamsEntity;
+import com.android.volley.common.VolleyHttpResult;
+import com.android.volley.common.VolleyHttpService;
 import com.xptschool.parent.R;
+import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.ui.main.BaseActivity;
 
 import butterknife.BindView;
@@ -16,24 +22,124 @@ public class ClockActivity extends BaseActivity {
 
     @BindView(R.id.container)
     LinearLayout container;
+    public String[] alarmArray = new String[3];
+    public String imei = "867587027683984";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clock);
-
         setTitle(R.string.home_clock);
-        initView();
     }
 
     private void initView() {
+        container.removeAllViews();
 
-        container.addView(new WatchAlarmView(this));
-        container.addView(new WatchAlarmView(this));
-        container.addView(new WatchAlarmView(this));
+        for (int i = 0; i < 3; i++) {
+            WatchAlarmView watchAlarmView = new WatchAlarmView(ClockActivity.this);
+            watchAlarmView.bindData(watchAlarmView.defTime, i);
+            alarmArray[i] = watchAlarmView.defTime;
+            container.addView(watchAlarmView);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getAlarmList();
+    }
+
+    private void getAlarmList() {
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.GET_WATCH_ALARM_LIST,
+                new VolleyHttpParamsEntity().addParam("imei", imei), new MyVolleyRequestListener() {
+                    @Override
+                    public void onStart() {
+                        super.onStart();
+                        showProgress("正在获取闹钟信息");
+                    }
+
+                    @Override
+                    public void onResponse(VolleyHttpResult volleyHttpResult) {
+                        super.onResponse(volleyHttpResult);
+                        hideProgress();
+
+                        switch (volleyHttpResult.getStatus()) {
+                            case HttpAction.SUCCESS:
+                                try {
+                                    container.removeAllViews();
+                                    //08:10-1-1,08:10-1-2,08:10-1-3-23111110
+                                    String[] alarmItems = volleyHttpResult.getInfo().toString().split(",");
+
+                                    for (int i = 0; i < 3; i++) {
+                                        WatchAlarmView watchAlarmView = new WatchAlarmView(ClockActivity.this);
+                                        try {
+                                            alarmArray[i] = alarmItems[i].trim();
+                                        } catch (Exception ex) {
+                                            alarmArray[i] = watchAlarmView.defTime;
+                                        }
+                                        watchAlarmView.bindData(alarmArray[i], i);
+                                        container.addView(watchAlarmView);
+                                    }
+                                } catch (Exception ex) {
+                                    initView();
+                                }
+                                break;
+                            default:
+                                initView();
+                                break;
+                        }
+                    }
+
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        super.onErrorResponse(volleyError);
+                        hideProgress();
+                        initView();
+                    }
+                });
 
     }
 
+    public void updateAlarm(String alarm, int index) {
+        String allAlarm = "";
 
+        try {
+            if (alarm != null) {
+                alarmArray[index] = alarm;
+            }
+
+            for (int i = 0; i < alarmArray.length; i++) {
+                allAlarm += alarmArray[i] + ",";
+            }
+            allAlarm = allAlarm.substring(0, allAlarm.length() - 1);
+        } catch (Exception ex) {
+            allAlarm = "";
+        }
+
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.GET_WATCH_ALARM_EDIT,
+                new VolleyHttpParamsEntity().addParam("imei", imei)
+                        .addParam("AlarmTime", allAlarm),
+                new MyVolleyRequestListener() {
+                    @Override
+                    public void onStart() {
+                        super.onStart();
+                        showProgress("正在设置闹钟");
+                    }
+
+                    @Override
+                    public void onResponse(VolleyHttpResult volleyHttpResult) {
+                        super.onResponse(volleyHttpResult);
+                        hideProgress();
+
+                    }
+
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        super.onErrorResponse(volleyError);
+                        hideProgress();
+
+                    }
+                });
+    }
 
 }

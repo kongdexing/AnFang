@@ -1,15 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_150"
+        android:layout_marginTop="@dimen/dp_20"
+        android:paddingLeft="@dimen/dp_50"
 
-    <com.android.widget.wheelview.WheelView
-        android:id="@+id/hourWheelView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_margin="@dimen/dp_5" />
+        android:paddingRight="@dimen/dp_50">
 
+        <com.android.widget.wheelview.WheelView
+            android:id="@+id/APMView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" />
 
+        <com.android.widget.wheelview.WheelView
+            android:id="@+id/hourWheelView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" />
+
+        <com.android.widget.wheelview.WheelView
+            android:id="@+id/minuteWheelView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_20"
+        android:gravity="center"
+        android:text="重复"
+        android:textSize="@dimen/sp_16" />
+
+    <RelativeLayout
+        android:id="@+id/rlRepeat1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_15"
+        android:background="@drawable/bg_mine_info"
+        android:padding="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="一次"
+            android:textSize="@dimen/sp_16" />
+
+        <com.android.widget.view.SmoothCheckBox
+            android:id="@+id/ckbRepeat1"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            app:color_checked="@color/text_black" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlRepeat2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_15"
+        android:background="@drawable/bg_mine_info"
+        android:padding="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="每天"
+            android:textSize="@dimen/sp_16" />
+
+        <com.android.widget.view.SmoothCheckBox
+            android:id="@+id/ckbRepeat2"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            app:color_checked="@color/text_black" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/llRepeat3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_15"
+        android:background="@drawable/bg_mine_info"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_10">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="每周"
+                android:textSize="@dimen/sp_16" />
+
+            <com.android.widget.view.SmoothCheckBox
+                android:id="@+id/ckbRepeat3"
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_20"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                app:color_checked="@color/text_black" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10">
+
+            <TextView
+                android:id="@+id/week1"
+                style="@style/alarm_week"
+                android:text="一" />
+
+            <TextView
+                android:id="@+id/week2"
+                style="@style/alarm_week"
+                android:text="二" />
+
+            <TextView
+                android:id="@+id/week3"
+                style="@style/alarm_week"
+                android:text="三" />
+
+            <TextView
+                android:id="@+id/week4"
+                style="@style/alarm_week"
+                android:text="四" />
+
+            <TextView
+                android:id="@+id/week5"
+                style="@style/alarm_week"
+                android:text="五" />
+
+            <TextView
+                android:id="@+id/week6"
+                style="@style/alarm_week"
+                android:text="六" />
+
+            <TextView
+                android:id="@+id/week7"
+                style="@style/alarm_week"
+                android:text="日" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/ok"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginLeft="@dimen/dp_40"
+        android:layout_marginRight="@dimen/dp_40"
+        android:background="@drawable/btn_bg_normal"
+        android:gravity="center"
+        android:text="保存"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
 
 </LinearLayout>

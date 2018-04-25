@@ -8,11 +8,19 @@
         android:id="@+id/includeActionBar"
         layout="@layout/layout_actionbar" />
 
-    <LinearLayout
-        android:id="@+id/llContent"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg_window"
-        android:orientation="vertical"></LinearLayout>
+        android:background="@color/bg_window">
+
+        <LinearLayout
+            android:id="@+id/llContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>
