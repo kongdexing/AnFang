@@ -82,13 +82,13 @@ public class ClockDetailActivity extends BaseActivity {
 
     private void initView() {
 
-        weekViews[0] = week1;
-        weekViews[1] = week2;
-        weekViews[2] = week3;
-        weekViews[3] = week4;
-        weekViews[4] = week5;
-        weekViews[5] = week6;
-        weekViews[6] = week7;
+        weekViews[0] = week7;
+        weekViews[1] = week1;
+        weekViews[2] = week2;
+        weekViews[3] = week3;
+        weekViews[4] = week4;
+        weekViews[5] = week5;
+        weekViews[6] = week6;
 
         for (int i = 0; i < weekViews.length; i++) {
             weekViews[i].setTag(false);
@@ -176,7 +176,7 @@ public class ClockDetailActivity extends BaseActivity {
                         weekViews[i].setTag(true);
                         weekViews[i].setBackgroundColor(getResources().getColor(R.color.text_black_2));
                     } else {
-                        weekViews[i].setTag(true);
+                        weekViews[i].setTag(false);
                         weekViews[i].setBackgroundColor(getResources().getColor(R.color.item_clicked));
                     }
                 }
@@ -303,7 +303,7 @@ public class ClockDetailActivity extends BaseActivity {
     private class APMAdapter extends ArrayWheelAdapter {
         public APMAdapter(Context context, Object[] items) {
             super(context, items);
-            setTextSize(TypedValue.COMPLEX_UNIT_PX, (int) ClockDetailActivity.this.getResources().getDimensionPixelOffset(R.dimen.sp_24));
+            setTextSize(TypedValue.COMPLEX_UNIT_PX, (int) ClockDetailActivity.this.getResources().getDimensionPixelOffset(R.dimen.sp_22));
             setTextColor(ClockDetailActivity.this.getResources().getColor(R.color.white));
         }
 

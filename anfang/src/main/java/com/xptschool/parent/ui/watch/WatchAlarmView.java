@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -50,14 +51,6 @@ public class WatchAlarmView extends BaseInfoView {
         super(context, attrs);
         View view = LayoutInflater.from(context).inflate(R.layout.view_watch_clock, this, true);
         ButterKnife.bind(view);
-
-
-        switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
-            }
-        });
     }
 
     /**
@@ -89,7 +82,24 @@ public class WatchAlarmView extends BaseInfoView {
             //开关
             String open = clock[1];
             switch1.setChecked("1".equals(open) ? true : false);
+            switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    Log.i("AlarmView", "onCheckedChanged: " + b);
+                    String open = switch1.isChecked() ? "1" : "0";
+                    try {
+                        String[] alarms = currentAlarm.split("-");
+                        alarms[1] = open;
+                        String strAlarm = alarms[0] + "-" + alarms[1] + "-" + alarms[2];
+                        if (alarms.length == 4) {
+                            strAlarm += "-" + alarms[3];
+                        }
+                        updateAlarm(strAlarm, currentAlarmIndex);
+                    } catch (Exception ex) {
 
+                    }
+                }
+            });
             //频率
             String rate = clock[2];
             if ("1".equals(rate)) {
@@ -125,18 +135,7 @@ public class WatchAlarmView extends BaseInfoView {
                 break;
             case R.id.switch1:
                 Log.i("AlarmView", "onCheckedChanged: " + switch1.isChecked());
-                String open = switch1.isChecked() ? "1" : "0";
-                try {
-                    String[] alarms = currentAlarm.split("-");
-                    alarms[1] = open;
-                    String strAlarm = alarms[0] + "-" + alarms[1] + "-" + alarms[2];
-                    if (alarms.length == 4) {
-                        strAlarm += "-" + alarms[3];
-                    }
-                    updateAlarm(strAlarm, currentAlarmIndex);
-                } catch (Exception ex) {
 
-                }
                 break;
         }
     }

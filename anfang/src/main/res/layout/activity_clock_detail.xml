@@ -126,6 +126,11 @@
             android:layout_marginTop="@dimen/dp_10">
 
             <TextView
+                android:id="@+id/week7"
+                style="@style/alarm_week"
+                android:text="日" />
+
+            <TextView
                 android:id="@+id/week1"
                 style="@style/alarm_week"
                 android:text="一" />
@@ -155,10 +160,6 @@
                 style="@style/alarm_week"
                 android:text="六" />
 
-            <TextView
-                android:id="@+id/week7"
-                style="@style/alarm_week"
-                android:text="日" />
 
         </LinearLayout>
     </LinearLayout>
@@ -167,9 +168,9 @@
         android:id="@+id/ok"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_40"
-        android:layout_marginTop="@dimen/dp_20"
         android:layout_marginLeft="@dimen/dp_40"
         android:layout_marginRight="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_20"
         android:background="@drawable/btn_bg_normal"
         android:gravity="center"
         android:text="保存"

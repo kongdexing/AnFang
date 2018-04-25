@@ -179,5 +179,8 @@ public class HttpAction {
     public static String GET_WATCH_ALARM_LIST = HEAD + "Watch/UpAlarmTime";
     //修改闹钟
     public static String GET_WATCH_ALARM_EDIT = HEAD + "Watch/SetAlarmTime";
+    //远程监听
+    public static String GET_WATCH_Monitor = HEAD + "Watch/SetMonitor";
+
 
 }
