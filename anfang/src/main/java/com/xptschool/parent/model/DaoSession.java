@@ -19,6 +19,7 @@ import com.xptschool.parent.model.BeanParent;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.BeanTeacher;
 import com.xptschool.parent.model.BeanUser;
+import com.xptschool.parent.model.BeanWChat;
 import com.xptschool.parent.model.ContactParent;
 import com.xptschool.parent.model.ContactSchool;
 import com.xptschool.parent.model.ContactStudent;
@@ -35,6 +36,7 @@ import com.xptschool.parent.model.BeanParentDao;
 import com.xptschool.parent.model.BeanStudentDao;
 import com.xptschool.parent.model.BeanTeacherDao;
 import com.xptschool.parent.model.BeanUserDao;
+import com.xptschool.parent.model.BeanWChatDao;
 import com.xptschool.parent.model.ContactParentDao;
 import com.xptschool.parent.model.ContactSchoolDao;
 import com.xptschool.parent.model.ContactStudentDao;
@@ -60,6 +62,7 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig beanStudentDaoConfig;
     private final DaoConfig beanTeacherDaoConfig;
     private final DaoConfig beanUserDaoConfig;
+    private final DaoConfig beanWChatDaoConfig;
     private final DaoConfig contactParentDaoConfig;
     private final DaoConfig contactSchoolDaoConfig;
     private final DaoConfig contactStudentDaoConfig;
@@ -76,6 +79,7 @@ public class DaoSession extends AbstractDaoSession {
     private final BeanStudentDao beanStudentDao;
     private final BeanTeacherDao beanTeacherDao;
     private final BeanUserDao beanUserDao;
+    private final BeanWChatDao beanWChatDao;
     private final ContactParentDao contactParentDao;
     private final ContactSchoolDao contactSchoolDao;
     private final ContactStudentDao contactStudentDao;
@@ -118,6 +122,9 @@ public class DaoSession extends AbstractDaoSession {
         beanUserDaoConfig = daoConfigMap.get(BeanUserDao.class).clone();
         beanUserDaoConfig.initIdentityScope(type);
 
+        beanWChatDaoConfig = daoConfigMap.get(BeanWChatDao.class).clone();
+        beanWChatDaoConfig.initIdentityScope(type);
+
         contactParentDaoConfig = daoConfigMap.get(ContactParentDao.class).clone();
         contactParentDaoConfig.initIdentityScope(type);
 
@@ -141,6 +148,7 @@ public class DaoSession extends AbstractDaoSession {
         beanStudentDao = new BeanStudentDao(beanStudentDaoConfig, this);
         beanTeacherDao = new BeanTeacherDao(beanTeacherDaoConfig, this);
         beanUserDao = new BeanUserDao(beanUserDaoConfig, this);
+        beanWChatDao = new BeanWChatDao(beanWChatDaoConfig, this);
         contactParentDao = new ContactParentDao(contactParentDaoConfig, this);
         contactSchoolDao = new ContactSchoolDao(contactSchoolDaoConfig, this);
         contactStudentDao = new ContactStudentDao(contactStudentDaoConfig, this);
@@ -157,6 +165,7 @@ public class DaoSession extends AbstractDaoSession {
         registerDao(BeanStudent.class, beanStudentDao);
         registerDao(BeanTeacher.class, beanTeacherDao);
         registerDao(BeanUser.class, beanUserDao);
+        registerDao(BeanWChat.class, beanWChatDao);
         registerDao(ContactParent.class, contactParentDao);
         registerDao(ContactSchool.class, contactSchoolDao);
         registerDao(ContactStudent.class, contactStudentDao);
@@ -175,6 +184,7 @@ public class DaoSession extends AbstractDaoSession {
         beanStudentDaoConfig.getIdentityScope().clear();
         beanTeacherDaoConfig.getIdentityScope().clear();
         beanUserDaoConfig.getIdentityScope().clear();
+        beanWChatDaoConfig.getIdentityScope().clear();
         contactParentDaoConfig.getIdentityScope().clear();
         contactSchoolDaoConfig.getIdentityScope().clear();
         contactStudentDaoConfig.getIdentityScope().clear();
@@ -223,6 +233,10 @@ public class DaoSession extends AbstractDaoSession {
 
     public BeanUserDao getBeanUserDao() {
         return beanUserDao;
+    }
+
+    public BeanWChatDao getBeanWChatDao() {
+        return beanWChatDao;
     }
 
     public ContactParentDao getContactParentDao() {

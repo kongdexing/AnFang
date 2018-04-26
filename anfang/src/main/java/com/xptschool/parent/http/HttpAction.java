@@ -181,6 +181,9 @@ public class HttpAction {
     public static String GET_WATCH_ALARM_EDIT = HEAD + "Watch/SetAlarmTime";
     //远程监听
     public static String GET_WATCH_Monitor = HEAD + "Watch/SetMonitor";
+    //绑定|解绑设备
+    public static String GET_WATCH_Bind = HEAD + "Watch/BindDevice";
+
 
 
 }

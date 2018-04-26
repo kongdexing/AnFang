@@ -35,6 +35,7 @@
         android:gravity="center"
         android:hint="未绑定手机号"
         android:text="13552676774"
+        android:inputType="phone"
         android:textColor="@color/color_black_1"
         android:textColorHint="@color/color_black_3"
         android:textSize="@dimen/sp_24" />

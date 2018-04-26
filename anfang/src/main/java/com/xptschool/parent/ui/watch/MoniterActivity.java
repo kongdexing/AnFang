@@ -12,6 +12,7 @@ import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
@@ -21,8 +22,10 @@ import com.android.volley.common.VolleyHttpService;
 import com.jph.takephoto.app.TakePhoto;
 import com.jph.takephoto.uitl.TFileUtils;
 import com.xptschool.parent.R;
+import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyRequestListener;
+import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.ui.album.LocalImageTHelper;
 import com.xptschool.parent.ui.main.BaseActivity;
 import com.xptschool.parent.ui.mine.MyInfoActivity;
@@ -33,6 +36,7 @@ import com.xptschool.parent.view.MoniterView;
 
 import java.io.File;
 
+import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
@@ -42,12 +46,29 @@ public class MoniterActivity extends BaseActivity {
 
     private PopupWindow picPopup;
 
+    @BindView(R.id.txtNickName)
+    TextView txtNickName;
+    @BindView(R.id.txtPhone)
+    TextView txtPhone;
+    @BindView(R.id.txtCardPhone)
+    TextView txtCardPhone;
+    BeanStudent currentStudent = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_moniter);
         setTitle(R.string.home_moniter);
+        setMonitorData();
+    }
 
+    private void setMonitorData() {
+        currentStudent = XPTApplication.getInstance().getCurrentWatchStu();
+        if (currentStudent != null) {
+            txtNickName.setText(currentStudent.getStu_name());
+            txtCardPhone.setText(currentStudent.getCard_phone());
+            txtPhone.setText(currentStudent.getMonitor());
+        }
     }
 
     @OnClick({R.id.rlItem1})
@@ -66,7 +87,7 @@ public class MoniterActivity extends BaseActivity {
             TFileUtils.setCacheFile(null);
 
             MoniterView view1 = new MoniterView(this);
-            view1.setPhone("17600200500");
+            view1.setPhone(currentStudent.getMonitor());
 
             picPopup = new PopupWindow(view1,
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);
@@ -86,7 +107,7 @@ public class MoniterActivity extends BaseActivity {
 
     public void setMonitorPhone(String phone) {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.GET_WATCH_Monitor,
-                new VolleyHttpParamsEntity().addParam("imei", "867587027683984")
+                new VolleyHttpParamsEntity().addParam("imei", XPTApplication.getInstance().getCurrentWatchIMEI())
                         .addParam("phone", phone),
                 new MyVolleyRequestListener() {
                     @Override

@@ -9,6 +9,7 @@ import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.xptschool.parent.R;
+import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyRequestListener;
@@ -45,7 +46,7 @@ public class WalkActivity extends BaseActivity {
 
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.GET_WATCH_STEP,
                 new VolleyHttpParamsEntity().addParam("date", CommonUtil.getCurrentDate())
-                        .addParam("imei", "867587027683984"),
+                        .addParam("imei", XPTApplication.getInstance().getCurrentWatchIMEI()),
                 new MyVolleyRequestListener() {
                     @Override
                     public void onStart() {
@@ -58,6 +59,7 @@ public class WalkActivity extends BaseActivity {
                         super.onResponse(volleyHttpResult);
                         hideProgress();
                         if (volleyHttpResult.getStatus() == HttpAction.SUCCESS) {
+
                             txtNum.setText(volleyHttpResult.getInfo());
                         }
                     }

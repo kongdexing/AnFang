@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/llBind2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/mine_item_selector"
+        android:padding="@dimen/dp_15"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/user_defaulthead" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_40"
+            android:layout_marginRight="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_10"
+            android:gravity="center"
+            android:text="输入ID号码绑定"
+            android:textSize="@dimen/sp_22" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_40"
+            android:layout_marginRight="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_10"
+            android:gravity="center"
+            android:text="说明书或手表上的ID序列号"
+            android:textSize="@dimen/sp_16" />
+
+    </LinearLayout>
+
+</RelativeLayout>

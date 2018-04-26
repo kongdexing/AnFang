@@ -712,7 +712,9 @@
         <activity android:name=".ui.watch.ShutDownActivity" />
         <activity android:name=".ui.watch.ClockActivity" />
         <activity android:name=".ui.watch.ClockDetailActivity" />
-        <activity android:name=".ui.watch.MoniterActivity"></activity>
+        <activity android:name=".ui.watch.MoniterActivity" />
+        <activity android:name=".ui.watch.BindWatch1Activity" />
+        <activity android:name=".ui.watch.BindWatchInputActivity"></activity>
     </application>
 
 </manifest>

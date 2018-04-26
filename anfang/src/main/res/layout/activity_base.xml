@@ -8,19 +8,22 @@
         android:id="@+id/includeActionBar"
         layout="@layout/layout_actionbar" />
 
-    <ScrollView
+    <!--fillViewport="true" 子View小于ScrollView高度时就会占满父View-->
+
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:fillViewport="true">-->
+
+    <!--</ScrollView>-->
+
+    <LinearLayout
+        android:id="@+id/llContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg_window">
+        android:background="@color/bg_window"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/llContent"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-        </LinearLayout>
-
-    </ScrollView>
+    </LinearLayout>
 
 </LinearLayout>

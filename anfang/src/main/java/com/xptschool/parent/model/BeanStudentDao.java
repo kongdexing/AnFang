@@ -34,13 +34,14 @@ public class BeanStudentDao extends AbstractDao<BeanStudent, String> {
         public final static Property Birth_date = new Property(9, String.class, "birth_date", false, "BIRTH_DATE");
         public final static Property Rx_date = new Property(10, String.class, "rx_date", false, "RX_DATE");
         public final static Property Sex = new Property(11, String.class, "sex", false, "SEX");
-        public final static Property S_name = new Property(12, String.class, "s_name", false, "S_NAME");
-        public final static Property A_name = new Property(13, String.class, "a_name", false, "A_NAME");
-        public final static Property G_name = new Property(14, String.class, "g_name", false, "G_NAME");
-        public final static Property C_name = new Property(15, String.class, "c_name", false, "C_NAME");
-        public final static Property Sos = new Property(16, String.class, "sos", false, "SOS");
-        public final static Property Whitelist = new Property(17, String.class, "whitelist", false, "WHITELIST");
-        public final static Property Monitor = new Property(18, String.class, "monitor", false, "MONITOR");
+        public final static Property Devicetype = new Property(12, String.class, "devicetype", false, "DEVICETYPE");
+        public final static Property S_name = new Property(13, String.class, "s_name", false, "S_NAME");
+        public final static Property A_name = new Property(14, String.class, "a_name", false, "A_NAME");
+        public final static Property G_name = new Property(15, String.class, "g_name", false, "G_NAME");
+        public final static Property C_name = new Property(16, String.class, "c_name", false, "C_NAME");
+        public final static Property Sos = new Property(17, String.class, "sos", false, "SOS");
+        public final static Property Whitelist = new Property(18, String.class, "whitelist", false, "WHITELIST");
+        public final static Property Monitor = new Property(19, String.class, "monitor", false, "MONITOR");
     };
 
 
@@ -68,13 +69,14 @@ public class BeanStudentDao extends AbstractDao<BeanStudent, String> {
                 "\"BIRTH_DATE\" TEXT," + // 9: birth_date
                 "\"RX_DATE\" TEXT," + // 10: rx_date
                 "\"SEX\" TEXT," + // 11: sex
-                "\"S_NAME\" TEXT," + // 12: s_name
-                "\"A_NAME\" TEXT," + // 13: a_name
-                "\"G_NAME\" TEXT," + // 14: g_name
-                "\"C_NAME\" TEXT," + // 15: c_name
-                "\"SOS\" TEXT," + // 16: sos
-                "\"WHITELIST\" TEXT," + // 17: whitelist
-                "\"MONITOR\" TEXT);"); // 18: monitor
+                "\"DEVICETYPE\" TEXT," + // 12: devicetype
+                "\"S_NAME\" TEXT," + // 13: s_name
+                "\"A_NAME\" TEXT," + // 14: a_name
+                "\"G_NAME\" TEXT," + // 15: g_name
+                "\"C_NAME\" TEXT," + // 16: c_name
+                "\"SOS\" TEXT," + // 17: sos
+                "\"WHITELIST\" TEXT," + // 18: whitelist
+                "\"MONITOR\" TEXT);"); // 19: monitor
     }
 
     /** Drops the underlying database table. */
@@ -147,39 +149,44 @@ public class BeanStudentDao extends AbstractDao<BeanStudent, String> {
             stmt.bindString(12, sex);
         }
  
+        String devicetype = entity.getDevicetype();
+        if (devicetype != null) {
+            stmt.bindString(13, devicetype);
+        }
+ 
         String s_name = entity.getS_name();
         if (s_name != null) {
-            stmt.bindString(13, s_name);
+            stmt.bindString(14, s_name);
         }
  
         String a_name = entity.getA_name();
         if (a_name != null) {
-            stmt.bindString(14, a_name);
+            stmt.bindString(15, a_name);
         }
  
         String g_name = entity.getG_name();
         if (g_name != null) {
-            stmt.bindString(15, g_name);
+            stmt.bindString(16, g_name);
         }
  
         String c_name = entity.getC_name();
         if (c_name != null) {
-            stmt.bindString(16, c_name);
+            stmt.bindString(17, c_name);
         }
  
         String sos = entity.getSos();
         if (sos != null) {
-            stmt.bindString(17, sos);
+            stmt.bindString(18, sos);
         }
  
         String whitelist = entity.getWhitelist();
         if (whitelist != null) {
-            stmt.bindString(18, whitelist);
+            stmt.bindString(19, whitelist);
         }
  
         String monitor = entity.getMonitor();
         if (monitor != null) {
-            stmt.bindString(19, monitor);
+            stmt.bindString(20, monitor);
         }
     }
 
@@ -247,39 +254,44 @@ public class BeanStudentDao extends AbstractDao<BeanStudent, String> {
             stmt.bindString(12, sex);
         }
  
+        String devicetype = entity.getDevicetype();
+        if (devicetype != null) {
+            stmt.bindString(13, devicetype);
+        }
+ 
         String s_name = entity.getS_name();
         if (s_name != null) {
-            stmt.bindString(13, s_name);
+            stmt.bindString(14, s_name);
         }
  
         String a_name = entity.getA_name();
         if (a_name != null) {
-            stmt.bindString(14, a_name);
+            stmt.bindString(15, a_name);
         }
  
         String g_name = entity.getG_name();
         if (g_name != null) {
-            stmt.bindString(15, g_name);
+            stmt.bindString(16, g_name);
         }
  
         String c_name = entity.getC_name();
         if (c_name != null) {
-            stmt.bindString(16, c_name);
+            stmt.bindString(17, c_name);
         }
  
         String sos = entity.getSos();
         if (sos != null) {
-            stmt.bindString(17, sos);
+            stmt.bindString(18, sos);
         }
  
         String whitelist = entity.getWhitelist();
         if (whitelist != null) {
-            stmt.bindString(18, whitelist);
+            stmt.bindString(19, whitelist);
         }
  
         String monitor = entity.getMonitor();
         if (monitor != null) {
-            stmt.bindString(19, monitor);
+            stmt.bindString(20, monitor);
         }
     }
 
@@ -303,13 +315,14 @@ public class BeanStudentDao extends AbstractDao<BeanStudent, String> {
             cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // birth_date
             cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // rx_date
             cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // sex
-            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // s_name
-            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // a_name
-            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // g_name
-            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // c_name
-            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // sos
-            cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17), // whitelist
-            cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18) // monitor
+            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // devicetype
+            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // s_name
+            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // a_name
+            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // g_name
+            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // c_name
+            cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17), // sos
+            cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18), // whitelist
+            cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19) // monitor
         );
         return entity;
     }
@@ -328,13 +341,14 @@ public class BeanStudentDao extends AbstractDao<BeanStudent, String> {
         entity.setBirth_date(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
         entity.setRx_date(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
         entity.setSex(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
-        entity.setS_name(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
-        entity.setA_name(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
-        entity.setG_name(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
-        entity.setC_name(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
-        entity.setSos(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
-        entity.setWhitelist(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
-        entity.setMonitor(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
+        entity.setDevicetype(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
+        entity.setS_name(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
+        entity.setA_name(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
+        entity.setG_name(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
+        entity.setC_name(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
+        entity.setSos(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
+        entity.setWhitelist(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
+        entity.setMonitor(cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19));
      }
     
     @Override

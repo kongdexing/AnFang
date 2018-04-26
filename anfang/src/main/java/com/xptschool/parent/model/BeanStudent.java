@@ -28,6 +28,8 @@ public class BeanStudent extends SpinnerModel implements Serializable {
     private String rx_date;
     //0 女 1 男
     private String sex;
+    //设备类型 1学生卡，2手表
+    private String devicetype = "";
     private String s_name;
     private String a_name;
     private String g_name;
@@ -36,12 +38,12 @@ public class BeanStudent extends SpinnerModel implements Serializable {
     private String whitelist;
     private String monitor;
 
-    @Generated(hash = 1606108849)
+    @Generated(hash = 1971354211)
     public BeanStudent(String s_id, String a_id, String g_id, String c_id,
                        String stu_id, String stu_name, String stu_no, String imei_id,
                        String card_phone, String birth_date, String rx_date, String sex,
-                       String s_name, String a_name, String g_name, String c_name, String sos,
-                       String whitelist, String monitor) {
+                       String devicetype, String s_name, String a_name, String g_name,
+                       String c_name, String sos, String whitelist, String monitor) {
         this.s_id = s_id;
         this.a_id = a_id;
         this.g_id = g_id;
@@ -54,6 +56,7 @@ public class BeanStudent extends SpinnerModel implements Serializable {
         this.birth_date = birth_date;
         this.rx_date = rx_date;
         this.sex = sex;
+        this.devicetype = devicetype;
         this.s_name = s_name;
         this.a_name = a_name;
         this.g_name = g_name;
@@ -132,7 +135,7 @@ public class BeanStudent extends SpinnerModel implements Serializable {
     }
 
     public String getCard_phone() {
-        return card_phone;
+        return card_phone == null ? "" : card_phone;
     }
 
     public void setCard_phone(String card_phone) {
@@ -161,6 +164,17 @@ public class BeanStudent extends SpinnerModel implements Serializable {
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public String getDevice_type() {
+        return devicetype;
+    }
+
+    /**
+     * @param device_type 设备类型 1学生卡，2手表
+     */
+    public void setDevice_type(String device_type) {
+        this.devicetype = device_type;
     }
 
     public String getS_name() {
@@ -212,7 +226,7 @@ public class BeanStudent extends SpinnerModel implements Serializable {
     }
 
     public String getMonitor() {
-        return monitor;
+        return monitor == null ? "" : monitor;
     }
 
     public void setMonitor(String monitor) {
@@ -247,5 +261,13 @@ public class BeanStudent extends SpinnerModel implements Serializable {
                 ", whitelist='" + whitelist + '\'' +
                 ", monitor='" + monitor + '\'' +
                 '}';
+    }
+
+    public String getDevicetype() {
+        return this.devicetype;
+    }
+
+    public void setDevicetype(String devicetype) {
+        this.devicetype = devicetype;
     }
 }

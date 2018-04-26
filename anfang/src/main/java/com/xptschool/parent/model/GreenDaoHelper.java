@@ -134,6 +134,12 @@ public class GreenDaoHelper {
         }
     }
 
+    public void insertStudent(BeanStudent student){
+        if (writeDaoSession!=null){
+            writeDaoSession.getBeanStudentDao().insert(student);
+        }
+    }
+
     /**
      * 执教班级写入数据库
      */

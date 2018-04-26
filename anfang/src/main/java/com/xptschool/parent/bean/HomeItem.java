@@ -18,6 +18,8 @@ public class HomeItem {
     private boolean showForParent = true;
     //老师是否可见
     private boolean showForTeacher = true;
+    //检测是否有手表
+    private boolean checkWatch = false;
 
     public int getIconId() {
         return iconId;
@@ -61,6 +63,15 @@ public class HomeItem {
 
     public HomeItem setShowForTeacher(boolean showForTeacher) {
         this.showForTeacher = showForTeacher;
+        return this;
+    }
+
+    public boolean isCheckWatch() {
+        return checkWatch;
+    }
+
+    public HomeItem setCheckWatch(boolean checkWatch) {
+        this.checkWatch = checkWatch;
         return this;
     }
 }

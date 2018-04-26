@@ -19,6 +19,7 @@ import com.android.widget.wheelview.WheelView;
 import com.android.widget.wheelview.adapter.ArrayWheelAdapter;
 import com.android.widget.wheelview.adapter.NumericWheelAdapter;
 import com.xptschool.parent.R;
+import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.ui.main.BaseActivity;
@@ -276,7 +277,7 @@ public class ClockDetailActivity extends BaseActivity {
         }
 
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.GET_WATCH_ALARM_EDIT,
-                new VolleyHttpParamsEntity().addParam("imei", "867587027683984")
+                new VolleyHttpParamsEntity().addParam("imei", XPTApplication.getInstance().getCurrentWatchIMEI())
                         .addParam("AlarmTime", allAlarm),
                 new MyVolleyRequestListener() {
                     @Override

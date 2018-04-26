@@ -163,7 +163,6 @@ public class HomeFragment extends BaseFragment {
         return mRootView;
     }
 
-
     @Override
     public void onResume() {
         super.onResume();
@@ -608,21 +607,26 @@ public class HomeFragment extends BaseFragment {
                 .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_honour))
                 .setIntent(new Intent(activity, isParent ? HonorPActivity.class : HonorTActivity.class)));
 
-        //碰碰交友
-        homeItems.add(new HomeItem()
-                .setIconId(R.drawable.home_friend)
-                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_friend))
-                .setIntent(new Intent(activity, FriendActivity.class)));
-        //微聊
-        homeItems.add(new HomeItem()
-                .setIconId(R.drawable.home_chat)
-                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_chat))
-                .setIntent(new Intent(activity, ChatListActivity.class)));
-        //计步
-        homeItems.add(new HomeItem()
-                .setIconId(R.drawable.home_walk)
-                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_walk))
-                .setIntent(new Intent(activity, WalkActivity.class)));
+        if (isParent) {
+            //碰碰交友
+            homeItems.add(new HomeItem()
+                    .setIconId(R.drawable.home_friend)
+                    .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_friend))
+//                    .setCheckWatch(true)
+                    .setIntent(new Intent(activity, FriendActivity.class)));
+            //微聊
+            homeItems.add(new HomeItem()
+                    .setIconId(R.drawable.home_chat)
+                    .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_chat))
+//                    .setCheckWatch(true)
+                    .setIntent(new Intent(activity, ChatListActivity.class)));
+            //计步
+            homeItems.add(new HomeItem()
+                    .setIconId(R.drawable.home_walk)
+                    .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_walk))
+                    .setCheckWatch(true)
+                    .setIntent(new Intent(activity, WalkActivity.class)));
+        }
 
         HomeItemGridAdapter itemAdapter = new HomeItemGridAdapter(activity);
         if (grd_school != null)
@@ -631,31 +635,37 @@ public class HomeFragment extends BaseFragment {
 
         //安全设置
         List<HomeItem> secretItems = new ArrayList<HomeItem>();
-        //语音监护
-        secretItems.add(new HomeItem()
-                .setIconId(R.drawable.home_moniter)
-                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_moniter))
-                .setIntent(new Intent(activity, MoniterActivity.class)));
-        //闹钟设置
-        secretItems.add(new HomeItem()
-                .setIconId(R.drawable.home_clock)
-                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_clock))
-                .setIntent(new Intent(activity, ClockActivity.class)));
-        //远程关机
-        secretItems.add(new HomeItem()
-                .setIconId(R.drawable.home_shutdown)
-                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_shutdown))
-                .setIntent(new Intent(activity,ShutDownActivity.class)));
+        if (isParent) {
+            //语音监护
+            secretItems.add(new HomeItem()
+                    .setIconId(R.drawable.home_moniter)
+                    .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_moniter))
+                    .setCheckWatch(true)
+                    .setIntent(new Intent(activity, MoniterActivity.class)));
+            //闹钟设置
+            secretItems.add(new HomeItem()
+                    .setIconId(R.drawable.home_clock)
+                    .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_clock))
+                    .setCheckWatch(true)
+                    .setIntent(new Intent(activity, ClockActivity.class)));
+            //远程关机
+            secretItems.add(new HomeItem()
+                    .setIconId(R.drawable.home_shutdown)
+                    .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_shutdown))
+                    .setCheckWatch(true)
+                    .setIntent(new Intent(activity, ShutDownActivity.class)));
+            //电子围栏
+            secretItems.add(new HomeItem()
+                    .setIconId(R.drawable.home_fence)
+                    .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_fence))
+                    .setIntent(new Intent(activity, FenceListActivity.class)));
+        }
         //报警查询
         secretItems.add(new HomeItem()
                 .setIconId(R.drawable.home_alarm)
                 .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_alarm))
                 .setIntent(new Intent(activity, isParent ? AlarmActivity.class : AlarmTActivity.class)));
-        //电子围栏
-        secretItems.add(new HomeItem()
-                .setIconId(R.drawable.home_fence)
-                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_fence))
-                .setIntent(new Intent(activity, FenceListActivity.class)));
+
         HomeItemGridAdapter secretAdapter = new HomeItemGridAdapter(activity);
         if (grd_secret != null)
             grd_secret.setAdapter(secretAdapter);

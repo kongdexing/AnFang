@@ -8,6 +8,7 @@ import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.xptschool.parent.R;
+import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.ui.main.BaseActivity;
@@ -50,7 +51,7 @@ public class ShutDownActivity extends BaseActivity {
 
     private void shutdownWatch() {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.GET_WATCH_SHUTDOWN,
-                new VolleyHttpParamsEntity().addParam("imei", "867587027680824")
+                new VolleyHttpParamsEntity().addParam("imei", XPTApplication.getInstance().getCurrentWatchIMEI())
                         .addParam("state", "1"), new MyVolleyRequestListener() {
                     @Override
                     public void onStart() {

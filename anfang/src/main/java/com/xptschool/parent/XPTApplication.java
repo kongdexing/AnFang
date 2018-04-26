@@ -36,6 +36,7 @@ import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.ease.EaseHelper;
+import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.alarm.AlarmMapActivity;
 import com.xptschool.parent.ui.album.LocalImagePHelper;
@@ -54,6 +55,8 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.net.Proxy;
+import java.util.ArrayList;
+import java.util.List;
 
 public class XPTApplication extends Application {
 
@@ -70,6 +73,8 @@ public class XPTApplication extends Application {
     public static final String WXAPP_ID = "wx1af4f660ce9e6b37";
     private Display display;
     public static String TAG = XPTApplication.class.getSimpleName();
+    private static String currentWatchIMEI = "";
+    private static BeanStudent currentWatchStu = null;
 
     {
         PlatformConfig.setWeixin("wx1af4f660ce9e6b37", "5bb696d9ccd75a38c8a0bfe0675559b3");
@@ -222,7 +227,7 @@ public class XPTApplication extends Application {
                 startActivity(intent);
             } else if ("register".equals(activity)) {
 
-                ToastUtils.showToast(XPTApplication.this,"您的用户注册成功了。。。");
+                ToastUtils.showToast(XPTApplication.this, "您的用户注册成功了。。。");
 
             }
         } catch (Exception ex) {
@@ -341,6 +346,34 @@ public class XPTApplication extends Application {
 
     public void setCurrent_user_type(String current_user_type) {
         SharedPreferencesUtil.saveData(this, SharedPreferencesUtil.KEY_USER_TYPE, current_user_type);
+    }
+
+    public String getCurrentWatchIMEI() {
+        if (currentWatchIMEI.isEmpty()) {
+            List<BeanStudent> students = GreenDaoHelper.getInstance().getStudents();
+            for (int i = 0; i < students.size(); i++) {
+                BeanStudent student = students.get(i);
+                if (student.getDevice_type().equals("2")) {
+                    currentWatchIMEI = student.getImei_id();
+                    break;
+                }
+            }
+        }
+        return currentWatchIMEI;
+    }
+
+    public BeanStudent getCurrentWatchStu() {
+        if (currentWatchStu == null) {
+            List<BeanStudent> students = GreenDaoHelper.getInstance().getStudents();
+            for (int i = 0; i < students.size(); i++) {
+                BeanStudent student = students.get(i);
+                if (student.getDevice_type().equals("2")) {
+                    currentWatchStu = student;
+                    break;
+                }
+            }
+        }
+        return currentWatchStu;
     }
 
     public boolean isLoggedIn() {

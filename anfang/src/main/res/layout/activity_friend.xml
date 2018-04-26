@@ -7,7 +7,7 @@
         android:id="@+id/txtNoFriend"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible"
+        android:visibility="gone"
         android:gravity="center"
         android:textSize="@dimen/sp_18"
         android:text="您还没有碰碰好友呦，赶紧碰碰添加吧！"/>
@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_10"
         android:background="@color/color_lay1"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <ImageView
             android:id="@+id/img_watch"

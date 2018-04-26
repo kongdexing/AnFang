@@ -11,6 +11,7 @@ import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.xptschool.parent.R;
+import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.ui.main.BaseActivity;
@@ -23,7 +24,6 @@ public class ClockActivity extends BaseActivity {
     @BindView(R.id.container)
     LinearLayout container;
     public String[] alarmArray = new String[3];
-    public String imei = "867587027683984";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +51,7 @@ public class ClockActivity extends BaseActivity {
 
     private void getAlarmList() {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.GET_WATCH_ALARM_LIST,
-                new VolleyHttpParamsEntity().addParam("imei", imei), new MyVolleyRequestListener() {
+                new VolleyHttpParamsEntity().addParam("imei", XPTApplication.getInstance().getCurrentWatchIMEI()), new MyVolleyRequestListener() {
                     @Override
                     public void onStart() {
                         super.onStart();
@@ -98,48 +98,6 @@ public class ClockActivity extends BaseActivity {
                     }
                 });
 
-    }
-
-    public void updateAlarm(String alarm, int index) {
-        String allAlarm = "";
-
-        try {
-            if (alarm != null) {
-                alarmArray[index] = alarm;
-            }
-
-            for (int i = 0; i < alarmArray.length; i++) {
-                allAlarm += alarmArray[i] + ",";
-            }
-            allAlarm = allAlarm.substring(0, allAlarm.length() - 1);
-        } catch (Exception ex) {
-            allAlarm = "";
-        }
-
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.GET_WATCH_ALARM_EDIT,
-                new VolleyHttpParamsEntity().addParam("imei", imei)
-                        .addParam("AlarmTime", allAlarm),
-                new MyVolleyRequestListener() {
-                    @Override
-                    public void onStart() {
-                        super.onStart();
-                        showProgress("正在设置闹钟");
-                    }
-
-                    @Override
-                    public void onResponse(VolleyHttpResult volleyHttpResult) {
-                        super.onResponse(volleyHttpResult);
-                        hideProgress();
-
-                    }
-
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        super.onErrorResponse(volleyError);
-                        hideProgress();
-
-                    }
-                });
     }
 
 }

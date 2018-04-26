@@ -90,6 +90,7 @@
         <item name="android:textSize">@dimen/sp_15</item>
         <item name="android:layout_marginLeft">@dimen/dp_10</item>
         <item name="android:layout_marginTop">@dimen/dp_10</item>
+        <item name="android:layout_marginRight">@dimen/dp_15</item>
         <item name="android:layout_alignBottom">@dimen/dp_10</item>
         <item name="android:layout_gravity">center</item>
     </style>

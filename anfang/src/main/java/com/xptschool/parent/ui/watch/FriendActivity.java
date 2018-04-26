@@ -12,12 +12,15 @@ import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.xptschool.parent.R;
+import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.ui.login.LoginActivity;
 import com.xptschool.parent.ui.main.BaseActivity;
 import com.xptschool.parent.util.ToastUtils;
 import com.xptschool.parent.view.CustomDialog;
+
+import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -28,6 +31,10 @@ public class FriendActivity extends BaseActivity {
     RelativeLayout rlFriend1;
     @BindView(R.id.txtNoFriend)
     TextView txtNoFriend;
+
+    @BindView(R.id.txtIMEI)
+    TextView txtIMEI;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +65,7 @@ public class FriendActivity extends BaseActivity {
 
     private void getFriendList() {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.GET_WATCH_FRIENDLIST,
-                new VolleyHttpParamsEntity().addParam("imei", "867587027680824"),
+                new VolleyHttpParamsEntity().addParam("imei", XPTApplication.getInstance().getCurrentWatchIMEI()),
                 new MyVolleyRequestListener() {
                     @Override
                     public void onStart() {
@@ -72,7 +79,16 @@ public class FriendActivity extends BaseActivity {
                         hideProgress();
                         switch (volleyHttpResult.getStatus()) {
                             case HttpAction.SUCCESS:
-
+                                try {
+                                    rlFriend1.setVisibility(View.VISIBLE);
+                                    txtNoFriend.setVisibility(View.GONE);
+                                    JSONObject jsonObject = new JSONObject(volleyHttpResult.getData().toString());
+                                    txtIMEI.setText(jsonObject.getString("id"));
+                                } catch (Exception ex) {
+                                    ToastUtils.showToast(FriendActivity.this, "数据解析错误");
+                                    rlFriend1.setVisibility(View.GONE);
+                                    txtNoFriend.setVisibility(View.VISIBLE);
+                                }
                                 break;
                             case HttpAction.FAILED:
                                 rlFriend1.setVisibility(View.GONE);

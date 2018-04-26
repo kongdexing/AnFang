@@ -14,7 +14,10 @@ import android.widget.TextView;
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.bean.HomeItem;
+import com.xptschool.parent.model.BeanStudent;
+import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.login.LoginActivity;
+import com.xptschool.parent.ui.watch.BindWatch1Activity;
 import com.xptschool.parent.view.CustomDialog;
 
 import java.util.ArrayList;
@@ -77,7 +80,34 @@ public class HomeItemGridAdapter extends BaseAdapter {
         viewHolder.llHomeItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (item.isShowForParent() || item.isShowForTeacher()) {
+                if (item.isCheckWatch()) {
+                    //判断有无手表设备
+                    Boolean hasWatch = false;
+                    List<BeanStudent> students = GreenDaoHelper.getInstance().getStudents();
+                    for (int i = 0; i < students.size(); i++) {
+                        BeanStudent student = students.get(i);
+                        if (student.getDevice_type().equals("2")) {
+                            hasWatch = true;
+                            break;
+                        }
+                    }
+
+                    if (hasWatch) {
+                        //有手表
+                        mContext.startActivity(item.getIntent());
+                    } else {
+                        CustomDialog dialog = new CustomDialog(mContext);
+                        dialog.setTitle(R.string.label_tip);
+                        dialog.setMessage(R.string.message_nowatch);
+                        dialog.setAlertDialogClickListener(new CustomDialog.DialogClickListener() {
+                            @Override
+                            public void onPositiveClick() {
+                                //绑定手表
+                                mContext.startActivity(new Intent(mContext, BindWatch1Activity.class));
+                            }
+                        });
+                    }
+                } else if (item.isShowForParent() || item.isShowForTeacher()) {
                     //只有家长或老师可查看
                     //1.判断是否登录
                     //2.判断角色(暂时不用)

@@ -18,6 +18,7 @@ import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.xptschool.parent.R;
+import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.ui.mine.BaseInfoView;
@@ -159,7 +160,7 @@ public class WatchAlarmView extends BaseInfoView {
         }
 
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.GET_WATCH_ALARM_EDIT,
-                new VolleyHttpParamsEntity().addParam("imei", ((ClockActivity) mContext).imei)
+                new VolleyHttpParamsEntity().addParam("imei", XPTApplication.getInstance().getCurrentWatchIMEI())
                         .addParam("AlarmTime", allAlarm),
                 new MyVolleyRequestListener() {
                     @Override
