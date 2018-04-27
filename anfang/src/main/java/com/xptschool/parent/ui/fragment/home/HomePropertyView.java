@@ -21,6 +21,7 @@ import com.xptschool.parent.R;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.model.BeanHomeCfg;
+import com.xptschool.parent.ui.fragment.HomeItemGridAdapter;
 import com.xptschool.parent.ui.main.WebCommonActivity;
 import com.xptschool.parent.ui.mine.BaseInfoView;
 
@@ -102,18 +103,26 @@ public class HomePropertyView extends BaseInfoView {
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
             Log.i(TAG, "getView: " + position);
-            ImageView propertyImg = new ImageView(mContext);
-            AbsListView.LayoutParams layoutParams = new AbsListView.LayoutParams(LayoutParams.MATCH_PARENT, 180);
-            propertyImg.setLayoutParams(layoutParams);
-
-            propertyImg.setScaleType(ImageView.ScaleType.FIT_XY);
+            ViewHolder viewHolder = null;
+            if (convertView == null) {
+                convertView = LayoutInflater.from(mContext).inflate(
+                        R.layout.item_home_option, parent, false);
+                viewHolder = new ViewHolder();
+                viewHolder.llHomeItem = (LinearLayout) convertView.findViewById(R.id.llHomeItem);
+                viewHolder.optionImg = (ImageView) convertView.findViewById(R.id.optionImg);
+                viewHolder.optionText = (TextView) convertView.findViewById(R.id.optionText);
+                convertView.setTag(viewHolder);
+            } else {
+                viewHolder = (ViewHolder) convertView.getTag();
+            }
 
             final BeanHomeCfg homeCfg = getItem(position);
             if (homeCfg != null) {
                 ImageLoader.getInstance().displayImage(homeCfg.getImage(),
-                        new ImageViewAware(propertyImg), CommonUtil.getDefaultImageLoaderOption());
+                        new ImageViewAware(viewHolder.optionImg), CommonUtil.getDefaultImageLoaderOption());
+                viewHolder.optionText.setText(homeCfg.getTitle());
 
-                propertyImg.setOnClickListener(new OnClickListener() {
+                viewHolder.llHomeItem.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(mContext, WebCommonActivity.class);
@@ -122,8 +131,15 @@ public class HomePropertyView extends BaseInfoView {
                     }
                 });
             }
-            return propertyImg;
+
+            return convertView;
         }
+    }
+
+    class ViewHolder {
+        LinearLayout llHomeItem;
+        TextView optionText;
+        ImageView optionImg;
     }
 
 }

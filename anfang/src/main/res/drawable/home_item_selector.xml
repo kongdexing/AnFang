@@ -6,5 +6,5 @@
     <item android:drawable="@drawable/mine_item_selected" android:state_checked="true"/>
 
     <!-- default state -->
-    <item android:drawable="@color/color_lay1"/>
+    <item android:drawable="@color/white"/>
 </selector>

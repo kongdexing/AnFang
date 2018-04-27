@@ -88,13 +88,13 @@ public class NoticeAdapter extends BaseRecycleAdapter {
             mHolder.imgArrow.setVisibility(View.INVISIBLE);
         } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
             mHolder.imgArrow.setVisibility(View.VISIBLE);
-            if (notice.getFs_type().equals("1")) {
-                //自己发布的公告
-                mHolder.imgArrow.setBackgroundResource(R.drawable.arrow_right_up);
-            } else {
-                //接收到的公告
-                mHolder.imgArrow.setBackgroundResource(R.drawable.arrow_left_down);
-            }
+//            if (notice.getFs_type().equals("1")) {
+//                //自己发布的公告
+//                mHolder.imgArrow.setBackgroundResource(R.drawable.arrow_right_up);
+//            } else {
+//                //接收到的公告
+//                mHolder.imgArrow.setBackgroundResource(R.drawable.arrow_left_down);
+//            }
         }
 
         mHolder.llNoticeItem.setOnClickListener(new View.OnClickListener() {

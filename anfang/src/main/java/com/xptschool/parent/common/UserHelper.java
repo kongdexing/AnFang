@@ -62,7 +62,11 @@ public class UserHelper {
     }
 
     public void userLoginSuccess() {
-        ServerManager.getInstance().startService();
+        //判断有无手表
+        if (XPTApplication.getInstance().hasWatch()) {
+            ServerManager.getInstance().startService();
+        }
+
         Log.i(TAG, "userLoginSuccess: listener size " + listeners.size());
         for (int i = 0; i < listeners.size(); i++) {
             listeners.get(i).onUserLoginSuccess();

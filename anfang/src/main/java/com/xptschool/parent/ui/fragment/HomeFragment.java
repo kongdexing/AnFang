@@ -402,7 +402,7 @@ public class HomeFragment extends BaseFragment {
                                     JSONObject jsonData = new JSONObject(volleyHttpResult.getData().toString());
                                     Gson gson = new Gson();
 
-                                    //快乐成长
+                                    //合作产品
                                     List<BeanHomeCfg> children_goods = gson.fromJson(jsonData.getJSONArray(HomeUtil.CHILDREN_GOODS).toString(),
                                             new TypeToken<List<BeanHomeCfg>>() {
                                             }.getType());
@@ -412,7 +412,7 @@ public class HomeFragment extends BaseFragment {
                                     GreenDaoHelper.getInstance().insertHomeCfg(children_goods, HomeUtil.CHILDREN_GOODS);
                                     happyGrowView.bindData(children_goods);
 
-                                    //投资理财
+                                    //智慧金融
                                     List<BeanHomeCfg> invests = gson.fromJson(jsonData.getJSONArray(HomeUtil.INVEST).toString(),
                                             new TypeToken<List<BeanHomeCfg>>() {
                                             }.getType());

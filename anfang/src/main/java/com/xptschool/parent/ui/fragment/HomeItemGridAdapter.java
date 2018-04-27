@@ -82,17 +82,7 @@ public class HomeItemGridAdapter extends BaseAdapter {
             public void onClick(View view) {
                 if (item.isCheckWatch()) {
                     //判断有无手表设备
-                    Boolean hasWatch = false;
-                    List<BeanStudent> students = GreenDaoHelper.getInstance().getStudents();
-                    for (int i = 0; i < students.size(); i++) {
-                        BeanStudent student = students.get(i);
-                        if (student.getDevice_type().equals("2")) {
-                            hasWatch = true;
-                            break;
-                        }
-                    }
-
-                    if (hasWatch) {
+                    if (XPTApplication.getInstance().hasWatch()) {
                         //有手表
                         mContext.startActivity(item.getIntent());
                     } else {

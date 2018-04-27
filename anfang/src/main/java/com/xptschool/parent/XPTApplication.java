@@ -350,6 +350,19 @@ public class XPTApplication extends Application {
         SharedPreferencesUtil.saveData(this, SharedPreferencesUtil.KEY_USER_TYPE, current_user_type);
     }
 
+    public boolean hasWatch(){
+        Boolean hasWatch = false;
+        List<BeanStudent> students = GreenDaoHelper.getInstance().getStudents();
+        for (int i = 0; i < students.size(); i++) {
+            BeanStudent student = students.get(i);
+            if (student.getDevice_type().equals("2")) {
+                hasWatch = true;
+                break;
+            }
+        }
+        return hasWatch;
+    }
+
     public String getCurrentWatchIMEI() {
         if (currentWatchIMEI.isEmpty()) {
             List<BeanStudent> students = GreenDaoHelper.getInstance().getStudents();
