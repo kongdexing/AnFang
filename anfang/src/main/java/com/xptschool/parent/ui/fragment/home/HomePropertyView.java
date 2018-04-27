@@ -31,7 +31,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * 理财投资
+ * 智慧金融
  * Created by shuhaixinxi on 2018/1/13.
  */
 

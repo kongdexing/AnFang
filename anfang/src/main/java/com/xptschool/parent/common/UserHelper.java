@@ -7,6 +7,7 @@ import com.xptschool.parent.model.BeanParent;
 import com.xptschool.parent.model.BeanTeacher;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.push.UpushTokenHelper;
+import com.xptschool.parent.ui.watch.chat.ServerManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +62,7 @@ public class UserHelper {
     }
 
     public void userLoginSuccess() {
+        ServerManager.getInstance().startService();
         Log.i(TAG, "userLoginSuccess: listener size " + listeners.size());
         for (int i = 0; i < listeners.size(); i++) {
             listeners.get(i).onUserLoginSuccess();
@@ -68,6 +70,7 @@ public class UserHelper {
     }
 
     public void userExit() {
+        ServerManager.getInstance().stopService(XPTApplication.getInstance());
         Log.i(TAG, "userExit: listener size " + listeners.size());
         XPTApplication.getInstance().setCurrent_user_type("");
         for (int i = 0; i < listeners.size(); i++) {

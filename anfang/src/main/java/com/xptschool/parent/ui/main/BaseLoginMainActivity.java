@@ -16,6 +16,7 @@ import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
+import com.xptschool.parent.ui.watch.chat.ServerManager;
 
 import butterknife.ButterKnife;
 
@@ -85,7 +86,6 @@ public class BaseLoginMainActivity extends AppCompatActivity {
 
     protected void onLoginSuccess(String newAccount) {
         CommonUtil.changeUserStatus(newAccount);
-
     }
 
     protected void onLoginFailed(String msg) {

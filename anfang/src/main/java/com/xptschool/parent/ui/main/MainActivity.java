@@ -190,11 +190,11 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
         if (cookie == null || cookie.isEmpty()) {
             Log.i(TAG, "onResume: cookie is null");
 
-            String userName = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_NAME, "");
-            String password = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_PWD, "");
-            if (!userName.isEmpty() || !password.isEmpty()) {
-                login(userName, password);
-            }
+//            String userName = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_NAME, "");
+//            String password = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_PWD, "");
+//            if (!userName.isEmpty() || !password.isEmpty()) {
+//                login(userName, password);
+//            }
         }
 
         String userType = SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_TYPE, "").toString();
@@ -464,46 +464,46 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
         }
     }
 
-    private void login(final String account, final String password) {
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.LOGIN,
-                new MyVolleyHttpParamsEntity()
-                        .addParam("username", account)
-                        .addParam("password", password),
-                new MyVolleyRequestListener() {
-                    @Override
-                    public void onStart() {
-                    }
-
-                    @Override
-                    public void onResponse(VolleyHttpResult httpResult) {
-                        super.onResponse(httpResult);
-                        switch (httpResult.getStatus()) {
-                            case HttpAction.SUCCESS:
-                                try {
-                                    CommonUtil.analyseLoginData(httpResult, account);
-
-                                    Intent intent = new Intent(MainActivity.this, MainActivity.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
-                                } catch (Exception ex) {
-                                    Log.i(TAG, "onResponse: error " + ex.getMessage());
-                                    toLogin();
-                                }
-                                break;
-                            default:
-                                toLogin();
-                                break;
-                        }
-                    }
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.i(TAG, "onErrorResponse: " + error);
-                        toLogin();
-                    }
-                });
-    }
+//    private void login(final String account, final String password) {
+//        VolleyHttpService.getInstance().sendPostRequest(HttpAction.LOGIN,
+//                new MyVolleyHttpParamsEntity()
+//                        .addParam("username", account)
+//                        .addParam("password", password),
+//                new MyVolleyRequestListener() {
+//                    @Override
+//                    public void onStart() {
+//                    }
+//
+//                    @Override
+//                    public void onResponse(VolleyHttpResult httpResult) {
+//                        super.onResponse(httpResult);
+//                        switch (httpResult.getStatus()) {
+//                            case HttpAction.SUCCESS:
+//                                try {
+//                                    CommonUtil.analyseLoginData(httpResult, account);
+//
+//                                    Intent intent = new Intent(MainActivity.this, MainActivity.class);
+//                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                    startActivity(intent);
+//                                } catch (Exception ex) {
+//                                    Log.i(TAG, "onResponse: error " + ex.getMessage());
+//                                    toLogin();
+//                                }
+//                                break;
+//                            default:
+//                                toLogin();
+//                                break;
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        Log.i(TAG, "onErrorResponse: " + error);
+//                        toLogin();
+//                    }
+//                });
+//    }
 
     private void toLogin() {
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);

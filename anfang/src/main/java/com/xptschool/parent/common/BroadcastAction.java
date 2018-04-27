@@ -23,4 +23,8 @@ public class BroadcastAction {
 
     public static String MESSAGE_RECEIVED = "com.xptschool.parent.message.receive";
 
+    //微聊
+    public static String WCHAT_MESSAGE_RECEIVED = "com.xptschool.parent.wchat.message.receive";
+
+
 }

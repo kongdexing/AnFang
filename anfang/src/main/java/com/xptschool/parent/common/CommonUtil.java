@@ -279,8 +279,9 @@ public class CommonUtil {
         JSONObject jsonLogin = new JSONObject(jsonData.getJSONObject("login").toString());
         String type = jsonLogin.getString("type");
 
+        CommonUtil.initBeanStudentByHttpResult(jsonData.getJSONArray("stuData").toString());
+
         if (type.equals(UserType.PARENT.toString())) {
-            CommonUtil.initBeanStudentByHttpResult(jsonData.getJSONArray("stuData").toString());
             CommonUtil.initParentInfoByHttpResult(jsonData.getJSONObject("login").toString(), account);
         } else if (type.equals(UserType.TEACHER.toString())) {
             CommonUtil.getBeanClassesByHttpResult(jsonData.getJSONArray("class").toString());
@@ -298,6 +299,7 @@ public class CommonUtil {
             user.setEmail(jsonLogin.getString("email"));
             user.setHead_portrait(jsonLogin.getString("head_portrait"));
             user.setRef_id(jsonLogin.getString("ref_id"));
+
             GreenDaoHelper.getInstance().insertUser(user);
         }
         XPTApplication.getInstance().setCurrent_user_type(type);

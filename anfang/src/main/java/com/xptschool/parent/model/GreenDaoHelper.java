@@ -112,7 +112,7 @@ public class GreenDaoHelper {
         }
     }
 
-    public BeanUser getCurrentUser(){
+    public BeanUser getCurrentUser() {
         if (readDaoSession != null) {
             List<BeanUser> beanUsers = readDaoSession.getBeanUserDao().loadAll();
             if (beanUsers.size() > 0) {
@@ -134,8 +134,8 @@ public class GreenDaoHelper {
         }
     }
 
-    public void insertStudent(BeanStudent student){
-        if (writeDaoSession!=null){
+    public void insertStudent(BeanStudent student) {
+        if (writeDaoSession != null) {
             writeDaoSession.getBeanStudentDao().insert(student);
         }
     }
@@ -467,5 +467,54 @@ public class GreenDaoHelper {
         }
         return counties;
     }
+
+    /**
+     * 根据DeviceId，获取跟此设备的聊天记录
+     *
+     * @param device_id
+     * @return
+     */
+    public List<BeanWChat> getChatsByDeviceId(String device_id) {
+        List<BeanWChat> chats = null;
+        if (readDaoSession != null) {
+            chats = readDaoSession.getBeanWChatDao().queryBuilder()
+                    .where(BeanWChatDao.Properties.Device_id.eq(device_id),
+                            BeanWChatDao.Properties.User_id.eq(XPTApplication.getInstance().getCurrentUserId()))
+                    .orderDesc(BeanWChatDao.Properties.Time).list();
+        }
+        if (chats == null) {
+            chats = new ArrayList<BeanWChat>();
+        }
+        return chats;
+    }
+
+    /**
+     * 根据DeviceId，获取跟此设备的聊天记录
+     *
+     * @param device_id
+     * @return
+     */
+    public BeanWChat getLastChatByDeviceId(String device_id) {
+        BeanWChat wChat = null;
+        if (readDaoSession != null) {
+            wChat = readDaoSession.getBeanWChatDao().queryBuilder()
+                    .where(BeanWChatDao.Properties.Device_id.eq(device_id),
+                            BeanWChatDao.Properties.User_id.eq(XPTApplication.getInstance().getCurrentUserId()))
+                    .orderDesc(BeanWChatDao.Properties.Time).limit(1).unique();
+        }
+        return wChat;
+    }
+
+    /**
+     * 添加微聊消息
+     *
+     * @param chat
+     */
+    public void insertChat(BeanWChat chat) {
+        if (writeDaoSession != null) {
+            writeDaoSession.getBeanWChatDao().insertOrReplace(chat);
+        }
+    }
+
 
 }

@@ -49,6 +49,7 @@ import com.xptschool.parent.ui.leave.LeavePDetailActivity;
 import com.xptschool.parent.ui.leave.LeaveTDetailActivity;
 import com.xptschool.parent.ui.main.MainActivity;
 import com.xptschool.parent.ui.notice.NoticeDetailActivity;
+import com.xptschool.parent.ui.watch.chat.ServerManager;
 import com.xptschool.parent.util.ToastUtils;
 
 import org.json.JSONObject;
@@ -178,6 +179,7 @@ public class XPTApplication extends Application {
         } catch (Exception ex) {
             Log.i(TAG, "init: UMShareAPI " + ex.getMessage());
         }
+
     }
 
     public void resolvePushMsg(String message) {

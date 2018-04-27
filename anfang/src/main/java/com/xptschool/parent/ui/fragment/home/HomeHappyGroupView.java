@@ -32,7 +32,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by shuhaixinxi on 2018/1/13.
- * 快乐成长模块
+ * 合作产品模块
  */
 
 public class HomeHappyGroupView extends BaseInfoView {

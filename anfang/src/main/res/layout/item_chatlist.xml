@@ -52,7 +52,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/dp_15"
-            android:text="04-19 15:32" />
+            android:text="" />
 
     </RelativeLayout>
 

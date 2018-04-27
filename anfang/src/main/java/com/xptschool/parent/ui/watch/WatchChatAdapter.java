@@ -17,7 +17,10 @@ import com.xptschool.parent.adapter.BaseRecycleAdapter;
 import com.xptschool.parent.adapter.RecyclerViewHolderBase;
 import com.xptschool.parent.bean.BeanHomeWork;
 import com.xptschool.parent.model.BeanStudent;
+import com.xptschool.parent.model.BeanWChat;
+import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.homework.HomeWorkTeacherAdapter;
+import com.xptschool.parent.util.ChatUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +62,7 @@ public class WatchChatAdapter extends BaseRecycleAdapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         Log.i(TAG, "showData: ");
-        BeanStudent student = beanStudents.get(position);
+        final BeanStudent student = beanStudents.get(position);
         final ViewHolder mHolder = (ViewHolder) holder;
         if (student != null) {
             String name = student.getStu_name();
@@ -69,14 +72,24 @@ public class WatchChatAdapter extends BaseRecycleAdapter {
                 mHolder.txtNickName.setText(name);
             }
             //读取聊天信息
+            BeanWChat wChat = GreenDaoHelper.getInstance().getLastChatByDeviceId(student.getImei_id());
 
+            if (wChat == null) {
+                mHolder.txtChatInfo.setText("暂无聊天信息");
+            } else {
+                if (ChatUtil.TYPE_TEXT.equals(wChat.getType())) {
+                    mHolder.txtChatInfo.setText(wChat.getText());
+                } else if (ChatUtil.TYPE_AMR.equals(wChat.getType())) {
+                    mHolder.txtChatInfo.setText("[语音]");
+                }
+                mHolder.txtTime.setText(wChat.getTime());
+            }
 
-            mHolder.txtChatInfo.setText("暂无聊天信息");
             mHolder.rlItem1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(mContext, ChatDetailActivity.class);
-
+                    intent.putExtra("student", student);
                     mContext.startActivity(intent);
                 }
             });

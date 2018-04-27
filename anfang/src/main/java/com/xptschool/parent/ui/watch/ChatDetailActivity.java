@@ -1,21 +1,44 @@
 package com.xptschool.parent.ui.watch;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
+import com.android.volley.common.VolleyHttpParamsEntity;
+import com.android.volley.common.VolleyHttpResult;
+import com.android.volley.common.VolleyHttpService;
 import com.android.widget.audiorecorder.AudioRecorderButton;
 import com.android.widget.audiorecorder.Recorder;
 import com.xptschool.parent.R;
+import com.xptschool.parent.XPTApplication;
+import com.xptschool.parent.common.BroadcastAction;
 import com.xptschool.parent.common.CommonUtil;
+import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyRequestListener;
+import com.xptschool.parent.model.BeanStudent;
+import com.xptschool.parent.model.BeanWChat;
+import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.chat.ChatActivity;
 import com.xptschool.parent.ui.main.BaseActivity;
+import com.xptschool.parent.ui.main.BaseListActivity;
+import com.xptschool.parent.util.ChatUtil;
 import com.xptschool.parent.util.ToastUtils;
 
 import java.io.File;
@@ -23,8 +46,12 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
+import io.github.rockerhieu.emojicon.EmojiconEditText;
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.OnNeverAskAgain;
 import permissions.dispatcher.OnPermissionDenied;
@@ -33,19 +60,70 @@ import permissions.dispatcher.PermissionRequest;
 import permissions.dispatcher.RuntimePermissions;
 
 @RuntimePermissions
-public class ChatDetailActivity extends BaseActivity {
+public class ChatDetailActivity extends BaseListActivity {
 
-    @BindView(R.id.rlMeVoice)
-    RelativeLayout rlMeVoice;
+    @BindView(R.id.RlParent)
+    RelativeLayout RlParent;
+
+    @BindView(R.id.refresh_layout)
+    SwipeRefreshLayout swipeRefreshLayout;
+
+    @BindView(R.id.recycleView)
+    RecyclerView recycleView;
+
+    @BindView(R.id.imgVoiceOrText)
+    ImageView imgVoiceOrText;
 
     @BindView(R.id.id_recorder_button)
     AudioRecorderButton mAudioRecorderButton;
+
+    @BindView(R.id.edtContent)
+    EmojiconEditText edtContent;
+
+    @BindView(R.id.btnSend)
+    Button btnSend;
+
+    @BindView(R.id.llAttachment)
+    LinearLayout llAttachment;
+
+    private ChatAdapter adapter = null;
+
+    BeanStudent currentStudent = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_detail);
-        setTitle("小明");
+        setTitle(R.string.home_chat);
+
+        //获取学生信息
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            currentStudent = (BeanStudent) bundle.getSerializable("student");
+        }
+
+        if (currentStudent == null) {
+            ToastUtils.showToast(this, "未获取设备信息");
+            return;
+        }
+        initView();
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(BroadcastAction.WCHAT_MESSAGE_RECEIVED);
+        this.registerReceiver(messageReceiver, filter);
+
+    }
+
+    private void initView() {
+        initRecyclerView(recycleView, swipeRefreshLayout);
+        LinearLayoutManager layoutManager = (LinearLayoutManager) recycleView.getLayoutManager();
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        layoutManager.setReverseLayout(true);
+
+        adapter = new ChatAdapter(this);
+        recycleView.setAdapter(adapter);
+
+        getChatList();
 
         mAudioRecorderButton.setAudioRecorderCallBack(new AudioRecorderButton.AudioRecorderCallBack() {
 
@@ -82,11 +160,27 @@ public class ChatDetailActivity extends BaseActivity {
                 Recorder recorder = new Recorder(seconds, filePath);
                 File file = new File(recorder.getFilePath());
                 Log.i(TAG, "onFinish: " + recorder.getFilePath() + "  " + file.getName());
-                rlMeVoice.setVisibility(View.VISIBLE);
+//                rlMeVoice.setVisibility(View.VISIBLE);
 
                 if (file.length() == 0) {
                     return;
                 }
+
+                BeanWChat chat = new BeanWChat();
+                chat.setChatId(CommonUtil.getUUID());
+                chat.setUser_id(XPTApplication.getInstance().getCurrentUserId());
+                chat.setDevice_id(currentStudent.getImei_id());
+                chat.setFileName(recorder.getFilePath());
+                chat.setIsSend(true);
+                chat.setText("");
+                chat.setType(ChatUtil.TYPE_AMR);
+                chat.setSeconds("");
+                chat.setTime(CommonUtil.getCurrentDateHms());
+                addSendingMsg(chat);
+
+                sendMessage(recorder.getFilePath(), ChatUtil.TYPE_AMR);
+
+
                 try {
                     CopySdcardFile(recorder.getFilePath(), "/sdcard/" + file.getName());
                 } catch (Exception ex) {
@@ -106,6 +200,128 @@ public class ChatDetailActivity extends BaseActivity {
 
         });
     }
+
+    @OnClick({R.id.imgVoiceOrText, R.id.btnSend})
+    void viewClick(View view) {
+        switch (view.getId()) {
+            case R.id.imgVoiceOrText:
+                if (edtContent.getVisibility() == View.GONE) {
+                    edtContent.setVisibility(View.VISIBLE);
+                    btnSend.setVisibility(View.VISIBLE);
+                    mAudioRecorderButton.setVisibility(View.GONE);
+                } else {
+                    mAudioRecorderButton.setVisibility(View.VISIBLE);
+                    edtContent.setVisibility(View.GONE);
+                    btnSend.setVisibility(View.GONE);
+                }
+                break;
+            case R.id.btnSend:
+                String content = edtContent.getText().toString().trim();
+                if (content.isEmpty()) {
+                    ToastUtils.showToast(this, "未填写发送信息");
+                    return;
+                }
+                BeanWChat chat = new BeanWChat();
+                chat.setChatId(CommonUtil.getUUID());
+                chat.setUser_id(XPTApplication.getInstance().getCurrentUserId());
+                chat.setDevice_id(currentStudent.getImei_id());
+                chat.setFileName("");
+                chat.setIsSend(true);
+                chat.setText(content);
+                chat.setType(ChatUtil.TYPE_TEXT);
+                chat.setSeconds("");
+                chat.setTime(CommonUtil.getCurrentDateHms());
+                edtContent.setText("");
+                addSendingMsg(chat);
+                sendMessage(content, ChatUtil.TYPE_TEXT);
+                break;
+        }
+    }
+
+    private void getChatList() {
+        List<BeanWChat> pageChatList = GreenDaoHelper.getInstance().getChatsByDeviceId(currentStudent.getImei_id());
+        if (pageChatList.size() == 0) {
+            return;
+        }
+
+        adapter.appendData(pageChatList);
+//        currentOffset = adapter.getItemCount();
+    }
+
+    private void addSendingMsg(BeanWChat chat) {
+        adapter.addData(chat);
+        smoothBottom();
+        GreenDaoHelper.getInstance().insertChat(chat);
+    }
+
+    private void sendMessage(final String message, String msgType) {
+        VolleyHttpParamsEntity entity = new VolleyHttpParamsEntity()
+                .addParam("imei", currentStudent.getImei_id())
+                .addParam("type", ChatUtil.TYPE_TEXT)
+                .addParam("user_id", XPTApplication.getInstance().getCurrentUserId())
+                .addParam("contents", message);
+
+        if (ChatUtil.TYPE_TEXT.equals(msgType)) {
+            VolleyHttpService.getInstance().sendPostRequest(HttpAction.POST_WCHAT_MESSAGE,
+                    entity, myVolleyRequestListener);
+        } else if (ChatUtil.TYPE_AMR.equals(msgType)) {
+            List<String> uploadFiles = new ArrayList<>();
+            uploadFiles.add(message);
+
+            VolleyHttpService.getInstance().uploadFiles(HttpAction.POST_WCHAT_MESSAGE,
+                    entity, uploadFiles, myVolleyRequestListener);
+
+        }
+
+    }
+
+    MyVolleyRequestListener myVolleyRequestListener = new MyVolleyRequestListener() {
+        @Override
+        public void onStart() {
+            super.onStart();
+            showProgress("正在发送");
+        }
+
+        @Override
+        public void onResponse(VolleyHttpResult volleyHttpResult) {
+            super.onResponse(volleyHttpResult);
+            hideProgress();
+            ToastUtils.showToast(ChatDetailActivity.this, volleyHttpResult.getInfo());
+        }
+
+        @Override
+        public void onErrorResponse(VolleyError volleyError) {
+            super.onErrorResponse(volleyError);
+            hideProgress();
+
+        }
+    };
+
+    private void smoothBottom() {
+        recycleView.smoothScrollToPosition(0);
+    }
+
+    public BroadcastReceiver messageReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            Log.i(TAG, "onReceive: " + action);
+            if (action.equals(BroadcastAction.WCHAT_MESSAGE_RECEIVED)) {
+                return;
+            }
+
+            Bundle bundle = intent.getExtras();
+            if (bundle == null) {
+                Log.i(TAG, "onReceive: bundle is null");
+                return;
+            }
+
+            BeanWChat chat = (BeanWChat) bundle.getSerializable("chat");
+            adapter.addData(chat);
+            smoothBottom();
+        }
+    };
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -143,9 +359,7 @@ public class ChatDetailActivity extends BaseActivity {
     //文件拷贝
     //要复制的目录下的所有非子目录(文件夹)文件拷贝
     public int CopySdcardFile(String fromFile, String toFile) {
-
         try {
-
             InputStream fosfrom = new FileInputStream(fromFile);
             OutputStream fosto = new FileOutputStream(toFile);
             byte bt[] = new byte[1024];

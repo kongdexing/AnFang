@@ -110,31 +110,14 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.llTip)
     LinearLayout llTip;
 
-    //教育培训,快乐成长,理财投资,校园购,生活缴费
-    @BindView(R.id.eduGroupView)
-    HomeEduGroupView eduGroupView;
-
     @BindView(R.id.happyGrowView)
     HomeHappyGroupView happyGrowView;
 
     @BindView(R.id.propertyView)
     HomePropertyView propertyView;
 
-    @BindView(R.id.shopView)
-    HomeShopView shopView;
-
-    @BindView(R.id.newsView)
-    HomeNewsView newsView;
-
-    @BindView(R.id.paymentView)
-    HomePayMentView paymentView;
-
-    @BindView(R.id.grd_tip)
-    MyGridView grd_tip;
     @BindView(R.id.grd_school)
     MyGridView grd_school;
-    @BindView(R.id.grd_secret)
-    MyGridView grd_secret;
 
     public MainActivity activity;
     private Unbinder unbinder;
@@ -419,15 +402,6 @@ public class HomeFragment extends BaseFragment {
                                     JSONObject jsonData = new JSONObject(volleyHttpResult.getData().toString());
                                     Gson gson = new Gson();
 
-                                    List<BeanHomeCfg> onlines = gson.fromJson(jsonData.getJSONArray(HomeUtil.ONLINE_VIDEO).toString(),
-                                            new TypeToken<List<BeanHomeCfg>>() {
-                                            }.getType());
-                                    for (int i = 0; i < onlines.size(); i++) {
-                                        onlines.get(i).setType(HomeUtil.ONLINE_VIDEO);
-                                    }
-                                    GreenDaoHelper.getInstance().insertHomeCfg(onlines, HomeUtil.ONLINE_VIDEO);
-                                    eduGroupView.initEduOnLine(onlines);
-
                                     //快乐成长
                                     List<BeanHomeCfg> children_goods = gson.fromJson(jsonData.getJSONArray(HomeUtil.CHILDREN_GOODS).toString(),
                                             new TypeToken<List<BeanHomeCfg>>() {
@@ -447,36 +421,6 @@ public class HomeFragment extends BaseFragment {
                                     }
                                     GreenDaoHelper.getInstance().insertHomeCfg(invests, HomeUtil.INVEST);
                                     propertyView.bindData(invests);
-
-                                    //教育新闻
-                                    List<BeanHomeCfg> edu_news = gson.fromJson(jsonData.getJSONArray(HomeUtil.EDU_NEWS).toString(),
-                                            new TypeToken<List<BeanHomeCfg>>() {
-                                            }.getType());
-                                    for (int i = 0; i < edu_news.size(); i++) {
-                                        edu_news.get(i).setType(HomeUtil.EDU_NEWS);
-                                    }
-                                    GreenDaoHelper.getInstance().insertHomeCfg(edu_news, HomeUtil.EDU_NEWS);
-                                    newsView.bindData(edu_news);
-
-                                    //校园购
-//                                    List<BeanHomeCfg> shops = gson.fromJson(jsonData.getJSONArray(HomeUtil.SHOPPING).toString(),
-//                                            new TypeToken<List<BeanHomeCfg>>() {
-//                                            }.getType());
-//                                    for (int i = 0; i < shops.size(); i++) {
-//                                        shops.get(i).setType(HomeUtil.SHOPPING);
-//                                    }
-//                                    GreenDaoHelper.getInstance().insertHomeCfg(shops, HomeUtil.SHOPPING);
-//                                    shopView.bindData(shops);
-
-                                    //生活缴费
-                                    List<BeanHomeCfg> payments = gson.fromJson(jsonData.getJSONArray(HomeUtil.LIVING_PAYMENT).toString(),
-                                            new TypeToken<List<BeanHomeCfg>>() {
-                                            }.getType());
-                                    for (int i = 0; i < payments.size(); i++) {
-                                        payments.get(i).setType(HomeUtil.LIVING_PAYMENT);
-                                    }
-                                    GreenDaoHelper.getInstance().insertHomeCfg(payments, HomeUtil.LIVING_PAYMENT);
-                                    paymentView.bindData(payments);
 
                                 } catch (Exception ex) {
                                     Log.i(TAG, "onResponse: error " + ex.getMessage());
@@ -498,12 +442,8 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void initHomeCfg() {
-        eduGroupView.initEduOnLine(GreenDaoHelper.getInstance().getHomeCfgByType(HomeUtil.ONLINE_VIDEO));
         happyGrowView.bindData(GreenDaoHelper.getInstance().getHomeCfgByType(HomeUtil.CHILDREN_GOODS));
         propertyView.bindData(GreenDaoHelper.getInstance().getHomeCfgByType(HomeUtil.INVEST));
-        newsView.bindData(GreenDaoHelper.getInstance().getHomeCfgByType(HomeUtil.EDU_NEWS));
-//        shopView.bindData(GreenDaoHelper.getInstance().getHomeCfgByType(HomeUtil.SHOPPING));
-        paymentView.bindData(GreenDaoHelper.getInstance().getHomeCfgByType(HomeUtil.LIVING_PAYMENT));
     }
 
     @Override
@@ -516,161 +456,72 @@ public class HomeFragment extends BaseFragment {
         Log.i(TAG, "initSchoolItem: ");
         //判断角色
         UserType type = XPTApplication.getInstance().getCurrent_user_type();
-        if (UserType.PARENT.equals(type) || UserType.TEACHER.equals(type)) {
-            //家长|老师显示校园生活
-            if (llTip != null)
-                llTip.setVisibility(View.VISIBLE);
-
-            if (happyGrowView != null) {
-                LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) happyGrowView.getLayoutParams();
-                lp.setMargins(0, 10, 0, 0);
-                happyGrowView.setLayoutParams(lp);
-            }
-        } else {
-            if (llTip != null)
-                llTip.setVisibility(View.GONE);
-
-            if (happyGrowView != null) {
-                LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) happyGrowView.getLayoutParams();
-                lp.setMargins(0, 0, 0, 0);
-                happyGrowView.setLayoutParams(lp);
-            }
-            return;
-        }
 
         boolean isParent = false;
-        if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+        if (UserType.TEACHER.equals(type)) {
             isParent = false;
-        } else if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
+        } else if (UserType.PARENT.equals(type)) {
             isParent = true;
         }
 
-        List<HomeItem> tipItems = new ArrayList<>();
-        Intent courseIntent = new Intent(activity, isParent ? CourseActivity.class : CourseTActivity.class);
-        /*课程表*/
-        tipItems.add(new HomeItem()
-                .setIconId(R.drawable.home_course)
-                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_course))
-                .setIntent(courseIntent));
-        /*老师评语*/
-        tipItems.add(new HomeItem()
-                .setIconId(R.drawable.home_remark)
-                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_comment))
-                .setIntent(new Intent(activity, isParent ? CommentPActivity.class : CommentTActivity.class)));
-
-        //班级公告
-        tipItems.add(new HomeItem()
-                .setIconId(R.drawable.home_notice)
-                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_notice))
-                .setIntent(new Intent(activity, isParent ? NoticeActivity.class : NoticeTeacherActivity.class)));
-
-        /*教育新闻*/
-//        Intent newsIntent = new Intent(activity, WebCommonActivity.class);
-//        newsIntent.putExtra(ExtraKey.WEB_URL, "http://school.xinpingtai.com/edunews/");
-//        tipItems.add(new HomeItem()
-//                .setShowForParent(false)
-//                .setShowForTeacher(false)
-//                .setIconId(R.drawable.home_news)
-//                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_news))
-//                .setIntent(newsIntent));
-        HomeItemGridAdapter tipAdapter = new HomeItemGridAdapter(activity);
-
-        if (grd_tip != null)
-            grd_tip.setAdapter(tipAdapter);
-        tipAdapter.reloadData(tipItems);
-
         List<HomeItem> homeItems = new ArrayList<HomeItem>();
-        //家庭作业
-        homeItems.add(new HomeItem()
-                .setIconId(R.drawable.home_homework)
-                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_homework))
-                .setIntent(new Intent(activity, isParent ? HomeWorkParentActivity.class : HomeWorkTeacherActivity.class)));
-        //成绩
-        homeItems.add(new HomeItem()
-                .setIconId(R.drawable.home_classes)
-                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_score))
-                .setIntent(new Intent(activity, isParent ? ScoreActivity.class : ScoreTeacherActivity.class)));
-        //在线请假
-        homeItems.add(new HomeItem()
-                .setIconId(R.drawable.home_notice)
-                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_leave))
-                .setIntent(new Intent(activity, isParent ? LeaveActivity.class : LeaveTActivity.class)));
-        //考勤
-        homeItems.add(new HomeItem()
-                .setIconId(R.drawable.home_checkin)
-                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_checkin))
-                .setIntent(new Intent(activity, isParent ? CheckinPActivity.class : CheckinTActivity.class)));
 
-        /*荣誉墙*/
+        //监听设置
         homeItems.add(new HomeItem()
-                .setIconId(R.drawable.home_honour)
-                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_honour))
-                .setIntent(new Intent(activity, isParent ? HonorPActivity.class : HonorTActivity.class)));
+                .setIconId(R.drawable.home_moniter)
+                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_moniter))
+                .setCheckWatch(true)
+                .setIntent(new Intent(activity, MoniterActivity.class)));
+        //碰碰交友
+        homeItems.add(new HomeItem()
+                .setIconId(R.drawable.home_friend)
+                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_friend))
+                .setCheckWatch(true)
+                .setIntent(new Intent(activity, FriendActivity.class)));
 
-        if (isParent) {
-            //碰碰交友
-            homeItems.add(new HomeItem()
-                    .setIconId(R.drawable.home_friend)
-                    .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_friend))
+        //微聊
+        homeItems.add(new HomeItem()
+                .setIconId(R.drawable.home_chat)
+                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_chat))
 //                    .setCheckWatch(true)
-                    .setIntent(new Intent(activity, FriendActivity.class)));
-            //微聊
-            homeItems.add(new HomeItem()
-                    .setIconId(R.drawable.home_chat)
-                    .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_chat))
-//                    .setCheckWatch(true)
-                    .setIntent(new Intent(activity, ChatListActivity.class)));
-            //计步
-            homeItems.add(new HomeItem()
-                    .setIconId(R.drawable.home_walk)
-                    .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_walk))
-                    .setCheckWatch(true)
-                    .setIntent(new Intent(activity, WalkActivity.class)));
-        }
+                .setIntent(new Intent(activity, ChatListActivity.class)));
+        //计步
+        homeItems.add(new HomeItem()
+                .setIconId(R.drawable.home_walk)
+                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_walk))
+                .setCheckWatch(true)
+                .setIntent(new Intent(activity, WalkActivity.class)));
+
+        //报警查询
+        homeItems.add(new HomeItem()
+                .setIconId(R.drawable.home_alarm)
+                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_alarm))
+                .setIntent(new Intent(activity, isParent ? AlarmActivity.class : AlarmTActivity.class)));
+
+        //电子围栏
+        homeItems.add(new HomeItem()
+                .setIconId(R.drawable.home_fence)
+                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_fence))
+                .setIntent(new Intent(activity, FenceListActivity.class)));
+
+        //远程关机
+        homeItems.add(new HomeItem()
+                .setIconId(R.drawable.home_shutdown)
+                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_shutdown))
+                .setCheckWatch(true)
+                .setIntent(new Intent(activity, ShutDownActivity.class)));
+
+        //闹钟设置
+        homeItems.add(new HomeItem()
+                .setIconId(R.drawable.home_clock)
+                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_clock))
+                .setCheckWatch(true)
+                .setIntent(new Intent(activity, ClockActivity.class)));
 
         HomeItemGridAdapter itemAdapter = new HomeItemGridAdapter(activity);
         if (grd_school != null)
             grd_school.setAdapter(itemAdapter);
         itemAdapter.reloadData(homeItems);
-
-        //安全设置
-        List<HomeItem> secretItems = new ArrayList<HomeItem>();
-        if (isParent) {
-            //语音监护
-            secretItems.add(new HomeItem()
-                    .setIconId(R.drawable.home_moniter)
-                    .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_moniter))
-                    .setCheckWatch(true)
-                    .setIntent(new Intent(activity, MoniterActivity.class)));
-            //闹钟设置
-            secretItems.add(new HomeItem()
-                    .setIconId(R.drawable.home_clock)
-                    .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_clock))
-                    .setCheckWatch(true)
-                    .setIntent(new Intent(activity, ClockActivity.class)));
-            //远程关机
-            secretItems.add(new HomeItem()
-                    .setIconId(R.drawable.home_shutdown)
-                    .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_shutdown))
-                    .setCheckWatch(true)
-                    .setIntent(new Intent(activity, ShutDownActivity.class)));
-            //电子围栏
-            secretItems.add(new HomeItem()
-                    .setIconId(R.drawable.home_fence)
-                    .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_fence))
-                    .setIntent(new Intent(activity, FenceListActivity.class)));
-        }
-        //报警查询
-        secretItems.add(new HomeItem()
-                .setIconId(R.drawable.home_alarm)
-                .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_alarm))
-                .setIntent(new Intent(activity, isParent ? AlarmActivity.class : AlarmTActivity.class)));
-
-        HomeItemGridAdapter secretAdapter = new HomeItemGridAdapter(activity);
-        if (grd_secret != null)
-            grd_secret.setAdapter(secretAdapter);
-        secretAdapter.reloadData(secretItems);
-
 
     }
 

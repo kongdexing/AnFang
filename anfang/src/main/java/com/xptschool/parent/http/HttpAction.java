@@ -183,7 +183,10 @@ public class HttpAction {
     public static String GET_WATCH_Monitor = HEAD + "Watch/SetMonitor";
     //绑定|解绑设备
     public static String GET_WATCH_Bind = HEAD + "Watch/BindDevice";
-
+    //发送微聊信息
+    public static String POST_WCHAT_MESSAGE = HEAD + "ChatInfo/uploadMsg";
+    //获取微聊信息
+    public static String GET_UNREAD_MESSAGE = HEAD + "ChatInfo/getUnReadChatMsg";
 
 
 }

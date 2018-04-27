@@ -23,11 +23,14 @@ public class BeanWChatDao extends AbstractDao<BeanWChat, String> {
     */
     public static class Properties {
         public final static Property ChatId = new Property(0, String.class, "chatId", true, "CHAT_ID");
-        public final static Property Type = new Property(1, String.class, "type", false, "TYPE");
-        public final static Property Text = new Property(2, String.class, "text", false, "TEXT");
-        public final static Property FileName = new Property(3, String.class, "fileName", false, "FILE_NAME");
-        public final static Property Seconds = new Property(4, String.class, "seconds", false, "SECONDS");
-        public final static Property Time = new Property(5, String.class, "time", false, "TIME");
+        public final static Property User_id = new Property(1, String.class, "user_id", false, "USER_ID");
+        public final static Property Device_id = new Property(2, String.class, "device_id", false, "DEVICE_ID");
+        public final static Property Type = new Property(3, String.class, "type", false, "TYPE");
+        public final static Property Text = new Property(4, String.class, "text", false, "TEXT");
+        public final static Property FileName = new Property(5, String.class, "fileName", false, "FILE_NAME");
+        public final static Property Seconds = new Property(6, String.class, "seconds", false, "SECONDS");
+        public final static Property Time = new Property(7, String.class, "time", false, "TIME");
+        public final static Property IsSend = new Property(8, boolean.class, "isSend", false, "IS_SEND");
     };
 
 
@@ -44,11 +47,14 @@ public class BeanWChatDao extends AbstractDao<BeanWChat, String> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"BEAN_WCHAT\" (" + //
                 "\"CHAT_ID\" TEXT PRIMARY KEY NOT NULL ," + // 0: chatId
-                "\"TYPE\" TEXT," + // 1: type
-                "\"TEXT\" TEXT," + // 2: text
-                "\"FILE_NAME\" TEXT," + // 3: fileName
-                "\"SECONDS\" TEXT," + // 4: seconds
-                "\"TIME\" TEXT);"); // 5: time
+                "\"USER_ID\" TEXT," + // 1: user_id
+                "\"DEVICE_ID\" TEXT," + // 2: device_id
+                "\"TYPE\" TEXT," + // 3: type
+                "\"TEXT\" TEXT," + // 4: text
+                "\"FILE_NAME\" TEXT," + // 5: fileName
+                "\"SECONDS\" TEXT," + // 6: seconds
+                "\"TIME\" TEXT," + // 7: time
+                "\"IS_SEND\" INTEGER NOT NULL );"); // 8: isSend
     }
 
     /** Drops the underlying database table. */
@@ -66,30 +72,41 @@ public class BeanWChatDao extends AbstractDao<BeanWChat, String> {
             stmt.bindString(1, chatId);
         }
  
+        String user_id = entity.getUser_id();
+        if (user_id != null) {
+            stmt.bindString(2, user_id);
+        }
+ 
+        String device_id = entity.getDevice_id();
+        if (device_id != null) {
+            stmt.bindString(3, device_id);
+        }
+ 
         String type = entity.getType();
         if (type != null) {
-            stmt.bindString(2, type);
+            stmt.bindString(4, type);
         }
  
         String text = entity.getText();
         if (text != null) {
-            stmt.bindString(3, text);
+            stmt.bindString(5, text);
         }
  
         String fileName = entity.getFileName();
         if (fileName != null) {
-            stmt.bindString(4, fileName);
+            stmt.bindString(6, fileName);
         }
  
         String seconds = entity.getSeconds();
         if (seconds != null) {
-            stmt.bindString(5, seconds);
+            stmt.bindString(7, seconds);
         }
  
         String time = entity.getTime();
         if (time != null) {
-            stmt.bindString(6, time);
+            stmt.bindString(8, time);
         }
+        stmt.bindLong(9, entity.getIsSend() ? 1L: 0L);
     }
 
     @Override
@@ -101,30 +118,41 @@ public class BeanWChatDao extends AbstractDao<BeanWChat, String> {
             stmt.bindString(1, chatId);
         }
  
+        String user_id = entity.getUser_id();
+        if (user_id != null) {
+            stmt.bindString(2, user_id);
+        }
+ 
+        String device_id = entity.getDevice_id();
+        if (device_id != null) {
+            stmt.bindString(3, device_id);
+        }
+ 
         String type = entity.getType();
         if (type != null) {
-            stmt.bindString(2, type);
+            stmt.bindString(4, type);
         }
  
         String text = entity.getText();
         if (text != null) {
-            stmt.bindString(3, text);
+            stmt.bindString(5, text);
         }
  
         String fileName = entity.getFileName();
         if (fileName != null) {
-            stmt.bindString(4, fileName);
+            stmt.bindString(6, fileName);
         }
  
         String seconds = entity.getSeconds();
         if (seconds != null) {
-            stmt.bindString(5, seconds);
+            stmt.bindString(7, seconds);
         }
  
         String time = entity.getTime();
         if (time != null) {
-            stmt.bindString(6, time);
+            stmt.bindString(8, time);
         }
+        stmt.bindLong(9, entity.getIsSend() ? 1L: 0L);
     }
 
     @Override
@@ -136,11 +164,14 @@ public class BeanWChatDao extends AbstractDao<BeanWChat, String> {
     public BeanWChat readEntity(Cursor cursor, int offset) {
         BeanWChat entity = new BeanWChat( //
             cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // chatId
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // type
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // text
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // fileName
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // seconds
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // time
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // user_id
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // device_id
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // type
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // text
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // fileName
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // seconds
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // time
+            cursor.getShort(offset + 8) != 0 // isSend
         );
         return entity;
     }
@@ -148,11 +179,14 @@ public class BeanWChatDao extends AbstractDao<BeanWChat, String> {
     @Override
     public void readEntity(Cursor cursor, BeanWChat entity, int offset) {
         entity.setChatId(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
-        entity.setType(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setText(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setFileName(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setSeconds(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setTime(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setUser_id(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setDevice_id(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setType(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setText(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setFileName(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setSeconds(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setTime(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setIsSend(cursor.getShort(offset + 8) != 0);
      }
     
     @Override

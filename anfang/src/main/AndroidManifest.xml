@@ -714,7 +714,12 @@
         <activity android:name=".ui.watch.ClockDetailActivity" />
         <activity android:name=".ui.watch.MoniterActivity" />
         <activity android:name=".ui.watch.BindWatch1Activity" />
-        <activity android:name=".ui.watch.BindWatchInputActivity"></activity>
+        <activity android:name=".ui.watch.BindWatchInputActivity" />
+
+        <service
+            android:name=".ui.watch.chat.ChatService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>
