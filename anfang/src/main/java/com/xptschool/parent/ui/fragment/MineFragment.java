@@ -152,10 +152,10 @@ public class MineFragment extends BaseFragment {
             params.setMargins(0, (int) mContext.getResources().getDimension(R.dimen.dp_1), 0, 0);
             rlMyChild.setLayoutParams(params);
 
-            rlMyChild.setVisibility(View.VISIBLE);
-            rlMyClass.setVisibility(View.VISIBLE);
+            rlMyChild.setVisibility(View.GONE);
+            rlMyClass.setVisibility(View.GONE);
 //            rlMyBill.setVisibility(View.VISIBLE);
-            rlMyProperty.setVisibility(View.VISIBLE);
+            rlMyProperty.setVisibility(View.GONE); //宝贝管理
             ll_unlogin.setVisibility(View.VISIBLE);
             ll_login.setVisibility(View.GONE);
         }
