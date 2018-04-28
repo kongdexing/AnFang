@@ -56,8 +56,7 @@ public class ParentAdapterDelegate extends BaseAdapterDelegate {
 
     public void onBindViewHolder(List items, final int position, RecyclerView.ViewHolder holder, final ChatAdapter.OnItemResendListener listener) {
         final BeanWChat chat = (BeanWChat) items.get(position);
-        BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
-        if (parent == null || chat == null) {
+        if (chat == null) {
             return;
         }
         final MyViewHolder viewHolder = (MyViewHolder) holder;

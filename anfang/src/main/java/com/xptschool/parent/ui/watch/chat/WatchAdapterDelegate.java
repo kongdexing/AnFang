@@ -58,6 +58,12 @@ public class WatchAdapterDelegate extends BaseAdapterDelegate {
         final BeanWChat chat = (BeanWChat) items.get(position);
         final MyViewHolder viewHolder = (MyViewHolder) holder;
 
+        if (chat == null) {
+            viewHolder.llChat.setVisibility(View.GONE);
+            return;
+        } else {
+            viewHolder.llChat.setVisibility(View.VISIBLE);
+        }
         viewHolder.txtContent.setVisibility(View.GONE);
         viewHolder.rlVoice.setVisibility(View.GONE);
 
@@ -69,7 +75,6 @@ public class WatchAdapterDelegate extends BaseAdapterDelegate {
 //        } else {
 //            viewHolder.llRevert.setVisibility(View.GONE);
 //        }
-
 
         if ((ChatUtil.TYPE_TEXT).equals(chat.getType())) {
             Log.i(TAG, "onBindViewHolder text:" + chat.getText());
@@ -182,7 +187,7 @@ public class WatchAdapterDelegate extends BaseAdapterDelegate {
                     })
                     .setTag(chat.getFileName())
                     .start();
-            
+
             viewHolder.error_file.setVisibility(View.GONE);
             viewHolder.img_recorder_anim.setTag(chat);
             SoundPlayHelper.getInstance().insertPlayView(viewHolder.img_recorder_anim);
@@ -195,6 +200,9 @@ public class WatchAdapterDelegate extends BaseAdapterDelegate {
 
         @BindView(R.id.imgUser)
         CircularImageView imgUser;
+
+        @BindView(R.id.llChat)
+        LinearLayout llChat;
 
         @BindView(R.id.llContent)
         LinearLayout llContent;

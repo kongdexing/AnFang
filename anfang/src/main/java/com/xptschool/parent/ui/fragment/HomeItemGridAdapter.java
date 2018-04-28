@@ -80,8 +80,20 @@ public class HomeItemGridAdapter extends BaseAdapter {
         viewHolder.llHomeItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (item.isCheckWatch()) {
-                    //判断有无手表设备
+//                if (item.isCheckWatch()) {
+//                    //判断有无手表设备
+//
+//                } else if (item.isShowForParent() || item.isShowForTeacher()) {
+//                    //只有家长或老师可查看
+//
+//                } else {
+//                    //任意角色可见
+//                    mContext.startActivity(item.getIntent());
+//                }
+
+                //1.判断是否登录
+                //2.判断角色(暂时不用)
+                if (XPTApplication.getInstance().isLoggedIn()) {
                     if (XPTApplication.getInstance().hasWatch()) {
                         //有手表
                         mContext.startActivity(item.getIntent());
@@ -97,27 +109,17 @@ public class HomeItemGridAdapter extends BaseAdapter {
                             }
                         });
                     }
-                } else if (item.isShowForParent() || item.isShowForTeacher()) {
-                    //只有家长或老师可查看
-                    //1.判断是否登录
-                    //2.判断角色(暂时不用)
-                    if (XPTApplication.getInstance().isLoggedIn()) {
-                        mContext.startActivity(item.getIntent());
-                    } else {
-                        //弹出登录对话框
-                        CustomDialog dialog = new CustomDialog(mContext);
-                        dialog.setTitle(R.string.label_tip);
-                        dialog.setMessage(R.string.message_tologin);
-                        dialog.setAlertDialogClickListener(new CustomDialog.DialogClickListener() {
-                            @Override
-                            public void onPositiveClick() {
-                                mContext.startActivity(new Intent(mContext, LoginActivity.class));
-                            }
-                        });
-                    }
                 } else {
-                    //任意角色可见
-                    mContext.startActivity(item.getIntent());
+                    //弹出登录对话框
+                    CustomDialog dialog = new CustomDialog(mContext);
+                    dialog.setTitle(R.string.label_tip);
+                    dialog.setMessage(R.string.message_tologin);
+                    dialog.setAlertDialogClickListener(new CustomDialog.DialogClickListener() {
+                        @Override
+                        public void onPositiveClick() {
+                            mContext.startActivity(new Intent(mContext, LoginActivity.class));
+                        }
+                    });
                 }
             }
         });

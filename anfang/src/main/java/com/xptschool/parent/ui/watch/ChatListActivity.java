@@ -44,9 +44,7 @@ public class ChatListActivity extends BaseListActivity {
     }
 
     private void initView() {
-
         initRecyclerView(recyclerView, swipeRefreshLayout);
-
         adapter = new WatchChatAdapter(this);
         swipeRefreshLayout.setEnabled(false);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -55,9 +53,13 @@ public class ChatListActivity extends BaseListActivity {
 
             }
         });
-
         recyclerView.setAdapter(adapter);
+    }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         List<BeanStudent> students = GreenDaoHelper.getInstance().getStudents();
         List<BeanStudent> watchStu = new ArrayList<>();
         for (int i = 0; i < students.size(); i++) {
@@ -67,8 +69,5 @@ public class ChatListActivity extends BaseListActivity {
             }
         }
         adapter.refreshData(watchStu);
-
     }
-
-
 }

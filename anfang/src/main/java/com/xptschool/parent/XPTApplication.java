@@ -350,7 +350,7 @@ public class XPTApplication extends Application {
         SharedPreferencesUtil.saveData(this, SharedPreferencesUtil.KEY_USER_TYPE, current_user_type);
     }
 
-    public boolean hasWatch(){
+    public boolean hasWatch() {
         Boolean hasWatch = false;
         List<BeanStudent> students = GreenDaoHelper.getInstance().getStudents();
         for (int i = 0; i < students.size(); i++) {
@@ -364,30 +364,19 @@ public class XPTApplication extends Application {
     }
 
     public String getCurrentWatchIMEI() {
-        if (currentWatchIMEI.isEmpty()) {
-            List<BeanStudent> students = GreenDaoHelper.getInstance().getStudents();
-            for (int i = 0; i < students.size(); i++) {
-                BeanStudent student = students.get(i);
-                if (student.getDevice_type().equals("2")) {
-                    currentWatchIMEI = student.getImei_id();
-                    break;
-                }
+        List<BeanStudent> students = GreenDaoHelper.getInstance().getStudents();
+        for (int i = 0; i < students.size(); i++) {
+            BeanStudent student = students.get(i);
+            if (student.getDevice_type().equals("2")) {
+                currentWatchIMEI = student.getImei_id();
+                break;
             }
         }
         return currentWatchIMEI;
     }
 
     public BeanStudent getCurrentWatchStu() {
-        if (currentWatchStu == null) {
-            List<BeanStudent> students = GreenDaoHelper.getInstance().getStudents();
-            for (int i = 0; i < students.size(); i++) {
-                BeanStudent student = students.get(i);
-                if (student.getDevice_type().equals("2")) {
-                    currentWatchStu = student;
-                    break;
-                }
-            }
-        }
+        currentWatchStu = GreenDaoHelper.getInstance().getStudentByIMEI(getCurrentWatchIMEI());
         return currentWatchStu;
     }
 

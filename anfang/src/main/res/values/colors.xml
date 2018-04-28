@@ -3,7 +3,9 @@
 
     <color name="colorTransparent">#00000000</color>
     <color name="colorPrimaryTransparent">#ffffff</color>
-    <color name="colorPrimary">#fcfcfc</color>
+    <color name="colorPrimary">#00bbd4</color>
+    <color name="colorPrimary_low">#8800bbd4</color>
+
     <color name="colorPrimaryDark">@color/colorTransparent</color>
     <color name="colorAccent">#0080ba</color>
     <color name="colorAccent2">#27DEB7</color>

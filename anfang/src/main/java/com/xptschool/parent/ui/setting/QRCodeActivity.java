@@ -77,7 +77,7 @@ public class QRCodeActivity extends BaseActivity {
 //            } else {
 //                txtUserRole.setText("未登录");
 //            }
-            txtUserName.setText("高收益理财，亦高效沟通");
+            txtUserName.setText("高收益理财，易高效沟通");
             txtUserRole.setText("多样化商城，建数海科技");
 
         } catch (Exception ex) {

@@ -196,6 +196,11 @@ public class GreenDaoHelper {
         return readDaoSession.getBeanStudentDao().queryBuilder().where(BeanStudentDao.Properties.Stu_id.eq(stuId)).limit(1).unique();
     }
 
+    public BeanStudent getStudentByIMEI(String imei) {
+        return readDaoSession.getBeanStudentDao().queryBuilder().where(BeanStudentDao.Properties.Imei_id.eq(imei)).limit(1).unique();
+    }
+
+
     public void updateStudent(BeanStudent student) {
         if (writeDaoSession != null) {
             writeDaoSession.getBeanStudentDao().update(student);

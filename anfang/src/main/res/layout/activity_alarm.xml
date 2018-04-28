@@ -23,7 +23,6 @@
                 app:ms_dropdown_height="wrap_content"
                 app:ms_dropdown_max_height="@dimen/dp_350"
                 app:ms_dropdown_width="match_parent"
-                app:ms_text_color="@color/text_black"
                 app:ms_text_size="@dimen/sp_int_14" />
 
         </LinearLayout>
@@ -48,7 +47,6 @@
                 app:ms_dropdown_height="wrap_content"
                 app:ms_dropdown_max_height="@dimen/dp_350"
                 app:ms_dropdown_width="match_parent"
-                app:ms_text_color="@color/text_black"
                 app:ms_text_size="@dimen/sp_int_14" />
 
         </LinearLayout>

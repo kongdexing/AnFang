@@ -16,6 +16,8 @@ import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.ui.main.BaseActivity;
 import com.xptschool.parent.util.ToastUtils;
 
+import org.json.JSONObject;
+
 import butterknife.BindView;
 
 
@@ -28,7 +30,6 @@ public class WalkActivity extends BaseActivity {
     TextView txtDay;
     @BindView(R.id.txtNum)
     TextView txtNum;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +60,14 @@ public class WalkActivity extends BaseActivity {
                         super.onResponse(volleyHttpResult);
                         hideProgress();
                         if (volleyHttpResult.getStatus() == HttpAction.SUCCESS) {
-
-                            txtNum.setText(volleyHttpResult.getInfo());
+                            try{
+                                JSONObject jsonObject = new JSONObject(volleyHttpResult.getData().toString());
+                                txtNum.setText(jsonObject.getString("step"));
+                            }catch (Exception ex){
+                                txtNum.setText("0");
+                            }
+                        } else {
+                            txtNum.setText("0");
                         }
                     }
 

@@ -18,7 +18,7 @@
             android:layout_width="@dimen/dp_30"
             android:layout_height="@dimen/dp_30"
             android:layout_marginLeft="@dimen/dp_15"
-            android:background="@drawable/home_group_partner"/>
+            android:background="@drawable/home_group_partner" />
 
         <TextView
             android:id="@+id/txtGroupName"
@@ -26,8 +26,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/dp_10"
-            android:textColor="@color/color_black_1"
             android:text="合作产品"
+            android:textColor="@color/color_black_1"
             android:textSize="@dimen/sp_16" />
 
     </LinearLayout>
@@ -36,10 +36,11 @@
         android:id="@+id/grd_children"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_8"
-        android:layout_marginRight="@dimen/dp_8"
         android:layout_marginTop="@dimen/dp_10"
-        android:horizontalSpacing="@dimen/dp_5"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:padding="@dimen/dp_15"
+        android:background="@color/white"
+        android:horizontalSpacing="@dimen/dp_8"
         android:listSelector="@null"
         android:numColumns="2"
         android:scrollbars="none"

@@ -87,11 +87,9 @@
 
                     <com.android.widget.mygridview.MyGridView
                         android:id="@+id/grd_school"
-                        android:layout_width="fill_parent"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:horizontalSpacing="@dimen/dp_2"
-                        android:paddingLeft="@dimen/dp_10"
-                        android:paddingRight="@dimen/dp_10"
                         android:listSelector="@null"
                         android:numColumns="4"
                         android:scrollbars="none"

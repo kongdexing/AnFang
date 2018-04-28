@@ -31,6 +31,7 @@ import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.BroadcastAction;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.BeanWChat;
@@ -105,6 +106,14 @@ public class ChatDetailActivity extends BaseListActivity {
         if (currentStudent == null) {
             ToastUtils.showToast(this, "未获取设备信息");
             return;
+        } else {
+            String nickName = currentStudent.getStu_name();
+            String imei = currentStudent.getImei_id();
+            if (nickName == null || nickName.isEmpty()) {
+                setTitle(imei);
+            } else {
+                setTitle(nickName);
+            }
         }
         initView();
 
@@ -180,7 +189,6 @@ public class ChatDetailActivity extends BaseListActivity {
 
                 sendMessage(recorder.getFilePath(), ChatUtil.TYPE_AMR);
 
-
                 try {
                     CopySdcardFile(recorder.getFilePath(), "/sdcard/" + file.getName());
                 } catch (Exception ex) {
@@ -255,13 +263,14 @@ public class ChatDetailActivity extends BaseListActivity {
     }
 
     private void sendMessage(final String message, String msgType) {
-        VolleyHttpParamsEntity entity = new VolleyHttpParamsEntity()
+        VolleyHttpParamsEntity entity = new MyVolleyHttpParamsEntity()
                 .addParam("imei", currentStudent.getImei_id())
-                .addParam("type", ChatUtil.TYPE_TEXT)
-                .addParam("user_id", XPTApplication.getInstance().getCurrentUserId())
-                .addParam("contents", message);
+                .addParam("type", msgType)
+                .addParam("user_id", XPTApplication.getInstance().getCurrentUserId());
 
         if (ChatUtil.TYPE_TEXT.equals(msgType)) {
+            entity.addParam("contents", message);
+
             VolleyHttpService.getInstance().sendPostRequest(HttpAction.POST_WCHAT_MESSAGE,
                     entity, myVolleyRequestListener);
         } else if (ChatUtil.TYPE_AMR.equals(msgType)) {
@@ -286,6 +295,8 @@ public class ChatDetailActivity extends BaseListActivity {
         public void onResponse(VolleyHttpResult volleyHttpResult) {
             super.onResponse(volleyHttpResult);
             hideProgress();
+
+
             ToastUtils.showToast(ChatDetailActivity.this, volleyHttpResult.getInfo());
         }
 
@@ -307,9 +318,9 @@ public class ChatDetailActivity extends BaseListActivity {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             Log.i(TAG, "onReceive: " + action);
-            if (action.equals(BroadcastAction.WCHAT_MESSAGE_RECEIVED)) {
-                return;
-            }
+//            if (action.equals(BroadcastAction.WCHAT_MESSAGE_RECEIVED)) {
+//                return;
+//            }
 
             Bundle bundle = intent.getExtras();
             if (bundle == null) {
@@ -318,6 +329,7 @@ public class ChatDetailActivity extends BaseListActivity {
             }
 
             BeanWChat chat = (BeanWChat) bundle.getSerializable("chat");
+            Log.i(TAG, "onReceive: " + chat.getFileName());
             adapter.addData(chat);
             smoothBottom();
         }

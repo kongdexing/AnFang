@@ -470,26 +470,22 @@ public class HomeFragment extends BaseFragment {
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_moniter)
                 .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_moniter))
-                .setCheckWatch(true)
                 .setIntent(new Intent(activity, MoniterActivity.class)));
         //碰碰交友
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_friend)
                 .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_friend))
-                .setCheckWatch(true)
                 .setIntent(new Intent(activity, FriendActivity.class)));
 
         //微聊
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_chat)
                 .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_chat))
-//                    .setCheckWatch(true)
                 .setIntent(new Intent(activity, ChatListActivity.class)));
         //计步
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_walk)
                 .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_walk))
-                .setCheckWatch(true)
                 .setIntent(new Intent(activity, WalkActivity.class)));
 
         //报警查询
@@ -508,14 +504,12 @@ public class HomeFragment extends BaseFragment {
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_shutdown)
                 .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_shutdown))
-                .setCheckWatch(true)
                 .setIntent(new Intent(activity, ShutDownActivity.class)));
 
         //闹钟设置
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_clock)
                 .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_clock))
-                .setCheckWatch(true)
                 .setIntent(new Intent(activity, ClockActivity.class)));
 
         HomeItemGridAdapter itemAdapter = new HomeItemGridAdapter(activity);

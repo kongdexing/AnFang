@@ -205,7 +205,7 @@ public class ClockDetailActivity extends BaseActivity {
                 resetCheckBox(ckbRepeat3);
                 for (int i = 0; i < weekViews.length; i++) {
                     boolean click = (Boolean) weekViews[i].getTag();
-                    weekViews[i].setBackgroundColor(getResources().getColor(click ? R.color.text_black_2 : R.color.item_clicked));
+                    weekViews[i].setBackgroundColor(getResources().getColor(click ? R.color.colorPrimary : R.color.color_black_2));
                 }
                 break;
             case R.id.ok:
@@ -305,7 +305,7 @@ public class ClockDetailActivity extends BaseActivity {
         public APMAdapter(Context context, Object[] items) {
             super(context, items);
             setTextSize(TypedValue.COMPLEX_UNIT_PX, (int) ClockDetailActivity.this.getResources().getDimensionPixelOffset(R.dimen.sp_22));
-            setTextColor(ClockDetailActivity.this.getResources().getColor(R.color.white));
+            setTextColor(ClockDetailActivity.this.getResources().getColor(R.color.color_black_2));
         }
 
         @Override
@@ -341,9 +341,9 @@ public class ClockDetailActivity extends BaseActivity {
         protected void configureTextView(TextView view) {
             super.configureTextView(view);
             if (currentItem == currentValue) {
-                view.setTextColor(ClockDetailActivity.this.getResources().getColor(R.color.text_black));
+                view.setTextColor(ClockDetailActivity.this.getResources().getColor(R.color.colorPrimary));
             } else {
-                view.setTextColor(ClockDetailActivity.this.getResources().getColor(R.color.white));
+                view.setTextColor(ClockDetailActivity.this.getResources().getColor(R.color.color_black_2));
             }
             view.setTypeface(Typeface.SANS_SERIF);
         }
@@ -377,9 +377,9 @@ public class ClockDetailActivity extends BaseActivity {
         protected void configureTextView(TextView view) {
             super.configureTextView(view);
             if (currentItem == currentValue) {
-                view.setTextColor(ClockDetailActivity.this.getResources().getColor(R.color.text_black));
+                view.setTextColor(ClockDetailActivity.this.getResources().getColor(R.color.colorPrimary));
             } else {
-                view.setTextColor(ClockDetailActivity.this.getResources().getColor(R.color.white));
+                view.setTextColor(ClockDetailActivity.this.getResources().getColor(R.color.color_black_2));
             }
             view.setTypeface(Typeface.SANS_SERIF);
         }

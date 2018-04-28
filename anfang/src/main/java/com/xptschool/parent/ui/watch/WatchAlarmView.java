@@ -22,6 +22,7 @@ import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.ui.mine.BaseInfoView;
+import com.xptschool.parent.util.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -83,24 +84,8 @@ public class WatchAlarmView extends BaseInfoView {
             //开关
             String open = clock[1];
             switch1.setChecked("1".equals(open) ? true : false);
-            switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    Log.i("AlarmView", "onCheckedChanged: " + b);
-                    String open = switch1.isChecked() ? "1" : "0";
-                    try {
-                        String[] alarms = currentAlarm.split("-");
-                        alarms[1] = open;
-                        String strAlarm = alarms[0] + "-" + alarms[1] + "-" + alarms[2];
-                        if (alarms.length == 4) {
-                            strAlarm += "-" + alarms[3];
-                        }
-                        updateAlarm(strAlarm, currentAlarmIndex);
-                    } catch (Exception ex) {
+            setSwitchChangeListener();
 
-                    }
-                }
-            });
             //频率
             String rate = clock[2];
             if ("1".equals(rate)) {
@@ -122,6 +107,27 @@ public class WatchAlarmView extends BaseInfoView {
         } catch (Exception ex) {
             bindData(defTime, index);
         }
+    }
+
+    private void setSwitchChangeListener() {
+        switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                Log.i("AlarmView", "onCheckedChanged: " + b);
+                String open = switch1.isChecked() ? "1" : "0";
+                try {
+                    String[] alarms = currentAlarm.split("-");
+                    alarms[1] = open;
+                    String strAlarm = alarms[0] + "-" + alarms[1] + "-" + alarms[2];
+                    if (alarms.length == 4) {
+                        strAlarm += "-" + alarms[3];
+                    }
+                    updateAlarm(strAlarm, currentAlarmIndex);
+                } catch (Exception ex) {
+
+                }
+            }
+        });
     }
 
     @OnClick({R.id.rlItem1, R.id.switch1})
@@ -175,10 +181,12 @@ public class WatchAlarmView extends BaseInfoView {
                         ((ClockActivity) mContext).hideProgress();
                         switch (volleyHttpResult.getStatus()) {
                             case HttpAction.SUCCESS:
-
+                                ToastUtils.showToast(mContext, volleyHttpResult.getInfo());
                                 break;
                             default:
+                                switch1.setOnCheckedChangeListener(null);
                                 switch1.setChecked(!switch1.isChecked());
+                                setSwitchChangeListener();
                                 break;
                         }
                     }
@@ -187,7 +195,10 @@ public class WatchAlarmView extends BaseInfoView {
                     public void onErrorResponse(VolleyError volleyError) {
                         super.onErrorResponse(volleyError);
                         ((ClockActivity) mContext).hideProgress();
+
+                        switch1.setOnCheckedChangeListener(null);
                         switch1.setChecked(!switch1.isChecked());
+                        setSwitchChangeListener();
                     }
                 });
     }

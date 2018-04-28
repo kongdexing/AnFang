@@ -18,7 +18,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_50"
                 android:layout_alignParentTop="true"
-                android:background="@color/colorPrimaryDark">
+                android:background="@color/colorPrimary">
 
                 <TextView
                     android:id="@+id/txtTitle"
@@ -27,6 +27,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:lines="1"
+                    android:textColor="@color/white"
                     android:text="@string/nav_mine"
                     android:textSize="@dimen/sp_18" />
 

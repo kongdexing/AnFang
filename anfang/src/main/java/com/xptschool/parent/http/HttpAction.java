@@ -180,7 +180,7 @@ public class HttpAction {
     //修改闹钟
     public static String GET_WATCH_ALARM_EDIT = HEAD + "Watch/SetAlarmTime";
     //远程监听
-    public static String GET_WATCH_Monitor = HEAD + "Watch/SetMonitor";
+    public static String SET_WATCH_Monitor = HEAD + "Watch/SetMonitor";
     //绑定|解绑设备
     public static String GET_WATCH_Bind = HEAD + "Watch/BindDevice";
     //发送微聊信息

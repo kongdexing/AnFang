@@ -36,7 +36,7 @@ public class BindWatchInputActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bind_watch_input);
-
+        setTitle("绑定设备");
     }
 
     @OnClick({R.id.ok})
@@ -47,7 +47,7 @@ public class BindWatchInputActivity extends BaseActivity {
                 String nickName = edtNickName.getText().toString().trim();
                 String phone = edtPhone.getText().toString().trim();
 
-                if (imei.isEmpty() || imei.length() != 15) {
+                if (imei.isEmpty()) {
                     ToastUtils.showToast(this, R.string.msg_imei_error);
                     return;
                 }
@@ -77,7 +77,7 @@ public class BindWatchInputActivity extends BaseActivity {
                     public void onResponse(VolleyHttpResult volleyHttpResult) {
                         super.onResponse(volleyHttpResult);
                         hideProgress();
-                        ToastUtils.showToast(BindWatchInputActivity.this, volleyHttpResult.getInfo());
+
                         if (volleyHttpResult.getStatus() == HttpAction.SUCCESS) {
                             try {
                                 JSONObject object = new JSONObject(volleyHttpResult.getData().toString());
@@ -90,11 +90,14 @@ public class BindWatchInputActivity extends BaseActivity {
                                 student.setCard_phone(phone);
                                 //存入数据库
                                 GreenDaoHelper.getInstance().insertStudent(student);
+                                ToastUtils.showToast(BindWatchInputActivity.this, "绑定成功");
                                 setResult(1);
                                 finish();
                             } catch (Exception ex) {
                                 ToastUtils.showToast(BindWatchInputActivity.this, "数据处理错误");
                             }
+                        } else {
+                            ToastUtils.showToast(BindWatchInputActivity.this, "绑定失败");
                         }
                     }
 

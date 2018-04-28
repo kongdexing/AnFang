@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
         android:layout_alignParentTop="true"
-        android:background="@color/colorPrimaryDark">
+        android:background="@color/colorPrimary">
 
         <TextView
             android:id="@+id/txtTitle"
@@ -19,6 +19,7 @@
             android:layout_centerVertical="true"
             android:lines="1"
             android:text="@string/nav_message"
+            android:textColor="@color/white"
             android:textSize="@dimen/sp_18" />
     </RelativeLayout>
 
@@ -95,8 +96,7 @@
             <RelativeLayout
                 android:id="@+id/rlTip"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/transparent_gray" />
+                android:layout_height="match_parent"/>
 
         </FrameLayout>
         <!--最近聊天记录-->
