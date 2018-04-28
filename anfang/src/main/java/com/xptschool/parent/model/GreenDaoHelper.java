@@ -483,8 +483,7 @@ public class GreenDaoHelper {
         List<BeanWChat> chats = null;
         if (readDaoSession != null) {
             chats = readDaoSession.getBeanWChatDao().queryBuilder()
-                    .where(BeanWChatDao.Properties.Device_id.eq(device_id),
-                            BeanWChatDao.Properties.User_id.eq(XPTApplication.getInstance().getCurrentUserId()))
+                    .where(BeanWChatDao.Properties.Device_id.eq(device_id))
                     .orderDesc(BeanWChatDao.Properties.Time).list();
         }
         if (chats == null) {
@@ -517,7 +516,8 @@ public class GreenDaoHelper {
      */
     public void insertChat(BeanWChat chat) {
         if (writeDaoSession != null) {
-            writeDaoSession.getBeanWChatDao().insertOrReplace(chat);
+            long rowId = writeDaoSession.getBeanWChatDao().insert(chat);
+            Log.i(TAG, "insertChat: " + chat.getChatId() + "  " + chat.getDevice_id() + "  result：" + rowId);
         }
     }
 

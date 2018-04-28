@@ -28,6 +28,7 @@ import com.android.widget.audiorecorder.AudioRecorderButton;
 import com.android.widget.audiorecorder.Recorder;
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
+import com.xptschool.parent.adapter.WrapContentLinearLayoutManager;
 import com.xptschool.parent.common.BroadcastAction;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.http.HttpAction;
@@ -124,7 +125,14 @@ public class ChatDetailActivity extends BaseListActivity {
     }
 
     private void initView() {
-        initRecyclerView(recycleView, swipeRefreshLayout);
+        recycleView.setHasFixedSize(true);
+        WrapContentLinearLayoutManager mLayoutManager = new WrapContentLinearLayoutManager(this);
+        recycleView.setLayoutManager(mLayoutManager);
+
+//        initRecyclerView(recycleView, swipeRefreshLayout);
+
+        swipeRefreshLayout.setEnabled(false);
+
         LinearLayoutManager layoutManager = (LinearLayoutManager) recycleView.getLayoutManager();
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         layoutManager.setReverseLayout(true);

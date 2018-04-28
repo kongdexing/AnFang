@@ -24,6 +24,10 @@ import com.xptschool.parent.model.ContactTeacher;
 import com.xptschool.parent.util.ChatUtil;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 
 import butterknife.BindView;
@@ -91,8 +95,11 @@ public class WatchAdapterDelegate extends BaseAdapterDelegate {
 //            ViewGroup.LayoutParams lp = viewHolder.id_recorder_length.getLayoutParams();
 //            lp.width = (int) (ChatUtil.getChatMinWidth(mContext) + (ChatUtil.getChatMaxWidth(mContext) / 60f) * Integer.parseInt(chat.getSeconds()));
 
+            String amr_file = chat.getFileName();
+            String fileName = amr_file.substring(amr_file.lastIndexOf('/') + 1);
+
             //下载音频文件
-            FileDownloader.getImpl().create(chat.getFileName())
+            FileDownloader.getImpl().create(amr_file)
                     .setListener(new FileDownloadListener() {
 
                         @Override
@@ -132,6 +139,7 @@ public class WatchAdapterDelegate extends BaseAdapterDelegate {
                         protected void completed(BaseDownloadTask task) {
                             viewHolder.id_recorder_time.setVisibility(View.GONE);
                             final String voicePath = task.getPath();
+
                             //点击播放
                             viewHolder.rlVoice.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -185,7 +193,8 @@ public class WatchAdapterDelegate extends BaseAdapterDelegate {
 //                updateDisplay(String.format("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ %d", (Integer) task.getTag()));
                         }
                     })
-                    .setTag(chat.getFileName())
+                    .setPath(XPTApplication.getInstance().getCachePath() + "/" + fileName)
+                    .setTag(fileName)
                     .start();
 
             viewHolder.error_file.setVisibility(View.GONE);
