@@ -41,6 +41,7 @@ import com.xptschool.parent.ui.chat.ChatActivity;
 import com.xptschool.parent.ui.main.BaseActivity;
 import com.xptschool.parent.ui.main.BaseListActivity;
 import com.xptschool.parent.util.ChatUtil;
+import com.xptschool.parent.util.KeyboardChangeListener;
 import com.xptschool.parent.util.ToastUtils;
 
 import java.io.File;
@@ -84,9 +85,6 @@ public class ChatDetailActivity extends BaseListActivity {
 
     @BindView(R.id.btnSend)
     Button btnSend;
-
-    @BindView(R.id.llAttachment)
-    LinearLayout llAttachment;
 
     private ChatAdapter adapter = null;
 
@@ -136,9 +134,20 @@ public class ChatDetailActivity extends BaseListActivity {
         LinearLayoutManager layoutManager = (LinearLayoutManager) recycleView.getLayoutManager();
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
 
         adapter = new ChatAdapter(this);
         recycleView.setAdapter(adapter);
+
+        KeyboardChangeListener mKeyboardChangeListener = new KeyboardChangeListener(this);
+        mKeyboardChangeListener.setKeyBoardListener(new KeyboardChangeListener.KeyBoardListener() {
+            @Override
+            public void onKeyboardChange(boolean isShow, int keyboardHeight) {
+                if (isShow) {
+                    smoothBottom();
+                }
+            }
+        });
 
         getChatList();
 
@@ -303,8 +312,6 @@ public class ChatDetailActivity extends BaseListActivity {
         public void onResponse(VolleyHttpResult volleyHttpResult) {
             super.onResponse(volleyHttpResult);
             hideProgress();
-
-
             ToastUtils.showToast(ChatDetailActivity.this, volleyHttpResult.getInfo());
         }
 

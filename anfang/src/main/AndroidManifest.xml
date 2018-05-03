@@ -707,7 +707,10 @@
         <activity android:name=".ui.mine.MyInviteActivity" />
         <activity android:name=".ui.watch.FriendActivity" />
         <activity android:name=".ui.watch.ChatListActivity" />
-        <activity android:name=".ui.watch.ChatDetailActivity" />
+        <activity
+            android:name=".ui.watch.ChatDetailActivity"
+            android:windowSoftInputMode="adjustResize" />
+
         <activity android:name=".ui.watch.WalkActivity" />
         <activity android:name=".ui.watch.ShutDownActivity" />
         <activity android:name=".ui.watch.ClockActivity" />
