@@ -63,8 +63,9 @@ public class MineFragment extends BaseFragment {
     @BindView(R.id.rlMyChild)
     RelativeLayout rlMyChild;
 
-    //    @BindView(R.id.rlMyBill)
-//    RelativeLayout rlMyBill;
+
+    @BindView(R.id.rlMyInvite)
+    RelativeLayout rlMyInvite;
     @BindView(R.id.rlMyProperty)
     RelativeLayout rlMyProperty;
 
@@ -91,6 +92,11 @@ public class MineFragment extends BaseFragment {
         if (rlMyChild == null || ll_unlogin == null) {
             return;
         }
+        rlMyChild.setVisibility(View.GONE);
+        rlMyProperty.setVisibility(View.GONE);
+        rlMyClass.setVisibility(View.GONE);
+        rlMyInvite.setVisibility(View.GONE);
+
         //判断登录状态
         if (XPTApplication.getInstance().isLoggedIn()) {
 
@@ -104,10 +110,9 @@ public class MineFragment extends BaseFragment {
             String headImg = "";
 
             if (UserType.TEACHER.equals(type)) {
-                rlMyChild.setVisibility(View.GONE);
+
                 rlMyClass.setVisibility(View.VISIBLE);
 //                rlMyBill.setVisibility(View.GONE);
-                rlMyProperty.setVisibility(View.GONE);
 
                 BeanTeacher teacher = GreenDaoHelper.getInstance().getCurrentTeacher();
                 if (teacher != null) {
@@ -133,9 +138,19 @@ public class MineFragment extends BaseFragment {
                     headImg = parent.getHead_portrait();
                 }
             } else {
-                rlMyClass.setVisibility(View.GONE);
-                rlMyChild.setVisibility(View.GONE);
-                rlMyProperty.setVisibility(View.GONE);
+                //判断有无学生（手表）
+                List<BeanStudent> students = GreenDaoHelper.getInstance().getStudents();
+                if (students.size() > 0) {
+                    rlMyChild.setVisibility(View.VISIBLE);
+                }
+
+                //会员不显示我的邀请，第三方公司|代理商显示我的邀请
+                if (type.equals(UserType.VISITOR)) {
+                    rlMyInvite.setVisibility(View.GONE);
+                } else {
+                    rlMyInvite.setVisibility(View.VISIBLE);
+                }
+
                 BeanUser user = GreenDaoHelper.getInstance().getCurrentUser();
                 if (user != null) {
                     headImg = user.getHead_portrait();
@@ -148,14 +163,10 @@ public class MineFragment extends BaseFragment {
 
             txtRole.setText(type.getRoleName());
         } else {
-            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) rlMyChild.getLayoutParams();
-            params.setMargins(0, (int) mContext.getResources().getDimension(R.dimen.dp_1), 0, 0);
-            rlMyChild.setLayoutParams(params);
+//            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) rlMyChild.getLayoutParams();
+//            params.setMargins(0, (int) mContext.getResources().getDimension(R.dimen.dp_1), 0, 0);
+//            rlMyChild.setLayoutParams(params);
 
-            rlMyChild.setVisibility(View.GONE);
-            rlMyClass.setVisibility(View.GONE);
-//            rlMyBill.setVisibility(View.VISIBLE);
-            rlMyProperty.setVisibility(View.GONE); //宝贝管理
             ll_unlogin.setVisibility(View.VISIBLE);
             ll_login.setVisibility(View.GONE);
         }

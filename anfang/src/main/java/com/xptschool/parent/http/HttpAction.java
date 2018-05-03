@@ -181,8 +181,10 @@ public class HttpAction {
     public static String GET_WATCH_ALARM_EDIT = HEAD + "Watch/SetAlarmTime";
     //远程监听
     public static String SET_WATCH_Monitor = HEAD + "Watch/SetMonitor";
-    //绑定|解绑设备
+    //绑定
     public static String GET_WATCH_Bind = HEAD + "Watch/BindDevice";
+    //解绑设备
+    public static String WATCH_UnBind = HEAD + "Watch/UnBindDevice";
     //发送微聊信息
     public static String POST_WCHAT_MESSAGE = HEAD + "ChatInfo/uploadMsg";
     //获取微聊信息

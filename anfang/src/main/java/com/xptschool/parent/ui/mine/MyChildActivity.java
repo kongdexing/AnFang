@@ -40,7 +40,7 @@ public class MyChildActivity extends BaseListActivity {
         initData();
     }
 
-    private void initData() {
+    public void initData() {
         beanStudents = GreenDaoHelper.getInstance().getStudents();
         FragmentPagerAdapter adapter = new ChildFragmentAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);

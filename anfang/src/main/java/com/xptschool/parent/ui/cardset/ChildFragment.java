@@ -14,17 +14,35 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
+import com.android.volley.common.VolleyHttpParamsEntity;
+import com.android.volley.common.VolleyHttpResult;
+import com.android.volley.common.VolleyHttpService;
 import com.android.widget.view.CircularImageView;
 import com.android.widget.view.KenBurnsView;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 import com.xptschool.parent.R;
+import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
+import com.xptschool.parent.common.SharedPreferencesUtil;
+import com.xptschool.parent.common.UserHelper;
+import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanStudent;
+import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.fragment.BaseFragment;
+import com.xptschool.parent.ui.mine.MyChildActivity;
+import com.xptschool.parent.ui.setting.SettingActivity;
 import com.xptschool.parent.util.ToastUtils;
+import com.xptschool.parent.view.CustomDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class ChildFragment extends BaseFragment implements View.OnClickListener {
 
@@ -42,6 +60,7 @@ public class ChildFragment extends BaseFragment implements View.OnClickListener 
     TextView txtIMEI;
     ProgressBar progress;
     TextView txtCardPhone;
+    RelativeLayout rlUnbind;
 
     private BeanStudent currentStudent;
 
@@ -64,6 +83,7 @@ public class ChildFragment extends BaseFragment implements View.OnClickListener 
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_child, container, false);
+
         imgHead = (CircularImageView) view.findViewById(R.id.imgHead);
         imgSex = (ImageView) view.findViewById(R.id.imgSex);
         KenBurnsView mHeaderPicture = (KenBurnsView) view.findViewById(R.id.header_picture);
@@ -101,10 +121,12 @@ public class ChildFragment extends BaseFragment implements View.OnClickListener 
         RelativeLayout RLSOSSet = (RelativeLayout) view.findViewById(R.id.RLSOSSet);
         RelativeLayout RLWhitelistSet = (RelativeLayout) view.findViewById(R.id.RLWhitelistSet);
         RelativeLayout RLMoniterSet = (RelativeLayout) view.findViewById(R.id.RLMoniterSet);
+        rlUnbind = (RelativeLayout) view.findViewById(R.id.rlUnbind);
 
         RLSOSSet.setOnClickListener(this);
         RLWhitelistSet.setOnClickListener(this);
         RLMoniterSet.setOnClickListener(this);
+        rlUnbind.setOnClickListener(this);
 
         return view;
     }
@@ -115,21 +137,18 @@ public class ChildFragment extends BaseFragment implements View.OnClickListener 
             Log.i(TAG, "bindingData: " + txtName.hashCode());
             return;
         }
-        if (currentStudent.getSex().equals("1")) {
+        if ("1".equals(currentStudent.getSex())) {
             imgHead.setImageResource(R.drawable.student_boy);
+            llInfoBg.setBackgroundResource(R.drawable.bg_student_info_boy);
+            imgSex.setBackgroundResource(R.drawable.male_w);
         } else {
             imgHead.setImageResource(R.drawable.student_girl);
+            llInfoBg.setBackgroundResource(R.drawable.bg_student_info_girl);
+            imgSex.setBackgroundResource(R.drawable.female_w);
         }
         //设置信息
         txtName.setText(currentStudent.getStu_name());
         txtClassName.setText(currentStudent.getG_name() + currentStudent.getC_name());
-        if (currentStudent.getSex().equals("0")) {
-            llInfoBg.setBackgroundResource(R.drawable.bg_student_info_girl);
-            imgSex.setBackgroundResource(R.drawable.female_w);
-        } else {
-            llInfoBg.setBackgroundResource(R.drawable.bg_student_info_boy);
-            imgSex.setBackgroundResource(R.drawable.male_w);
-        }
 
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -169,6 +188,52 @@ public class ChildFragment extends BaseFragment implements View.OnClickListener 
                 intent.putExtra(ExtraKey.STUDENT_ID, currentStudent.getStu_id());
                 getContext().startActivity(intent);
                 break;
+            case R.id.rlUnbind:
+                //解绑设备
+                CustomDialog dialog = new CustomDialog(mContext);
+                dialog.setTitle(R.string.label_tip);
+                dialog.setMessage(mContext.getResources().getString(R.string.msg_unbind_watch, currentStudent.getImei_id()));
+                dialog.setAlertDialogClickListener(new CustomDialog.DialogClickListener() {
+                    @Override
+                    public void onPositiveClick() {
+                        unBindDevice();
+                    }
+                });
+                break;
         }
     }
+
+    private void unBindDevice() {
+
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.WATCH_UnBind,
+                new VolleyHttpParamsEntity()
+                        .addParam("stu_id", currentStudent.getStu_id())
+                        .addParam("user_id", XPTApplication.getInstance().getCurrentUserId()), new MyVolleyRequestListener() {
+                    @Override
+                    public void onStart() {
+                        super.onStart();
+                        ((MyChildActivity) mContext).showProgress("正在解除设备");
+                    }
+
+                    @Override
+                    public void onResponse(VolleyHttpResult volleyHttpResult) {
+                        super.onResponse(volleyHttpResult);
+                        ((MyChildActivity) mContext).hideProgress();
+                        ToastUtils.showToast(mContext, volleyHttpResult.getInfo());
+                        if (volleyHttpResult.getStatus() == HttpAction.SUCCESS) {
+                            //删除学生，重新刷新界面
+                            GreenDaoHelper.getInstance().deleteStuById(currentStudent.getStu_id());
+                            ((MyChildActivity) mContext).initData();
+                        }
+                    }
+
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        super.onErrorResponse(volleyError);
+                        ((MyChildActivity) mContext).hideProgress();
+                    }
+                });
+
+    }
+
 }

@@ -128,6 +128,8 @@
     <string name="mine_about">关于</string>
     <string name="mine_setting">设置</string>
     <string name="mine_exit">退出当前账号</string>
+    <string name="unbind_watch">解绑设备</string>
+
     <string name="title_detail">学生详情</string>
     <string name="setting_change_pwd">修改密码</string>
     <string name="setting_add_tutelage">添加监护人</string>
@@ -242,6 +244,8 @@
     <string name="msg_large_endtime">结束时间小于开始时间，请重新选择</string>
     <string name="msg_month_cannot_overstep">只能查询当月日期的数据</string>
     <string name="msg_exit">确定要退出当前账号吗？</string>
+    <string name="msg_unbind_watch">确定要解绑%1$s吗？</string>
+
     <string name="msg_fence_delete">确定要删除当前围栏信息吗？</string>
     <string name="msg_teacher_null">当前教师信息获取失败</string>
     <string name="msg_fence_deleteing">正在删除围栏信息</string>
