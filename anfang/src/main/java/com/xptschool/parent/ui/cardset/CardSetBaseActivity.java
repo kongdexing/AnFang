@@ -198,8 +198,7 @@ public class CardSetBaseActivity extends ContractClickActivity {
 
     protected void setViewData(String value) {
         if (currentStudent != null) {
-            String parentId = GreenDaoHelper.getInstance().getCurrentParent().getU_id();
-            spKey = parentId + currentStudent.getStu_id() + CardType;
+            spKey = currentStudent.getStu_id() + CardType;
         }
         Log.i(TAG, "setViewData:  " + spKey);
     }

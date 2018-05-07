@@ -202,7 +202,6 @@
         <!-- 学生卡设置 -->
         <activity android:name=".ui.cardset.CardSOSActivity" />
         <activity android:name=".ui.cardset.CardWhiteListActivity" />
-        <activity android:name=".ui.cardset.CardMoniterActivity" />
 
         <!-- 家庭作业 -->
         <activity android:name=".ui.homework.HomeWorkParentActivity" />

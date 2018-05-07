@@ -20,29 +20,21 @@ import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.view.CircularImageView;
 import com.android.widget.view.KenBurnsView;
-import com.hyphenate.EMCallBack;
-import com.hyphenate.chat.EMClient;
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
-import com.xptschool.parent.common.SharedPreferencesUtil;
-import com.xptschool.parent.common.UserHelper;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.fragment.BaseFragment;
 import com.xptschool.parent.ui.mine.MyChildActivity;
-import com.xptschool.parent.ui.setting.SettingActivity;
 import com.xptschool.parent.util.ToastUtils;
 import com.xptschool.parent.view.CustomDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class ChildFragment extends BaseFragment implements View.OnClickListener {
 
@@ -120,12 +112,10 @@ public class ChildFragment extends BaseFragment implements View.OnClickListener 
 
         RelativeLayout RLSOSSet = (RelativeLayout) view.findViewById(R.id.RLSOSSet);
         RelativeLayout RLWhitelistSet = (RelativeLayout) view.findViewById(R.id.RLWhitelistSet);
-        RelativeLayout RLMoniterSet = (RelativeLayout) view.findViewById(R.id.RLMoniterSet);
         rlUnbind = (RelativeLayout) view.findViewById(R.id.rlUnbind);
 
         RLSOSSet.setOnClickListener(this);
         RLWhitelistSet.setOnClickListener(this);
-        RLMoniterSet.setOnClickListener(this);
         rlUnbind.setOnClickListener(this);
 
         return view;
@@ -180,11 +170,6 @@ public class ChildFragment extends BaseFragment implements View.OnClickListener 
                 break;
             case R.id.RLWhitelistSet:
                 intent = new Intent(getContext(), CardWhiteListActivity.class);
-                intent.putExtra(ExtraKey.STUDENT_ID, currentStudent.getStu_id());
-                getContext().startActivity(intent);
-                break;
-            case R.id.RLMoniterSet:
-                intent = new Intent(getContext(), CardMoniterActivity.class);
                 intent.putExtra(ExtraKey.STUDENT_ID, currentStudent.getStu_id());
                 getContext().startActivity(intent);
                 break;
