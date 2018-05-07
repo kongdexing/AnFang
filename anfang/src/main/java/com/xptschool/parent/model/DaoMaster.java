@@ -21,42 +21,42 @@ public class DaoMaster extends AbstractDaoMaster {
 
     /** Creates underlying database table using DAOs. */
     public static void createAllTables(Database db, boolean ifNotExists) {
-        BeanBannerDao.createTable(db, ifNotExists);
-        BeanClassDao.createTable(db, ifNotExists);
-        BeanCountyDao.createTable(db, ifNotExists);
-        BeanCourseDao.createTable(db, ifNotExists);
-        BeanHomeCfgDao.createTable(db, ifNotExists);
         BeanLearningModuleDao.createTable(db, ifNotExists);
-        BeanMyClassDao.createTable(db, ifNotExists);
-        BeanParentDao.createTable(db, ifNotExists);
-        BeanStudentDao.createTable(db, ifNotExists);
-        BeanTeacherDao.createTable(db, ifNotExists);
+        BeanCountyDao.createTable(db, ifNotExists);
         BeanUserDao.createTable(db, ifNotExists);
         BeanWChatDao.createTable(db, ifNotExists);
-        ContactParentDao.createTable(db, ifNotExists);
-        ContactSchoolDao.createTable(db, ifNotExists);
+        BeanHomeCfgDao.createTable(db, ifNotExists);
         ContactStudentDao.createTable(db, ifNotExists);
+        BeanTeacherDao.createTable(db, ifNotExists);
+        ContactParentDao.createTable(db, ifNotExists);
+        BeanStudentDao.createTable(db, ifNotExists);
         ContactTeacherDao.createTable(db, ifNotExists);
+        BeanClassDao.createTable(db, ifNotExists);
+        ContactSchoolDao.createTable(db, ifNotExists);
+        BeanBannerDao.createTable(db, ifNotExists);
+        BeanCourseDao.createTable(db, ifNotExists);
+        BeanParentDao.createTable(db, ifNotExists);
+        BeanMyClassDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(Database db, boolean ifExists) {
-        BeanBannerDao.dropTable(db, ifExists);
-        BeanClassDao.dropTable(db, ifExists);
-        BeanCountyDao.dropTable(db, ifExists);
-        BeanCourseDao.dropTable(db, ifExists);
-        BeanHomeCfgDao.dropTable(db, ifExists);
         BeanLearningModuleDao.dropTable(db, ifExists);
-        BeanMyClassDao.dropTable(db, ifExists);
-        BeanParentDao.dropTable(db, ifExists);
-        BeanStudentDao.dropTable(db, ifExists);
-        BeanTeacherDao.dropTable(db, ifExists);
+        BeanCountyDao.dropTable(db, ifExists);
         BeanUserDao.dropTable(db, ifExists);
         BeanWChatDao.dropTable(db, ifExists);
-        ContactParentDao.dropTable(db, ifExists);
-        ContactSchoolDao.dropTable(db, ifExists);
+        BeanHomeCfgDao.dropTable(db, ifExists);
         ContactStudentDao.dropTable(db, ifExists);
+        BeanTeacherDao.dropTable(db, ifExists);
+        ContactParentDao.dropTable(db, ifExists);
+        BeanStudentDao.dropTable(db, ifExists);
         ContactTeacherDao.dropTable(db, ifExists);
+        BeanClassDao.dropTable(db, ifExists);
+        ContactSchoolDao.dropTable(db, ifExists);
+        BeanBannerDao.dropTable(db, ifExists);
+        BeanCourseDao.dropTable(db, ifExists);
+        BeanParentDao.dropTable(db, ifExists);
+        BeanMyClassDao.dropTable(db, ifExists);
     }
 
     /**
@@ -75,22 +75,22 @@ public class DaoMaster extends AbstractDaoMaster {
 
     public DaoMaster(Database db) {
         super(db, SCHEMA_VERSION);
-        registerDaoClass(BeanBannerDao.class);
-        registerDaoClass(BeanClassDao.class);
-        registerDaoClass(BeanCountyDao.class);
-        registerDaoClass(BeanCourseDao.class);
-        registerDaoClass(BeanHomeCfgDao.class);
         registerDaoClass(BeanLearningModuleDao.class);
-        registerDaoClass(BeanMyClassDao.class);
-        registerDaoClass(BeanParentDao.class);
-        registerDaoClass(BeanStudentDao.class);
-        registerDaoClass(BeanTeacherDao.class);
+        registerDaoClass(BeanCountyDao.class);
         registerDaoClass(BeanUserDao.class);
         registerDaoClass(BeanWChatDao.class);
-        registerDaoClass(ContactParentDao.class);
-        registerDaoClass(ContactSchoolDao.class);
+        registerDaoClass(BeanHomeCfgDao.class);
         registerDaoClass(ContactStudentDao.class);
+        registerDaoClass(BeanTeacherDao.class);
+        registerDaoClass(ContactParentDao.class);
+        registerDaoClass(BeanStudentDao.class);
         registerDaoClass(ContactTeacherDao.class);
+        registerDaoClass(BeanClassDao.class);
+        registerDaoClass(ContactSchoolDao.class);
+        registerDaoClass(BeanBannerDao.class);
+        registerDaoClass(BeanCourseDao.class);
+        registerDaoClass(BeanParentDao.class);
+        registerDaoClass(BeanMyClassDao.class);
     }
 
     public DaoSession newSession() {
