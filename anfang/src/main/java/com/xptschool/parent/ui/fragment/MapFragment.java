@@ -167,8 +167,6 @@ public class MapFragment extends MapBaseFragment implements OnGetShareUrlResultL
         mLocClient.start();
         Log.i(TAG, "initData: start loc");
 
-
-
         UserHelper.getInstance().addUserChangeListener(new UserHelper.UserChangeListener() {
             @Override
             public void onUserLoginSuccess() {
@@ -192,13 +190,18 @@ public class MapFragment extends MapBaseFragment implements OnGetShareUrlResultL
         UserType type = XPTApplication.getInstance().getCurrent_user_type();
         Log.i(TAG, "initSpinnerData: " + type);
 
-        if(UserType.PARENT.equals(type)||UserType.TEACHER.equals(type)){
+        List<BeanStudent> students = GreenDaoHelper.getInstance().getStudents();
+        if (students.size() > 0) {
             startTime = (new SimpleDateFormat("yyyy-MM-dd HH:mm")).format(CommonUtil.getDateBefore(1));
             endTime = CommonUtil.getCurrentDateTime();
             txtSDate.setText(startTime);
             txtEDate.setText(endTime);
 
-            if (UserType.PARENT.equals(type)) {
+            if (UserType.TEACHER.equals(type)) {
+                llStudentName.setVisibility(View.GONE);
+                txtStudentName.setVisibility(View.VISIBLE);
+                getStudents();
+            } else {
                 llStudentName.setVisibility(View.VISIBLE);
                 txtStudentName.setVisibility(View.GONE);
 
@@ -229,11 +232,8 @@ public class MapFragment extends MapBaseFragment implements OnGetShareUrlResultL
                         flTransparent.setVisibility(View.GONE);
                     }
                 });
-            } else if (UserType.TEACHER.equals(type)) {
-                llStudentName.setVisibility(View.GONE);
-                txtStudentName.setVisibility(View.VISIBLE);
-                getStudents();
             }
+
         } else {
             //隐藏学生功能
             llMyTools.setVisibility(View.GONE);
@@ -255,7 +255,6 @@ public class MapFragment extends MapBaseFragment implements OnGetShareUrlResultL
         llLocation.setTag(false);
         llRailings.setTag(false);
 
-//        viewClick(llLocation);
     }
 
     @Override
@@ -367,7 +366,7 @@ public class MapFragment extends MapBaseFragment implements OnGetShareUrlResultL
                 if (CommonUtil.isMapAppInstalled()) {
                     CustomMapDialog dialog = new CustomMapDialog(mContext);
                 } else {
-                    ToastUtils.showToast(mContext,"没有检测到其他地图");
+                    ToastUtils.showToast(mContext, "没有检测到其他地图");
                 }
                 break;
 

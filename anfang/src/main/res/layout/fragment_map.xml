@@ -31,8 +31,7 @@
         <LinearLayout
             android:id="@+id/llStudentDrop"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_40"
-            android:background="@color/color_black_1">
+            android:layout_height="@dimen/dp_40">
 
             <com.android.widget.view.ArrowTextView
                 android:id="@+id/txtSDate"

@@ -16,6 +16,7 @@ import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.main.BaseActivity;
+import com.xptschool.parent.ui.watch.chat.ServerManager;
 import com.xptschool.parent.util.ToastUtils;
 
 import org.json.JSONObject;
@@ -91,6 +92,9 @@ public class BindWatchInputActivity extends BaseActivity {
                                 //存入数据库
                                 GreenDaoHelper.getInstance().insertStudent(student);
                                 ToastUtils.showToast(BindWatchInputActivity.this, "绑定成功");
+                                //启动服务
+                                ServerManager.getInstance().startService();
+
                                 setResult(1);
                                 finish();
                             } catch (Exception ex) {
