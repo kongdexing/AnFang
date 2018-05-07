@@ -32,6 +32,7 @@ import com.umeng.message.entity.UMessage;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.common.UserType;
@@ -179,7 +180,7 @@ public class XPTApplication extends Application {
         } catch (Exception ex) {
             Log.i(TAG, "init: UMShareAPI " + ex.getMessage());
         }
-
+        ZXingLibrary.initDisplayOpinion(this);
     }
 
     public void resolvePushMsg(String message) {

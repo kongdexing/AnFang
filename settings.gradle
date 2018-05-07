@@ -1,5 +1,7 @@
 include ':anfang', ':lint', ':library', ':multipleimageselect',
         ':network-events-library', ':processor', ':viewpagerindicator', ':PushSDK',
-        ':takephoto_library', ':widget', ':camera', ':easeui', ':redpacketlibrary', ':pickerview', ':barlibrary', ':agentweb-core', ':agentweb-download', ':agentweb-filechooser'
+        ':takephoto_library', ':widget', ':camera', ':easeui', ':redpacketlibrary', ':pickerview', ':barlibrary',
+        ':agentweb-core', ':agentweb-download', ':agentweb-filechooser',
+        ':lib-zxing'
 //include ':hyphenatechatsdk'
 //project(':hyphenatechatsdk').projectDir = new File('../emclient-android/hyphenatechatsdk')
