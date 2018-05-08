@@ -215,9 +215,9 @@ public class CommonUtil {
         DisplayImageOptions  options = new DisplayImageOptions.Builder()
                 .cacheInMemory(true)
                 .cacheOnDisk(true)
-                .showImageForEmptyUri(R.drawable.icon_def_ad_top)
-                .showImageOnFail(R.drawable.icon_def_ad_top)
-                .showImageOnLoading(R.drawable.icon_def_ad_top)
+                .showImageForEmptyUri(R.drawable.no_banner)
+                .showImageOnFail(R.drawable.no_banner)
+                .showImageOnLoading(R.drawable.no_banner)
                 .bitmapConfig(Bitmap.Config.RGB_565)
                 .displayer(new SimpleBitmapDisplayer()).build();
         return options;

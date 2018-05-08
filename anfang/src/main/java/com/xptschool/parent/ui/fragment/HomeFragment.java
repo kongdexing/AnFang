@@ -20,6 +20,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.volley.common.VolleyRequestListener;
+import com.android.widget.banner.Banner;
+import com.android.widget.banner.BannerConfig;
+import com.android.widget.banner.OnBannerListener;
 import com.android.widget.mygridview.MyGridView;
 import com.android.widget.pulltorefresh.PullToRefreshBase;
 import com.android.widget.pulltorefresh.PullToRefreshScrollView;
@@ -79,9 +82,6 @@ import com.xptschool.parent.util.HomeUtil;
 import com.xptschool.parent.util.NetWorkUsefulUtils;
 import com.xptschool.parent.util.ParentUtil;
 import com.xptschool.parent.view.autoviewpager.GlideImageLoader;
-import com.youth.banner.Banner;
-import com.youth.banner.BannerConfig;
-import com.youth.banner.listener.OnBannerListener;
 
 import org.json.JSONObject;
 

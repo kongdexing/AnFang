@@ -3,9 +3,9 @@ package com.xptschool.parent.view.autoviewpager;
 import android.content.Context;
 import android.widget.ImageView;
 
+import com.android.widget.banner.ImageLoader;
 import com.squareup.picasso.Picasso;
 import com.xptschool.parent.R;
-import com.youth.banner.loader.ImageLoader;
 
 public class GlideImageLoader extends ImageLoader {
 
