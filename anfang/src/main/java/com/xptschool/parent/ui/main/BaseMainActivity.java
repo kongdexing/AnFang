@@ -56,6 +56,10 @@ public class BaseMainActivity extends BaseLoginMainActivity implements HuaweiApi
                 unRegisterPush();
             }
         });
+
+        //检测版本
+
+
     }
 
     private void registerPush() {
