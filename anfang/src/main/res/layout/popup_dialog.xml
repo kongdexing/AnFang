@@ -13,7 +13,7 @@
         android:paddingLeft="@dimen/dp_15"
         android:text=""
         android:textColor="@color/colorPrimary"
-        android:textSize="15sp"
+        android:textSize="@dimen/sp_15"
         android:visibility="visible" />
 
     <View

@@ -46,6 +46,10 @@ public class CustomDialog implements View.OnClickListener {
         setTitle(mContext.getString(strId));
     }
 
+    public void setVisibilityCancel(boolean visibility){
+        btnCancel.setVisibility(visibility?View.VISIBLE:View.GONE);
+    }
+
     public void setTitle(String title) {
         if (txtTitle != null) {
             if (title != null && !title.isEmpty()) {

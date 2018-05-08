@@ -3,6 +3,7 @@ package com.xptschool.parent.common;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
@@ -565,6 +566,24 @@ public class CommonUtil {
             }
         }
         return installed;
+    }
+
+    /**
+     * 获取当前本地apk的版本
+     *
+     * @param mContext
+     * @return
+     */
+    public static int getVersionCode(Context mContext) {
+        int versionCode = 0;
+        try {
+            //获取软件版本号，对应AndroidManifest.xml下android:versionCode
+            versionCode = mContext.getPackageManager().
+                    getPackageInfo(mContext.getPackageName(), 0).versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return versionCode;
     }
 
     //判断应用是否安装

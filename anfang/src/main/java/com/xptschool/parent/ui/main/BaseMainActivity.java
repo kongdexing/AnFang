@@ -1,5 +1,7 @@
 package com.xptschool.parent.ui.main;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -19,10 +21,18 @@ import com.umeng.message.PushAgent;
 import com.xiaomi.channel.commonutils.logger.LoggerInterface;
 import com.xiaomi.mipush.sdk.Logger;
 import com.xiaomi.mipush.sdk.MiPushClient;
+import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
+import com.xptschool.parent.common.CommonUtil;
+import com.xptschool.parent.common.UpgradeHelper;
 import com.xptschool.parent.common.UserHelper;
 import com.xptschool.parent.push.DeviceHelper;
 import com.xptschool.parent.push.UpushTokenHelper;
+import com.xptschool.parent.ui.cardset.CardSetBaseActivity;
+import com.xptschool.parent.view.CustomDialog;
+import com.xptschool.parent.view.CustomProgressDialog;
+
+import org.json.JSONObject;
 
 /**
  * Created by dexing on 2017/6/5.
@@ -58,7 +68,44 @@ public class BaseMainActivity extends BaseLoginMainActivity implements HuaweiApi
         });
 
         //检测版本
+        UpgradeHelper.getInstance().checkUpgrade(new UpgradeHelper.UpgradeListener() {
+            @Override
+            public void onUpgrade(String data) {
+                Log.i(TAG, "onUpgrade: " + data);
+                if (data != null && !data.isEmpty()) {
+                    try {
+                        JSONObject object = new JSONObject(data);
+                        int versionCode = object.getInt("v_code");
 
+                        int currentCode = CommonUtil.getVersionCode(BaseMainActivity.this);
+                        if (versionCode > currentCode) {
+                            //提示升级信息
+                            String describe = object.getString("v_memo");
+                            int upgrade = object.getInt("v_upgrade");
+                            final String path = object.getString("v_path");
+
+                            final CustomDialog dialog = new CustomDialog(BaseMainActivity.this);
+                            dialog.setTitle(R.string.label_upgrade);
+                            dialog.setMessage(describe);
+                            dialog.setVisibilityCancel(upgrade == 1 ? false : true);
+                            dialog.setAlertDialogClickListener(new CustomDialog.DialogClickListener() {
+                                @Override
+                                public void onPositiveClick() {
+                                    //下载文件
+                                    dialog.dismiss();
+                                    new CustomProgressDialog(BaseMainActivity.this).downloadFile(path);
+                                }
+                            });
+
+                        }
+
+                    } catch (Exception ex) {
+
+                    }
+
+                }
+            }
+        });
 
     }
 

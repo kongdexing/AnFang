@@ -202,6 +202,7 @@
     <string name="label_back">返回</string>
     <string name="label_fence_list">学生围栏</string>
     <string name="label_cardset">学生卡设置</string>
+    <string name="label_upgrade">新版更多惊喜，是否更新</string>
     <string name="label_card_sos">SOS设置</string>
     <string name="label_card_whitelist">白名单设置</string>
     <string name="label_card_moniter">监听设置</string>

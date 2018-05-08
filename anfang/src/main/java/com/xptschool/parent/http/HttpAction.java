@@ -190,5 +190,7 @@ public class HttpAction {
     //获取微聊信息
     public static String GET_UNREAD_MESSAGE = HEAD + "ChatInfo/getUnReadChatMsg";
 
+    //检测版本
+    public static String GET_UPGRADE_INFO = HEAD + "AppHomeset/appVersion";
 
 }
