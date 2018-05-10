@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_10"
             android:text="提现金额："
-            android:textColor="@color/color_black_2"
+            android:textColor="@color/color_black_4"
             android:textSize="@dimen/sp_16" />
 
         <LinearLayout
@@ -88,7 +88,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="当前零钱剩余金额："
-                android:textColor="@color/color_black_3"
+                android:textColor="@color/color_black_9"
                 android:textSize="@dimen/sp_14" />
 
             <TextView
@@ -96,7 +96,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:textColor="@color/color_black_3"
+                android:textColor="@color/color_black_9"
                 android:textSize="@dimen/sp_14" />
 
             <TextView

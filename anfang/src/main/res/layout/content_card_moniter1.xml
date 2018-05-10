@@ -56,7 +56,7 @@
                         android:lines="1"
                         android:inputType="textPersonName"
                         android:paddingLeft="@dimen/dp_8"
-                        android:textColorHint="@color/color_black_3"
+                        android:textColorHint="@color/color_black_9"
                         android:textSize="@dimen/sp_16" />
 
                     <ImageView
@@ -100,7 +100,7 @@
                         android:hint="@string/hint_phone"
                         android:inputType="number"
                         android:lines="1"
-                        android:textColorHint="@color/color_black_3"
+                        android:textColorHint="@color/color_black_9"
                         android:textSize="@dimen/sp_16" />
 
                     <ImageView

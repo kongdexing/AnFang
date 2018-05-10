@@ -45,7 +45,7 @@
                 android:hint="@string/hint_device_imei"
                 android:inputType="number"
                 android:textColor="@color/text_black"
-                android:textColorHint="@color/color_black_3"
+                android:textColorHint="@color/color_black_9"
                 android:textSize="@dimen/sp_16" />
         </FrameLayout>
     </LinearLayout>
@@ -78,7 +78,7 @@
                 android:hint="@string/hint_device_nickname"
                 android:inputType="textVisiblePassword|textPersonName"
                 android:textColor="@color/text_black"
-                android:textColorHint="@color/color_black_3"
+                android:textColorHint="@color/color_black_9"
                 android:textSize="@dimen/sp_16" />
 
         </FrameLayout>
@@ -112,7 +112,7 @@
                 android:hint="@string/hint_device_phone"
                 android:inputType="phone"
                 android:textColor="@color/text_black"
-                android:textColorHint="@color/color_black_3"
+                android:textColorHint="@color/color_black_9"
                 android:textSize="@dimen/sp_16" />
 
         </FrameLayout>

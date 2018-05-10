@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_5"
             android:text="20160612"
-            android:textColor="@color/color_black_3"
+            android:textColor="@color/color_black_9"
             android:textSize="@dimen/sp_16" />
 
     </LinearLayout>

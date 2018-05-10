@@ -44,7 +44,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="护眼仪"
-                    android:textColor="@color/color_black_3"
+                    android:textColor="@color/color_black_9"
                     android:textSize="@dimen/sp_12" />
 
                 <RelativeLayout
@@ -72,7 +72,7 @@
                         android:lines="1"
                         android:gravity="right"
                         android:text="@string/label_homework_title"
-                        android:textColor="@color/color_black_3"
+                        android:textColor="@color/color_black_9"
                         android:textSize="@dimen/sp_13" />
 
                 </RelativeLayout>

@@ -19,7 +19,7 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_8"
                 android:text=""
-                android:textColor="@color/color_black_3"
+                android:textColor="@color/color_black_9"
                 android:textSize="@dimen/sp_18" />
 
             <com.android.widget.view.LoadMoreRecyclerView

@@ -24,7 +24,7 @@
         android:layout_below="@+id/img_module"
         android:layout_centerHorizontal="true"
         android:text="title"
-        android:textColor="@color/color_black_2"
+        android:textColor="@color/color_black_4"
         android:textSize="@dimen/sp_14" />
 
 </com.xptschool.parent.view.SquareLayout>

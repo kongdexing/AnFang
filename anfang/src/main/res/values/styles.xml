@@ -96,13 +96,13 @@
     </style>
 
     <style name="AlarmLeftText">
-        <item name="android:textColor">@color/color_black_2</item>
+        <item name="android:textColor">@color/color_black_4</item>
         <item name="android:textSize">@dimen/sp_15</item>
         <item name="android:gravity">right</item>
     </style>
 
     <style name="AlarmRightText">
-        <item name="android:textColor">@color/color_black_2</item>
+        <item name="android:textColor">@color/color_black_4</item>
         <item name="android:textSize">@dimen/sp_15</item>
     </style>
 
@@ -214,7 +214,7 @@
         <item name="android:layout_marginLeft">@dimen/dp_6</item>
         <item name="android:layout_marginRight">@dimen/dp_6</item>
         <item name="android:layout_marginTop">@dimen/dp_5</item>
-        <item name="android:background">@color/color_black_3</item>
+        <item name="android:background">@color/color_black_9</item>
         <item name="android:layout_alignParentBottom">true</item>
     </style>
 

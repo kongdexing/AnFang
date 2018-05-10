@@ -38,7 +38,7 @@
         android:lines="1"
         android:text=""
         android:textColor="@color/color_black_1"
-        android:textColorHint="@color/color_black_3"
+        android:textColorHint="@color/color_black_9"
         android:textSize="16sp" />
 
     <View

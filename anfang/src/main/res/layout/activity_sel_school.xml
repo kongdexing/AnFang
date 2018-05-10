@@ -36,8 +36,8 @@
                     android:layout_marginTop="@dimen/dp_5"
                     android:hint="@string/hint_county"
                     android:lines="1"
-                    android:textColor="@color/color_black_2"
-                    android:textColorHint="@color/color_black_3" />
+                    android:textColor="@color/color_black_4"
+                    android:textColorHint="@color/color_black_9" />
             </LinearLayout>
 
             <LinearLayout
@@ -69,7 +69,7 @@
                         app:ms_dropdown_max_height="@dimen/dp_350"
                         app:ms_dropdown_width="wrap_content"
                         app:ms_padding_left="@dimen/dp_5"
-                        app:ms_text_color="@color/color_black_2"
+                        app:ms_text_color="@color/color_black_4"
                         app:ms_text_size="@dimen/sp_int_16" />
 
                 </LinearLayout>
@@ -95,7 +95,7 @@
                         app:ms_dropdown_max_height="@dimen/dp_350"
                         app:ms_dropdown_width="wrap_content"
                         app:ms_padding_left="@dimen/dp_5"
-                        app:ms_text_color="@color/color_black_2"
+                        app:ms_text_color="@color/color_black_4"
                         app:ms_text_size="@dimen/sp_int_16" />
 
                 </LinearLayout>

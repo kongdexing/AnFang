@@ -22,10 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.VolleyError;
 import com.android.volley.common.CookieUtil;
-import com.android.volley.common.VolleyHttpResult;
-import com.android.volley.common.VolleyHttpService;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -49,9 +46,6 @@ import com.xptschool.parent.common.UserHelper;
 import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.ease.Constant;
 import com.xptschool.parent.ease.EaseHelper;
-import com.xptschool.parent.http.HttpAction;
-import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
-import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.fragment.HomeFragment;
 import com.xptschool.parent.ui.fragment.MapFragment;
@@ -344,10 +338,10 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
         messageBtn.setSelected(false);
         mineBtn.setSelected(false);
 
-        homeTxt.setTextColor(getResources().getColor(R.color.color_black_4));
-        mapTxt.setTextColor(getResources().getColor(R.color.color_black_4));
-        messageTxt.setTextColor(getResources().getColor(R.color.color_black_4));
-        mineTxt.setTextColor(getResources().getColor(R.color.color_black_4));
+        homeTxt.setTextColor(getResources().getColor(R.color.color_black_6));
+        mapTxt.setTextColor(getResources().getColor(R.color.color_black_6));
+        messageTxt.setTextColor(getResources().getColor(R.color.color_black_6));
+        mineTxt.setTextColor(getResources().getColor(R.color.color_black_6));
     }
 
     private void addOrReplaceFgt(int position) {

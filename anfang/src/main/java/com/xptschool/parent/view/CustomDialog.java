@@ -5,6 +5,9 @@ import android.content.Context;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.xptschool.parent.R;
@@ -20,22 +23,25 @@ public class CustomDialog implements View.OnClickListener {
     private AlertDialog alertDialog;
     private TextView txtTitle;
     private TextView txtMessage;
-    private Button btnConfirm, btnCancel;
+    private TextView btnConfirm;
+    private ImageView img_dialog_teacher;
+    private ImageButton btnCancel;
     private DialogClickListener clickListener;
 
     public CustomDialog(Context context) {
         mContext = context;
         alertDialog = new AlertDialog.Builder(context).create();
         alertDialog.show();
-        alertDialog.getWindow().setLayout(XPTApplication.getInstance().getWindowWidth() * 4 / 5,
-                XPTApplication.getInstance().getWindowHeight() / 3);
+        alertDialog.getWindow().setLayout(XPTApplication.getInstance().getWindowWidth() * 5 / 6,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
         alertDialog.setCancelable(false);
         Window window = alertDialog.getWindow();
         window.setContentView(R.layout.popup_dialog);
+        img_dialog_teacher = (ImageView) window.findViewById(R.id.img_dialog_teacher);
         txtTitle = (TextView) window.findViewById(R.id.title);
         txtMessage = (TextView) window.findViewById(R.id.content);
-        btnConfirm = (Button) window.findViewById(R.id.ok);
-        btnCancel = (Button) window.findViewById(R.id.cancel);
+        btnConfirm = (TextView) window.findViewById(R.id.ok);
+        btnCancel = (ImageButton) window.findViewById(R.id.cancel);
         btnConfirm.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
 

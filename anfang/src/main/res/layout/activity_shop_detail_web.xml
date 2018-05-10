@@ -52,7 +52,7 @@
                     android:gravity="right"
                     android:lines="1"
                     android:text="12"
-                    android:textColor="@color/color_black_3"
+                    android:textColor="@color/color_black_9"
                     android:textSize="@dimen/sp_14" />
 
             </RelativeLayout>

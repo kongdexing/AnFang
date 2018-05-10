@@ -95,7 +95,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/dp_10"
                     android:text=""
-                    android:textColor="@color/color_black_2"
+                    android:textColor="@color/color_black_4"
                     android:textSize="@dimen/sp_16" />
                 <View style="@style/line1" />
             </RelativeLayout>

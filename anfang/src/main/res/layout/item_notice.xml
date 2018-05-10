@@ -36,7 +36,7 @@
                     android:layout_toLeftOf="@+id/imgArrow"
                     android:layout_marginRight="@dimen/dp_5"
                     android:text="20160612"
-                    android:textColor="@color/color_black_3"
+                    android:textColor="@color/color_black_9"
                     android:textSize="@dimen/sp_16" />
             </RelativeLayout>
 
@@ -50,7 +50,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="标题："
-                    android:textColor="@color/color_black_2"
+                    android:textColor="@color/color_black_4"
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
@@ -60,7 +60,7 @@
                     android:ellipsize="end"
                     android:maxLines="2"
                     android:text="1.akdjad\n2.全文背诵\nsdf"
-                    android:textColor="@color/color_black_2"
+                    android:textColor="@color/color_black_4"
                     android:textSize="@dimen/sp_16" />
             </LinearLayout>
 
@@ -74,7 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="内容："
-                    android:textColor="@color/color_black_3"
+                    android:textColor="@color/color_black_9"
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
@@ -84,7 +84,7 @@
                     android:ellipsize="end"
                     android:maxLines="3"
                     android:text="1.akdjad\n2.全文背诵\nsdf"
-                    android:textColor="@color/color_black_3"
+                    android:textColor="@color/color_black_9"
                     android:textSize="@dimen/sp_16" />
             </LinearLayout>
 

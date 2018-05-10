@@ -205,7 +205,7 @@ public class ClockDetailActivity extends BaseActivity {
                 resetCheckBox(ckbRepeat3);
                 for (int i = 0; i < weekViews.length; i++) {
                     boolean click = (Boolean) weekViews[i].getTag();
-                    weekViews[i].setBackgroundColor(getResources().getColor(click ? R.color.colorPrimary : R.color.color_black_2));
+                    weekViews[i].setBackgroundColor(getResources().getColor(click ? R.color.colorPrimary : R.color.color_black_4));
                 }
                 break;
             case R.id.ok:
@@ -305,7 +305,7 @@ public class ClockDetailActivity extends BaseActivity {
         public APMAdapter(Context context, Object[] items) {
             super(context, items);
             setTextSize(TypedValue.COMPLEX_UNIT_PX, (int) ClockDetailActivity.this.getResources().getDimensionPixelOffset(R.dimen.sp_22));
-            setTextColor(ClockDetailActivity.this.getResources().getColor(R.color.color_black_2));
+            setTextColor(ClockDetailActivity.this.getResources().getColor(R.color.color_black_4));
         }
 
         @Override
@@ -343,7 +343,7 @@ public class ClockDetailActivity extends BaseActivity {
             if (currentItem == currentValue) {
                 view.setTextColor(ClockDetailActivity.this.getResources().getColor(R.color.colorPrimary));
             } else {
-                view.setTextColor(ClockDetailActivity.this.getResources().getColor(R.color.color_black_2));
+                view.setTextColor(ClockDetailActivity.this.getResources().getColor(R.color.color_black_4));
             }
             view.setTypeface(Typeface.SANS_SERIF);
         }
@@ -379,7 +379,7 @@ public class ClockDetailActivity extends BaseActivity {
             if (currentItem == currentValue) {
                 view.setTextColor(ClockDetailActivity.this.getResources().getColor(R.color.colorPrimary));
             } else {
-                view.setTextColor(ClockDetailActivity.this.getResources().getColor(R.color.color_black_2));
+                view.setTextColor(ClockDetailActivity.this.getResources().getColor(R.color.color_black_4));
             }
             view.setTypeface(Typeface.SANS_SERIF);
         }

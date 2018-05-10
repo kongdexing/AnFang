@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/sp_16"
-        android:textColor="@color/color_black_3"
+        android:textColor="@color/color_black_9"
         app:footerColor="@color/color_refresh_reload"
         app:footerIndicatorHeight="1.3dp"
         app:footerIndicatorStyle="underline"

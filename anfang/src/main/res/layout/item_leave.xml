@@ -15,7 +15,7 @@
         android:layout_marginTop="@dimen/dp_3"
         android:layout_weight="1"
         android:text="请假时间：20160612"
-        android:textColor="@color/color_black_2"
+        android:textColor="@color/color_black_4"
         android:textSize="@dimen/sp_16" />
 
     <TextView
@@ -25,7 +25,7 @@
         android:layout_marginTop="@dimen/dp_3"
         android:layout_weight="1"
         android:text="销假时间：20160612"
-        android:textColor="@color/color_black_2"
+        android:textColor="@color/color_black_4"
         android:textSize="@dimen/sp_16" />
 
     <TextView
@@ -64,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="状态："
-                android:textColor="@color/color_black_3"
+                android:textColor="@color/color_black_9"
                 android:textSize="@dimen/sp_16" />
 
             <TextView

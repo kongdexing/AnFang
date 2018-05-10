@@ -20,7 +20,7 @@
         android:layout_marginTop="@dimen/dp_10"
         android:gravity="center"
         android:text=""
-        android:textColor="@color/color_black_3"
+        android:textColor="@color/color_black_9"
         android:textSize="@dimen/sp_18" />
 
 
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
             android:text="付款方式"
-            android:textColor="@color/color_black_2"
+            android:textColor="@color/color_black_4"
             android:textSize="@dimen/sp_16" />
 
         <TextView
@@ -44,7 +44,7 @@
             android:layout_marginTop="@dimen/dp_10"
             android:gravity="right"
             android:text=""
-            android:textColor="@color/color_black_2"
+            android:textColor="@color/color_black_4"
             android:textSize="@dimen/sp_16" />
     </LinearLayout>
 
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
             android:text="转账说明"
-            android:textColor="@color/color_black_2"
+            android:textColor="@color/color_black_4"
             android:textSize="@dimen/sp_16" />
 
         <TextView
@@ -67,7 +67,7 @@
             android:layout_marginTop="@dimen/dp_10"
             android:gravity="right"
             android:text="..."
-            android:textColor="@color/color_black_2"
+            android:textColor="@color/color_black_4"
             android:textSize="@dimen/sp_16" />
     </LinearLayout>
 
@@ -81,7 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
             android:text="交易时间"
-            android:textColor="@color/color_black_2"
+            android:textColor="@color/color_black_4"
             android:textSize="@dimen/sp_16" />
 
         <TextView
@@ -91,7 +91,7 @@
             android:layout_marginTop="@dimen/dp_10"
             android:gravity="right"
             android:text="...."
-            android:textColor="@color/color_black_2"
+            android:textColor="@color/color_black_4"
             android:textSize="@dimen/sp_16" />
     </LinearLayout>
 
@@ -105,7 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
             android:text="交易订单号"
-            android:textColor="@color/color_black_2"
+            android:textColor="@color/color_black_4"
             android:textSize="@dimen/sp_16" />
 
         <TextView
@@ -115,7 +115,7 @@
             android:layout_marginTop="@dimen/dp_10"
             android:gravity="right"
             android:text="....."
-            android:textColor="@color/color_black_2"
+            android:textColor="@color/color_black_4"
             android:textSize="@dimen/sp_16" />
     </LinearLayout>
 

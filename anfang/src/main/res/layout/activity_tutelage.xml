@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dp_10"
                 android:text="基本资料"
-                android:textColor="@color/color_black_2" />
+                android:textColor="@color/color_black_4" />
 
             <LinearLayout
                 android:layout_width="match_parent"

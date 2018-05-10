@@ -58,7 +58,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_2"
                     android:text="完成时间："
-                    android:textColor="@color/color_black_3"
+                    android:textColor="@color/color_black_9"
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_2"
                     android:text="@string/label_homework_title"
-                    android:textColor="@color/color_black_2"
+                    android:textColor="@color/color_black_4"
                     android:textSize="@dimen/sp_16" />
 
                 <LinearLayout
@@ -80,7 +80,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="内容："
-                        android:textColor="@color/color_black_2"
+                        android:textColor="@color/color_black_4"
                         android:textSize="@dimen/sp_16" />
 
                     <TextView
@@ -90,7 +90,7 @@
                         android:ellipsize="end"
                         android:maxLines="2"
                         android:text=""
-                        android:textColor="@color/color_black_2"
+                        android:textColor="@color/color_black_4"
                         android:textSize="@dimen/sp_16" />
                 </LinearLayout>
 

@@ -30,7 +30,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/dp_8"
             android:text="更多 >"
-            android:textColor="@color/color_black_3"
+            android:textColor="@color/color_black_9"
             android:textSize="@dimen/sp_13" />
 
     </RelativeLayout>

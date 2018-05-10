@@ -181,7 +181,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_6"
                     android:text="语音文件"
-                    android:textColor="@color/color_black_3" />
+                    android:textColor="@color/color_black_9" />
                 <!--声音文件-->
                 <RelativeLayout
                     android:layout_width="match_parent"

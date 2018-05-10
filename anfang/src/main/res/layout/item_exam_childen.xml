@@ -14,7 +14,7 @@
         android:layout_toRightOf="@+id/txtScoreName"
         android:padding="@dimen/dp_10"
         android:text="300.00"
-        android:textColor="@color/color_black_2" />
+        android:textColor="@color/color_black_4" />
 
     <com.android.widget.roundcornerprogressbar.RoundCornerProgressBar
         android:id="@+id/roundCornerProgressBar"
@@ -35,5 +35,5 @@
         android:layout_gravity="center_vertical"
         android:padding="@dimen/dp_10"
         android:text="方圆"
-        android:textColor="@color/color_black_2" />
+        android:textColor="@color/color_black_4" />
 </RelativeLayout>

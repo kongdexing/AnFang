@@ -39,7 +39,7 @@
             android:ellipsize="end"
             android:lines="2"
             android:text="1231"
-            android:textColor="@color/color_black_3"
+            android:textColor="@color/color_black_9"
             android:textSize="@dimen/sp_15" />
 
         <TextView
@@ -52,7 +52,7 @@
             android:ellipsize="end"
             android:lines="1"
             android:text="12:32"
-            android:textColor="@color/color_black_3"
+            android:textColor="@color/color_black_9"
             android:textSize="@dimen/sp_12" />
     </RelativeLayout>
 
