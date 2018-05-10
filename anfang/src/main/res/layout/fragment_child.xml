@@ -1,271 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_student_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ScrollView
+    <View
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none">
+        android:layout_height="300px"
+        android:background="@drawable/bg_device_user" />
 
-        <LinearLayout
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
+        android:gravity="left|top"
+        android:text="我是她爸"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_18" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_40"
+        android:background="@drawable/bg_device_userinfo"
+        android:orientation="vertical">
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <com.android.widget.view.KenBurnsView
-                android:id="@+id/header_picture"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_170"
-                android:src="@drawable/bg_student" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_40">
 
             <com.android.widget.view.CircularImageView
                 android:id="@+id/imgHead"
                 android:layout_width="@dimen/dp_80"
                 android:layout_height="@dimen/dp_80"
-                android:layout_gravity="center"
-                android:layout_marginTop="-40dp"
+                android:layout_centerHorizontal="true"
+                app:border_width="@dimen/dp_2"
+                app:border_color="@color/colorPrimary"
                 android:clickable="true"
                 android:src="@drawable/user_defaulthead" />
-
-            <TextView
-                android:id="@+id/txtName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/dp_10"
-                android:text="未知"
-                android:textSize="@dimen/sp_14" />
 
             <LinearLayout
                 android:id="@+id/llInfoBg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/dp_3"
-                android:gravity="center"
+                android:layout_alignBottom="@+id/imgHead"
+                android:layout_toRightOf="@+id/imgHead"
                 android:padding="@dimen/dp_3">
 
                 <ImageView
                     android:id="@+id/imgSex"
                     android:layout_width="@dimen/dp_10"
                     android:layout_height="@dimen/dp_10"
+                    android:layout_gravity="center"
                     android:background="@drawable/female_w" />
 
                 <TextView
                     android:id="@+id/txtAge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_5"
+                    android:layout_marginLeft="@dimen/dp_3"
                     android:text="神秘"
                     android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/sp_12" />
+                    android:textSize="@dimen/sp_10" />
 
             </LinearLayout>
+        </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
+
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_30"
+            android:text="未知"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/txtCardPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_10"
+            android:gravity="center"
+            android:text="2341" />
+
+        <RelativeLayout
+            android:id="@+id/rlUnbind"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_80"
+            android:background="@drawable/btn_delete_bg"
+            android:clickable="true"
+            android:visibility="gone">
+
+            <TextView
+                style="@style/mineText"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_20"
-                android:background="@drawable/mine_item_normal"
-                android:clickable="true">
+                android:layout_centerHorizontal="true"
+                android:text="@string/unbind_watch"
+                android:textColor="@color/red" />
 
-                <TextView
-                    style="@style/mineText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="班级：" />
+        </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/txtClassName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/dp_10"
-                    android:text="未知" />
-            </RelativeLayout>
+    </LinearLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
-                android:background="@drawable/mine_item_normal"
-                android:clickable="true">
+    <ImageView
+        android:id="@+id/imgEdit"
+        android:layout_width="@dimen/dp_30"
+        android:layout_height="@dimen/dp_30"
+        android:layout_gravity="right|top"
+        android:layout_margin="@dimen/dp_15"
+        android:src="@drawable/ic_device_edit" />
 
-                <TextView
-                    style="@style/mineText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="出生日期：" />
-
-                <TextView
-                    android:id="@+id/txtBirthday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="@dimen/dp_10"
-                    android:text="未知" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
-                android:background="@drawable/mine_item_normal">
-
-                <TextView
-                    style="@style/mineText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="入学时间：" />
-
-                <TextView
-                    android:id="@+id/txtSchoolDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="@dimen/dp_10"
-                    android:text="未知" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
-                android:background="@drawable/mine_item_normal">
-
-                <TextView
-                    android:id="@+id/txtParentCount"
-                    style="@style/mineText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="学校：" />
-
-                <TextView
-                    android:id="@+id/txtSchoolName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="@dimen/dp_10"
-                    android:text="未知" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_5"
-                android:background="@drawable/mine_item_normal">
-
-                <TextView
-                    style="@style/mineText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="IMEI：" />
-
-                <TextView
-                    android:id="@+id/txtIMEI"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="@dimen/dp_10"
-                    android:text="未知" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rlCardPhone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_5"
-                android:background="@drawable/mine_item_normal">
-
-                <TextView
-                    style="@style/mineText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="手机号：" />
-
-                <TextView
-                    android:id="@+id/txtCardPhone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="@dimen/dp_10"
-                    android:text="" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/RLSOSSet"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
-                android:background="@drawable/mine_item_selector"
-                android:clickable="true"
-                android:visibility="gone">
-
-                <TextView
-                    style="@style/mineText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/label_card_sos" />
-
-                <ImageView style="@style/arrow_right" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/RLWhitelistSet"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
-                android:background="@drawable/mine_item_selector"
-                android:clickable="true">
-
-                <TextView
-                    style="@style/mineText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/label_card_whitelist" />
-
-                <ImageView style="@style/arrow_right" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rlUnbind"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dp_20"
-                android:layout_marginTop="@dimen/dp_20"
-                android:background="@drawable/btn_delete_bg"
-                android:clickable="true">
-
-                <TextView
-                    style="@style/mineText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:text="@string/unbind_watch"
-                    android:textColor="@color/red" />
-
-            </RelativeLayout>
-
-        </LinearLayout>
-    </ScrollView>
-
-    <ProgressBar
-        android:id="@+id/progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone" />
 </FrameLayout>

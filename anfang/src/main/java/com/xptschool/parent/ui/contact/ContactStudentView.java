@@ -26,8 +26,6 @@ import butterknife.ButterKnife;
 
 public class ContactStudentView extends ContactBaseView {
 
-    @BindView(R.id.top_picture)
-    KenBurnsView top_picture;
     @BindView(R.id.imgHead)
     CircularImageView imgHead;
 
@@ -57,8 +55,6 @@ public class ContactStudentView extends ContactBaseView {
         super(context, attrs);
         View view = LayoutInflater.from(context).inflate(R.layout.contact_student, this, true);
         ButterKnife.bind(view);
-
-        top_picture.setResourceIds(R.drawable.bg_student, R.drawable.bg_student);
     }
 
     public void setStudentInfo(ContactStudent student) {

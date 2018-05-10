@@ -36,7 +36,7 @@ public class MyChildActivity extends BaseListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_child);
-        setTitle(R.string.mine_child);
+        setTitle(R.string.mine_devices);
         initData();
     }
 

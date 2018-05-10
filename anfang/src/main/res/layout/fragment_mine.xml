@@ -161,7 +161,7 @@
                     style="@style/mineText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/mine_child" />
+                    android:text="@string/mine_devices" />
 
                 <ImageView style="@style/arrow_right" />
 

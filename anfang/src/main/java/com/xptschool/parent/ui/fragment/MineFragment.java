@@ -33,6 +33,7 @@ import com.xptschool.parent.ui.setting.DownloadQRCodeActivity;
 import com.xptschool.parent.ui.setting.QRCodeActivity;
 import com.xptschool.parent.ui.setting.SettingActivity;
 import com.xptschool.parent.ui.wallet.WalletActivity;
+import com.xptschool.parent.ui.watch.DevicesManageActivity;
 import com.xptschool.parent.view.CustomDialog;
 
 import java.util.List;
@@ -225,7 +226,9 @@ public class MineFragment extends BaseFragment {
                 startActivity(new Intent(getContext(), MyInfoActivity.class));
                 break;
             case R.id.rlMyChild:
-                startActivity(new Intent(getContext(), MyChildActivity.class));
+                //进入设备管理界面
+                startActivity(new Intent(getContext(), DevicesManageActivity.class));
+//                startActivity(new Intent(getContext(), MyChildActivity.class));
                 break;
             case R.id.rlMyClass:
                 startActivity(new Intent(getContext(), MyClassesActivity.class));

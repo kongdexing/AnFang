@@ -193,14 +193,20 @@ public class GreenDaoHelper {
     }
 
     public BeanStudent getStudentByStuId(String stuId) {
+        if (stuId == null) {
+            return null;
+        }
         return readDaoSession.getBeanStudentDao().queryBuilder().where(BeanStudentDao.Properties.Stu_id.eq(stuId)).limit(1).unique();
     }
 
     public BeanStudent getStudentByIMEI(String imei) {
+        if (imei == null) {
+            return null;
+        }
         return readDaoSession.getBeanStudentDao().queryBuilder().where(BeanStudentDao.Properties.Imei_id.eq(imei)).limit(1).unique();
     }
 
-    public void deleteStuById(String stu_id){
+    public void deleteStuById(String stu_id) {
         if (writeDaoSession != null) {
             writeDaoSession.getBeanStudentDao().deleteByKey(stu_id);
         }

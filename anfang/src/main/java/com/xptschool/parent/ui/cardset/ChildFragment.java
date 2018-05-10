@@ -19,7 +19,6 @@ import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.view.CircularImageView;
-import com.android.widget.view.KenBurnsView;
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.CommonUtil;
@@ -42,15 +41,10 @@ public class ChildFragment extends BaseFragment implements View.OnClickListener 
 
     CircularImageView imgHead;
     ImageView imgSex;
+    ImageView imgEdit;
     TextView txtName;
     LinearLayout llInfoBg;
     TextView txtAge;
-    TextView txtClassName;
-    TextView txtBirthday;
-    TextView txtSchoolDate;
-    TextView txtSchoolName;
-    TextView txtIMEI;
-    ProgressBar progress;
     TextView txtCardPhone;
     RelativeLayout rlUnbind;
 
@@ -78,20 +72,13 @@ public class ChildFragment extends BaseFragment implements View.OnClickListener 
 
         imgHead = (CircularImageView) view.findViewById(R.id.imgHead);
         imgSex = (ImageView) view.findViewById(R.id.imgSex);
-        KenBurnsView mHeaderPicture = (KenBurnsView) view.findViewById(R.id.header_picture);
-        mHeaderPicture.setResourceIds(R.drawable.bg_student, R.drawable.bg_student);
+        imgEdit = (ImageView) view.findViewById(R.id.imgEdit);
         txtName = (TextView) view.findViewById(R.id.txtName);
         llInfoBg = (LinearLayout) view.findViewById(R.id.llInfoBg);
         txtAge = (TextView) view.findViewById(R.id.txtAge);
-        txtClassName = (TextView) view.findViewById(R.id.txtClassName);
-        txtBirthday = (TextView) view.findViewById(R.id.txtBirthday);
-        txtSchoolDate = (TextView) view.findViewById(R.id.txtSchoolDate);
-        txtSchoolName = (TextView) view.findViewById(R.id.txtSchoolName);
-        txtIMEI = (TextView) view.findViewById(R.id.txtIMEI);
 
-        RelativeLayout rlCardPhone = (RelativeLayout) view.findViewById(R.id.rlCardPhone);
         txtCardPhone = (TextView) view.findViewById(R.id.txtCardPhone);
-        rlCardPhone.setOnClickListener(new View.OnClickListener() {
+        txtCardPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String cardPhone = txtCardPhone.getText().toString();
@@ -110,14 +97,15 @@ public class ChildFragment extends BaseFragment implements View.OnClickListener 
             }
         });
 
-        RelativeLayout RLSOSSet = (RelativeLayout) view.findViewById(R.id.RLSOSSet);
-        RelativeLayout RLWhitelistSet = (RelativeLayout) view.findViewById(R.id.RLWhitelistSet);
+        imgEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                
+            }
+        });
+
         rlUnbind = (RelativeLayout) view.findViewById(R.id.rlUnbind);
-
-        RLSOSSet.setOnClickListener(this);
-        RLWhitelistSet.setOnClickListener(this);
         rlUnbind.setOnClickListener(this);
-
         return view;
     }
 
@@ -138,7 +126,6 @@ public class ChildFragment extends BaseFragment implements View.OnClickListener 
         }
         //设置信息
         txtName.setText(currentStudent.getStu_name());
-        txtClassName.setText(currentStudent.getG_name() + currentStudent.getC_name());
 
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -147,10 +134,6 @@ public class ChildFragment extends BaseFragment implements View.OnClickListener 
         } catch (Exception ex) {
             txtAge.setText("未知");
         }
-        txtSchoolDate.setText(currentStudent.getRx_date());
-        txtBirthday.setText(currentStudent.getBirth_date());
-        txtSchoolName.setText(currentStudent.getS_name() + currentStudent.getA_name());
-        txtIMEI.setText(currentStudent.getImei_id());
         txtCardPhone.setText(currentStudent.getCard_phone());
     }
 
@@ -163,16 +146,6 @@ public class ChildFragment extends BaseFragment implements View.OnClickListener 
 
         Intent intent = new Intent();
         switch (view.getId()) {
-            case R.id.RLSOSSet:
-                intent = new Intent(getContext(), CardSOSActivity.class);
-                intent.putExtra(ExtraKey.STUDENT_ID, currentStudent.getStu_id());
-                getContext().startActivity(intent);
-                break;
-            case R.id.RLWhitelistSet:
-                intent = new Intent(getContext(), CardWhiteListActivity.class);
-                intent.putExtra(ExtraKey.STUDENT_ID, currentStudent.getStu_id());
-                getContext().startActivity(intent);
-                break;
             case R.id.rlUnbind:
                 //解绑设备
                 CustomDialog dialog = new CustomDialog(mContext);

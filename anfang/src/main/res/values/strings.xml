@@ -90,7 +90,7 @@
     <string name="mine_unlogin">点击登录</string>
     <string name="mine_change_account">账号切换</string>
     <string name="mine_info">我的信息</string>
-    <string name="mine_child">我的孩子</string>
+    <string name="mine_devices">设备管理</string>
     <string name="mine_class">我的班级</string>
     <string name="mine_invite">我的邀请</string>
     <string name="mine_student">我的学生</string>
@@ -98,6 +98,11 @@
     <string name="mine_fence">我的围栏</string>
     <string name="mine_wellet">我的钱包</string>
     <string name="mine_collect">我的收藏</string>
+
+    <!--设备信息-->
+    <string name="dev_userinfo">设备使用者信息</string>
+    <string name="dev_bind">设备绑定</string>
+
 
     <!--消息-->
     <string name="msg_notify">通知</string>

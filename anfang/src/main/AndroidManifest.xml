@@ -708,7 +708,6 @@
         <activity
             android:name=".ui.watch.ChatDetailActivity"
             android:windowSoftInputMode="adjustResize" />
-
         <activity android:name=".ui.watch.WalkActivity" />
         <activity android:name=".ui.watch.ShutDownActivity" />
         <activity android:name=".ui.watch.ClockActivity" />
@@ -720,7 +719,9 @@
         <service
             android:name=".ui.watch.chat.ChatService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
+        <activity android:name=".ui.watch.DevicesManageActivity"></activity>
     </application>
 
 </manifest>

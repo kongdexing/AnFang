@@ -75,9 +75,6 @@ public class StudentDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_student_detail);
         setTitle(R.string.title_detail);
 
-        KenBurnsView mHeaderPicture = (KenBurnsView) findViewById(R.id.header_picture);
-        mHeaderPicture.setResourceIds(R.drawable.bg_student, R.drawable.bg_student);
-
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             currentStudent = bundle.getParcelable(ExtraKey.STUDENT_DETAIL);
