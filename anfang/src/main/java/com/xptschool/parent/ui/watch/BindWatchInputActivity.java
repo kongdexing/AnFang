@@ -37,13 +37,8 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class BindWatchInputActivity extends BaseActivity {
-    /**
-     * 扫描跳转Activity RequestCode
-     */
-    public static final int REQUEST_CODE = 111;
-
-    @BindView(R.id.edtImei)
-    EditText edtImei;
+//    @BindView(R.id.edtImei)
+//    EditText edtImei;
     @BindView(R.id.edtNickName)
     EditText edtNickName;
     @BindView(R.id.edtPhone)
@@ -54,83 +49,29 @@ public class BindWatchInputActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bind_watch_input);
         setTitle("绑定设备");
-        setBtnRight("扫描");
+        setBtnRight("跳过");
         setBtnRightClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtils.showToast(BindWatchInputActivity.this, "扫描");
-
-
-
-
-
-
-
-
-
-
+                Intent intent = new Intent(BindWatchInputActivity.this,
+                        SecondActivity.class);
+                setResult(4,intent);
+                finish();
             }
         });
-
-
-        /**
-         * 初始化组件
-         */
-        initView();
-        //初始化权限
-        initPermission();
-
-
-
-
-
-    }
-    /**
-     * 初始化组件
-     */
-    private void initView() {
-
-        /**
-         * 打开默认二维码扫描界面
-         *
-         * 打开系统图片选择界面
-         *
-         * 定制化显示扫描界面
-         *
-         * 测试生成二维码图片
-         */
-
     }
 
-    /**
-     * 初始化权限事件
-     */
-    private void initPermission() {
-        //检查权限
-        String[] permissions = CheckPermissionUtils.checkPermission(this);
-        if (permissions.length == 0) {
-            //权限都申请了
-            //是否登录
-        } else {
-            //申请权限
-            ActivityCompat.requestPermissions(this, permissions, 100);
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-    @OnClick({R.id.ok, R.id.scan})
+    @OnClick({R.id.ok})
     void viewClick(View view) {
         switch (view.getId()) {
             case R.id.ok:
-                String imei = edtImei.getText().toString().trim();
+
+//                String imei = edtImei.getText().toString().trim();
+                Intent getIntent = getIntent();
+                String imei = getIntent.getStringExtra("mScan");
+                Toast.makeText(getApplication(), "解析结果:" + imei, Toast.LENGTH_LONG).show();
+//                edtImei.setText(result);
+
                 String nickName = edtNickName.getText().toString().trim();
                 String phone = edtPhone.getText().toString().trim();
 
@@ -138,13 +79,7 @@ public class BindWatchInputActivity extends BaseActivity {
                     ToastUtils.showToast(this, R.string.msg_imei_error);
                     return;
                 }
-
-                addDevice(imei, nickName, phone);
-                break;
-            case R.id.scan:
-                ToastUtils.showToast(BindWatchInputActivity.this, "扫描");
-                Intent intent = new Intent(getApplication(), CaptureActivity.class);
-                startActivityForResult(intent, REQUEST_CODE);
+//                addDevice(imei, nickName, phone);
                 break;
         }
     }
@@ -202,31 +137,5 @@ public class BindWatchInputActivity extends BaseActivity {
                         hideProgress();
                     }
                 });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        /**
-         * 处理二维码扫描结果
-         */
-        if (requestCode == REQUEST_CODE) {
-            //处理扫描结果（在界面上显示）
-            if (null != data) {
-                Bundle bundle = data.getExtras();
-                if (bundle == null) {
-                    return;
-                }
-                if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
-                    String result = bundle.getString(CodeUtils.RESULT_STRING);
-                    Toast.makeText(this, "解析结果:" + result, Toast.LENGTH_LONG).show();
-
-
-                    edtImei.setText(result);
-
-                } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
-                    Toast.makeText(BindWatchInputActivity.this, "解析二维码失败", Toast.LENGTH_LONG).show();
-                }
-            }
-        }
     }
 }
