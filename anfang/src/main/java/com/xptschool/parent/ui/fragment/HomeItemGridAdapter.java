@@ -18,6 +18,7 @@ import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.login.LoginActivity;
 import com.xptschool.parent.ui.watch.BindWatch1Activity;
+import com.xptschool.parent.ui.watch.SecondActivity;
 import com.xptschool.parent.view.CustomDialog;
 
 import java.util.ArrayList;
@@ -105,7 +106,8 @@ public class HomeItemGridAdapter extends BaseAdapter {
                             @Override
                             public void onPositiveClick() {
                                 //绑定手表
-                                mContext.startActivity(new Intent(mContext, BindWatch1Activity.class));
+//                                mContext.startActivity(new Intent(mContext, BindWatch1Activity.class));
+                                mContext.startActivity(new Intent(mContext, SecondActivity.class));
                             }
                         });
                     }

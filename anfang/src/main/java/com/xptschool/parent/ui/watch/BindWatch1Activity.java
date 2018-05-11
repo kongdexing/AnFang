@@ -16,7 +16,7 @@ public class BindWatch1Activity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bind_watch1);
-        setTitle("绑定设备");
+        setTitle("绑定设备xxx");
     }
 
     @OnClick({R.id.llBind2})

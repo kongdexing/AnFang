@@ -431,4 +431,16 @@
 
     <string name="label_app_download_url">http://school.xinpingtai.com/app/index.html</string>
 
+
+    <!--扫描二维码-->
+    <string name="scan_text1">将手表二维码放入框内，即可自动扫描</string>
+    <string name="scan_text2">(点击右上角手动输入手表绑定码)</string>
+
+    <!--输入绑定码-->
+    <string name="bind_text1">绑定码输入方式:</string>
+    <string name="bind_text2">手表背面注册码一共15位，去除前4位和后一位，输入中间10位号码即手表绑定码。</string>
+
+
+
+
 </resources>
