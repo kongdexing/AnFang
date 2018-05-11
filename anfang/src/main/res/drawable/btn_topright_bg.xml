@@ -6,7 +6,7 @@
                 android:width="@dimen/dp_1"
                 android:color="@android:color/white" />
             <corners android:radius="@dimen/dp_2" />
-            <solid android:color="#008fd0" />
+            <solid android:color="@color/colorPrimary" />
         </shape>
     </item>
     <item android:state_pressed="true">
@@ -15,7 +15,7 @@
                 android:width="@dimen/dp_1"
                 android:color="@android:color/white" />
             <corners android:radius="@dimen/dp_2" />
-            <solid android:color="#008fd0" />
+            <solid android:color="@color/colorPrimary" />
         </shape>
     </item>
     <item>
@@ -24,7 +24,7 @@
                 android:width="@dimen/dp_1"
                 android:color="@android:color/white" />
             <corners android:radius="@dimen/dp_2" />
-            <solid android:color="#00a0e9" />
+            <solid android:color="@color/colorPrimary" />
         </shape>
     </item>
 </selector>

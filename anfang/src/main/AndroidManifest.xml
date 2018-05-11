@@ -723,7 +723,8 @@
 
         <activity android:name=".ui.watch.DevicesManageActivity" />
         <activity android:name=".ui.watch.StuWatchEditActivity" />
-        <activity android:name=".ui.watch.UnbindActivity"></activity>
+        <activity android:name=".ui.watch.UnbindActivity" />
+        <activity android:name=".ui.watch.RelationActivity"></activity>
     </application>
 
 </manifest>

@@ -72,6 +72,14 @@ public class StuWatchEditActivity extends TakePhotoActivity {
             ToastUtils.showToast(this, "学生资料为空");
             finish();
         }
+
+        setBtnRight("保存");
+        setBtnRightClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     private void initView() {

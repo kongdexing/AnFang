@@ -365,6 +365,7 @@ public class XPTApplication extends Application {
     }
 
     public String getCurrentWatchIMEI() {
+        currentWatchIMEI = "";
         List<BeanStudent> students = GreenDaoHelper.getInstance().getStudents();
         for (int i = 0; i < students.size(); i++) {
             BeanStudent student = students.get(i);

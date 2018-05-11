@@ -70,7 +70,7 @@
             <ImageView
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_30"
-                android:src="@drawable/device_bind_add_regcode" />
+                android:src="@drawable/icon_watch_small" />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -103,7 +103,7 @@
             <ImageView
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_30"
-                android:src="@drawable/device_bind_add_regcode" />
+                android:src="@drawable/icon_watch_phone" />
 
             <FrameLayout
                 android:layout_width="match_parent"

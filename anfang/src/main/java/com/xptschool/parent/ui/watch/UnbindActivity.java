@@ -17,6 +17,7 @@ import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.main.BaseActivity;
 import com.xptschool.parent.ui.mine.MyChildActivity;
+import com.xptschool.parent.ui.watch.chat.ServerManager;
 import com.xptschool.parent.util.ToastUtils;
 import com.xptschool.parent.view.CustomDialog;
 
@@ -80,6 +81,7 @@ public class UnbindActivity extends BaseActivity {
                         if (volleyHttpResult.getStatus() == HttpAction.SUCCESS) {
                             //删除学生，重新刷新界面
                             GreenDaoHelper.getInstance().deleteStuById(currentStudent.getStu_id());
+                            ServerManager.getInstance().stopService(mContext);
                             UnbindActivity.this.finish();
                         }
                     }

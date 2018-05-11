@@ -77,8 +77,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_20"
             android:text="未知"
+            android:textColor="@color/color_black_6"
             android:textSize="@dimen/sp_14" />
 
         <TextView
@@ -87,6 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dp_30"
             android:layout_marginTop="@dimen/dp_10"
+            android:textColor="@color/color_black_6"
             android:gravity="center"
             android:text="2341" />
 

@@ -108,13 +108,11 @@ public class MineFragment extends BaseFragment {
             if (type == null) {
                 return;
             }
+            rlMyChild.setVisibility(View.VISIBLE);
             String headImg = "";
 
             if (UserType.TEACHER.equals(type)) {
-
                 rlMyClass.setVisibility(View.VISIBLE);
-//                rlMyBill.setVisibility(View.GONE);
-
                 BeanTeacher teacher = GreenDaoHelper.getInstance().getCurrentTeacher();
                 if (teacher != null) {
                     txtUserName.setText(teacher.getName());
@@ -122,14 +120,12 @@ public class MineFragment extends BaseFragment {
                     headImg = teacher.getHead_portrait();
                 }
             } else if (UserType.PARENT.equals(type)) {
-                rlMyChild.setVisibility(View.VISIBLE);
+//                rlMyChild.setVisibility(View.VISIBLE);
+//
+//                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) rlMyChild.getLayoutParams();
+//                params.setMargins(0, (int) mContext.getResources().getDimension(R.dimen.dp_20), 0, 0);
+//                rlMyChild.setLayoutParams(params);
 
-                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) rlMyChild.getLayoutParams();
-                params.setMargins(0, (int) mContext.getResources().getDimension(R.dimen.dp_20), 0, 0);
-                rlMyChild.setLayoutParams(params);
-
-                rlMyClass.setVisibility(View.GONE);
-//                rlMyBill.setVisibility(View.VISIBLE);
                 rlMyProperty.setVisibility(View.VISIBLE);
 
                 BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
@@ -139,12 +135,6 @@ public class MineFragment extends BaseFragment {
                     headImg = parent.getHead_portrait();
                 }
             } else {
-                //判断有无学生（手表）
-                List<BeanStudent> students = GreenDaoHelper.getInstance().getStudents();
-                if (students.size() > 0) {
-                    rlMyChild.setVisibility(View.VISIBLE);
-                }
-
                 //会员不显示我的邀请，第三方公司|代理商显示我的邀请
                 if (type.equals(UserType.VISITOR)) {
                     rlMyInvite.setVisibility(View.GONE);
