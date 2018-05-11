@@ -46,12 +46,14 @@ public class BaseActivity extends AppCompatActivity {
     private ImageView imgRight;
     private Dialog progressDialog;
     public Unbinder unbinder;
+    public Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         TAG = this.getClass().getSimpleName();
         isDestroy = false;
+        mContext = this;
         PushAgent.getInstance(this).onAppStart();
 
         IntentFilter filter = new IntentFilter();

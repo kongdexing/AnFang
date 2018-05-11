@@ -29,6 +29,7 @@ import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.fragment.BaseFragment;
 import com.xptschool.parent.ui.mine.MyChildActivity;
+import com.xptschool.parent.ui.watch.StuWatchEditActivity;
 import com.xptschool.parent.util.ToastUtils;
 import com.xptschool.parent.view.CustomDialog;
 
@@ -97,13 +98,8 @@ public class ChildFragment extends BaseFragment implements View.OnClickListener 
             }
         });
 
-        imgEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                
-            }
-        });
-
+        //跳转至编辑设备信息页
+        imgEdit.setOnClickListener(this);
         rlUnbind = (RelativeLayout) view.findViewById(R.id.rlUnbind);
         rlUnbind.setOnClickListener(this);
         return view;
@@ -144,7 +140,6 @@ public class ChildFragment extends BaseFragment implements View.OnClickListener 
             return;
         }
 
-        Intent intent = new Intent();
         switch (view.getId()) {
             case R.id.rlUnbind:
                 //解绑设备
@@ -157,6 +152,11 @@ public class ChildFragment extends BaseFragment implements View.OnClickListener 
                         unBindDevice();
                     }
                 });
+                break;
+            case R.id.imgEdit:
+                Intent intent = new Intent(mContext, StuWatchEditActivity.class);
+                intent.putExtra("student", currentStudent);
+                mContext.startActivity(intent);
                 break;
         }
     }

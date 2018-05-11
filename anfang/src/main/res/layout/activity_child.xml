@@ -17,6 +17,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:padding="10dip"
-        app:fillColor="@color/text_black_2"
-        app:strokeColor="@color/text_white" />
+        android:visibility="gone"
+        app:fillColor="@color/colorPrimary"
+        app:strokeColor="@color/colorPrimary_low" />
 </LinearLayout>
