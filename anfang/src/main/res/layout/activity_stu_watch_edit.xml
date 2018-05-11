@@ -141,7 +141,7 @@
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_30"
                 android:layout_centerVertical="true"
-                android:src="@drawable/device_bind_add_regcode" />
+                android:src="@drawable/icon_watch_relation" />
 
             <TextView
                 android:id="@+id/edtRelation"

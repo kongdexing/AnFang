@@ -1,5 +1,6 @@
 package com.xptschool.parent.ui.watch;
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -95,8 +96,8 @@ public class StuWatchEditActivity extends TakePhotoActivity {
         }
 
         edtNickName.setText(currentStudent.getStu_name());
+        edtNickName.setSelection(currentStudent.getStu_name().length());
         edtPhone.setText(currentStudent.getCard_phone());
-
 
     }
 
@@ -117,7 +118,8 @@ public class StuWatchEditActivity extends TakePhotoActivity {
                 currentStudent.setSex("0");
                 break;
             case R.id.rlRelation:
-
+                Intent intent = new Intent(this,RelationActivity.class);
+                startActivity(intent);
                 break;
         }
     }

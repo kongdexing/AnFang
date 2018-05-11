@@ -11,12 +11,12 @@ public class WatchUtil {
     public static List<WatchRelation> getRelationList() {
         List<WatchRelation> relations = new ArrayList<>();
         relations.add(new WatchRelation("1", "爸爸"));
-        relations.add(new WatchRelation("2", "爸爸"));
-        relations.add(new WatchRelation("3", "爸爸"));
-        relations.add(new WatchRelation("4", "爸爸"));
-        relations.add(new WatchRelation("5", "爸爸"));
-        relations.add(new WatchRelation("6", "爸爸"));
-        relations.add(new WatchRelation("7", "爸爸"));
+        relations.add(new WatchRelation("2", "妈妈"));
+        relations.add(new WatchRelation("3", "爷爷"));
+        relations.add(new WatchRelation("4", "奶奶"));
+        relations.add(new WatchRelation("5", "外公"));
+        relations.add(new WatchRelation("6", "外婆"));
+        relations.add(new WatchRelation("7", "哥哥"));
         relations.add(new WatchRelation("8", "爸爸"));
         relations.add(new WatchRelation("9", "爸爸"));
 

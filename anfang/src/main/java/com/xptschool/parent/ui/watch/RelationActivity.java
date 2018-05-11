@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -20,7 +21,9 @@ import com.xptschool.parent.R;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.model.BeanHomeCfg;
+import com.xptschool.parent.ui.fragment.home.HomePropertyView;
 import com.xptschool.parent.ui.main.BaseActivity;
+import com.xptschool.parent.ui.main.WebCommonActivity;
 import com.xptschool.parent.ui.shop.ShopListActivity;
 import com.xptschool.parent.util.ToastUtils;
 import com.xptschool.parent.util.WatchUtil;
@@ -84,24 +87,36 @@ public class RelationActivity extends BaseActivity {
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
             Log.i(TAG, "getView: " + position);
-            TextView propertyImg = new TextView(mContext);
+            ViewHolder viewHolder = null;
+            if (convertView == null) {
+                convertView = LayoutInflater.from(mContext).inflate(
+                        R.layout.item_relation_option, parent, false);
+                viewHolder = new ViewHolder();
+                viewHolder.llHomeItem = (LinearLayout) convertView.findViewById(R.id.llItem);
+                viewHolder.optionText = (TextView) convertView.findViewById(R.id.optionText);
+                convertView.setTag(viewHolder);
+            } else {
+                viewHolder = (ViewHolder) convertView.getTag();
+            }
 
-            AbsListView.LayoutParams layoutParams = new AbsListView.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                    (int) getResources().getDimension(R.dimen.dp_70));
-            propertyImg.setLayoutParams(layoutParams);
+            final WatchUtil.WatchRelation homeCfg = getItem(position);
+            if (homeCfg != null) {
+                viewHolder.optionText.setText(homeCfg.getValue());
 
-            final WatchUtil.WatchRelation relation = getItem(position);
-
-            if (relation != null) {
-                propertyImg.setText(relation.getValue());
-                propertyImg.setOnClickListener(new View.OnClickListener() {
+                viewHolder.llHomeItem.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        ToastUtils.showToast(mContext,relation.getKey());
+
                     }
                 });
             }
-            return propertyImg;
+
+            return convertView;
+        }
+
+        class ViewHolder {
+            LinearLayout llHomeItem;
+            TextView optionText;
         }
     }
 
