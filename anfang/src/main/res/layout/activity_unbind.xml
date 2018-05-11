@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dp_30"
+        android:text="您绑定的设备注册码为"
+        android:textSize="@dimen/sp_18"/>
+
+    <TextView
+        android:id="@+id/txtIMEI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text=""
+        android:layout_marginTop="@dimen/dp_5"
+        android:textSize="@dimen/sp_22"
+        android:textColor="@color/colorPrimary"/>
+
+    <RelativeLayout
+        android:id="@+id/rlUnbind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_100"
+        android:layout_gravity="center"
+        android:paddingLeft="@dimen/dp_60"
+        android:paddingRight="@dimen/dp_60"
+        android:background="@drawable/btn_bg"
+        android:clickable="true">
+
+        <TextView
+            style="@style/mineText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/unbind_watch"
+            android:textSize="@dimen/sp_20"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+
+</LinearLayout>

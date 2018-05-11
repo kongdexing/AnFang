@@ -27,9 +27,12 @@ public class DevicesManageActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_devices_manage);
         setTitle(R.string.mine_devices);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
         currentStudent = XPTApplication.getInstance().getCurrentWatchStu();
-
     }
 
     @OnClick({R.id.rlUserInfo, R.id.rlBind, R.id.rlPhone})
@@ -53,12 +56,13 @@ public class DevicesManageActivity extends BaseActivity {
                 startActivity(new Intent(DevicesManageActivity.this, MyChildActivity.class));
                 break;
             case R.id.rlBind:
-                //设备信息
-
+                //设备绑定|解绑
+                Intent intent = new Intent(DevicesManageActivity.this, UnbindActivity.class);
+                DevicesManageActivity.this.startActivity(intent);
                 break;
             case R.id.rlPhone:
                 //
-                Intent intent = new Intent(DevicesManageActivity.this, CardWhiteListActivity.class);
+                intent = new Intent(DevicesManageActivity.this, CardWhiteListActivity.class);
                 //stu_id
                 intent.putExtra(ExtraKey.STUDENT_ID, currentStudent.getStu_id());
                 DevicesManageActivity.this.startActivity(intent);

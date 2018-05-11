@@ -47,7 +47,6 @@ public class ChildFragment extends BaseFragment implements View.OnClickListener 
     LinearLayout llInfoBg;
     TextView txtAge;
     TextView txtCardPhone;
-    RelativeLayout rlUnbind;
 
     private BeanStudent currentStudent;
 
@@ -100,8 +99,6 @@ public class ChildFragment extends BaseFragment implements View.OnClickListener 
 
         //跳转至编辑设备信息页
         imgEdit.setOnClickListener(this);
-        rlUnbind = (RelativeLayout) view.findViewById(R.id.rlUnbind);
-        rlUnbind.setOnClickListener(this);
         return view;
     }
 
@@ -141,57 +138,12 @@ public class ChildFragment extends BaseFragment implements View.OnClickListener 
         }
 
         switch (view.getId()) {
-            case R.id.rlUnbind:
-                //解绑设备
-                CustomDialog dialog = new CustomDialog(mContext);
-                dialog.setTitle(R.string.label_tip);
-                dialog.setMessage(mContext.getResources().getString(R.string.msg_unbind_watch, currentStudent.getImei_id()));
-                dialog.setAlertDialogClickListener(new CustomDialog.DialogClickListener() {
-                    @Override
-                    public void onPositiveClick() {
-                        unBindDevice();
-                    }
-                });
-                break;
             case R.id.imgEdit:
                 Intent intent = new Intent(mContext, StuWatchEditActivity.class);
                 intent.putExtra("student", currentStudent);
                 mContext.startActivity(intent);
                 break;
         }
-    }
-
-    private void unBindDevice() {
-
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.WATCH_UnBind,
-                new VolleyHttpParamsEntity()
-                        .addParam("stu_id", currentStudent.getStu_id())
-                        .addParam("user_id", XPTApplication.getInstance().getCurrentUserId()), new MyVolleyRequestListener() {
-                    @Override
-                    public void onStart() {
-                        super.onStart();
-                        ((MyChildActivity) mContext).showProgress("正在解除设备");
-                    }
-
-                    @Override
-                    public void onResponse(VolleyHttpResult volleyHttpResult) {
-                        super.onResponse(volleyHttpResult);
-                        ((MyChildActivity) mContext).hideProgress();
-                        ToastUtils.showToast(mContext, volleyHttpResult.getInfo());
-                        if (volleyHttpResult.getStatus() == HttpAction.SUCCESS) {
-                            //删除学生，重新刷新界面
-                            GreenDaoHelper.getInstance().deleteStuById(currentStudent.getStu_id());
-                            ((MyChildActivity) mContext).initData();
-                        }
-                    }
-
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        super.onErrorResponse(volleyError);
-                        ((MyChildActivity) mContext).hideProgress();
-                    }
-                });
-
     }
 
 }

@@ -90,25 +90,6 @@
             android:gravity="center"
             android:text="2341" />
 
-        <RelativeLayout
-            android:id="@+id/rlUnbind"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_80"
-            android:background="@drawable/btn_delete_bg"
-            android:clickable="true"
-            android:visibility="gone">
-
-            <TextView
-                style="@style/mineText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:text="@string/unbind_watch"
-                android:textColor="@color/red" />
-
-        </RelativeLayout>
-
     </LinearLayout>
 
     <ImageView

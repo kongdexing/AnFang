@@ -722,7 +722,8 @@
             android:exported="true" />
 
         <activity android:name=".ui.watch.DevicesManageActivity" />
-        <activity android:name=".ui.watch.StuWatchEditActivity"></activity>
+        <activity android:name=".ui.watch.StuWatchEditActivity" />
+        <activity android:name=".ui.watch.UnbindActivity"></activity>
     </application>
 
 </manifest>
