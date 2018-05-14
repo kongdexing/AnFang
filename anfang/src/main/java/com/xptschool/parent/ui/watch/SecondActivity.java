@@ -30,8 +30,10 @@ public class SecondActivity extends BaseActivity {
         setBtnRightClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(SecondActivity.this,BindWatchInput2Activity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
+
             }
         });
 
@@ -95,6 +97,9 @@ public class SecondActivity extends BaseActivity {
         // TODO Auto-generated method stub
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 0 && resultCode == 4) {
+            finish();
+        }
+        if (requestCode == 1 && resultCode == 5) {
             finish();
         }
     }

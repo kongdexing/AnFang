@@ -69,7 +69,7 @@ public class BindWatchInputActivity extends BaseActivity {
 //                String imei = edtImei.getText().toString().trim();
                 Intent getIntent = getIntent();
                 String imei = getIntent.getStringExtra("mScan");
-                Toast.makeText(getApplication(), "解析结果:" + imei, Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplication(), "解析结果:" + imei, Toast.LENGTH_LONG).show();
 //                edtImei.setText(result);
 
                 String nickName = edtNickName.getText().toString().trim();
@@ -79,7 +79,7 @@ public class BindWatchInputActivity extends BaseActivity {
                     ToastUtils.showToast(this, R.string.msg_imei_error);
                     return;
                 }
-//                addDevice(imei, nickName, phone);
+                addDevice(imei, nickName, phone);
                 break;
         }
     }
@@ -121,7 +121,9 @@ public class BindWatchInputActivity extends BaseActivity {
                                 //启动服务
                                 ServerManager.getInstance().startService();
 
-                                setResult(1);
+                                Intent intent = new Intent(BindWatchInputActivity.this,
+                                        SecondActivity.class);
+                                setResult(4,intent);
                                 finish();
                             } catch (Exception ex) {
                                 ToastUtils.showToast(BindWatchInputActivity.this, "数据处理错误");
