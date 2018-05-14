@@ -74,6 +74,31 @@ public class BeanStudent extends SpinnerModel implements Serializable {
 
     @Generated(hash = 1456032229)
     public BeanStudent() {
+
+    }
+
+    public void init(){
+        this.s_id = "";
+        this.a_id = "";
+        this.g_id = "";
+        this.c_id = "";
+        this.stu_id = "";
+        this.stu_name = "";
+        this.imei_id = "";
+        this.card_phone = "";
+        this.birth_date = "";
+        this.rx_date = "";
+        this.sex = "1";
+        this.devicetype = "2";
+        this.s_name = "";
+        this.a_name = "";
+        this.g_name = "";
+        this.c_name = "";
+        this.sos = "";
+        this.whitelist = "";
+        this.monitor = "";
+        this.photo = "";
+        this.relation = "";
     }
 
     public String getS_id() {

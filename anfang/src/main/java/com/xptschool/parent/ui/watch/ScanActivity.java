@@ -53,19 +53,19 @@ public class ScanActivity extends BaseActivity {
     public static boolean isOpen = false;
 
     private void initView() {
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linear1);
-        linearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!isOpen) {
-                    CodeUtils.isLightEnable(true);
-                    isOpen = true;
-                } else {
-                    CodeUtils.isLightEnable(false);
-                    isOpen = false;
-                }
-            }
-        });
+//        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linear1);
+//        linearLayout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (!isOpen) {
+//                    CodeUtils.isLightEnable(true);
+//                    isOpen = true;
+//                } else {
+//                    CodeUtils.isLightEnable(false);
+//                    isOpen = false;
+//                }
+//            }
+//        });
     }
 
     @Override
@@ -113,8 +113,19 @@ public class ScanActivity extends BaseActivity {
     CodeUtils.AnalyzeCallback analyzeCallback = new CodeUtils.AnalyzeCallback() {
         @Override
         public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
+            Log.i(TAG, "onAnalyzeSuccess: " + result);
+            String stmp = result;
+            if (stmp.length() > 4) {
+                stmp = stmp.substring(4);
+            }
+            Log.i(TAG, "onAnalyzeSuccess: " + stmp);
+            if (stmp.length() > 1) {
+                stmp = stmp.substring(0, stmp.length() - 1);
+            }
+            Log.i(TAG, "onAnalyzeSuccess: " + stmp);
+
             Intent intent = new Intent(ScanActivity.this, BindWatchInputActivity.class);
-            intent.putExtra("mScan", result);
+            intent.putExtra("mScan", stmp);
             startActivityForResult(intent, 0);
         }
 
