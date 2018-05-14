@@ -4,23 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpParamsEntity;
-import com.android.volley.common.VolleyHttpResult;
-import com.android.volley.common.VolleyHttpService;
 import com.xptschool.parent.R;
-import com.xptschool.parent.XPTApplication;
-import com.xptschool.parent.http.HttpAction;
-import com.xptschool.parent.http.MyVolleyRequestListener;
-import com.xptschool.parent.model.BeanStudent;
-import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.main.BaseActivity;
-import com.xptschool.parent.ui.watch.chat.ServerManager;
 import com.xptschool.parent.util.ToastUtils;
-
-import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -63,7 +50,7 @@ public class BindWatchInput2Activity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 3 && resultCode == 4) {
             Intent intent = new Intent(BindWatchInput2Activity.this,
-                    SecondActivity.class);
+                    ScanActivity.class);
             setResult(5,intent);
             finish();
         }

@@ -5,18 +5,16 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.uuzuche.lib_zxing.activity.CaptureFragment;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.xptschool.parent.R;
 import com.xptschool.parent.ui.main.BaseActivity;
-import com.xptschool.parent.util.ToastUtils;
 
 /**
  * 定制化显示扫描界面
  */
-public class SecondActivity extends BaseActivity {
+public class ScanActivity extends BaseActivity {
 
     private CaptureFragment captureFragment;
 
@@ -31,7 +29,7 @@ public class SecondActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(SecondActivity.this,BindWatchInput2Activity.class);
+                Intent intent = new Intent(ScanActivity.this,BindWatchInput2Activity.class);
                 startActivityForResult(intent, 1);
 
             }
@@ -70,26 +68,12 @@ public class SecondActivity extends BaseActivity {
     CodeUtils.AnalyzeCallback analyzeCallback = new CodeUtils.AnalyzeCallback() {
         @Override
         public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
-//            Intent resultIntent = new Intent();
-//            Bundle bundle = new Bundle();
-//            bundle.putInt(CodeUtils.RESULT_TYPE, CodeUtils.RESULT_SUCCESS);
-//            bundle.putString(CodeUtils.RESULT_STRING, result);
-//            resultIntent.putExtras(bundle);
-//            SecondActivity.this.setResult(RESULT_OK, resultIntent);
-//            SecondActivity.this.finish();
-            Intent intent = new Intent(SecondActivity.this,BindWatchInputActivity.class);
+            Intent intent = new Intent(ScanActivity.this,BindWatchInputActivity.class);
             intent.putExtra("mScan", result);
             startActivityForResult(intent, 0);
         }
         @Override
         public void onAnalyzeFailed() {
-//            Intent resultIntent = new Intent();
-//            Bundle bundle = new Bundle();
-//            bundle.putInt(CodeUtils.RESULT_TYPE, CodeUtils.RESULT_FAILED);
-//            bundle.putString(CodeUtils.RESULT_STRING, "");
-//            resultIntent.putExtras(bundle);
-//            SecondActivity.this.setResult(RESULT_OK, resultIntent);
-//            SecondActivity.this.finish();
         }
     };
     @Override

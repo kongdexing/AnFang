@@ -716,7 +716,7 @@
         <activity android:name=".ui.watch.BindWatch1Activity" />
         <activity android:name=".ui.watch.BindWatchInputActivity" />
         <activity android:name=".ui.watch.BindWatchInput2Activity" />
-        <activity android:name=".ui.watch.SecondActivity"/>
+        <activity android:name=".ui.watch.ScanActivity"/>
 
         <service
             android:name=".ui.watch.chat.ChatService"
