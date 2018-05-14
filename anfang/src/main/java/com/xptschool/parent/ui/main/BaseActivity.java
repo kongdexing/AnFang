@@ -42,7 +42,7 @@ public class BaseActivity extends AppCompatActivity {
     private RelativeLayout llActionBar;  //ActionBar
     private ImageView imgBack;
     private TextView txtTitle, txtRight;
-    private Button btnRight;
+    private TextView btnRight;
     private ImageView imgRight;
     private Dialog progressDialog;
     public Unbinder unbinder;
@@ -83,7 +83,7 @@ public class BaseActivity extends AppCompatActivity {
         });
         txtTitle = (TextView) parentView.findViewById(R.id.txtTitle);
         txtRight = (TextView) parentView.findViewById(R.id.txtRight);
-        btnRight = (Button) parentView.findViewById(R.id.btnRight);
+        btnRight = (TextView) parentView.findViewById(R.id.btnRight);
         imgRight = (ImageView) parentView.findViewById(R.id.imgRight);
         llContent = (LinearLayout) parentView.findViewById(R.id.llContent);
 

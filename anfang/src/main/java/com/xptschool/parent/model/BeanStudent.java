@@ -1,6 +1,8 @@
 package com.xptschool.parent.model;
 
 import com.android.widget.spinner.SpinnerModel;
+import com.xptschool.parent.BuildConfig;
+import com.xptschool.parent.http.HttpAction;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
@@ -37,13 +39,15 @@ public class BeanStudent extends SpinnerModel implements Serializable {
     private String sos;
     private String whitelist;
     private String monitor;
+    private String photo;
+    private String relation;
 
-    @Generated(hash = 1971354211)
-    public BeanStudent(String s_id, String a_id, String g_id, String c_id,
-                       String stu_id, String stu_name, String stu_no, String imei_id,
-                       String card_phone, String birth_date, String rx_date, String sex,
-                       String devicetype, String s_name, String a_name, String g_name,
-                       String c_name, String sos, String whitelist, String monitor) {
+    @Generated(hash = 2071492309)
+    public BeanStudent(String s_id, String a_id, String g_id, String c_id, String stu_id,
+                       String stu_name, String stu_no, String imei_id, String card_phone,
+                       String birth_date, String rx_date, String sex, String devicetype, String s_name,
+                       String a_name, String g_name, String c_name, String sos, String whitelist,
+                       String monitor, String photo, String relation) {
         this.s_id = s_id;
         this.a_id = a_id;
         this.g_id = g_id;
@@ -64,6 +68,8 @@ public class BeanStudent extends SpinnerModel implements Serializable {
         this.sos = sos;
         this.whitelist = whitelist;
         this.monitor = monitor;
+        this.photo = photo;
+        this.relation = relation;
     }
 
     @Generated(hash = 1456032229)
@@ -238,6 +244,24 @@ public class BeanStudent extends SpinnerModel implements Serializable {
         return stu_name;
     }
 
+    public String getPhoto() {
+        if (!photo.contains(BuildConfig.SERVICE_URL)) {
+            photo = BuildConfig.SERVICE_URL + photo;
+        }
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public String getRelation() {
+        return relation;
+    }
+
+    public void setRelation(String relation) {
+        this.relation = relation;
+    }
 
     @Override
     public String toString() {

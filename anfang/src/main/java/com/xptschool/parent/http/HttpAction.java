@@ -189,6 +189,8 @@ public class HttpAction {
     public static String POST_WCHAT_MESSAGE = HEAD + "ChatInfo/uploadMsg";
     //获取微聊信息
     public static String GET_UNREAD_MESSAGE = HEAD + "ChatInfo/getUnReadChatMsg";
+    //修改学生信息接口
+    public static String UPDATE_STU_INFO = HEAD + "UserInfo/updateStudentInfo";
 
     //检测版本
     public static String GET_UPGRADE_INFO = HEAD + "AppHomeset/appVersion";

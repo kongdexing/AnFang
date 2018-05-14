@@ -60,7 +60,7 @@ public class RelationActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
-                intent.putExtra("relation", adapter.getCurrentRelation());
+                intent.putExtra(ExtraKey.RELATION, adapter.getCurrentRelation());
                 setResult(1, intent);
                 finish();
             }

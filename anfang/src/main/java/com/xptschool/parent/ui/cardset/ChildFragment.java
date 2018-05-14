@@ -19,6 +19,8 @@ import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.widget.view.CircularImageView;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.CommonUtil;
@@ -31,6 +33,7 @@ import com.xptschool.parent.ui.fragment.BaseFragment;
 import com.xptschool.parent.ui.mine.MyChildActivity;
 import com.xptschool.parent.ui.watch.StuWatchEditActivity;
 import com.xptschool.parent.util.ToastUtils;
+import com.xptschool.parent.util.WatchUtil;
 import com.xptschool.parent.view.CustomDialog;
 
 import java.text.SimpleDateFormat;
@@ -47,6 +50,7 @@ public class ChildFragment extends BaseFragment implements View.OnClickListener 
     LinearLayout llInfoBg;
     TextView txtAge;
     TextView txtCardPhone;
+    TextView txtRelation;
 
     private BeanStudent currentStudent;
 
@@ -76,6 +80,7 @@ public class ChildFragment extends BaseFragment implements View.OnClickListener 
         txtName = (TextView) view.findViewById(R.id.txtName);
         llInfoBg = (LinearLayout) view.findViewById(R.id.llInfoBg);
         txtAge = (TextView) view.findViewById(R.id.txtAge);
+        txtRelation = (TextView) view.findViewById(R.id.txtRelation);
 
         txtCardPhone = (TextView) view.findViewById(R.id.txtCardPhone);
         txtCardPhone.setOnClickListener(new View.OnClickListener() {
@@ -108,17 +113,21 @@ public class ChildFragment extends BaseFragment implements View.OnClickListener 
             Log.i(TAG, "bindingData: " + txtName.hashCode());
             return;
         }
+        ImageLoader.getInstance().displayImage(currentStudent.getPhoto(),
+                new ImageViewAware(imgHead), CommonUtil.getDefaultUserImageLoaderOption());
+
         if ("1".equals(currentStudent.getSex())) {
-            imgHead.setImageResource(R.drawable.student_boy);
             llInfoBg.setBackgroundResource(R.drawable.bg_student_info_boy);
             imgSex.setBackgroundResource(R.drawable.male_w);
         } else {
-            imgHead.setImageResource(R.drawable.student_girl);
             llInfoBg.setBackgroundResource(R.drawable.bg_student_info_girl);
             imgSex.setBackgroundResource(R.drawable.female_w);
         }
         //设置信息
         txtName.setText(currentStudent.getStu_name());
+
+        String relation = WatchUtil.getRelationByKey(currentStudent.getRelation());
+        txtRelation.setText("我是" + (("1".equals(currentStudent.getSex()) ? "他的" : "她的") + relation));
 
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

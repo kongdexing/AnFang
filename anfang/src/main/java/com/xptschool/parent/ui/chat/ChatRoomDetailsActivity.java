@@ -749,7 +749,6 @@ public class ChatRoomDetailsActivity extends BaseActivity implements OnClickList
 						return;
 					}
 
-
 					// do nothing here, you can show group member's profile here
 					operationUserId = username;
 					Dialog dialog = createMemberMenuDialog();
