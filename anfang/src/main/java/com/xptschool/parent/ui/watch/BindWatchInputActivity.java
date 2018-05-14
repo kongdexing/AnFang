@@ -25,12 +25,11 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class BindWatchInputActivity extends BaseActivity {
-//    @BindView(R.id.edtImei)
-//    EditText edtImei;
     @BindView(R.id.edtNickName)
     EditText edtNickName;
     @BindView(R.id.edtPhone)
     EditText edtPhone;
+    private String currentIMEI = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +37,14 @@ public class BindWatchInputActivity extends BaseActivity {
         setContentView(R.layout.activity_bind_watch_input);
         setTitle("绑定设备");
         setBtnRight("跳过");
+
+        Intent getIntent = getIntent();
+        currentIMEI = getIntent.getStringExtra("mScan");
+
         setBtnRightClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(BindWatchInputActivity.this,
-                        ScanActivity.class);
-                setResult(4,intent);
-                finish();
+                addDevice(currentIMEI, "", "");
             }
         });
     }
@@ -53,21 +53,13 @@ public class BindWatchInputActivity extends BaseActivity {
     void viewClick(View view) {
         switch (view.getId()) {
             case R.id.ok:
-
-//                String imei = edtImei.getText().toString().trim();
-                Intent getIntent = getIntent();
-                String imei = getIntent.getStringExtra("mScan");
-//                Toast.makeText(getApplication(), "解析结果:" + imei, Toast.LENGTH_LONG).show();
-//                edtImei.setText(result);
-
                 String nickName = edtNickName.getText().toString().trim();
                 String phone = edtPhone.getText().toString().trim();
-
-                if (imei.isEmpty()) {
+                if (currentIMEI.isEmpty()) {
                     ToastUtils.showToast(this, R.string.msg_imei_error);
                     return;
                 }
-                addDevice(imei, nickName, phone);
+                addDevice(currentIMEI, nickName, phone);
                 break;
         }
     }
