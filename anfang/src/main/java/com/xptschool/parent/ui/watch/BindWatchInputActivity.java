@@ -90,6 +90,7 @@ public class BindWatchInputActivity extends BaseActivity {
                                 JSONObject object = new JSONObject(volleyHttpResult.getData().toString());
                                 String stu_id = object.getString("stu_id");
                                 BeanStudent student = new BeanStudent();
+                                student.init();
                                 student.setStu_id(stu_id);
                                 student.setDevice_type("2");
                                 student.setImei_id(imei);
