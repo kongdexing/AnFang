@@ -37,6 +37,11 @@ public class MyChildActivity extends BaseListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_child);
         setTitle(R.string.mine_devices);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         initData();
     }
 

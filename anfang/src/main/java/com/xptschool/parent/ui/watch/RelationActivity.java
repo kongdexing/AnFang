@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -20,7 +21,9 @@ import com.xptschool.parent.R;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.model.BeanHomeCfg;
+import com.xptschool.parent.ui.fragment.home.HomePropertyView;
 import com.xptschool.parent.ui.main.BaseActivity;
+import com.xptschool.parent.ui.main.WebCommonActivity;
 import com.xptschool.parent.ui.shop.ShopListActivity;
 import com.xptschool.parent.util.ToastUtils;
 import com.xptschool.parent.util.WatchUtil;
@@ -45,20 +48,43 @@ public class RelationActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_relation);
 
-        MyRelationAdapter adapter = new MyRelationAdapter(this);
+        final MyRelationAdapter adapter = new MyRelationAdapter(this);
         grd_relation.setAdapter(adapter);
 
+        //设置默认选中关系
+
         adapter.reloadData(WatchUtil.getRelationList());
+
+        setBtnRight("保存");
+        setBtnRightClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.putExtra(ExtraKey.RELATION, adapter.getCurrentRelation());
+                setResult(1, intent);
+                finish();
+            }
+        });
     }
 
     class MyRelationAdapter extends BaseAdapter {
 
         private Context mContext;
         List<WatchUtil.WatchRelation> relations = new ArrayList<>();
+        private String currentRelation = "1";
+
 
         public MyRelationAdapter(Context mContext) {
             super();
             this.mContext = mContext;
+        }
+
+        public void setCurrentRelation(String relation) {
+            currentRelation = relation;
+        }
+
+        public String getCurrentRelation() {
+            return currentRelation;
         }
 
         public void reloadData(List<WatchUtil.WatchRelation> items) {
@@ -84,24 +110,44 @@ public class RelationActivity extends BaseActivity {
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
             Log.i(TAG, "getView: " + position);
-            TextView propertyImg = new TextView(mContext);
-
-            AbsListView.LayoutParams layoutParams = new AbsListView.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                    (int) getResources().getDimension(R.dimen.dp_70));
-            propertyImg.setLayoutParams(layoutParams);
+            ViewHolder viewHolder = null;
+            if (convertView == null) {
+                convertView = LayoutInflater.from(mContext).inflate(
+                        R.layout.item_relation_option, parent, false);
+                viewHolder = new ViewHolder();
+                viewHolder.llHomeItem = (LinearLayout) convertView.findViewById(R.id.llItem);
+                viewHolder.optionText = (TextView) convertView.findViewById(R.id.optionText);
+                convertView.setTag(viewHolder);
+            } else {
+                viewHolder = (ViewHolder) convertView.getTag();
+            }
 
             final WatchUtil.WatchRelation relation = getItem(position);
-
             if (relation != null) {
-                propertyImg.setText(relation.getValue());
-                propertyImg.setOnClickListener(new View.OnClickListener() {
+                viewHolder.optionText.setText(relation.getValue());
+                if (currentRelation.equals(relation.getKey())) {
+                    viewHolder.llHomeItem.setBackgroundResource(R.drawable.btn_relation_select);
+                    viewHolder.optionText.setTextColor(getResources().getColor(R.color.colorPrimary));
+                } else {
+                    viewHolder.llHomeItem.setBackgroundResource(R.drawable.btn_recorder_normal);
+                    viewHolder.optionText.setTextColor(getResources().getColor(R.color.color_black_6));
+                }
+
+                viewHolder.llHomeItem.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        ToastUtils.showToast(mContext,relation.getKey());
+                        setCurrentRelation(relation.getKey());
+                        reloadData(relations);
                     }
                 });
             }
-            return propertyImg;
+
+            return convertView;
+        }
+
+        class ViewHolder {
+            LinearLayout llHomeItem;
+            TextView optionText;
         }
     }
 

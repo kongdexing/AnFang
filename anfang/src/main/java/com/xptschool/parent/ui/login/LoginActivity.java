@@ -275,23 +275,25 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
 
             @Override
             public void onError(final int code, final String error) {
+                EMLoginSuccess();
+
                 if (code == 200) {
                     //USER_ALREADY_LOGIN
-                    EMLoginSuccess();
+
                     Log.i(TAG, "USER_ALREADY_LOGIN！");
 //                    ToastUtils.showToast(LoginActivity.this, "USER_ALREADY_LOGIN");
                 } else {
                     runOnUiThread(new Runnable() {
                         public void run() {
                             Log.i(TAG, "EMUI onError: " + code + " error:" + error);
-                            if (progress != null)
-                                progress.setVisibility(View.INVISIBLE);
-                            btnLogin.setEnabled(true);
-                            //清除数据
-                            SharedPreferencesUtil.clearUserInfo(LoginActivity.this);
-
-                            GreenDaoHelper.getInstance().clearData();
-                            ToastUtils.showToast(getApplicationContext(), "login failed");
+//                            if (progress != null)
+//                                progress.setVisibility(View.INVISIBLE);
+//                            btnLogin.setEnabled(true);
+//                            //清除数据
+//                            SharedPreferencesUtil.clearUserInfo(LoginActivity.this);
+//
+//                            GreenDaoHelper.getInstance().clearData();
+//                            ToastUtils.showToast(getApplicationContext(), "login failed");
                         }
                     });
                 }

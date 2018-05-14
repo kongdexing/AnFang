@@ -42,6 +42,8 @@ public class BeanStudentDao extends AbstractDao<BeanStudent, String> {
         public final static Property Sos = new Property(17, String.class, "sos", false, "SOS");
         public final static Property Whitelist = new Property(18, String.class, "whitelist", false, "WHITELIST");
         public final static Property Monitor = new Property(19, String.class, "monitor", false, "MONITOR");
+        public final static Property Photo = new Property(20, String.class, "photo", false, "PHOTO");
+        public final static Property Relation = new Property(21, String.class, "relation", false, "RELATION");
     };
 
 
@@ -76,7 +78,9 @@ public class BeanStudentDao extends AbstractDao<BeanStudent, String> {
                 "\"C_NAME\" TEXT," + // 16: c_name
                 "\"SOS\" TEXT," + // 17: sos
                 "\"WHITELIST\" TEXT," + // 18: whitelist
-                "\"MONITOR\" TEXT);"); // 19: monitor
+                "\"MONITOR\" TEXT," + // 19: monitor
+                "\"PHOTO\" TEXT," + // 20: photo
+                "\"RELATION\" TEXT);"); // 21: relation
     }
 
     /** Drops the underlying database table. */
@@ -188,6 +192,16 @@ public class BeanStudentDao extends AbstractDao<BeanStudent, String> {
         if (monitor != null) {
             stmt.bindString(20, monitor);
         }
+ 
+        String photo = entity.getPhoto();
+        if (photo != null) {
+            stmt.bindString(21, photo);
+        }
+ 
+        String relation = entity.getRelation();
+        if (relation != null) {
+            stmt.bindString(22, relation);
+        }
     }
 
     @Override
@@ -293,6 +307,16 @@ public class BeanStudentDao extends AbstractDao<BeanStudent, String> {
         if (monitor != null) {
             stmt.bindString(20, monitor);
         }
+ 
+        String photo = entity.getPhoto();
+        if (photo != null) {
+            stmt.bindString(21, photo);
+        }
+ 
+        String relation = entity.getRelation();
+        if (relation != null) {
+            stmt.bindString(22, relation);
+        }
     }
 
     @Override
@@ -322,7 +346,9 @@ public class BeanStudentDao extends AbstractDao<BeanStudent, String> {
             cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // c_name
             cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17), // sos
             cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18), // whitelist
-            cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19) // monitor
+            cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19), // monitor
+            cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20), // photo
+            cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21) // relation
         );
         return entity;
     }
@@ -349,6 +375,8 @@ public class BeanStudentDao extends AbstractDao<BeanStudent, String> {
         entity.setSos(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
         entity.setWhitelist(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
         entity.setMonitor(cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19));
+        entity.setPhoto(cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20));
+        entity.setRelation(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
      }
     
     @Override

@@ -11,18 +11,31 @@ public class WatchUtil {
     public static List<WatchRelation> getRelationList() {
         List<WatchRelation> relations = new ArrayList<>();
         relations.add(new WatchRelation("1", "爸爸"));
-        relations.add(new WatchRelation("2", "爸爸"));
-        relations.add(new WatchRelation("3", "爸爸"));
-        relations.add(new WatchRelation("4", "爸爸"));
-        relations.add(new WatchRelation("5", "爸爸"));
-        relations.add(new WatchRelation("6", "爸爸"));
-        relations.add(new WatchRelation("7", "爸爸"));
-        relations.add(new WatchRelation("8", "爸爸"));
-        relations.add(new WatchRelation("9", "爸爸"));
-
+        relations.add(new WatchRelation("2", "妈妈"));
+        relations.add(new WatchRelation("3", "爷爷"));
+        relations.add(new WatchRelation("4", "奶奶"));
+        relations.add(new WatchRelation("5", "外公"));
+        relations.add(new WatchRelation("6", "外婆"));
+        relations.add(new WatchRelation("7", "哥哥"));
+        relations.add(new WatchRelation("8", "姐姐"));
+        relations.add(new WatchRelation("9", "叔叔"));
+        relations.add(new WatchRelation("10", "舅舅"));
+        relations.add(new WatchRelation("11", "阿姨"));
+        relations.add(new WatchRelation("12", "婶婶"));
+        relations.add(new WatchRelation("0", "其它"));
         return relations;
     }
 
+    public static String getRelationByKey(String key) {
+        List<WatchRelation> relations = getRelationList();
+        for (int i = 0; i < relations.size(); i++) {
+            WatchRelation relation = relations.get(i);
+            if (relation.getKey().equals(key)) {
+                return relation.getValue();
+            }
+        }
+        return "其它";
+    }
 
     public static class WatchRelation {
         private String key;
