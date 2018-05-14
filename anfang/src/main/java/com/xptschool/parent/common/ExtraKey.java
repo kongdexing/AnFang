@@ -29,8 +29,6 @@ public class ExtraKey {
 
     public static final String CATEGORY_ID = "category_id";
     public static final String SHOP_GOODS = "shop_goods";
-
-
-
+    public static final String RELATION = "relation";
 
 }

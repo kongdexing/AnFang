@@ -23,6 +23,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.xptschool.parent.R;
 import com.xptschool.parent.common.CommonUtil;
+import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.ui.album.LocalImageTHelper;
 import com.xptschool.parent.ui.album.TakePhotoActivity;
@@ -119,6 +120,7 @@ public class StuWatchEditActivity extends TakePhotoActivity {
                 break;
             case R.id.rlRelation:
                 Intent intent = new Intent(this,RelationActivity.class);
+//                intent.putExtra(ExtraKey.RELATION,currentStudent.get);
                 startActivity(intent);
                 break;
         }

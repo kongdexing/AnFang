@@ -48,20 +48,43 @@ public class RelationActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_relation);
 
-        MyRelationAdapter adapter = new MyRelationAdapter(this);
+        final MyRelationAdapter adapter = new MyRelationAdapter(this);
         grd_relation.setAdapter(adapter);
 
+        //设置默认选中关系
+
         adapter.reloadData(WatchUtil.getRelationList());
+
+        setBtnRight("保存");
+        setBtnRightClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.putExtra("relation", adapter.getCurrentRelation());
+                setResult(1, intent);
+                finish();
+            }
+        });
     }
 
     class MyRelationAdapter extends BaseAdapter {
 
         private Context mContext;
         List<WatchUtil.WatchRelation> relations = new ArrayList<>();
+        private String currentRelation = "1";
+
 
         public MyRelationAdapter(Context mContext) {
             super();
             this.mContext = mContext;
+        }
+
+        public void setCurrentRelation(String relation) {
+            currentRelation = relation;
+        }
+
+        public String getCurrentRelation() {
+            return currentRelation;
         }
 
         public void reloadData(List<WatchUtil.WatchRelation> items) {
@@ -99,14 +122,22 @@ public class RelationActivity extends BaseActivity {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
 
-            final WatchUtil.WatchRelation homeCfg = getItem(position);
-            if (homeCfg != null) {
-                viewHolder.optionText.setText(homeCfg.getValue());
+            final WatchUtil.WatchRelation relation = getItem(position);
+            if (relation != null) {
+                viewHolder.optionText.setText(relation.getValue());
+                if (currentRelation.equals(relation.getKey())) {
+                    viewHolder.llHomeItem.setBackgroundResource(R.drawable.btn_relation_select);
+                    viewHolder.optionText.setTextColor(getResources().getColor(R.color.colorPrimary));
+                } else {
+                    viewHolder.llHomeItem.setBackgroundResource(R.drawable.btn_recorder_normal);
+                    viewHolder.optionText.setTextColor(getResources().getColor(R.color.color_black_6));
+                }
 
                 viewHolder.llHomeItem.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        setCurrentRelation(relation.getKey());
+                        reloadData(relations);
                     }
                 });
             }
