@@ -1,7 +1,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_window">
+    android:background="@color/bg_window"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/fragmentHome_titleLinearId"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:lines="1"
+            android:text="@string/nav_mine"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_18" />
+
+    </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -11,45 +33,30 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:id="@+id/fragmentHome_titleLinearId"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_50"
-                android:layout_alignParentTop="true"
-                android:background="@color/colorPrimary">
-
-                <TextView
-                    android:id="@+id/txtTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:lines="1"
-                    android:textColor="@color/white"
-                    android:text="@string/nav_mine"
-                    android:textSize="@dimen/sp_18" />
-
-            </RelativeLayout>
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dp_15"
+            android:paddingRight="@dimen/dp_15"
+            android:paddingTop="@dimen/dp_10">
 
             <LinearLayout
                 android:id="@+id/ll_unlogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimaryDark"
+                android:background="@drawable/bg_mine_item"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/dp_10"
                 android:paddingTop="@dimen/dp_10"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <com.android.widget.view.CircularImageView
                     android:id="@+id/imgHead"
                     android:layout_width="@dimen/dp_60"
                     android:layout_height="@dimen/dp_60"
                     android:clickable="true"
-                    android:src="@drawable/user_defaulthead" />
+                    android:src="@drawable/user_defaulthead"
+                    app:border_color="@color/colorPrimary"
+                    app:border_width="@dimen/dp_2" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -75,7 +82,7 @@
                 android:id="@+id/ll_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimaryDark"
+                android:background="@drawable/bg_mine_item"
                 android:paddingBottom="@dimen/dp_10"
                 android:paddingTop="@dimen/dp_10"
                 android:visibility="visible">
@@ -85,7 +92,9 @@
                     android:layout_width="@dimen/dp_60"
                     android:layout_height="@dimen/dp_60"
                     android:layout_marginLeft="@dimen/dp_20"
-                    android:src="@drawable/user_defaulthead" />
+                    android:src="@drawable/user_defaulthead"
+                    app:border_color="@color/colorPrimary"
+                    app:border_width="@dimen/dp_2" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -94,14 +103,6 @@
                     android:layout_marginLeft="@dimen/dp_10"
                     android:layout_toRightOf="@+id/imgLoginHead"
                     android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/txtUserName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:text=""
-                        android:textSize="@dimen/sp_14" />
 
                     <TextView
                         android:id="@+id/txtPhone"
@@ -116,189 +117,120 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_5"
+                        android:background="@color/colorPrimary"
+                        android:paddingBottom="@dimen/dp_2"
+                        android:paddingLeft="@dimen/dp_5"
+                        android:paddingRight="@dimen/dp_5"
+                        android:paddingTop="@dimen/dp_2"
                         android:text=""
-                        android:textSize="@dimen/sp_14" />
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_12" />
 
                 </LinearLayout>
 
                 <ImageView
-                    style="@style/arrow_right"
-                    android:layout_marginRight="@dimen/dp_10" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp_15"
+                    android:src="@drawable/ic_edit" />
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/rlMyClass"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20"
-                android:background="@drawable/mine_item_selector"
-                android:clickable="true"
-                android:paddingLeft="@dimen/dp_5"
-                android:paddingTop="@dimen/dp_5">
+                android:background="@drawable/bg_mine_item"
+                android:orientation="vertical">
 
-                <TextView
-                    style="@style/mineText"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/rlMyClass"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/mine_class" />
+                    android:clickable="true"
+                    android:paddingLeft="@dimen/dp_5"
+                    android:paddingTop="@dimen/dp_5">
 
-                <ImageView style="@style/arrow_right" />
+                    <TextView
+                        style="@style/mineText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mine_class" />
 
-                <View style="@style/line1" />
-            </RelativeLayout>
+                    <ImageView style="@style/arrow_right" />
 
-            <RelativeLayout
-                android:id="@+id/rlMyChild"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
-                android:background="@drawable/mine_item_selector"
-                android:clickable="true"
-                android:paddingLeft="@dimen/dp_5"
-                android:paddingTop="@dimen/dp_5">
+                    <View style="@style/line1" />
+                </RelativeLayout>
 
-                <TextView
-                    style="@style/mineText"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/rlMyChild"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/mine_devices" />
+                    android:layout_marginTop="@dimen/dp_1"
+                    android:clickable="true"
+                    android:paddingLeft="@dimen/dp_5"
+                    android:paddingTop="@dimen/dp_5">
 
-                <ImageView style="@style/arrow_right" />
+                    <TextView
+                        style="@style/mineText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mine_devices" />
 
-                <View style="@style/line1" />
-            </RelativeLayout>
+                    <ImageView style="@style/arrow_right" />
 
-            <RelativeLayout
-                android:id="@+id/rlMyInvite"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
-                android:background="@drawable/mine_item_selector"
-                android:clickable="true"
-                android:paddingLeft="@dimen/dp_5"
-                android:paddingTop="@dimen/dp_5">
+                    <View style="@style/line1" />
+                </RelativeLayout>
 
-                <TextView
-                    style="@style/mineText"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/rlMyInvite"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/mine_invite" />
+                    android:layout_marginTop="@dimen/dp_1"
+                    android:clickable="true"
+                    android:paddingLeft="@dimen/dp_5"
+                    android:paddingTop="@dimen/dp_5">
 
-                <ImageView style="@style/arrow_right" />
+                    <TextView
+                        style="@style/mineText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mine_invite" />
 
-                <View style="@style/line1" />
-            </RelativeLayout>
+                    <ImageView style="@style/arrow_right" />
 
-            <RelativeLayout
-                android:id="@+id/rlMyCollect"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
-                android:clickable="true"
-                android:padding="@dimen/dp_5"
-                android:visibility="gone">
+                    <View style="@style/line1" />
+                </RelativeLayout>
 
-                <TextView
-                    style="@style/mineText"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/rlSetting"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/mine_collect" />
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:clickable="true"
+                    android:paddingLeft="@dimen/dp_5">
 
-                <ImageView style="@style/arrow_right" />
+                    <TextView
+                        style="@style/mineText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mine_setting" />
 
-                <View style="@style/line1" />
+                    <ImageView style="@style/arrow_right" />
 
-            </RelativeLayout>
+                </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/rlMyBill"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
-                android:background="@drawable/mine_item_selector"
-                android:clickable="true"
-                android:padding="@dimen/dp_5"
-                android:visibility="gone">
-
-                <TextView
-                    style="@style/mineText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/mine_bill" />
-
-                <ImageView style="@style/arrow_right" />
-
-                <View style="@style/line1" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rlMyProperty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
-                android:background="@drawable/mine_item_selector"
-                android:clickable="true"
-                android:paddingLeft="@dimen/dp_5"
-                android:paddingTop="@dimen/dp_5">
-
-                <TextView
-                    android:id="@+id/txtContact"
-                    style="@style/mineText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/mine_property" />
-
-                <ImageView style="@style/arrow_right" />
-
-                <View style="@style/line1" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rlSetting"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_5"
-                android:background="@drawable/mine_item_selector"
-                android:clickable="true"
-                android:paddingLeft="@dimen/dp_5">
-
-                <TextView
-                    style="@style/mineText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/mine_setting" />
-
-                <ImageView style="@style/arrow_right" />
-
-                <View style="@style/line1" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_20"
-                android:clickable="true"
-                android:paddingLeft="@dimen/dp_5"
-                android:paddingTop="@dimen/dp_5">
-
-                <TextView
-                    style="@style/mineText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/mine_qr_code" />
-
-                <View style="@style/line1" />
-            </RelativeLayout>
+            </LinearLayout>
 
             <RelativeLayout
                 android:id="@+id/rlQRCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
-                android:background="@drawable/mine_item_selector"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@drawable/bg_mine_item"
                 android:clickable="true"
-                android:paddingLeft="@dimen/dp_5"
-                android:paddingTop="@dimen/dp_5">
+                android:paddingLeft="@dimen/dp_5">
 
                 <TextView
                     style="@style/mineText"
@@ -308,29 +240,6 @@
 
                 <ImageView style="@style/arrow_right" />
 
-                <View style="@style/line1" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rlDownloadQRCode"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
-                android:background="@drawable/mine_item_selector"
-                android:clickable="true"
-                android:paddingLeft="@dimen/dp_5"
-                android:paddingTop="@dimen/dp_3"
-                android:visibility="gone">
-
-                <TextView
-                    style="@style/mineText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/mine_download_code" />
-
-                <ImageView style="@style/arrow_right" />
-
-                <View style="@style/line1" />
             </RelativeLayout>
 
         </LinearLayout>

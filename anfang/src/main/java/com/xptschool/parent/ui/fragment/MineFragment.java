@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.widget.view.CircularImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -20,23 +19,17 @@ import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.UserHelper;
 import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.model.BeanParent;
-import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.BeanTeacher;
 import com.xptschool.parent.model.BeanUser;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.login.LoginActivity;
-import com.xptschool.parent.ui.mine.MyChildActivity;
 import com.xptschool.parent.ui.mine.MyClassesActivity;
 import com.xptschool.parent.ui.mine.MyInfoActivity;
 import com.xptschool.parent.ui.mine.MyInviteActivity;
-import com.xptschool.parent.ui.setting.DownloadQRCodeActivity;
 import com.xptschool.parent.ui.setting.QRCodeActivity;
 import com.xptschool.parent.ui.setting.SettingActivity;
-import com.xptschool.parent.ui.wallet.WalletActivity;
 import com.xptschool.parent.ui.watch.DevicesManageActivity;
 import com.xptschool.parent.view.CustomDialog;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,8 +45,6 @@ public class MineFragment extends BaseFragment {
 
     @BindView(R.id.imgLoginHead)
     CircularImageView imgLoginHead;
-    @BindView(R.id.txtUserName)
-    TextView txtUserName;
     @BindView(R.id.txtPhone)
     TextView txtPhone;
     @BindView(R.id.txtRole)
@@ -64,11 +55,8 @@ public class MineFragment extends BaseFragment {
     @BindView(R.id.rlMyChild)
     RelativeLayout rlMyChild;
 
-
     @BindView(R.id.rlMyInvite)
     RelativeLayout rlMyInvite;
-    @BindView(R.id.rlMyProperty)
-    RelativeLayout rlMyProperty;
 
     private Unbinder unbinder;
 
@@ -94,7 +82,6 @@ public class MineFragment extends BaseFragment {
             return;
         }
         rlMyChild.setVisibility(View.GONE);
-        rlMyProperty.setVisibility(View.GONE);
         rlMyClass.setVisibility(View.GONE);
         rlMyInvite.setVisibility(View.GONE);
 
@@ -115,23 +102,13 @@ public class MineFragment extends BaseFragment {
                 rlMyClass.setVisibility(View.VISIBLE);
                 BeanTeacher teacher = GreenDaoHelper.getInstance().getCurrentTeacher();
                 if (teacher != null) {
-                    txtUserName.setText(teacher.getName());
-                    txtPhone.setText("手机号：" + teacher.getPhone());
+                    txtPhone.setText(teacher.getPhone());
                     headImg = teacher.getHead_portrait();
                 }
             } else if (UserType.PARENT.equals(type)) {
-//                rlMyChild.setVisibility(View.VISIBLE);
-//
-//                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) rlMyChild.getLayoutParams();
-//                params.setMargins(0, (int) mContext.getResources().getDimension(R.dimen.dp_20), 0, 0);
-//                rlMyChild.setLayoutParams(params);
-
-                rlMyProperty.setVisibility(View.VISIBLE);
-
                 BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
                 if (parent != null) {
-                    txtUserName.setText(parent.getParent_name());
-                    txtPhone.setText("手机号：" + parent.getParent_phone());
+                    txtPhone.setText(parent.getParent_phone());
                     headImg = parent.getHead_portrait();
                 }
             } else {
@@ -145,19 +122,14 @@ public class MineFragment extends BaseFragment {
                 BeanUser user = GreenDaoHelper.getInstance().getCurrentUser();
                 if (user != null) {
                     headImg = user.getHead_portrait();
-                    txtUserName.setText(user.getUsername());
                 }
-                txtPhone.setVisibility(View.GONE);
+                txtPhone.setText(user.getUsername());
             }
             ImageLoader.getInstance().displayImage(headImg,
                     new ImageViewAware(imgLoginHead), CommonUtil.getDefaultUserImageLoaderOption());
 
             txtRole.setText(type.getRoleName());
         } else {
-//            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) rlMyChild.getLayoutParams();
-//            params.setMargins(0, (int) mContext.getResources().getDimension(R.dimen.dp_1), 0, 0);
-//            rlMyChild.setLayoutParams(params);
-
             ll_unlogin.setVisibility(View.VISIBLE);
             ll_login.setVisibility(View.GONE);
         }
@@ -183,15 +155,13 @@ public class MineFragment extends BaseFragment {
         });
     }
 
-    @OnClick({R.id.imgHead, R.id.txtToLogin, R.id.ll_login, R.id.rlMyChild, R.id.rlMyInvite,
-            R.id.rlMyBill, R.id.rlMyClass, R.id.rlMyProperty, R.id.rlSetting, R.id.rlQRCode, R.id.rlDownloadQRCode})
+    @OnClick({R.id.imgHead, R.id.txtToLogin, R.id.ll_login, R.id.rlMyChild, R.id.rlMyInvite, R.id.rlMyClass,
+            R.id.rlSetting, R.id.rlQRCode})
     void viewClick(View view) {
         switch (view.getId()) {
             case R.id.rlMyClass:
             case R.id.rlMyChild:
-            case R.id.rlMyBill:
             case R.id.rlMyInvite:
-            case R.id.rlMyProperty:
                 if (!XPTApplication.getInstance().isLoggedIn()) {
                     //弹出登录对话框
                     CustomDialog dialog = new CustomDialog(mContext);
@@ -218,7 +188,6 @@ public class MineFragment extends BaseFragment {
             case R.id.rlMyChild:
                 //进入设备管理界面
                 startActivity(new Intent(getContext(), DevicesManageActivity.class));
-//                startActivity(new Intent(getContext(), MyChildActivity.class));
                 break;
             case R.id.rlMyClass:
                 startActivity(new Intent(getContext(), MyClassesActivity.class));
@@ -228,22 +197,11 @@ public class MineFragment extends BaseFragment {
                 intent.putExtra("user_id", XPTApplication.getInstance().getCurrentUserId());
                 startActivity(intent);
                 break;
-            case R.id.rlMyProperty:
-                List<BeanStudent> students = GreenDaoHelper.getInstance().getStudents();
-                if (students.size() > 0) {
-                    startActivity(new Intent(getContext(), WalletActivity.class));
-                } else {
-                    Toast.makeText(mContext, "暂无绑定的学生", Toast.LENGTH_SHORT).show();
-                }
-                break;
             case R.id.rlSetting:
                 startActivity(new Intent(getContext(), SettingActivity.class));
                 break;
             case R.id.rlQRCode:
                 startActivity(new Intent(getContext(), QRCodeActivity.class));
-                break;
-            case R.id.rlDownloadQRCode:
-                startActivity(new Intent(getContext(), DownloadQRCodeActivity.class));
                 break;
         }
     }

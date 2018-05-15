@@ -457,11 +457,9 @@ public class HomeFragment extends BaseFragment {
         //判断角色
         UserType type = XPTApplication.getInstance().getCurrent_user_type();
 
-        boolean isParent = false;
+        boolean isParent = true;
         if (UserType.TEACHER.equals(type)) {
             isParent = false;
-        } else if (UserType.PARENT.equals(type)) {
-            isParent = true;
         }
 
         List<HomeItem> homeItems = new ArrayList<HomeItem>();

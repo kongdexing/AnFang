@@ -7,7 +7,7 @@
     <corners android:radius="8dp" />
     <!-- 变化率 -->
     <gradient
-        android:endColor="@color/text_black"
-        android:startColor="@color/text_black" />
+        android:endColor="@color/colorPrimary_low"
+        android:startColor="@color/colorPrimary_low" />
 
 </shape>

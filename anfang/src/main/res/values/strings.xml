@@ -420,10 +420,13 @@
     <!--添加设备-->
     <string name="hint_device_imei">请输入手表注册码</string>
     <string name="msg_imei_error">请输入正确的手表注册码</string>
-    <string name="hint_device_nickname">设备昵称（1-6位字符）(选填)</string>
-    <string name="hint_device_phone">设备的电话号码(选填)</string>
+    <string name="hint_device_nickname_optional">设备昵称（1-6位字符）(选填)</string>
+    <string name="hint_device_nickname">设备昵称（1-6位字符）</string>
+
+    <string name="hint_device_phone_optional">设备的电话号码(选填)</string>
+    <string name="hint_device_phone">设备的电话号码</string>
     <string name="title_device_edit">编辑资料</string>
-    <string name="hint_device_relation">我是他的</string>
+    <string name="hint_device_relation">我是TA的</string>
     <string name="title_device_unbind">解除绑定</string>
 
     <!-- 消息成功率统计： 通道将消息转发给SDK后，SDK通知通道消息已接收到 -->
@@ -439,8 +442,6 @@
     <!--输入绑定码-->
     <string name="bind_text1">绑定码输入方式:</string>
     <string name="bind_text2">手表背面注册码一共15位，去除前4位和后一位，输入中间10位号码即手表绑定码。</string>
-
-
 
 
 </resources>

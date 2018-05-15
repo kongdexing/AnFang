@@ -85,6 +85,7 @@
                     android:layout_gravity="center_vertical"
                     android:background="@null"
                     android:hint="@string/hint_device_nickname"
+                    android:maxLength="6"
                     android:textColor="@color/text_black"
                     android:textColorHint="@color/color_black_9"
                     android:textSize="@dimen/sp_16" />
@@ -119,6 +120,7 @@
                     android:background="@null"
                     android:hint="@string/hint_device_phone"
                     android:inputType="number"
+                    android:maxLength="11"
                     android:textColor="@color/text_black"
                     android:textColorHint="@color/color_black_9"
                     android:textSize="@dimen/sp_16" />
@@ -151,10 +153,10 @@
                 android:layout_marginLeft="@dimen/dp_15"
                 android:layout_marginRight="@dimen/dp_15"
                 android:layout_toRightOf="@+id/img3"
+                android:clickable="false"
                 android:gravity="center_vertical"
                 android:hint="@string/hint_device_relation"
                 android:inputType="number"
-                android:clickable="false"
                 android:textColor="@color/text_black"
                 android:textColorHint="@color/color_black_9"
                 android:textSize="@dimen/sp_16" />

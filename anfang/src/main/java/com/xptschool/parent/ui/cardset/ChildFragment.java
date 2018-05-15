@@ -48,7 +48,6 @@ public class ChildFragment extends BaseFragment implements View.OnClickListener 
     ImageView imgEdit;
     TextView txtName;
     LinearLayout llInfoBg;
-    TextView txtAge;
     TextView txtCardPhone;
     TextView txtRelation;
 
@@ -79,7 +78,6 @@ public class ChildFragment extends BaseFragment implements View.OnClickListener 
         imgEdit = (ImageView) view.findViewById(R.id.imgEdit);
         txtName = (TextView) view.findViewById(R.id.txtName);
         llInfoBg = (LinearLayout) view.findViewById(R.id.llInfoBg);
-        txtAge = (TextView) view.findViewById(R.id.txtAge);
         txtRelation = (TextView) view.findViewById(R.id.txtRelation);
 
         txtCardPhone = (TextView) view.findViewById(R.id.txtCardPhone);
@@ -108,11 +106,19 @@ public class ChildFragment extends BaseFragment implements View.OnClickListener 
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        initData();
+    }
+
+    @Override
     protected void initData() {
         if (currentStudent == null || txtName == null) {
             Log.i(TAG, "bindingData: " + txtName.hashCode());
             return;
         }
+        currentStudent = GreenDaoHelper.getInstance().getStudentByStuId(currentStudent.getStu_id());
+
         ImageLoader.getInstance().displayImage(currentStudent.getPhoto(),
                 new ImageViewAware(imgHead), CommonUtil.getDefaultUserImageLoaderOption());
 
@@ -127,15 +133,8 @@ public class ChildFragment extends BaseFragment implements View.OnClickListener 
         txtName.setText(currentStudent.getStu_name());
 
         String relation = WatchUtil.getRelationByKey(currentStudent.getRelation());
-        txtRelation.setText("我是" + (("1".equals(currentStudent.getSex()) ? "他的" : "她的") + relation));
+        txtRelation.setText("我是TA的" + relation);
 
-        try {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Date dbDate = (Date) dateFormat.parse(currentStudent.getBirth_date());
-            txtAge.setText(CommonUtil.getAge(dbDate) + "岁");
-        } catch (Exception ex) {
-            txtAge.setText("未知");
-        }
         txtCardPhone.setText(currentStudent.getCard_phone());
     }
 

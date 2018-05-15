@@ -137,7 +137,7 @@ public class ClockDetailActivity extends BaseActivity {
                         return;
                     }
                     boolean click = (Boolean) view.getTag();
-                    view.setBackgroundColor(getResources().getColor(click ? R.color.item_clicked : R.color.text_black_2));
+                    view.setBackgroundColor(getResources().getColor(click ? R.color.colorPrimary : R.color.map_railings));
                     view.setTag(!click);
                 }
             });
@@ -175,10 +175,10 @@ public class ClockDetailActivity extends BaseActivity {
                 for (int i = 0; i < weeks.length; i++) {
                     if (weeks[i] == '1') {
                         weekViews[i].setTag(true);
-                        weekViews[i].setBackgroundColor(getResources().getColor(R.color.text_black_2));
+                        weekViews[i].setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     } else {
                         weekViews[i].setTag(false);
-                        weekViews[i].setBackgroundColor(getResources().getColor(R.color.item_clicked));
+                        weekViews[i].setBackgroundColor(getResources().getColor(R.color.map_railings));
                     }
                 }
             }

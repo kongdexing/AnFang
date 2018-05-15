@@ -86,6 +86,13 @@ public class StuWatchEditActivity extends TakePhotoActivity {
             if (bundle != null) {
                 currentStudent = (BeanStudent) bundle.getSerializable("student");
             }
+
+            if (currentStudent != null) {
+                initView();
+            } else {
+                ToastUtils.showToast(this, "学生资料为空");
+                finish();
+            }
         } catch (Exception ex) {
             Log.i(TAG, "onCreate: bundle get data error :" + ex.getMessage());
         }
@@ -102,12 +109,6 @@ public class StuWatchEditActivity extends TakePhotoActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (currentStudent != null) {
-            initView();
-        } else {
-            ToastUtils.showToast(this, "学生资料为空");
-            finish();
-        }
     }
 
     private void initView() {
@@ -129,8 +130,7 @@ public class StuWatchEditActivity extends TakePhotoActivity {
     }
 
     private void setTxtRelationVal() {
-        txtRelation.setText("我是" + (("1".equals(currentStudent.getSex()) ? "他的" : "她的") +
-                WatchUtil.getRelationByKey(currentStudent.getRelation())));
+        txtRelation.setText("我是TA的" + WatchUtil.getRelationByKey(currentStudent.getRelation()));
     }
 
     @OnClick({R.id.imgHead, R.id.imgMale, R.id.imgFemale, R.id.rlRelation})
@@ -293,9 +293,13 @@ public class StuWatchEditActivity extends TakePhotoActivity {
             switch (volleyHttpResult.getStatus()) {
                 case HttpAction.SUCCESS:
                     try {
-                        JSONObject jsonObject = new JSONObject(volleyHttpResult.getData().toString());
-                        String photo = jsonObject.getString("photo");
-                        currentStudent.setPhoto(photo);
+
+                        if (compressPath != null) {
+                            JSONObject jsonObject = new JSONObject(volleyHttpResult.getData().toString());
+                            String photo = jsonObject.getString("photo");
+                            currentStudent.setPhoto(photo);
+                        }
+
                         GreenDaoHelper.getInstance().updateStudent(currentStudent);
                         ToastUtils.showToast(StuWatchEditActivity.this, "修改成功");
                         finish();

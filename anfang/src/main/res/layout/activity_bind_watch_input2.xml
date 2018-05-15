@@ -44,7 +44,7 @@
                 android:background="@null"
                 android:hint="@string/hint_device_imei"
                 android:inputType="number"
-                android:maxEms="10"
+                android:maxLength="10"
                 android:textColor="@color/text_black"
                 android:textColorHint="@color/color_black_6"
                 android:textSize="@dimen/sp_16" />
@@ -82,81 +82,10 @@
         </LinearLayout>
     </FrameLayout>
 
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="@dimen/dp_45"-->
-    <!--android:layout_marginTop="@dimen/dp_10"-->
-    <!--android:background="@drawable/bg_mine_info"-->
-    <!--android:gravity="center_vertical">-->
-
-    <!--<ImageView-->
-    <!--android:layout_width="@dimen/dp_30"-->
-    <!--android:layout_height="@dimen/dp_30"-->
-    <!--android:layout_marginLeft="@dimen/dp_15"-->
-    <!--android:src="@drawable/device_bind_add_nickname" />-->
-
-    <!--<FrameLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_marginLeft="@dimen/dp_10"-->
-    <!--android:layout_marginRight="@dimen/dp_15">-->
-
-    <!--<EditText-->
-    <!--android:id="@+id/edtNickName"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_gravity="center_vertical"-->
-    <!--android:background="@null"-->
-    <!--android:hint="@string/hint_device_nickname"-->
-    <!--android:inputType="textVisiblePassword|textPersonName"-->
-    <!--android:textColor="@color/text_black"-->
-    <!--android:textColorHint="@color/color_black_3"-->
-    <!--android:textSize="@dimen/sp_16" />-->
-
-    <!--</FrameLayout>-->
-    <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="@dimen/dp_45"-->
-    <!--android:layout_marginTop="@dimen/dp_10"-->
-    <!--android:background="@drawable/bg_mine_info"-->
-    <!--android:gravity="center_vertical">-->
-
-    <!--<ImageView-->
-    <!--android:layout_width="@dimen/dp_30"-->
-    <!--android:layout_height="@dimen/dp_30"-->
-    <!--android:layout_marginLeft="@dimen/dp_15"-->
-    <!--android:src="@drawable/device_bind_add_phone" />-->
-
-    <!--<FrameLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_marginLeft="@dimen/dp_10"-->
-    <!--android:layout_marginRight="@dimen/dp_15">-->
-
-    <!--<EditText-->
-    <!--android:id="@+id/edtPhone"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_gravity="center_vertical"-->
-    <!--android:background="@null"-->
-    <!--android:hint="@string/hint_device_phone"-->
-    <!--android:inputType="phone"-->
-    <!--android:textColor="@color/text_black"-->
-    <!--android:textColorHint="@color/color_black_3"-->
-    <!--android:textSize="@dimen/sp_16" />-->
-
-    <!--</FrameLayout>-->
-    <!--</LinearLayout>-->
-
     <Button
         android:id="@+id/ok"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_40"
-        android:layout_marginLeft="@dimen/dp_40"
-        android:layout_marginRight="@dimen/dp_40"
         android:layout_marginTop="@dimen/dp_30"
         android:background="@drawable/btn_bg_normal"
         android:gravity="center"

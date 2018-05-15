@@ -7,7 +7,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="300px"
+        android:layout_height="@dimen/dp_200"
         android:background="@drawable/bg_device_user" />
 
     <TextView
@@ -40,10 +40,10 @@
                 android:layout_width="@dimen/dp_80"
                 android:layout_height="@dimen/dp_80"
                 android:layout_centerHorizontal="true"
-                app:border_width="@dimen/dp_2"
-                app:border_color="@color/colorPrimary"
                 android:clickable="true"
-                android:src="@drawable/user_defaulthead" />
+                android:src="@drawable/user_defaulthead"
+                app:border_color="@color/colorPrimary"
+                app:border_width="@dimen/dp_2" />
 
             <LinearLayout
                 android:id="@+id/llInfoBg"
@@ -60,27 +60,20 @@
                     android:layout_gravity="center"
                     android:background="@drawable/female_w" />
 
-                <TextView
-                    android:id="@+id/txtAge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_3"
-                    android:text="神秘"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/sp_10" />
-
             </LinearLayout>
         </RelativeLayout>
 
 
         <TextView
             android:id="@+id/txtName"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_marginTop="@dimen/dp_20"
-            android:text="未知"
+            android:gravity="center"
+            android:hint="未添加昵称"
+            android:text=""
             android:textColor="@color/color_black_6"
+            android:textColorHint="@color/color_black_9"
             android:textSize="@dimen/sp_14" />
 
         <TextView
@@ -89,9 +82,11 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dp_30"
             android:layout_marginTop="@dimen/dp_10"
-            android:textColor="@color/color_black_6"
             android:gravity="center"
-            android:text="2341" />
+            android:hint="未绑定手机号"
+            android:text=""
+            android:textColor="@color/color_black_6"
+            android:textColorHint="@color/color_black_9" />
 
     </LinearLayout>
 

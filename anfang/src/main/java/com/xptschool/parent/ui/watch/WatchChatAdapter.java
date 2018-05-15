@@ -12,10 +12,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.widget.view.CircularImageView;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.xptschool.parent.R;
 import com.xptschool.parent.adapter.BaseRecycleAdapter;
 import com.xptschool.parent.adapter.RecyclerViewHolderBase;
 import com.xptschool.parent.bean.BeanHomeWork;
+import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.BeanWChat;
 import com.xptschool.parent.model.GreenDaoHelper;
@@ -65,6 +69,9 @@ public class WatchChatAdapter extends BaseRecycleAdapter {
         final BeanStudent student = beanStudents.get(position);
         final ViewHolder mHolder = (ViewHolder) holder;
         if (student != null) {
+            ImageLoader.getInstance().displayImage(student.getPhoto(),
+                    new ImageViewAware(mHolder.imgHead), CommonUtil.getDefaultUserImageLoaderOption());
+
             String name = student.getStu_name();
             if (name == null || name.isEmpty()) {
                 mHolder.txtNickName.setText(student.getImei_id());
@@ -109,6 +116,9 @@ public class WatchChatAdapter extends BaseRecycleAdapter {
 
         @BindView(R.id.rlItem1)
         RelativeLayout rlItem1;
+
+        @BindView(R.id.imgHead)
+        CircularImageView imgHead;
 
         @BindView(R.id.txtNickName)
         TextView txtNickName;

@@ -266,6 +266,9 @@ public class BeanStudent extends SpinnerModel implements Serializable {
 
     @Override
     public String getName() {
+        if (stu_name==null||stu_name.isEmpty()){
+            return "未添加昵称";
+        }
         return stu_name;
     }
 

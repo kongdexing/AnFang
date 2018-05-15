@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="@dimen/dp_15">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_150"
-        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_10"
         android:paddingLeft="@dimen/dp_50"
 
         android:paddingRight="@dimen/dp_50">
@@ -35,7 +36,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
         android:gravity="center"
         android:text="重复"
         android:textSize="@dimen/sp_16" />
@@ -44,8 +45,7 @@
         android:id="@+id/rlRepeat1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_15"
-        android:layout_marginRight="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_15"
         android:background="@drawable/bg_mine_info"
         android:padding="@dimen/dp_10">
 
@@ -62,7 +62,7 @@
             android:layout_height="@dimen/dp_20"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            app:color_checked="@color/text_black" />
+            app:color_checked="@color/colorPrimary_low" />
 
     </RelativeLayout>
 
@@ -70,7 +70,7 @@
         android:id="@+id/rlRepeat2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_15"
         android:background="@drawable/bg_mine_info"
         android:padding="@dimen/dp_10">
 
@@ -87,7 +87,7 @@
             android:layout_height="@dimen/dp_20"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            app:color_checked="@color/text_black" />
+            app:color_checked="@color/colorPrimary_low" />
 
     </RelativeLayout>
 
@@ -95,8 +95,7 @@
         android:id="@+id/llRepeat3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_15"
-        android:layout_marginRight="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_15"
         android:background="@drawable/bg_mine_info"
         android:orientation="vertical"
         android:padding="@dimen/dp_10">
@@ -117,7 +116,7 @@
                 android:layout_height="@dimen/dp_20"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                app:color_checked="@color/text_black" />
+                app:color_checked="@color/colorPrimary_low" />
         </RelativeLayout>
 
         <LinearLayout
@@ -168,8 +167,6 @@
         android:id="@+id/ok"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_40"
-        android:layout_marginLeft="@dimen/dp_40"
-        android:layout_marginRight="@dimen/dp_40"
         android:layout_marginTop="@dimen/dp_20"
         android:background="@drawable/btn_bg_normal"
         android:gravity="center"

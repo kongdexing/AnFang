@@ -42,10 +42,11 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:background="@null"
-                android:hint="@string/hint_device_nickname"
+                android:hint="@string/hint_device_nickname_optional"
                 android:inputType="textVisiblePassword|textPersonName"
                 android:textColor="@color/text_black"
                 android:textColorHint="@color/color_black_9"
+                android:maxLength="6"
                 android:textSize="@dimen/sp_16" />
 
         </FrameLayout>
@@ -76,8 +77,9 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:background="@null"
-                android:hint="@string/hint_device_phone"
+                android:hint="@string/hint_device_phone_optional"
                 android:inputType="phone"
+                android:maxLength="11"
                 android:textColor="@color/text_black"
                 android:textColorHint="@color/color_black_9"
                 android:textSize="@dimen/sp_16" />
@@ -89,8 +91,6 @@
         android:id="@+id/ok"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_40"
-        android:layout_marginLeft="@dimen/dp_40"
-        android:layout_marginRight="@dimen/dp_40"
         android:layout_marginTop="@dimen/dp_30"
         android:background="@drawable/btn_bg_normal"
         android:gravity="center"
