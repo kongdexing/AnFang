@@ -26,7 +26,7 @@ public class CardWhiteListActivity extends CardSetBaseActivity implements View.O
 
     LinearLayout llContent;
     private ArrayList<WhiteCardView> whiteCardViews = new ArrayList<>();
-    private int maxLength = 10;
+    private int maxLength = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +62,7 @@ public class CardWhiteListActivity extends CardSetBaseActivity implements View.O
         btnSubmit.setBackground(getResources().getDrawable(R.drawable.btn_bg_normal));
         btnSubmit.setText(R.string.btn_confirm);
         btnSubmit.setTextColor(getResources().getColor(R.color.colorWhite));
-        btnSubmit.setTextSize(TypedValue.COMPLEX_UNIT_PX, (int) getResources().getDimension(R.dimen.sp_14));
+        btnSubmit.setTextSize(TypedValue.COMPLEX_UNIT_PX, (int) getResources().getDimension(R.dimen.sp_16));
         btnSubmit.setOnClickListener(this);
 
         llContent = new LinearLayout(this);

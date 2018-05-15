@@ -15,6 +15,7 @@ import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.ui.main.BaseActivity;
+import com.xptschool.parent.util.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -62,7 +63,6 @@ public class ClockActivity extends BaseActivity {
                     public void onResponse(VolleyHttpResult volleyHttpResult) {
                         super.onResponse(volleyHttpResult);
                         hideProgress();
-
                         switch (volleyHttpResult.getStatus()) {
                             case HttpAction.SUCCESS:
                                 try {
@@ -85,6 +85,7 @@ public class ClockActivity extends BaseActivity {
                                 }
                                 break;
                             default:
+                                ToastUtils.showToast(ClockActivity.this, volleyHttpResult.getInfo());
                                 initView();
                                 break;
                         }
