@@ -28,7 +28,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:delay_time="3000"
-                    app:indicator_drawable_selected="@color/text_black"
+                    app:indicator_drawable_selected="@color/colorPrimary"
                     app:indicator_drawable_unselected="@color/transparent_white"
                     app:is_auto_play="true"
                     app:title_background="@color/translucent"

@@ -47,7 +47,7 @@
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/dp_10"
                 android:paddingTop="@dimen/dp_10"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <com.android.widget.view.CircularImageView
                     android:id="@+id/imgHead"
@@ -78,64 +78,71 @@
 
             </LinearLayout>
 
-            <RelativeLayout
-                android:id="@+id/ll_login"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_mine_item"
-                android:paddingBottom="@dimen/dp_10"
-                android:paddingTop="@dimen/dp_10"
-                android:visibility="visible">
+                android:background="@drawable/bg_mine_item">
 
-                <com.android.widget.view.CircularImageView
-                    android:id="@+id/imgLoginHead"
-                    android:layout_width="@dimen/dp_60"
-                    android:layout_height="@dimen/dp_60"
-                    android:layout_marginLeft="@dimen/dp_20"
-                    android:src="@drawable/user_defaulthead"
-                    app:border_color="@color/colorPrimary"
-                    app:border_width="@dimen/dp_2" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/ll_login"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:layout_toRightOf="@+id/imgLoginHead"
-                    android:orientation="vertical">
+                    android:background="@drawable/mine_item_selector"
+                    android:paddingBottom="@dimen/dp_10"
+                    android:paddingTop="@dimen/dp_10"
+                    android:visibility="visible">
 
-                    <TextView
-                        android:id="@+id/txtPhone"
+                    <com.android.widget.view.CircularImageView
+                        android:id="@+id/imgLoginHead"
+                        android:layout_width="@dimen/dp_60"
+                        android:layout_height="@dimen/dp_60"
+                        android:layout_marginLeft="@dimen/dp_20"
+                        android:src="@drawable/user_defaulthead"
+                        app:border_color="@color/colorPrimary"
+                        app:border_width="@dimen/dp_2" />
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_5"
-                        android:text=""
-                        android:textSize="@dimen/sp_14" />
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_toRightOf="@+id/imgLoginHead"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/txtRole"
+                        <TextView
+                            android:id="@+id/txtPhone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_5"
+                            android:text=""
+                            android:textSize="@dimen/sp_14" />
+
+                        <TextView
+                            android:id="@+id/txtRole"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_5"
+                            android:background="@color/colorPrimary"
+                            android:paddingBottom="@dimen/dp_2"
+                            android:paddingLeft="@dimen/dp_5"
+                            android:paddingRight="@dimen/dp_5"
+                            android:paddingTop="@dimen/dp_2"
+                            android:text=""
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/sp_12" />
+
+                    </LinearLayout>
+
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_5"
-                        android:background="@color/colorPrimary"
-                        android:paddingBottom="@dimen/dp_2"
-                        android:paddingLeft="@dimen/dp_5"
-                        android:paddingRight="@dimen/dp_5"
-                        android:paddingTop="@dimen/dp_2"
-                        android:text=""
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/sp_12" />
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dp_15"
+                        android:src="@drawable/ic_edit" />
+                </RelativeLayout>
+            </LinearLayout>
 
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/dp_15"
-                    android:src="@drawable/ic_edit" />
-            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -148,6 +155,7 @@
                     android:id="@+id/rlMyClass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/mine_item_selector"
                     android:clickable="true"
                     android:paddingLeft="@dimen/dp_5"
                     android:paddingTop="@dimen/dp_5">
@@ -168,6 +176,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_1"
+                    android:background="@drawable/mine_item_selector"
                     android:clickable="true"
                     android:paddingLeft="@dimen/dp_5"
                     android:paddingTop="@dimen/dp_5">
@@ -188,6 +197,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_1"
+                    android:background="@drawable/mine_item_selector"
                     android:clickable="true"
                     android:paddingLeft="@dimen/dp_5"
                     android:paddingTop="@dimen/dp_5">
@@ -208,6 +218,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_5"
+                    android:background="@drawable/mine_item_selector"
                     android:clickable="true"
                     android:paddingLeft="@dimen/dp_5">
 
@@ -223,24 +234,30 @@
 
             </LinearLayout>
 
-            <RelativeLayout
-                android:id="@+id/rlQRCode"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
-                android:background="@drawable/bg_mine_item"
-                android:clickable="true"
-                android:paddingLeft="@dimen/dp_5">
+                android:background="@drawable/bg_mine_item">
 
-                <TextView
-                    style="@style/mineText"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/rlQRCode"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/mine_invite_qr_code" />
+                    android:background="@drawable/mine_item_selector"
+                    android:clickable="true"
+                    android:paddingLeft="@dimen/dp_5">
 
-                <ImageView style="@style/arrow_right" />
+                    <TextView
+                        style="@style/mineText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/mine_invite_qr_code" />
 
-            </RelativeLayout>
+                    <ImageView style="@style/arrow_right" />
+
+                </RelativeLayout>
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
