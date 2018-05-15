@@ -135,6 +135,7 @@
             android:layout_height="@dimen/dp_45"
             android:background="@drawable/mine_item_selector"
             android:gravity="center_vertical"
+            android:clickable="true"
             android:paddingLeft="@dimen/dp_15"
             android:paddingRight="@dimen/dp_15">
 
@@ -148,15 +149,12 @@
             <TextView
                 android:id="@+id/txtRelation"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_15"
                 android:layout_marginRight="@dimen/dp_15"
                 android:layout_toRightOf="@+id/img3"
-                android:clickable="false"
-                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
                 android:hint="@string/hint_device_relation"
-                android:inputType="number"
                 android:textColor="@color/text_black"
                 android:textColorHint="@color/color_black_9"
                 android:textSize="@dimen/sp_16" />

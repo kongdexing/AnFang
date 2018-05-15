@@ -52,9 +52,7 @@ public class CaptureFragment extends Fragment implements SurfaceHolder.Callback 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         CameraManager.init(getActivity().getApplication());
-
         hasSurface = false;
         inactivityTimer = new InactivityTimer(this.getActivity());
     }
@@ -62,7 +60,6 @@ public class CaptureFragment extends Fragment implements SurfaceHolder.Callback 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         Bundle bundle = getArguments();
         View view = null;
         if (bundle != null) {

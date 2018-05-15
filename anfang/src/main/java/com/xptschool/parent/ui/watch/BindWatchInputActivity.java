@@ -11,6 +11,7 @@ import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
+import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanStudent;
@@ -59,6 +60,19 @@ public class BindWatchInputActivity extends BaseActivity {
                     ToastUtils.showToast(this, R.string.msg_imei_error);
                     return;
                 }
+                if (nickName.isEmpty()) {
+                    ToastUtils.showToast(this, "您还没有输入设备昵称");
+                    return;
+                }
+                if (phone.isEmpty()) {
+                    ToastUtils.showToast(this, "您还没有输入设备电话号码");
+                    return;
+                }
+                if (!CommonUtil.isPhone(phone)) {
+                    ToastUtils.showToast(this, "您输入的设备手机号不正确，请重新输入");
+                    return;
+                }
+
                 addDevice(currentIMEI, nickName, phone);
                 break;
         }
@@ -104,7 +118,7 @@ public class BindWatchInputActivity extends BaseActivity {
 
                                 Intent intent = new Intent(BindWatchInputActivity.this,
                                         ScanActivity.class);
-                                setResult(4,intent);
+                                setResult(4, intent);
                                 finish();
                             } catch (Exception ex) {
                                 ToastUtils.showToast(BindWatchInputActivity.this, "数据处理错误");

@@ -36,9 +36,10 @@ public class ScanActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
         setTitle("扫描二维码");
-        setBtnRight("手动绑定");
 
-        setBtnRightClickListener(new View.OnClickListener() {
+        setRightImage(R.drawable.ic_input_imei);
+
+        setRightImageViewClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ScanActivity.this, BindWatchInput2Activity.class);
