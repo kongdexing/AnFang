@@ -20,22 +20,12 @@
         android:layout_gravity="center"/>
 
     <TextView
-        android:id="@+id/txtUserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_30"
         android:textColor="@color/color_black_1"
         android:gravity="center"
-        android:text=""
-        android:textSize="@dimen/sp_20" />
-
-    <TextView
-        android:id="@+id/txtUserRole"
-        style="@style/mineText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text=""
+        android:text="@string/setting_qrcode_des"
         android:textSize="@dimen/sp_20" />
 
 </LinearLayout>

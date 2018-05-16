@@ -21,14 +21,13 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_45"
         android:layout_marginTop="@dimen/dp_20"
-        android:background="@drawable/bg_mine_info"
         android:gravity="center_vertical">
 
         <ImageView
-            android:layout_width="@dimen/dp_30"
-            android:layout_height="@dimen/dp_30"
+            android:layout_width="@dimen/dp_25"
+            android:layout_height="@dimen/dp_25"
             android:layout_marginLeft="@dimen/dp_15"
-            android:src="@drawable/device_bind_add_regcode" />
+            android:src="@drawable/icon_watch_small" />
 
         <FrameLayout
             android:layout_width="match_parent"

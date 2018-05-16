@@ -43,21 +43,18 @@ import com.xptschool.parent.ui.alarm.AlarmMapActivity;
 import com.xptschool.parent.ui.album.LocalImagePHelper;
 import com.xptschool.parent.ui.album.LocalImageTHelper;
 import com.xptschool.parent.ui.checkin.CheckinPActivity;
-import com.xptschool.parent.ui.comment.CommentDetailActivity;
 import com.xptschool.parent.ui.homework.HomeWorkDetailParentActivity;
 import com.xptschool.parent.ui.honor.HonorDetailActivity;
 import com.xptschool.parent.ui.leave.LeavePDetailActivity;
 import com.xptschool.parent.ui.leave.LeaveTDetailActivity;
 import com.xptschool.parent.ui.main.MainActivity;
 import com.xptschool.parent.ui.notice.NoticeDetailActivity;
-import com.xptschool.parent.ui.watch.chat.ServerManager;
 import com.xptschool.parent.util.ToastUtils;
 
 import org.json.JSONObject;
 
 import java.io.File;
 import java.net.Proxy;
-import java.util.ArrayList;
 import java.util.List;
 
 public class XPTApplication extends Application {
@@ -216,11 +213,6 @@ public class XPTApplication extends Application {
                 }
             } else if ("warning".equals(activity)) {
                 Intent intent = new Intent(XPTApplication.this, AlarmMapActivity.class);
-                intent.putExtra(ExtraKey.DETAIL_ID, id);
-                startActivity(intent);
-            } else if ("remark".equals(activity)) {
-                //评语
-                Intent intent = new Intent(XPTApplication.this, CommentDetailActivity.class);
                 intent.putExtra(ExtraKey.DETAIL_ID, id);
                 startActivity(intent);
             } else if ("honor".equals(activity)) {

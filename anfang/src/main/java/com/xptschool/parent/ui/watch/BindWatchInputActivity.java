@@ -3,7 +3,10 @@ package com.xptschool.parent.ui.watch;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.android.volley.VolleyError;
 import com.android.volley.common.VolleyHttpParamsEntity;
@@ -26,10 +29,14 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class BindWatchInputActivity extends BaseActivity {
+
+    @BindView(R.id.imgTop)
+    ImageView imgTop;
     @BindView(R.id.edtNickName)
     EditText edtNickName;
     @BindView(R.id.edtPhone)
     EditText edtPhone;
+
     private String currentIMEI = null;
 
     @Override
@@ -38,6 +45,10 @@ public class BindWatchInputActivity extends BaseActivity {
         setContentView(R.layout.activity_bind_watch_input);
         setTitle("绑定设备");
         setBtnRight("跳过");
+
+        ViewGroup.LayoutParams params = imgTop.getLayoutParams();
+        params.height = XPTApplication.getInstance().getWindowWidth() / 2;
+        imgTop.setLayoutParams(params);
 
         Intent getIntent = getIntent();
         currentIMEI = getIntent.getStringExtra("mScan");

@@ -189,7 +189,6 @@
         <!-- 设置 -->
         <activity android:name=".ui.setting.SettingActivity" />
         <activity android:name=".ui.setting.ChangePwdActivity" />
-        <activity android:name=".ui.setting.TutelageActivity" />
         <activity android:name=".ui.setting.AboutActivity" />
         <activity android:name=".ui.setting.QRCodeActivity" />
         <activity
@@ -329,27 +328,6 @@
         <!-- 课程表 -->
         <activity android:name=".ui.course.CourseActivity" />
         <activity android:name=".ui.course.CourseTActivity" />
-
-        <!-- 评语 -->
-        <activity android:name=".ui.comment.CommentPActivity" />
-        <activity android:name=".ui.comment.CommentTActivity" />
-        <activity
-            android:name=".ui.comment.CommentPushActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        <activity android:name=".ui.comment.CommentDetailActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data
-                    android:host="${PACKAGE_NAME}"
-                    android:path="/remark_p"
-                    android:scheme="shuhai" />
-            </intent-filter>
-        </activity>
 
         <!-- 荣誉墙 -->
         <activity android:name=".ui.honor.HonorPActivity" />

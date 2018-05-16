@@ -40,9 +40,6 @@ public class SettingActivity extends BaseActivity {
     @BindView(R.id.rlChangePwd)
     RelativeLayout rlChangePwd;
 
-    @BindView(R.id.rltutelage)
-    RelativeLayout rltutelage;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,12 +54,6 @@ public class SettingActivity extends BaseActivity {
             e.printStackTrace();
         }
 
-        if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-            rltutelage.setVisibility(View.VISIBLE);
-        } else {
-            rltutelage.setVisibility(View.GONE);
-        }
-
         if (XPTApplication.getInstance().isLoggedIn()) {
             rlChangePwd.setVisibility(View.VISIBLE);
         } else {
@@ -70,7 +61,7 @@ public class SettingActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.rlChangePwd, R.id.rlTel, R.id.rlUpdate, R.id.rltutelage, R.id.rlHelp, R.id.rlExit})
+    @OnClick({R.id.rlChangePwd, R.id.rlTel, R.id.rlUpdate, R.id.rlHelp, R.id.rlExit})
     void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.rlTel:
@@ -89,14 +80,6 @@ public class SettingActivity extends BaseActivity {
                 break;
             case R.id.rlChangePwd:
                 startActivity(new Intent(this, ChangePwdActivity.class));
-                break;
-            case R.id.rltutelage:
-                List<BeanStudent> students = GreenDaoHelper.getInstance().getStudents();
-                if (students.size() != 0) {
-                    startActivity(new Intent(this, TutelageActivity.class));
-                } else {
-                    Toast.makeText(this, "暂无绑定的学生", Toast.LENGTH_SHORT).show();
-                }
                 break;
             case R.id.rlHelp:
                 Intent intent = new Intent(this, WebCommonActivity.class);

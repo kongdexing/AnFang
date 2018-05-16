@@ -12,7 +12,6 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
@@ -34,11 +33,6 @@ public class QRCodeActivity extends BaseActivity {
 
     @BindView(R.id.QRImg)
     ImageView QRImg;
-
-    @BindView(R.id.txtUserName)
-    TextView txtUserName;
-    @BindView(R.id.txtUserRole)
-    TextView txtUserRole;
 
     String shareURL = "";
 
@@ -77,8 +71,6 @@ public class QRCodeActivity extends BaseActivity {
 //            } else {
 //                txtUserRole.setText("未登录");
 //            }
-            txtUserName.setText("高收益理财，易高效沟通");
-            txtUserRole.setText("多样化商城，建数海科技");
 
         } catch (Exception ex) {
             Log.i(TAG, "onCreate: " + ex.getMessage());

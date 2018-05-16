@@ -26,7 +26,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 24
         versionCode 32
-        versionName "2.2.0"
+        versionName "2.2.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [API_KEY_BAIDU       : rootProject.appKeyBaiduMap,
                                 UMENG_APPKEY        : rootProject.UMENG_APPKEY,
