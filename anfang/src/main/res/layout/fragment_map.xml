@@ -96,7 +96,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/mine_item_selector"
-                    app:ms_background_color="@color/bg_window"
                     app:ms_dropdown_height="wrap_content"
                     app:ms_dropdown_max_height="@dimen/dp_350"
                     app:ms_dropdown_width="match_parent"

@@ -170,9 +170,9 @@ public class TimePickerPopupWindow extends PopupWindow implements View.OnClickLi
         @Override
         protected void configureTextView(TextView view) {
             super.configureTextView(view);
-            if (currentItem == currentValue) {
-                view.setTextColor(mContext.getResources().getColor(R.color.colorPrimaryDark));
-            }
+//            if (currentItem == currentValue) {
+//                view.setTextColor(mContext.getResources().getColor(R.color.colorPrimaryDark));
+//            }
             view.setTypeface(Typeface.SANS_SERIF);
         }
 

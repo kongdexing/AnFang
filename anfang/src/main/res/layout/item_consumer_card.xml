@@ -14,7 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
-        android:src="@drawable/bg_stu_card"
         app:borderRadius="@dimen/dp_10"
         app:roundType="round" />
 

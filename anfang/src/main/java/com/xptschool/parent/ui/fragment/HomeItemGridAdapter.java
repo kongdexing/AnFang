@@ -15,7 +15,7 @@ import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.bean.HomeItem;
 import com.xptschool.parent.ui.login.LoginActivity;
-import com.xptschool.parent.ui.watch.ScanActivity;
+import com.xptschool.parent.ui.watch.BindWatchScanActivity;
 import com.xptschool.parent.view.CustomDialog;
 
 import java.util.ArrayList;
@@ -103,7 +103,7 @@ public class HomeItemGridAdapter extends BaseAdapter {
                             @Override
                             public void onPositiveClick() {
                                 //绑定手表
-                                mContext.startActivity(new Intent(mContext, ScanActivity.class));
+                                mContext.startActivity(new Intent(mContext, BindWatchScanActivity.class));
                             }
                         });
                     }

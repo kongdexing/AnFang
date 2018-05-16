@@ -40,15 +40,14 @@
                     android:background="@drawable/user_defaulthead" />
 
                 <ImageView style="@style/arrow_right" />
-            </RelativeLayout>
 
-            <View style="@style/line1" />
+                <View style="@style/line1" />
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/rlSex"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
                 android:background="@drawable/mine_item_selector"
                 android:clickable="true">
 
@@ -70,15 +69,13 @@
                     android:id="@+id/img_sex"
                     style="@style/arrow_right" />
 
+                <View style="@style/line1" />
             </RelativeLayout>
-
-            <View style="@style/line1" />
 
             <RelativeLayout
                 android:id="@+id/rlName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
                 android:background="@drawable/mine_item_selector"
                 android:clickable="true">
 
@@ -99,15 +96,14 @@
                 <ImageView
                     android:id="@+id/img_name"
                     style="@style/arrow_right" />
-            </RelativeLayout>
 
-            <View style="@style/line1" />
+                <View style="@style/line1" />
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/rlMinePhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
                 android:background="@drawable/mine_item_selector"
                 android:clickable="true">
 
@@ -128,15 +124,14 @@
                 <ImageView
                     android:id="@+id/img_phone"
                     style="@style/arrow_right" />
-            </RelativeLayout>
 
-            <View style="@style/line1" />
+                <View style="@style/line1" />
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/rlEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
                 android:background="@drawable/mine_item_selector"
                 android:clickable="true">
 
@@ -158,14 +153,12 @@
                     android:id="@+id/img_email"
                     style="@style/arrow_right" />
 
+                <View style="@style/line1" />
             </RelativeLayout>
-
-            <View style="@style/line1" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
                 android:background="@drawable/mine_item_selector"
                 android:clickable="true">
 
@@ -182,15 +175,14 @@
                     android:layout_marginRight="@dimen/dp_15"
                     android:text="无" />
 
+                <View style="@style/line1" />
             </RelativeLayout>
 
-            <View style="@style/line1" />
             <!--代理商显示代理地址|第三方公司显示公司信息-->
             <RelativeLayout
                 android:id="@+id/rlProxy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
                 android:background="@drawable/mine_item_selector"
                 android:clickable="true"
                 android:visibility="gone">
@@ -213,7 +205,6 @@
                 android:id="@+id/rlCompanay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
                 android:background="@drawable/mine_item_selector"
                 android:clickable="true"
                 android:visibility="gone">
@@ -231,7 +222,6 @@
                     android:text="无" />
 
             </RelativeLayout>
-
 
         </LinearLayout>
     </ScrollView>

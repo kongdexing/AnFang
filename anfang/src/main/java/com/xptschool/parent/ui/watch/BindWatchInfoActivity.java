@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.android.volley.VolleyError;
 import com.android.volley.common.VolleyHttpParamsEntity;
@@ -28,7 +27,7 @@ import org.json.JSONObject;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class BindWatchInputActivity extends BaseActivity {
+public class BindWatchInfoActivity extends BaseActivity {
 
     @BindView(R.id.imgTop)
     ImageView imgTop;
@@ -123,19 +122,19 @@ public class BindWatchInputActivity extends BaseActivity {
                                 student.setCard_phone(phone);
                                 //存入数据库
                                 GreenDaoHelper.getInstance().insertStudent(student);
-                                ToastUtils.showToast(BindWatchInputActivity.this, "绑定成功");
+                                ToastUtils.showToast(BindWatchInfoActivity.this, "绑定成功");
                                 //启动服务
                                 ServerManager.getInstance().startService();
 
-                                Intent intent = new Intent(BindWatchInputActivity.this,
-                                        ScanActivity.class);
+                                Intent intent = new Intent(BindWatchInfoActivity.this,
+                                        BindWatchScanActivity.class);
                                 setResult(4, intent);
                                 finish();
                             } catch (Exception ex) {
-                                ToastUtils.showToast(BindWatchInputActivity.this, "数据处理错误");
+                                ToastUtils.showToast(BindWatchInfoActivity.this, "数据处理错误");
                             }
                         } else {
-                            ToastUtils.showToast(BindWatchInputActivity.this, "绑定失败");
+                            ToastUtils.showToast(BindWatchInfoActivity.this, "绑定失败");
                         }
                     }
 

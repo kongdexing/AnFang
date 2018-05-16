@@ -26,7 +26,7 @@ public class CardWhiteListActivity extends CardSetBaseActivity implements View.O
 
     LinearLayout llContent;
     private ArrayList<WhiteCardView> whiteCardViews = new ArrayList<>();
-    private int maxLength = 3;
+    private int maxLength = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

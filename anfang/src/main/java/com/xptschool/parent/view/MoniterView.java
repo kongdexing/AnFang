@@ -15,9 +15,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
+import com.android.widget.view.CircularImageView;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.xptschool.parent.R;
+import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyRequestListener;
+import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.ui.mine.BaseInfoView;
 import com.xptschool.parent.ui.watch.MoniterActivity;
 
@@ -29,6 +34,8 @@ public class MoniterView extends BaseInfoView {
 
     private String TAG = MoniterView.class.getSimpleName();
 
+    @BindView(R.id.imgHead)
+    CircularImageView imgHead;
     @BindView(R.id.edtPhone)
     EditText edtPhone;
 
@@ -43,8 +50,12 @@ public class MoniterView extends BaseInfoView {
         ButterKnife.bind(view);
     }
 
-    public void setPhone(String phone) {
-        edtPhone.setText(phone);
+    public void setStudentData(BeanStudent student) {
+        if (student != null) {
+            edtPhone.setText("");
+            ImageLoader.getInstance().displayImage(student.getPhoto(),
+                    new ImageViewAware(imgHead), CommonUtil.getDefaultUserImageLoaderOption());
+        }
     }
 
     @OnClick({R.id.ok})

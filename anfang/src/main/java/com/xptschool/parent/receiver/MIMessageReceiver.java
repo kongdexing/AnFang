@@ -72,9 +72,10 @@ public class MIMessageReceiver extends PushMessageReceiver {
 
     @Override
     public void onNotificationMessageClicked(Context context, MiPushMessage message) {
-        Log.v(XPTApplication.TAG,
+        Log.i(XPTApplication.TAG,
                 "onNotificationMessageClicked is called. " + message.toString());
 
+        //{activity:"warning",id:"2124234"}
         if (!TextUtils.isEmpty(message.getTopic())) {
             mTopic = message.getTopic();
         } else if (!TextUtils.isEmpty(message.getAlias())) {
@@ -88,7 +89,7 @@ public class MIMessageReceiver extends PushMessageReceiver {
 
             XPTApplication.getInstance().resolvePushMsg(message.getContent());
         } catch (Exception ex) {
-            Log.v(XPTApplication.TAG,
+            Log.i(XPTApplication.TAG,
                     "onNotificationMessageClicked error. " + ex.getMessage());
         }
     }

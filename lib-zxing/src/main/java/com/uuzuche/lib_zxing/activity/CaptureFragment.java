@@ -117,7 +117,6 @@ public class CaptureFragment extends Fragment implements SurfaceHolder.Callback 
         inactivityTimer.shutdown();
     }
 
-
     /**
      * Handler scan result
      *

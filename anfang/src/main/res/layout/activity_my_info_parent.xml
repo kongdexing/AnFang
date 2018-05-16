@@ -40,15 +40,14 @@
                     android:src="@drawable/user_defaulthead" />
 
                 <ImageView style="@style/arrow_right" />
-            </RelativeLayout>
 
-            <View style="@style/line1" />
+                <View style="@style/line1" />
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/rlName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
                 android:background="@drawable/mine_item_normal"
                 android:clickable="true">
 
@@ -64,15 +63,13 @@
                     style="@style/mineVal"
                     android:text="无" />
 
+                <View style="@style/line1" />
             </RelativeLayout>
-
-            <View style="@style/line1" />
 
             <RelativeLayout
                 android:id="@+id/rlSex"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
                 android:background="@drawable/mine_item_selector"
                 android:clickable="true">
 
@@ -88,15 +85,13 @@
                     style="@style/mineVal"
                     android:text="无" />
 
+                <View style="@style/line1" />
             </RelativeLayout>
-
-            <View style="@style/line1" />
 
             <RelativeLayout
                 android:id="@+id/rlMinePhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
                 android:background="@drawable/mine_item_selector"
                 android:clickable="true">
 
@@ -117,15 +112,14 @@
                 <ImageView
                     android:id="@+id/img_phone"
                     style="@style/arrow_right" />
-            </RelativeLayout>
 
-            <View style="@style/line1" />
+                <View style="@style/line1" />
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/rlMail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
                 android:background="@drawable/mine_item_normal"
                 android:clickable="true">
 
@@ -141,14 +135,12 @@
                     style="@style/mineVal"
                     android:text="无" />
 
+                <View style="@style/line1" />
             </RelativeLayout>
-
-            <View style="@style/line1" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
                 android:background="@drawable/mine_item_normal"
                 android:clickable="true">
 
@@ -163,15 +155,14 @@
                     android:id="@+id/txtHomeAdd"
                     style="@style/mineVal"
                     android:text="无" />
-            </RelativeLayout>
 
-            <View style="@style/line1" />
+                <View style="@style/line1" />
+            </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/rlAddressPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_1"
                 android:background="@drawable/mine_item_selector"
                 android:clickable="true">
 
@@ -194,6 +185,8 @@
                 <ImageView
                     android:id="@+id/img_addtel"
                     style="@style/arrow_right" />
+
+                <View style="@style/line1" />
             </RelativeLayout>
 
         </LinearLayout>

@@ -171,7 +171,7 @@ public class XPTApplication extends Application {
 
         //init demo helper
         EaseHelper.getInstance().init(mInstance);
-        Config.DEBUG = true;
+        Config.DEBUG = false;
         try {
             UMShareAPI.get(this);
         } catch (Exception ex) {
@@ -181,6 +181,7 @@ public class XPTApplication extends Application {
     }
 
     public void resolvePushMsg(String message) {
+        Log.i(TAG, "resolvePushMsg: " + message);
         try {
             JSONObject object = new JSONObject(message);
 //                    Map<String, String> msgExtra = msg.extra;

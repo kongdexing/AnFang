@@ -13,9 +13,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
+import com.android.widget.view.CircularImageView;
 import com.jph.takephoto.uitl.TFileUtils;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
+import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanStudent;
@@ -34,10 +38,12 @@ public class MoniterActivity extends BaseActivity {
 
     private PopupWindow picPopup;
 
+    @BindView(R.id.imgHead)
+    CircularImageView imgHead;
     @BindView(R.id.txtNickName)
     TextView txtNickName;
-    @BindView(R.id.txtPhone)
-    TextView txtPhone;
+    @BindView(R.id.txtIMEI)
+    TextView txtIMEI;
     @BindView(R.id.txtCardPhone)
     TextView txtCardPhone;
     BeanStudent currentStudent = null;
@@ -60,9 +66,11 @@ public class MoniterActivity extends BaseActivity {
         currentStudent = XPTApplication.getInstance().getCurrentWatchStu();
 
         if (currentStudent != null) {
+            ImageLoader.getInstance().displayImage(currentStudent.getPhoto(),
+                    new ImageViewAware(imgHead), CommonUtil.getDefaultUserImageLoaderOption());
             txtNickName.setText(currentStudent.getStu_name());
             txtCardPhone.setText(currentStudent.getCard_phone());
-            txtPhone.setText(currentStudent.getMonitor());
+            txtIMEI.setText(currentStudent.getImei_id());
         }
     }
 
@@ -82,7 +90,7 @@ public class MoniterActivity extends BaseActivity {
             TFileUtils.setCacheFile(null);
 
             MoniterView view1 = new MoniterView(this);
-            view1.setPhone(currentStudent.getMonitor());
+            view1.setStudentData(currentStudent);
 
             picPopup = new PopupWindow(view1,
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, true);

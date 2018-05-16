@@ -45,7 +45,7 @@ public class DevicesManageActivity extends BaseActivity {
                 @Override
                 public void onPositiveClick() {
                     //绑定手表
-                    startActivity(new Intent(DevicesManageActivity.this, ScanActivity.class));
+                    startActivity(new Intent(DevicesManageActivity.this, BindWatchScanActivity.class));
                 }
             });
             return;
