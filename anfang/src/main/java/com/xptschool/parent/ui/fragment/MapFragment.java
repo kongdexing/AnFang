@@ -140,6 +140,7 @@ public class MapFragment extends MapBaseFragment implements OnGetShareUrlResultL
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.i(TAG, "onCreateView: ");
         mRootView = inflater.inflate(R.layout.fragment_map, container, false);
         ButterKnife.bind(this, mRootView);
         //初始化传感器
@@ -179,6 +180,13 @@ public class MapFragment extends MapBaseFragment implements OnGetShareUrlResultL
                 initSpinnerData();
             }
         });
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i(TAG, "onResume: ");
         initSpinnerData();
     }
 
@@ -211,9 +219,21 @@ public class MapFragment extends MapBaseFragment implements OnGetShareUrlResultL
                     return;
                 }
 
+                List<BeanStudent> beanStudents = GreenDaoHelper.getInstance().getStudents();
+
                 spnStudents.setEnabled(true);
-                spnStudents.setItems(GreenDaoHelper.getInstance().getStudents());
-                currentStudent = (BeanStudent) spnStudents.getSelectedItem();
+                spnStudents.setItems(beanStudents);
+                if (currentStudent != null) {
+                    //重新选中当前学生
+                    for (int i = 0; i < beanStudents.size(); i++) {
+                        if (currentStudent.getStu_id().equals(beanStudents.get(i).getStu_id())) {
+                            spnStudents.setSelectedIndex(i);
+                            break;
+                        }
+                    }
+                } else {
+                    currentStudent = (BeanStudent) spnStudents.getSelectedItem();
+                }
 
                 spnStudents.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<BeanStudent>() {
                     @Override
@@ -235,6 +255,9 @@ public class MapFragment extends MapBaseFragment implements OnGetShareUrlResultL
             }
 
         } else {
+            mBaiduMap.clear();
+            isShowLocation = false;
+
             //隐藏学生功能
             llMyTools.setVisibility(View.GONE);
             llStudentDrop.setVisibility(View.GONE);

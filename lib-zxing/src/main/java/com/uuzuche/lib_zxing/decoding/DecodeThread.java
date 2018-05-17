@@ -53,7 +53,7 @@ final class DecodeThread extends Thread {
         if (decodeFormats == null || decodeFormats.isEmpty()) {
             decodeFormats = new Vector<BarcodeFormat>();
             decodeFormats.addAll(DecodeFormatManager.ONE_D_FORMATS);
-            decodeFormats.addAll(DecodeFormatManager.QR_CODE_FORMATS);
+//            decodeFormats.addAll(DecodeFormatManager.QR_CODE_FORMATS);
             decodeFormats.addAll(DecodeFormatManager.DATA_MATRIX_FORMATS);
         }
 

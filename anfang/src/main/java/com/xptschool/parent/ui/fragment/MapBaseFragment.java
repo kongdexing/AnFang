@@ -83,7 +83,7 @@ public class MapBaseFragment extends BaseFragment implements BDLocationListener,
 
     public BeanStudent currentStudent;
     private BitmapDescriptor mBlueTexture = null;
-    private boolean isShowLocation = false;
+    public boolean isShowLocation = false;
     public boolean isBindRoadForHistoryTrack = false;
     public boolean mapStatusChange = false;
     private InfoWindow locationInfoWindow;

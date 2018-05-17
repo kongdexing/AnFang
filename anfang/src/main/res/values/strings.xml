@@ -433,7 +433,7 @@
 
 
     <!--扫描二维码-->
-    <string name="scan_text1">将手表二维码放入框内，即可自动扫描</string>
+    <string name="scan_text1">将手表条形码放入框内，即可自动扫描</string>
     <string name="scan_text2">(点击右上角手动输入手表绑定码)</string>
 
     <!--输入绑定码-->

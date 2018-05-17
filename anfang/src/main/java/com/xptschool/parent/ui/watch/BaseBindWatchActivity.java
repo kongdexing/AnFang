@@ -7,6 +7,7 @@ import com.android.volley.common.VolleyHttpParamsEntity;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.xptschool.parent.XPTApplication;
+import com.xptschool.parent.common.UserHelper;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanStudent;
@@ -71,7 +72,11 @@ public abstract class BaseBindWatchActivity extends BaseActivity{
                 });
     }
 
-    public abstract void onBindSuccess();
-    public abstract void onBindFailed();
+    public void onBindSuccess(){
+        UserHelper.getInstance().userLoginSuccess();
+    };
+    public void onBindFailed(){
+
+    };
 
 }

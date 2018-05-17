@@ -360,7 +360,6 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
         Log.e(TAG, "Replace");
         mCurrentFgt.onPause();
         mCurrentFgt = fragmentList.get(position);
-        mCurrentFgt.onResume();
     }
 
     EMMessageListener messageListener = new EMMessageListener() {
