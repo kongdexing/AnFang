@@ -31,7 +31,7 @@ public class BindWatchIMEIActivity extends BaseBindWatchActivity {
         switch (view.getId()) {
             case R.id.ok:
                 String result = edtImei.getText().toString().trim();
-                if (result.isEmpty()) {
+                if (result.isEmpty() || result.length() != 10) {
                     ToastUtils.showToast(this, R.string.msg_imei_error);
                     return;
                 }
