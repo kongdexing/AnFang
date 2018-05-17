@@ -43,12 +43,7 @@ import com.xptschool.parent.ui.alarm.AlarmMapActivity;
 import com.xptschool.parent.ui.album.LocalImagePHelper;
 import com.xptschool.parent.ui.album.LocalImageTHelper;
 import com.xptschool.parent.ui.checkin.CheckinPActivity;
-import com.xptschool.parent.ui.homework.HomeWorkDetailParentActivity;
-import com.xptschool.parent.ui.honor.HonorDetailActivity;
-import com.xptschool.parent.ui.leave.LeavePDetailActivity;
-import com.xptschool.parent.ui.leave.LeaveTDetailActivity;
 import com.xptschool.parent.ui.main.MainActivity;
-import com.xptschool.parent.ui.notice.NoticeDetailActivity;
 import com.xptschool.parent.util.ToastUtils;
 
 import org.json.JSONObject;
@@ -190,35 +185,12 @@ public class XPTApplication extends Application {
 
             Log.i(TAG, "dealWithCustomAction: " + message);
             Log.i(TAG, "activity: " + activity + " id:" + id);
-            if ("homework".equals(activity)) {
-                Intent intent = new Intent(XPTApplication.this, HomeWorkDetailParentActivity.class);
-                intent.putExtra(ExtraKey.DETAIL_ID, id);
-                startActivity(intent);
-            } else if ("notice".equals(activity)) {
-                Intent intent = new Intent(XPTApplication.this, NoticeDetailActivity.class);
-                intent.putExtra(ExtraKey.DETAIL_ID, id);
-                startActivity(intent);
-            } else if ("attendance".equals(activity)) {
+            if ("attendance".equals(activity)) {
                 Intent intent = new Intent(XPTApplication.this, CheckinPActivity.class);
                 intent.putExtra(ExtraKey.DETAIL_ID, id);
                 startActivity(intent);
-            } else if ("leave".equals(activity)) {
-                if (getCurrent_user_type().equals(UserType.PARENT)) {
-                    Intent intent = new Intent(XPTApplication.this, LeavePDetailActivity.class);
-                    intent.putExtra(ExtraKey.DETAIL_ID, id);
-                    startActivity(intent);
-                } else if (getCurrent_user_type().equals(UserType.TEACHER)) {
-                    Intent intent = new Intent(XPTApplication.this, LeaveTDetailActivity.class);
-                    intent.putExtra(ExtraKey.DETAIL_ID, id);
-                    startActivity(intent);
-                }
             } else if ("warning".equals(activity)) {
                 Intent intent = new Intent(XPTApplication.this, AlarmMapActivity.class);
-                intent.putExtra(ExtraKey.DETAIL_ID, id);
-                startActivity(intent);
-            } else if ("honor".equals(activity)) {
-                //荣誉
-                Intent intent = new Intent(XPTApplication.this, HonorDetailActivity.class);
                 intent.putExtra(ExtraKey.DETAIL_ID, id);
                 startActivity(intent);
             } else if ("register".equals(activity)) {

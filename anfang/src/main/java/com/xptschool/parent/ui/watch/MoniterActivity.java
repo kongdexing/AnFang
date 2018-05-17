@@ -113,6 +113,15 @@ public class MoniterActivity extends BaseActivity {
             picPopup.dismiss();
         }
 
+        if (phone.isEmpty()) {
+            ToastUtils.showToast(this, R.string.hint_phone);
+            return;
+        }
+        if (!CommonUtil.isPhone(phone)){
+            ToastUtils.showToast(this, R.string.input_error_phone);
+            return;
+        }
+
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.SET_WATCH_Monitor,
                 new VolleyHttpParamsEntity().addParam("imei", XPTApplication.getInstance().getCurrentWatchIMEI())
                         .addParam("phone", phone),

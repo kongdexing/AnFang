@@ -88,9 +88,14 @@ public class RegisterActivity extends BaseActivity {
     @OnClick({R.id.btnSend, R.id.btnRegister})
     void viewOnClick(View view) {
         String phone = edtPhone.getText().toString().trim();
-        if (phone.isEmpty() || !CommonUtil.isPhone(phone)) {
+        if (phone.isEmpty()) {
             ToastUtils.showToast(this, R.string.hint_phone);
             edtPhone.setError(getResources().getString(R.string.hint_phone));
+            return;
+        }
+        if (!CommonUtil.isPhone(phone)){
+            ToastUtils.showToast(this, R.string.input_error_phone);
+            edtPhone.setError(getResources().getString(R.string.input_error_phone));
             return;
         }
 

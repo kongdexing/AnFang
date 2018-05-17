@@ -1,23 +1,18 @@
 package com.xptschool.parent.ui.watch;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.view.View;
 
 import com.android.widget.view.LoadMoreRecyclerView;
 import com.xptschool.parent.R;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.GreenDaoHelper;
-import com.xptschool.parent.ui.homework.HomeWorkParentAdapter;
-import com.xptschool.parent.ui.main.BaseActivity;
 import com.xptschool.parent.ui.main.BaseListActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * 聊天列表页面
@@ -55,7 +50,6 @@ public class ChatListActivity extends BaseListActivity {
         });
         recyclerView.setAdapter(adapter);
     }
-
 
     @Override
     protected void onResume() {

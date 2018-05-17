@@ -224,13 +224,20 @@ public class MapFragment extends MapBaseFragment implements OnGetShareUrlResultL
                 spnStudents.setEnabled(true);
                 spnStudents.setItems(beanStudents);
                 if (currentStudent != null) {
-                    //重新选中当前学生
+                    //重新选中当前学生,如果不存在于当前数组，则重新赋予默认
+                    boolean isOld = false;
                     for (int i = 0; i < beanStudents.size(); i++) {
                         if (currentStudent.getStu_id().equals(beanStudents.get(i).getStu_id())) {
                             spnStudents.setSelectedIndex(i);
+                            isOld = true;
                             break;
                         }
                     }
+
+                    if (!isOld){
+                        currentStudent = (BeanStudent) spnStudents.getSelectedItem();
+                    }
+
                 } else {
                     currentStudent = (BeanStudent) spnStudents.getSelectedItem();
                 }

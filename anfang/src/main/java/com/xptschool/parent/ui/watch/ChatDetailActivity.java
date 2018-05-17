@@ -215,12 +215,8 @@ public class ChatDetailActivity extends BaseListActivity {
 
             @Override
             public void onMediaRecorderError(Exception ex) {
-                if ("Permission deny!".equals(ex.getMessage())) {
-                    ToastUtils.showToast(ChatDetailActivity.this, R.string.permission_voice_never_askagain);
-                    CommonUtil.goAppDetailSettingIntent(ChatDetailActivity.this);
-                } else {
-                    ToastUtils.showToast(ChatDetailActivity.this, R.string.voice_recorder_error);
-                }
+                ToastUtils.showToast(ChatDetailActivity.this, R.string.permission_voice_rationale);
+                CommonUtil.goAppDetailSettingIntent(ChatDetailActivity.this);
             }
 
         });

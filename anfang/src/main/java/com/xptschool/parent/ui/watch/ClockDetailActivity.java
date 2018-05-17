@@ -137,7 +137,7 @@ public class ClockDetailActivity extends BaseActivity {
                         return;
                     }
                     boolean click = (Boolean) view.getTag();
-                    view.setBackgroundColor(getResources().getColor(click ? R.color.colorPrimary : R.color.map_railings));
+                    view.setBackgroundColor(getResources().getColor(click ? R.color.map_railings : R.color.colorPrimary));
                     view.setTag(!click);
                 }
             });
@@ -205,7 +205,7 @@ public class ClockDetailActivity extends BaseActivity {
                 resetCheckBox(ckbRepeat3);
                 for (int i = 0; i < weekViews.length; i++) {
                     boolean click = (Boolean) weekViews[i].getTag();
-                    weekViews[i].setBackgroundColor(getResources().getColor(click ? R.color.colorPrimary : R.color.color_black_4));
+                    weekViews[i].setBackgroundColor(getResources().getColor(click ? R.color.colorPrimary : R.color.map_railings));
                 }
                 break;
             case R.id.ok:
@@ -241,7 +241,7 @@ public class ClockDetailActivity extends BaseActivity {
         currentCkb.setChecked(true);
 
         for (int i = 0; i < weekViews.length; i++) {
-            weekViews[i].setBackgroundColor(getResources().getColor(R.color.item_clicked));
+            weekViews[i].setBackgroundColor(getResources().getColor(R.color.map_railings));
         }
     }
 

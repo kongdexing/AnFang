@@ -23,7 +23,6 @@ import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.BeanWChat;
 import com.xptschool.parent.model.GreenDaoHelper;
-import com.xptschool.parent.ui.homework.HomeWorkTeacherAdapter;
 import com.xptschool.parent.util.ChatUtil;
 
 import java.util.ArrayList;

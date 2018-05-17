@@ -200,73 +200,6 @@
         <activity android:name=".ui.cardset.CardSOSActivity" />
         <activity android:name=".ui.cardset.CardWhiteListActivity" />
 
-        <!-- 家庭作业 -->
-        <activity android:name=".ui.homework.HomeWorkParentActivity" />
-        <activity android:name=".ui.homework.HomeWorkTeacherActivity" />
-        <activity
-            android:name=".ui.homework.HomeWorkDetailParentActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data
-                    android:host="${PACKAGE_NAME}"
-                    android:path="/homework_p"
-                    android:scheme="shuhai" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.homework.HomeWorkDetailTeacherActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-
-        <!-- 公告 -->
-        <activity android:name=".ui.notice.NoticeActivity" />
-        <activity android:name=".ui.notice.NoticeTeacherActivity" />
-        <activity
-            android:name=".ui.notice.NoticeDetailActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data
-                    android:host="${PACKAGE_NAME}"
-                    android:path="/notice_p"
-                    android:scheme="shuhai" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.notice.NoticeDetailTActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-
-        <!-- 成绩 -->
-        <activity android:name=".ui.score.ScoreActivity" />
-        <activity android:name=".ui.score.ScoreTeacherActivity" />
-
-        <!-- 考勤 -->
-        <activity android:name=".ui.checkin.CheckinPActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data
-                    android:host="${PACKAGE_NAME}"
-                    android:path="/attendance_p"
-                    android:scheme="shuhai" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".ui.checkin.CheckinTActivity" />
-        <activity android:name=".ui.checkin.ChechinDetailActivity" />
-
         <!-- 报警查询 -->
         <activity android:name=".ui.alarm.AlarmActivity" />
         <activity android:name=".ui.alarm.AlarmTActivity" />
@@ -290,65 +223,6 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".ui.fence.FenceDrawActivity" />
         <activity android:name=".ui.fence.FenceShowActivity" />
-
-        <!-- 在线请假 -->
-        <activity android:name=".ui.leave.LeaveActivity" />
-        <activity android:name=".ui.leave.LeaveTActivity" />
-        <activity
-            android:name=".ui.leave.LeavePDetailActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data
-                    android:host="${PACKAGE_NAME}"
-                    android:path="/leave_p"
-                    android:scheme="shuhai" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.leave.LeaveTDetailActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data
-                    android:host="${PACKAGE_NAME}"
-                    android:path="/leave_t"
-                    android:scheme="shuhai" />
-            </intent-filter>
-        </activity>
-
-        <!-- 课程表 -->
-        <activity android:name=".ui.course.CourseActivity" />
-        <activity android:name=".ui.course.CourseTActivity" />
-
-        <!-- 荣誉墙 -->
-        <activity android:name=".ui.honor.HonorPActivity" />
-        <activity android:name=".ui.honor.HonorTActivity" />
-        <activity
-            android:name=".ui.honor.HonorPushActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
-        <activity android:name=".ui.honor.HonorDetailActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data
-                    android:host="${PACKAGE_NAME}"
-                    android:path="/honor_p"
-                    android:scheme="shuhai" />
-            </intent-filter>
-        </activity>
 
         <!-- 我的班级 -->
         <activity android:name=".ui.mine.MyClassesActivity" />
