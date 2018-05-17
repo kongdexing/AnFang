@@ -57,7 +57,8 @@
                 android:layout_marginLeft="@dimen/dp_5"
                 android:layout_marginTop="@dimen/dp_5"
                 android:text="每天"
-                android:textSize="@dimen/sp_18" />
+                android:textColor="@color/color_black_6"
+                android:textSize="@dimen/sp_16" />
 
         </LinearLayout>
 
