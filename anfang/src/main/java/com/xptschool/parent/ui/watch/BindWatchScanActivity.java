@@ -92,7 +92,7 @@ public class BindWatchScanActivity extends BaseBindWatchActivity {
     @OnPermissionDenied({Manifest.permission.CAMERA})
     void onStartCameraDenied() {
         Log.i(TAG, "onStartCameraDenied: ");
-        Toast.makeText(this, R.string.permission_voice_denied, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.permission_camera_denied, Toast.LENGTH_SHORT).show();
     }
 
     @OnShowRationale({Manifest.permission.CAMERA})
