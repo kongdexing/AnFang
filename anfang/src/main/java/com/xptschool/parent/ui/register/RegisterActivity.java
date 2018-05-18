@@ -93,6 +93,7 @@ public class RegisterActivity extends BaseActivity {
             edtPhone.setError(getResources().getString(R.string.hint_phone));
             return;
         }
+
         if (!CommonUtil.isPhone(phone)){
             ToastUtils.showToast(this, R.string.input_error_phone);
             edtPhone.setError(getResources().getString(R.string.input_error_phone));
