@@ -58,7 +58,6 @@
     <uses-permission android:name="com.xptschool.parent.permission.MIPUSH_RECEIVE" />
     <!-- 这里com.xiaomi.mipushdemo改成app的包名 -->
 
-
     <!-- 访问Push APK provider需要的权限，SDK富媒体需要,无富媒体功能则不需要 -->
     <uses-permission android:name="com.huawei.pushagent.permission.RICHMEDIA_PROVIDER" />
 
@@ -384,6 +383,8 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+
         <!-- UMShare -->
 
         <provider

@@ -57,11 +57,18 @@ keytool -list -v -keystore mystore.keystore
 证书指纹:
 
          MD5: 8D:AE:32:46:96:89:08:82:6B:6B:E7:CA:4D:F0:20:BC
+         签名: 8dae3246968908826b6be7ca4df020bc
          SHA1: 7B:18:68:3D:4B:FB:6C:8F:D1:9D:04:8B:EA:17:70:C0:B6:99:E4:23
          SHA256: 36:33:D4:25:C4:C1:B8:4F:9A:B8:03:C6:19:AE:E5:84:DC:E7:A8:9B:D9:7F:18:6A:F2:55:D5:2C:38:69:C4:92
          
          签名算法名称: SHA1withRSA
          版本: 1
 
+
+3.IOS
+  URL Schema:
+  AppStore URL: https://itunes.apple.com/app/apple-store/id1208549714?pt=118536605&ct=web&mt=8
+  Bundle ID: pinganxiaoyuanjiazhang1
+  AppStore ID: 1208549714
 
 

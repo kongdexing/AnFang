@@ -1,4 +1,4 @@
-package com.xptschool.parent.ui.wallet.bankcard;
+package com.xptschool.parent.ui.wallet.pocket.bill;
 
 import android.os.Parcel;
 import android.os.Parcelable;

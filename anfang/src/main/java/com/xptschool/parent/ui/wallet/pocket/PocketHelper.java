@@ -3,7 +3,7 @@ package com.xptschool.parent.ui.wallet.pocket;
 import android.content.Context;
 
 import com.xptschool.parent.R;
-import com.xptschool.parent.ui.wallet.bankcard.BeanBankCard;
+import com.xptschool.parent.ui.wallet.pocket.bill.BeanBankCard;
 
 /**
  * Created by dexing on 2017/4/21.

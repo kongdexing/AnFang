@@ -158,6 +158,19 @@
                     android:visibility="visible" />
 
             </RelativeLayout>
+
+            <Button
+                android:id="@+id/btnQQLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="QQ登录"/>
+
+            <Button
+                android:id="@+id/btnWXLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="微信登录"/>
+
         </LinearLayout>
 
     </RelativeLayout>

@@ -20,8 +20,12 @@ import com.huawei.hms.support.api.push.HuaweiPush;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.meizu.cloud.pushsdk.PushManager;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.umeng.message.IUmengCallback;
 import com.umeng.message.PushAgent;
+import com.umeng.socialize.UMAuthListener;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.CommonUtil;
@@ -35,6 +39,8 @@ import com.xptschool.parent.push.DeviceHelper;
 import com.xptschool.parent.ui.main.MainActivity;
 import com.xptschool.parent.ui.register.RegisterActivity;
 import com.xptschool.parent.util.ToastUtils;
+
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -156,7 +162,7 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
         });
     }
 
-    @OnClick({R.id.imgDel, R.id.imgToggle, R.id.btnLogin, R.id.txtForgetPWD, R.id.txtRegister})
+    @OnClick({R.id.imgDel, R.id.imgToggle, R.id.btnLogin, R.id.btnQQLogin, R.id.btnWXLogin, R.id.txtForgetPWD, R.id.txtRegister})
     void buttonOnclick(View view) {
         switch (view.getId()) {
             case R.id.imgDel:
@@ -185,12 +191,20 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
                 startActivityForResult(new Intent(this, RegisterActivity.class), 1);
 //                startActivity(new Intent(this, SelSchoolActivity.class));
                 break;
+            case R.id.btnQQLogin:
+                UMShareAPI.get(this).getPlatformInfo(this, SHARE_MEDIA.QQ, umAuthListener);
+                break;
+            case R.id.btnWXLogin:
+                UMShareAPI.get(this).getPlatformInfo(this, SHARE_MEDIA.WEIXIN, umAuthListener);
+                break;
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+
         //跳转至注册 && 注册成功
         if ((requestCode == 1 && resultCode == 1) || (requestCode == 2 && resultCode == 1)) {
             String userName = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_NAME, "");
@@ -201,7 +215,38 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
             //自动登录
             login(userName, CommonUtil.md5(pwd), null);
         }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
+
+    UMAuthListener umAuthListener = new UMAuthListener() {
+        @Override
+        public void onStart(SHARE_MEDIA share_media) {
+            Log.i(TAG, "onStart: " + share_media.getName());
+        }
+
+        @Override
+        public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+            Log.i(TAG, "onComplete: successed");
+            ToastUtils.showToast(LoginActivity.this, "onComplete: successed");
+
+            for (String key : map.keySet()) {
+                Log.i(TAG, "onComplete: key-" + key + "  val-" + map.get(key));
+            }
+
+        }
+
+        @Override
+        public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
+            Log.i(TAG, "onError: " + throwable.getMessage());
+            ToastUtils.showToast(LoginActivity.this, "fail" + throwable.getMessage());
+        }
+
+        @Override
+        public void onCancel(SHARE_MEDIA share_media, int i) {
+            Log.i(TAG, "onCancel: cancel");
+        }
+    };
 
     private void showPassword(boolean show) {
         if (show) {

@@ -200,6 +200,7 @@
                     android:background="@drawable/mine_item_selector"
                     android:clickable="true"
                     android:paddingLeft="@dimen/dp_5"
+                    android:visibility="gone"
                     android:paddingTop="@dimen/dp_5">
 
                     <TextView
@@ -238,6 +239,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
+                android:visibility="gone"
                 android:background="@drawable/bg_mine_item">
 
                 <RelativeLayout

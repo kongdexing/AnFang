@@ -18,7 +18,6 @@ import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.ui.fragment.BaseFragment;
-import com.xptschool.parent.ui.wallet.bankcard.BeanBankCard;
 import com.xptschool.parent.ui.wallet.pocket.BeanPocketRecord;
 import com.xptschool.parent.ui.wallet.pocket.PocketHelper;
 
