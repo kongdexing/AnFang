@@ -23,59 +23,15 @@ public class HttpAction {
     /*更改密码*/
     public static String UPDATE_PASSWORD = HEAD + "Login/edit_password";
 
-    public static String GetClass = HEAD + "Comment/get_class";
-    public static String GetCourse = HEAD + "Comment/get_course";
-    public static String GETExams = HEAD + "Comment/get_exam_name";
-
     //广告位
     public static String HOME_Banner = HEAD + "Banner/query";
     public static String SHOW_Banner = BuildConfig.SERVICE_URL + "/getadstatics.php";
     //获取分组数据
     public static String Home_GroupCfg = HEAD + "AppHomeset/titleQuery";
-    /*获取推荐商品*/
-    public static String GETHotGoods = HEAD + "HotSale/query";
-
-    //家庭作业
-    public static String HOMEWORK_QUERY = HEAD + "Homework/query";
-    public static String HOMEWORK_DEL = HEAD + "Homework/delete";
-    public static String HOMEWORK_ADD = HEAD + "Homework/add";
-    public static String HOMEWORK_DETAIL = HEAD + "Homework/getDetail";
-
-    //班级公告
-    public static String NOTICE_QUERY = HEAD + "Notice/query";
-    public static String NOTICE_DEL = HEAD + "Notice/delete";
-    public static String NOTICE_ADD = HEAD + "Notice/add";
-    public static String NOTICE_DETAIL = HEAD + "Notice/getDetail";
-
-    public static String GET_TEACHER_BYCID = HEAD + "Comment/get_teacher_list";
-
-    //考试名称查询
-    public static String EXAM_QUERY_FOR_PARENT = HEAD + "Exam/getScoresForParent";
-    public static String EXAM_QUERY = HEAD + "Exam/query";
 
     //考勤管理
     public static String Attendance_QUERY = HEAD + "Attendance/query_v1_0_1";
     public static String Attendance_Detail = HEAD + "Attendance/getDetail";
-
-    //请假管理
-    public static String Leave_QUERY = HEAD + "Leave/query";
-    public static String Leave_Edit = HEAD + "Leave/edit";
-    public static String Leave_Add = HEAD + "Leave/add_leave";
-    public static String Leave_Del = HEAD + "Leave/del";
-    public static String Leave_Detail = HEAD + "Leave/getDetail";
-
-    //课程表
-    public static String Timetable_QUERY = HEAD + "Timetable/query";
-    //荣誉墙
-    //rw_type(荣誉类型),stu_id(家长查看孩子荣誉使用),c_id(教室查看班级学生荣誉使用)
-    public static String Honor_query = HEAD + "Honor/query";
-    public static String Honor_edit = HEAD + "Honor/edit";
-    public static String Honor_detail = HEAD + "Honor/getDetail";
-
-    //评语查询
-    public static String Remark_query = HEAD + "Remark/query";
-    public static String Remark_edit = HEAD + "Remark/edit";
-    public static String Remark_detail = HEAD + "Remark/getDetail";
 
     //报警记录
     public static String Track_alarm = HEAD + "Track/alarmRecord_v1_0_1";
@@ -107,37 +63,11 @@ public class HttpAction {
     //上传token
     public static String HOOK_PUSH_TOKEN = HEAD + "Hook/addPushToken";
 
-    //添加监护人
-    public static String ADD_TUTELAGE = HEAD + "AddGuardian/add";
-
-    //钱包
-    public static String Learning_Server = HEAD + "Learning/query";
-    //零钱
-    public static String POCKET_BALANCE = HEAD + "OrderBalance/queryAccount";
     //零钱明细记录
     public static String POCKET_BILLS = HEAD + "Order/getBillList";
     public static String POCKET_BILL_DETAIL = HEAD + "Order/getBillDetail";
-
-    //提现
-    public static String REFUND_ADD = HEAD + "UserRefund/addRefund";
-    public static String REFUND_Query = HEAD + "UserRefund/query";
-
-    public static String STU_CARD_ORDERID = HEAD + "OrderBalance/getCardOrderId";
-    //学生卡充值
-    public static String STU_CARD_RECHARGE = HEAD + "OrderBalance/onCardRecharge";
-
-    //学生卡冻结/解冻
-    public static String STU_CARD_FREEZE = HEAD + "OrderBalance/onFreezeChange";
     //学生卡消费记录
     public static String STU_CARD_BILL = HEAD + "OrderBalance/getStuCardBill";
-
-    //获取订单信息
-    public static String GET_OrderInfo = HEAD + "Order/getOrder";
-
-    //银行卡
-    public static String GET_BankCards = HEAD + "BankCard/query";
-    public static String Add_BankCard = HEAD + "BankCard/add";
-    public static String Delete_BankCard = HEAD + "BankCard/del";
 
     //手机话费充值
     public static String GET_TEL_RECHARGE_ORDER = HEAD + "TelCharge/getTelCharge";
@@ -153,9 +83,6 @@ public class HttpAction {
     public static String REGISTER_GETCODE = HEAD + "Register/getCode";
     //注册
     public static String REGISTER = HEAD + "Register/register";
-
-    //获取学校
-    public static String GET_SCHOOL = HEAD + "Register/information";
 
     //获取商品列表
     public static String GET_SHOPLIST = HEAD + "Goods/getGoodsList";
