@@ -55,8 +55,8 @@ public class MineFragment extends BaseFragment {
     @BindView(R.id.rlMyChild)
     RelativeLayout rlMyChild;
 
-    @BindView(R.id.rlMyInvite)
-    RelativeLayout rlMyInvite;
+//    @BindView(R.id.rlMyInvite)
+//    RelativeLayout rlMyInvite;
 
     private Unbinder unbinder;
 
@@ -83,7 +83,7 @@ public class MineFragment extends BaseFragment {
         }
         rlMyChild.setVisibility(View.GONE);
         rlMyClass.setVisibility(View.GONE);
-        rlMyInvite.setVisibility(View.GONE);
+//        rlMyInvite.setVisibility(View.GONE);
 
         //判断登录状态
         if (XPTApplication.getInstance().isLoggedIn()) {
@@ -113,11 +113,11 @@ public class MineFragment extends BaseFragment {
                 }
             } else {
                 //会员不显示我的邀请，第三方公司|代理商显示我的邀请
-                if (type.equals(UserType.VISITOR)) {
-                    rlMyInvite.setVisibility(View.GONE);
-                } else {
-                    rlMyInvite.setVisibility(View.VISIBLE);
-                }
+//                if (type.equals(UserType.VISITOR)) {
+//                    rlMyInvite.setVisibility(View.GONE);
+//                } else {
+//                    rlMyInvite.setVisibility(View.VISIBLE);
+//                }
 
                 BeanUser user = GreenDaoHelper.getInstance().getCurrentUser();
                 if (user != null) {
