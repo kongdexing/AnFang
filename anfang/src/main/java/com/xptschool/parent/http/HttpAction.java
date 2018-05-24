@@ -15,7 +15,7 @@ public class HttpAction {
     public static String Index = BuildConfig.SERVICE_URL + "/index.php";
     public static String HEAD = BuildConfig.SERVICE_URL + "/index.php/Api/";
     /*登录*/
-    public static String LOGIN = HEAD + "Login/login2_1_3";
+    public static String LOGIN = HEAD + "Login/login2_2_2";
 
     /*修改用户信息*/
     public static String UserInfo = HEAD + "UserInfo/updateUserInfo";
@@ -79,6 +79,8 @@ public class HttpAction {
     public static String FORGOT_PWD_STEP3 = HEAD + "ForgetPwd/checkCode";
     public static String FORGOT_PWD_STEP4 = HEAD + "ForgetPwd/PasswordReset";
 
+    //注册获取验证码
+    public static String LOGIN_GETCODE = HEAD + "Login/getSMSCode";
     //注册获取验证码
     public static String REGISTER_GETCODE = HEAD + "Register/getCode";
     //注册

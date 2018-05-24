@@ -6,6 +6,6 @@ public interface LoginListener {
 
     void onLoginSuccess();
 
-    void onLoginFail();
+    void onLoginFail(String msg);
 
 }

@@ -171,7 +171,7 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
         });
     }
 
-    @OnClick({R.id.imgDel, R.id.btnSend, R.id.btnLogin, R.id.imgQQ, R.id.imgWeChat})
+    @OnClick({R.id.imgDel, R.id.btnSend, R.id.btnLogin, R.id.imgQQ, R.id.imgWeChat, R.id.imgPwd})
     void buttonOnclick(View view) {
         switch (view.getId()) {
             case R.id.imgDel:
@@ -194,7 +194,9 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
                 if (!TextUtils.isEmpty(verifyCode)) {
                     btnLogin.setEnabled(false);
                     CommonUtil.hideInputWindow(LoginActivity.this, btnLogin);
-                    LoginHelper.getInstance().login(account, verifyCode, null);
+                    LoginHelper.getInstance().login(new MyVolleyHttpParamsEntity()
+                            .addParam("phone", account)
+                            .addParam("verifyCode", verifyCode), this);
                 } else {
                     Toast.makeText(LoginActivity.this, R.string.hint_code, Toast.LENGTH_SHORT).show();
                 }
@@ -205,6 +207,17 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
             case R.id.imgWeChat:
                 UMShareAPI.get(this).getPlatformInfo(this, SHARE_MEDIA.WEIXIN, umAuthListener);
                 break;
+            case R.id.imgPwd:
+                startActivityForResult(new Intent(this, LoginByPwdActivity.class),1);
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==1){
+
         }
     }
 
@@ -233,7 +246,7 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
     };
 
     private void getVerifyCode(final String phone) {
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.REGISTER_GETCODE,
+        VolleyHttpService.getInstance().sendPostRequest(HttpAction.LOGIN_GETCODE,
                 new MyVolleyHttpParamsEntity()
                         .addParam("phone", phone), new MyVolleyRequestListener() {
                     @Override
@@ -277,7 +290,10 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
             for (String key : map.keySet()) {
                 Log.i(TAG, "onComplete: key-" + key + "  val-" + map.get(key));
             }
-
+            //授权成功，登录
+//            LoginHelper.getInstance().login(new MyVolleyHttpParamsEntity()
+//                    .addParam("openId", map.get("openid"))
+//                    .addParam("platform_name", verifyCode), this);
         }
 
         @Override
@@ -292,152 +308,30 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
         }
     };
 
-    LoginListener loginListener = new LoginListener() {
-        @Override
-        public void onLoginStart() {
-            if (progress != null)
-                progress.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        public void onLoginSuccess() {
-
-        }
-
-        @Override
-        public void onLoginFail() {
-
-        }
-    };
-
     @Override
-    protected void onStartLogin() {
-        super.onStartLogin();
-        String easeLoginName = "";
-
-        try {
-            UserType type = XPTApplication.getInstance().getCurrent_user_type();
-            if (UserType.PARENT.equals(type)) {
-                BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
-                if (parent == null) {
-                    return;
-                }
-                easeLoginName = parent.getU_id();
-            } else if (UserType.TEACHER.equals(type)) {
-                BeanTeacher teacher = GreenDaoHelper.getInstance().getCurrentTeacher();
-                if (teacher == null) {
-                    return;
-                }
-                easeLoginName = teacher.getU_id();
-            } else {
-                //游客不登录环信
-                if (progress != null)
-                    progress.setVisibility(View.INVISIBLE);
-                btnLogin.setEnabled(true);
-                finishActivity();
-                return;
-            }
-        } catch (Exception ex) {
-            Log.i(TAG, "onLoginSuccess: login ease error " + ex.getMessage());
-            return;
-        }
-
-        Log.i(TAG, "login ease easeLoginName : ");
-
-        EMClient.getInstance().login(easeLoginName, CommonUtil.md5("SHUHAIXINXI" + easeLoginName), new EMCallBack() {
-
-            @Override
-            public void onSuccess() {
-                EMLoginSuccess();
-                Log.i(TAG, "登录聊天服务器成功！");
-//                ToastUtils.showToast(LoginActivity.this, "登录聊天服务器成功");
-            }
-
-            @Override
-            public void onProgress(int progress, String status) {
-
-            }
-
-            @Override
-            public void onError(final int code, final String error) {
-                EMLoginSuccess();
-
-                if (code == 200) {
-                    //USER_ALREADY_LOGIN
-
-                    Log.i(TAG, "USER_ALREADY_LOGIN！");
-//                    ToastUtils.showToast(LoginActivity.this, "USER_ALREADY_LOGIN");
-                } else {
-                    runOnUiThread(new Runnable() {
-                        public void run() {
-                            Log.i(TAG, "EMUI onError: " + code + " error:" + error);
-//                            if (progress != null)
-//                                progress.setVisibility(View.INVISIBLE);
-//                            btnLogin.setEnabled(true);
-//                            //清除数据
-//                            SharedPreferencesUtil.clearUserInfo(LoginActivity.this);
-//
-//                            GreenDaoHelper.getInstance().clearData();
-//                            ToastUtils.showToast(getApplicationContext(), "login failed");
-                        }
-                    });
-                }
-            }
-        });
+    public void onLoginStart() {
+        super.onLoginStart();
+        enableView(false);
     }
 
     @Override
-    protected void onLoginSuccess(String newAccount) {
-        super.onLoginSuccess(newAccount);
-
-    }
-
-    private void EMLoginSuccess() {
-        EMClient.getInstance().groupManager().loadAllGroups();
-        EMClient.getInstance().chatManager().loadAllConversations();
-
-        String nickName = "";
-        try {
-            if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-                BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
-                if (parent != null) {
-                    nickName = parent.getParent_name();
-                }
-            } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-                BeanTeacher teacher = GreenDaoHelper.getInstance().getCurrentTeacher();
-                if (teacher != null) {
-                    nickName = teacher.getName();
-                }
-            }
-        } catch (Exception ex) {
-            Log.i(TAG, "onLoginSuccess: login ease error " + ex.getMessage());
-        }
-
-        EMClient.getInstance().updateCurrentUserNick(nickName);
-
-//        EMClient.getInstance().chatManager().getAllConversations();
-
-        runOnUiThread(new Runnable() {
-            public void run() {
-                if (progress != null)
-                    progress.setVisibility(View.INVISIBLE);
-
-                if (btnLogin != null) {
-                    btnLogin.setEnabled(true);
-                }
-                finishActivity();
-            }
-        });
+    public void onLoginSuccess() {
+        super.onLoginSuccess();
+        enableView(true);
     }
 
     @Override
-    protected void onLoginFailed(String msg) {
-        super.onLoginFailed(msg);
+    public void onLoginFail(String msg) {
+        super.onLoginFail(msg);
         ToastUtils.showToast(this, msg);
+        enableView(true);
+    }
+
+    private void enableView(boolean enable) {
         if (progress != null)
-            progress.setVisibility(View.INVISIBLE);
+            progress.setVisibility(enable ? View.VISIBLE : View.INVISIBLE);
         if (btnLogin != null) {
-            btnLogin.setEnabled(true);
+            btnLogin.setEnabled(enable);
         }
     }
 
@@ -448,7 +342,6 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
         } else {
             finish();
         }
-
     }
 
     @Override

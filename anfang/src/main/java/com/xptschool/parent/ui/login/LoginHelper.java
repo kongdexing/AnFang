@@ -26,17 +26,13 @@ public class LoginHelper {
     /**
      * 账号密码登录
      *
-     * @param account
-     * @param password
+     * @param entity
      * @param listener
      */
-    public void login(final String account, final String password, final LoginListener listener) {
+    public void login(final MyVolleyHttpParamsEntity entity, final LoginListener listener) {
         //login
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.LOGIN,
-                new MyVolleyHttpParamsEntity()
-                        .addParam("username", account)
-                        .addParam("password", password),
-                new MyVolleyRequestListener() {
+                entity, new MyVolleyRequestListener() {
                     @Override
                     public void onStart() {
                         if (listener != null) {
@@ -65,7 +61,7 @@ public class LoginHelper {
                                 break;
                             default:
                                 if (listener != null) {
-                                    listener.onLoginFail();
+                                    listener.onLoginFail(httpResult.getInfo());
                                 }
 //                                onLoginFailed(httpResult.getInfo());
                                 break;
@@ -76,7 +72,7 @@ public class LoginHelper {
                     public void onErrorResponse(VolleyError error) {
 //                        onLoginFailed("登录失败");
                         if (listener != null) {
-                            listener.onLoginFail();
+                            listener.onLoginFail(error.getMessage());
                         }
                     }
                 });
