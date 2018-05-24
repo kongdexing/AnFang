@@ -84,7 +84,7 @@ public class CardSetBaseActivity extends ContractClickActivity {
                                             } else if (CardType.equals(CARD_WHITELIST)) {
                                                 currentStudent.setWhitelist(value);
                                             } else if (CardType.equals(CARD_MONITER)) {
-                                                currentStudent.setMonitor(value);
+//                                                currentStudent.setMonitor(value);
                                             }
                                             setViewData(value);
                                             GreenDaoHelper.getInstance().updateStudent(currentStudent);
@@ -112,10 +112,6 @@ public class CardSetBaseActivity extends ContractClickActivity {
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.SetCard_Phone, new MyVolleyHttpParamsEntity()
                         .addParam("stu_id", currentStudent.getStu_id())
                         .addParam("typeFlag", CardType)
-                        .addParam("s_id", currentStudent.getS_id())
-                        .addParam("a_id", currentStudent.getA_id())
-                        .addParam("g_id", currentStudent.getA_id())
-                        .addParam("c_id", currentStudent.getC_id())
                         .addParam("imei", currentStudent.getImei_id())
                         .addParam(CardType, values)
                         .addParam("token", CommonUtil.encryptToken(HttpAction.SetCard_Phone)),
@@ -145,7 +141,7 @@ public class CardSetBaseActivity extends ContractClickActivity {
                                 } else if (CardType.equals(CARD_WHITELIST)) {
                                     currentStudent.setWhitelist(values);
                                 } else if (CardType.equals(CARD_MONITER)) {
-                                    currentStudent.setMonitor(values);
+//                                    currentStudent.setMonitor(values);
                                 }
                                 SharedPreferencesUtil.saveData(CardSetBaseActivity.this, spKey, System.currentTimeMillis() + "");
                                 GreenDaoHelper.getInstance().updateStudent(currentStudent);

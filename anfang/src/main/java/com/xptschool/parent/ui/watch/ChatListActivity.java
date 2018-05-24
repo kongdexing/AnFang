@@ -55,13 +55,6 @@ public class ChatListActivity extends BaseListActivity {
     protected void onResume() {
         super.onResume();
         List<BeanStudent> students = GreenDaoHelper.getInstance().getStudents();
-        List<BeanStudent> watchStu = new ArrayList<>();
-        for (int i = 0; i < students.size(); i++) {
-            BeanStudent student = students.get(i);
-            if (student.getDevice_type().equals("2")) {
-                watchStu.add(student);
-            }
-        }
-        adapter.refreshData(watchStu);
+        adapter.refreshData(students);
     }
 }

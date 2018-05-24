@@ -324,10 +324,8 @@ public class XPTApplication extends Application {
         List<BeanStudent> students = GreenDaoHelper.getInstance().getStudents();
         for (int i = 0; i < students.size(); i++) {
             BeanStudent student = students.get(i);
-            if (student.getDevice_type().equals("2")) {
-                hasWatch = true;
-                break;
-            }
+            hasWatch = true;
+            break;
         }
         return hasWatch;
     }
@@ -337,10 +335,8 @@ public class XPTApplication extends Application {
         List<BeanStudent> students = GreenDaoHelper.getInstance().getStudents();
         for (int i = 0; i < students.size(); i++) {
             BeanStudent student = students.get(i);
-            if (student.getDevice_type().equals("2")) {
-                currentWatchIMEI = student.getImei_id();
-                break;
-            }
+            currentWatchIMEI = student.getImei_id();
+            break;
         }
         return currentWatchIMEI;
     }

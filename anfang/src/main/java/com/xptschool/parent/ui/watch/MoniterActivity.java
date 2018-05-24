@@ -69,7 +69,7 @@ public class MoniterActivity extends BaseActivity {
             ImageLoader.getInstance().displayImage(currentStudent.getPhoto(),
                     new ImageViewAware(imgHead), CommonUtil.getDefaultUserImageLoaderOption());
             txtNickName.setText(currentStudent.getStu_name());
-            txtCardPhone.setText(currentStudent.getCard_phone());
+            txtCardPhone.setText(currentStudent.getWatch_phone());
             txtIMEI.setText(currentStudent.getImei_id());
         }
     }
@@ -139,9 +139,6 @@ public class MoniterActivity extends BaseActivity {
                         ToastUtils.showToast(MoniterActivity.this, volleyHttpResult.getInfo());
                         if (volleyHttpResult.getStatus() == HttpAction.SUCCESS) {
                             //修改 imei 设备对应的监听号码
-                            BeanStudent student = GreenDaoHelper.getInstance().getStudentByIMEI(XPTApplication.getInstance().getCurrentWatchIMEI());
-                            student.setMonitor(phone);
-                            GreenDaoHelper.getInstance().updateStudent(student);
                             setMonitorData();
                         }
                     }

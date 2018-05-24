@@ -298,30 +298,30 @@ public class ContactFragment extends BaseFragment {
             BeanStudent student = students.get(j);
 
             for (int i = 0; i < listSchool.size(); i++) {
-                try {
-                    ContactSchool school = (ContactSchool) listSchool.get(i);
-                    if (student.getS_id().equals(school.getS_id()) &&
-                            student.getA_id().equals(school.getA_id())) {
-                        teachers.add(school);
-                    }
-                } catch (Exception ex) {
-
-                }
+//                try {
+//                    ContactSchool school = (ContactSchool) listSchool.get(i);
+//                    if (student.getS_id().equals(school.getS_id()) &&
+//                            student.getA_id().equals(school.getA_id())) {
+//                        teachers.add(school);
+//                    }
+//                } catch (Exception ex) {
+//
+//                }
             }
 
             for (int i = 0; i < listTeacher.size(); i++) {
                 try {
                     ContactTeacher teacher = (ContactTeacher) listTeacher.get(i);
                     //老师指教班级与学生所在班级一致
-                    if (teacher.getC_id().contains(student.getC_id())) {
-                        teachers.add(teacher);
-                    }
+//                    if (teacher.getC_id().contains(student.getC_id())) {
+//                        teachers.add(teacher);
+//                    }
                 } catch (Exception ex) {
 
                 }
             }
-            String title = student.getName() + " (" + student.getG_name() + student.getC_name() + ")";
-            listContacts.put(title, teachers);
+//            String title = student.getName() + " (" + student.getG_name() + student.getC_name() + ")";
+//            listContacts.put(title, teachers);
         }
 
         adapter.loadContacts(listContacts);

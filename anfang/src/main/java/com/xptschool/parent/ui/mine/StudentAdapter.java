@@ -91,7 +91,7 @@ public class StudentAdapter extends BaseAdapter {
         }
 
         viewHolder.txtStudentName.setText(student.getStu_name());
-        viewHolder.txtStudentCode.setText("学号:" + student.getStu_no());
+        viewHolder.txtStudentCode.setText("学号:");
         return convertView;
     }
 

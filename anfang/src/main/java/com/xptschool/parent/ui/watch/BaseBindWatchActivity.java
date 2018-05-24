@@ -46,7 +46,6 @@ public abstract class BaseBindWatchActivity extends BaseActivity{
                                 BeanStudent student = new BeanStudent();
                                 student.init();
                                 student.setStu_id(stu_id);
-                                student.setDevice_type("2");
                                 student.setImei_id(imei);
                                 //存入数据库
                                 GreenDaoHelper.getInstance().insertStudent(student);

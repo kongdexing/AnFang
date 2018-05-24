@@ -3,7 +3,6 @@ package com.xptschool.parent.ui.watch;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -36,8 +35,6 @@ import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.album.LocalImageTHelper;
 import com.xptschool.parent.ui.album.TakePhotoActivity;
-import com.xptschool.parent.ui.main.BaseActivity;
-import com.xptschool.parent.ui.mine.MyInfoActivity;
 import com.xptschool.parent.util.TakePhotoUtil;
 import com.xptschool.parent.util.ToastUtils;
 import com.xptschool.parent.util.WatchUtil;
@@ -125,7 +122,7 @@ public class StuWatchEditActivity extends TakePhotoActivity {
 
         edtNickName.setText(currentStudent.getStu_name());
         edtNickName.setSelection(currentStudent.getStu_name().length());
-        edtPhone.setText(currentStudent.getCard_phone());
+        edtPhone.setText(currentStudent.getWatch_phone());
         setTxtRelationVal();
     }
 
@@ -260,7 +257,7 @@ public class StuWatchEditActivity extends TakePhotoActivity {
     private void updateStuInfo() {
 
         currentStudent.setStu_name(edtNickName.getText().toString().trim());
-        currentStudent.setCard_phone(edtPhone.getText().toString().trim());
+        currentStudent.setWatch_phone(edtPhone.getText().toString().trim());
 
         MyVolleyHttpParamsEntity entity = new MyVolleyHttpParamsEntity()
                 .addParam("user_id", XPTApplication.getInstance().getCurrentUserId())
@@ -268,7 +265,7 @@ public class StuWatchEditActivity extends TakePhotoActivity {
                 .addParam("relation", currentStudent.getRelation())
                 .addParam("stu_name", currentStudent.getStu_name())
                 .addParam("sex", currentStudent.getSex())
-                .addParam("stu_phone", currentStudent.getCard_phone());
+                .addParam("stu_phone", currentStudent.getWatch_phone());
 
         if (compressPath != null) {
             List<String> imgs = new ArrayList<>();

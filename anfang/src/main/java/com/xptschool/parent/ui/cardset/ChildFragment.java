@@ -135,7 +135,7 @@ public class ChildFragment extends BaseFragment implements View.OnClickListener 
         String relation = WatchUtil.getRelationByKey(currentStudent.getRelation());
         txtRelation.setText("我是TA的" + relation);
 
-        txtCardPhone.setText(currentStudent.getCard_phone());
+        txtCardPhone.setText(currentStudent.getWatch_phone());
     }
 
     @Override

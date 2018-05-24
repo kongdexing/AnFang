@@ -280,10 +280,6 @@ public class FenceDrawActivity extends BaseActivity implements BDLocationListene
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.Track_addStudentFence,
                 new MyVolleyHttpParamsEntity()
                         .addParam("stu_id", student.getStu_id())
-                        .addParam("s_id", student.getS_id())
-                        .addParam("a_id", student.getA_id())
-                        .addParam("g_id", student.getG_id())
-                        .addParam("c_id", student.getC_id())
                         .addParam("point", point)
                         .addParam("name", name)
                         .addParam("token", CommonUtil.encryptToken(HttpAction.Track_addStudentFence)), new MyVolleyRequestListener() {
