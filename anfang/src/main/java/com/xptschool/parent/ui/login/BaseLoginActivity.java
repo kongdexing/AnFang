@@ -35,46 +35,6 @@ public class BaseLoginActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
-    public void login(final String account, final String password, DefaultRetryPolicy retryPolicy) {
-        //login
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.LOGIN,
-                new MyVolleyHttpParamsEntity()
-                        .addParam("username", account)
-                        .addParam("password", password), retryPolicy,
-                new MyVolleyRequestListener() {
-                    @Override
-                    public void onStart() {
-                        onStartLogin();
-                    }
-
-                    @Override
-                    public void onResponse(VolleyHttpResult httpResult) {
-                        super.onResponse(httpResult);
-                        switch (httpResult.getStatus()) {
-                            case HttpAction.SUCCESS:
-                                SharedPreferencesUtil.saveData(BaseLoginActivity.this, SharedPreferencesUtil.KEY_PWD, password);
-                                try {
-                                    CommonUtil.analyseLoginData(httpResult, account);
-                                } catch (Exception ex) {
-                                    Log.i(TAG, "onResponse: exception " + ex.getMessage());
-                                    onLoginFailed("登录失败");
-                                    return;
-                                }
-                                onLoginSuccess(account);
-                                break;
-                            default:
-                                onLoginFailed(httpResult.getInfo());
-                                break;
-                        }
-                    }
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        onLoginFailed("登录失败");
-                    }
-                });
-    }
-
     protected void onStartLogin() {
         SharedPreferencesUtil.saveData(this, SharedPreferencesUtil.KEY_PWD, "");
     }

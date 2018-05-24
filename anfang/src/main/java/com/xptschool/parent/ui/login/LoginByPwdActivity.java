@@ -44,6 +44,7 @@ import com.xptschool.parent.model.BeanTeacher;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.push.DeviceHelper;
 import com.xptschool.parent.ui.main.MainActivity;
+import com.xptschool.parent.ui.register.RegisterActivity;
 import com.xptschool.parent.util.ToastUtils;
 
 import java.util.Map;
@@ -51,7 +52,10 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.ConnectionCallbacks, HuaweiApiClient.OnConnectionFailedListener {
+/**
+ * 用户名密码登录
+ */
+public class LoginByPwdActivity extends BaseLoginActivity implements HuaweiApiClient.ConnectionCallbacks, HuaweiApiClient.OnConnectionFailedListener {
 
     @BindView(R.id.llParent)
     LinearLayout llParent;
@@ -59,6 +63,8 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
     EditText edtAccount;
     @BindView(R.id.edtCode)
     EditText edtCode;
+    @BindView(R.id.imgToggle)
+    ImageView imgToggle;
     @BindView(R.id.btnLogin)
     TextView btnLogin;
     @BindView(R.id.progress)
@@ -115,10 +121,10 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
                     });
                 }
             } else if (origin != null && origin.equals("1")) {
-//                String userName = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_NAME, "");
-//                edtAccount.setText(userName);
-//                String userPwd = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_PWD, "");
-//                edtCode.setText(userPwd);
+                String userName = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_NAME, "");
+                edtAccount.setText(userName);
+                String userPwd = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_PWD, "");
+                edtCode.setText(userPwd);
 //                login(userName, CommonUtil.md5(userPwd), null);
             }
         }
@@ -193,17 +199,17 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
 
                 if (!TextUtils.isEmpty(verifyCode)) {
                     btnLogin.setEnabled(false);
-                    CommonUtil.hideInputWindow(LoginActivity.this, btnLogin);
-                   LoginHelper.getInstance().login(account, verifyCode, null);
+                    CommonUtil.hideInputWindow(LoginByPwdActivity.this, btnLogin);
+//                    login(account, verifyCode, null);
                 } else {
-                    Toast.makeText(LoginActivity.this, R.string.hint_code, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginByPwdActivity.this, R.string.hint_code, Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.txtForgetPWD:
                 startActivityForResult(new Intent(this, CheckUserActivity.class), 2);
                 break;
             case R.id.txtRegister:
-//                startActivityForResult(new Intent(this, RegisterActivity.class), 1);
+                startActivityForResult(new Intent(this, RegisterActivity.class), 1);
 //                startActivity(new Intent(this, SelSchoolActivity.class));
                 break;
             case R.id.imgQQ:
@@ -213,6 +219,25 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
                 UMShareAPI.get(this).getPlatformInfo(this, SHARE_MEDIA.WEIXIN, umAuthListener);
                 break;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+
+        //跳转至注册 && 注册成功
+        if ((requestCode == 1 && resultCode == 1) || (requestCode == 2 && resultCode == 1)) {
+            String userName = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_NAME, "");
+            edtAccount.setText(userName);
+            edtAccount.setSelection(edtAccount.getText().length());
+            String pwd = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_PWD, "");
+            edtCode.setText(pwd);
+            //自动登录
+//            login(userName, CommonUtil.md5(pwd), null);
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     Handler handler = new Handler() {
@@ -254,12 +279,12 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
                         super.onResponse(volleyHttpResult);
                         hideProgress();
                         if (volleyHttpResult.getStatus() == HttpAction.SUCCESS) {
-                            SharedPreferencesUtil.saveData(LoginActivity.this, SharedPreferencesUtil.KEY_LAST_REGISTER, System.currentTimeMillis());
+                            SharedPreferencesUtil.saveData(LoginByPwdActivity.this, SharedPreferencesUtil.KEY_LAST_REGISTER, System.currentTimeMillis());
                             //开始60秒倒计时
                             lastTime = 60;
                             handler.sendEmptyMessageDelayed(START_TIMER_DELAY, 1000);
                         }
-                        ToastUtils.showToast(LoginActivity.this, volleyHttpResult.getInfo());
+                        ToastUtils.showToast(LoginByPwdActivity.this, volleyHttpResult.getInfo());
                     }
 
                     @Override
@@ -279,7 +304,7 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
         @Override
         public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
             Log.i(TAG, "onComplete: successed");
-            ToastUtils.showToast(LoginActivity.this, "onComplete: successed");
+            ToastUtils.showToast(LoginByPwdActivity.this, "onComplete: successed");
 
             for (String key : map.keySet()) {
                 Log.i(TAG, "onComplete: key-" + key + "  val-" + map.get(key));
@@ -290,7 +315,7 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
         @Override
         public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
             Log.i(TAG, "onError: " + throwable.getMessage());
-            ToastUtils.showToast(LoginActivity.this, "fail" + throwable.getMessage());
+            ToastUtils.showToast(LoginByPwdActivity.this, "fail" + throwable.getMessage());
         }
 
         @Override
@@ -299,27 +324,17 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
         }
     };
 
-    LoginListener loginListener = new LoginListener() {
-        @Override
-        public void onLoginStart() {
-            if (progress != null)
-                progress.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        public void onLoginSuccess() {
-
-        }
-
-        @Override
-        public void onLoginFail() {
-
-        }
-    };
-
     @Override
     protected void onStartLogin() {
         super.onStartLogin();
+        if (progress != null)
+            progress.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void onLoginSuccess(String newAccount) {
+        super.onLoginSuccess(newAccount);
+
         String easeLoginName = "";
 
         try {
@@ -391,12 +406,6 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
                 }
             }
         });
-    }
-
-    @Override
-    protected void onLoginSuccess(String newAccount) {
-        super.onLoginSuccess(newAccount);
-
     }
 
     private void EMLoginSuccess() {
