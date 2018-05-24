@@ -181,7 +181,6 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateVisible" />
-        <activity android:name=".ui.register.RegisterActivity" />
 
         <!-- 设置 -->
         <activity android:name=".ui.setting.SettingActivity" />

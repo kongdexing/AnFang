@@ -171,7 +171,7 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
         });
     }
 
-    @OnClick({R.id.imgDel, R.id.btnSend, R.id.btnLogin, R.id.imgQQ, R.id.imgWeChat, R.id.txtForgetPWD, R.id.txtRegister})
+    @OnClick({R.id.imgDel, R.id.btnSend, R.id.btnLogin, R.id.imgQQ, R.id.imgWeChat})
     void buttonOnclick(View view) {
         switch (view.getId()) {
             case R.id.imgDel:
@@ -181,8 +181,8 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
             case R.id.btnSend:
                 //发送验证码
                 String phone = edtAccount.getText().toString();
-                if (phone.isEmpty()||CommonUtil.isPhone(phone)){
-                    ToastUtils.showToast(this,R.string.input_error_phone);
+                if (phone.isEmpty() || !CommonUtil.isPhone(phone)) {
+                    ToastUtils.showToast(this, R.string.input_error_phone);
                     break;
                 }
                 getVerifyCode(phone);
@@ -194,17 +194,10 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
                 if (!TextUtils.isEmpty(verifyCode)) {
                     btnLogin.setEnabled(false);
                     CommonUtil.hideInputWindow(LoginActivity.this, btnLogin);
-                   LoginHelper.getInstance().login(account, verifyCode, null);
+                    LoginHelper.getInstance().login(account, verifyCode, null);
                 } else {
                     Toast.makeText(LoginActivity.this, R.string.hint_code, Toast.LENGTH_SHORT).show();
                 }
-                break;
-            case R.id.txtForgetPWD:
-                startActivityForResult(new Intent(this, CheckUserActivity.class), 2);
-                break;
-            case R.id.txtRegister:
-//                startActivityForResult(new Intent(this, RegisterActivity.class), 1);
-//                startActivity(new Intent(this, SelSchoolActivity.class));
                 break;
             case R.id.imgQQ:
                 UMShareAPI.get(this).getPlatformInfo(this, SHARE_MEDIA.QQ, umAuthListener);

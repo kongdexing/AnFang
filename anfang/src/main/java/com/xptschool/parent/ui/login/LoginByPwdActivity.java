@@ -44,7 +44,6 @@ import com.xptschool.parent.model.BeanTeacher;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.push.DeviceHelper;
 import com.xptschool.parent.ui.main.MainActivity;
-import com.xptschool.parent.ui.register.RegisterActivity;
 import com.xptschool.parent.util.ToastUtils;
 
 import java.util.Map;
@@ -209,7 +208,7 @@ public class LoginByPwdActivity extends BaseLoginActivity implements HuaweiApiCl
                 startActivityForResult(new Intent(this, CheckUserActivity.class), 2);
                 break;
             case R.id.txtRegister:
-                startActivityForResult(new Intent(this, RegisterActivity.class), 1);
+//                startActivityForResult(new Intent(this, RegisterActivity.class), 1);
 //                startActivity(new Intent(this, SelSchoolActivity.class));
                 break;
             case R.id.imgQQ:
