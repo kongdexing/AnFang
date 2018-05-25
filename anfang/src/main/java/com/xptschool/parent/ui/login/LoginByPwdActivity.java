@@ -84,7 +84,6 @@ public class LoginByPwdActivity extends BaseLoginActivity implements HuaweiApiCl
             public void onClick(View view) {
                 Intent intent = new Intent(LoginByPwdActivity.this, CheckSMSCodeActivity.class);
                 //获取已保存的用户找回密码的手机号
-                intent.putExtra("phone", SharedPreferencesUtil.getData(LoginByPwdActivity.this, SharedPreferencesUtil.KEY_PHONE_FORGET_PWD, "").toString());
                 startActivityForResult(intent, 2);
             }
         });
@@ -180,12 +179,14 @@ public class LoginByPwdActivity extends BaseLoginActivity implements HuaweiApiCl
     @Override
     public void onLoginStart() {
         super.onLoginStart();
+        showProgress("正在登录");
         enableView(false);
     }
 
     @Override
     public void onLoginSuccess() {
         super.onLoginSuccess();
+        hideProgress();
         enableView(true);
         setResult(1);
         finish();
@@ -194,12 +195,13 @@ public class LoginByPwdActivity extends BaseLoginActivity implements HuaweiApiCl
     @Override
     public void onLoginFail(String msg) {
         super.onLoginFail(msg);
+        hideProgress();
         enableView(true);
     }
 
     private void enableView(boolean enable) {
-        if (progress != null)
-            progress.setVisibility(enable ? View.VISIBLE : View.INVISIBLE);
+//        if (progress != null)
+//            progress.setVisibility(enable ? View.VISIBLE : View.INVISIBLE);
         if (btnLogin != null) {
             btnLogin.setEnabled(enable);
         }

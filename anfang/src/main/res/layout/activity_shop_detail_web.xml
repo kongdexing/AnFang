@@ -16,7 +16,7 @@
                 android:id="@+id/goods_img"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_200"
-                android:scaleType="fitXY" />
+                android:scaleType="fitCenter" />
 
             <TextView
                 android:id="@+id/txtDes"

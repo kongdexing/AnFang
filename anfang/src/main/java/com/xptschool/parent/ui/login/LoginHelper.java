@@ -24,6 +24,10 @@ public class LoginHelper {
         return instance;
     }
 
+    public void bindPhone(final MyVolleyHttpParamsEntity entity, final LoginListener listener) {
+        login(HttpAction.BindPhone, entity, listener);
+    }
+
     /**
      * 账号密码登录
      *
@@ -31,8 +35,12 @@ public class LoginHelper {
      * @param listener
      */
     public void login(final MyVolleyHttpParamsEntity entity, final LoginListener listener) {
+        login(HttpAction.LOGIN, entity, listener);
+    }
+
+    private void login(String httpUrl, final MyVolleyHttpParamsEntity entity, final LoginListener listener) {
         //login
-        VolleyHttpService.getInstance().sendPostRequest(HttpAction.LOGIN,
+        VolleyHttpService.getInstance().sendPostRequest(httpUrl,
                 entity, new MyVolleyRequestListener() {
                     @Override
                     public void onStart() {

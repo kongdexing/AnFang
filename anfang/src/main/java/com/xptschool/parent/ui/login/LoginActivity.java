@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
+import com.google.gson.Gson;
 import com.huawei.hms.api.ConnectionResult;
 import com.huawei.hms.api.HuaweiApiClient;
 import com.huawei.hms.support.api.push.HuaweiPush;
@@ -34,11 +35,14 @@ import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.HttpErrorMsg;
 import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.push.DeviceHelper;
 import com.xptschool.parent.ui.main.MainActivity;
 import com.xptschool.parent.util.ToastUtils;
+
+import org.json.JSONObject;
 
 import java.util.Map;
 
@@ -65,6 +69,7 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
     HuaweiApiClient client;
     String origin = null;
 
+    String authJsonMap = "";
     private int lastTime = 0;
     private final int START_TIMER_DELAY = 1;
 
@@ -213,9 +218,10 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
         if (requestCode == 1 && resultCode == 1) {
             //使用登录密码登录成功
             finish();
+        } else if (requestCode == 2 && resultCode == 1) {
+            //授权后绑定手机号
+            finish();
         }
-
-
     }
 
     Handler handler = new Handler() {
@@ -257,7 +263,6 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
                         super.onResponse(volleyHttpResult);
                         hideProgress();
                         if (volleyHttpResult.getStatus() == HttpAction.SUCCESS) {
-                            SharedPreferencesUtil.saveData(LoginActivity.this, SharedPreferencesUtil.KEY_LAST_REGISTER, System.currentTimeMillis());
                             //开始60秒倒计时
                             lastTime = 60;
                             handler.sendEmptyMessageDelayed(START_TIMER_DELAY, 1000);
@@ -274,6 +279,7 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
     }
 
     UMAuthListener umAuthListener = new UMAuthListener() {
+
         @Override
         public void onStart(SHARE_MEDIA share_media) {
             Log.i(TAG, "onStart: " + share_media.getName());
@@ -281,16 +287,26 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
 
         @Override
         public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
-            Log.i(TAG, "onComplete: successed");
-            ToastUtils.showToast(LoginActivity.this, "onComplete: successed");
-
-            for (String key : map.keySet()) {
-                Log.i(TAG, "onComplete: key-" + key + "  val-" + map.get(key));
+            Log.i(TAG, "onComplete: successed " + share_media.getName());
+            if (share_media.equals(SHARE_MEDIA.QQ)) {
+                map.put("platform", "qq");
+            } else if (share_media.equals(SHARE_MEDIA.WEIXIN)) {
+                map.put("platform", "wx");
             }
-            //授权成功，登录
-//            LoginHelper.getInstance().login(new MyVolleyHttpParamsEntity()
-//                    .addParam("openId", map.get("openid"))
-//                    .addParam("platform_name", verifyCode), this);
+
+            authJsonMap = new Gson().toJson(map);
+            Log.i(TAG, "onComplete jsonMap : " + authJsonMap);
+
+            try {
+                JSONObject object = new JSONObject(authJsonMap);
+                //授权成功，登录
+                LoginHelper.getInstance().login(new MyVolleyHttpParamsEntity()
+                        .addParam("openId", object.getString("openid"))
+                        .addParam("platform_name", object.getString("platform")), LoginActivity.this);
+            } catch (Exception ex) {
+                ToastUtils.showToast(LoginActivity.this, "获取授权信息失败");
+            }
+
         }
 
         @Override
@@ -309,11 +325,13 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
     public void onLoginStart() {
         super.onLoginStart();
         enableView(false);
+        showProgress("正在登录");
     }
 
     @Override
     public void onLoginSuccess() {
         super.onLoginSuccess();
+        hideProgress();
         enableView(true);
         finish();
     }
@@ -321,24 +339,23 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
     @Override
     public void onLoginFail(String msg) {
         super.onLoginFail(msg);
-        ToastUtils.showToast(this, msg);
+        hideProgress();
+        if (HttpErrorMsg.ERROR_CODE_BINDPHONE.equals(msg)) {
+            //第三方登录后，需要绑定手机号
+            Intent intent = new Intent(this, BindPhoneActivity.class);
+            intent.putExtra("auth_data", authJsonMap);
+            startActivityForResult(intent, 2);
+        } else {
+            ToastUtils.showToast(this, msg);
+        }
         enableView(true);
     }
 
     private void enableView(boolean enable) {
-        if (progress != null)
-            progress.setVisibility(enable ? View.INVISIBLE : View.VISIBLE);
+//        if (progress != null)
+//            progress.setVisibility(enable ? View.INVISIBLE : View.VISIBLE);
         if (btnLogin != null) {
             btnLogin.setEnabled(enable);
-        }
-    }
-
-    private void finishActivity() {
-        if (origin != null && origin.equals("1")) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        } else {
-            finish();
         }
     }
 

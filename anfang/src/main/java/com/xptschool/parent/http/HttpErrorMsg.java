@@ -10,5 +10,6 @@ public class HttpErrorMsg {
     public static String ERROR_JSON = "数据解析错误";
     public static String ERROR_RESPONSE = "访问失败";
 
+    public static String ERROR_CODE_BINDPHONE = "1001";
 
 }

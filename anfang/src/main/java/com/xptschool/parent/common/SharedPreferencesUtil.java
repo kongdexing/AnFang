@@ -18,12 +18,6 @@ public class SharedPreferencesUtil {
     public static final String KEY_PROVINCE = "local_province"; //省
     public static final String KEY_CITY = "local_city";         //市
 
-    public static final String KEY_LAST_REGISTER = "last_register_time";
-
-    //保存最后一次用于找回密码时输入的手机号
-    public static final String KEY_PHONE_FORGET_PWD = "last_phone_for_forget_pwd";
-
-
     /**
      * 保存数据到文件
      *

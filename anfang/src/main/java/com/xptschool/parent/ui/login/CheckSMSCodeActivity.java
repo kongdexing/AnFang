@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +14,6 @@ import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.xptschool.parent.R;
 import com.xptschool.parent.common.CommonUtil;
-import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
@@ -34,7 +31,6 @@ public class CheckSMSCodeActivity extends BaseActivity {
     EditText edtCode;
     @BindView(R.id.btnSend)
     Button btnSend;
-    private String spSMSKey = "";
     private final int START_TIMER_DELAY = 0;
     private int lastTime = 0;
 
@@ -44,30 +40,11 @@ public class CheckSMSCodeActivity extends BaseActivity {
         setContentView(R.layout.activity_check_smscode);
         setTitle(R.string.title_forgot_password);
 
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            //1.获取上次获取验证码使用的手机号
-            //2.已此手机号为键，获取该手机号可重新获取验证码的剩余时间
-            spSMSKey = bundle.getString("phone");
-        } else {
-            spSMSKey = "";
-        }
         initView();
 
     }
 
     private void initView() {
-        //获取可继续发送短信的剩余时间
-        long spVal = (long) SharedPreferencesUtil.getData(this, spSMSKey, 0l);
-
-        long diff = (System.currentTimeMillis() - spVal) / 1000;
-        int maxTime = 60;
-        if (maxTime >= diff) {
-            btnSend.setEnabled(false);
-            lastTime = (int) (maxTime - diff);
-            btnSend.setText(lastTime + "秒后重发");
-            handler.sendEmptyMessageDelayed(START_TIMER_DELAY, 1000);
-        }
 
     }
 
@@ -119,11 +96,6 @@ public class CheckSMSCodeActivity extends BaseActivity {
     }
 
     private void getVerifyCode(String phone) {
-        if (spSMSKey.isEmpty()) {
-            spSMSKey = phone;
-        }
-
-        SharedPreferencesUtil.saveData(this, SharedPreferencesUtil.KEY_PHONE_FORGET_PWD, phone);
 
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.FORGOT_PWD_STEP2,
                 new MyVolleyHttpParamsEntity()
@@ -139,7 +111,6 @@ public class CheckSMSCodeActivity extends BaseActivity {
                         super.onResponse(volleyHttpResult);
                         if (volleyHttpResult.getStatus() == HttpAction.SUCCESS) {
                             edtPhone.setEnabled(false);
-                            SharedPreferencesUtil.saveData(CheckSMSCodeActivity.this, spSMSKey, System.currentTimeMillis());
                             //开始60秒倒计时
                             lastTime = 60;
                             handler.sendEmptyMessageDelayed(START_TIMER_DELAY, 1000);

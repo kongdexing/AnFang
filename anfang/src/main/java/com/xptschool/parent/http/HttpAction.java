@@ -17,6 +17,8 @@ public class HttpAction {
     /*登录*/
     public static String LOGIN = HEAD + "Login/login2_2_2";
 
+    public static String BindPhone = HEAD + "Login/bindPhone";
+
     /*修改用户信息*/
     public static String UserInfo = HEAD + "UserInfo/updateUserInfo";
 
