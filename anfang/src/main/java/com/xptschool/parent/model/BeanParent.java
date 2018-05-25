@@ -21,15 +21,12 @@ public class BeanParent {
     private String qq_openid;
     private String wx_openid;
     private String head_portrait;
-    private String api_id;
-    private String security_key;
     private String token;
 
-    @Generated(hash = 2039025773)
+    @Generated(hash = 45804087)
     public BeanParent(String name, String username, String password,
             String user_id, String sex, String phone, String qq_openid,
-            String wx_openid, String head_portrait, String api_id,
-            String security_key, String token) {
+            String wx_openid, String head_portrait, String token) {
         this.name = name;
         this.username = username;
         this.password = password;
@@ -39,8 +36,6 @@ public class BeanParent {
         this.qq_openid = qq_openid;
         this.wx_openid = wx_openid;
         this.head_portrait = head_portrait;
-        this.api_id = api_id;
-        this.security_key = security_key;
         this.token = token;
     }
 
@@ -112,22 +107,6 @@ public class BeanParent {
         this.wx_openid = wx_openid;
     }
 
-    public String getApi_id() {
-        return api_id;
-    }
-
-    public void setApi_id(String api_id) {
-        this.api_id = api_id;
-    }
-
-    public String getSecurity_key() {
-        return security_key;
-    }
-
-    public void setSecurity_key(String security_key) {
-        this.security_key = security_key;
-    }
-
     public String getToken() {
         return token;
     }
@@ -137,6 +116,10 @@ public class BeanParent {
     }
 
     public String getHead_portrait() {
+        if (head_portrait.startsWith("http")) {
+            return head_portrait;
+        }
+
         if (!head_portrait.contains(BuildConfig.SERVICE_URL)) {
             head_portrait = BuildConfig.SERVICE_URL + head_portrait;
         }

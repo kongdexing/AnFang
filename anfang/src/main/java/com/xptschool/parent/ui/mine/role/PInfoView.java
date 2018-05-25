@@ -34,14 +34,8 @@ public class PInfoView extends BaseUserView {
     @BindView(R.id.txtPhone)
     TextView txtPhone;
 
-    @BindView(R.id.txtEmail)
-    TextView txtEmail;
-
-    @BindView(R.id.txtHomeAdd)
-    TextView txtHomeAdd;
-
-    @BindView(R.id.txtHomeTel)
-    TextView txtHomeTel;
+    @BindView(R.id.txtSex)
+    TextView txtSex;
 
     public PInfoView(Context context) {
         this(context, null);
@@ -59,16 +53,17 @@ public class PInfoView extends BaseUserView {
 
         BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
         if (parent != null) {
-            Log.i(TAG, "initData: "+parent.getHead_portrait());
+            Log.i(TAG, "initData: " + parent.getHead_portrait());
             ImageLoader.getInstance().displayImage(parent.getHead_portrait(),
                     new ImageViewAware(imgHead), CommonUtil.getDefaultUserImageLoaderOption());
 
             txtMineName.setText(parent.getName());
             txtPhone.setText(parent.getPhone());
+            txtSex.setText(parent.getSex() == "1" ? "男" : "女");
         }
     }
 
-    @OnClick({R.id.rlName, R.id.rlMail, R.id.rlSex, R.id.rlMinePhoto, R.id.rlMinePhone, R.id.rlAddressPhone})
+    @OnClick({R.id.rlName, R.id.rlMail, R.id.rlSex, R.id.rlMinePhoto})
     void viewClick(View view) {
         BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
         if (parent == null) {
@@ -101,21 +96,6 @@ public class PInfoView extends BaseUserView {
                 } catch (Exception ex) {
                     Toast.makeText(mContext, R.string.toast_startcall_error, Toast.LENGTH_SHORT).show();
                 }
-                break;
-            case R.id.rlAddressPhone:
-//                if (parent.getFamily_tel().isEmpty()) {
-//                    Toast.makeText(mContext, R.string.toast_phone_empty, Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                try {
-//                    Intent intent = new Intent();
-//                    intent.setAction(Intent.ACTION_DIAL);
-//                    intent.setData(Uri.parse("tel:" + parent.getFamily_tel()));
-//                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                    mContext.startActivity(intent);
-//                } catch (Exception ex) {
-//                    Toast.makeText(mContext, R.string.toast_startcall_error, Toast.LENGTH_SHORT).show();
-//                }
                 break;
         }
     }

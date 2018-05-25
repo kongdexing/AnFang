@@ -31,9 +31,7 @@ public class BeanParentDao extends AbstractDao<BeanParent, Void> {
         public final static Property Qq_openid = new Property(6, String.class, "qq_openid", false, "QQ_OPENID");
         public final static Property Wx_openid = new Property(7, String.class, "wx_openid", false, "WX_OPENID");
         public final static Property Head_portrait = new Property(8, String.class, "head_portrait", false, "HEAD_PORTRAIT");
-        public final static Property Api_id = new Property(9, String.class, "api_id", false, "API_ID");
-        public final static Property Security_key = new Property(10, String.class, "security_key", false, "SECURITY_KEY");
-        public final static Property Token = new Property(11, String.class, "token", false, "TOKEN");
+        public final static Property Token = new Property(9, String.class, "token", false, "TOKEN");
     };
 
 
@@ -58,9 +56,7 @@ public class BeanParentDao extends AbstractDao<BeanParent, Void> {
                 "\"QQ_OPENID\" TEXT," + // 6: qq_openid
                 "\"WX_OPENID\" TEXT," + // 7: wx_openid
                 "\"HEAD_PORTRAIT\" TEXT," + // 8: head_portrait
-                "\"API_ID\" TEXT," + // 9: api_id
-                "\"SECURITY_KEY\" TEXT," + // 10: security_key
-                "\"TOKEN\" TEXT);"); // 11: token
+                "\"TOKEN\" TEXT);"); // 9: token
     }
 
     /** Drops the underlying database table. */
@@ -118,19 +114,9 @@ public class BeanParentDao extends AbstractDao<BeanParent, Void> {
             stmt.bindString(9, head_portrait);
         }
  
-        String api_id = entity.getApi_id();
-        if (api_id != null) {
-            stmt.bindString(10, api_id);
-        }
- 
-        String security_key = entity.getSecurity_key();
-        if (security_key != null) {
-            stmt.bindString(11, security_key);
-        }
- 
         String token = entity.getToken();
         if (token != null) {
-            stmt.bindString(12, token);
+            stmt.bindString(10, token);
         }
     }
 
@@ -183,19 +169,9 @@ public class BeanParentDao extends AbstractDao<BeanParent, Void> {
             stmt.bindString(9, head_portrait);
         }
  
-        String api_id = entity.getApi_id();
-        if (api_id != null) {
-            stmt.bindString(10, api_id);
-        }
- 
-        String security_key = entity.getSecurity_key();
-        if (security_key != null) {
-            stmt.bindString(11, security_key);
-        }
- 
         String token = entity.getToken();
         if (token != null) {
-            stmt.bindString(12, token);
+            stmt.bindString(10, token);
         }
     }
 
@@ -216,9 +192,7 @@ public class BeanParentDao extends AbstractDao<BeanParent, Void> {
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // qq_openid
             cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // wx_openid
             cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // head_portrait
-            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // api_id
-            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // security_key
-            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11) // token
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9) // token
         );
         return entity;
     }
@@ -234,9 +208,7 @@ public class BeanParentDao extends AbstractDao<BeanParent, Void> {
         entity.setQq_openid(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
         entity.setWx_openid(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
         entity.setHead_portrait(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
-        entity.setApi_id(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
-        entity.setSecurity_key(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
-        entity.setToken(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
+        entity.setToken(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
      }
     
     @Override

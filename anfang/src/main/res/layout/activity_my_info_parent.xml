@@ -116,78 +116,78 @@
                 <View style="@style/line1" />
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/rlMail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/mine_item_normal"
-                android:clickable="true">
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/rlMail"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@drawable/mine_item_normal"-->
+                <!--android:clickable="true">-->
 
-                <TextView
-                    style="@style/mineText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="邮箱：" />
+                <!--<TextView-->
+                    <!--style="@style/mineText"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:text="邮箱：" />-->
 
-                <TextView
-                    android:id="@+id/txtEmail"
-                    style="@style/mineVal"
-                    android:text="无" />
+                <!--<TextView-->
+                    <!--android:id="@+id/txtEmail"-->
+                    <!--style="@style/mineVal"-->
+                    <!--android:text="无" />-->
 
-                <View style="@style/line1" />
-            </RelativeLayout>
+                <!--<View style="@style/line1" />-->
+            <!--</RelativeLayout>-->
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/mine_item_normal"
-                android:clickable="true">
+            <!--<RelativeLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@drawable/mine_item_normal"-->
+                <!--android:clickable="true">-->
 
-                <TextView
-                    style="@style/mineText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="家庭住址：" />
+                <!--<TextView-->
+                    <!--style="@style/mineText"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:text="家庭住址：" />-->
 
-                <TextView
-                    android:id="@+id/txtHomeAdd"
-                    style="@style/mineVal"
-                    android:text="无" />
+                <!--<TextView-->
+                    <!--android:id="@+id/txtHomeAdd"-->
+                    <!--style="@style/mineVal"-->
+                    <!--android:text="无" />-->
 
-                <View style="@style/line1" />
-            </RelativeLayout>
+                <!--<View style="@style/line1" />-->
+            <!--</RelativeLayout>-->
 
-            <RelativeLayout
-                android:id="@+id/rlAddressPhone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/mine_item_selector"
-                android:clickable="true">
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/rlAddressPhone"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@drawable/mine_item_selector"-->
+                <!--android:clickable="true">-->
 
-                <TextView
-                    android:id="@+id/txtSchoolTitle"
-                    style="@style/mineText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="家庭电话：" />
+                <!--<TextView-->
+                    <!--android:id="@+id/txtSchoolTitle"-->
+                    <!--style="@style/mineText"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerVertical="true"-->
+                    <!--android:text="家庭电话：" />-->
 
-                <TextView
-                    android:id="@+id/txtHomeTel"
-                    style="@style/mineVal"
-                    android:layout_alignParentRight="false"
-                    android:layout_marginRight="@dimen/dp_20"
-                    android:layout_toLeftOf="@+id/img_addtel"
-                    android:text="无" />
+                <!--<TextView-->
+                    <!--android:id="@+id/txtHomeTel"-->
+                    <!--style="@style/mineVal"-->
+                    <!--android:layout_alignParentRight="false"-->
+                    <!--android:layout_marginRight="@dimen/dp_20"-->
+                    <!--android:layout_toLeftOf="@+id/img_addtel"-->
+                    <!--android:text="无" />-->
 
-                <ImageView
-                    android:id="@+id/img_addtel"
-                    style="@style/arrow_right" />
+                <!--<ImageView-->
+                    <!--android:id="@+id/img_addtel"-->
+                    <!--style="@style/arrow_right" />-->
 
-                <View style="@style/line1" />
-            </RelativeLayout>
+                <!--<View style="@style/line1" />-->
+            <!--</RelativeLayout>-->
 
         </LinearLayout>
     </ScrollView>

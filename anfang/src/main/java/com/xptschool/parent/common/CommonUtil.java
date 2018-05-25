@@ -34,6 +34,7 @@ import com.xptschool.parent.model.BeanParent;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.GreenDaoHelper;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -261,7 +262,7 @@ public class CommonUtil {
     public static void analyseLoginData(VolleyHttpResult httpResult) throws JSONException {
         JSONObject jsonData = new JSONObject(httpResult.getData().toString());
         CommonUtil.initParentInfoByHttpResult(jsonData.getJSONObject("login").toString());
-        CommonUtil.initBeanStudentByHttpResult(jsonData.getJSONArray("devices").toString());
+        CommonUtil.initBeanStudentByHttpResult(jsonData.get("devices").toString());
     }
 
     public static void changeUserStatus(String newAccount) {
