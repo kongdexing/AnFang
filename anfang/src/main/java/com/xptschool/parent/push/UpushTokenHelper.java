@@ -6,13 +6,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.common.VolleyHttpResult;
 import com.android.volley.common.VolleyHttpService;
 import com.android.volley.common.VolleyRequestListener;
-import com.xptschool.parent.XPTApplication;
-import com.xptschool.parent.common.SharedPreferencesUtil;
-import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.model.BeanParent;
-import com.xptschool.parent.model.BeanTeacher;
 import com.xptschool.parent.model.GreenDaoHelper;
 
 /**

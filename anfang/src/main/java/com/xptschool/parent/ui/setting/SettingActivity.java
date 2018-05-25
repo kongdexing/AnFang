@@ -37,6 +37,8 @@ public class SettingActivity extends BaseActivity {
     @BindView(R.id.txtVersion)
     TextView txtVersion;
 
+    @BindView(R.id.rlExit)
+    RelativeLayout rlExit;
     @BindView(R.id.rlChangePwd)
     RelativeLayout rlChangePwd;
 
@@ -56,8 +58,10 @@ public class SettingActivity extends BaseActivity {
 
         if (XPTApplication.getInstance().isLoggedIn()) {
             rlChangePwd.setVisibility(View.VISIBLE);
+            rlExit.setVisibility(View.VISIBLE);
         } else {
             rlChangePwd.setVisibility(View.GONE);
+            rlExit.setVisibility(View.GONE);
         }
     }
 

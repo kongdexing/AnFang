@@ -9,8 +9,6 @@ import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.ui.album.TakePhotoActivity;
 import com.xptschool.parent.ui.mine.role.BaseUserView;
 import com.xptschool.parent.ui.mine.role.PInfoView;
-import com.xptschool.parent.ui.mine.role.TInfoView;
-import com.xptschool.parent.ui.mine.role.VisitorInfoView;
 
 public class MyInfoActivity extends TakePhotoActivity {
 

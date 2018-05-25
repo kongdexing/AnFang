@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
-import android.support.annotation.NonNull;
 import android.telephony.TelephonyManager;
 import android.text.InputFilter;
 import android.text.Spanned;
@@ -31,13 +30,10 @@ import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.http.HttpAction;
-import com.xptschool.parent.model.BeanClass;
 import com.xptschool.parent.model.BeanParent;
 import com.xptschool.parent.model.BeanStudent;
-import com.xptschool.parent.model.BeanTeacher;
 import com.xptschool.parent.model.GreenDaoHelper;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 

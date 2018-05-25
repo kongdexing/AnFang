@@ -2,26 +2,11 @@ package com.xptschool.parent.ui.login;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.VolleyError;
-import com.android.volley.common.VolleyHttpResult;
-import com.android.volley.common.VolleyHttpService;
-import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
-import com.xptschool.parent.XPTApplication;
-import com.xptschool.parent.common.CommonUtil;
-import com.xptschool.parent.common.SharedPreferencesUtil;
-import com.xptschool.parent.common.UserType;
-import com.xptschool.parent.http.HttpAction;
-import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
-import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanParent;
-import com.xptschool.parent.model.BeanTeacher;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.main.BaseActivity;
-import com.xptschool.parent.util.ToastUtils;
 
 import butterknife.ButterKnife;
 

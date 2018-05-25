@@ -4,7 +4,6 @@ import android.util.Log;
 
 import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.model.BeanParent;
-import com.xptschool.parent.model.BeanTeacher;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.push.UpushTokenHelper;
 import com.xptschool.parent.ui.watch.chat.ServerManager;

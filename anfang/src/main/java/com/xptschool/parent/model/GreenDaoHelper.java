@@ -24,7 +24,6 @@ public class GreenDaoHelper {
     private static DaoMaster writeDaoMaster, readDaoMaster;
     private static DaoSession writeDaoSession, readDaoSession;
     private BeanParent currentParent;
-    private BeanTeacher currentTeacher;
 
     private GreenDaoHelper() {
     }
@@ -62,7 +61,7 @@ public class GreenDaoHelper {
     public void clearData() {
         if (writeDaoSession != null) {
             writeDaoSession.getBeanParentDao().deleteAll();
-            writeDaoSession.getBeanTeacherDao().deleteAll();
+            currentParent = null;
             writeDaoSession.getContactSchoolDao().deleteAll();
             writeDaoSession.getContactTeacherDao().deleteAll();
             writeDaoSession.getBeanStudentDao().deleteAll();
@@ -80,20 +79,6 @@ public class GreenDaoHelper {
         if (writeDaoSession != null) {
             writeDaoSession.getBeanParentDao().deleteAll();
             writeDaoSession.getBeanParentDao().insert(parent);
-        }
-    }
-
-    /**
-     * 教师：删除后再插入
-     */
-    public void insertTeacher(BeanTeacher teacher) {
-        currentTeacher = teacher;
-        SharedPreferencesUtil.saveData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_UID, currentTeacher.getU_id());
-        Log.i(TAG, "insertTeacher: " + teacher.getLoginName());
-
-        if (writeDaoSession != null) {
-            writeDaoSession.getBeanTeacherDao().deleteAll();
-            writeDaoSession.getBeanTeacherDao().insert(teacher);
         }
     }
 
@@ -145,18 +130,6 @@ public class GreenDaoHelper {
             }
         }
         return currentParent;
-    }
-
-    public BeanTeacher getCurrentTeacher() {
-        if (currentTeacher == null) {
-            if (readDaoSession != null) {
-                List<BeanTeacher> listTeachers = readDaoSession.getBeanTeacherDao().loadAll();
-                if (listTeachers.size() > 0) {
-                    currentTeacher = listTeachers.get(0);
-                }
-            }
-        }
-        return currentTeacher;
     }
 
     public List<BeanStudent> getStudents() {
