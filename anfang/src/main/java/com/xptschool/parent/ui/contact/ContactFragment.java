@@ -22,16 +22,13 @@ import com.android.widget.groupexpandable.WrapperExpandableListAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xptschool.parent.R;
-import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.bean.ContactType;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.UserHelper;
-import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanStudent;
-import com.xptschool.parent.model.ContactParent;
 import com.xptschool.parent.model.ContactSchool;
 import com.xptschool.parent.model.ContactStudent;
 import com.xptschool.parent.model.ContactTeacher;
@@ -87,7 +84,7 @@ public class ContactFragment extends BaseFragment {
         swipe_refresh_widget.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getContacts();
+//                getContacts();
             }
         });
 
@@ -128,44 +125,31 @@ public class ContactFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-        UserType type = XPTApplication.getInstance().getCurrent_user_type();
+//        UserType type = XPTApplication.getInstance().getCurrent_user_type();
+//
+//        Log.i(TAG, "initData: " + type);
+//        //判断老师家长
+//        if (UserType.PARENT.equals(type)) {
+//            ArrayList<Object> listTeacher = (ArrayList) GreenDaoHelper.getInstance().getContactTeacher();
+//            ArrayList<Object> listSchool = (ArrayList) GreenDaoHelper.getInstance().getSchoolInfo();
+//
+//            if (listTeacher.size() > 0 || listSchool.size() > 0) {
+//                setContactForParent(listTeacher, listSchool);
+//            }
+//        } else if (UserType.TEACHER.equals(type)) {
+//            ArrayList<Object> listTeacher = (ArrayList) GreenDaoHelper.getInstance().getContactTeacher();
+//            ArrayList<Object> listStudent = (ArrayList) GreenDaoHelper.getInstance().getContactStudent();
+//            for (int i = 0; i < listStudent.size(); i++) {
+//                ContactStudent student = (ContactStudent) listStudent.get(i);
+//                List<ContactParent> parents = GreenDaoHelper.getInstance().getStudentParentBySId(student.getStu_id());
+//                student.setParent(parents);
+//            }
+//
+//            if (listTeacher.size() > 0 || listStudent.size() > 0) {
+//                setContactForTeacher(listTeacher, listStudent);
+//            }
+//        }
 
-        Log.i(TAG, "initData: " + type);
-        //判断老师家长
-        if (UserType.PARENT.equals(type)) {
-            ArrayList<Object> listTeacher = (ArrayList) GreenDaoHelper.getInstance().getContactTeacher();
-            ArrayList<Object> listSchool = (ArrayList) GreenDaoHelper.getInstance().getSchoolInfo();
-
-            if (listTeacher.size() > 0 || listSchool.size() > 0) {
-                setContactForParent(listTeacher, listSchool);
-            }
-        } else if (UserType.TEACHER.equals(type)) {
-            ArrayList<Object> listTeacher = (ArrayList) GreenDaoHelper.getInstance().getContactTeacher();
-            ArrayList<Object> listStudent = (ArrayList) GreenDaoHelper.getInstance().getContactStudent();
-            for (int i = 0; i < listStudent.size(); i++) {
-                ContactStudent student = (ContactStudent) listStudent.get(i);
-                List<ContactParent> parents = GreenDaoHelper.getInstance().getStudentParentBySId(student.getStu_id());
-                student.setParent(parents);
-            }
-
-            if (listTeacher.size() > 0 || listStudent.size() > 0) {
-                setContactForTeacher(listTeacher, listStudent);
-            }
-        }
-
-        getContacts();
-    }
-
-    private void getContacts() {
-        ll_contacts.setVisibility(View.VISIBLE);
-        //判断老师家长
-        if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-            getContactForParent();
-        } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-            getContactForTeacher();
-        } else {
-            ll_contacts.setVisibility(View.GONE);
-        }
     }
 
     private void getContactForParent() {

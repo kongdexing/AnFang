@@ -29,7 +29,7 @@ import butterknife.ButterKnife;
  * Created by dexing on 2017/6/5.
  * No1
  */
-public class BaseLoginActivity extends BaseActivity implements LoginListener{
+public class BaseLoginActivity extends BaseActivity implements LoginListener {
     public String TAG = "";
 
     @Override
@@ -52,47 +52,38 @@ public class BaseLoginActivity extends BaseActivity implements LoginListener{
     @Override
     public void onLoginSuccess() {
         //登录环信
-        String easeLoginName = "";
-        EMClient.getInstance().login(easeLoginName, CommonUtil.md5("SHUHAIXINXI" + easeLoginName), new EMCallBack() {
-
-            @Override
-            public void onSuccess() {
-                EMLoginSuccess();
-                Log.i(TAG, "登录聊天服务器成功！");
-//                ToastUtils.showToast(LoginActivity.this, "登录聊天服务器成功");
-            }
-
-            @Override
-            public void onProgress(int progress, String status) {
-
-            }
-
-            @Override
-            public void onError(final int code, final String error) {
-                EMLoginSuccess();
-
-                if (code == 200) {
-                    //USER_ALREADY_LOGIN
-
-                    Log.i(TAG, "USER_ALREADY_LOGIN！");
-//                    ToastUtils.showToast(LoginActivity.this, "USER_ALREADY_LOGIN");
-                } else {
-                    runOnUiThread(new Runnable() {
-                        public void run() {
-                            Log.i(TAG, "EMUI onError: " + code + " error:" + error);
-//                            if (progress != null)
-//                                progress.setVisibility(View.INVISIBLE);
-//                            btnLogin.setEnabled(true);
-//                            //清除数据
-//                            SharedPreferencesUtil.clearUserInfo(LoginActivity.this);
+//        String easeLoginName = "";
+//        EMClient.getInstance().login(easeLoginName, CommonUtil.md5("SHUHAIXINXI" + easeLoginName), new EMCallBack() {
 //
-//                            GreenDaoHelper.getInstance().clearData();
-//                            ToastUtils.showToast(getApplicationContext(), "login failed");
-                        }
-                    });
-                }
-            }
-        });
+//            @Override
+//            public void onSuccess() {
+//                EMLoginSuccess();
+//                Log.i(TAG, "登录聊天服务器成功！");
+////                ToastUtils.showToast(LoginActivity.this, "登录聊天服务器成功");
+//            }
+//
+//            @Override
+//            public void onProgress(int progress, String status) {
+//
+//            }
+//
+//            @Override
+//            public void onError(final int code, final String error) {
+//                EMLoginSuccess();
+//
+//                if (code == 200) {
+//                    //USER_ALREADY_LOGIN
+//                    Log.i(TAG, "USER_ALREADY_LOGIN！");
+////                    ToastUtils.showToast(LoginActivity.this, "USER_ALREADY_LOGIN");
+//                } else {
+//                    runOnUiThread(new Runnable() {
+//                        public void run() {
+//                            Log.i(TAG, "EMUI onError: " + code + " error:" + error);
+//                        }
+//                    });
+//                }
+//            }
+//        });
 
     }
 
@@ -107,25 +98,15 @@ public class BaseLoginActivity extends BaseActivity implements LoginListener{
 
         String nickName = "";
         try {
-            if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-                BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
-                if (parent != null) {
-                    nickName = parent.getParent_name();
-                }
-            } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-                BeanTeacher teacher = GreenDaoHelper.getInstance().getCurrentTeacher();
-                if (teacher != null) {
-                    nickName = teacher.getName();
-                }
+            BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
+            if (parent != null) {
+                nickName = parent.getName();
             }
         } catch (Exception ex) {
             Log.i(TAG, "onLoginSuccess: login ease error " + ex.getMessage());
         }
 
         EMClient.getInstance().updateCurrentUserNick(nickName);
-
-//        EMClient.getInstance().chatManager().getAllConversations();
-
         runOnUiThread(new Runnable() {
             public void run() {
 //                finishActivity();

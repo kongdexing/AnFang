@@ -68,7 +68,7 @@ public class VisitorInfoView extends BaseUserView {
         txtPhone.setText(currentUser.getPhone());
         txtSex.setText("1".equals(currentUser.getSex()) ? "男" : "女");
         txtMail.setText(currentUser.getEmail());
-        txtRole.setText(XPTApplication.getInstance().getCurrent_user_type().getRoleName());
+//        txtRole.setText(XPTApplication.getInstance().getCurrent_user_type().getRoleName());
 
         ImageLoader.getInstance().displayImage(currentUser.getHead_portrait(),
                 new ImageViewAware(imgHead), CommonUtil.getDefaultUserImageLoaderOption());

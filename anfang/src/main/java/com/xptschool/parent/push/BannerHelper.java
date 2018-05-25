@@ -37,7 +37,7 @@ public class BannerHelper {
         BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
         String phone = "";
         if (parent != null) {
-            phone = parent.getParent_phone();
+            phone = parent.getPhone();
         }
         int random_int = (int) (Math.random() * 100);
 

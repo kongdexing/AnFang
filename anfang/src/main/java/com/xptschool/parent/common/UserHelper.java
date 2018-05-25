@@ -46,17 +46,9 @@ public class UserHelper {
      * 登录成功，切换账号信息
      */
     public void changeAccount() {
-        UserType type = XPTApplication.getInstance().getCurrent_user_type();
-        if (UserType.PARENT.equals(type)) {
-            BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
-            if (parent != null) {
-                UpushTokenHelper.exitAccount(parent.getLogin_name(), parent.getU_id());
-            }
-        } else if (UserType.TEACHER.equals(type)) {
-            BeanTeacher teacher = GreenDaoHelper.getInstance().getCurrentTeacher();
-            if (teacher != null) {
-                UpushTokenHelper.exitAccount(teacher.getLogin_name(), teacher.getU_id());
-            }
+        BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
+        if (parent != null) {
+            UpushTokenHelper.exitAccount(parent.getUsername(), parent.getUser_id());
         }
         userLoginSuccess();
     }
@@ -76,7 +68,6 @@ public class UserHelper {
     public void userExit() {
         ServerManager.getInstance().stopService(XPTApplication.getInstance());
         Log.i(TAG, "userExit: listener size " + listeners.size());
-        XPTApplication.getInstance().setCurrent_user_type("");
         for (int i = 0; i < listeners.size(); i++) {
             listeners.get(i).onUserExit();
         }

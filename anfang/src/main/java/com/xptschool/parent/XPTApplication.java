@@ -35,7 +35,6 @@ import com.umeng.socialize.UMShareAPI;
 import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.common.SharedPreferencesUtil;
-import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.ease.EaseHelper;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.GreenDaoHelper;
@@ -268,55 +267,12 @@ public class XPTApplication extends Application {
         return cacheDir.getAbsolutePath();
     }
 
-    public UserType getCurrent_user_type() {
-        if (!isLoggedIn()) {
-            return null;
-        }
-        String current_user_type = SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_TYPE, "").toString();
-        return UserType.getUserTypeByStr(current_user_type);
-    }
-
     public String getCurrentUserId() {
-        String userId = "";
-        UserType type = getCurrent_user_type();
-        if (UserType.PARENT.equals(type)) {
-            userId = GreenDaoHelper.getInstance().getCurrentParent().getU_id();
-        } else if (UserType.TEACHER.equals(type)) {
-            userId = GreenDaoHelper.getInstance().getCurrentTeacher().getU_id();
-        } else {
-            userId = SharedPreferencesUtil.getData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_UID, "").toString();
-        }
-        return userId;
+        return SharedPreferencesUtil.getData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_UID, "").toString();
     }
 
     public String getCurrentUserName() {
-        String userName = "";
-        UserType type = getCurrent_user_type();
-        if (UserType.PARENT.equals(type)) {
-            userName = GreenDaoHelper.getInstance().getCurrentParent().getParent_name();
-        } else if (UserType.TEACHER.equals(type)) {
-            userName = GreenDaoHelper.getInstance().getCurrentTeacher().getName();
-        } else {
-            userName = SharedPreferencesUtil.getData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_USER_NAME, "").toString();
-        }
-        return userName;
-    }
-
-    public String getCurrentRefId() {
-        String refId = "10847";
-        UserType type = getCurrent_user_type();
-        if (UserType.PARENT.equals(type)) {
-            refId = GreenDaoHelper.getInstance().getCurrentParent().getRef_id();
-        } else if (UserType.TEACHER.equals(type)) {
-            refId = GreenDaoHelper.getInstance().getCurrentTeacher().getRef_id();
-        } else {
-            refId = SharedPreferencesUtil.getData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_REF_ID, "").toString();
-        }
-        return refId;
-    }
-
-    public void setCurrent_user_type(String current_user_type) {
-        SharedPreferencesUtil.saveData(this, SharedPreferencesUtil.KEY_USER_TYPE, current_user_type);
+        return SharedPreferencesUtil.getData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_USER_NAME, "").toString();
     }
 
     public boolean hasWatch() {

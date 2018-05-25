@@ -34,17 +34,14 @@ import com.xptschool.parent.bean.HomeItem;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.common.UserHelper;
-import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 import com.xptschool.parent.model.BeanBanner;
 import com.xptschool.parent.model.BeanHomeCfg;
-import com.xptschool.parent.model.BeanTeacher;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.push.BannerHelper;
 import com.xptschool.parent.ui.alarm.AlarmActivity;
-import com.xptschool.parent.ui.alarm.AlarmTActivity;
 import com.xptschool.parent.ui.fence.FenceListActivity;
 import com.xptschool.parent.ui.fragment.home.HomeHappyGroupView;
 import com.xptschool.parent.ui.fragment.home.HomePropertyView;
@@ -58,7 +55,6 @@ import com.xptschool.parent.ui.watch.ShutDownActivity;
 import com.xptschool.parent.ui.watch.WalkActivity;
 import com.xptschool.parent.util.HomeUtil;
 import com.xptschool.parent.util.NetWorkUsefulUtils;
-import com.xptschool.parent.util.ParentUtil;
 import com.xptschool.parent.view.autoviewpager.GlideImageLoader;
 
 import org.json.JSONObject;
@@ -280,23 +276,6 @@ public class HomeFragment extends BaseFragment {
     public void getBanners() {
         Log.i(TAG, "getBanners: ");
         String s_id = "";
-        if (XPTApplication.getInstance().isLoggedIn()) {
-            //家长登录
-            if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-                s_id = ParentUtil.getStuSid();
-            } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-                //老师登录
-                BeanTeacher teacher = GreenDaoHelper.getInstance().getCurrentTeacher();
-                if (teacher != null) {
-                    s_id = teacher.getS_id();
-                }
-            }
-        }
-
-        if (s_id == null) {
-            s_id = "";
-        }
-
         String cityName = SharedPreferencesUtil.getData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_CITY, "").toString();
 
         String url = HttpAction.HOME_Banner;
@@ -432,16 +411,7 @@ public class HomeFragment extends BaseFragment {
 
     private void initSchoolItem() {
         Log.i(TAG, "initSchoolItem: ");
-        //判断角色
-        UserType type = XPTApplication.getInstance().getCurrent_user_type();
-
-        boolean isParent = true;
-        if (UserType.TEACHER.equals(type)) {
-            isParent = false;
-        }
-
         List<HomeItem> homeItems = new ArrayList<HomeItem>();
-
         //监听设置
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_moniter)
@@ -468,7 +438,7 @@ public class HomeFragment extends BaseFragment {
         homeItems.add(new HomeItem()
                 .setIconId(R.drawable.home_alarm)
                 .setTitle(XPTApplication.getInstance().getResources().getString(R.string.home_alarm))
-                .setIntent(new Intent(activity, isParent ? AlarmActivity.class : AlarmTActivity.class)));
+                .setIntent(new Intent(activity, AlarmActivity.class)));
 
         //电子围栏
         homeItems.add(new HomeItem()

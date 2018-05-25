@@ -32,11 +32,9 @@ import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.model.BeanClass;
-import com.xptschool.parent.model.BeanCourse;
 import com.xptschool.parent.model.BeanParent;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.BeanTeacher;
-import com.xptschool.parent.model.BeanUser;
 import com.xptschool.parent.model.GreenDaoHelper;
 
 import org.json.JSONArray;
@@ -239,17 +237,6 @@ public class CommonUtil {
 
     public static String encryptToken(String action) {
         String security_key = "";
-
-        try {
-            if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-                security_key = GreenDaoHelper.getInstance().getCurrentParent().getSecurity_key();
-            } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-                security_key = GreenDaoHelper.getInstance().getCurrentTeacher().getSecurity_key();
-            }
-        } catch (Exception ex) {
-            Log.i(TAG, "encryptToken: currentUser is null");
-        }
-
         String encrypt = action.replace(HttpAction.Index, "")
                 + getCurrentDate().replaceAll("-", "")
                 + security_key;
@@ -275,35 +262,10 @@ public class CommonUtil {
         return hex.toString();
     }
 
-    public static void analyseLoginData(VolleyHttpResult httpResult, String account) throws JSONException {
+    public static void analyseLoginData(VolleyHttpResult httpResult) throws JSONException {
         JSONObject jsonData = new JSONObject(httpResult.getData().toString());
-        JSONObject jsonLogin = new JSONObject(jsonData.getJSONObject("login").toString());
-        String type = jsonLogin.getString("type");
-
-        CommonUtil.initBeanStudentByHttpResult(jsonData.getJSONArray("stuData").toString());
-
-        if (type.equals(UserType.PARENT.toString())) {
-            CommonUtil.initParentInfoByHttpResult(jsonData.getJSONObject("login").toString(), account);
-        } else if (type.equals(UserType.TEACHER.toString())) {
-            CommonUtil.getBeanClassesByHttpResult(jsonData.getJSONArray("class").toString());
-            CommonUtil.getBeanCoursesByHttpResult(jsonData.getJSONArray("course").toString());
-            CommonUtil.initTeacherInfoByHttpResult(jsonData.getJSONObject("login").toString(), account);
-        } else {
-            //会员|第三方公司|代理商|区县代理商
-            BeanUser user = new BeanUser();
-            user.setUser_id(jsonLogin.getString("user_id"));
-            user.setType(jsonLogin.getString("type"));
-            user.setName(jsonLogin.getString("name"));
-            user.setUsername(jsonLogin.getString("username"));
-            user.setSex(jsonLogin.getString("sex"));
-            user.setPhone(jsonLogin.getString("phone"));
-            user.setEmail(jsonLogin.getString("email"));
-            user.setHead_portrait(jsonLogin.getString("head_portrait"));
-            user.setRef_id(jsonLogin.getString("ref_id"));
-
-            GreenDaoHelper.getInstance().insertUser(user);
-        }
-        XPTApplication.getInstance().setCurrent_user_type(type);
+        CommonUtil.initParentInfoByHttpResult(jsonData.getJSONObject("login").toString());
+        CommonUtil.initBeanStudentByHttpResult(jsonData.getJSONArray("devices").toString());
     }
 
     public static void changeUserStatus(String newAccount) {
@@ -338,88 +300,21 @@ public class CommonUtil {
      * 登录成功后解析家长信息
      *
      * @param httpResult
-     * @param login_name
      * @throws JSONException
      */
-    private static void initParentInfoByHttpResult(String httpResult, String login_name) throws JSONException {
+    private static void initParentInfoByHttpResult(String httpResult) throws JSONException {
         JSONObject jsonLogin = new JSONObject(httpResult);
         Gson gson = new Gson();
         BeanParent parent = gson.fromJson(jsonLogin.toString(), BeanParent.class);
-        parent.setLoginName(login_name);
-
         GreenDaoHelper.getInstance().insertParent(parent);
 
         EaseLocalUser localUser = new EaseLocalUser();
-        localUser.setUserId(parent.getU_id());
-        localUser.setNickName(parent.getParent_name());
+        localUser.setUserId(parent.getUser_id());
+        localUser.setNickName(parent.getUsername());
         localUser.setSex(parent.getSex());
         localUser.setType(UserType.PARENT.toString());
         EaseLocalUserHelper.getInstance().insertOrReplaceLocalUser(localUser);
     }
-
-    /**
-     * 登录成功后解析教师信息
-     *
-     * @param httpResult
-     * @param login_name
-     * @throws
-     */
-    private static void initTeacherInfoByHttpResult(String httpResult, String login_name) throws JSONException {
-        JSONObject jsonLogin = new JSONObject(httpResult);
-        Gson gson = new Gson();
-        BeanTeacher teacher = gson.fromJson(jsonLogin.toString(), BeanTeacher.class);
-        teacher.setLogin_name(login_name);
-        GreenDaoHelper.getInstance().insertTeacher(teacher);
-
-        EaseLocalUser localUser = new EaseLocalUser();
-        localUser.setUserId(teacher.getU_id());
-        localUser.setNickName(teacher.getName());
-        localUser.setSex(teacher.getSex());
-        localUser.setType(UserType.TEACHER.toString());
-        EaseLocalUserHelper.getInstance().insertOrReplaceLocalUser(localUser);
-    }
-
-    /**
-     * 教师登录后解析班级
-     *
-     * @param httpResult
-     * @return
-     * @throws JSONException
-     */
-    @NonNull
-    private static List<BeanClass> getBeanClassesByHttpResult(String httpResult) throws JSONException {
-        List<BeanClass> listClass = new ArrayList<BeanClass>();
-        Gson gson = new Gson();
-        listClass = gson.fromJson(httpResult.toString(), new TypeToken<List<BeanClass>>() {
-        }.getType());
-        GreenDaoHelper.getInstance().insertClass(listClass);
-        return listClass;
-    }
-
-    /**
-     * 教师登录后解析执教班级
-     *
-     * @param httpResult
-     * @return
-     * @throws JSONException
-     */
-    @NonNull
-    private static List<BeanCourse> getBeanCoursesByHttpResult(String httpResult) throws JSONException {
-        List<BeanCourse> listCourse = new ArrayList<BeanCourse>();
-        JSONArray jsonArray = new JSONArray(httpResult);
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject json = jsonArray.getJSONObject(i);
-            BeanCourse course = new BeanCourse();
-            course.setId(json.getString("id"));
-            course.setName(json.getString("name"));
-            course.setG_id(json.getString("g_id"));
-            course.setG_name(json.getString("g_name"));
-            listCourse.add(course);
-        }
-        GreenDaoHelper.getInstance().insertCourse(listCourse);
-        return listCourse;
-    }
-
 
     /**
      * 获取当前屏幕旋转角度

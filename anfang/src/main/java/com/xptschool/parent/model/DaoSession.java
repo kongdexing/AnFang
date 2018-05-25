@@ -11,7 +11,6 @@ import org.greenrobot.greendao.internal.DaoConfig;
 import com.xptschool.parent.model.BeanBanner;
 import com.xptschool.parent.model.BeanClass;
 import com.xptschool.parent.model.BeanCounty;
-import com.xptschool.parent.model.BeanCourse;
 import com.xptschool.parent.model.BeanHomeCfg;
 import com.xptschool.parent.model.BeanLearningModule;
 import com.xptschool.parent.model.BeanMyClass;
@@ -28,7 +27,6 @@ import com.xptschool.parent.model.ContactTeacher;
 import com.xptschool.parent.model.BeanBannerDao;
 import com.xptschool.parent.model.BeanClassDao;
 import com.xptschool.parent.model.BeanCountyDao;
-import com.xptschool.parent.model.BeanCourseDao;
 import com.xptschool.parent.model.BeanHomeCfgDao;
 import com.xptschool.parent.model.BeanLearningModuleDao;
 import com.xptschool.parent.model.BeanMyClassDao;
@@ -54,7 +52,6 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig beanBannerDaoConfig;
     private final DaoConfig beanClassDaoConfig;
     private final DaoConfig beanCountyDaoConfig;
-    private final DaoConfig beanCourseDaoConfig;
     private final DaoConfig beanHomeCfgDaoConfig;
     private final DaoConfig beanLearningModuleDaoConfig;
     private final DaoConfig beanMyClassDaoConfig;
@@ -71,7 +68,6 @@ public class DaoSession extends AbstractDaoSession {
     private final BeanBannerDao beanBannerDao;
     private final BeanClassDao beanClassDao;
     private final BeanCountyDao beanCountyDao;
-    private final BeanCourseDao beanCourseDao;
     private final BeanHomeCfgDao beanHomeCfgDao;
     private final BeanLearningModuleDao beanLearningModuleDao;
     private final BeanMyClassDao beanMyClassDao;
@@ -97,9 +93,6 @@ public class DaoSession extends AbstractDaoSession {
 
         beanCountyDaoConfig = daoConfigMap.get(BeanCountyDao.class).clone();
         beanCountyDaoConfig.initIdentityScope(type);
-
-        beanCourseDaoConfig = daoConfigMap.get(BeanCourseDao.class).clone();
-        beanCourseDaoConfig.initIdentityScope(type);
 
         beanHomeCfgDaoConfig = daoConfigMap.get(BeanHomeCfgDao.class).clone();
         beanHomeCfgDaoConfig.initIdentityScope(type);
@@ -140,7 +133,6 @@ public class DaoSession extends AbstractDaoSession {
         beanBannerDao = new BeanBannerDao(beanBannerDaoConfig, this);
         beanClassDao = new BeanClassDao(beanClassDaoConfig, this);
         beanCountyDao = new BeanCountyDao(beanCountyDaoConfig, this);
-        beanCourseDao = new BeanCourseDao(beanCourseDaoConfig, this);
         beanHomeCfgDao = new BeanHomeCfgDao(beanHomeCfgDaoConfig, this);
         beanLearningModuleDao = new BeanLearningModuleDao(beanLearningModuleDaoConfig, this);
         beanMyClassDao = new BeanMyClassDao(beanMyClassDaoConfig, this);
@@ -157,7 +149,6 @@ public class DaoSession extends AbstractDaoSession {
         registerDao(BeanBanner.class, beanBannerDao);
         registerDao(BeanClass.class, beanClassDao);
         registerDao(BeanCounty.class, beanCountyDao);
-        registerDao(BeanCourse.class, beanCourseDao);
         registerDao(BeanHomeCfg.class, beanHomeCfgDao);
         registerDao(BeanLearningModule.class, beanLearningModuleDao);
         registerDao(BeanMyClass.class, beanMyClassDao);
@@ -176,7 +167,6 @@ public class DaoSession extends AbstractDaoSession {
         beanBannerDaoConfig.getIdentityScope().clear();
         beanClassDaoConfig.getIdentityScope().clear();
         beanCountyDaoConfig.getIdentityScope().clear();
-        beanCourseDaoConfig.getIdentityScope().clear();
         beanHomeCfgDaoConfig.getIdentityScope().clear();
         beanLearningModuleDaoConfig.getIdentityScope().clear();
         beanMyClassDaoConfig.getIdentityScope().clear();
@@ -201,10 +191,6 @@ public class DaoSession extends AbstractDaoSession {
 
     public BeanCountyDao getBeanCountyDao() {
         return beanCountyDao;
-    }
-
-    public BeanCourseDao getBeanCourseDao() {
-        return beanCourseDao;
     }
 
     public BeanHomeCfgDao getBeanHomeCfgDao() {

@@ -46,7 +46,7 @@ public class AndroidInterface {
     @JavascriptInterface
     public void callAndroid(final String option1, final String option2) {
 
-        if (XPTApplication.getInstance().getCurrent_user_type() == null) {
+        if (XPTApplication.getInstance().getCurrentUserId().isEmpty()) {
             ToastUtils.showToast(context, "请登录后进行操作");
             return;
         }

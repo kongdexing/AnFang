@@ -21,9 +21,7 @@ import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.NewsType;
 import com.xptschool.parent.common.UserHelper;
-import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.ui.chat.ConversationListFragment;
-import com.xptschool.parent.ui.contact.ContactFragment;
 import com.xptschool.parent.ui.main.MainActivity;
 import com.xptschool.parent.ui.message.Msg3NewsFragment;
 
@@ -138,63 +136,22 @@ public class MessageFragment extends BaseFragment {
 
     private void initFragmentTip() {
         Fragment[] fragments = null;
-        UserType type = XPTApplication.getInstance().getCurrent_user_type();
-        if (UserType.PARENT.equals(type) || UserType.TEACHER.equals(type)) {
-            Log.i(TAG, "initFragmentTip: parent teacher");
-            //显示通讯录，通知
-            //改变头部 view
-            txt1.setText(R.string.msg_contacts);
-            txt2.setText(R.string.msg_notify);
+        //普通会员，显示新品推荐，致富财经
+        txt1.setText(R.string.msg_newproj);
+        txt2.setText(R.string.msg_fortune);
 
-            tipImgs[0][0] = R.drawable.icon_msg_contracts_def;
-            tipImgs[0][1] = R.drawable.icon_msg_contracts_pre;
-            tipImgs[1][0] = R.drawable.icon_msg_notice_def;
-            tipImgs[1][1] = R.drawable.icon_msg_notice_pre;
+        tipImgs[0][0] = R.drawable.icon_msg_xptj_def;
+        tipImgs[0][1] = R.drawable.icon_msg_xptj_pre;
+        tipImgs[1][0] = R.drawable.icon_msg_cf_def;
+        tipImgs[1][1] = R.drawable.icon_msg_cf_pre;
 
-            conversationListFragment = new ConversationListFragment();
-            ContactFragment contactListFragment = new ContactFragment();
-            fragments = new Fragment[]{contactListFragment, conversationListFragment};
+        Msg3NewsFragment msg1 = new Msg3NewsFragment();
+        msg1.setNewsType(NewsType.RECOMMEND.toString());
 
-        } else if (UserType.COMPANY.equals(type) || UserType.PROXY.equals(type) ||
-                UserType.CITYPROXY.equals(type)) {
-            Log.i(TAG, "initFragmentTip: company proxy cityproxy");
-            //公告，通知
-            txt1.setText(R.string.msg_callboard);
-            txt2.setText(R.string.msg_notify);
+        Msg3NewsFragment msg2 = new Msg3NewsFragment();
+        msg2.setNewsType(NewsType.RICH_NEWS.toString());
 
-            tipImgs[0][0] = R.drawable.icon_msg_gg_def;
-            tipImgs[0][1] = R.drawable.icon_msg_gg_pre;
-            tipImgs[1][0] = R.drawable.icon_msg_notice_def;
-            tipImgs[1][1] = R.drawable.icon_msg_notice_pre;
-
-            Msg3NewsFragment msg1 = new Msg3NewsFragment();
-            msg1.setNewsType(NewsType.NOTICE.toString());
-
-            Msg3NewsFragment msg2 = new Msg3NewsFragment();
-            msg2.setNewsType(NewsType.PUSH_MSG.toString());
-            fragments = new Fragment[]{msg1, msg2};
-
-        } else {
-            Log.i(TAG, "initFragmentTip: 推荐，财经");
-            //普通会员，显示新品推荐，致富财经
-            txt1.setText(R.string.msg_newproj);
-            txt2.setText(R.string.msg_fortune);
-
-            tipImgs[0][0] = R.drawable.icon_msg_xptj_def;
-            tipImgs[0][1] = R.drawable.icon_msg_xptj_pre;
-            tipImgs[1][0] = R.drawable.icon_msg_cf_def;
-            tipImgs[1][1] = R.drawable.icon_msg_cf_pre;
-
-            Msg3NewsFragment msg1 = new Msg3NewsFragment();
-            msg1.setNewsType(NewsType.RECOMMEND.toString());
-
-            Msg3NewsFragment msg2 = new Msg3NewsFragment();
-            msg2.setNewsType(NewsType.RICH_NEWS.toString());
-
-            fragments = new Fragment[]{msg1, msg2};
-
-        }
-
+        fragments = new Fragment[]{msg1, msg2};
         if (adapter == null) {
             adapter = new MyPagerAdapter(((MainActivity) mContext).getSupportFragmentManager());
             viewPager.setAdapter(adapter);

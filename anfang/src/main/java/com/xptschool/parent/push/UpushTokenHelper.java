@@ -34,27 +34,10 @@ public class UpushTokenHelper {
         }
         String user_name = "";
         String user_id = "";
-        UserType type = XPTApplication.getInstance().getCurrent_user_type();
-        //家长登录
-        if (UserType.PARENT.equals(type)) {
-            BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
-            if (parent != null) {
-                user_name = parent.getLoginName();
-                user_id = parent.getU_id();
-            }
-        } else if (UserType.TEACHER.equals(type)) {
-            //老师登录
-            BeanTeacher teacher = GreenDaoHelper.getInstance().getCurrentTeacher();
-            if (teacher != null) {
-                user_name = teacher.getLoginName();
-                user_id = teacher.getU_id();
-            }
-        } else {
-//            return;
-            user_id = SharedPreferencesUtil.getData(XPTApplication.getInstance(),SharedPreferencesUtil.KEY_UID,"").toString();
-            user_name = SharedPreferencesUtil.getData(XPTApplication.getInstance(),SharedPreferencesUtil.KEY_USER_NAME,"").toString();
-
-
+        BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
+        if (parent != null) {
+            user_name = parent.getName();
+            user_id = parent.getUser_id();
         }
 
         VolleyHttpService.getInstance().sendPostRequest(HttpAction.HOOK_PUSH_TOKEN,
@@ -65,7 +48,6 @@ public class UpushTokenHelper {
                         .addParam("device_token", device_token)
                         .addParam("mobile_model", android.os.Build.MODEL)
                         .addParam("push_name", push)
-                        .addParam("user_type", type.toString())
                 , new VolleyRequestListener() {
                     @Override
                     public void onStart() {

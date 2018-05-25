@@ -191,7 +191,6 @@
         <activity android:name=".ui.setting.SettingActivity" />
         <activity android:name=".ui.setting.ChangePwdActivity" />
         <activity android:name=".ui.setting.AboutActivity" />
-        <activity android:name=".ui.setting.QRCodeActivity" />
         <activity
             android:name=".ui.mine.MyInfoActivity"
             android:theme="@style/AppTheme" />

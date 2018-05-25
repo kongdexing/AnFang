@@ -12,85 +12,72 @@ import org.greenrobot.greendao.annotation.Generated;
 @Entity
 public class BeanParent {
 
-    private String login_name;
-    private String sp_id;
-    private String parent_name;
-    private String parent_phone;
-    private String relation;
+    private String name;
+    private String username;
+    private String password;
+    private String user_id;
     private String sex;
-    private String u_id;
-    private String ref_id;  //上级 ID（用于邀请会员）
-    private String address;
-    private String work_unit;
-    private String family_tel;
-    private String email;
+    private String phone;
+    private String qq_openid;
+    private String wx_openid;
+    private String head_portrait;
     private String api_id;
     private String security_key;
-    private String head_portrait;
+    private String token;
 
-    @Generated(hash = 1570598412)
-    public BeanParent(String login_name, String sp_id, String parent_name, String parent_phone, String relation,
-            String sex, String u_id, String ref_id, String address, String work_unit, String family_tel,
-            String email, String api_id, String security_key, String head_portrait) {
-        this.login_name = login_name;
-        this.sp_id = sp_id;
-        this.parent_name = parent_name;
-        this.parent_phone = parent_phone;
-        this.relation = relation;
+    @Generated(hash = 2039025773)
+    public BeanParent(String name, String username, String password,
+            String user_id, String sex, String phone, String qq_openid,
+            String wx_openid, String head_portrait, String api_id,
+            String security_key, String token) {
+        this.name = name;
+        this.username = username;
+        this.password = password;
+        this.user_id = user_id;
         this.sex = sex;
-        this.u_id = u_id;
-        this.ref_id = ref_id;
-        this.address = address;
-        this.work_unit = work_unit;
-        this.family_tel = family_tel;
-        this.email = email;
+        this.phone = phone;
+        this.qq_openid = qq_openid;
+        this.wx_openid = wx_openid;
+        this.head_portrait = head_portrait;
         this.api_id = api_id;
         this.security_key = security_key;
-        this.head_portrait = head_portrait;
+        this.token = token;
     }
 
     @Generated(hash = 111404833)
     public BeanParent() {
     }
 
-    public String getLoginName() {
-        return login_name;
+    public String getName() {
+        return name;
     }
 
-    public void setLoginName(String login_name) {
-        this.login_name = login_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getSp_id() {
-        return sp_id;
+    public String getUsername() {
+        return username;
     }
 
-    public void setSp_id(String sp_id) {
-        this.sp_id = sp_id;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getParent_name() {
-        return parent_name;
+    public String getPassword() {
+        return password;
     }
 
-    public void setParent_name(String parent_name) {
-        this.parent_name = parent_name;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getParent_phone() {
-        return parent_phone;
+    public String getUser_id() {
+        return user_id;
     }
 
-    public void setParent_phone(String parent_phone) {
-        this.parent_phone = parent_phone;
-    }
-
-    public String getRelation() {
-        return relation;
-    }
-
-    public void setRelation(String relation) {
-        this.relation = relation;
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 
     public String getSex() {
@@ -101,52 +88,28 @@ public class BeanParent {
         this.sex = sex;
     }
 
-    public String getRef_id() {
-        return ref_id;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setRef_id(String ref_id) {
-        this.ref_id = ref_id;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getU_id() {
-        return u_id;
+    public String getQq_openid() {
+        return qq_openid;
     }
 
-    public void setU_id(String u_id) {
-        this.u_id = u_id;
+    public void setQq_openid(String qq_openid) {
+        this.qq_openid = qq_openid;
     }
 
-    public String getAddress() {
-        return address;
+    public String getWx_openid() {
+        return wx_openid;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getWork_unit() {
-        return work_unit;
-    }
-
-    public void setWork_unit(String work_unit) {
-        this.work_unit = work_unit;
-    }
-
-    public String getFamily_tel() {
-        return family_tel;
-    }
-
-    public void setFamily_tel(String family_tel) {
-        this.family_tel = family_tel;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setWx_openid(String wx_openid) {
+        this.wx_openid = wx_openid;
     }
 
     public String getApi_id() {
@@ -165,12 +128,12 @@ public class BeanParent {
         this.security_key = security_key;
     }
 
-    public String getLogin_name() {
-        return this.login_name;
+    public String getToken() {
+        return token;
     }
 
-    public void setLogin_name(String login_name) {
-        this.login_name = login_name;
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getHead_portrait() {

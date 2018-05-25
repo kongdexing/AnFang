@@ -19,17 +19,8 @@ public class MyInfoActivity extends TakePhotoActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         //判断老师家长
-        UserType type = XPTApplication.getInstance().getCurrent_user_type();
-
-        if (UserType.PARENT.equals(type)) {
-            baseUserView = new PInfoView(this);
-        } else if (UserType.TEACHER.equals(type)) {
-            baseUserView = new TInfoView(this);
-        } else {
-            baseUserView = new VisitorInfoView(this);
-        }
+        baseUserView = new PInfoView(this);
         setContentView(baseUserView);
         setTitle("个人信息");
     }

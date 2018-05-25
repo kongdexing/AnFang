@@ -16,8 +16,6 @@ public class SharedPreferencesUtil {
     public static final String KEY_UID = "userid";
     public static final String KEY_REF_ID = "ref_id";  //上级代理 Id
 
-    public static final String KEY_USER_TYPE = "usertype";
-
     public static final String KEY_PROVINCE = "local_province"; //省
     public static final String KEY_CITY = "local_city";         //市
 
@@ -85,7 +83,6 @@ public class SharedPreferencesUtil {
     public static void clearUserInfo(Context context) {
         Log.i(TAG, "clearUserInfo: ");
         saveData(context, KEY_PWD, "");
-        saveData(context, KEY_USER_TYPE, "");
         saveData(context, KEY_UID, "");
     }
 

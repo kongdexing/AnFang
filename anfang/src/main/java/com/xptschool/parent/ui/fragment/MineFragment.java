@@ -17,16 +17,12 @@ import com.xptschool.parent.R;
 import com.xptschool.parent.XPTApplication;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.UserHelper;
-import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.model.BeanParent;
-import com.xptschool.parent.model.BeanTeacher;
-import com.xptschool.parent.model.BeanUser;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.login.LoginActivity;
 import com.xptschool.parent.ui.mine.MyClassesActivity;
 import com.xptschool.parent.ui.mine.MyInfoActivity;
 import com.xptschool.parent.ui.mine.MyInviteActivity;
-import com.xptschool.parent.ui.setting.QRCodeActivity;
 import com.xptschool.parent.ui.setting.SettingActivity;
 import com.xptschool.parent.ui.watch.DevicesManageActivity;
 import com.xptschool.parent.view.CustomDialog;
@@ -91,44 +87,16 @@ public class MineFragment extends BaseFragment {
             ll_unlogin.setVisibility(View.GONE);
             ll_login.setVisibility(View.VISIBLE);
 
-            UserType type = XPTApplication.getInstance().getCurrent_user_type();
-            if (type == null) {
-                return;
-            }
             rlMyChild.setVisibility(View.VISIBLE);
             String headImg = "";
-
-            if (UserType.TEACHER.equals(type)) {
-                rlMyClass.setVisibility(View.VISIBLE);
-                BeanTeacher teacher = GreenDaoHelper.getInstance().getCurrentTeacher();
-                if (teacher != null) {
-                    txtPhone.setText(teacher.getPhone());
-                    headImg = teacher.getHead_portrait();
-                }
-            } else if (UserType.PARENT.equals(type)) {
-                BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
-                if (parent != null) {
-                    txtPhone.setText(parent.getParent_phone());
-                    headImg = parent.getHead_portrait();
-                }
-            } else {
-                //会员不显示我的邀请，第三方公司|代理商显示我的邀请
-//                if (type.equals(UserType.VISITOR)) {
-//                    rlMyInvite.setVisibility(View.GONE);
-//                } else {
-//                    rlMyInvite.setVisibility(View.VISIBLE);
-//                }
-
-                BeanUser user = GreenDaoHelper.getInstance().getCurrentUser();
-                if (user != null) {
-                    headImg = user.getHead_portrait();
-                }
-                txtPhone.setText(user.getUsername());
+            BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
+            if (parent != null) {
+                txtPhone.setText(parent.getPhone());
+                headImg = parent.getHead_portrait();
             }
+
             ImageLoader.getInstance().displayImage(headImg,
                     new ImageViewAware(imgLoginHead), CommonUtil.getDefaultUserImageLoaderOption());
-
-            txtRole.setText(type.getRoleName());
         } else {
             ll_unlogin.setVisibility(View.VISIBLE);
             ll_login.setVisibility(View.GONE);
@@ -156,7 +124,7 @@ public class MineFragment extends BaseFragment {
     }
 
     @OnClick({R.id.imgHead, R.id.txtToLogin, R.id.ll_login, R.id.rlMyChild, R.id.rlMyInvite, R.id.rlMyClass,
-            R.id.rlSetting, R.id.rlQRCode})
+            R.id.rlSetting})
     void viewClick(View view) {
         switch (view.getId()) {
             case R.id.rlMyClass:
@@ -199,9 +167,6 @@ public class MineFragment extends BaseFragment {
                 break;
             case R.id.rlSetting:
                 startActivity(new Intent(getContext(), SettingActivity.class));
-                break;
-            case R.id.rlQRCode:
-                startActivity(new Intent(getContext(), QRCodeActivity.class));
                 break;
         }
     }

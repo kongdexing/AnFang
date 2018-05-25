@@ -22,21 +22,18 @@ public class BeanParentDao extends AbstractDao<BeanParent, Void> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property Login_name = new Property(0, String.class, "login_name", false, "LOGIN_NAME");
-        public final static Property Sp_id = new Property(1, String.class, "sp_id", false, "SP_ID");
-        public final static Property Parent_name = new Property(2, String.class, "parent_name", false, "PARENT_NAME");
-        public final static Property Parent_phone = new Property(3, String.class, "parent_phone", false, "PARENT_PHONE");
-        public final static Property Relation = new Property(4, String.class, "relation", false, "RELATION");
-        public final static Property Sex = new Property(5, String.class, "sex", false, "SEX");
-        public final static Property U_id = new Property(6, String.class, "u_id", false, "U_ID");
-        public final static Property Ref_id = new Property(7, String.class, "ref_id", false, "REF_ID");
-        public final static Property Address = new Property(8, String.class, "address", false, "ADDRESS");
-        public final static Property Work_unit = new Property(9, String.class, "work_unit", false, "WORK_UNIT");
-        public final static Property Family_tel = new Property(10, String.class, "family_tel", false, "FAMILY_TEL");
-        public final static Property Email = new Property(11, String.class, "email", false, "EMAIL");
-        public final static Property Api_id = new Property(12, String.class, "api_id", false, "API_ID");
-        public final static Property Security_key = new Property(13, String.class, "security_key", false, "SECURITY_KEY");
-        public final static Property Head_portrait = new Property(14, String.class, "head_portrait", false, "HEAD_PORTRAIT");
+        public final static Property Name = new Property(0, String.class, "name", false, "NAME");
+        public final static Property Username = new Property(1, String.class, "username", false, "USERNAME");
+        public final static Property Password = new Property(2, String.class, "password", false, "PASSWORD");
+        public final static Property User_id = new Property(3, String.class, "user_id", false, "USER_ID");
+        public final static Property Sex = new Property(4, String.class, "sex", false, "SEX");
+        public final static Property Phone = new Property(5, String.class, "phone", false, "PHONE");
+        public final static Property Qq_openid = new Property(6, String.class, "qq_openid", false, "QQ_OPENID");
+        public final static Property Wx_openid = new Property(7, String.class, "wx_openid", false, "WX_OPENID");
+        public final static Property Head_portrait = new Property(8, String.class, "head_portrait", false, "HEAD_PORTRAIT");
+        public final static Property Api_id = new Property(9, String.class, "api_id", false, "API_ID");
+        public final static Property Security_key = new Property(10, String.class, "security_key", false, "SECURITY_KEY");
+        public final static Property Token = new Property(11, String.class, "token", false, "TOKEN");
     };
 
 
@@ -52,21 +49,18 @@ public class BeanParentDao extends AbstractDao<BeanParent, Void> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"BEAN_PARENT\" (" + //
-                "\"LOGIN_NAME\" TEXT," + // 0: login_name
-                "\"SP_ID\" TEXT," + // 1: sp_id
-                "\"PARENT_NAME\" TEXT," + // 2: parent_name
-                "\"PARENT_PHONE\" TEXT," + // 3: parent_phone
-                "\"RELATION\" TEXT," + // 4: relation
-                "\"SEX\" TEXT," + // 5: sex
-                "\"U_ID\" TEXT," + // 6: u_id
-                "\"REF_ID\" TEXT," + // 7: ref_id
-                "\"ADDRESS\" TEXT," + // 8: address
-                "\"WORK_UNIT\" TEXT," + // 9: work_unit
-                "\"FAMILY_TEL\" TEXT," + // 10: family_tel
-                "\"EMAIL\" TEXT," + // 11: email
-                "\"API_ID\" TEXT," + // 12: api_id
-                "\"SECURITY_KEY\" TEXT," + // 13: security_key
-                "\"HEAD_PORTRAIT\" TEXT);"); // 14: head_portrait
+                "\"NAME\" TEXT," + // 0: name
+                "\"USERNAME\" TEXT," + // 1: username
+                "\"PASSWORD\" TEXT," + // 2: password
+                "\"USER_ID\" TEXT," + // 3: user_id
+                "\"SEX\" TEXT," + // 4: sex
+                "\"PHONE\" TEXT," + // 5: phone
+                "\"QQ_OPENID\" TEXT," + // 6: qq_openid
+                "\"WX_OPENID\" TEXT," + // 7: wx_openid
+                "\"HEAD_PORTRAIT\" TEXT," + // 8: head_portrait
+                "\"API_ID\" TEXT," + // 9: api_id
+                "\"SECURITY_KEY\" TEXT," + // 10: security_key
+                "\"TOKEN\" TEXT);"); // 11: token
     }
 
     /** Drops the underlying database table. */
@@ -79,79 +73,64 @@ public class BeanParentDao extends AbstractDao<BeanParent, Void> {
     protected final void bindValues(DatabaseStatement stmt, BeanParent entity) {
         stmt.clearBindings();
  
-        String login_name = entity.getLogin_name();
-        if (login_name != null) {
-            stmt.bindString(1, login_name);
+        String name = entity.getName();
+        if (name != null) {
+            stmt.bindString(1, name);
         }
  
-        String sp_id = entity.getSp_id();
-        if (sp_id != null) {
-            stmt.bindString(2, sp_id);
+        String username = entity.getUsername();
+        if (username != null) {
+            stmt.bindString(2, username);
         }
  
-        String parent_name = entity.getParent_name();
-        if (parent_name != null) {
-            stmt.bindString(3, parent_name);
+        String password = entity.getPassword();
+        if (password != null) {
+            stmt.bindString(3, password);
         }
  
-        String parent_phone = entity.getParent_phone();
-        if (parent_phone != null) {
-            stmt.bindString(4, parent_phone);
-        }
- 
-        String relation = entity.getRelation();
-        if (relation != null) {
-            stmt.bindString(5, relation);
+        String user_id = entity.getUser_id();
+        if (user_id != null) {
+            stmt.bindString(4, user_id);
         }
  
         String sex = entity.getSex();
         if (sex != null) {
-            stmt.bindString(6, sex);
+            stmt.bindString(5, sex);
         }
  
-        String u_id = entity.getU_id();
-        if (u_id != null) {
-            stmt.bindString(7, u_id);
+        String phone = entity.getPhone();
+        if (phone != null) {
+            stmt.bindString(6, phone);
         }
  
-        String ref_id = entity.getRef_id();
-        if (ref_id != null) {
-            stmt.bindString(8, ref_id);
+        String qq_openid = entity.getQq_openid();
+        if (qq_openid != null) {
+            stmt.bindString(7, qq_openid);
         }
  
-        String address = entity.getAddress();
-        if (address != null) {
-            stmt.bindString(9, address);
-        }
- 
-        String work_unit = entity.getWork_unit();
-        if (work_unit != null) {
-            stmt.bindString(10, work_unit);
-        }
- 
-        String family_tel = entity.getFamily_tel();
-        if (family_tel != null) {
-            stmt.bindString(11, family_tel);
-        }
- 
-        String email = entity.getEmail();
-        if (email != null) {
-            stmt.bindString(12, email);
-        }
- 
-        String api_id = entity.getApi_id();
-        if (api_id != null) {
-            stmt.bindString(13, api_id);
-        }
- 
-        String security_key = entity.getSecurity_key();
-        if (security_key != null) {
-            stmt.bindString(14, security_key);
+        String wx_openid = entity.getWx_openid();
+        if (wx_openid != null) {
+            stmt.bindString(8, wx_openid);
         }
  
         String head_portrait = entity.getHead_portrait();
         if (head_portrait != null) {
-            stmt.bindString(15, head_portrait);
+            stmt.bindString(9, head_portrait);
+        }
+ 
+        String api_id = entity.getApi_id();
+        if (api_id != null) {
+            stmt.bindString(10, api_id);
+        }
+ 
+        String security_key = entity.getSecurity_key();
+        if (security_key != null) {
+            stmt.bindString(11, security_key);
+        }
+ 
+        String token = entity.getToken();
+        if (token != null) {
+            stmt.bindString(12, token);
         }
     }
 
@@ -159,79 +138,64 @@ public class BeanParentDao extends AbstractDao<BeanParent, Void> {
     protected final void bindValues(SQLiteStatement stmt, BeanParent entity) {
         stmt.clearBindings();
  
-        String login_name = entity.getLogin_name();
-        if (login_name != null) {
-            stmt.bindString(1, login_name);
+        String name = entity.getName();
+        if (name != null) {
+            stmt.bindString(1, name);
         }
  
-        String sp_id = entity.getSp_id();
-        if (sp_id != null) {
-            stmt.bindString(2, sp_id);
+        String username = entity.getUsername();
+        if (username != null) {
+            stmt.bindString(2, username);
         }
  
-        String parent_name = entity.getParent_name();
-        if (parent_name != null) {
-            stmt.bindString(3, parent_name);
+        String password = entity.getPassword();
+        if (password != null) {
+            stmt.bindString(3, password);
         }
  
-        String parent_phone = entity.getParent_phone();
-        if (parent_phone != null) {
-            stmt.bindString(4, parent_phone);
-        }
- 
-        String relation = entity.getRelation();
-        if (relation != null) {
-            stmt.bindString(5, relation);
+        String user_id = entity.getUser_id();
+        if (user_id != null) {
+            stmt.bindString(4, user_id);
         }
  
         String sex = entity.getSex();
         if (sex != null) {
-            stmt.bindString(6, sex);
+            stmt.bindString(5, sex);
         }
  
-        String u_id = entity.getU_id();
-        if (u_id != null) {
-            stmt.bindString(7, u_id);
+        String phone = entity.getPhone();
+        if (phone != null) {
+            stmt.bindString(6, phone);
         }
  
-        String ref_id = entity.getRef_id();
-        if (ref_id != null) {
-            stmt.bindString(8, ref_id);
+        String qq_openid = entity.getQq_openid();
+        if (qq_openid != null) {
+            stmt.bindString(7, qq_openid);
         }
  
-        String address = entity.getAddress();
-        if (address != null) {
-            stmt.bindString(9, address);
-        }
- 
-        String work_unit = entity.getWork_unit();
-        if (work_unit != null) {
-            stmt.bindString(10, work_unit);
-        }
- 
-        String family_tel = entity.getFamily_tel();
-        if (family_tel != null) {
-            stmt.bindString(11, family_tel);
-        }
- 
-        String email = entity.getEmail();
-        if (email != null) {
-            stmt.bindString(12, email);
-        }
- 
-        String api_id = entity.getApi_id();
-        if (api_id != null) {
-            stmt.bindString(13, api_id);
-        }
- 
-        String security_key = entity.getSecurity_key();
-        if (security_key != null) {
-            stmt.bindString(14, security_key);
+        String wx_openid = entity.getWx_openid();
+        if (wx_openid != null) {
+            stmt.bindString(8, wx_openid);
         }
  
         String head_portrait = entity.getHead_portrait();
         if (head_portrait != null) {
-            stmt.bindString(15, head_portrait);
+            stmt.bindString(9, head_portrait);
+        }
+ 
+        String api_id = entity.getApi_id();
+        if (api_id != null) {
+            stmt.bindString(10, api_id);
+        }
+ 
+        String security_key = entity.getSecurity_key();
+        if (security_key != null) {
+            stmt.bindString(11, security_key);
+        }
+ 
+        String token = entity.getToken();
+        if (token != null) {
+            stmt.bindString(12, token);
         }
     }
 
@@ -243,42 +207,36 @@ public class BeanParentDao extends AbstractDao<BeanParent, Void> {
     @Override
     public BeanParent readEntity(Cursor cursor, int offset) {
         BeanParent entity = new BeanParent( //
-            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // login_name
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // sp_id
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // parent_name
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // parent_phone
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // relation
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // sex
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // u_id
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // ref_id
-            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // address
-            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // work_unit
-            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // family_tel
-            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // email
-            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // api_id
-            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // security_key
-            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14) // head_portrait
+            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // name
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // username
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // password
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // user_id
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // sex
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // phone
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // qq_openid
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // wx_openid
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // head_portrait
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // api_id
+            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // security_key
+            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11) // token
         );
         return entity;
     }
      
     @Override
     public void readEntity(Cursor cursor, BeanParent entity, int offset) {
-        entity.setLogin_name(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
-        entity.setSp_id(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setParent_name(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setParent_phone(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setRelation(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setSex(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setU_id(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setRef_id(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
-        entity.setAddress(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
-        entity.setWork_unit(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
-        entity.setFamily_tel(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
-        entity.setEmail(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
-        entity.setApi_id(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
-        entity.setSecurity_key(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
-        entity.setHead_portrait(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
+        entity.setName(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
+        entity.setUsername(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setPassword(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setUser_id(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setSex(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setPhone(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setQq_openid(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setWx_openid(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setHead_portrait(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setApi_id(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
+        entity.setSecurity_key(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
+        entity.setToken(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
      }
     
     @Override

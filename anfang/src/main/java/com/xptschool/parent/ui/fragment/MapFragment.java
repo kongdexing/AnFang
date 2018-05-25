@@ -47,7 +47,6 @@ import com.xptschool.parent.bean.BeanRTLocation;
 import com.xptschool.parent.bean.BeanRail;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.UserHelper;
-import com.xptschool.parent.common.UserType;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.HttpErrorMsg;
 import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
@@ -195,9 +194,6 @@ public class MapFragment extends MapBaseFragment implements OnGetShareUrlResultL
         llStudentDrop.setVisibility(View.VISIBLE);
         llShare.setVisibility(View.GONE);
 
-        UserType type = XPTApplication.getInstance().getCurrent_user_type();
-        Log.i(TAG, "initSpinnerData: " + type);
-
         List<BeanStudent> students = GreenDaoHelper.getInstance().getStudents();
         if (students.size() > 0) {
             startTime = (new SimpleDateFormat("yyyy-MM-dd HH:mm")).format(CommonUtil.getDateBefore(1));
@@ -205,11 +201,6 @@ public class MapFragment extends MapBaseFragment implements OnGetShareUrlResultL
             txtSDate.setText(startTime);
             txtEDate.setText(endTime);
 
-            if (UserType.TEACHER.equals(type)) {
-                llStudentName.setVisibility(View.GONE);
-                txtStudentName.setVisibility(View.VISIBLE);
-                getStudents();
-            } else {
                 llStudentName.setVisibility(View.VISIBLE);
                 txtStudentName.setVisibility(View.GONE);
 
@@ -259,8 +250,6 @@ public class MapFragment extends MapBaseFragment implements OnGetShareUrlResultL
                         flTransparent.setVisibility(View.GONE);
                     }
                 });
-            }
-
         } else {
             mBaiduMap.clear();
             isShowLocation = false;

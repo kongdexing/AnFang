@@ -75,7 +75,7 @@ public class GreenDaoHelper {
      */
     public void insertParent(BeanParent parent) {
         currentParent = parent;
-        SharedPreferencesUtil.saveData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_UID, parent.getU_id());
+        SharedPreferencesUtil.saveData(XPTApplication.getInstance(), SharedPreferencesUtil.KEY_UID, parent.getUser_id());
 
         if (writeDaoSession != null) {
             writeDaoSession.getBeanParentDao().deleteAll();
@@ -147,16 +147,6 @@ public class GreenDaoHelper {
         if (writeDaoSession != null) {
             writeDaoSession.getBeanClassDao().deleteAll();
             writeDaoSession.getBeanClassDao().insertInTx(listClass);
-        }
-    }
-
-    /**
-     * 执教课程写入数据库
-     */
-    public void insertCourse(List<BeanCourse> listCourse) {
-        if (writeDaoSession != null) {
-            writeDaoSession.getBeanCourseDao().deleteAll();
-            writeDaoSession.getBeanCourseDao().insertInTx(listCourse);
         }
     }
 
@@ -329,75 +319,6 @@ public class GreenDaoHelper {
     public BeanClass getClassById(String Id) {
         if (readDaoSession != null) {
             return readDaoSession.getBeanClassDao().queryBuilder().where(BeanClassDao.Properties.C_id.eq(Id)).build().unique();
-        }
-        return null;
-    }
-
-    public List<BeanCourse> getCourseByGId(String g_id) {
-        List<BeanCourse> courses = new ArrayList<>();
-        if (readDaoSession != null) {
-            if (g_id.isEmpty() || g_id == null) {
-                courses = readDaoSession.getBeanCourseDao().queryBuilder().list();
-            } else {
-                courses = readDaoSession.getBeanCourseDao().queryBuilder().where(BeanCourseDao.Properties.G_id.eq(g_id)).list();
-            }
-
-        }
-        return courses;
-    }
-
-    /**
-     * 获取全部课程(包含【全部】选项)
-     *
-     * @return
-     */
-    public List<BeanCourse> getAllCourseNameAppend() {
-        List<BeanCourse> courses = new ArrayList<>();
-        BeanCourse all = new BeanCourse();
-        all.setId("");
-        all.setName("全部");
-        courses.add(all);
-        courses.addAll(getAllCourse());
-        return courses;
-    }
-
-    /**
-     * 获取全部课程
-     *
-     * @return
-     */
-    public List<BeanCourse> getAllCourse() {
-        List<BeanCourse> courses = new ArrayList<>();
-        if (readDaoSession != null) {
-            courses = readDaoSession.getBeanCourseDao().loadAll();
-        }
-        return courses;
-    }
-
-    public String getCourseNameById(String id) {
-        if (readDaoSession != null) {
-            BeanCourse course = readDaoSession.getBeanCourseDao().queryBuilder().where(BeanCourseDao.Properties.Id.eq(id)).unique();
-            if (course != null) {
-                return course.getName();
-            }
-        }
-        return "";
-    }
-
-    public String getClassNameById(String id) {
-        if (readDaoSession != null) {
-            BeanClass _class = readDaoSession.getBeanClassDao().queryBuilder().where(BeanClassDao.Properties.C_id.eq(id)).unique();
-            if (_class != null) {
-                return _class.getName();
-            }
-        }
-        return "";
-    }
-
-    public ContactTeacher getContactByTeacher(String t_u_id) {
-        if (readDaoSession != null) {
-            return readDaoSession.getContactTeacherDao().queryBuilder()
-                    .where(ContactTeacherDao.Properties.U_id.eq(t_u_id)).limit(1).unique();
         }
         return null;
     }

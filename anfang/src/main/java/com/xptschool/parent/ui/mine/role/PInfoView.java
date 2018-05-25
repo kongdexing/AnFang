@@ -63,11 +63,8 @@ public class PInfoView extends BaseUserView {
             ImageLoader.getInstance().displayImage(parent.getHead_portrait(),
                     new ImageViewAware(imgHead), CommonUtil.getDefaultUserImageLoaderOption());
 
-            txtMineName.setText(parent.getParent_name());
-            txtPhone.setText(parent.getParent_phone());
-            txtEmail.setText(parent.getEmail());
-            txtHomeAdd.setText(parent.getAddress());
-            txtHomeTel.setText(parent.getFamily_tel());
+            txtMineName.setText(parent.getName());
+            txtPhone.setText(parent.getPhone());
         }
     }
 
@@ -91,14 +88,14 @@ public class PInfoView extends BaseUserView {
 //                changeSex(parent.getSex());
 //                break;
             case R.id.rlMinePhone:
-                if (parent.getParent_phone().isEmpty()) {
+                if (parent.getPhone().isEmpty()) {
                     Toast.makeText(mContext, R.string.toast_phone_empty, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 try {
                     Intent intent = new Intent();
                     intent.setAction(Intent.ACTION_DIAL);
-                    intent.setData(Uri.parse("tel:" + parent.getParent_phone()));
+                    intent.setData(Uri.parse("tel:" + parent.getPhone()));
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     mContext.startActivity(intent);
                 } catch (Exception ex) {
@@ -106,19 +103,19 @@ public class PInfoView extends BaseUserView {
                 }
                 break;
             case R.id.rlAddressPhone:
-                if (parent.getFamily_tel().isEmpty()) {
-                    Toast.makeText(mContext, R.string.toast_phone_empty, Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                try {
-                    Intent intent = new Intent();
-                    intent.setAction(Intent.ACTION_DIAL);
-                    intent.setData(Uri.parse("tel:" + parent.getFamily_tel()));
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    mContext.startActivity(intent);
-                } catch (Exception ex) {
-                    Toast.makeText(mContext, R.string.toast_startcall_error, Toast.LENGTH_SHORT).show();
-                }
+//                if (parent.getFamily_tel().isEmpty()) {
+//                    Toast.makeText(mContext, R.string.toast_phone_empty, Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                try {
+//                    Intent intent = new Intent();
+//                    intent.setAction(Intent.ACTION_DIAL);
+//                    intent.setData(Uri.parse("tel:" + parent.getFamily_tel()));
+//                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    mContext.startActivity(intent);
+//                } catch (Exception ex) {
+//                    Toast.makeText(mContext, R.string.toast_startcall_error, Toast.LENGTH_SHORT).show();
+//                }
                 break;
         }
     }

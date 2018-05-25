@@ -9,6 +9,7 @@ import com.android.volley.common.VolleyHttpService;
 import com.xptschool.parent.common.CommonUtil;
 import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.http.HttpAction;
+import com.xptschool.parent.http.HttpErrorMsg;
 import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
 
@@ -46,31 +47,29 @@ public class LoginHelper {
 
                         switch (httpResult.getStatus()) {
                             case HttpAction.SUCCESS:
+                                try {
+                                    CommonUtil.analyseLoginData(httpResult);
+                                } catch (Exception ex) {
+                                    if (listener != null) {
+                                        listener.onLoginFail(HttpErrorMsg.ERROR_JSON);
+                                    }
+                                    break;
+                                }
+
                                 if (listener != null) {
                                     listener.onLoginSuccess();
                                 }
-//                                SharedPreferencesUtil.saveData(BaseLoginActivity.this, SharedPreferencesUtil.KEY_PWD, password);
-//                                try {
-//                                    CommonUtil.analyseLoginData(httpResult, account);
-//                                } catch (Exception ex) {
-//                                    Log.i(TAG, "onResponse: exception " + ex.getMessage());
-//                                    onLoginFailed("登录失败");
-//                                    return;
-//                                }
-//                                onLoginSuccess(account);
                                 break;
                             default:
                                 if (listener != null) {
                                     listener.onLoginFail(httpResult.getInfo());
                                 }
-//                                onLoginFailed(httpResult.getInfo());
                                 break;
                         }
                     }
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-//                        onLoginFailed("登录失败");
                         if (listener != null) {
                             listener.onLoginFail(error.getMessage());
                         }

@@ -60,7 +60,7 @@ public class BaseLoginMainActivity extends AppCompatActivity {
                                 SharedPreferencesUtil.saveData(BaseLoginMainActivity.this, SharedPreferencesUtil.KEY_PWD, password);
                                 Log.i(TAG, "login success onResponse: ");
                                 try {
-                                    CommonUtil.analyseLoginData(httpResult, account);
+                                    CommonUtil.analyseLoginData(httpResult);
                                 } catch (Exception ex) {
                                     Log.i(TAG, "BaseLoginMainActivity onResponse: exception " + ex.getMessage());
                                     return;

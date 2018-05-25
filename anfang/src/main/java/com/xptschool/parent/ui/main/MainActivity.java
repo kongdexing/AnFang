@@ -191,16 +191,17 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
 //            }
         }
 
-        String userType = SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_TYPE, "").toString();
-        if (UserType.PARENT.toString().equals(userType) || UserType.TEACHER.toString().equals(userType)) {
-            updateUnreadLabel();
-            // unregister this event listener when this activity enters the
-            // background
-            EaseHelper sdkHelper = EaseHelper.getInstance();
-            sdkHelper.pushActivity(this);
+//        String userType = SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_TYPE, "").toString();
+////        if (UserType.PARENT.toString().equals(userType) || UserType.TEACHER.toString().equals(userType)) {
+////            updateUnreadLabel();
+////            // unregister this event listener when this activity enters the
+////            // background
+////            EaseHelper sdkHelper = EaseHelper.getInstance();
+////            sdkHelper.pushActivity(this);
+////
+////            EMClient.getInstance().chatManager().addMessageListener(messageListener);
+////        }
 
-            EMClient.getInstance().chatManager().addMessageListener(messageListener);
-        }
     }
 
     @Override
@@ -519,21 +520,7 @@ public class MainActivity extends BaseMainActivity implements BDLocationListener
             ((HomeFragment) homeFragment).reloadPageData();
         }
 
-        String userId = "";
-        try {
-            UserType type = XPTApplication.getInstance().getCurrent_user_type();
-            if (UserType.PARENT.equals(type)) {
-                userId = GreenDaoHelper.getInstance().getCurrentParent().getU_id();
-            } else if (UserType.TEACHER.equals(type)) {
-                userId = GreenDaoHelper.getInstance().getCurrentTeacher().getU_id();
-            } else {
-                Log.i(TAG, "onLoginSuccess: 非家长老师角色，不登录环信");
-                return;
-            }
-        } catch (Exception ex) {
-            Log.i(TAG, "onLoginSuccess: " + ex.getMessage());
-            return;
-        }
+        String userId = GreenDaoHelper.getInstance().getCurrentParent().getUser_id();
 
         Log.i(TAG, "onLoginSuccess: login to em");
 

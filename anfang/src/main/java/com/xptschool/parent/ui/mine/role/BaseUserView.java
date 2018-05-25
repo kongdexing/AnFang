@@ -221,24 +221,9 @@ public class BaseUserView extends LinearLayout {
                         try {
                             JSONObject object = new JSONObject(volleyHttpResult.getData().toString());
                             String head_img = object.getString("head_portrait");
-                            if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-                                BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
-                                parent.setHead_portrait(head_img);
-                                GreenDaoHelper.getInstance().insertParent(parent);
-
-                            } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-                                BeanTeacher teacher = GreenDaoHelper.getInstance().getCurrentTeacher();
-                                teacher.setHead_portrait(head_img);
-                                GreenDaoHelper.getInstance().insertTeacher(teacher);
-                            } else {
-                                BeanUser currentUser = GreenDaoHelper.getInstance().getCurrentUser();
-                                if (currentUser != null) {
-                                    currentUser.setHead_portrait(head_img);
-                                    GreenDaoHelper.getInstance().insertUser(currentUser);
-                                    ImageLoader.getInstance().displayImage(currentUser.getHead_portrait(),
-                                            new ImageViewAware(imgHead), CommonUtil.getDefaultUserImageLoaderOption());
-                                }
-                            }
+                            BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
+                            parent.setHead_portrait(head_img);
+                            GreenDaoHelper.getInstance().insertParent(parent);
                             initData();
                             ToastUtils.showToast(mContext, R.string.toast_modify_success);
                         } catch (Exception ex) {
@@ -284,24 +269,9 @@ public class BaseUserView extends LinearLayout {
                             String email = object.getString("email");
                             String name = object.getString("name");
 
-                            if (UserType.PARENT.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-                                BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
-                                parent.setSex(sex);
-                                parent.setEmail(email);
-                                parent.setParent_name(name);
-                                GreenDaoHelper.getInstance().insertParent(parent);
-                            } else if (UserType.TEACHER.equals(XPTApplication.getInstance().getCurrent_user_type())) {
-
-                            } else {
-                                BeanUser currentUser = GreenDaoHelper.getInstance().getCurrentUser();
-                                if (currentUser != null) {
-                                    currentUser.setName(name);
-                                    currentUser.setSex(sex);
-                                    currentUser.setEmail(email);
-
-                                    GreenDaoHelper.getInstance().insertUser(currentUser);
-                                }
-                            }
+                            BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
+                            parent.setSex(sex);
+                            GreenDaoHelper.getInstance().insertParent(parent);
                             initData();
                             ToastUtils.showToast(mContext, R.string.toast_modify_success);
                         } catch (Exception ex) {

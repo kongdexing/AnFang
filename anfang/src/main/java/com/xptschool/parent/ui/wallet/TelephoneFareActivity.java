@@ -160,7 +160,7 @@ public class TelephoneFareActivity extends ContractClickActivity {
                                     String notice_sn = object.getString("notice_sn");
                                     String in_price = object.getString("inprice");
                                     String access_token = CommonUtil.md5(notice_sn + "shuhaixinxi_phone_recharge_order" +
-                                            GreenDaoHelper.getInstance().getCurrentParent().getU_id() + in_price);
+                                            GreenDaoHelper.getInstance().getCurrentParent().getUser_id() + in_price);
                                     doTelTopUp(access_token, notice_sn);
                                 } catch (Exception ex) {
                                     hideProgress();

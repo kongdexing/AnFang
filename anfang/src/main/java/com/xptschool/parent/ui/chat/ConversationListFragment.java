@@ -96,16 +96,16 @@ public class ConversationListFragment extends EaseConversationListFragment {
     private void reloadUI() {
         llEMNet.setVisibility(View.VISIBLE);
         Log.i(TAG, "onConnectionDisconnected: ");
-        if (NetUtils.hasNetwork(getActivity())) {
-            UserType type = XPTApplication.getInstance().getCurrent_user_type();
-            if (UserType.TEACHER.equals(type) || UserType.PARENT.equals(type) || type == null) {
-                errorText.setText(R.string.can_not_connect_chat_server_connection);
-            } else {
-                llEMNet.setVisibility(View.GONE);
-            }
-        } else {
-            errorText.setText(R.string.the_current_network);
-        }
+//        if (NetUtils.hasNetwork(getActivity())) {
+//            UserType type = XPTApplication.getInstance().getCurrent_user_type();
+//            if (UserType.TEACHER.equals(type) || UserType.PARENT.equals(type) || type == null) {
+//                errorText.setText(R.string.can_not_connect_chat_server_connection);
+//            } else {
+//                llEMNet.setVisibility(View.GONE);
+//            }
+//        } else {
+//            errorText.setText(R.string.the_current_network);
+//        }
     }
 
     @Override
