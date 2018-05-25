@@ -36,6 +36,7 @@ import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.common.SharedPreferencesUtil;
 import com.xptschool.parent.ease.EaseHelper;
+import com.xptschool.parent.model.BeanParent;
 import com.xptschool.parent.model.BeanStudent;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.alarm.AlarmMapActivity;
@@ -303,13 +304,8 @@ public class XPTApplication extends Application {
     }
 
     public boolean isLoggedIn() {
-        String userName = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_NAME, "");
-        String password = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_PWD, "");
-        if (userName.isEmpty() || password.isEmpty()) {
-            return false;
-        } else {
-            return true;
-        }
+        BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
+        return parent == null ? false : true;
     }
 
     /**

@@ -28,16 +28,16 @@ public class SetPasswordActivity extends BaseActivity {
     EditText edtNewPwd1;
     @BindView(R.id.edtNewPwd2)
     EditText edtNewPwd2;
-    private String userName;
+    private String phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_password);
-        setTitle(R.string.title_forgot_password);
+        setTitle(R.string.title_new_pwd);
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            userName = bundle.getString("username");
+            phone = bundle.getString("username");
         }
     }
 
@@ -73,7 +73,7 @@ public class SetPasswordActivity extends BaseActivity {
                 new MyVolleyHttpParamsEntity()
                         .addParam("pass", password)
                         .addParam("password", password)
-                        .addParam("username", userName), new MyVolleyRequestListener() {
+                        .addParam("username", phone), new MyVolleyRequestListener() {
                     @Override
                     public void onStart() {
                         super.onStart();
@@ -84,13 +84,15 @@ public class SetPasswordActivity extends BaseActivity {
                         super.onResponse(volleyHttpResult);
                         if (volleyHttpResult.getStatus() == HttpAction.SUCCESS) {
                             //返回登录页面
-                            SharedPreferencesUtil.saveData(SetPasswordActivity.this, SharedPreferencesUtil.KEY_USER_NAME, userName);
+                            SharedPreferencesUtil.saveData(SetPasswordActivity.this, SharedPreferencesUtil.KEY_USER_NAME, phone);
                             SharedPreferencesUtil.saveData(SetPasswordActivity.this, SharedPreferencesUtil.KEY_PWD, password);
+                            //直接登录
 
-                            Intent intent = new Intent(SetPasswordActivity.this, LoginActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            intent.putExtra(ExtraKey.LOGIN_ORIGIN, "1");
-                            startActivity(intent);
+
+//                            Intent intent = new Intent(SetPasswordActivity.this, LoginByPwdActivity.class);
+//                            intent.putExtra(ExtraKey.LOGIN_ORIGIN, "1");
+//                            startActivity(intent);
+//                            finish();
                         }
                         ToastUtils.showToast(SetPasswordActivity.this, volleyHttpResult.getInfo());
                     }

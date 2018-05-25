@@ -91,7 +91,6 @@ public class BaseLoginMainActivity extends AppCompatActivity {
     protected void onLoginFailed(String msg) {
         Log.i(TAG, "onLoginFailed: ");
         SharedPreferencesUtil.saveData(this, SharedPreferencesUtil.KEY_UID, "");
-        SharedPreferencesUtil.saveData(this, SharedPreferencesUtil.KEY_REF_ID, "");
     }
 
     public void showProgress(String str) {

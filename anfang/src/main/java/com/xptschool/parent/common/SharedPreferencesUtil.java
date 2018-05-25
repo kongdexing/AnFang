@@ -14,12 +14,14 @@ public class SharedPreferencesUtil {
     public static final String KEY_USER_NAME = "username";
     public static final String KEY_PWD = "password";
     public static final String KEY_UID = "userid";
-    public static final String KEY_REF_ID = "ref_id";  //上级代理 Id
 
     public static final String KEY_PROVINCE = "local_province"; //省
     public static final String KEY_CITY = "local_city";         //市
 
     public static final String KEY_LAST_REGISTER = "last_register_time";
+
+    //保存最后一次用于找回密码时输入的手机号
+    public static final String KEY_PHONE_FORGET_PWD = "last_phone_for_forget_pwd";
 
 
     /**

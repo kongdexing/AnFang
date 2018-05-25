@@ -61,50 +61,33 @@ public class LoginByPwdActivity extends BaseLoginActivity implements HuaweiApiCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_pwd);
         initView();
+
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             origin = bundle.getString(ExtraKey.LOGIN_ORIGIN);
-            if (origin != null && origin.equals("0")) {
-                showImgBack(false);
-                //推送不可用
-                //拒收通知
-                String model = android.os.Build.MODEL;
-                String carrier = android.os.Build.MANUFACTURER;
-                Log.i(TAG, "onCreate: " + model + "  " + carrier);
-
-                if (carrier.toUpperCase().equals(DeviceHelper.M_HUAWEI)) {
-                    client = new HuaweiApiClient.Builder(this)
-                            .addApi(HuaweiPush.PUSH_API)
-                            .addConnectionCallbacks(this)
-                            .addOnConnectionFailedListener(this)
-                            .build();
-                    client.connect();
-                    Log.i(TAG, "HUAWEI disable ");
-                } else if (carrier.toUpperCase().equals(DeviceHelper.M_MEIZU)) {
-                    PushManager.unRegister(this, XPTApplication.MZ_APP_ID, XPTApplication.MZ_APP_KEY);
-                } else {
-                    PushAgent mPushAgent = PushAgent.getInstance(this);
-                    mPushAgent.disable(new IUmengCallback() {
-                        @Override
-                        public void onSuccess() {
-                            Log.i(TAG, "PushAgent disable onSuccess: ");
-                        }
-
-                        @Override
-                        public void onFailure(String s, String s1) {
-                            Log.i(TAG, "PushAgent disable onFailure: " + s + " s1 " + s1);
-                        }
-                    });
-                }
-            } else if (origin != null && origin.equals("1")) {
+            if (origin != null && origin.equals("1")) {
+                //修改密码后重新进入登录界面
                 String userName = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_NAME, "");
                 edtAccount.setText(userName);
                 String userPwd = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_PWD, "");
                 edtPwd.setText(userPwd);
-//                login(userName, CommonUtil.md5(userPwd), null);
+
+                LoginHelper.getInstance().login(new MyVolleyHttpParamsEntity()
+                        .addParam("phone", userName)
+                        .addParam("password", CommonUtil.md5(userPwd)), this);
             }
         }
 
+        setTxtRight(R.string.forgetpwd);
+        setTextRightClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginByPwdActivity.this, CheckSMSCodeActivity.class);
+                //获取已保存的用户找回密码的手机号
+                intent.putExtra("phone", SharedPreferencesUtil.getData(LoginByPwdActivity.this, SharedPreferencesUtil.KEY_PHONE_FORGET_PWD, "").toString());
+                startActivityForResult(intent, 2);
+            }
+        });
         //显示上次登录成功的手机号
         String userName = (String) SharedPreferencesUtil.getData(this, SharedPreferencesUtil.KEY_USER_NAME, "");
         edtAccount.setText(userName);
@@ -153,7 +136,7 @@ public class LoginByPwdActivity extends BaseLoginActivity implements HuaweiApiCl
         });
     }
 
-    @OnClick({R.id.imgDel, R.id.imgToggle, R.id.btnLogin, R.id.txtForgetPWD})
+    @OnClick({R.id.imgDel, R.id.imgToggle, R.id.btnLogin})
     void buttonOnclick(View view) {
         switch (view.getId()) {
             case R.id.imgDel:
@@ -176,9 +159,6 @@ public class LoginByPwdActivity extends BaseLoginActivity implements HuaweiApiCl
                 } else {
                     Toast.makeText(LoginByPwdActivity.this, R.string.error_empty_login, Toast.LENGTH_SHORT).show();
                 }
-                break;
-            case R.id.txtForgetPWD:
-//                startActivityForResult(new Intent(this, CheckUserActivity.class), 2);
                 break;
         }
     }
@@ -207,7 +187,8 @@ public class LoginByPwdActivity extends BaseLoginActivity implements HuaweiApiCl
     public void onLoginSuccess() {
         super.onLoginSuccess();
         enableView(true);
-
+        setResult(1);
+        finish();
     }
 
     @Override

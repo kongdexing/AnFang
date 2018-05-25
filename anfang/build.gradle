@@ -138,7 +138,7 @@ android {
 }
 
 greendao {
-    schemaVersion 23
+    schemaVersion 24
     targetGenDir 'src/main/java'
 }
 

@@ -185,7 +185,7 @@ public class MapFragment extends MapBaseFragment implements OnGetShareUrlResultL
     @Override
     public void onResume() {
         super.onResume();
-        Log.i(TAG, "onResume: ");
+        Log.i(TAG, "MapFragment onResume: ");
         initSpinnerData();
     }
 
@@ -201,55 +201,55 @@ public class MapFragment extends MapBaseFragment implements OnGetShareUrlResultL
             txtSDate.setText(startTime);
             txtEDate.setText(endTime);
 
-                llStudentName.setVisibility(View.VISIBLE);
-                txtStudentName.setVisibility(View.GONE);
+            llStudentName.setVisibility(View.VISIBLE);
+            txtStudentName.setVisibility(View.GONE);
 
-                if (GreenDaoHelper.getInstance().getStudents().size() == 0) {
-                    spnStudents.setText(R.string.title_no_student);
-                    spnStudents.setEnabled(false);
-                    return;
+            if (GreenDaoHelper.getInstance().getStudents().size() == 0) {
+                spnStudents.setText(R.string.title_no_student);
+                spnStudents.setEnabled(false);
+                return;
+            }
+
+            List<BeanStudent> beanStudents = GreenDaoHelper.getInstance().getStudents();
+
+            spnStudents.setEnabled(true);
+            spnStudents.setItems(beanStudents);
+            if (currentStudent != null) {
+                //重新选中当前学生,如果不存在于当前数组，则重新赋予默认
+                boolean isOld = false;
+                for (int i = 0; i < beanStudents.size(); i++) {
+                    if (currentStudent.getStu_id().equals(beanStudents.get(i).getStu_id())) {
+                        spnStudents.setSelectedIndex(i);
+                        isOld = true;
+                        break;
+                    }
                 }
 
-                List<BeanStudent> beanStudents = GreenDaoHelper.getInstance().getStudents();
-
-                spnStudents.setEnabled(true);
-                spnStudents.setItems(beanStudents);
-                if (currentStudent != null) {
-                    //重新选中当前学生,如果不存在于当前数组，则重新赋予默认
-                    boolean isOld = false;
-                    for (int i = 0; i < beanStudents.size(); i++) {
-                        if (currentStudent.getStu_id().equals(beanStudents.get(i).getStu_id())) {
-                            spnStudents.setSelectedIndex(i);
-                            isOld = true;
-                            break;
-                        }
-                    }
-
-                    if (!isOld){
-                        currentStudent = (BeanStudent) spnStudents.getSelectedItem();
-                    }
-
-                } else {
+                if (!isOld) {
                     currentStudent = (BeanStudent) spnStudents.getSelectedItem();
                 }
 
-                spnStudents.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<BeanStudent>() {
-                    @Override
-                    public void onItemSelected(MaterialSpinner view, int position, long id, BeanStudent item) {
-                        flTransparent.setVisibility(View.GONE);
-                        currentStudent = item;
-                        locationTime = 0;
-                        //获取不同数据
-                        reloadDataByStatus();
-                    }
-                });
+            } else {
+                currentStudent = (BeanStudent) spnStudents.getSelectedItem();
+            }
 
-                spnStudents.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
-                    @Override
-                    public void onNothingSelected(MaterialSpinner spinner) {
-                        flTransparent.setVisibility(View.GONE);
-                    }
-                });
+            spnStudents.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<BeanStudent>() {
+                @Override
+                public void onItemSelected(MaterialSpinner view, int position, long id, BeanStudent item) {
+                    flTransparent.setVisibility(View.GONE);
+                    currentStudent = item;
+                    locationTime = 0;
+                    //获取不同数据
+                    reloadDataByStatus();
+                }
+            });
+
+            spnStudents.setOnNothingSelectedListener(new MaterialSpinner.OnNothingSelectedListener() {
+                @Override
+                public void onNothingSelected(MaterialSpinner spinner) {
+                    flTransparent.setVisibility(View.GONE);
+                }
+            });
         } else {
             mBaiduMap.clear();
             isShowLocation = false;
@@ -582,6 +582,7 @@ public class MapFragment extends MapBaseFragment implements OnGetShareUrlResultL
     @Override
     public void onPause() {
         super.onPause();
+        Log.i(TAG, "MapFragment onPause: ");
         cancelRTLocationTimer();
     }
 

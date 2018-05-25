@@ -208,7 +208,7 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
                 UMShareAPI.get(this).getPlatformInfo(this, SHARE_MEDIA.WEIXIN, umAuthListener);
                 break;
             case R.id.imgPwd:
-                startActivityForResult(new Intent(this, LoginByPwdActivity.class),1);
+                startActivityForResult(new Intent(this, LoginByPwdActivity.class), 1);
                 break;
         }
     }
@@ -216,9 +216,12 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==1){
-
+        if (requestCode == 1 && resultCode == 1) {
+            //使用登录密码登录成功
+            finish();
         }
+
+
     }
 
     Handler handler = new Handler() {
@@ -318,6 +321,7 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
     public void onLoginSuccess() {
         super.onLoginSuccess();
         enableView(true);
+        finish();
     }
 
     @Override
@@ -329,7 +333,7 @@ public class LoginActivity extends BaseLoginActivity implements HuaweiApiClient.
 
     private void enableView(boolean enable) {
         if (progress != null)
-            progress.setVisibility(enable ? View.VISIBLE : View.INVISIBLE);
+            progress.setVisibility(enable ? View.INVISIBLE : View.VISIBLE);
         if (btnLogin != null) {
             btnLogin.setEnabled(enable);
         }
