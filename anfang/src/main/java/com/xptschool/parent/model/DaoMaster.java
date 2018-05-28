@@ -22,7 +22,6 @@ public class DaoMaster extends AbstractDaoMaster {
     /** Creates underlying database table using DAOs. */
     public static void createAllTables(Database db, boolean ifNotExists) {
         BeanBannerDao.createTable(db, ifNotExists);
-        BeanClassDao.createTable(db, ifNotExists);
         BeanCountyDao.createTable(db, ifNotExists);
         BeanHomeCfgDao.createTable(db, ifNotExists);
         BeanLearningModuleDao.createTable(db, ifNotExists);
@@ -40,7 +39,6 @@ public class DaoMaster extends AbstractDaoMaster {
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(Database db, boolean ifExists) {
         BeanBannerDao.dropTable(db, ifExists);
-        BeanClassDao.dropTable(db, ifExists);
         BeanCountyDao.dropTable(db, ifExists);
         BeanHomeCfgDao.dropTable(db, ifExists);
         BeanLearningModuleDao.dropTable(db, ifExists);
@@ -72,7 +70,6 @@ public class DaoMaster extends AbstractDaoMaster {
     public DaoMaster(Database db) {
         super(db, SCHEMA_VERSION);
         registerDaoClass(BeanBannerDao.class);
-        registerDaoClass(BeanClassDao.class);
         registerDaoClass(BeanCountyDao.class);
         registerDaoClass(BeanHomeCfgDao.class);
         registerDaoClass(BeanLearningModuleDao.class);

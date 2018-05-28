@@ -10,7 +10,6 @@ import android.util.Log;
 import com.viewpagerindicator.TitlePageIndicator;
 import com.xptschool.parent.R;
 import com.xptschool.parent.common.ExtraKey;
-import com.xptschool.parent.model.BeanClass;
 import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.main.BaseActivity;
 

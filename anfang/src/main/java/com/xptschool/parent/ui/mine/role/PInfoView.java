@@ -59,11 +59,11 @@ public class PInfoView extends BaseUserView {
 
             txtMineName.setText(parent.getName());
             txtPhone.setText(parent.getPhone());
-            txtSex.setText(parent.getSex() == "1" ? "男" : "女");
+            txtSex.setText("1".equals(parent.getSex()) ? "男" : "女");
         }
     }
 
-    @OnClick({R.id.rlName, R.id.rlMail, R.id.rlSex, R.id.rlMinePhoto})
+    @OnClick({R.id.rlName, R.id.rlSex, R.id.rlMinePhoto})
     void viewClick(View view) {
         BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
         if (parent == null) {

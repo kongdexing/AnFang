@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 
 import com.viewpagerindicator.CirclePageIndicator;
 import com.xptschool.parent.R;
-import com.xptschool.parent.model.BeanClass;
 import com.xptschool.parent.model.GreenDaoHelper;
 
 import java.util.ArrayList;

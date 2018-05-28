@@ -205,7 +205,6 @@
 
         <!-- 报警查询 -->
         <activity android:name=".ui.alarm.AlarmActivity" />
-        <activity android:name=".ui.alarm.AlarmTActivity" />
         <activity android:name=".ui.alarm.AlarmMapActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

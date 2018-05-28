@@ -21,7 +21,6 @@ import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.http.HttpAction;
 import com.xptschool.parent.http.MyVolleyHttpParamsEntity;
 import com.xptschool.parent.http.MyVolleyRequestListener;
-import com.xptschool.parent.model.BeanClass;
 import com.xptschool.parent.model.BeanStudent;
 
 import java.util.List;

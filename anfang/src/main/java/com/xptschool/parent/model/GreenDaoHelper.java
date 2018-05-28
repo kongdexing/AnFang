@@ -110,16 +110,6 @@ public class GreenDaoHelper {
         }
     }
 
-    /**
-     * 执教班级写入数据库
-     */
-    public void insertClass(List<BeanClass> listClass) {
-        if (writeDaoSession != null) {
-            writeDaoSession.getBeanClassDao().deleteAll();
-            writeDaoSession.getBeanClassDao().insertInTx(listClass);
-        }
-    }
-
     public BeanParent getCurrentParent() {
         if (currentParent == null) {
             if (readDaoSession != null) {
@@ -243,42 +233,6 @@ public class GreenDaoHelper {
                     .where(ContactParentDao.Properties.Stu_id.eq(stu_id)).list();
         }
         return new ArrayList<ContactParent>();
-    }
-
-    /**
-     * 获取全部班级(包含【全部】选项)
-     *
-     * @return
-     */
-    public List<BeanClass> getAllClassNameAppend() {
-        List<BeanClass> classes = new ArrayList<>();
-        BeanClass all = new BeanClass();
-        all.setName("全部");
-        all.setC_id("");
-        all.setG_id("");
-        classes.add(all);
-        classes.addAll(getAllClass());
-        return classes;
-    }
-
-    /**
-     * 获取全部班级
-     *
-     * @return
-     */
-    public List<BeanClass> getAllClass() {
-        List<BeanClass> classes = new ArrayList<>();
-        if (readDaoSession != null) {
-            classes = readDaoSession.getBeanClassDao().queryBuilder().orderAsc(BeanClassDao.Properties.G_id).list();
-        }
-        return classes;
-    }
-
-    public BeanClass getClassById(String Id) {
-        if (readDaoSession != null) {
-            return readDaoSession.getBeanClassDao().queryBuilder().where(BeanClassDao.Properties.C_id.eq(Id)).build().unique();
-        }
-        return null;
     }
 
     public void insertSchoolInfo(List<ContactSchool> schools) {
