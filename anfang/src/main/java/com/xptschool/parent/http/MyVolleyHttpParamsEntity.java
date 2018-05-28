@@ -4,6 +4,8 @@ import android.content.pm.PackageInfo;
 
 import com.android.volley.common.VolleyHttpParamsEntity;
 import com.xptschool.parent.XPTApplication;
+import com.xptschool.parent.model.BeanParent;
+import com.xptschool.parent.model.GreenDaoHelper;
 
 import java.util.HashMap;
 
@@ -31,6 +33,13 @@ public class MyVolleyHttpParamsEntity extends VolleyHttpParamsEntity {
         this.map.put("system_model", "1");
         this.map.put("version_code", localVersionCode + "");
         this.map.put("version_name", localVersionName);
+        //传入 token
+        BeanParent parent = GreenDaoHelper.getInstance().getCurrentParent();
+        if (parent == null) {
+            this.map.put("token", "");
+        } else {
+            this.map.put("token", parent.getToken());
+        }
     }
 
     @Override

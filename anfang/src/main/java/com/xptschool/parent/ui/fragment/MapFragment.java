@@ -56,7 +56,6 @@ import com.xptschool.parent.model.GreenDaoHelper;
 import com.xptschool.parent.ui.alarm.AlarmActivity;
 import com.xptschool.parent.ui.main.MainActivity;
 import com.xptschool.parent.ui.mine.StudentAdapter;
-import com.xptschool.parent.ui.mine.StudentPopupWindowView;
 import com.xptschool.parent.util.ToastUtils;
 import com.xptschool.parent.view.CustomMapDialog;
 import com.xptschool.parent.view.TimePickerPopupWindow;
@@ -119,7 +118,6 @@ public class MapFragment extends MapBaseFragment implements OnGetShareUrlResultL
     private Timer timer = null;
     private TimerTask task;
     PopupWindow studentPopup;
-    StudentPopupWindowView studentPopupWindowView;
     TimePickerPopupWindow sDatePopup, eDatePopup;
     private String startTime, endTime;
     private int locationTime = 0;
@@ -297,7 +295,7 @@ public class MapFragment extends MapBaseFragment implements OnGetShareUrlResultL
                 showEDatePop();
                 break;
             case R.id.txtStudentName:
-                showStudent();
+//                showStudent();
                 break;
             case R.id.spnStudents:
                 if (spnStudents.getItems().size() != 1) {
@@ -434,66 +432,6 @@ public class MapFragment extends MapBaseFragment implements OnGetShareUrlResultL
             currentView.setTag(false);
         }
         //设置其他按钮tag 为 false
-    }
-
-    public void getStudents() {
-        Log.i(TAG, "getStudentByClass: ");
-        if (studentPopupWindowView == null) {
-            studentPopupWindowView = new StudentPopupWindowView(getContext());
-            studentPopupWindowView.initData();
-            studentPopupWindowView.setMyGridViewClickListener(new StudentAdapter.MyGridViewClickListener() {
-                @Override
-                public void onGridViewItemClick(BeanStudent student) {
-                    studentPopup.dismiss();
-                    if (student == null) {
-                        return;
-                    }
-                    txtStudentName.setText(student.getStu_name());
-                    //根据学生id获取学生位置
-                    if (student != currentStudent) {
-                        currentStudent = student;
-                        mapStatusChange = false;
-                        locationTime = 0;
-                    } else {
-                        return;
-                    }
-
-                    Log.i(TAG, "onGridViewItemClick: " + student.getStu_name());
-                    //获取实时位置or历史轨迹or电子围栏
-                    if (llLocation.getTag() != null && (Boolean) llLocation.getTag()) {
-                        getRealTimeLocationByStu();
-                    }
-                    if (llTrack.getTag() != null && (Boolean) llTrack.getTag()) {
-                        getHistoryTrackByStu();
-                    }
-                    if (llRailings.getTag() != null && (Boolean) llRailings.getTag()) {
-                        getStudentRail();
-                    }
-                }
-            });
-        }
-    }
-
-    private void showStudent() {
-        if (studentPopup == null) {
-            studentPopup = new PopupWindow(LinearLayout.LayoutParams.MATCH_PARENT,
-                    XPTApplication.getInstance().getWindowHeight() / 2);
-            studentPopup.setFocusable(true);
-            studentPopup.setTouchable(true);
-            studentPopup.setBackgroundDrawable(new BitmapDrawable());
-            studentPopup.setOnDismissListener(new PopupWindow.OnDismissListener() {
-                @Override
-                public void onDismiss() {
-                    flTransparent.setVisibility(View.GONE);
-                    txtStudentName.collapse();
-                }
-            });
-        }
-
-        studentPopup.setContentView(studentPopupWindowView);
-
-        flTransparent.setVisibility(View.VISIBLE);
-        studentPopup.showAsDropDown(txtStudentName, 0, 5);
     }
 
     private void reloadDataByStatus() {

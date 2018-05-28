@@ -228,7 +228,6 @@
 
         <!-- 我的班级 -->
         <activity android:name=".ui.mine.MyClassesActivity" />
-        <activity android:name=".ui.mine.StudentsActivity" />
         <activity android:name=".ui.mine.StudentDetailActivity" />
 
         <!-- 聊天页面 -->

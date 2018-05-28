@@ -1,7 +1,6 @@
 package com.xptschool.parent.ui.mine;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,7 +12,6 @@ import android.widget.TextView;
 import com.xptschool.parent.R;
 import com.xptschool.parent.adapter.BaseRecycleAdapter;
 import com.xptschool.parent.adapter.RecyclerViewHolderBase;
-import com.xptschool.parent.common.ExtraKey;
 import com.xptschool.parent.model.BeanMyClass;
 
 import java.util.ArrayList;
@@ -61,9 +59,9 @@ public class MyClassAdapter extends BaseRecycleAdapter {
         mHolder.llClassItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, StudentsActivity.class);
-                intent.putExtra(ExtraKey.CLASS_ID, beanClass.getC_id());
-                mContext.startActivity(intent);
+//                Intent intent = new Intent(mContext, StudentsActivity.class);
+//                intent.putExtra(ExtraKey.CLASS_ID, beanClass.getC_id());
+//                mContext.startActivity(intent);
             }
         });
     }
